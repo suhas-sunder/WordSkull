@@ -52,10 +52,10 @@ function MainLinks({ showMobileMenu, setShowMobileMenu }: PropType) {
       <li className="flex w-full lg:w-auto">
         <NavLink
           onClick={handleLinkClick}
-          to="/faq"
+          to="/blog"
           className="relative flex items-center justify-center w-full lg:w-auto py-4 hover:bg-white-500 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
         >
-          <span className={`${styles.icon} flex`}>FAQ</span>
+          <span className={`${styles.icon} flex`}>Blog</span>
         </NavLink>
       </li>
       <li className="flex w-full lg:w-auto">
