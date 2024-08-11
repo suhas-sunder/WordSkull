@@ -20,6 +20,7 @@ function Logo({ setShowMobileMenu }: PropTypes) {
         width={50}
         height={50}
         src={LogoImg}
+        className="rounded-lg"
         alt="logo depicting a chef cooking with emoji as ingredients"
       />
       <div className="flex">

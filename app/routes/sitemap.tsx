@@ -37,8 +37,8 @@ export default function Sitemap() {
             </Link>
           </li>
           <li>
-            <Link to="/faq" className="hover: hover:text-sky-400">
-              FAQ
+            <Link to="/blog" className="hover: hover:text-sky-400">
+              Blog
             </Link>
           </li>
           <li>
@@ -49,6 +49,11 @@ export default function Sitemap() {
           <li>
             <Link to="/rules" className="hover: hover:text-sky-400">
               Rules
+            </Link>
+          </li>
+          <li>
+            <Link to="/faq" className="hover: hover:text-sky-400">
+              FAQ
             </Link>
           </li>
           <li>
