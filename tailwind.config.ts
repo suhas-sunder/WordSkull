@@ -41,7 +41,26 @@ export default {
         "default-sky-blue": "#2b6ab3",
         "start-btn-green": "#4db538",
         "skull-brown": "#6d5d64",
-        "skull-dark-brown": "#3e3539"
+        "skull-dark-brown": "#3e3539",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        fadeOut: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+        scalePulse: {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" },
+        },
+      },
+      animation: {
+        scalePulse: "scalePulse 3s ease-in-out infinite",
+        fadeIn: "fadeIn 1s ease-in-out",
+        fadeOut: "fadeOut 1s ease-in-out",
       },
     },
   },
