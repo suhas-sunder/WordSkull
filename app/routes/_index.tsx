@@ -157,6 +157,11 @@ export default function Index() {
         >
           Play
         </button>
+        <div className="max-w-[800px] text-center font-nunito text-lg text-slate-500">
+          Hello friend! Unfortunately this website/game is still in development
+          and is currently in a non-functioning state. I am working hard to get
+          it up and running as soon as possible! Thanks for stopping by :)
+        </div>
       </main>
     </div>
   );
