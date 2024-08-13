@@ -1,7 +1,9 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Skulls from "../client/components/data/skulls";
+import words from "../client/components/data/words";
+import Keyboard from "../client/components/ui/Keyboard";
 
 export const meta: MetaFunction = () => {
   return [
@@ -18,10 +20,76 @@ export const meta: MetaFunction = () => {
 };
 
 export default function WordSkullMedium() {
-  const skulls = useMemo(() => Skulls().slice(4, 9), []);
+  const skulls = useMemo(
+    () =>
+      Skulls()
+        .map((skull) => [...skull])
+        .slice(4, 8),
+    []
+  );
   const [currentSkull, setCurrentSkull] = useState<string[][][]>([]);
   const [currentRow, setCurrentRow] = useState<number>(0);
   const [currentRowIndex, setCurrentRowIndex] = useState<number>(0);
+  const [wordsForSkull, setWordsForSkull] = useState<string[]>([]);
+  const [enteredWords, setEnteredWords] = useState<string[][]>([]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const wordsList: { [key: number]: string[] } = useMemo(() => words(), []);
+
+  //If wordsForSkull is empty, generate a random array of words that are of the correct length which matches each skull row.
+  useEffect(() => {
+    if (wordsForSkull[0]) return;
+
+    // Helper function to get words of a specific length and exclude words with "@" or "~"
+    const getWordsOfLength = (length: number) => {
+      return wordsList[length]
+        .filter((word) => word.length === length)
+        .filter((word) => !word.includes("@") && !word.includes("~"));
+    };
+
+    // Function to calculate effective length of a row, ignoring "@" and "~"
+    const calculateEffectiveLength = (row: string[]) => {
+      // Flatten the row if it's an array of arrays
+      const flattenedRow = Array.isArray(row) ? row.flat() : [row];
+      // Count the characters that are not "@" or "~"
+      const validCharsCount = flattenedRow.filter((cell) => cell === "").length;
+      return validCharsCount;
+    };
+
+    currentSkull[0]?.forEach((row, index) => {
+      // Calculate effective length of the row ignoring "@" and "~"
+      const rowLength = calculateEffectiveLength(row);
+      const wordsOfCorrectLength = getWordsOfLength(rowLength);
+
+      if (wordsOfCorrectLength.length === 0) {
+        // If no valid words are found, handle accordingly
+        console.warn(`No valid words found for length ${rowLength}`);
+        return;
+      }
+
+      const randomWord =
+        wordsOfCorrectLength[
+          Math.floor(Math.random() * wordsOfCorrectLength.length)
+        ];
+
+      setWordsForSkull((prevState) => {
+        // Replace the existing word at the index with the new word
+        const newState = [...prevState];
+        newState[index] = randomWord;
+        return newState;
+      });
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentSkull]);
+
+  useEffect(() => {
+    wordsForSkull.length > 0 && console.log(wordsForSkull);
+  }, [wordsForSkull]);
+
+  useEffect(() => {
+    console.log(enteredWords);
+  }, [enteredWords]);
 
   useEffect(() => {
     const randomizeCurrentSkull = () => {
@@ -31,43 +99,95 @@ export default function WordSkullMedium() {
     randomizeCurrentSkull();
   }, [skulls]);
 
+  const handleShiftIndex = useCallback(() => {
+    let defaultIndex = 0;
+
+    if (currentRow > currentSkull[0].length - 1) {
+      console.log("You Won! Game Over...");
+      return 0;
+    }
+
+    while (
+      currentSkull[0][currentRow][currentRowIndex + defaultIndex] === "@" ||
+      currentSkull[0][currentRow][currentRowIndex + defaultIndex] === "~"
+    ) {
+      defaultIndex++;
+    }
+
+    return defaultIndex;
+  }, [currentSkull, currentRow, currentRowIndex]);
+
   useEffect(() => {
+    //If a square is marked with "@" or "~" it can't be changed so shift the index to a square that can.
+
     const handleUpdateSquare = (key: string) => {
+      const shiftIndex = handleShiftIndex();
+
       //Update the current square with a letter
-      if (currentRowIndex <= currentSkull[0][currentRow].length - 1) {
+      if (
+        currentRowIndex + shiftIndex <=
+        currentSkull[0][currentRow].length - 1
+      ) {
         setCurrentSkull((prevState) => {
           // Create a new copy of the previous state array
           const newState: string[][][] = [...prevState];
 
           // Update the specific element within the row
-          newState[0][currentRow][currentRowIndex] = key;
+          newState[0][currentRow][currentRowIndex + shiftIndex] = key;
 
           // Return the updated state
           return newState;
         });
-        setCurrentRowIndex((prevState) => prevState + 1);
+
+        setCurrentRowIndex((prevState) => prevState + 1 + shiftIndex);
       }
+    };
+
+    const handleShiftIndexBackwards = () => {
+      let defaultIndex = currentRowIndex - 1;
+
+      //Skip squares that start with "@" or "~" so that empty and eyeball squares are not changed
+      while (
+        currentSkull[0][currentRow][defaultIndex] === "@" ||
+        currentSkull[0][currentRow][defaultIndex] === "~"
+      ) {
+        defaultIndex--;
+      }
+
+      //For corner squares that start with "@" or "~", the index can be less than 0. If so, set it back to the first empty position in the row.
+      if (defaultIndex < 0) {
+        currentSkull[0][currentRow].forEach((square, index) => {
+          if (defaultIndex < 0 && square === "") defaultIndex = index;
+        });
+      }
+
+      return defaultIndex;
     };
 
     const handleDeleteSquare = () => {
       if (currentRowIndex > 0) {
+        const shiftIndexBackwards = handleShiftIndexBackwards();
+
+        console.log(shiftIndexBackwards);
+
         setCurrentSkull((prevState) => {
           // Create a new copy of the previous state array
           const newState: string[][][] = [...prevState];
 
           // Update the specific element within the row
-          newState[0][currentRow][currentRowIndex - 1] = "";
+          newState[0][currentRow][shiftIndexBackwards] = "";
 
           // Return the updated state
           return newState;
         });
 
-        setCurrentRowIndex((prevState) => prevState - 1);
+        setCurrentRowIndex(shiftIndexBackwards);
       }
     };
     const handleNextRow = () => {
-      console.log(currentRowIndex, currentSkull[0][currentRow].length);
-      if (currentRowIndex === currentSkull[0][currentRow].length) {
+      const shiftIndex = handleShiftIndex();
+
+      if (currentRowIndex + shiftIndex === currentSkull[0][currentRow].length) {
         setCurrentRowIndex(0);
         setCurrentRow((prevState) => prevState + 1);
       }
@@ -77,8 +197,56 @@ export default function WordSkullMedium() {
       event.preventDefault();
       const key = event.key.toLowerCase();
 
+      const handleEnteredWord = () => {
+        if (
+          currentSkull[0][currentRow].join("") !== wordsForSkull[currentRow] &&
+          !currentSkull[0][currentRow].includes("")
+        ) {
+          if (
+            !wordsList[
+              currentSkull[0][currentRow].join("").replace(/[@~]/g, "").length
+            ].includes(
+              currentSkull[0][currentRow].join("").replace(/[@~]/g, "")
+            )
+          ) {
+            alert("Not in word list!");
+            return;
+          }
+        } else {
+          handleNextRow();
+        }
+
+        setEnteredWords((prevState) => {
+          const updatedWords = [...prevState];
+
+          // Check if there's an existing entry for the current row
+          if (updatedWords[currentRow]) {
+            // Update the existing array with the current character
+            updatedWords[currentRow] = [
+              ...updatedWords[currentRow],
+              currentSkull[0][currentRow].join("").replace(/[@~]/g, ""),
+            ];
+          } else {
+            // Initialize the array if it doesn't exist, then push the character
+            updatedWords[currentRow] = [
+              currentSkull[0][currentRow].join("").replace(/[@~]/g, ""),
+            ];
+          }
+
+          return updatedWords;
+        });
+      };
+
       if (key === "enter") {
-        handleNextRow();
+        if (
+          currentSkull[0][currentRow].join("").replace(/[@~]/g, "") !==
+            wordsForSkull[currentRow] &&
+          !currentSkull[0][currentRow].includes("")
+        ) {
+          handleEnteredWord();
+        } else {
+          handleNextRow();
+        }
       } else if (key === "backspace") {
         handleDeleteSquare();
       } else {
@@ -91,9 +259,21 @@ export default function WordSkullMedium() {
     return () => {
       removeEventListener("keydown", handleKeydown);
     };
-  }, [currentRow, currentRowIndex, currentSkull]);
+  }, [
+    currentRow,
+    currentRowIndex,
+    currentSkull,
+    handleShiftIndex,
+    wordsForSkull,
+    wordsList,
+  ]);
 
-  const handleListItem = (square: string, squareCount: number) => {
+  const handleListItem = (
+    square: string,
+    squareCount: number,
+    rowIndex: number,
+    squareIndex: number
+  ) => {
     if (square === "@")
       return (
         <li
@@ -110,43 +290,132 @@ export default function WordSkullMedium() {
         ></li>
       );
 
+    const shiftIndex = handleShiftIndex();
+
     return (
       <li
         key={uuidv4()}
-        className="text-[1.2rem] relative sm:text-[2rem] border-2 border-slate-400 rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center"
+        className={`${
+          rowIndex === currentRow &&
+          squareIndex === currentRowIndex + shiftIndex
+            ? "bg-slate-600 bg-opacity-20 border-opacity-75 scale-110 z-10 border-[2.5px] border-slate-600"
+            : "text-slate-300 border-slate-400 border-2"
+        } ${
+          square !== "" &&
+          rowIndex === currentRow &&
+          "!border-slate-600 border-[2.5px] !text-slate-600"
+        }  text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center`}
       >
-        <span className="absolute text-[0.5rem] sm:text-sm text-slate-300 flex top-[0.02em] left-[0.3em]">
+        <span
+          className={`${
+            (rowIndex === currentRow &&
+              squareIndex === currentRowIndex + shiftIndex) ||
+            (square !== "" && rowIndex === currentRow)
+              ? "text-slate-600 text-opacity-75 border-slate-600"
+              : "text-slate-300"
+          } absolute text-[0.5rem] sm:text-sm flex top-[0.02em] left-[0.3em]`}
+        >
           {squareCount}
         </span>
-        <span>{square}</span>
+        <span className="translate-y-[0.16em] sm:translate-y-1">{square}</span>
       </li>
     );
   };
 
+  const handleValidationStyling = (char: string, charIndex: number) => {
+    let style = "border-slate-100 text-slate-400";
+
+    if (wordsForSkull[currentRow].includes(char))
+      style = "border-yellow-400 text-yellow-600 bg-yellow-100";
+
+    if (wordsForSkull[currentRow][charIndex] === char)
+      style = "border-green-400 text-green-600 bg-green-100";
+
+    return style;
+  };
+
   return (
     <div>
-      <header className=" -mb-2">
-        <h1 className="w-full flex justify-center items-center text-4xl sm:text-6xl text-center mt-10 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-5 sm:mb-1 text-slate-500 font-lora">
+      <header className="animate-fadeIn -mb-2 sm:-mb-5">
+        <h1 className="w-full flex justify-center items-center  text-xl sm:text-2xl text-center mt-5 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-2 text-slate-500 font-lora">
           W💀RD SKULL
         </h1>
       </header>
-      <main className="flex justify-center flex-col pt-4 sm:pt-10 gap-14 mx-5 items-center">
+      <main className="flex min-h-[21.5em] sm:min-h-[32.7em] justify-center flex-col pt-0 sm:pt-10 gap-5 mx-5 items-center animate-fadeIn">
+        <div className="flex flex-col h-5 z-10  bg-white  gap-3 mt-[1em] sm:mt-0 mb-4 sm:mb-2 rounded-xl border-slate-200 justify-center items-center">
+          {enteredWords[currentRow]?.length > 0 ? (
+            <div
+              title="Hold Space Bar or press Caps key to view your attempts."
+              className="min-h-7 sm:min-h-10 relative flex gap-[4px]  cursor-pointer justify-center border-2 px-3 rounded-md sm:rounded-lg items-center"
+            >
+              {enteredWords[currentRow]
+                ?.slice(-1)[0]
+                .split("")
+                .map((char, charIndex) => (
+                  <span
+                    key={uuidv4()}
+                    className={`${handleValidationStyling(
+                      char,
+                      charIndex
+                    )}} text-[0.5rem] sm:text-[0.8rem] font-nunito capitalize border-2 rounded-sm sm:rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
+                  >
+                    {char}
+                  </span>
+                ))}
+            </div>
+          ) : (
+            <div className="h-5"></div>
+          )}
+        </div>
+        {/* {enteredWords[currentRow]?.map((enteredWord, rowIndex) => {
+          return (
+            <>
+              <h2>Row {rowIndex + 1} Guesses</h2>
+              <ul
+                className="h-10 relative flex gap-[2px] justify-center items-center"
+                key={uuidv4()}
+              >
+                {enteredWord.split("").map((char, charIndex) => (
+                  <li
+                    key={uuidv4()}
+                    className={`${handleValidationStyling(
+                      char,
+                      charIndex
+                    )}} text-[1.2rem] p-0 m-0 sm:text-[1rem] font-nunito capitalize border-2 rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
+                  >
+                    {charIndex === 0 && (
+                      <span className="absolute -left-6 bottom-[0.35em] text-black">
+                        {rowIndex + 1}.
+                      </span>
+                    )}{" "}
+                    {char}
+                  </li>
+                ))}
+              </ul>
+            </>
+          );
+        })} */}
         {currentSkull.map((skull, index) => {
           return index === 0 ? (
             <div
               key={index}
-              className="relative flex-col w-full max-w-[800px] capitalize flex font-nunito text-slate-400 items-center min-h-[40em]"
+              className="relative flex-col w-full max-w-[800px] -translate-y-5 sm:scale-[0.9] capitalize flex font-nunito text-slate-400 items-center"
             >
-              {skull.map((row) => {
+              {skull.map((row, rowIndex) => {
                 let squareCount = 0; // Reset squareCount at the start of each row
 
                 return (
                   <ul key={uuidv4()} className="flex">
-                    {row.map((square) => {
+                    {row.map((square, squareIndex) => {
                       if (square !== "@" && square !== "~") {
                         squareCount += 1; // Increment squareCount only for empty squares
                       }
-                      return handleListItem(square, squareCount);
+                      return handleListItem(
+                        square,
+                        squareCount,
+                        rowIndex,
+                        squareIndex
+                      );
                     })}
                   </ul>
                 );
@@ -155,6 +424,14 @@ export default function WordSkullMedium() {
           ) : null;
         })}
       </main>
+      <div className="flex justify-center items-center -translate-y-5 mt-2 flex-col">
+        <Keyboard
+          cursorPosition={0}
+          displayedText={["a"]}
+          menuURL=""
+          handleRestartLesson={() => {}}
+        />
+      </div>
     </div>
   );
 }
