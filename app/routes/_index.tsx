@@ -1,7 +1,7 @@
 import { useNavigate } from "@remix-run/react";
 import { useState, useEffect, useMemo } from "react";
-import { v4 as uuidv4 } from "uuid";
 import Skulls from "../client/components/data/skulls";
+import seedrandom from "seedrandom";
 
 const getRandomTransform = () => {
   const scale = Math.random() * (1 - 0.6) + 0.6; // Random scale between 0.7 and 1.1
@@ -17,28 +17,39 @@ const getRandomTransform = () => {
   };
 };
 
-// Function to shuffle an array
-const shuffleArray = (array: string[][][]) => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+// Function to generate a unique seed
+const generateSeed = () => `${Date.now()}-${Math.random()}`;
+
+// Deterministic shuffle function with seed
+const shuffleArray = (array: string[][][], seed: string) => {
+  const rng = seedrandom(seed);
+  const result = array.slice();
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
   }
-  return shuffled;
+  return result;
 };
 
 export default function Index() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [transformStyle, setTransformStyle] = useState({});
   const [fadeClass, setFadeClass] = useState("fade-in"); // State to manage fade class
+  const [shuffledSkulls, setShuffledSkulls] = useState<string[][][]>([]); // Initial empty array
   const navigate = useNavigate();
 
   const skulls = useMemo(() => Skulls(), []);
 
-  // Shuffle skulls initially
-  const [shuffledSkulls] = useState(shuffleArray(skulls));
+  useEffect(() => {
+    // Generate a new seed and shuffle skulls on the client side
+    const seed = generateSeed();
+    const shuffled = shuffleArray(skulls, seed);
+    setShuffledSkulls(shuffled);
+  }, [skulls]);
 
   useEffect(() => {
+    if (shuffledSkulls.length === 0) return; // Ensure skulls are shuffled before setting up the interval
+
     const interval = setInterval(() => {
       const fadeOutTransform = getRandomTransform();
       setFadeClass("fade-out"); // Start fade-out
@@ -59,13 +70,17 @@ export default function Index() {
     }, 5000); // Duration to show each skull
 
     return () => clearInterval(interval);
-  }, [shuffledSkulls.length]);
+  }, [shuffledSkulls, currentIndex]);
 
-  const handleListItem = (square: string, squareCount: number) => {
+  const handleListItem = (
+    square: string,
+    squareCount: number,
+    index: number
+  ) => {
     if (square === "@")
       return (
         <li
-          key={uuidv4()}
+          key={index + "eye-square"}
           className="text-[1.1rem] sm:text-[2rem] border-2 border-slate-700 bg-slate-800 rounded-lg w-[2em] h-[2em] flex justify-center items-center"
         ></li>
       );
@@ -73,14 +88,14 @@ export default function Index() {
     if (square === "~")
       return (
         <li
-          key={uuidv4()}
+          key={index + "empty-square"}
           className="text-[1.1rem] sm:text-[2rem] border-2 rounded-lg w-[2em] h-[2em] flex justify-center items-center"
         ></li>
       );
 
     return (
       <li
-        key={uuidv4()}
+        key={index + "num-square"}
         className="text-[1.1rem] relative sm:text-[2rem] border-2 border-slate-400 rounded-lg w-[2em] h-[2em] flex justify-center items-center"
       >
         <span className="absolute text-sm text-slate-300 flex top-[0.02em] left-[0.3em]">
@@ -103,7 +118,7 @@ export default function Index() {
           <span className="inline-flex">SKULL</span>
         </h1>
       </header>
-      <main className="flex flex-col-reverse sm:flex-col sm:gap-14 items-center">
+      <main className="flex flex-col-reverse sm:flex-col sm:gap-14 items-center animate-fadeIn">
         <div className="relative flex-col w-full max-w-[800px] capitalize flex font-nunito text-slate-400 items-center min-h-[28em] sm:min-h-[40em]">
           <div
             className={`absolute top-0 left-0  w-full h-full   flex flex-col justify-center items-center transition-opacity duration-2000 ease-in-out ${fadeClass}`}
@@ -112,20 +127,27 @@ export default function Index() {
               transition: "opacity 2s ease-in-out, transform 2s ease-in-out",
             }}
           >
-            {shuffledSkulls[currentIndex].map((row: string[]) => {
-              let squareCount = 0; // Reset squareCount at the start of each row
+            {shuffledSkulls[currentIndex]?.map(
+              (row: string[], listIndex: number) => {
+                let squareCount = 0; // Reset squareCount at the start of each row
 
-              return (
-                <ul key={uuidv4()} className="flex">
-                  {row.map((square: string) => {
-                    if (square !== "@" && square !== "~") {
-                      squareCount += 1; // Increment squareCount only for empty squares
-                    }
-                    return handleListItem(square, squareCount);
-                  })}
-                </ul>
-              );
-            })}
+                return (
+                  <ul key={listIndex} className="flex">
+                    {row.map((square: string, index: number) => {
+                      if (square !== "@" && square !== "~") {
+                        squareCount += 1; // Increment squareCount only for empty squares
+                      }
+
+                      return handleListItem(
+                        square,
+                        squareCount,
+                        index + listIndex
+                      );
+                    })}
+                  </ul>
+                );
+              }
+            )}
           </div>
         </div>
 
