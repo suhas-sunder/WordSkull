@@ -31,6 +31,7 @@ export default function WordSkullMedium() {
   const [wordsForSkull, setWordsForSkull] = useState<string[]>([]);
   const [enteredWords, setEnteredWords] = useState<string[][]>([]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const wordsList = [
     "cat",
     "dog",
@@ -140,6 +141,11 @@ export default function WordSkullMedium() {
   const handleShiftIndex = useCallback(() => {
     let defaultIndex = 0;
 
+    if (currentRow > currentSkull[0].length - 1) {
+      console.log("You Won! Game Over...");
+      return 0;
+    }
+
     while (
       currentSkull[0][currentRow][currentRowIndex + defaultIndex] === "@" ||
       currentSkull[0][currentRow][currentRowIndex + defaultIndex] === "~"
@@ -176,20 +182,45 @@ export default function WordSkullMedium() {
       }
     };
 
+    const handleShiftIndexBackwards = () => {
+      let defaultIndex = currentRowIndex - 1;
+
+      //Skip squares that start with "@" or "~" so that empty and eyeball squares are not changed
+      while (
+        currentSkull[0][currentRow][defaultIndex] === "@" ||
+        currentSkull[0][currentRow][defaultIndex] === "~"
+      ) {
+        defaultIndex--;
+      }
+
+      //For corner squares that start with "@" or "~", the index can be less than 0. If so, set it back to the first empty position in the row.
+      if (defaultIndex < 0) {
+        currentSkull[0][currentRow].forEach((square, index) => {
+          if (defaultIndex < 0 && square === "") defaultIndex = index;
+        });
+      }
+
+      return defaultIndex;
+    };
+
     const handleDeleteSquare = () => {
       if (currentRowIndex > 0) {
+        const shiftIndexBackwards = handleShiftIndexBackwards();
+
+        console.log(shiftIndexBackwards);
+
         setCurrentSkull((prevState) => {
           // Create a new copy of the previous state array
           const newState: string[][][] = [...prevState];
 
           // Update the specific element within the row
-          newState[0][currentRow][currentRowIndex - 1] = "";
+          newState[0][currentRow][shiftIndexBackwards] = "";
 
           // Return the updated state
           return newState;
         });
 
-        setCurrentRowIndex((prevState) => prevState - 1);
+        setCurrentRowIndex(shiftIndexBackwards);
       }
     };
     const handleNextRow = () => {
@@ -210,33 +241,46 @@ export default function WordSkullMedium() {
           currentSkull[0][currentRow].join("") !== wordsForSkull[currentRow] &&
           !currentSkull[0][currentRow].includes("")
         ) {
-          alert("Wrong word");
+          console.log(wordsList);
+          console.log(wordsList.join(""));
 
-          setEnteredWords((prevState) => {
-            const updatedWords = [...prevState];
-
-            // Check if there's an existing entry for the current row
-            if (updatedWords[currentRow]) {
-              // Update the existing array with the current character
-              updatedWords[currentRow] = [
-                ...updatedWords[currentRow],
-                currentSkull[0][currentRow].join(""),
-              ];
-            } else {
-              // Initialize the array if it doesn't exist, then push the character
-              updatedWords[currentRow] = [currentSkull[0][currentRow].join("")];
-            }
-
-            return updatedWords;
-          });
+          if (
+            !wordsList.includes(
+              currentSkull[0][currentRow].join("").replace(/[@~]/g, "")
+            )
+          ) {
+            alert("Not in word list!");
+            return;
+          }
         } else {
           handleNextRow();
         }
+
+        setEnteredWords((prevState) => {
+          const updatedWords = [...prevState];
+
+          // Check if there's an existing entry for the current row
+          if (updatedWords[currentRow]) {
+            // Update the existing array with the current character
+            updatedWords[currentRow] = [
+              ...updatedWords[currentRow],
+              currentSkull[0][currentRow].join("").replace(/[@~]/g, ""),
+            ];
+          } else {
+            // Initialize the array if it doesn't exist, then push the character
+            updatedWords[currentRow] = [
+              currentSkull[0][currentRow].join("").replace(/[@~]/g, ""),
+            ];
+          }
+
+          return updatedWords;
+        });
       };
 
       if (key === "enter") {
         if (
-          currentSkull[0][currentRow].join("") !== wordsForSkull[currentRow] &&
+          currentSkull[0][currentRow].join("").replace(/[@~]/g, "") !==
+            wordsForSkull[currentRow] &&
           !currentSkull[0][currentRow].includes("")
         ) {
           handleEnteredWord();
@@ -261,6 +305,7 @@ export default function WordSkullMedium() {
     currentSkull,
     handleShiftIndex,
     wordsForSkull,
+    wordsList,
   ]);
 
   const handleListItem = (
@@ -293,20 +338,20 @@ export default function WordSkullMedium() {
         className={`${
           rowIndex === currentRow &&
           squareIndex === currentRowIndex + shiftIndex
-            ? "text-skull-brown scale-110 z-10 border-skull-brown border-[2.5px] sm:border-[3px]"
-            : "text-slate-500 border-slate-400 border-2"
+            ? "bg-skull-brown bg-opacity-20 border-opacity-75 scale-110 z-10 border-[2.5px] border-skull-brown"
+            : "text-slate-300 border-slate-400 border-2"
         } ${
           square !== "" &&
           rowIndex === currentRow &&
-          "border-skull-brown border-[2px] sm:border-[2.5px] !text-skull-brown"
-        }  text-[1.2rem] relative sm:text-[2rem] rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
+          "!border-skull-brown border-[2.5px] !text-skull-brown"
+        }  text-[1.2rem] relative border-2 sm:text-[2rem] rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
       >
         <span
           className={`${
             (rowIndex === currentRow &&
               squareIndex === currentRowIndex + shiftIndex) ||
-            square !== ""
-              ? "text-skull-brown border-skull-brown"
+            (square !== "" && rowIndex === currentRow)
+              ? "text-skull-brown text-opacity-75 border-skull-brown"
               : "text-slate-300"
           } absolute text-[0.5rem] sm:text-sm flex top-[0.02em] left-[0.3em]`}
         >
@@ -319,13 +364,6 @@ export default function WordSkullMedium() {
 
   const handleValidationStyling = (char: string, charIndex: number) => {
     let style = "border-slate-100 text-slate-400";
-
-    console.log(
-      char,
-      wordsForSkull[currentRow][charIndex],
-      currentRow,
-      charIndex
-    );
 
     if (wordsForSkull[currentRow].includes(char))
       style = "border-yellow-400 text-yellow-600 bg-yellow-100";
@@ -346,7 +384,10 @@ export default function WordSkullMedium() {
       <main className="flex justify-center flex-col pt-0 sm:pt-10 gap-5 mx-5 items-center animate-fadeIn">
         <div className="flex flex-col h-5 z-10 bg-white gap-3 mb-2 rounded-xl border-slate-200 py-5 justify-center items-center">
           {enteredWords[currentRow]?.length > 0 ? (
-            <div title="Hold Space Bar or press Caps key to view your attempts." className="h-10 relative flex gap-[4px] cursor-pointer justify-center border-2 py-6 px-4 rounded-lg items-center">
+            <div
+              title="Hold Space Bar or press Caps key to view your attempts."
+              className="h-10 relative flex gap-[4px] cursor-pointer justify-center border-2 py-6 px-4 rounded-lg items-center"
+            >
               {enteredWords[currentRow]
                 ?.slice(-1)[0]
                 .split("")
