@@ -2,6 +2,8 @@ import type { MetaFunction } from "@remix-run/node";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Skulls from "../client/components/data/skulls";
+import words from "../client/components/data/words";
+import Keyboard from "../client/components/ui/Keyboard";
 
 export const meta: MetaFunction = () => {
   return [
@@ -32,48 +34,7 @@ export default function WordSkullMedium() {
   const [enteredWords, setEnteredWords] = useState<string[][]>([]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const wordsList = [
-    "cat",
-    "dog",
-    "bat",
-    "sun",
-    "box",
-    "pen",
-    "car",
-    "hat",
-    "map",
-    "joy",
-    "book",
-    "lamp",
-    "ball",
-    "wind",
-    "fish",
-    "tree",
-    "snow",
-    "star",
-    "home",
-    "moon",
-    "apple",
-    "chair",
-    "plane",
-    "house",
-    "bread",
-    "music",
-    "night",
-    "water",
-    "beach",
-    "river",
-    "forest",
-    "circle",
-    "market",
-    "school",
-    "garden",
-    "rocket",
-    "silver",
-    "island",
-    "travel",
-    "dreams",
-  ];
+  const wordsList: { [key: number]: string[] } = useMemo(() => words(), []);
 
   //If wordsForSkull is empty, generate a random array of words that are of the correct length which matches each skull row.
   useEffect(() => {
@@ -81,7 +42,7 @@ export default function WordSkullMedium() {
 
     // Helper function to get words of a specific length and exclude words with "@" or "~"
     const getWordsOfLength = (length: number) => {
-      return wordsList
+      return wordsList[length]
         .filter((word) => word.length === length)
         .filter((word) => !word.includes("@") && !word.includes("~"));
     };
@@ -241,11 +202,10 @@ export default function WordSkullMedium() {
           currentSkull[0][currentRow].join("") !== wordsForSkull[currentRow] &&
           !currentSkull[0][currentRow].includes("")
         ) {
-          console.log(wordsList);
-          console.log(wordsList.join(""));
-
           if (
-            !wordsList.includes(
+            !wordsList[
+              currentSkull[0][currentRow].join("").replace(/[@~]/g, "").length
+            ].includes(
               currentSkull[0][currentRow].join("").replace(/[@~]/g, "")
             )
           ) {
@@ -338,26 +298,26 @@ export default function WordSkullMedium() {
         className={`${
           rowIndex === currentRow &&
           squareIndex === currentRowIndex + shiftIndex
-            ? "bg-skull-brown bg-opacity-20 border-opacity-75 scale-110 z-10 border-[2.5px] border-skull-brown"
+            ? "bg-slate-600 bg-opacity-20 border-opacity-75 scale-110 z-10 border-[2.5px] border-slate-600"
             : "text-slate-300 border-slate-400 border-2"
         } ${
           square !== "" &&
           rowIndex === currentRow &&
-          "!border-skull-brown border-[2.5px] !text-skull-brown"
-        }  text-[1.2rem] relative border-2 sm:text-[2rem] rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
+          "!border-slate-600 border-[2.5px] !text-slate-600"
+        }  text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center`}
       >
         <span
           className={`${
             (rowIndex === currentRow &&
               squareIndex === currentRowIndex + shiftIndex) ||
             (square !== "" && rowIndex === currentRow)
-              ? "text-skull-brown text-opacity-75 border-skull-brown"
+              ? "text-slate-600 text-opacity-75 border-slate-600"
               : "text-slate-300"
           } absolute text-[0.5rem] sm:text-sm flex top-[0.02em] left-[0.3em]`}
         >
           {squareCount}
         </span>
-        <span className=" translate-y-1">{square}</span>
+        <span className="translate-y-[0.16em] sm:translate-y-1">{square}</span>
       </li>
     );
   };
@@ -376,17 +336,17 @@ export default function WordSkullMedium() {
 
   return (
     <div>
-      <header className="animate-fadeIn -mb-2">
-        <h1 className="w-full flex justify-center items-center text-4xl sm:text-6xl text-center mt-10 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-5 text-slate-500 font-lora">
+      <header className="animate-fadeIn -mb-2 sm:-mb-5">
+        <h1 className="w-full flex justify-center items-center  text-xl sm:text-2xl text-center mt-5 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-2 text-slate-500 font-lora">
           W💀RD SKULL
         </h1>
       </header>
-      <main className="flex justify-center flex-col pt-0 sm:pt-10 gap-5 mx-5 items-center animate-fadeIn">
-        <div className="flex flex-col h-5 z-10 bg-white gap-3 mb-2 rounded-xl border-slate-200 py-5 justify-center items-center">
+      <main className="flex min-h-[21.5em] sm:min-h-[32.7em] justify-center flex-col pt-0 sm:pt-10 gap-5 mx-5 items-center animate-fadeIn">
+        <div className="flex flex-col h-5 z-10  bg-white  gap-3 mt-[1em] sm:mt-0 mb-4 sm:mb-2 rounded-xl border-slate-200 justify-center items-center">
           {enteredWords[currentRow]?.length > 0 ? (
             <div
               title="Hold Space Bar or press Caps key to view your attempts."
-              className="h-10 relative flex gap-[4px] cursor-pointer justify-center border-2 py-6 px-4 rounded-lg items-center"
+              className="min-h-7 sm:min-h-10 relative flex gap-[4px]  cursor-pointer justify-center border-2 px-3 rounded-md sm:rounded-lg items-center"
             >
               {enteredWords[currentRow]
                 ?.slice(-1)[0]
@@ -397,7 +357,7 @@ export default function WordSkullMedium() {
                     className={`${handleValidationStyling(
                       char,
                       charIndex
-                    )}} text-[1.2rem] p-0 m-0 sm:text-[1rem] font-nunito capitalize border-2 rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
+                    )}} text-[0.5rem] sm:text-[0.8rem] font-nunito capitalize border-2 rounded-sm sm:rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
                   >
                     {char}
                   </span>
@@ -439,7 +399,7 @@ export default function WordSkullMedium() {
           return index === 0 ? (
             <div
               key={index}
-              className="relative flex-col w-full max-w-[800px] capitalize flex font-nunito text-slate-400 items-center min-h-[40em]"
+              className="relative flex-col w-full max-w-[800px] -translate-y-5 sm:scale-[0.9] capitalize flex font-nunito text-slate-400 items-center"
             >
               {skull.map((row, rowIndex) => {
                 let squareCount = 0; // Reset squareCount at the start of each row
@@ -464,6 +424,14 @@ export default function WordSkullMedium() {
           ) : null;
         })}
       </main>
+      <div className="flex justify-center items-center -translate-y-5 mt-2 flex-col">
+        <Keyboard
+          cursorPosition={0}
+          displayedText={["a"]}
+          menuURL=""
+          handleRestartLesson={() => {}}
+        />
+      </div>
     </div>
   );
 }
