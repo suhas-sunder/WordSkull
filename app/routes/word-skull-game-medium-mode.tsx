@@ -32,9 +32,30 @@ export default function WordSkullMedium() {
   const [currentRowIndex, setCurrentRowIndex] = useState<number>(0);
   const [wordsForSkull, setWordsForSkull] = useState<string[]>([]);
   const [enteredWords, setEnteredWords] = useState<string[][]>([]);
+  const [lives, setLives] = useState<number | null>(null);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const wordsList: { [key: number]: string[] } = useMemo(() => words(), []);
+
+  useEffect(() => {
+    if (lives === null && currentSkull[0]?.length > 0) {
+      // Calculate the average length of rows in currentSkull[0]
+      const totalLength = currentSkull[0].reduce(
+        (sum, row) => sum + row.length,
+        0
+      );
+      const averageLength = totalLength / currentSkull[0].length;
+
+      // Set lives to the product of currentSkull[0].length and the averageLength
+      setLives(currentSkull[0].length * averageLength);
+    }
+  }, [lives, currentSkull]);
+
+  useEffect(() => {
+    if (lives !== null && lives <= 0) {
+      alert("Game Over!");
+    }
+  }, [lives]);
 
   //If wordsForSkull is empty, generate a random array of words that are of the correct length which matches each skull row.
   useEffect(() => {
@@ -193,9 +214,19 @@ export default function WordSkullMedium() {
       }
     };
 
-    const handleKeydown = (event: KeyboardEvent) => {
-      event.preventDefault();
-      const key = event.key.toLowerCase();
+    const handleKeydown = (e: KeyboardEvent) => {
+      const key = e.key.toLowerCase();
+
+      if (key === "tab") return; //Allow tab for accessability reasons but don't track the input for test
+
+      e.preventDefault();
+
+      if (
+        !/^[a-zA-Z]$/.test(key) &&
+        key.toLowerCase() !== "backspace" &&
+        key.toLowerCase() !== "enter"
+      )
+        return;
 
       const handleEnteredWord = () => {
         if (
@@ -211,6 +242,10 @@ export default function WordSkullMedium() {
           ) {
             alert("Not in word list!");
             return;
+          } else {
+            setLives((prevState) =>
+              prevState !== null ? prevState - 1 : prevState
+            );
           }
         } else {
           handleNextRow();
@@ -238,6 +273,7 @@ export default function WordSkullMedium() {
       };
 
       if (key === "enter") {
+        console.log(key);
         if (
           currentSkull[0][currentRow].join("").replace(/[@~]/g, "") !==
             wordsForSkull[currentRow] &&
@@ -323,31 +359,31 @@ export default function WordSkullMedium() {
   };
 
   const handleValidationStyling = (char: string, charIndex: number) => {
-    let style = "border-slate-100 text-slate-400";
+    let style = "border-slate-300 text-slate-500 ";
 
     if (wordsForSkull[currentRow].includes(char))
-      style = "border-yellow-400 text-yellow-600 bg-yellow-100";
+      style = "border-yellow-400 text-yellow-600 bg-yellow-100 ";
 
     if (wordsForSkull[currentRow][charIndex] === char)
-      style = "border-green-400 text-green-600 bg-green-100";
+      style = "border-green-400 text-green-600 bg-green-100 ";
 
     return style;
   };
 
   return (
     <div>
-      <header className="animate-fadeIn -mb-2 sm:-mb-5">
+      <header className="animate-fadeIn -mb-4 sm:-mb-8">
         <h1 className="w-full flex justify-center items-center  text-xl sm:text-2xl text-center mt-5 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-2 text-slate-500 font-lora">
           W💀RD SKULL
         </h1>
       </header>
       <main className="flex min-h-[21.5em] sm:min-h-[32.7em] justify-center flex-col pt-0 sm:pt-10 gap-5 mx-5 items-center animate-fadeIn">
-        <div className="flex flex-col h-5 z-10  bg-white  gap-3 mt-[1em] sm:mt-0 mb-4 sm:mb-2 rounded-xl border-slate-200 justify-center items-center">
+        <div
+          title="Hold 'Space Bar' or press 'Caps' key to view your attempts."
+          className="flex flex-col h-5 z-10 w-full cursor-pointer min-h-10 max-w-[400px] sm:max-w-[600px] bg-white border-2 gap-3 mt-[1em] sm:mt-0 mb-3 sm:mb-2 rounded-md sm:rounded-xl border-slate-200 justify-center items-center"
+        >
           {enteredWords[currentRow]?.length > 0 ? (
-            <div
-              title="Hold Space Bar or press Caps key to view your attempts."
-              className="min-h-7 sm:min-h-10 relative flex gap-[4px]  cursor-pointer justify-center border-2 px-3 rounded-md sm:rounded-lg items-center"
-            >
+            <div className="relative flex gap-[4px] justify-center px-3 rounded-md sm:rounded-lg items-center">
               {enteredWords[currentRow]
                 ?.slice(-1)[0]
                 .split("")
@@ -357,7 +393,7 @@ export default function WordSkullMedium() {
                     className={`${handleValidationStyling(
                       char,
                       charIndex
-                    )}} text-[0.5rem] sm:text-[0.8rem] font-nunito capitalize border-2 rounded-sm sm:rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
+                    )}} text-[0.8rem] font-nunito capitalize border-2 rounded-sm sm:rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
                   >
                     {char}
                   </span>
@@ -399,7 +435,7 @@ export default function WordSkullMedium() {
           return index === 0 ? (
             <div
               key={index}
-              className="relative flex-col w-full max-w-[800px] -translate-y-5 sm:scale-[0.9] capitalize flex font-nunito text-slate-400 items-center"
+              className="relative flex-col w-full max-w-[800px] -translate-y-6 sm:-translate-y-8 sm:scale-[0.9] capitalize flex font-nunito text-slate-400 items-center"
             >
               {skull.map((row, rowIndex) => {
                 let squareCount = 0; // Reset squareCount at the start of each row
@@ -424,13 +460,8 @@ export default function WordSkullMedium() {
           ) : null;
         })}
       </main>
-      <div className="flex justify-center items-center -translate-y-5 mt-2 flex-col">
-        <Keyboard
-          cursorPosition={0}
-          displayedText={["a"]}
-          menuURL=""
-          handleRestartLesson={() => {}}
-        />
+      <div className="flex justify-center items-center -translate-y-5 sm:-translate-y-9 mt-2 flex-col">
+        <Keyboard cursorPosition={0} lives={lives} />
       </div>
     </div>
   );

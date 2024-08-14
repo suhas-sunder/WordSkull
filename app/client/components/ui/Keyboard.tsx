@@ -3,10 +3,15 @@ import useHighlightKeys from "../hooks/useHighlightKeys";
 import KeyboardData from "../data/KeyboardData";
 import GenerateDefaultStylingForKeys from "../utils/generators/GenerateDefaultStylingForKeys";
 import useKeyPress from "../hooks/useKeyPress";
-function KeyboardMenu() {
+
+interface MenuPropType {
+  lives?: number | null;
+}
+
+function KeyboardMenu({ lives }: MenuPropType) {
   return (
     <ul className="flex font-nunito text-slate-700 gap-2 text-2xl justify-center items-center">
-      <span className="text-xl translate-y-[0.05em]">20</span>
+      <span className="text-xl translate-y-[0.05em]">{lives || 0}</span>
       <span className="text-xl translate-y-[0.01em]">x</span>
       <span className="opacity-85 -translate-x-[0.1em]">🖤</span>
     </ul>
@@ -53,13 +58,11 @@ function DefaultKeyboardSetup() {
 }
 
 interface PropType {
+  lives?: number | null;
   cursorPosition: number;
-  displayedText: string[];
-  menuURL: string;
-  handleRestartLesson: () => void;
 }
 
-export default function Keyboard({ cursorPosition, displayedText }: PropType) {
+export default function Keyboard({ cursorPosition, lives }: PropType) {
   const { defaultKeyStyles, keyboardData } = DefaultKeyboardSetup();
 
   const [keyStyles, setKeyStyles] = useState<{ [key: string]: string }>(
@@ -67,9 +70,7 @@ export default function Keyboard({ cursorPosition, displayedText }: PropType) {
   );
 
   useHighlightKeys({
-    showGameOverMenu: false,
     cursorPosition,
-    displayedText,
     setKeyStyles,
   });
 
@@ -104,7 +105,7 @@ export default function Keyboard({ cursorPosition, displayedText }: PropType) {
 
   return (
     <>
-      <KeyboardMenu />
+      <KeyboardMenu lives={lives} />
       <div
         className={` -translate-y-6 hidden min-h-[23em] scale-[0.75] select-none flex-col gap-y-5 rounded-xl border-2 bg-slate-700 p-6 text-xs text-slate-700 md:flex lg:text-base`}
       >
@@ -128,6 +129,7 @@ export default function Keyboard({ cursorPosition, displayedText }: PropType) {
                   <span
                     className={` ${
                       key.defaultKey !== "Shift" &&
+                      key.defaultKey !== " " &&
                       key.defaultKey !== "Backspace"
                         ? handleKeyStyling(key)
                         : keyPressed !== key.defaultKey
@@ -135,7 +137,9 @@ export default function Keyboard({ cursorPosition, displayedText }: PropType) {
                         : ""
                     } ${
                       keyPressed === key.defaultKey &&
-                      (keyPressed === "Shift" || keyPressed === "Backspace") &&
+                      (keyPressed === " " ||
+                        keyPressed === "Backspace" ||
+                        keyPressed === "Shift") &&
                       "bg-slate-500 text-white"
                     } ${handleBtnStyle(key.defaultKey)}  mx-auto rounded-lg`}
                   >
