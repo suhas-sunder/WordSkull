@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useHighlightKeys from "../hooks/useHighlightKeys";
 import KeyboardData from "../data/KeyboardData";
 import GenerateDefaultStylingForKeys from "../utils/generators/GenerateDefaultStylingForKeys";
@@ -70,6 +70,10 @@ export default function Keyboard({
   currentlyEnteredWords,
   currentWord,
 }: PropType) {
+  const [correctCharCount, setCorrectCharCount] = useState<{
+    [key: string]: number;
+  }>({});
+
   const { defaultKeyStyles, keyboardData } = DefaultKeyboardSetup();
 
   const [keyStyles, setKeyStyles] = useState<{ [key: string]: string }>(
@@ -110,6 +114,28 @@ export default function Keyboard({
     return style;
   };
 
+  useEffect(() => {
+    // Create a new object for updated character counts
+    const newCharCount: { [key: string]: number } = {};
+
+    currentlyEnteredWords?.forEach((word) => {
+      word.split("").forEach((char, index) => {
+        // Initialize char count if not present
+        if (!(char in newCharCount)) {
+          newCharCount[char] = 0;
+        }
+        // Update count if conditions are met
+        if (currentWord[index] === char) {
+          newCharCount[char] = (newCharCount[char] || 0) + 1;
+        }
+      });
+    });
+
+    // Update state with the new char count object
+    setCorrectCharCount(newCharCount);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentlyEnteredWords, currentWord]);
+
   return (
     <>
       <KeyboardMenu lives={lives} />
@@ -128,7 +154,7 @@ export default function Keyboard({
                 >
                   {key.shiftKey !== "" && (
                     <span
-                      className={`absolute left-1/2 top-[12px] flex -translate-x-1/2 -translate-y-1/2 `}
+                      className={`absolute  left-1/2 top-[12px] flex -translate-x-1/2 -translate-y-1/2 `}
                     >
                       {key.shiftKey}
                     </span>
@@ -150,13 +176,27 @@ export default function Keyboard({
                       "bg-slate-500 text-white"
                     } ${handleBtnStyle(key.defaultKey)}  mx-auto rounded-lg  ${
                       currentWord?.includes(key.defaultKey) &&
-                      currentlyEnteredWords?.join("").includes(key.defaultKey) &&
-                      "bg-green-300  w-full"
-                    } ${
-                      !currentWord?.includes(key.defaultKey) &&
-                      currentlyEnteredWords?.join("").includes(key.defaultKey) &&
-                      "bg-slate-300  w-full"
-                    }`}
+                      currentlyEnteredWords
+                        ?.join("")
+                        .includes(key.defaultKey) &&
+                      correctCharCount[key.defaultKey] > 0 &&
+                      "bg-green-300"
+                    }
+                    ${
+                      currentWord?.includes(key.defaultKey) &&
+                      currentlyEnteredWords
+                        ?.join("")
+                        .includes(key.defaultKey) &&
+                      correctCharCount[key.defaultKey] === 0 &&
+                      "bg-yellow-200"
+                    }
+                     ${
+                       !currentWord?.includes(key.defaultKey) &&
+                       currentlyEnteredWords
+                         ?.join("")
+                         .includes(key.defaultKey) &&
+                       "bg-slate-400"
+                     }`}
                   >
                     <span
                       className={`${

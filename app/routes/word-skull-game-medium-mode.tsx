@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Skulls from "../client/components/data/skulls";
 import Keyboard from "../client/components/ui/Keyboard";
@@ -22,6 +22,14 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+interface PropType {
+  enteredWords: string[][];
+  currentRow: number;
+  char: string;
+  wordsForSkull: string[];
+  charIndex: number;
+}
+
 export default function WordSkullMedium() {
   const skulls = useMemo(
     () =>
@@ -30,27 +38,26 @@ export default function WordSkullMedium() {
         .slice(4, 8),
     []
   );
+
   const [currentSkull, setCurrentSkull] = useState<string[][][]>([]);
 
   //Manage lives
   const { lives, setLives } = useTotalLives({ currentSkull });
 
   //Manage words list
-  const { wordsForSkull, wordsList, dispWordHistory, setDispWordHistory } = useWordsForSkull({ currentSkull });
+  const { wordsForSkull, wordsList, dispWordHistory, setDispWordHistory } =
+    useWordsForSkull({ currentSkull });
 
   //Handle the main gameplay logic
-  const {
-    currentRow,
-    currentRowIndex,
-    enteredWords,
-  } = useClassicGameplayLogic({
-    currentSkull,
-    setCurrentSkull,
-    wordsList,
-    setDispWordHistory,
-    setLives,
-    wordsForSkull,
-  });
+  const { currentRow, currentRowIndex, enteredWords, enterPressed } =
+    useClassicGameplayLogic({
+      currentSkull,
+      setCurrentSkull,
+      wordsList,
+      setDispWordHistory,
+      setLives,
+      wordsForSkull,
+    });
 
   useEffect(() => {
     const randomizeCurrentSkull = () => {
@@ -78,7 +85,7 @@ export default function WordSkullMedium() {
       return (
         <li
           key={uuidv4()}
-          className="text-[1.2rem] sm:text-[2rem] border-2 rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center"
+          className={`text-[1.2rem] sm:text-[2rem] border-2 rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
         ></li>
       );
 
@@ -88,28 +95,34 @@ export default function WordSkullMedium() {
       currentSkull,
     });
 
+    //Controls styling of characters that have been guessed correctly. Green for exact match, and yellow for partial.
+
     return (
       <li
         key={uuidv4()}
         className={`${
           rowIndex === currentRow &&
           squareIndex === currentRowIndex + shiftIndex
-            ? "bg-slate-400 bg-opacity-20 border-opacity-75 scale-110 z-10 border-[2.5px] border-slate-400"
+            ? "bg-slate-300 bg-opacity-20 border-opacity-75 scale-110 z-10 border-[2.5px] border-slate-500"
             : "text-slate-300 border-slate-400 border-2"
         } ${
           square !== "" &&
           rowIndex === currentRow &&
-          "!border-slate-500 border-[2.5px] !text-slate-500"
-        }  text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center`}
+          "!border-slate-400 border-[2.5px] !text-slate-500"
+        }  text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center  ${
+          enterPressed &&
+          rowIndex === currentRow &&
+          handleValidationStylingV2({
+            enteredWords,
+            currentRow,
+            char: square,
+            wordsForSkull,
+            charIndex: squareIndex,
+          })
+        }`}
       >
         <span
-          className={`${
-            (rowIndex === currentRow &&
-              squareIndex === currentRowIndex + shiftIndex) ||
-            (square !== "" && rowIndex === currentRow)
-              ? "text-slate-600 text-opacity-75 border-slate-600"
-              : "text-slate-300"
-          } absolute text-[0.5rem] sm:text-sm flex top-[0.02em] left-[0.3em]`}
+          className={` absolute text-[0.5rem] opacity-75 brightness-[0.75] sm:text-sm flex top-[0.02em] left-[0.3em]`}
         >
           {squareCount}
         </span>
@@ -118,14 +131,150 @@ export default function WordSkullMedium() {
     );
   };
 
-  const handleValidationStyling = (char: string, charIndex: number) => {
+  const handleValidationStyling = ({
+    enteredWords,
+    currentRow,
+    char,
+    wordsForSkull,
+    charIndex,
+  }: PropType) => {
+    if (!enteredWords[currentRow] || enteredWords[currentRow]?.length <= 0)
+      return;
+
     let style = "border-slate-300 text-slate-500 ";
+    const correctCharCount: { [key: string]: number } = { [`${char}`]: 0 }; //This is used to track the total green squares so that yellow squares do not count as green
 
-    if (wordsForSkull[currentRow].includes(char))
-      style = "border-yellow-400 text-yellow-600 bg-yellow-100 ";
+    //Count total number of correct characters in guessed word
+    enteredWords[currentRow][enteredWords[currentRow]?.length - 1]
+      .split("")
+      .forEach((character, index) => {
+        if (wordsForSkull[currentRow][index] === character) {
+          correctCharCount[character] = correctCharCount[character] + 1;
+        }
+      });
 
-    if (wordsForSkull[currentRow][charIndex] === char)
-      style = "border-green-400 text-green-600 bg-green-100 ";
+    //Count total number of characters in answer
+    function countChar(str: string, char: string) {
+      if (!str) return 0;
+
+      let count = 0;
+      for (let i = 0; i < str?.length; i++) {
+        if (str[i] === char) {
+          count++;
+        }
+      }
+      return count;
+    }
+
+    const charIndexesInEnteredWord = [];
+
+    for (
+      let i = 0;
+      i < enteredWords[currentRow][enteredWords[currentRow]?.length - 1].length;
+      i++
+    ) {
+      if (
+        enteredWords[currentRow][enteredWords[currentRow]?.length - 1][i] ===
+        char
+      ) {
+        charIndexesInEnteredWord.push(i);
+      }
+    }
+
+    //Count remaining characters in guess after valid characters are accounted for from answer
+    function countRemainingChars() {
+      return (
+        countChar(wordsForSkull[currentRow], char) - correctCharCount[`${char}`]
+      );
+    }
+
+    if (wordsForSkull[currentRow][charIndex] === char) {
+      style = "!border-green-400 !text-green-600 !bg-green-100 ";
+    } else if (
+      wordsForSkull[currentRow].includes(char) &&
+      charIndexesInEnteredWord
+        .slice(0, countChar(wordsForSkull[currentRow], char))
+        .includes(charIndex) &&
+      countRemainingChars() > 0
+    ) {
+      style = "!border-yellow-400 !text-yellow-600 !bg-yellow-100 ";
+    }
+
+    return style;
+  };
+
+  const handleValidationStylingV2 = ({
+    enteredWords,
+    currentRow,
+    char,
+    wordsForSkull,
+    charIndex,
+  }: PropType) => {
+    if (!enteredWords[currentRow] || enteredWords[currentRow]?.length <= 0)
+      return;
+
+    //Offset calculation for index of guessed word when answer has ~ and @ for mapping blank squares and eyes.
+    const adjustedIndex =
+      charIndex -
+      currentSkull[0][currentRow]
+        .slice(0, charIndex + 1)
+        .filter((char) => char === "~" || char === "@").length;
+
+    const answer = wordsForSkull[currentRow]
+      .split("")
+      .filter((char) => char !== "~" && char !== "@")
+      .join("");
+
+    const wordGuessed = enteredWords[currentRow];
+    const guessLength = wordGuessed.length - 1;
+
+    let style = "border-slate-300 text-slate-500 ";
+    const correctCharCount: { [key: string]: number } = { [`${char}`]: 0 }; //This is used to track the total green squares so that yellow squares do not count as green
+
+    //Count total number of correct characters in guessed word
+    wordGuessed[guessLength].split("").forEach((character, index) => {
+      if (answer[index] === character) {
+        correctCharCount[character] = correctCharCount[character] + 1;
+      }
+    });
+
+    //Count total number of characters in answer
+    function countChar(str: string, char: string) {
+      if (!str) return 0;
+
+      let count = 0;
+      for (let i = 0; i < str?.length; i++) {
+        if (str[i] === char) {
+          count++;
+        }
+      }
+      return count;
+    }
+
+    const charIndexesInEnteredWord = [];
+
+    for (let i = 0; i < wordGuessed[guessLength].length; i++) {
+      if (wordGuessed[guessLength][i] === char) {
+        charIndexesInEnteredWord.push(i);
+      }
+    }
+
+    //Count remaining characters in guess after valid characters are accounted for from answer
+    function countRemainingChars() {
+      return countChar(answer, char) - correctCharCount[`${char}`];
+    }
+
+    if (answer[adjustedIndex] === char) {
+      style = "!border-green-400 !text-green-600 !bg-green-100 ";
+    } else if (
+      answer.includes(char) &&
+      charIndexesInEnteredWord
+        .slice(0, countChar(answer, char))
+        .includes(adjustedIndex) &&
+      countRemainingChars() > 0
+    ) {
+      style = "!border-yellow-400 !text-yellow-600 !bg-yellow-100 ";
+    }
 
     return style;
   };
@@ -141,13 +290,13 @@ export default function WordSkullMedium() {
         {dispWordHistory && (
           <button
             onClick={() => setDispWordHistory(false)}
-            className="w-full z-10 flex absolute h-full"
+            className="w-full top-12 z-10 flex absolute h-full bg-black opacity-10"
           ></button>
         )}
         <button
           onClick={() => setDispWordHistory(!dispWordHistory)}
           title="Hold 'Space Bar' or press 'Caps' key to view your attempts."
-          className="flex flex-col h-5 z-10 w-full cursor-pointer min-h-10 max-w-[400px] sm:max-w-[600px] bg-white border-2 gap-3 mt-[1em] sm:mt-0 mb-3 sm:mb-2 rounded-md sm:rounded-xl border-slate-200 justify-center items-center"
+          className="flex flex-col h-5 w-full cursor-pointer min-h-10 max-w-[400px] sm:max-w-[600px] bg-white border-2 gap-3 mt-[1em] sm:mt-0 mb-3 sm:mb-2 rounded-md sm:rounded-xl border-slate-200 justify-center items-center"
         >
           {enteredWords[currentRow]?.length > 0 ? (
             <div className="relative flex gap-[4px] justify-center px-3 rounded-md sm:rounded-lg items-center">
@@ -157,10 +306,13 @@ export default function WordSkullMedium() {
                 .map((char, charIndex) => (
                   <span
                     key={uuidv4()}
-                    className={`${handleValidationStyling(
+                    className={`${handleValidationStyling({
+                      enteredWords,
+                      currentRow,
                       char,
-                      charIndex
-                    )}} text-[0.8rem] font-nunito capitalize border-2 rounded-sm sm:rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
+                      wordsForSkull,
+                      charIndex,
+                    })}} text-[0.8rem] font-nunito capitalize border-2 rounded-sm sm:rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
                   >
                     {char}
                   </span>
@@ -171,7 +323,7 @@ export default function WordSkullMedium() {
           )}
         </button>
         {dispWordHistory && (
-          <div className="flex flex-col absolute z-10 bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto max-h-[450px] max-w-[600px] rounded-lg">
+          <div className="flex flex-col absolute z-10 bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto max-h-[450px] max-w-[400px] rounded-lg">
             <h2>Guesses for Row {currentRow + 1}</h2>{" "}
             {enteredWords[currentRow]?.map((enteredWord, rowIndex) => (
               <ul
@@ -179,22 +331,24 @@ export default function WordSkullMedium() {
                 className="h-10 relative flex gap-[2px] justify-center items-center"
               >
                 {enteredWord.split("").map((char, charIndex) => (
-                  <>
+                  <Fragment key={uuidv4()}>
                     {charIndex === 0 && (
-                      <li className="w-[1.7em] pt-[0.2em] h-[1.7em] text-black">
+                      <li className="w-[1.7em] pt-[0.2em] h-[1.7em] text-slate-600">
                         {rowIndex + 1}.
                       </li>
                     )}
                     <li
-                      key={uuidv4()}
-                      className={`${handleValidationStyling(
+                      className={` ${handleValidationStyling({
+                        enteredWords,
+                        currentRow,
                         char,
-                        charIndex
-                      )}} text-[1.2rem] p-0 m-0 sm:text-[1rem] capitalize border-2 rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
+                        wordsForSkull,
+                        charIndex,
+                      })}} text-[1.2rem] p-0 m-0 sm:text-[1rem] capitalize border-2 rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
                     >
                       {char}
                     </li>
-                  </>
+                  </Fragment>
                 ))}
               </ul>
             ))}
