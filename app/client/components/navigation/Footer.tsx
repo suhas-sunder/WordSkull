@@ -3,10 +3,9 @@ import styles from "./styles/NavBar.module.css";
 
 //Used by App.tsx component
 function Footer() {
-
   return (
     <nav
-      className={`${styles.nav} w-full  mt-[16em] border-t-2 flex gap-5 sm:gap-20 justify-center items-center py-1 sm:py-2 text-xs font-nunito  bg-white-500 `}
+      className={`${styles.nav} w-full border-t-2 flex gap-5 sm:gap-20 justify-center items-center py-1 sm:py-2 text-xs font-nunito  bg-white-500 `}
     >
       <div className="flex text-skull-dark-brown gap-1 font-bold tracking-widest">
         <span>&copy; 2024</span> <span className="hidden md:flex"> | </span>

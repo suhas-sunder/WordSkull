@@ -60,9 +60,16 @@ function DefaultKeyboardSetup() {
 interface PropType {
   lives?: number | null;
   cursorPosition: number;
+  currentlyEnteredWords: string[];
+  currentWord: string;
 }
 
-export default function Keyboard({ cursorPosition, lives }: PropType) {
+export default function Keyboard({
+  cursorPosition,
+  lives,
+  currentlyEnteredWords,
+  currentWord,
+}: PropType) {
   const { defaultKeyStyles, keyboardData } = DefaultKeyboardSetup();
 
   const [keyStyles, setKeyStyles] = useState<{ [key: string]: string }>(
@@ -107,7 +114,7 @@ export default function Keyboard({ cursorPosition, lives }: PropType) {
     <>
       <KeyboardMenu lives={lives} />
       <div
-        className={` -translate-y-6 hidden min-h-[23em] scale-[0.75] select-none flex-col gap-y-5 rounded-xl border-2 bg-slate-700 p-6 text-xs text-slate-700 md:flex lg:text-base`}
+        className={` -translate-y-6 hidden min-h-[23em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2 bg-slate-700 p-6 text-xs text-slate-700 md:flex lg:text-base`}
       >
         {Object.values(keyboardData).map((keysArr, index) => {
           return (
@@ -141,20 +148,22 @@ export default function Keyboard({ cursorPosition, lives }: PropType) {
                         keyPressed === "Backspace" ||
                         keyPressed === "Shift") &&
                       "bg-slate-500 text-white"
-                    } ${handleBtnStyle(key.defaultKey)}  mx-auto rounded-lg`}
+                    } ${handleBtnStyle(key.defaultKey)}  mx-auto rounded-lg  ${
+                      currentWord?.includes(key.defaultKey) &&
+                      currentlyEnteredWords?.join("").includes(key.defaultKey) &&
+                      "bg-green-300  w-full"
+                    } ${
+                      !currentWord?.includes(key.defaultKey) &&
+                      currentlyEnteredWords?.join("").includes(key.defaultKey) &&
+                      "bg-slate-300  w-full"
+                    }`}
                   >
                     <span
                       className={`${
                         key.shiftKey !== "" && "translate-y-[8.5px]"
-                      } flex items-center justify-center py-3 `}
+                      } flex items-center uppercase justify-center py-3`}
                     >
-                      {key.defaultKey === " "
-                        ? "Spacebar"
-                        : keyPressed === "Shift"
-                        ? key.defaultKey.toUpperCase()
-                        : key.defaultKey.length === 1
-                        ? key.defaultKey
-                        : key.defaultKey.toUpperCase()}
+                      {key.defaultKey === " " ? "SpaceBar" : key.defaultKey}
                     </span>
                   </span>
                 </div>

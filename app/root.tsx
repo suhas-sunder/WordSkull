@@ -25,7 +25,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="pt-14">
         <NavBar />
-        <div className="min-h-svh">{children}</div>
+        <div className="min-h-svh ">{children}</div>
         <ScrollRestoration />
         <Scripts />
         <Footer />
