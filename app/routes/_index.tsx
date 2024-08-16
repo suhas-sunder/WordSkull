@@ -118,7 +118,7 @@ export default function Index() {
           <span className="inline-flex">SKULL</span>
         </h1>
       </header>
-      <main className="flex flex-col-reverse sm:flex-col sm:gap-14 items-center animate-fadeIn">
+      <main className="flex flex-col sm:gap-14 items-center animate-fadeIn">
         <div className="relative flex-col w-full max-w-[800px] capitalize flex font-nunito text-slate-400 items-center min-h-[28em] sm:min-h-[40em]">
           <div
             className={`absolute top-0 left-0  w-full h-full   flex flex-col justify-center items-center transition-opacity duration-2000 ease-in-out ${fadeClass}`}
@@ -153,7 +153,7 @@ export default function Index() {
 
         <button
           onClick={() => navigate("/word-skull-game-medium-mode")}
-          className="flex z-10 border-2 px-8 py-1 text-2xl font-nunito rounded-lg tracking-widest leading-loose text-slate-500 hover:text-skull-dark-brown hover:border-skull-brown"
+          className="flex z-10 border-2 px-8 py-1 text-2xl font-nunito rounded-lg tracking-widest leading-loose border-slate-300 text-slate-500 hover:text-slate-600 hover:border-slate-400"
         >
           Play
         </button>
