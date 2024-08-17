@@ -23,6 +23,7 @@ function useClassicGameplayLogic({
   const [currentRow, setCurrentRow] = useState<number>(0);
   const [currentRowIndex, setCurrentRowIndex] = useState<number>(0);
   const [enteredWords, setEnteredWords] = useState<string[][]>([]);
+  const [enterPressed, setEnterPressed] = useState(false);
 
   useEffect(() => {
     //If a square is marked with "@" or "~" it can't be changed so shift the index to a square that can.
@@ -139,6 +140,7 @@ function useClassicGameplayLogic({
             alert("Not in word list!");
             return;
           } else {
+            setEnterPressed(true);
             setLives((prevState) =>
               prevState !== null ? prevState - 1 : prevState
             );
@@ -168,17 +170,24 @@ function useClassicGameplayLogic({
         });
       };
 
-      if (key === "enter") {
+      //If enter is pressed and entered word isn't repeated for current row
+      if (
+        key === "enter" &&
+        !enteredWords[currentRow]?.includes(
+          currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "")
+        )
+      ) {
         if (
-          currentSkull[0][currentRow].join("").replace(/[@~]/g, "") !==
+          currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "") !==
             wordsForSkull[currentRow] &&
-          !currentSkull[0][currentRow].includes("")
+          !currentSkull[0][currentRow]?.includes("")
         ) {
           handleEnteredWord();
         } else {
           handleNextRow();
         }
       } else if (key === "backspace") {
+        setEnterPressed(false);
         handleDeleteSquare();
       } else {
         handleUpdateSquare(key);
@@ -200,6 +209,7 @@ function useClassicGameplayLogic({
     currentRow,
     currentRowIndex,
     currentSkull,
+    enteredWords,
     setCurrentSkull,
     setDispWordHistory,
     setLives,
@@ -211,6 +221,7 @@ function useClassicGameplayLogic({
     currentRow,
     currentRowIndex,
     enteredWords,
+    enterPressed,
   };
 }
 
