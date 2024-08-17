@@ -1,11 +1,20 @@
 import type { MetaFunction } from "@remix-run/node";
-import { v4 as uuidv4 } from "uuid";
+import { useEffect, useMemo, useState } from "react";
+import Skulls from "../client/components/data/skulls";
+import Keyboard from "../client/components/ui/Keyboard";
+import useTotalLives from "../client/components/hooks/useTotalLives";
+import useWordsForSkull from "../client/components/hooks/useWordsForSkull";
+import useClassicGameplayLogic from "../client/components/hooks/useClassicGameplayLogic";
+import DisplaySkull from "../client/components/layout/DisplaySkull";
+import WordHistory from "../client/components/ui/WordHistory";
+import Header from "../client/components/layout/Header";
+import useHandleGameOver from "../client/components/hooks/useHandleGameOver";
 
 export const meta: MetaFunction = () => {
   return [
     {
       title:
-        "💀 Word Skull - An educational word puzzle game designed to look like skulls and other fun shapes... 🎉✨",
+        "💀 Word Skull Easy - Easy difficulty offers learning for 3 to 5 letter words 🎉✨",
     },
     {
       name: "description",
@@ -15,103 +24,78 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function Index() {
-  //Easy Skull
-  const skull_1 = [
-    ["", "", "", ""],
-    ["", "@", "", "", "@", ""],
-    ["", "@", "@", "", "@", "@", ""],
-    ["", "", "", "", ""],
-    ["", "", "", ""],
-    ["", "", "", ""],
-  ];
+export default function WordSkullMedium() {
+  const skulls = useMemo(
+    () =>
+      Skulls()
+        .map((skull) => [...skull])
+        .slice(0, 4),
+    []
+  );
 
-  const skull_2 = [
-    ["", "", "", ""],
-    ["", "@", "", "", "", "@", ""],
-    ["", "@", "@", "@", "", "@", "@", "@", ""],
-    ["", "@", "", "~", "", "@", ""],
-    ["", "", "", "", ""],
-    ["", "", "", ""],
-  ];
-  const skull_3 = [
-    ["~", "", "", "~", "~", "", "", "~"],
-    ["", "@", "", "@", "", "@", "", "@", ""],
-    ["", "@", "@", "@", "", "@", "@", "@", ""],
-    ["", "", "~", "~", "~", "", ""],
-    ["", "", "~", "", ""],
-    ["", "", "", ""],
-  ];
+  const [currentSkull, setCurrentSkull] = useState<string[][][]>([]);
 
-  const skull_4 = [
-    ["~", "", "", "~", "~", "", "", "~"],
-    ["", "@", "@", "@", "", "@", "@", "@", ""],
-    ["", "@", "", "@", "", "@", "", "@", ""],
-    ["~", "", "", "~", "~", "", "", "~"],
-    ["", "", "~", "", ""],
-    ["", "", "", ""],
-  ];
+  //Manage lives
+  const { lives, setLives } = useTotalLives({ currentSkull });
 
-  const handleListItem = (square: string, squareCount: number) => {
-    if (square === "@")
-      return (
-        <li
-          key={uuidv4()}
-          className="text-[1.1rem] sm:text-[2rem] border-2 border-slate-700 bg-slate-800 rounded-lg w-[2em] h-[2em] flex justify-center items-center"
-        ></li>
-      );
+  //Manage words list
+  const { wordsForSkull, wordsList, dispWordHistory, setDispWordHistory } =
+    useWordsForSkull({ currentSkull });
 
-    if (square === "~")
-      return (
-        <li
-          key={uuidv4()}
-          className="text-[1.1rem] sm:text-[2rem] border-2 rounded-lg w-[2em] h-[2em] flex justify-center items-center"
-        ></li>
-      );
+  //Handle the main gameplay logic
+  const { currentRow, currentRowIndex, enteredWords, enterPressed } =
+    useClassicGameplayLogic({
+      currentSkull,
+      setCurrentSkull,
+      wordsList,
+      setDispWordHistory,
+      setLives,
+      wordsForSkull,
+    });
 
-    return (
-      <li
-        key={uuidv4()}
-        className="text-[1.1rem] relative sm:text-[2rem] border-2 border-slate-400 rounded-lg w-[2em] h-[2em] flex justify-center items-center"
-      >
-        <span className="absolute text-sm text-slate-300 flex top-[0.02em] left-[0.3em]">
-          {squareCount}
-        </span>
-        <span>{square}</span>
-      </li>
-    );
-  };
+  const { isGameOver } = useHandleGameOver({ currentRow, currentSkull });
+
+  useEffect(() => {
+    const randomizeCurrentSkull = () => {
+      setCurrentSkull([skulls[Math.floor(Math.random() * skulls?.length)]]);
+    };
+
+    randomizeCurrentSkull();
+  }, [skulls]);
 
   return (
-    <>
-      <header className=" mb-10">
-        <h1 className="w-full flex justify-center items-center text-6xl text-center mt-10 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-5 sm:mb-1 text-slate-500 font-lora">
-          W💀RD SKULL
-        </h1>
-      </header>
-      <main className="flex justify-center flex-col pt-10 gap-14 items-center">
-        {[skull_1, skull_2, skull_3, skull_4].map((skull, index) => (
-          <div
-            key={index}
-            className="relative flex-col w-full max-w-[800px] capitalize flex font-nunito text-slate-400 items-center min-h-[40em]"
-          >
-            {skull.map((row) => {
-              let squareCount = 0; // Reset squareCount at the start of each row
+    <div>
+      <Header lives={lives} isGameOver={isGameOver} />
+      {isGameOver ? (
+        <div></div>
+      ) : (
+        <main className="flex relative min-h-[21.5em] sm:min-h-[32.7em] flex-col pt-0 sm:pt-10 gap-5 px-5 items-center animate-fadeIn">
+          <WordHistory
+            dispWordHistory={dispWordHistory}
+            setDispWordHistory={setDispWordHistory}
+            wordsForSkull={wordsForSkull}
+            currentRow={currentRow}
+            enteredWords={enteredWords}
+          />
 
-              return (
-                <ul key={uuidv4()} className="flex">
-                  {row.map((square) => {
-                    if (square !== "@" && square !== "~") {
-                      squareCount += 1; // Increment squareCount only for empty squares
-                    }
-                    return handleListItem(square, squareCount);
-                  })}
-                </ul>
-              );
-            })}
+          <DisplaySkull
+            currentSkull={currentSkull}
+            currentRow={currentRow}
+            currentRowIndex={currentRowIndex}
+            wordsForSkull={wordsForSkull}
+            enteredWords={enteredWords}
+            enterPressed={enterPressed}
+          />
+
+          <div className="flex max-w-[800px] overflow-hidden justify-center items-center -translate-y-5 sm:-translate-y-16 flex-col">
+            <Keyboard
+              cursorPosition={0}
+              currentlyEnteredWords={enteredWords[currentRow]}
+              currentWord={wordsForSkull[currentRow]}
+            />
           </div>
-        ))}
-      </main>
-    </>
+        </main>
+      )}
+    </div>
   );
 }

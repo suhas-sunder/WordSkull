@@ -36,6 +36,7 @@ export default function Index() {
   const [transformStyle, setTransformStyle] = useState({});
   const [fadeClass, setFadeClass] = useState("fade-in"); // State to manage fade class
   const [shuffledSkulls, setShuffledSkulls] = useState<string[][][]>([]); // Initial empty array
+  const [difficulty, setDifficulty] = useState<string>("easy");
   const navigate = useNavigate();
 
   const skulls = useMemo(() => Skulls(), []);
@@ -152,11 +153,65 @@ export default function Index() {
         </div>
 
         <button
-          onClick={() => navigate("/word-skull-game-medium-mode")}
-          className="flex z-10 border-2 px-8 py-1 text-2xl font-nunito rounded-lg tracking-widest leading-loose border-slate-300 text-slate-500 hover:text-slate-600 hover:border-slate-400"
+          onClick={() => navigate(`/word-skull-game-${difficulty}-mode`)}
+          className="flex z-10 border-2 px-4  text-xl font-nunito rounded-lg tracking-widest leading-loose border-slate-300 text-slate-500 hover:text-slate-600 hover:border-slate-400"
         >
           Play
         </button>
+        <ul className="flex gap-8 uppercase font-nunito">
+          <li className="flex gap-2">
+            <input
+              checked={difficulty === "easy"}
+              onClick={() => setDifficulty("easy")}
+              id="easy"
+              type="radio"
+              name="difficulty"
+              className="cursor-pointer"
+            />{" "}
+            <label htmlFor="easy" className="cursor-pointer">
+              Easy
+            </label>
+          </li>
+          <li className="flex gap-2">
+            <input
+              checked={difficulty === "medium"}
+              onClick={() => setDifficulty("medium")}
+              id="medium"
+              type="radio"
+              name="difficulty"
+              className="cursor-pointer"
+            />{" "}
+            <label htmlFor="medium" className="cursor-pointer">
+              Medium
+            </label>
+          </li>
+          <li className="flex gap-2">
+            <input
+              checked={difficulty === "hard"}
+              onClick={() => setDifficulty("hard")}
+              id="hard"
+              type="radio"
+              name="difficulty"
+              className="cursor-pointer"
+            />{" "}
+            <label htmlFor="hard" className="cursor-pointer">
+              Hard
+            </label>
+          </li>
+          <li className="flex gap-2">
+            <input
+              checked={difficulty === "extreme"}
+              onClick={() => setDifficulty("extreme")}
+              id="extreme"
+              type="radio"
+              name="difficulty"
+              className="cursor-pointer"
+            />{" "}
+            <label htmlFor="extreme" className="cursor-pointer">
+              Extreme
+            </label>
+          </li>
+        </ul>
         <div className="max-w-[800px] text-center font-nunito text-lg text-slate-500">
           Hello friend! Unfortunately this website/game is still in development
           and is currently in a non-functioning state. I am working hard to get

@@ -4,25 +4,36 @@ interface PropType {
   currentRowIndex: number;
 }
 
+const cache = new Map<string, number>();
+
 function HandleShiftIndex({
   currentSkull,
   currentRow,
   currentRowIndex,
 }: PropType) {
-  let defaultIndex = 0;
+  const cacheKey = JSON.stringify({ currentRow, currentRowIndex });
+
+  if (cache.has(cacheKey)) {
+    return cache.get(cacheKey)!;
+  }
 
   if (currentRow > currentSkull[0].length - 1) {
-    console.log("You Won! Game Over...");
     return 0;
   }
 
+  const row = currentSkull[0][currentRow];
+  const length = row.length;
+  let defaultIndex = 0;
+
   while (
-    currentSkull[0][currentRow][currentRowIndex + defaultIndex] === "@" ||
-    currentSkull[0][currentRow][currentRowIndex + defaultIndex] === "~"
+    currentRowIndex + defaultIndex < length &&
+    (row[currentRowIndex + defaultIndex] === "@" ||
+      row[currentRowIndex + defaultIndex] === "~")
   ) {
     defaultIndex++;
   }
 
+  cache.set(cacheKey, defaultIndex);
   return defaultIndex;
 }
 

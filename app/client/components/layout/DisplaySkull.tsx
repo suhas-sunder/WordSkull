@@ -142,7 +142,7 @@ function DisplaySkull({
         } ${
           square !== "" &&
           rowIndex === currentRow &&
-          "!border-slate-400 border-[2.5px] !text-slate-500"
+          "border-slate-400 border-[2.5px] text-slate-500"
         }  text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center  ${
           enterPressed &&
           rowIndex === currentRow &&
