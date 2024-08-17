@@ -14,7 +14,7 @@ function useTotalLives({ currentSkull }: { currentSkull: string[][][] }) {
       const averageLength = totalLength / currentSkull[0].length;
 
       // Set lives to the product of currentSkull[0].length and the averageLength
-      setLives(currentSkull[0].length * averageLength);
+      setLives(Math.ceil(currentSkull[0].length * averageLength * 0.8));
     }
   }, [lives, currentSkull]);
 

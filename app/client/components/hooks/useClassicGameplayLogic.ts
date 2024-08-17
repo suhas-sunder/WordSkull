@@ -170,11 +170,17 @@ function useClassicGameplayLogic({
         });
       };
 
-      if (key === "enter") {
+      //If enter is pressed and entered word isn't repeated for current row
+      if (
+        key === "enter" &&
+        !enteredWords[currentRow]?.includes(
+          currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "")
+        )
+      ) {
         if (
-          currentSkull[0][currentRow].join("").replace(/[@~]/g, "") !==
+          currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "") !==
             wordsForSkull[currentRow] &&
-          !currentSkull[0][currentRow].includes("")
+          !currentSkull[0][currentRow]?.includes("")
         ) {
           handleEnteredWord();
         } else {
@@ -203,6 +209,7 @@ function useClassicGameplayLogic({
     currentRow,
     currentRowIndex,
     currentSkull,
+    enteredWords,
     setCurrentSkull,
     setDispWordHistory,
     setLives,

@@ -4,20 +4,6 @@ import KeyboardData from "../data/KeyboardData";
 import GenerateDefaultStylingForKeys from "../utils/generators/GenerateDefaultStylingForKeys";
 import useKeyPress from "../hooks/useKeyPress";
 
-interface MenuPropType {
-  lives?: number | null;
-}
-
-function KeyboardMenu({ lives }: MenuPropType) {
-  return (
-    <ul className="flex font-nunito text-slate-700 gap-2 text-2xl justify-center items-center">
-      <span className="text-xl translate-y-[0.05em]">{lives || 0}</span>
-      <span className="text-xl translate-y-[0.01em]">x</span>
-      <span className="opacity-85 -translate-x-[0.1em]">🖤</span>
-    </ul>
-  );
-}
-
 //Theres a lot of object/array manipulation for the initial setup so to improve readability it is going into it's own function
 function DefaultKeyboardSetup() {
   //Used to track validity of inputs
@@ -58,7 +44,6 @@ function DefaultKeyboardSetup() {
 }
 
 interface PropType {
-  lives?: number | null;
   cursorPosition: number;
   currentlyEnteredWords: string[];
   currentWord: string;
@@ -66,7 +51,6 @@ interface PropType {
 
 export default function Keyboard({
   cursorPosition,
-  lives,
   currentlyEnteredWords,
   currentWord,
 }: PropType) {
@@ -137,81 +121,72 @@ export default function Keyboard({
   }, [currentlyEnteredWords, currentWord]);
 
   return (
-    <>
-      <KeyboardMenu lives={lives} />
-      <div
-        className={` -translate-y-6 hidden min-h-[23em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2 bg-slate-700 p-6 text-xs text-slate-700 md:flex lg:text-base`}
-      >
-        {Object.values(keyboardData).map((keysArr, index) => {
-          return (
-            <div key={`keyboard-rows${index}-id`} className="flex gap-3">
-              {keysArr.map((key) => (
-                <div
-                  key={key.id}
-                  className={`${
-                    keyStyles[`${key.defaultKey} `]
-                  } relative flex w-full items-center justify-center`}
-                >
-                  {key.shiftKey !== "" && (
-                    <span
-                      className={`absolute  left-1/2 top-[12px] flex -translate-x-1/2 -translate-y-1/2 `}
-                    >
-                      {key.shiftKey}
-                    </span>
-                  )}
+    <div
+      className={`-translate-y-6 hidden min-h-[23em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2 bg-slate-700 p-6 text-xs text-slate-700 md:flex lg:text-base`}
+    >
+      {Object.values(keyboardData).map((keysArr, index) => {
+        return (
+          <div key={`keyboard-rows${index}-id`} className="flex gap-3">
+            {keysArr.map((key) => (
+              <div
+                key={key.id}
+                className={`${
+                  keyStyles[`${key.defaultKey} `]
+                } relative flex w-full items-center justify-center`}
+              >
+                {key.shiftKey !== "" && (
                   <span
-                    className={` ${
-                      key.defaultKey !== "Shift" &&
-                      key.defaultKey !== " " &&
-                      key.defaultKey !== "Backspace"
-                        ? handleKeyStyling(key)
-                        : keyPressed !== key.defaultKey
-                        ? "bg-white"
-                        : ""
-                    } ${
-                      keyPressed === key.defaultKey &&
-                      (keyPressed === " " ||
-                        keyPressed === "Backspace" ||
-                        keyPressed === "Shift") &&
-                      "bg-slate-500 text-white"
-                    } ${handleBtnStyle(key.defaultKey)}  mx-auto rounded-lg  ${
-                      currentWord?.includes(key.defaultKey) &&
-                      currentlyEnteredWords
-                        ?.join("")
-                        .includes(key.defaultKey) &&
-                      correctCharCount[key.defaultKey] > 0 &&
-                      "bg-green-300"
-                    }
-                    ${
-                      currentWord?.includes(key.defaultKey) &&
-                      currentlyEnteredWords
-                        ?.join("")
-                        .includes(key.defaultKey) &&
-                      correctCharCount[key.defaultKey] === 0 &&
-                      "bg-yellow-200"
-                    }
-                     ${
-                       !currentWord?.includes(key.defaultKey) &&
-                       currentlyEnteredWords
-                         ?.join("")
-                         .includes(key.defaultKey) &&
-                       "bg-slate-400"
-                     }`}
+                    className={`absolute  left-1/2 top-[12px] flex -translate-x-1/2 -translate-y-1/2 `}
                   >
-                    <span
-                      className={`${
-                        key.shiftKey !== "" && "translate-y-[8.5px]"
-                      } flex items-center uppercase justify-center py-3`}
-                    >
-                      {key.defaultKey === " " ? "SpaceBar" : key.defaultKey}
-                    </span>
+                    {key.shiftKey}
                   </span>
-                </div>
-              ))}
-            </div>
-          );
-        })}
-      </div>
-    </>
+                )}
+                <span
+                  className={` ${
+                    key.defaultKey !== "Shift" &&
+                    key.defaultKey !== " " &&
+                    key.defaultKey !== "Backspace"
+                      ? handleKeyStyling(key)
+                      : keyPressed !== key.defaultKey
+                      ? "bg-white"
+                      : ""
+                  } ${
+                    keyPressed === key.defaultKey &&
+                    (keyPressed === " " ||
+                      keyPressed === "Backspace" ||
+                      keyPressed === "Shift") &&
+                    "bg-slate-500 text-white"
+                  } ${handleBtnStyle(key.defaultKey)}  mx-auto rounded-lg  ${
+                    currentWord?.includes(key.defaultKey) &&
+                    currentlyEnteredWords?.join("").includes(key.defaultKey) &&
+                    correctCharCount[key.defaultKey] > 0 &&
+                    "!bg-green-300"
+                  }
+                ${
+                  currentWord?.includes(key.defaultKey) &&
+                  currentlyEnteredWords?.join("").includes(key.defaultKey) &&
+                  correctCharCount[key.defaultKey] === 0 &&
+                  "!bg-yellow-200"
+                }
+                 ${
+                   !currentWord?.includes(key.defaultKey) &&
+                   currentlyEnteredWords?.join("").includes(key.defaultKey) &&
+                   "!bg-slate-400"
+                 }`}
+                >
+                  <span
+                    className={`${
+                      key.shiftKey !== "" && "translate-y-[8.5px]"
+                    } flex items-center uppercase justify-center py-3`}
+                  >
+                    {key.defaultKey === " " ? "SpaceBar" : key.defaultKey}
+                  </span>
+                </span>
+              </div>
+            ))}
+          </div>
+        );
+      })}
+    </div>
   );
 }

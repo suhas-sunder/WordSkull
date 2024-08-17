@@ -77,7 +77,7 @@ export default function WordSkullMedium() {
       return (
         <li
           key={uuidv4()}
-          className="text-[1.2rem] sm:text-[2rem] border-2 border-slate-700 bg-slate-800 rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center"
+          className=" border-slate-700 bg-slate-800 text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center"
         ></li>
       );
 
@@ -85,7 +85,7 @@ export default function WordSkullMedium() {
       return (
         <li
           key={uuidv4()}
-          className={`text-[1.2rem] sm:text-[2rem] border-2 rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
+          className={`text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center`}
         ></li>
       );
 
@@ -281,12 +281,17 @@ export default function WordSkullMedium() {
 
   return (
     <div>
-      <header className="animate-fadeIn -mb-4 sm:-mb-8">
-        <h1 className="w-full flex justify-center items-center text-xl sm:text-2xl text-center mt-5 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-2 text-slate-500 font-lora">
+      <header className="animate-fadeIn w-full justify-center items-center flex-col flex -mb-6 sm:-mb-8">
+        <h1 className=" flex justify-center items-center text-xl sm:text-2xl text-center mt-2 leading-snug -translate-y-[0.3em] sm:translate-y-0 text-slate-500 font-lora">
           W💀RD SKULL
         </h1>
+        <ul className="flex font-nunito -translate-y-2 sm:translate-y-0 text-slate-700 gap-2 my-1 justify-center items-center">
+          <span className="text-lg translate-y-[0.05em]">{lives || 0}</span>
+          <span className="text-xl translate-y-[0.01em]">x</span>
+          <span className="opacity-85 -translate-x-[0.1em] text-lg">🖤</span>
+        </ul>
       </header>
-      <main className="flex min-h-[21.5em] sm:min-h-[32.7em] flex-col pt-0 sm:pt-10 gap-5 mx-5 items-center animate-fadeIn">
+      <main className="flex relative min-h-[21.5em] sm:min-h-[32.7em] flex-col pt-0 sm:pt-10 gap-5 mx-5 items-center animate-fadeIn">
         {dispWordHistory && (
           <button
             onClick={() => setDispWordHistory(false)}
@@ -296,10 +301,10 @@ export default function WordSkullMedium() {
         <button
           onClick={() => setDispWordHistory(!dispWordHistory)}
           title="Hold 'Space Bar' or press 'Caps' key to view your attempts."
-          className="flex flex-col h-5 w-full cursor-pointer min-h-10 max-w-[400px] sm:max-w-[600px] bg-white border-2 gap-3 mt-[1em] sm:mt-0 mb-3 sm:mb-2 rounded-md sm:rounded-xl border-slate-200 justify-center items-center"
+          className="flex h-5 cursor-pointer min-h-10 max-w-[400px] sm:max-w-[600px] bg-white border-2 gap-3 mt-[1em] sm:mt-0 mb-4 sm:mb-2 rounded-md sm:rounded-md border-slate-200 justify-center items-center"
         >
           {enteredWords[currentRow]?.length > 0 ? (
-            <div className="relative flex gap-[4px] justify-center px-3 rounded-md sm:rounded-lg items-center">
+            <div className="relative flex gap-[4px] justify-center px-3 items-center">
               {enteredWords[currentRow]
                 ?.slice(-1)[0]
                 .split("")
@@ -312,7 +317,7 @@ export default function WordSkullMedium() {
                       char,
                       wordsForSkull,
                       charIndex,
-                    })}} text-[0.8rem] font-nunito capitalize border-2 rounded-sm sm:rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
+                    })}} text-[0.8rem] font-nunito capitalize border-2 rounded-md w-[1.7em] h-[1.7em] flex justify-center items-center`}
                   >
                     {char}
                   </span>
@@ -322,6 +327,7 @@ export default function WordSkullMedium() {
             <div className="h-5"></div>
           )}
         </button>
+
         {dispWordHistory && (
           <div className="flex flex-col absolute z-10 bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto max-h-[450px] max-w-[400px] rounded-lg">
             <h2>Guesses for Row {currentRow + 1}</h2>{" "}
@@ -358,7 +364,7 @@ export default function WordSkullMedium() {
           return index === 0 ? (
             <div
               key={index}
-              className="relative flex-col w-full max-w-[800px] -translate-y-6 sm:-translate-y-8 sm:scale-[0.9] capitalize flex font-nunito text-slate-400 items-center"
+              className="relative flex-col w-full max-w-[800px] -translate-y-6 sm:-translate-y-7 sm:scale-[0.9] capitalize flex font-nunito text-slate-400 items-center"
             >
               {skull.map((row, rowIndex) => {
                 let squareCount = 0; // Reset squareCount at the start of each row
@@ -382,10 +388,10 @@ export default function WordSkullMedium() {
             </div>
           ) : null;
         })}
-        <div className="flex justify-center items-center -translate-y-5 sm:-translate-y-9 mt-2 flex-col">
+
+        <div className="flex justify-center items-center -translate-y-5 sm:-translate-y-16 flex-col">
           <Keyboard
             cursorPosition={0}
-            lives={lives}
             currentlyEnteredWords={enteredWords[currentRow]}
             currentWord={wordsForSkull[currentRow]}
           />
