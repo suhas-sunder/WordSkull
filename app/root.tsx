@@ -37,10 +37,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export function Body({ children }: { children: React.ReactNode }) {
   const { darkThemeActive } = useTheme();
 
-  useEffect(() => {
-    console.log("Dark theme active:", darkThemeActive);
-  }, [darkThemeActive]);
-
   return (
     <body className={`pt-14 ${darkThemeActive && "bg-slate-900"}`}>
       <NavBar />

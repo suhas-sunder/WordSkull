@@ -23,83 +23,83 @@ function MainLinks({
   const handleLinkClick = () => setShowMobileMenu(false);
 
   return (
-    <ul
-      id={showMobileMenu ? "mobile-links" : "main-links"}
-      className={`${
-        darkThemeActive ? "text-white" : "text-slate-700"
-      } text-base justify-center items-center text-center ${
-        showMobileMenu ? styles["mobile-nav"] : styles["main-nav"]
-      }`}
-    >
-      <li className="flex w-full lg:w-auto">
-        <NavLink
-          onClick={handleLinkClick}
-          to="/stats"
-          className={`relative flex items-center px-4 hover:fill-skull-brown  justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em] ${
-            darkThemeActive ? "fill-white" : "fill-slate-700"
-          }`}
-        >
-          <span className={`${styles.icon}`}>
-            <Icon icon="statsChart" title="Stats" />
-          </span>
-        </NavLink>
-      </li>
+    <div className="flex ml-auto pr-5 justify-center items-center">
+      <ul
+        id={showMobileMenu ? "mobile-links" : "main-links"}
+        className={`${
+          darkThemeActive ? "text-white bg-slate-900" : "text-slate-700 bg-white"
+        } text-base justify-center items-center text-center ${
+          showMobileMenu ? styles["mobile-nav"] : styles["main-nav"]
+        }`}
+      >
+        <li className="flex w-full lg:w-auto">
+          <NavLink
+            onClick={handleLinkClick}
+            to="/stats"
+            className={`relative flex items-center px-4 hover:fill-skull-brown  justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em] ${
+              darkThemeActive ? "fill-white" : "fill-slate-700"
+            }`}
+          >
+            <span className={`${styles.icon}`}>
+              <Icon icon="statsChart" title="Stats" />
+            </span>
+          </NavLink>
+        </li>
 
-      <li className="flex w-full lg:w-auto">
-        <NavLink
-          onClick={handleLinkClick}
-          to="/settings"
-          className={`relative flex items-center px-4 hover:fill-skull-brown  justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em] ${
-            darkThemeActive ? "fill-white" : "fill-slate-700"
-          }`}
-        >
-          <span className={`${styles.icon} flex`}>
-            <Icon icon="settingSparkle" title="Settings" />
-          </span>
-        </NavLink>
-      </li>
+        <li className="flex w-full lg:w-auto">
+          <NavLink
+            onClick={handleLinkClick}
+            to="/settings"
+            className={`relative flex items-center px-4 hover:fill-skull-brown  justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em] ${
+              darkThemeActive ? "fill-white" : "fill-slate-700"
+            }`}
+          >
+            <span className={`${styles.icon} flex`}>
+              <Icon icon="settingSparkle" title="Settings" />
+            </span>
+          </NavLink>
+        </li>
 
-      <li className="flex w-full lg:w-auto">
-        <NavLink
-          onClick={handleLinkClick}
-          to="/blog"
-          className="relative flex items-center px-4 justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
-        >
-          <span className={`${styles.icon} flex`}>Blog</span>
-        </NavLink>
-      </li>
-      <li>
-        <button
-          onClick={() => setDarkThemeActive(!darkThemeActive)}
+        <li className="flex w-full lg:w-auto">
+          <NavLink
+            onClick={handleLinkClick}
+            to="/blog"
+            className="relative flex items-center px-4 justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
+          >
+            <span className={`${styles.icon} flex`}>Blog</span>
+          </NavLink>
+        </li>
+      </ul>
+      <button
+        onClick={() => setDarkThemeActive(!darkThemeActive)}
+        className={`${
+          darkThemeActive
+            ? " bg-slate-500 hover:bg-white border-slate-600"
+            : " bg-slate-100 hover:bg-slate-500"
+        } group justify-center items-center border-2 py-1/2 ml-2 cursor-pointer hover:border-skull-brown hover:border-opacity-60 flex overflow-hidden rounded-full`}
+      >
+        <span
+          title="Toggle 'Dark' theme"
           className={`${
             darkThemeActive
-              ? " bg-slate-500 hover:bg-white border-slate-600"
-              : " bg-slate-100 hover:bg-slate-500"
-          } group justify-center items-center border-2 py-1/2 ml-2 cursor-pointer hover:border-skull-brown hover:border-opacity-60 flex overflow-hidden rounded-full`}
+              ? "group-hover:text-2xl group-hover:pr-1 pr-0 text-sm -translate-x-2 group-hover:translate-x-1"
+              : " group-hover:text-sm group-hover:pr-0 pr-1 text-2xl translate-x-1 group-hover:-translate-x-2"
+          }`}
         >
-          <span
-            title="Toggle 'Dark' theme"
-            className={`${
-              darkThemeActive
-                ? "group-hover:text-2xl group-hover:pr-1 pr-0 text-sm -translate-x-2 group-hover:translate-x-1"
-                : " group-hover:text-sm group-hover:pr-0 pr-1 text-2xl translate-x-1 group-hover:-translate-x-2"
-            }`}
-          >
-            🌞
-          </span>
-          <span
-            title="Toggle 'Light' theme"
-            className={`${
-              darkThemeActive
-                ? "group-hover:text-sm group-hover:pl-0 pl-1 text-2xl group-hover:translate-x-2 translate-x-0"
-                : "group-hover:text-2xl group-hover:pl-1 pl-0 text-sm group-hover:translate-x-0 translate-x-2"
-            }`}
-          >
-            🌝
-          </span>
-        </button>
-      </li>
-    </ul>
+          🌞
+        </span>
+        <span
+          title="Toggle 'Light' theme"
+          className={`${
+            darkThemeActive
+              ? "group-hover:text-sm group-hover:pl-0 pl-1 text-2xl group-hover:translate-x-2 translate-x-0"
+              : "group-hover:text-2xl group-hover:pl-1 pl-0 text-sm group-hover:translate-x-0 translate-x-2"
+          }`}
+        >
+          🌝
+        </span>
+      </button>
+    </div>
   );
 }
 

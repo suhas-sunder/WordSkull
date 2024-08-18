@@ -32,6 +32,8 @@ const shuffleArray = (array: string[][][], seed: string) => {
   return result;
 };
 
+const difficulties = ["easy", "medium", "hard", "extreme"];
+
 export default function Index() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [transformStyle, setTransformStyle] = useState({});
@@ -94,7 +96,7 @@ export default function Index() {
         <li
           key={index + "empty-square"}
           className={`${
-            darkThemeActive ? "bg-white opacity-20" : ""
+            darkThemeActive ? "bg-white opacity-95" : ""
           } text-[1.1rem] sm:text-[2rem] border-2 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
         ></li>
       );
@@ -173,59 +175,50 @@ export default function Index() {
         >
           Play
         </button>
-        <ul className="grid  grid-cols-2 my-8 sm:my-0 sm:grid-cols-4 gap-8 uppercase font-nunito">
-          <li className="flex gap-2">
-            <input
-              defaultChecked={difficulty === "easy"}
-              onClick={() => setDifficulty("easy")}
-              id="easy"
-              type="radio"
-              name="difficulty"
-              className="cursor-pointer"
-            />{" "}
-            <label htmlFor="easy" className="cursor-pointer">
-              Easy
-            </label>
-          </li>
-          <li className="flex gap-2">
-            <input
-              defaultChecked={difficulty === "medium"}
-              onClick={() => setDifficulty("medium")}
-              id="medium"
-              type="radio"
-              name="difficulty"
-              className="cursor-pointer"
-            />{" "}
-            <label htmlFor="medium" className="cursor-pointer">
-              Medium
-            </label>
-          </li>
-          <li className="flex gap-2">
-            <input
-              defaultChecked={difficulty === "hard"}
-              onClick={() => setDifficulty("hard")}
-              id="hard"
-              type="radio"
-              name="difficulty"
-              className="cursor-pointer"
-            />{" "}
-            <label htmlFor="hard" className="cursor-pointer">
-              Hard
-            </label>
-          </li>
-          <li className="flex gap-2">
-            <input
-              defaultChecked={difficulty === "extreme"}
-              onClick={() => setDifficulty("extreme")}
-              id="extreme"
-              type="radio"
-              name="difficulty"
-              className="cursor-pointer"
-            />{" "}
-            <label htmlFor="extreme" className="cursor-pointer">
-              Extreme
-            </label>
-          </li>
+
+        <ul className="grid grid-cols-2 my-8 sm:my-0 sm:grid-cols-4 text-sm gap-4 uppercase font-nunito">
+          {difficulties.map((level) => (
+            <li
+              key={level}
+              className="flex mx-auto items-center gap-2 justify-center rounded-lg cursor-pointer group hover:border-slate-200 border-2 border-transparent"
+            >
+              <input
+                checked={difficulty === level}
+                onChange={() => setDifficulty(level)}
+                id={level}
+                type="radio"
+                name="difficulty"
+                className="hidden"
+              />
+              <label
+                htmlFor={level}
+                className="cursor-pointer flex items-center gap-2 py-2 px-4"
+              >
+                <div
+                  className={`w-4 h-4 border rounded-full flex items-center justify-center ${
+                    difficulty === level
+                      ? "bg-slate-600 border-transparent"
+                      : "border-gray-300"
+                  }`}
+                >
+                  <svg
+                    className={`w-3 h-3 text-white translate-y-[0.05em] transition-opacity duration-300 ${
+                      difficulty === level || "group-hover:opacity-100"
+                    } ${difficulty === level ? "opacity-100" : "opacity-0"}`}
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M9 16.293l-4-4 1.414-1.414L9 13.465l8.586-8.586L19 6.293l-10 10z"
+                    />
+                  </svg>
+                </div>
+                {level.charAt(0).toUpperCase() + level.slice(1)}
+              </label>
+            </li>
+          ))}
         </ul>
         <div className="max-w-[800px] text-center font-nunito text-lg text-slate-500">
           Hello friend! Unfortunately this website/game is still in development
