@@ -110,9 +110,9 @@ function useClassicGameplayLogic({
     const handleKeydown = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
 
-      if (key === "shift") setDispWordHistory((prevState) => !prevState);
+      if (key === " ") setDispWordHistory((prevState) => !prevState);
 
-      if (key === " ") setDispWordHistory(true);
+      if (key === "shift") setDispWordHistory(true);
 
       if (key === "tab") return; //Allow tab for accessability reasons but don't track the input for test
 
@@ -158,7 +158,6 @@ function useClassicGameplayLogic({
         } else {
           handleNextRow();
         }
-
 
         //If entered word is not repeated add it to enteredWords list
         if (
@@ -207,8 +206,8 @@ function useClassicGameplayLogic({
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
-      const key = e.key;
-      if (key === " ") setDispWordHistory(false);
+      const key = e.key.toLowerCase();
+      if (key === "shift") setDispWordHistory(false);
     };
 
     addEventListener("keydown", handleKeydown);
