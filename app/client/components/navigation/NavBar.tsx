@@ -23,7 +23,7 @@ function MainLinks({
   const handleLinkClick = () => setShowMobileMenu(false);
 
   return (
-    <div className="flex ml-auto pr-5 justify-center items-center">
+    <div className="flex ml-auto pr-3 justify-center items-center">
       <ul
         id={showMobileMenu ? "mobile-links" : "main-links"}
         className={`${
@@ -133,7 +133,7 @@ export default function NavBar() {
       }`}
     >
       <div
-        className={`${styles["fade-in-nav"]} mx-auto flex max-w-[1400px] px-4 items-center justify-between`}
+        className={`${styles["fade-in-nav"]} mx-auto flex max-w-[1400px] px-1 sm:px-4 items-center justify-between`}
       >
         <Logo
           setShowMobileMenu={setShowMobileMenu}

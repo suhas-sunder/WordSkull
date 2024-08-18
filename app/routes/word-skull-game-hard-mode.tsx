@@ -14,7 +14,7 @@ export const meta: MetaFunction = () => {
   return [
     {
       title:
-        "💀 Word Skull Hard - Hard difficulty offers learning for 3 to 7 letter words 🎉✨",
+        "💀 Word Skull Easy - Easy difficulty offers learning for 3 to 5 letter words 🎉✨",
     },
     {
       name: "description",
@@ -64,7 +64,8 @@ export default function WordSkullMedium() {
   }, [skulls]);
 
   return (
-    <div>
+    <label className=" flex flex-col">
+      <input type="textbox" className="opacity-[0.01] bg-red-200" />
       <Header lives={lives} isGameOver={isGameOver} />
       {isGameOver ? (
         <div></div>
@@ -89,13 +90,12 @@ export default function WordSkullMedium() {
 
           <div className="flex max-w-[800px] overflow-hidden justify-center items-center -translate-y-5 sm:-translate-y-16 flex-col">
             <Keyboard
-              cursorPosition={0}
               currentlyEnteredWords={enteredWords[currentRow]}
               currentWord={wordsForSkull[currentRow]}
             />
           </div>
         </main>
       )}
-    </div>
+    </label>
   );
 }

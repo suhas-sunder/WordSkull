@@ -9,6 +9,7 @@ import DisplaySkull from "../client/components/layout/DisplaySkull";
 import WordHistory from "../client/components/ui/WordHistory";
 import Header from "../client/components/layout/Header";
 import useHandleGameOver from "../client/components/hooks/useHandleGameOver";
+import Keypad from "../client/components/ui/Keypad";
 
 export const meta: MetaFunction = () => {
   return [
@@ -64,7 +65,8 @@ export default function WordSkullMedium() {
   }, [skulls]);
 
   return (
-    <div>
+    <label className=" flex flex-col">
+      <input type="textbox" className="opacity-[0.01] bg-red-200" />
       <Header lives={lives} isGameOver={isGameOver} />
       {isGameOver ? (
         <div></div>
@@ -89,13 +91,14 @@ export default function WordSkullMedium() {
 
           <div className="flex max-w-[800px] overflow-hidden justify-center items-center -translate-y-5 sm:-translate-y-16 flex-col">
             <Keyboard
-              cursorPosition={0}
               currentlyEnteredWords={enteredWords[currentRow]}
               currentWord={wordsForSkull[currentRow]}
             />
+            <Keypad  currentlyEnteredWords={enteredWords[currentRow]}
+              currentWord={wordsForSkull[currentRow]} />
           </div>
         </main>
       )}
-    </div>
+    </label>
   );
 }

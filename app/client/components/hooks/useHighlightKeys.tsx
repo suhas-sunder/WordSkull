@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 interface PropType {
-  cursorPosition: number;
   setKeyStyles: (
     value: (prevState: { [key: string]: string }) => { [key: string]: string }
   ) => void;
@@ -10,7 +9,6 @@ interface PropType {
 //Highlight calculator key if it matches user input & update stats for valid/invalid input
 //Used by Calculator.tsx
 export default function useHighlightKeys({
-  cursorPosition,
   setKeyStyles,
 }: PropType) {
   useEffect(() => {
@@ -39,5 +37,5 @@ export default function useHighlightKeys({
     addEventListener("keydown", handleHighlightKeys);
 
     return () => removeEventListener("keydown", handleHighlightKeys);
-  }, [ cursorPosition, setKeyStyles]);
+  }, [setKeyStyles]);
 }

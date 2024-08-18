@@ -195,14 +195,22 @@ export default function Index() {
                 className="cursor-pointer flex items-center gap-2 py-2 px-4"
               >
                 <div
-                  className={`w-4 h-4 border rounded-full flex items-center justify-center ${
+                  className={`w-4 h-4 border rounded-full flex items-center justify-center  ${
                     difficulty === level
-                      ? "bg-slate-600 border-transparent"
-                      : "border-gray-300"
+                      ? `${
+                          darkThemeActive ? "bg-white" : "bg-slate-600"
+                        } border-transparent`
+                      : `${
+                          darkThemeActive ? "bg-slate-700" : "bg-white"
+                        } border-gray-300`
                   }`}
                 >
                   <svg
-                    className={`w-3 h-3 text-white translate-y-[0.05em] transition-opacity duration-300 ${
+                    className={`${
+                      darkThemeActive
+                        ? "text-slate-500 group-hover:text-white"
+                        : "text-white group-hover:text-slate-500"
+                    } w-3 h-3  translate-y-[0.05em] transition-opacity duration-300 ${
                       difficulty === level || "group-hover:opacity-100"
                     } ${difficulty === level ? "opacity-100" : "opacity-0"}`}
                     fill="currentColor"
@@ -223,7 +231,7 @@ export default function Index() {
         <div className="max-w-[800px] text-center font-nunito text-lg text-slate-500">
           Hello friend! Unfortunately this website/game is still in development
           and is currently in a non-functioning state. The game is playable but
-          I haven't implemented a game over menu or score tracking yet. I am
+          I havent implemented a game over menu or score tracking yet. I am
           working hard to complete the project as soon as possible! Thanks for
           stopping by :)
         </div>
