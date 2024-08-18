@@ -1,3 +1,4 @@
+import { useTheme } from "../context/ThemeContext";
 import HandleShiftIndex from "../utils/other/HandleShiftIndex";
 import { v4 as uuidv4 } from "uuid";
 
@@ -26,6 +27,7 @@ function DisplaySkull({
   enteredWords,
   enterPressed,
 }: PropType) {
+  const { darkThemeActive } = useTheme();
   const handleListItem = (
     square: string,
     squareCount: number,
@@ -36,7 +38,7 @@ function DisplaySkull({
       return (
         <li
           key={uuidv4()}
-          className=" border-slate-700 bg-slate-800 text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center"
+          className={`  text-[1.2rem] relative border-slate-700 bg-slate-800 border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center`}
         ></li>
       );
 
@@ -44,7 +46,9 @@ function DisplaySkull({
       return (
         <li
           key={uuidv4()}
-          className={`text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center`}
+          className={`${
+            darkThemeActive && "bg-white opacity-20"
+          } text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center`}
         ></li>
       );
 
@@ -80,7 +84,7 @@ function DisplaySkull({
       const wordGuessed = enteredWords[currentRow];
       const guessLength = wordGuessed.length - 1;
 
-      let style = "border-slate-300 text-slate-500 ";
+      let style = "border-slate-300 text-slate-500";
       const correctCharCount: { [key: string]: number } = { [`${square}`]: 0 }; //This is used to track the total green squares so that yellow squares do not count as green
 
       //Count total number of correct characters in guessed word
@@ -137,12 +141,24 @@ function DisplaySkull({
         className={`${
           rowIndex === currentRow &&
           squareIndex === currentRowIndex + shiftIndex
-            ? "bg-slate-300 bg-opacity-20 border-opacity-75 scale-110 z-10 border-[2.5px] border-slate-500"
-            : "text-slate-300 border-slate-400 border-2"
+            ? `${
+                darkThemeActive
+                  ? "bg-slate-300  text-slate-700"
+                  : "bg-slate-300 bg-opacity-20 border-opacity-75"
+              }  scale-110 z-[10] border-[2.5px] border-slate-500`
+            : `${
+                darkThemeActive
+                  ? "bg-white text-slate-400 "
+                  : "text-slate-300 border-slate-400"
+              }   border-2`
         } ${
           square !== "" &&
           rowIndex === currentRow &&
-          "border-slate-400 border-[2.5px] text-slate-500"
+          `${
+            darkThemeActive
+              ? "border-slate-200 text-slate-500 "
+              : "border-slate-400 text-slate-500 "
+          }  border-[2.5px] `
         }  text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center  ${
           enterPressed &&
           rowIndex === currentRow &&
@@ -153,10 +169,14 @@ function DisplaySkull({
             wordsForSkull,
             squareIndex,
           })
-        }`}
+        } `}
       >
         <span
-          className={` absolute text-[0.5rem] opacity-75 brightness-[0.75] sm:text-sm flex top-[0.02em] left-[0.3em]`}
+          className={`${
+            darkThemeActive
+              ? "brightness-[0.9]"
+              : "opacity-75 brightness-[0.75]"
+          } absolute text-[0.5rem]  sm:text-sm flex top-[0.02em] left-[0.3em]`}
         >
           {squareCount}
         </span>

@@ -40,8 +40,9 @@ export default {
         "default-light-sky-blue": "rgb(73, 160, 214)",
         "default-sky-blue": "#2b6ab3",
         "start-btn-green": "#4db538",
-        "skull-brown": "#6d5d64",
-        "skull-dark-brown": "#3e3539",
+        "skull-brown": "#938289",
+        "skull-dark-brown": "#6d5d64",
+        "skull-super-dark-brown": "#3e3539",
       },
       keyframes: {
         fadeIn: {

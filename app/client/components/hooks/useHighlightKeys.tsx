@@ -25,7 +25,7 @@ export default function useHighlightKeys({
       setKeyStyles((prevState: { [key: string]: string }) => ({
         ...prevState,
         [e.key === "Enter" ? "Enter" : enteredKey.toLowerCase()]:
-          "bg-slate-600 text-white",
+          "bg-slate-600 text-white !brightness-[1.2]",
       }));
 
       setTimeout(() => {

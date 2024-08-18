@@ -2,6 +2,7 @@ import { useNavigate } from "@remix-run/react";
 import { useState, useEffect, useMemo } from "react";
 import Skulls from "../client/components/data/skulls";
 import seedrandom from "seedrandom";
+import { useTheme } from "../client/components/context/ThemeContext";
 
 const getRandomTransform = () => {
   const scale = Math.random() * (1 - 0.6) + 0.6; // Random scale between 0.7 and 1.1
@@ -38,6 +39,8 @@ export default function Index() {
   const [shuffledSkulls, setShuffledSkulls] = useState<string[][][]>([]); // Initial empty array
   const [difficulty, setDifficulty] = useState<string>("easy");
   const navigate = useNavigate();
+
+  const { darkThemeActive } = useTheme();
 
   const skulls = useMemo(() => Skulls(), []);
 
@@ -82,7 +85,7 @@ export default function Index() {
       return (
         <li
           key={index + "eye-square"}
-          className="text-[1.1rem] sm:text-[2rem] border-2 border-slate-700 bg-slate-800 rounded-lg w-[2em] h-[2em] flex justify-center items-center"
+          className={` text-[1.1rem] sm:text-[2rem] border-2 border-slate-700 bg-slate-800 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
         ></li>
       );
 
@@ -90,16 +93,20 @@ export default function Index() {
       return (
         <li
           key={index + "empty-square"}
-          className="text-[1.1rem] sm:text-[2rem] border-2 rounded-lg w-[2em] h-[2em] flex justify-center items-center"
+          className={`${
+            darkThemeActive ? "bg-white opacity-20" : ""
+          } text-[1.1rem] sm:text-[2rem] border-2 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
         ></li>
       );
 
     return (
       <li
         key={index + "num-square"}
-        className="text-[1.1rem] relative sm:text-[2rem] border-2 border-slate-400 rounded-lg w-[2em] h-[2em] flex justify-center items-center"
+        className={`${
+          darkThemeActive ? "bg-white text-slate-500" : "text-slate-300"
+        } text-[1.1rem] relative sm:text-[2rem] border-2 border-slate-400 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
       >
-        <span className="absolute text-sm text-slate-300 flex top-[0.02em] left-[0.3em]">
+        <span className="absolute text-sm  flex top-[0.02em] left-[0.3em]">
           {squareCount}
         </span>
         <span>{square}</span>
@@ -119,7 +126,11 @@ export default function Index() {
           <span className="inline-flex">SKULL</span>
         </h1>
       </header>
-      <main className="flex flex-col sm:gap-14 items-center animate-fadeIn">
+      <main
+        className={`${
+          darkThemeActive && "text-white"
+        } flex flex-col sm:gap-14 items-center animate-fadeIn`}
+      >
         <div className="relative flex-col w-full max-w-[800px] capitalize flex font-nunito text-slate-400 items-center min-h-[28em] sm:min-h-[40em]">
           <div
             className={`absolute top-0 left-0  w-full h-full   flex flex-col justify-center items-center transition-opacity duration-2000 ease-in-out ${fadeClass}`}
@@ -154,14 +165,18 @@ export default function Index() {
 
         <button
           onClick={() => navigate(`/word-skull-game-${difficulty}-mode`)}
-          className="flex z-10 border-2 px-4  text-xl font-nunito rounded-lg tracking-widest leading-loose border-slate-300 text-slate-500 hover:text-slate-600 hover:border-slate-400"
+          className={`${
+            darkThemeActive
+              ? "text-white  hover:text-slate-300"
+              : " text-slate-500  hover:text-slate-600"
+          } flex z-10 border-2 px-4  text-xl font-nunito rounded-lg tracking-widest leading-loose border-slate-300 hover:border-slate-400`}
         >
           Play
         </button>
-        <ul className="flex gap-8 uppercase font-nunito">
+        <ul className="grid  grid-cols-2 my-8 sm:my-0 sm:grid-cols-4 gap-8 uppercase font-nunito">
           <li className="flex gap-2">
             <input
-              checked={difficulty === "easy"}
+              defaultChecked={difficulty === "easy"}
               onClick={() => setDifficulty("easy")}
               id="easy"
               type="radio"
@@ -174,7 +189,7 @@ export default function Index() {
           </li>
           <li className="flex gap-2">
             <input
-              checked={difficulty === "medium"}
+              defaultChecked={difficulty === "medium"}
               onClick={() => setDifficulty("medium")}
               id="medium"
               type="radio"
@@ -187,7 +202,7 @@ export default function Index() {
           </li>
           <li className="flex gap-2">
             <input
-              checked={difficulty === "hard"}
+              defaultChecked={difficulty === "hard"}
               onClick={() => setDifficulty("hard")}
               id="hard"
               type="radio"
@@ -200,7 +215,7 @@ export default function Index() {
           </li>
           <li className="flex gap-2">
             <input
-              checked={difficulty === "extreme"}
+              defaultChecked={difficulty === "extreme"}
               onClick={() => setDifficulty("extreme")}
               id="extreme"
               type="radio"

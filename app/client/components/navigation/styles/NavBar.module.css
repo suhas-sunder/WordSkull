@@ -5,20 +5,22 @@
 .profile:hover {
   .icon,
   .btn {
-    color: #6d5d64;
+    fill: #ae9fa5;
+    color: #938289;
   }
 
   .logo-com {
-    color: #6d5d64;
+    fill: #ae9fa5;
+    color: #938289;
   }
 
   .btn {
-    background-color: rgba(121, 250, 197, 0.3);
-    border: 2.5px solid #6d5d64;
+    fill: #ae9fa5;
+    border: 2.5px solid #ae9fa5;
   }
 
   .img {
-    border: 3px solid #6d5d64;
+    border: 3px solid #938289;
   }
 }
 
@@ -40,7 +42,6 @@
 .main-nav {
   display: flex;
   position: relative;
-  gap: 1.75em;
 }
 
 .login-menu {

@@ -1,11 +1,14 @@
 import { NavLink } from "react-router-dom";
 import styles from "./styles/NavBar.module.css";
+import { useTheme } from "../context/ThemeContext";
 
 //Used by App.tsx component
 function Footer() {
+  const { darkThemeActive } = useTheme();
+
   return (
     <nav
-      className={`${styles.nav} w-full border-t-2 flex gap-5 sm:gap-20 justify-center items-center py-1 sm:py-2 text-xs font-nunito  bg-white-500 `}
+      className={`${styles.nav} ${darkThemeActive && "border-slate-800" } mt-[50em] w-full border-t-2 flex gap-5 sm:gap-20 justify-center items-center py-1 sm:py-2 text-xs font-nunito  bg-white-500 `}
     >
       <div className="flex text-skull-dark-brown gap-1 font-bold tracking-widest">
         <span>&copy; 2024</span> <span className="hidden md:flex"> | </span>
@@ -13,7 +16,11 @@ function Footer() {
         <span className="font-overlock sm:hidden flex">EKG</span>
         <span className="hidden md:flex"> - All Rights Reserved.</span>
       </div>
-      <ul className="flex max-w-[500px] items-center justify-around text-slate-500">
+      <ul
+        className={`${
+          darkThemeActive ? "text-white" : "text-slate-700"
+        } flex max-w-[500px] items-center justify-around `}
+      >
         {/* <li className="hidden sm:flex">
           <NavLink to="/about" className="flex px-3 ">
             <span className={`${styles.icon} active:text-rose-300 `}>
