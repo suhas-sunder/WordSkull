@@ -12,6 +12,10 @@ import {
   useLocation,
 } from "@remix-run/react";
 import { useEffect, useState } from "react";
+import {
+  ThemeProvider,
+  useTheme,
+} from "./client/components/context/ThemeContext";
 
 // Layout Component for rendering HTML structure
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -23,14 +27,28 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="pt-14">
-        <NavBar />
-        <div>{children}</div>
-        <ScrollRestoration />
-        <Scripts />
-        <Footer />
-      </body>
+      <ThemeProvider>
+        <Body>{children}</Body>
+      </ThemeProvider>
     </html>
+  );
+}
+
+export function Body({ children }: { children: React.ReactNode }) {
+  const { darkThemeActive } = useTheme();
+
+  useEffect(() => {
+    console.log("Dark theme active:", darkThemeActive);
+  }, [darkThemeActive]);
+
+  return (
+    <body className={`pt-14 ${darkThemeActive && "bg-slate-900"}`}>
+      <NavBar />
+      <div>{children}</div>
+      <ScrollRestoration />
+      <Scripts />
+      <Footer />
+    </body>
   );
 }
 

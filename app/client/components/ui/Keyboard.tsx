@@ -3,6 +3,7 @@ import useHighlightKeys from "../hooks/useHighlightKeys";
 import KeyboardData from "../data/KeyboardData";
 import GenerateDefaultStylingForKeys from "../utils/generators/GenerateDefaultStylingForKeys";
 import useKeyPress from "../hooks/useKeyPress";
+import { useTheme } from "../context/ThemeContext";
 
 //Theres a lot of object/array manipulation for the initial setup so to improve readability it is going into it's own function
 function DefaultKeyboardSetup() {
@@ -54,6 +55,7 @@ export default function Keyboard({
   currentlyEnteredWords,
   currentWord,
 }: PropType) {
+  const { darkThemeActive } = useTheme();
   const [correctCharCount, setCorrectCharCount] = useState<{
     [key: string]: number;
   }>({});
@@ -122,7 +124,11 @@ export default function Keyboard({
 
   return (
     <div
-      className={`-translate-y-6 hidden min-h-[23em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2 bg-slate-700 p-6 text-xs text-slate-700 md:flex lg:text-base`}
+      className={`${
+        darkThemeActive
+          ? "bg-slate-700"
+          : "bg-slate-600"
+      } -translate-y-6 hidden text-slate-600 min-h-[23em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2  p-6 text-xs md:flex lg:text-base`}
     >
       {Object.values(keyboardData).map((keysArr, index) => {
         return (
@@ -132,7 +138,7 @@ export default function Keyboard({
                 key={key.id}
                 className={`${
                   keyStyles[`${key.defaultKey} `]
-                } relative flex w-full items-center justify-center`}
+                }  relative flex w-full items-center justify-center`}
               >
                 {key.shiftKey !== "" && (
                   <span
@@ -150,34 +156,34 @@ export default function Keyboard({
                       : keyPressed !== key.defaultKey
                       ? "bg-white"
                       : ""
-                  } ${
+                  }  ${
                     keyPressed === key.defaultKey &&
                     (keyPressed === " " ||
                       keyPressed === "Backspace" ||
                       keyPressed === "Shift") &&
-                    "bg-slate-500 text-white"
-                  } ${handleBtnStyle(key.defaultKey)}  mx-auto rounded-lg  ${
+                    "bg-slate-600 text-white"
+                  } ${handleBtnStyle(key.defaultKey)}   mx-auto rounded-lg  ${
                     currentWord?.includes(key.defaultKey) &&
                     currentlyEnteredWords?.join("").includes(key.defaultKey) &&
                     correctCharCount[key.defaultKey] > 0 &&
-                    "!bg-green-300"
+                    "!bg-green-300 !text-green-800"
                   }
                 ${
                   currentWord?.includes(key.defaultKey) &&
                   currentlyEnteredWords?.join("").includes(key.defaultKey) &&
                   correctCharCount[key.defaultKey] === 0 &&
-                  "!bg-yellow-200"
+                  "!bg-yellow-200 !text-yellow-800"
                 }
                  ${
                    !currentWord?.includes(key.defaultKey) &&
                    currentlyEnteredWords?.join("").includes(key.defaultKey) &&
-                   "!bg-slate-400"
+                   "!bg-slate-500 !text-white"
                  }`}
                 >
                   <span
                     className={`${
                       key.shiftKey !== "" && "translate-y-[8.5px]"
-                    } flex items-center uppercase justify-center py-3`}
+                    } flex items-center uppercase justify-center py-3 `}
                   >
                     {key.defaultKey === " " ? "SpaceBar" : key.defaultKey}
                   </span>

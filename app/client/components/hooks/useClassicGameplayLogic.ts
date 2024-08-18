@@ -126,6 +126,7 @@ function useClassicGameplayLogic({
         return;
 
       const handleEnteredWord = () => {
+        //Check if entered word is valid
         if (
           currentSkull[0][currentRow].join("") !== wordsForSkull[currentRow] &&
           !currentSkull[0][currentRow].includes("")
@@ -140,43 +141,54 @@ function useClassicGameplayLogic({
             alert("Not in word list!");
             return;
           } else {
+            //Update state to check for character validity
             setEnterPressed(true);
-            setLives((prevState) =>
-              prevState !== null ? prevState - 1 : prevState
-            );
+
+            //Only subtract a life if the entered word is in word list but not repeated
+            if (
+              !enteredWords[currentRow]?.includes(
+                currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "")
+              )
+            ) {
+              setLives((prevState) =>
+                prevState !== null ? prevState - 1 : prevState
+              );
+            }
           }
         } else {
           handleNextRow();
         }
 
-        setEnteredWords((prevState) => {
-          const updatedWords = [...prevState];
 
-          // Check if there's an existing entry for the current row
-          if (updatedWords[currentRow]) {
-            // Update the existing array with the current character
-            updatedWords[currentRow] = [
-              ...updatedWords[currentRow],
-              currentSkull[0][currentRow].join("").replace(/[@~]/g, ""),
-            ];
-          } else {
-            // Initialize the array if it doesn't exist, then push the character
-            updatedWords[currentRow] = [
-              currentSkull[0][currentRow].join("").replace(/[@~]/g, ""),
-            ];
-          }
+        //If entered word is not repeated add it to enteredWords list
+        if (
+          !enteredWords[currentRow]?.includes(
+            currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "")
+          )
+        )
+          setEnteredWords((prevState) => {
+            const updatedWords = [...prevState];
 
-          return updatedWords;
-        });
+            // Check if there's an existing entry for the current row
+            if (updatedWords[currentRow]) {
+              // Update the existing array with the current character
+              updatedWords[currentRow] = [
+                ...updatedWords[currentRow],
+                currentSkull[0][currentRow].join("").replace(/[@~]/g, ""),
+              ];
+            } else {
+              // Initialize the array if it doesn't exist, then push the character
+              updatedWords[currentRow] = [
+                currentSkull[0][currentRow].join("").replace(/[@~]/g, ""),
+              ];
+            }
+
+            return updatedWords;
+          });
       };
 
       //If enter is pressed and entered word isn't repeated for current row
-      if (
-        key === "enter" &&
-        !enteredWords[currentRow]?.includes(
-          currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "")
-        )
-      ) {
+      if (key === "enter") {
         if (
           currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "") !==
             wordsForSkull[currentRow] &&
@@ -187,7 +199,7 @@ function useClassicGameplayLogic({
           handleNextRow();
         }
       } else if (key === "backspace") {
-        setEnterPressed(false);
+        setEnterPressed(false); //Update state to stop checking for character validity
         handleDeleteSquare();
       } else {
         handleUpdateSquare(key);
