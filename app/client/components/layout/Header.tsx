@@ -15,7 +15,7 @@ function Header({ lives, isGameOver }: PropType) {
       </h1>
       {!isGameOver && (
         <ul
-          className={`flex absolute z-[100] -top-10  sm:-top-12 font-nunito -translate-y-2 sm:translate-y-0  gap-2 my-1 justify-center items-center ${
+          className={`flex fixed z-[100] top-[0.95em]  sm:top-[0.45em] font-nunito -translate-y-2 sm:translate-y-0  gap-2 my-1 justify-center items-center ${
             darkThemeActive ? "text-white" : "text-slate-700"
           }`}
         >

@@ -47,7 +47,7 @@ function DisplaySkull({
         <li
           key={uuidv4()}
           className={`${
-            darkThemeActive && "bg-white opacity-20"
+            darkThemeActive && "bg-white opacity-95"
           } text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center`}
         ></li>
       );
