@@ -117,7 +117,7 @@ function WordHistory({
       )}
       <button
         onClick={() => setDispWordHistory(!dispWordHistory)}
-        title="Hold 'Space Bar' or press 'Caps' key to view your attempts."
+        title="Hold 'Space Bar' or press 'Shift' key to view your attempts."
         className="flex h-5 cursor-pointer min-w-52 min-h-10 max-w-[400px] sm:max-w-[600px] bg-white border-2 gap-3 mt-[1em] sm:mt-0 mb-4 sm:mb-2 rounded-md sm:rounded-md border-slate-200 justify-center items-center"
       >
         {enteredWords[currentRow]?.length > 0 ? (
