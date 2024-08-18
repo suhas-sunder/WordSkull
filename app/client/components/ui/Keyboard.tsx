@@ -45,13 +45,11 @@ function DefaultKeyboardSetup() {
 }
 
 interface PropType {
-  cursorPosition: number;
   currentlyEnteredWords: string[];
   currentWord: string;
 }
 
 export default function Keyboard({
-  cursorPosition,
   currentlyEnteredWords,
   currentWord,
 }: PropType) {
@@ -67,7 +65,6 @@ export default function Keyboard({
   );
 
   useHighlightKeys({
-    cursorPosition,
     setKeyStyles,
   });
 
@@ -125,9 +122,7 @@ export default function Keyboard({
   return (
     <div
       className={`${
-        darkThemeActive
-          ? "bg-slate-700"
-          : "bg-slate-600"
+        darkThemeActive ? "bg-slate-700" : "bg-slate-600"
       } -translate-y-6 hidden text-slate-600 min-h-[23em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2  p-6 text-xs md:flex lg:text-base`}
     >
       {Object.values(keyboardData).map((keysArr, index) => {
