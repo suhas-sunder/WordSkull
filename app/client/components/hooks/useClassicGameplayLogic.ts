@@ -110,7 +110,7 @@ function useClassicGameplayLogic({
     const handleKeydown = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
 
-      if (key === "capslock") setDispWordHistory((prevState) => !prevState);
+      if (key === "shift") setDispWordHistory((prevState) => !prevState);
 
       if (key === " ") setDispWordHistory(true);
 
