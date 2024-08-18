@@ -222,8 +222,10 @@ export default function Index() {
         </ul>
         <div className="max-w-[800px] text-center font-nunito text-lg text-slate-500">
           Hello friend! Unfortunately this website/game is still in development
-          and is currently in a non-functioning state. I am working hard to get
-          it up and running as soon as possible! Thanks for stopping by :)
+          and is currently in a non-functioning state. The game is playable but
+          I haven't implemented a game over menu or score tracking yet. I am
+          working hard to complete the project as soon as possible! Thanks for
+          stopping by :)
         </div>
       </main>
     </div>
