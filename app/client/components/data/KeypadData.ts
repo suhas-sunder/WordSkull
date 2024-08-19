@@ -36,10 +36,7 @@ export default function KeypadData() {
       { id: "thirdRow-ninthKey", defaultKey: "delete" },
       { id: "fourthRow-thirdKey", defaultKey: "enter" },
     ],
-    fifthRowKeys: [
-      { id: "thirdRow-firstKey", defaultKey: "shift" },
-      { id: "fourthRow-secondKey", defaultKey: "space" },
-    ],
+    fifthRowKeys: [{ id: "fourthRow-secondKey", defaultKey: "space" }],
   };
   return keyboardData;
 }
