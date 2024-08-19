@@ -38,7 +38,7 @@ export function Body({ children }: { children: React.ReactNode }) {
   const { darkThemeActive } = useTheme();
 
   return (
-    <body className={`pt-14 ${darkThemeActive && "bg-slate-900"}`}>
+    <body className={`pt-6 ${darkThemeActive && "bg-slate-900"}`}>
       <NavBar />
       <div>{children}</div>
       <ScrollRestoration />

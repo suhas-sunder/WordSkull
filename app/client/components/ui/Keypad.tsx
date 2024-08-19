@@ -58,21 +58,17 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
 
   return (
     <div
-      className={` text-slate-600 flex min-h-[13em] select-none flex-col gap-y-5 font-nunito rounded-xl uppercase  text-base md:hidden`}
+      className={` text-slate-600 flex min-h-[13em] select-none flex-col gap-y-5 md:mt-0 sm:mt-5 font-nunito rounded-xl uppercase  text-base md:hidden`}
     >
-      {Object.values(keypadData).map((keysArr, rowIndex) => {
+      {Object.values(keypadData).map((keysArr) => {
         return (
           <ul
-            className="flex gap-[0.35em] justify-center items-center"
+            className="flex w-full gap-[0.25em] justify-center items-center"
             key={uuidv4()}
           >
             {keysArr.map((key) => (
               <li
-                className={` ${
-                  rowIndex < Object.values(keypadData).length - 2
-                    ? "w-[1.65em]"
-                    : "px-6"
-                } h-[2.3em] justify-center items-center flex rounded-md ${
+                className={` h-[2.3em] min-w-[1.7em] w-full justify-center items-center flex rounded-sm ${
                   darkThemeActive
                     ? "bg-white text-slate-600"
                     : "bg-slate-600 text-white"
@@ -99,6 +95,7 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
                ${
                  !currentWord?.includes(key.defaultKey) &&
                  currentlyEnteredWords?.join("").includes(key.defaultKey) &&
+                 key.defaultKey !== "enter" &&
                  "!bg-slate-400 !text-white"
                }`}
                 key={key.id}

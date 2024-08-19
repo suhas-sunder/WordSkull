@@ -117,9 +117,9 @@ export default function Index() {
   };
 
   return (
-    <div className="flex  flex-col overflow-hidden">
+    <div className="flex  flex-col mt-3 sm:mt-5 overflow-hidden">
       <header>
-        <h1 className="w-full flex-col z-10 sm:flex-row flex justify-center gap-2 sm:gap-5 items-center text-6xl text-center mt-10 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-5 sm:mb-1 text-slate-500 font-lora animate-fadeIn">
+        <h1 className="w-full flex-col z-10 sm:flex-row flex justify-center gap-1 sm:gap-5 items-center text-4xl sm:text-5xl text-center mt-10 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-5 sm:mb-1 text-slate-500 font-lora animate-fadeIn">
           <span className="whitespace-nowrap">
             <span className="inline-flex">W</span>
             <span className="inline-flex animate-scalePulse">💀</span>
@@ -131,9 +131,9 @@ export default function Index() {
       <main
         className={`${
           darkThemeActive && "text-white"
-        } flex flex-col sm:gap-14 items-center animate-fadeIn`}
+        } flex flex-col sm:gap-14  -translate-y-5 sm:translate-y-0 items-center animate-fadeIn`}
       >
-        <div className="relative flex-col w-full max-w-[800px] capitalize flex font-nunito text-slate-400 items-center min-h-[28em] sm:min-h-[40em]">
+        <div className="relative flex-col w-full max-w-[800px] capitalize flex font-nunito text-slate-400 items-center min-h-[24em] sm:min-h-[40em]">
           <div
             className={`absolute top-0 left-0  w-full h-full   flex flex-col justify-center items-center transition-opacity duration-2000 ease-in-out ${fadeClass}`}
             style={{
