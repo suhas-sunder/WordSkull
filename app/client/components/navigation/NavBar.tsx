@@ -32,7 +32,7 @@ function MainLinks({
           showMobileMenu ? styles["mobile-nav"] : styles["main-nav"]
         }`}
       >
-        <li className="flex w-full lg:w-auto">
+        {/* <li className="flex w-full lg:w-auto">
           <NavLink
             onClick={handleLinkClick}
             to="/stats"
@@ -43,10 +43,23 @@ function MainLinks({
             <span className={`${styles.icon}`}>
               <Icon icon="statsChart" title="Stats" />
             </span>
+            <span>Stats</span>
+          </NavLink>
+        </li> */}
+
+       
+
+        <li className="flex w-full lg:w-auto">
+          <NavLink
+            onClick={handleLinkClick}
+            to="/blog"
+            className="relative flex items-center px-4 justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
+          >
+            <span className={`${styles.icon} flex`}>Blog</span>
           </NavLink>
         </li>
 
-        <li className="flex w-full lg:w-auto">
+        {/* <li className="flex w-full lg:w-auto">
           <NavLink
             onClick={handleLinkClick}
             to="/settings"
@@ -58,17 +71,7 @@ function MainLinks({
               <Icon icon="settingSparkle" title="Settings" />
             </span>
           </NavLink>
-        </li>
-
-        <li className="flex w-full lg:w-auto">
-          <NavLink
-            onClick={handleLinkClick}
-            to="/blog"
-            className="relative flex items-center px-4 justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
-          >
-            <span className={`${styles.icon} flex`}>Blog</span>
-          </NavLink>
-        </li>
+        </li> */}
       </ul>
       <button
         onClick={() => setDarkThemeActive(!darkThemeActive)}
@@ -128,7 +131,7 @@ export default function NavBar() {
     <nav
       className={`${
         styles.nav
-      } fixed left-0 right-0 top-0 font-nunito border-b-2 text-base tracking-widest z-20 text-slate-700 ${
+      } fixed left-0 right-0 top-0 font-nunito border-b-2 text-base tracking-widest z-[100] text-slate-700 ${
         darkThemeActive ? "bg-slate-900 border-b-slate-800" : "bg-white"
       }`}
     >

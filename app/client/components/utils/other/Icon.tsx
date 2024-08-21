@@ -131,6 +131,91 @@ const SettingsSuggestIcon = () => (
   </svg>
 );
 
+const LeaderboardRoundedIcon = () => (
+  <svg
+    focusable="false"
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    data-testid="LeaderboardRoundedIcon"
+    width="24"
+    height="24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M6.5 21H3c-.55 0-1-.45-1-1V10c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1v10c0 .55-.45 1-1 1m7.25-18h-3.5c-.55 0-1 .45-1 1v16c0 .55.45 1 1 1h3.5c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1M21 11h-3.5c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1H21c.55 0 1-.45 1-1v-8c0-.55-.45-1-1-1"></path>
+  </svg>
+);
+
+const InfoRoundedIcon = () => (
+  <svg
+    focusable="false"
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    data-testid="InfoRoundedIcon"
+    width="24"
+    height="24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 15c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1m1-8h-2V7h2z"></path>
+  </svg>
+);
+
+const ReplyRoundedIconReversed = () => (
+  <svg
+    focusable="false"
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    data-testid="ReplyRoundedIconReversed"
+    width="24"
+    height="24"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ transform: "scaleX(-1)" }}
+  >
+    <path d="M10 9V7.41c0-.89-1.08-1.34-1.71-.71L3.7 11.29c-.39.39-.39 1.02 0 1.41l4.59 4.59c.63.63 1.71.19 1.71-.7V14.9c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11"></path>
+  </svg>
+);
+
+const HelpOutlineRoundedIcon = () => (
+  <svg
+    focusable="false"
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    data-testid="HelpOutlineRoundedIcon"
+    width="24"
+    height="24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m-1-4h2v2h-2zm1.61-9.96c-2.06-.3-3.88.97-4.43 2.79-.18.58.26 1.17.87 1.17h.2c.41 0 .74-.29.88-.67.32-.89 1.27-1.5 2.3-1.28.95.2 1.65 1.13 1.57 2.1-.1 1.34-1.62 1.63-2.45 2.88 0 .01-.01.01-.01.02-.01.02-.02.03-.03.05-.09.15-.18.32-.25.5-.01.03-.03.05-.04.08-.01.02-.01.04-.02.07-.12.34-.2.75-.2 1.25h2c0-.42.11-.77.28-1.07.02-.03.03-.06.05-.09.08-.14.18-.27.28-.39.01-.01.02-.03.03-.04.1-.12.21-.23.33-.34.96-.91 2.26-1.65 1.99-3.56-.24-1.74-1.61-3.21-3.35-3.47"></path>
+  </svg>
+);
+
+const SportsScoreIcon = () => (
+  <svg
+    focusable="false"
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    data-testid="SportsScoreIcon"
+    width="24"
+    height="24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M11 6H9V4h2zm4-2h-2v2h2zM9 14h2v-2H9zm10-4V8h-2v2zm0 4v-2h-2v2zm-6 0h2v-2h-2zm6-10h-2v2h2zm-6 4V6h-2v2zm-6 2V8h2V6H7V4H5v16h2v-8h2v-2zm8 2h2v-2h-2zm-4-2v2h2v-2zM9 8v2h2V8zm4 2h2V8h-2zm2-4v2h2V6z"></path>
+  </svg>
+);
+
+const CloseRoundedIcon = () => (
+  <svg
+    focusable="false"
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    data-testid="CloseRoundedIcon"
+    width="24"
+    height="24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M18.3 5.71a.9959.9959 0 0 0-1.41 0L12 10.59 7.11 5.7a.9959.9959 0 0 0-1.41 0c-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4"></path>
+  </svg>
+);
+
 // Define a mapping object for icon components
 const iconComponents = {
   copy: CopyIcon,
@@ -143,6 +228,12 @@ const iconComponents = {
   burgerOpen: MenuOpenRoundedIcon,
   statsChart: AutoGraphIcon,
   settingSparkle: SettingsSuggestIcon,
+  barGraph: LeaderboardRoundedIcon,
+  info: InfoRoundedIcon,
+  share: ReplyRoundedIconReversed,
+  question: HelpOutlineRoundedIcon,
+  flag: SportsScoreIcon,
+  close: CloseRoundedIcon,
 };
 
 // Define the type for icon names

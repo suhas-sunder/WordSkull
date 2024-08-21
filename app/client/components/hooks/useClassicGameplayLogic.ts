@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import HandleShiftIndex from "../utils/other/HandleShiftIndex";
+import useHandleGameOver from "./useHandleGameOver";
+import useTotalLives from "./useTotalLives";
 
 interface PropType {
   currentSkull: string[][][];
@@ -8,7 +10,6 @@ interface PropType {
   setDispWordHistory: (
     value: ((prevState: boolean) => boolean) | boolean
   ) => void;
-  setLives: (value: (prevState: number | null) => number | null) => void;
   wordsForSkull: string[];
 }
 
@@ -17,7 +18,6 @@ function useClassicGameplayLogic({
   setCurrentSkull,
   wordsList,
   setDispWordHistory,
-  setLives,
   wordsForSkull,
 }: PropType) {
   const [currentRow, setCurrentRow] = useState<number>(0);
@@ -25,9 +25,18 @@ function useClassicGameplayLogic({
   const [enteredWords, setEnteredWords] = useState<string[][]>([]);
   const [enterPressed, setEnterPressed] = useState(false);
 
-  useEffect(() => {
-    //If a square is marked with "@" or "~" it can't be changed so shift the index to a square that can.
+  const { isGameOver, setIsGameOver } = useHandleGameOver({
+    currentRow,
+    currentSkull,
+  });
 
+  //Manage lives
+  const { lives, setLives, maxLives } = useTotalLives({ currentSkull, setIsGameOver });
+
+  useEffect(() => {
+    if (isGameOver) return;
+
+    //If a square is marked with "@" or "~" it can't be changed so shift the index to a square that can.
     const handleUpdateSquare = (key: string) => {
       const shiftIndex = HandleShiftIndex({
         currentSkull,
@@ -221,6 +230,7 @@ function useClassicGameplayLogic({
     currentRowIndex,
     currentSkull,
     enteredWords,
+    isGameOver,
     setCurrentSkull,
     setDispWordHistory,
     setLives,
@@ -233,6 +243,9 @@ function useClassicGameplayLogic({
     currentRowIndex,
     enteredWords,
     enterPressed,
+    isGameOver,
+    lives,
+    maxLives
   };
 }
 
