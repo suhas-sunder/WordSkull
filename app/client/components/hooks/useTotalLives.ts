@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 
-function useTotalLives({ currentSkull }: { currentSkull: string[][][] }) {
+interface PropType {
+  currentSkull: string[][][];
+  setIsGameOver: (value: ((prevState: boolean) => boolean) | boolean) => void;
+}
+
+function useTotalLives({ currentSkull, setIsGameOver }: PropType) {
   const [lives, setLives] = useState<number | null>(null);
+  const [maxLives, setTotalLives] = useState<number | null>(null);
 
   //Update Lives
   useEffect(() => {
@@ -19,23 +25,24 @@ function useTotalLives({ currentSkull }: { currentSkull: string[][][] }) {
     // }
 
     //Total lives = total number of squares minus total number of (eyes plus blank spaces)
-    !lives &&
-      setLives(
-        currentSkull[0]?.reduce(
-          (sum, array) =>
-            sum + array.filter((char) => char !== "@" && char !== "~").length,
-          0
-        )
+    if (!lives && lives !== 0) {
+      const totalLives = currentSkull[0]?.reduce(
+        (sum, array) =>
+          sum + array.filter((char) => char !== "@" && char !== "~").length,
+        0
       );
+      setLives(totalLives);
+      setTotalLives(totalLives);
+    }
   }, [currentSkull, lives]);
 
   useEffect(() => {
     if (lives !== null && lives <= 0) {
-      alert("Game Over!");
+      setIsGameOver(true);
     }
-  }, [lives]);
+  }, [lives, setIsGameOver]);
 
-  return { lives, setLives };
+  return { lives, setLives, maxLives };
 }
 
 export default useTotalLives;

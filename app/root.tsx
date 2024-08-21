@@ -2,6 +2,8 @@ import "./tailwind.css";
 import NavBar from "./client/components/navigation/NavBar";
 import Footer from "./client/components/navigation/Footer";
 import ReactGA from "react-ga4";
+import cloudflareR2API from "./client/components/api/cloudflareR2API";
+import pako from "pako";
 
 import {
   Outlet,
@@ -10,12 +12,15 @@ import {
   Scripts,
   ScrollRestoration,
   useLocation,
+  json,
+  ClientLoaderFunctionArgs,
 } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import {
   ThemeProvider,
   useTheme,
 } from "./client/components/context/ThemeContext";
+import localforage from "localforage";
 
 // Layout Component for rendering HTML structure
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -46,6 +51,66 @@ export function Body({ children }: { children: React.ReactNode }) {
       <Footer />
     </body>
   );
+}
+
+// Loader function to fetch and return data
+export const loader = async () => {
+  let words = {};
+
+  // Fetch gzipped file from Cloudflare R2 if not cached
+  const response = await cloudflareR2API.get(
+    "/word-skull/sortedWords.json.gz",
+    {
+      method: "GET",
+      responseType: "arraybuffer",
+    }
+  );
+
+  const responseData = new Uint8Array(response.data);
+
+  // Check if the response data is Gzipped
+  const isGzip = responseData[0] === 0x1f && responseData[1] === 0x8b;
+
+  if (isGzip) {
+    const decompressedData = pako.ungzip(responseData, { to: "string" });
+    words = JSON.parse(decompressedData);
+  } else {
+    const textData = new TextDecoder().decode(responseData);
+    words = JSON.parse(textData);
+  }
+
+  return json(
+    { words }, // Return initial empty array or modify as needed
+    {
+      headers: {
+        "Cache-Control": "max-age=3600, public",
+      },
+    }
+  );
+};
+
+export async function clientLoader({ serverLoader }: ClientLoaderFunctionArgs) {
+  const cacheKey = "words";
+
+  try {
+    // Check if words are already cached in localForage
+    const cachedWords = await localforage.getItem(cacheKey);
+
+    if (cachedWords) {
+      return { words: cachedWords };
+    } else {
+      const { words }: { words: { [keys: number]: string[] } } =
+        await serverLoader();
+
+      // Store the words in localForage for future use
+      await localforage.setItem(cacheKey, words);
+
+      return { words };
+    }
+  } catch (error) {
+    console.error("Error fetching or decompressing words data:", error);
+    return { words: [] }; // Return an empty array in case of failure
+  }
 }
 
 // App Component for managing application state

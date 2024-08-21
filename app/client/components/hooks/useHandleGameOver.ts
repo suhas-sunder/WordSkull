@@ -15,7 +15,7 @@ function useHandleGameOver({ currentRow, currentSkull }: PropType) {
     }
   }, [currentRow, currentSkull]);
 
-  return {isGameOver};
+  return { isGameOver, setIsGameOver };
 }
 
 export default useHandleGameOver;

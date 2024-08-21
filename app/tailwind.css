@@ -20,6 +20,12 @@ font-family: 'Lora', serif;
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  img {
+    display: inline-block;
+  }
+}
+
 @font-face {
   font-family: "Nunito";
   font-weight: bold;
@@ -61,7 +67,6 @@ font-family: 'Lora', serif;
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
-
 
 body {
   margin: 0;

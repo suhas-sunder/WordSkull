@@ -112,13 +112,13 @@ function WordHistory({
       {dispWordHistory && (
         <button
           onClick={() => setDispWordHistory(false)}
-          className="w-full -top-20 z-10 flex absolute h-[100%] bg-black opacity-10"
+          className="w-full -top-20 z-20  flex absolute h-[100vh] bg-skull-brown opacity-10"
         ></button>
       )}
       <button
         onClick={() => setDispWordHistory(!dispWordHistory)}
         title="Hold 'Shift' or press 'Space Bar' key to view your attempts."
-        className="flex h-5 cursor-pointer min-w-52 min-h-10 max-w-[400px] sm:max-w-[600px] bg-white border-2 gap-3 mt-[1em] sm:mt-0 mb-4 sm:mb-2 rounded-md sm:rounded-md border-slate-200 justify-center items-center"
+        className="flex z-20 h-5 cursor-pointer min-w-52 min-h-10 max-w-[400px] sm:max-w-[600px] bg-white border-2 hover:border-skull-brown gap-3 mt-[1em] sm:mt-0 mb-4 sm:mb-2 rounded-md sm:rounded-md border-slate-200 justify-center items-center"
       >
         {enteredWords[currentRow]?.length > 0 ? (
           <div className="relative flex gap-[4px] justify-center px-3 items-center">
@@ -142,7 +142,7 @@ function WordHistory({
         )}
       </button>
       {dispWordHistory && (
-        <div className="flex flex-col absolute z-10 bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto max-h-[450px] max-w-[400px] rounded-lg">
+        <div className="flex flex-col absolute z-20 bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 max-h-[450px] max-w-[400px] rounded-lg">
           <h2>Guesses for Row {currentRow + 1}</h2>{" "}
           {enteredWords[currentRow]?.map((enteredWord, rowIndex) => (
             <ul

@@ -123,7 +123,7 @@ export default function Keyboard({
     <div
       className={`${
         darkThemeActive ? "bg-slate-700" : "bg-slate-600"
-      } -translate-y-6 hidden text-slate-600 min-h-[23em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2  p-6 text-xs md:flex lg:text-base`}
+      }  hidden text-slate-600 min-h-[23em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2  p-6 text-xs md:flex lg:text-base`}
     >
       {Object.values(keyboardData).map((keysArr, index) => {
         return (
@@ -137,7 +137,7 @@ export default function Keyboard({
               >
                 {key.shiftKey !== "" && (
                   <span
-                    className={`absolute  left-1/2 top-[12px] flex -translate-x-1/2 -translate-y-1/2 `}
+                    className={`absolute left-1/2 top-[12px] flex -translate-x-1/2 -translate-y-1/2 `}
                   >
                     {key.shiftKey}
                   </span>
