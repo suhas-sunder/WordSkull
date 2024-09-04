@@ -24,6 +24,7 @@ function useClassicGameplayLogic({
   const [currentRowIndex, setCurrentRowIndex] = useState<number>(0);
   const [enteredWords, setEnteredWords] = useState<string[][]>([]);
   const [enterPressed, setEnterPressed] = useState(false);
+  const [seconds, setSeconds] = useState<number>(0);
 
   const { isGameOver, setIsGameOver } = useHandleGameOver({
     currentRow,
@@ -238,6 +239,17 @@ function useClassicGameplayLogic({
     wordsList,
   ]);
 
+  
+  useEffect(() => {
+    if (!isGameOver) {
+      const interval = setInterval(() => {
+        setSeconds((seconds) => seconds + 1);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [isGameOver, setSeconds]);
+
   return {
     currentRow,
     currentRowIndex,
@@ -245,7 +257,8 @@ function useClassicGameplayLogic({
     enterPressed,
     isGameOver,
     lives,
-    maxLives
+    maxLives,
+    seconds
   };
 }
 
