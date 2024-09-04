@@ -64,7 +64,9 @@ function useCaptureHTML({ isGameOver }: PropType) {
   const copyImageToClipboard = async () => {
     try {
       if (!navigator.clipboard || !window.ClipboardItem) {
-        alert("Clipboard API not supported. Please manually download the image.");
+        alert(
+          "Clipboard API not supported. Please manually download the image."
+        );
         return;
       }
 
@@ -74,7 +76,6 @@ function useCaptureHTML({ isGameOver }: PropType) {
             "image/png": imgBlob,
           }),
         ]);
-        console.log("Image copied to clipboard!");
       } else {
         const blob = (await captureElementAsBlob("capture-area")) as Blob;
         if (blob) {
@@ -89,7 +90,9 @@ function useCaptureHTML({ isGameOver }: PropType) {
       }
     } catch (error) {
       console.error("Failed to copy image to clipboard:", error);
-      alert("Failed to copy image to clipboard. Please manually download the image.");
+      alert(
+        "Failed to copy image to clipboard. Please manually download the image."
+      );
     }
   };
 
@@ -97,7 +100,9 @@ function useCaptureHTML({ isGameOver }: PropType) {
     if (isWebShareSupported) {
       try {
         if (imgBlob) {
-          const file = new File([imgBlob], "screenshot.png", { type: "image/png" });
+          const file = new File([imgBlob], "screenshot.png", {
+            type: "image/png",
+          });
           await navigator.share({
             title: "Check this out!",
             text: "I captured this image.",
@@ -107,7 +112,9 @@ function useCaptureHTML({ isGameOver }: PropType) {
         } else {
           const blob = (await captureElementAsBlob("capture-area")) as Blob;
           if (blob) {
-            const file = new File([blob], "screenshot.png", { type: "image/png" });
+            const file = new File([blob], "screenshot.png", {
+              type: "image/png",
+            });
             await navigator.share({
               title: "Check this out!",
               text: "I captured this image.",
@@ -128,7 +135,14 @@ function useCaptureHTML({ isGameOver }: PropType) {
     }
   };
 
-  return { downloadPuzzle, copyImageToClipboard, shareImage, isWebShareSupported, imgBlob, captureAreaRef };
+  return {
+    downloadPuzzle,
+    copyImageToClipboard,
+    shareImage,
+    isWebShareSupported,
+    imgBlob,
+    captureAreaRef,
+  };
 }
 
 export default useCaptureHTML;
