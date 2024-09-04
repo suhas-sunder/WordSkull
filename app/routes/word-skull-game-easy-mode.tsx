@@ -68,7 +68,7 @@ export default function WordSkullMedium() {
     shareImage,
     isWebShareSupported,
     captureAreaRef,
-  } = useCaptureHTML({ isGameOver: true });
+  } = useCaptureHTML({ isGameOver });
 
   const handleGameOverMsg = () => {
     const rowsCompleted = currentRow;
@@ -106,7 +106,7 @@ export default function WordSkullMedium() {
             onClick={() => setShowGameOverMenu(false)}
             className="absolute h-[200vh] flex bg-skull-brown bg-opacity-10  z-30 w-full justify-center"
           ></button>
-          <div className="flex relative flex-col bg-white shadow-lg pb-10 w-full gap-5 z-40 max-w-[700px] font-nunito overflow-hidden mt-20 tracking-widest leading-loose min-h-[30em] min-w-40 mb-auto rounded-lg justify-center items-center">
+          <div className="flex relative flex-col bg-white shadow-lg pb-10 w-full gap-5 z-40 max-w-[700px] font-nunito overflow-hidden mt-20 tracking-widest leading-loose min-h-[26em] min-w-40 mb-auto rounded-lg justify-center items-center">
             <button
               className="absolute top-2 right-2 rounded-full p-1 scale-75 bg-skull-dark-brown fill-white hover:scale-[0.8]"
               onClick={() => setShowGameOverMenu(false)}
