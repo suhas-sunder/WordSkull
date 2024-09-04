@@ -25,6 +25,7 @@ function useClassicGameplayLogic({
   const [enteredWords, setEnteredWords] = useState<string[][]>([]);
   const [enterPressed, setEnterPressed] = useState(false);
   const [seconds, setSeconds] = useState<number>(0);
+  const [startTimer, setStartTimer] = useState<boolean>(false);
 
   const { isGameOver, setIsGameOver } = useHandleGameOver({
     currentRow,
@@ -32,7 +33,10 @@ function useClassicGameplayLogic({
   });
 
   //Manage lives
-  const { lives, setLives, maxLives } = useTotalLives({ currentSkull, setIsGameOver });
+  const { lives, setLives, maxLives } = useTotalLives({
+    currentSkull,
+    setIsGameOver,
+  });
 
   useEffect(() => {
     if (isGameOver) return;
@@ -134,6 +138,8 @@ function useClassicGameplayLogic({
         key.toLowerCase() !== "enter"
       )
         return;
+
+      setStartTimer(true);
 
       const handleEnteredWord = () => {
         //Check if entered word is valid
@@ -239,16 +245,16 @@ function useClassicGameplayLogic({
     wordsList,
   ]);
 
-  
   useEffect(() => {
-    if (!isGameOver) {
+    if (!isGameOver && startTimer) {
       const interval = setInterval(() => {
         setSeconds((seconds) => seconds + 1);
+        console.log("tick");
       }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [isGameOver, setSeconds]);
+  }, [isGameOver, startTimer]);
 
   return {
     currentRow,
@@ -258,7 +264,7 @@ function useClassicGameplayLogic({
     isGameOver,
     lives,
     maxLives,
-    seconds
+    seconds,
   };
 }
 

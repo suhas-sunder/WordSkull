@@ -235,7 +235,14 @@ export default function Index() {
           more. I am working hard to complete the project as soon as possible!
           Thanks for stopping by and enjoy the game. If you have any feedback,
           suggestions, or business inquiries, please feel free to reach out to
-          me at admin@wordskull.com
+          me at{" "}
+          <a
+            href="mailto:admin@wordskull.com"
+            className="text-skull-brown hover:text-skull-dark-brown"
+          >
+            admin@wordskull.com
+          </a>
+          .
         </div>
       </main>
     </div>

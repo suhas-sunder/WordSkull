@@ -144,7 +144,7 @@ function DisplaySkull({
             ? `${
                 darkThemeActive
                   ? "bg-slate-300  text-slate-700"
-                  : "bg-slate-300 bg-opacity-20 border-opacity-75"
+                  : "bg-slate-400 bg-opacity-20 border-opacity-75"
               }  scale-110 z-[10] border-[2.5px] border-slate-500`
             : `${
                 darkThemeActive

@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import { useTheme } from "../context/ThemeContext";
 import Icon from "../utils/other/Icon";
 
@@ -46,9 +47,12 @@ function Header({
             </button>
           </li>
           <li className="flex justify-center items-center">
-            <button className="cursor-pointer py-2 px-1 w-[2em]  fill-slate-500 hover:fill-skull-brown flex justify-center items-center">
+            <Link
+              to={`${location.pathname}/#gameplay-instructions`}
+              className="cursor-pointer py-2 px-1 w-[2em]  fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+            >
               <Icon icon="question" title="Rules" />
-            </button>
+            </Link>
           </li>
           {/* <li className="flex justify-center items-center">
             <button className="cursor-pointer py-2 px-1 w-[2em]  fill-slate-500 hover:fill-skull-brown">
