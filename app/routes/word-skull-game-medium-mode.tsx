@@ -117,7 +117,7 @@ export default function WordSkullMedium() {
                     {lives || 0}/{maxLives}
                   </span>
                   <span className="text-skull-super-dark-brown text-xs">
-                    Unused Lives
+                    Lives Left
                   </span>
                 </li>
                 <li className="flex flex-col gap-1 w-full justify-center items-center">
@@ -203,7 +203,7 @@ export default function WordSkullMedium() {
                     {lives || 0}/{maxLives}
                   </span>
                   <span className="text-skull-super-dark-brown text-xs">
-                    Unused Lives
+                    Lives Left
                   </span>
                 </li>
                 <li className="flex flex-col gap-1 w-full justify-center items-center">

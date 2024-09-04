@@ -10,6 +10,7 @@ import Header from "../client/components/layout/Header";
 import Keypad from "../client/components/ui/Keypad";
 import Icon from "../client/components/utils/other/Icon";
 import useCaptureHTML from "../client/components/hooks/useCaptureHTML";
+import SecondsToTime from "../client/components/utils/converters/SecondsToTime";
 
 export const meta: MetaFunction = () => {
   return [
@@ -27,6 +28,7 @@ export const meta: MetaFunction = () => {
 
 export default function WordSkullMedium() {
   const [showGameOverMenu, setShowGameOverMenu] = useState<boolean>(true);
+  const [isCopied, setIsCopied] = useState<boolean>(false);
 
   const skulls = useMemo(
     () =>
@@ -51,6 +53,7 @@ export default function WordSkullMedium() {
     isGameOver,
     lives,
     maxLives,
+    seconds,
   } = useClassicGameplayLogic({
     currentSkull,
     setCurrentSkull,
@@ -59,9 +62,13 @@ export default function WordSkullMedium() {
     wordsForSkull,
   });
 
-  const { downloadPuzzle, captureAreaRef } = useCaptureHTML({
-    isGameOver,
-  });
+  const {
+    downloadPuzzle,
+    copyImageToClipboard,
+    shareImage,
+    isWebShareSupported,
+    captureAreaRef,
+  } = useCaptureHTML({ isGameOver: true });
 
   const handleGameOverMsg = () => {
     const rowsCompleted = currentRow;
@@ -117,7 +124,7 @@ export default function WordSkullMedium() {
                     {lives || 0}/{maxLives}
                   </span>
                   <span className="text-skull-super-dark-brown text-xs">
-                    Unused Lives
+                    Lives Left
                   </span>
                 </li>
                 <li className="flex flex-col gap-1 w-full justify-center items-center">
@@ -129,7 +136,9 @@ export default function WordSkullMedium() {
                   </span>
                 </li>
                 <li className="text-skull-dark-brown flex flex-col gap-1 w-full justify-center items-center">
-                  <span className="text-2xl">0</span>
+                  <span className="text-2xl">
+                    {SecondsToTime(seconds) || "00:00:00"}
+                  </span>
                   <span className="text-skull-super-dark-brown text-xs">
                     Time Spent
                   </span>
@@ -137,7 +146,10 @@ export default function WordSkullMedium() {
               </ul>
             </div>
 
-            <button className="cursor-pointer py-2 gap-2 bg-green-500 text-white px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center">
+            <button
+              onClick={() => window.location.reload()}
+              className="cursor-pointer py-2 gap-2 bg-green-500 text-white px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+            >
               Play Again
             </button>
             <div className="cursor-pointer py-2 gap-2 px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center">
@@ -145,31 +157,39 @@ export default function WordSkullMedium() {
                 Share Your Results!
               </span>
             </div>
-            <ul className="grid grid-cols-2 sm:grid-cols-4 gap-5">
-              <li className="cursor-pointer py-2 gap-2 border-2 px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center">
-                Instagram
-              </li>
-              <li className="cursor-pointer py-2 gap-2 border-2 px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center">
-                Facebook
-              </li>
-              <li className="cursor-pointer py-2 gap-2 border-2 px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center">
-                LinkedIn
-              </li>
-              <li className="cursor-pointer py-2 gap-2 border-2 px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center">
-                Twitter
-              </li>
-              <li className="col-span-2 mx-auto">
+            <ul className="grid sm:grid-cols-3 gap-5 justify-center items-center">
+              {isWebShareSupported && (
+                <li className="flex justify-center items-center w-full">
+                  <button
+                    className="cursor-pointer w-[8em] hover:border-skull-brown hover:text-skull-super-dark-brown h-[3.5em] py-2 gap-2 border-2 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+                    onClick={shareImage}
+                  >
+                    Share
+                  </button>
+                </li>
+              )}
+              <li className="flex justify-center items-center w-full">
                 {" "}
                 <button
                   onClick={downloadPuzzle}
-                  className="cursor-pointer py-2 gap-2 border-2 px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+                  className="cursor-pointer py-2 w-[8em] hover:border-skull-brown hover:text-skull-super-dark-brown h-[3.5em] border-2 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
                 >
-                  Download Puzzle
+                  Download
                 </button>
               </li>
-              <li className="col-span-2 mx-auto">
-                <button className="cursor-pointer py-2 gap-2 border-2 px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center">
-                  Copy Puzzle
+              <li className="flex justify-center items-center w-full">
+                <button
+                  onClick={() => {
+                    copyImageToClipboard();
+                    setIsCopied(true);
+
+                    setTimeout(() => {
+                      setIsCopied(false);
+                    }, 500);
+                  }}
+                  className="cursor-pointer py-2 gap-2 border-2 hover:border-skull-brown hover:text-skull-super-dark-brown w-[8em] h-[3.5em] rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+                >
+                  {isCopied ? "Copied!" : "Copy"}
                 </button>
               </li>
             </ul>
@@ -203,7 +223,7 @@ export default function WordSkullMedium() {
                     {lives || 0}/{maxLives}
                   </span>
                   <span className="text-skull-super-dark-brown text-xs">
-                    Unused Lives
+                    Lives Left
                   </span>
                 </li>
                 <li className="flex flex-col gap-1 w-full justify-center items-center">
@@ -215,7 +235,9 @@ export default function WordSkullMedium() {
                   </span>
                 </li>
                 <li className="text-skull-dark-brown flex flex-col gap-1 w-full justify-center items-center">
-                  <span className="text-2xl">0</span>
+                  <span className="text-2xl">
+                    {SecondsToTime(seconds) || "00:00:00"}
+                  </span>
                   <span className="text-skull-super-dark-brown text-xs">
                     Time Spent
                   </span>
