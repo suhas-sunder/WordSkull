@@ -23,16 +23,16 @@ function ClassicGameplayInstructions() {
             <Link to="/words">dictionary</Link>
           </span>
           , and you get it right, you will be moved to the next row. This
-          repeats until you reach the end of the board and win.
+          repeats until you reach the end of the board (skull) and win.
         </li>
         <li>
           If your submitted word exists in the{" "}
           <span className="text-skull-brown hover:text-skull-dark-brown">
             <Link to="/words">dictionary</Link>
           </span>
-          , but does not match the correct word, you lose a life. When you lose
+          {" "}but does not match the correct word, you lose a life. When you lose
           all lives, the game ends. You will be shown the game over menu where
-          you can see and share your results or play again.
+          you can view and share your results or play again.
         </li>
         <li>
           If a word does not exist in the{" "}
@@ -55,7 +55,7 @@ function ClassicGameplayInstructions() {
         </li>{" "}
         <li>
           The difficulty of the game determines how long the maximum length of
-          any given word will be, as well as, the total number of rows. The
+          any given word will be, as well as, the total number of rows and lives. The
           higher the difficulty, the longer the words and rows.
         </li>
         <li>
@@ -104,7 +104,7 @@ function ClassicGameplayInstructions() {
           >
             admin@wordskull.com
           </a>
-          . I would love to hear your feedback!
+          . I would love to get your feedback!
         </li>
       </ul>
     </div>

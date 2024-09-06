@@ -249,7 +249,6 @@ function useClassicGameplayLogic({
     if (!isGameOver && startTimer) {
       const interval = setInterval(() => {
         setSeconds((seconds) => seconds + 1);
-        console.log("tick");
       }, 1000);
 
       return () => clearInterval(interval);

@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { Link, useLocation } from "@remix-run/react";
 import { useTheme } from "../context/ThemeContext";
 import Icon from "../utils/other/Icon";
 
@@ -18,6 +18,7 @@ function Header({
   dontFade,
 }: PropType) {
   const { darkThemeActive } = useTheme();
+  const location = useLocation();
 
   return (
     <header className="relative w-full justify-center items-center flex-col flex">
@@ -48,7 +49,7 @@ function Header({
           </li>
           <li className="flex justify-center items-center">
             <Link
-              to={`${location.pathname}/#gameplay-instructions`}
+              to={`${location?.pathname || "/"}/#gameplay-instructions`}
               className="cursor-pointer py-2 px-1 w-[2em]  fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
             >
               <Icon icon="question" title="Rules" />
