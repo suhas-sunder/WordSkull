@@ -62,6 +62,7 @@ module.exports = {
             extensions: [".ts", ".tsx"],
           },
           typescript: {
+            project: "./tsconfig.json", // Make sure ESLint knows where `tsconfig.json` is
             alwaysTryTypes: true,
           },
         },
