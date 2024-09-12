@@ -37,10 +37,10 @@ function ClassicGameplayInstructions() {
       <h2 className="text-4xl font-nunito text-slate-700 uppercase mb-10">
         How to play
       </h2>
-      <ul className="flex max-w-[1200px] flex-col gap-5 font-nunito text-slate-600 text-lg tracking-wider leading-loose">
+      <ul className="flex max-w-[1200px] flex-col gap-14 font-nunito text-center sm:text-start text-slate-600 mx-5 text-lg tracking-wider leading-loose">
         <li>Use a keyboard or mobile keypad to start typing a word.</li>
         <img
-          className="mx-auto"
+          className="mx-auto rounded-md"
           width={600}
           src={KeyboardImg}
           loading="lazy"
@@ -51,7 +51,7 @@ function ClassicGameplayInstructions() {
           labelled with the number of letters in that row.
         </li>
         <img
-          className="mx-auto"
+          className="mx-auto rounded-md"
           width={400}
           src={SkullInstructions}
           loading="lazy"
@@ -59,7 +59,7 @@ function ClassicGameplayInstructions() {
         />
         <li>Once you have typed your word, press enter to submit it.</li>
         <img
-          className="mx-auto"
+          className="mx-auto rounded-md"
           width={400}
           src={SkullFirstRow}
           loading="lazy"
@@ -74,7 +74,7 @@ function ClassicGameplayInstructions() {
           repeats until you complete all rows and win.
         </li>
         <img
-          className="mx-auto"
+          className="mx-auto rounded-md"
           width={400}
           src={SkullFirstRowEntered}
           loading="lazy"
@@ -93,7 +93,7 @@ function ClassicGameplayInstructions() {
           over menu where you can view and share your results or play again.
         </li>
         <img
-          className="mx-auto"
+          className="mx-auto rounded-md"
           width={700}
           src={GameEndsEarly}
           loading="lazy"
@@ -109,7 +109,7 @@ function ClassicGameplayInstructions() {
           be deducted.
         </li>
         <img
-          className="mx-auto"
+          className="mx-auto rounded-md"
           width={400}
           src={NotInList}
           loading="lazy"
@@ -127,7 +127,7 @@ function ClassicGameplayInstructions() {
           will not lose a life.
         </li>{" "}
         <img
-          className="mx-auto"
+          className="mx-auto rounded-md"
           width={400}
           src={Dance}
           loading="lazy"
@@ -139,7 +139,7 @@ function ClassicGameplayInstructions() {
           lives. The higher the difficulty, the longer the words and rows.
         </li>
         <img
-          className="mx-auto"
+          className="mx-auto rounded-md"
           width={600}
           src={Difficulty}
           loading="lazy"
@@ -155,7 +155,7 @@ function ClassicGameplayInstructions() {
           same position.
         </li>
         <img
-          className="mx-auto"
+          className="mx-auto rounded-md"
           width={600}
           src={EntryBar}
           loading="lazy"
@@ -168,7 +168,7 @@ function ClassicGameplayInstructions() {
           attempted words list.
         </li>
         <img
-          className="mx-auto"
+          className="mx-auto rounded-md"
           width={600}
           src={EntryPreview}
           loading="lazy"
@@ -183,7 +183,7 @@ function ClassicGameplayInstructions() {
           Characters that do not exist in the word will be a shade of grey.
         </li>
         <img
-          className="mx-auto"
+          className="mx-auto rounded-md"
           width={600}
           src={KeyboardEntered}
           loading="lazy"
@@ -205,7 +205,7 @@ function ClassicGameplayInstructions() {
           automatically be skipped.
         </li>
         <img
-          className="mx-auto"
+          className="mx-auto rounded-md"
           width={600}
           src={Blank}
           loading="lazy"
