@@ -1,5 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Link } from "@remix-run/react";
+import KeyboardImg from "../../assets/images/keyboard.jpg";
+import SkullInstructions from "../../assets/images/first_row.jpg"
+import SkullFirstRow from "../../assets/images/first_row_entry.jpg"
+import SkullFirstRowEntered from "../../assets/images/first_row_submitted.jpg"
 
 function ClassicGameplayInstructions() {
   return (
@@ -12,25 +16,49 @@ function ClassicGameplayInstructions() {
       </h2>
       <ul className="flex max-w-[1200px] flex-col gap-5 font-nunito text-slate-600 text-lg tracking-wider leading-loose">
         <li>Use a keyboard or mobile keypad to start typing a word.</li>
+        <img
+          className="mx-auto"
+          width={600}
+          src={KeyboardImg}
+          alt="Virtual keyboard"
+        />
         <li>
           The length of each word depends on the row you are on. Each square is
           labelled with the number of letters in that row.
         </li>
+        <img
+          className="mx-auto"
+          width={400}
+          src={SkullInstructions}
+          alt="Virtual keyboard"
+        />
+        <li>Once you have typed your word, press enter to submit it.</li>
+        <img
+          className="mx-auto"
+          width={400}
+          src={SkullFirstRow}
+          alt="Virtual keyboard"
+        />
         <li>
-          Once you have typed your word, press enter to submit it. If the word
-          exists in the{" "}
+          If the word exists in the{" "}
           <span className="text-skull-brown hover:text-skull-dark-brown">
             <Link to="/words">dictionary</Link>
           </span>
           , and you get it right, you will be moved to the next row. This
           repeats until you reach the end of the board (skull) and win.
         </li>
+        <img
+          className="mx-auto"
+          width={400}
+          src={SkullFirstRowEntered}
+          alt="Virtual keyboard"
+        />
         <li>
           If your submitted word exists in the{" "}
           <span className="text-skull-brown hover:text-skull-dark-brown">
             <Link to="/words">dictionary</Link>
-          </span>
-          {" "}but does not match the correct word, you lose a life. When you lose
+          </span>{" "}
+          but does not match the correct word, you lose a life. When you lose
           all lives, the game ends. You will be shown the game over menu where
           you can view and share your results or play again.
         </li>
@@ -55,8 +83,8 @@ function ClassicGameplayInstructions() {
         </li>{" "}
         <li>
           The difficulty of the game determines how long the maximum length of
-          any given word will be, as well as, the total number of rows and lives. The
-          higher the difficulty, the longer the words and rows.
+          any given word will be, as well as, the total number of rows and
+          lives. The higher the difficulty, the longer the words and rows.
         </li>
         <li>
           You will notice a bar sitting on top of the skull. This bar will fill
