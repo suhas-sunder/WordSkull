@@ -229,13 +229,8 @@ export default function Index() {
           ))}
         </ul>
         <div className="max-w-[800px] text-center font-nunito text-lg text-slate-500">
-          Hello friend! This website/game is still in development. The game is
-          playable but a few crucial features are still missing such as score
-          tracking, gameplay instructions, daily challenges, sharable links and
-          more. I am working hard to complete the project as soon as possible!
-          Thanks for stopping by and enjoy the game. If you have any feedback,
-          suggestions, or business inquiries, please feel free to reach out to
-          me at{" "}
+          If you have any feedback, suggestions, or business inquiries, please
+          feel free to reach out to me at{" "}
           <a
             href="mailto:admin@wordskull.com"
             className="text-skull-brown hover:text-skull-dark-brown"
