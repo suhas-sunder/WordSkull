@@ -1,5 +1,7 @@
 import { Fragment } from "react/jsx-runtime";
 import { v4 as uuidv4 } from "uuid";
+import Icon from "../utils/other/Icon";
+import { useState } from "react";
 
 interface ValidationPropType {
   char: string;
@@ -24,6 +26,8 @@ function WordHistory({
   setDispWordHistory,
   dispWordHistory,
 }: PropType) {
+  const [enteredWordsIndexOffset, setEnteredWordsIndexOffset] = useState(0);
+
   const handleValidationStyling = ({
     char,
     charIndex,
@@ -143,32 +147,65 @@ function WordHistory({
       </button>
       {dispWordHistory && (
         <div className="flex flex-col absolute z-20 bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 max-h-[450px] max-w-[400px] rounded-lg">
-          <h2>Guesses for Row {currentRow + 1}</h2>{" "}
-          {enteredWords[currentRow]?.map((enteredWord, rowIndex) => (
-            <ul
-              key={uuidv4()}
-              className="h-10 relative flex gap-[2px] justify-center items-center"
+          <div className="flex">
+            <button
+              onClick={() => {
+                if (currentRow + enteredWordsIndexOffset - 1 >= 0) {
+                  setEnteredWordsIndexOffset((prevState) => prevState - 1);
+                }
+              }}
+              className="pr-3"
             >
-              {enteredWord.split("").map((char, charIndex) => (
-                <Fragment key={uuidv4()}>
-                  {charIndex === 0 && (
-                    <li className="w-[1.7em] pt-[0.2em] h-[1.7em] text-slate-600">
-                      {rowIndex + 1}.
+              <Icon icon="arrowLeft" title="arrow left" />
+            </button>
+            <h2>Guesses for Row {currentRow + enteredWordsIndexOffset + 1}</h2>{" "}
+            <button
+              onClick={() => {
+                if (currentRow + enteredWordsIndexOffset + 1 <= currentRow) {
+                  setEnteredWordsIndexOffset((prevState) => prevState + 1);
+                }
+              }}
+              className="rotate-180 pr-3"
+            >
+              <Icon icon="arrowLeft" title="arrow right" />
+            </button>
+          </div>
+          {enteredWords[currentRow + enteredWordsIndexOffset]?.map(
+            (enteredWord, rowIndex) => (
+              <ul
+                key={uuidv4()}
+                className="h-10 relative flex gap-[2px] justify-center items-center"
+              >
+                {enteredWord.split("").map((char, charIndex) => (
+                  <Fragment key={uuidv4()}>
+                    {charIndex === 0 && (
+                      <li className="w-[1.7em] pt-[0.2em] h-[1.7em] text-slate-600">
+                        {rowIndex + 1}.
+                      </li>
+                    )}
+                    <li
+                      className={` ${handleValidationStyling({
+                        char,
+                        rowIndex,
+                        charIndex,
+                      })}} text-[1.2rem] p-0 m-0 sm:text-[1rem] capitalize border-2 rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
+                    >
+                      {char}
                     </li>
-                  )}
-                  <li
-                    className={` ${handleValidationStyling({
-                      char,
-                      rowIndex,
-                      charIndex,
-                    })}} text-[1.2rem] p-0 m-0 sm:text-[1rem] capitalize border-2 rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
-                  >
-                    {char}
-                  </li>
-                </Fragment>
-              ))}
-            </ul>
-          ))}
+                  </Fragment>
+                ))}
+              </ul>
+            )
+          )}
+
+          {enteredWordsIndexOffset < 0 && (
+            <div className="flex justify-center items-center gap-2">
+              <h3>Answer:</h3>
+              <p className="uppercase tracking-widest">
+                {wordsForSkull[currentRow + enteredWordsIndexOffset]}
+              </p>
+            </div>
+          )}
         </div>
       )}
     </>

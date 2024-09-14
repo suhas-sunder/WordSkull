@@ -216,6 +216,17 @@ const CloseRoundedIcon = () => (
   </svg>
 );
 
+const ArrowLeftIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M17.77 3.77L16 2 6 12l10 10 1.77-1.77L9.54 12z" />
+  </svg>
+);
+
 // Define a mapping object for icon components
 const iconComponents = {
   copy: CopyIcon,
@@ -234,6 +245,7 @@ const iconComponents = {
   question: HelpOutlineRoundedIcon,
   flag: SportsScoreIcon,
   close: CloseRoundedIcon,
+  arrowLeft: ArrowLeftIcon,
 };
 
 // Define the type for icon names

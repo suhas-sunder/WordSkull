@@ -26,6 +26,8 @@ function useClassicGameplayLogic({
   const [enterPressed, setEnterPressed] = useState(false);
   const [seconds, setSeconds] = useState<number>(0);
   const [startTimer, setStartTimer] = useState<boolean>(false);
+  const [previouslyEnteredKey, setPreviouslyEnteredKey] =
+    useState<string>("ResetKeyState"); //Use this to make sure some events only run on keydown and not on when key is pressed
 
   const { isGameOver, setIsGameOver } = useHandleGameOver({
     currentRow,
@@ -124,7 +126,10 @@ function useClassicGameplayLogic({
     const handleKeydown = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
 
-      if (key === " ") setDispWordHistory((prevState) => !prevState);
+      setPreviouslyEnteredKey(key);
+
+      if (key === " " && previouslyEnteredKey !== key)
+        setDispWordHistory((prevState) => !prevState);
 
       if (key === "shift") setDispWordHistory(true);
 
@@ -224,6 +229,7 @@ function useClassicGameplayLogic({
     const handleKeyUp = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
       if (key === "shift") setDispWordHistory(false);
+      setPreviouslyEnteredKey("ResetKeyState");
     };
 
     addEventListener("keydown", handleKeydown);
@@ -238,6 +244,7 @@ function useClassicGameplayLogic({
     currentSkull,
     enteredWords,
     isGameOver,
+    previouslyEnteredKey,
     setCurrentSkull,
     setDispWordHistory,
     setLives,
