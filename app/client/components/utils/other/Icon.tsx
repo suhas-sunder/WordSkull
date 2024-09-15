@@ -266,7 +266,7 @@ export default function Icon({ title, customStyle, icon }: Props) {
 
   return (
     <i
-      title={title || "default-star-icon"}
+      data-title={title || "default-star-icon"}
       className={`flex justify-center items-center min-w-5 ${customStyle}`}
     >
       <IconComponent />

@@ -19,6 +19,7 @@ interface PropType {
 function ClassicGameLogic({ startPosition, endPosition }: PropType) {
   const [showGameOverMenu, setShowGameOverMenu] = useState<boolean>(true);
   const [isCopied, setIsCopied] = useState<boolean>(false);
+  const [showKeyboard, setShowKeyboard] = useState(true);
 
   const skulls = useMemo(
     () =>
@@ -84,6 +85,8 @@ function ClassicGameLogic({ startPosition, endPosition }: PropType) {
     <label className=" flex relative flex-col">
       <input type="textbox" className="opacity-[0.01]" />
       <Header
+        showKeyboard={showKeyboard}
+        setShowKeyboard={setShowKeyboard}
         lives={lives}
         isGameOver={isGameOver}
         difficulty="3 - 5 Letters"
@@ -94,7 +97,7 @@ function ClassicGameLogic({ startPosition, endPosition }: PropType) {
         <div className="flex absolute w-full justify-center items-center">
           <button
             onClick={() => setShowGameOverMenu(false)}
-            className="absolute h-[200vh] flex bg-skull-brown bg-opacity-10  z-30 w-full justify-center"
+            className="fixed inset-0 h-full w-full flex bg-skull-brown bg-opacity-10 z-30 justify-center"
           ></button>
           <div className="flex relative flex-col bg-white shadow-lg pb-10 w-full gap-5 z-40 max-w-[700px] font-nunito overflow-hidden mt-20 tracking-widest leading-loose min-h-[26em] min-w-40 mb-auto rounded-lg justify-center items-center">
             <button
@@ -201,6 +204,8 @@ function ClassicGameLogic({ startPosition, endPosition }: PropType) {
           {isGameOver && showGameOverMenu && (
             <div className="flex font-nunito w-full flex-col justify-center items-center gap-4">
               <Header
+                showKeyboard={showKeyboard}
+                setShowKeyboard={setShowKeyboard}
                 lives={lives}
                 isGameOver={isGameOver}
                 difficulty="3 - 5 Letters"
@@ -243,7 +248,11 @@ function ClassicGameLogic({ startPosition, endPosition }: PropType) {
             enteredWords={enteredWords}
             enterPressed={enterPressed}
           />
-          <div className="flex max-w-[800px] max-h-[17.5em] overflow-hidden justify-center items-center flex-col">
+          <div
+            className={`${
+              showKeyboard ? "opacity-100" : "opacity-0"
+            } flex max-w-[800px] max-h-[17.5em] overflow-hidden justify-center items-center flex-col`}
+          >
             <Keyboard
               currentlyEnteredWords={enteredWords[currentRow]}
               currentWord={wordsForSkull[currentRow]}
