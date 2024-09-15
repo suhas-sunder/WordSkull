@@ -3,6 +3,20 @@ import { useState, useEffect, useMemo } from "react";
 import Skulls from "../client/components/data/skulls";
 import seedrandom from "seedrandom";
 import { useTheme } from "../client/components/context/ThemeContext";
+import { MetaFunction } from "@remix-run/node";
+
+export const meta: MetaFunction = () => {
+  return [
+    {
+      title: "💀 Word Skull - Sharpen Your Mind, One Word at a Time. 🎉✨",
+    },
+    {
+      name: "description",
+      content:
+        "Word Skull is an engaging platform where fun meets learning.  It’s a great way to sharpen your vocabulary 📚, but it’s also just a good game to dive into when you want to relax and challenge your mind 🧩. Word Skull is the perfect way to have fun and keep your brain active 🧠! 🎉📲",
+    },
+  ];
+};
 
 const getRandomTransform = () => {
   const scale = Math.random() * (1 - 0.6) + 0.6; // Random scale between 0.7 and 1.1

@@ -6,7 +6,7 @@ export const meta: MetaFunction = () => {
   return [
     {
       title:
-        "💀 Word Skull Easy - Easy difficulty offers learning for 3 to 5 letter words 🎉✨",
+        "💀 Word Skull Hard - Hard difficulty offers learning for 3 to 5 letter words 🎉✨",
     },
     {
       name: "description",
