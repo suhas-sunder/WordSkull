@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import useWordsForSkull from "../hooks/useWordsForSkull";
-import Skulls from "../data/skulls";
+import Skulls from "../data/Skulls";
 import useClassicGameplayLogic from "../hooks/useClassicGameplayLogic";
 import useCaptureHTML from "../hooks/useCaptureHTML";
 import Header from "./Header";
