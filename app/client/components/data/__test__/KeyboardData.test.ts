@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import KeyboardData from "../KeyboardData";
 
-describe("KeyboardData function", () => {
+describe("renders keyboard data", () => {
   it("should return an object", () => {
     const data = KeyboardData();
     expect(typeof data).toBe("object");

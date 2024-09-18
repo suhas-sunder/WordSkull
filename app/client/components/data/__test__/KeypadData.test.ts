@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import KeypadData from "../KeypadData";
 
-describe("KeypadData function", () => {
+describe("renders keypad data", () => {
   it("should return an object", () => {
     const data = KeypadData();
     expect(typeof data).toBe("object");
