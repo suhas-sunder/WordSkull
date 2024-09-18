@@ -116,7 +116,7 @@ function WordHistory({
       {dispWordHistory && (
         <button
           onClick={() => setDispWordHistory(false)}
-          className="w-full -top-20 z-20  flex absolute h-[100vh] bg-skull-brown opacity-10"
+          className="fixed inset-0 h-full w-full flex bg-skull-brown bg-opacity-10 z-30 justify-center"
         ></button>
       )}
       <button
@@ -146,7 +146,7 @@ function WordHistory({
         )}
       </button>
       {dispWordHistory && (
-        <div className="flex flex-col absolute z-20 bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 max-h-[450px] max-w-[400px] rounded-lg">
+        <div className="flex flex-col absolute z-[35] bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 max-h-[450px] max-w-[400px] rounded-lg">
           <div className="flex">
             <button
               onClick={() => {
@@ -154,7 +154,7 @@ function WordHistory({
                   setEnteredWordsIndexOffset((prevState) => prevState - 1);
                 }
               }}
-              className="pr-3"
+              className="pr-3 min-w-[2em] min-h-[1.4em]"
             >
               <Icon icon="arrowLeft" title="arrow left" />
             </button>
@@ -165,7 +165,7 @@ function WordHistory({
                   setEnteredWordsIndexOffset((prevState) => prevState + 1);
                 }
               }}
-              className="rotate-180 pr-3"
+              className="rotate-180 min-w-[2em] min-h-[1.4em] pr-3"
             >
               <Icon icon="arrowLeft" title="arrow right" />
             </button>
