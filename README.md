@@ -1,6 +1,8 @@
 # WordSkull
 A word game website project based on Wordle.
 
+I'm using Remix with Vite, Tailwind CSS, Express, PostgreSQL, Digital Ocean for Hosting, Cloudflare CDN, Cloudflare R2, Vitest (for unit, component, & integration testing), Selenium w/ Python for End-to-end testing (will be adding this soon), and more!
+
 This project is still in development but can be viewed live on [WordSkull](https://www.wordskull.com/).
 
 ![WordSkull Image](https://github.com/user-attachments/assets/cfa151d8-6c80-495e-a44a-e8325a30d133)
