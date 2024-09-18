@@ -147,15 +147,15 @@ function WordHistory({
       </button>
       {dispWordHistory && (
         <div className="flex flex-col absolute z-[35] bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 max-h-[450px] max-w-[400px] rounded-lg">
-          <div className="flex">
+          <div className="flex justify-center items-center">
             <button
               onClick={() => {
                 if (currentRow + enteredWordsIndexOffset - 1 >= 0) {
                   setEnteredWordsIndexOffset((prevState) => prevState - 1);
                 }
               }}
-              className="pr-3 min-w-[2em] min-h-[1.4em]"
-            >
+              className="pr-3"
+            > ←
               <Icon icon="arrowLeft" title="arrow left" />
             </button>
             <h2>Guesses for Row {currentRow + enteredWordsIndexOffset + 1}</h2>{" "}
@@ -165,8 +165,8 @@ function WordHistory({
                   setEnteredWordsIndexOffset((prevState) => prevState + 1);
                 }
               }}
-              className="rotate-180 min-w-[2em] min-h-[1.4em] pr-3"
-            >
+              className="rotate-180 pr-3"
+            > ←
               <Icon icon="arrowLeft" title="arrow right" />
             </button>
           </div>
