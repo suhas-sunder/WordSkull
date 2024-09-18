@@ -155,7 +155,7 @@ function WordHistory({
                 }
               }}
               className="pr-3"
-            > ←
+            >
               <Icon icon="arrowLeft" title="arrow left" />
             </button>
             <h2>Guesses for Row {currentRow + enteredWordsIndexOffset + 1}</h2>{" "}
@@ -166,7 +166,7 @@ function WordHistory({
                 }
               }}
               className="rotate-180 pr-3"
-            > ←
+            >
               <Icon icon="arrowLeft" title="arrow right" />
             </button>
           </div>
