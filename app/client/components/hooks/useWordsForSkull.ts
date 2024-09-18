@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import words from "../data/words";
+import words from "../data/Words";
 import { useMatches } from "@remix-run/react";
 
 interface WordsData {

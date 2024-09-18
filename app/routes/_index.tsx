@@ -1,6 +1,6 @@
 import { useNavigate } from "@remix-run/react";
 import { useState, useEffect, useMemo } from "react";
-import Skulls from "../client/components/data/skulls";
+import Skulls from "../client/components/data/Skulls";
 import seedrandom from "seedrandom";
 import { useTheme } from "../client/components/context/ThemeContext";
 import { MetaFunction } from "@remix-run/node";
