@@ -21,13 +21,6 @@ function Footer() {
           darkThemeActive ? "text-white" : "text-slate-700"
         } flex max-w-[500px] items-center justify-around `}
       >
-        {/* <li className="hidden sm:flex">
-          <NavLink to="/about" className="flex px-3 ">
-            <span className={`${styles.icon} active:text-rose-300 `}>
-              About
-            </span>
-          </NavLink>
-        </li> */}
         <li className="hidden sm:flex">
           <NavLink to="/sitemap" className="flex px-3">
             <span className={`${styles.icon}`}>Sitemap</span>

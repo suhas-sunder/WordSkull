@@ -2,10 +2,13 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "app/**/*.ts",
+    "app/**/*.tsx",
     "**/.server/**/*.ts",
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
     "**/.client/**/*.tsx",
+    "tests",
     "app/routes/emoji-combos.tsx",
     "app/routes/emoji-combos.$emoji.tsx",
     "app/routes/games.tsx",
