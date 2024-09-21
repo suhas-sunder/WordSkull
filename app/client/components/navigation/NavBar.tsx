@@ -27,28 +27,13 @@ function MainLinks({
       <ul
         id={showMobileMenu ? "mobile-links" : "main-links"}
         className={`${
-          darkThemeActive ? "text-white bg-slate-900" : "text-slate-700 bg-white"
+          darkThemeActive
+            ? "text-white bg-slate-900"
+            : "text-slate-700 bg-white"
         } text-base justify-center items-center text-center ${
           showMobileMenu ? styles["mobile-nav"] : styles["main-nav"]
         }`}
       >
-        {/* <li className="flex w-full lg:w-auto">
-          <NavLink
-            onClick={handleLinkClick}
-            to="/stats"
-            className={`relative flex items-center px-4 hover:fill-skull-brown  justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em] ${
-              darkThemeActive ? "fill-white" : "fill-slate-700"
-            }`}
-          >
-            <span className={`${styles.icon}`}>
-              <Icon icon="statsChart" title="Stats" />
-            </span>
-            <span>Stats</span>
-          </NavLink>
-        </li> */}
-
-       
-
         <li className="flex w-full lg:w-auto">
           <NavLink
             onClick={handleLinkClick}
@@ -58,20 +43,6 @@ function MainLinks({
             <span className={`${styles.icon} flex`}>Blog</span>
           </NavLink>
         </li>
-
-        {/* <li className="flex w-full lg:w-auto">
-          <NavLink
-            onClick={handleLinkClick}
-            to="/settings"
-            className={`relative flex items-center px-4 hover:fill-skull-brown  justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em] ${
-              darkThemeActive ? "fill-white" : "fill-slate-700"
-            }`}
-          >
-            <span className={`${styles.icon} flex`}>
-              <Icon icon="settingSparkle" title="Settings" />
-            </span>
-          </NavLink>
-        </li> */}
       </ul>
       <button
         onClick={() => setDarkThemeActive(!darkThemeActive)}

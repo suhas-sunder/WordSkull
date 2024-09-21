@@ -1,42 +1,9 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import "@testing-library/jest-dom/vitest"; // Ensure this import is present
+import "@testing-library/jest-dom/vitest";
 import Footer from "../Footer";
-import { createContext, useState, ReactNode } from "react";
-
-// Create a mock theme context
-const ThemeContext = createContext({
-  darkThemeActive: false,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setDarkThemeActive: (value: boolean) => {},
-});
-
-const MockThemeProvider = ({
-  children,
-  darkThemeActive = false,
-}: {
-  children: ReactNode;
-  darkThemeActive?: boolean;
-}) => {
-  const [isDarkTheme, setDarkThemeActive] = useState(darkThemeActive);
-
-  // This function matches the expected type
-  const mockSetDarkThemeActive = (value: boolean) => {
-    setDarkThemeActive(value);
-  };
-
-  return (
-    <ThemeContext.Provider
-      value={{
-        darkThemeActive: isDarkTheme,
-        setDarkThemeActive: mockSetDarkThemeActive,
-      }}
-    >
-      {children}
-    </ThemeContext.Provider>
-  );
-};
+import MockThemeProvider from "../../context/MockThemeContext";
 
 const MockFooter = ({ darkThemeActive }: { darkThemeActive?: boolean }) => {
   render(
@@ -54,12 +21,15 @@ describe("Should render default elements", () => {
   });
 
   it("should render the correct copyright text", () => {
-    expect(screen.getByText(/© 2024/i)).toBeInTheDocument();
+    const textElement = screen.getByText(/© 2024/i);
+    expect(textElement).toBeInTheDocument();
   });
 
   it("should display 'WordSkull' and 'All Rights Reserved'", () => {
-    expect(screen.getByText(/WordSkull/i)).toBeInTheDocument();
-    expect(screen.getByText(/All Rights Reserved/i)).toBeInTheDocument();
+    const textElement1 = screen.getByText(/WordSkull/i);
+    const textElement2 = screen.getByText(/All Rights Reserved/i);
+    expect(textElement1).toBeInTheDocument();
+    expect(textElement2).toBeInTheDocument();
   });
 
   it("should render a nav element", () => {
