@@ -12,20 +12,28 @@ export default ({ mode }: { mode: string }) => {
     server: {
       port,
       hmr: {
-        protocol: 'ws',
-        host: 'localhost',
+        protocol: "ws",
+        host: "localhost",
       },
     },
     plugins: [
-      remix({
-        future: {
-          v3_fetcherPersist: true,
-          v3_relativeSplatPath: true,
-          v3_throwAbortReason: true,
-        },
-      }),
+      // Include remix plugin only if not in test environment
+      process.env.NODE_ENV === "test"
+        ? null
+        : remix({
+            future: {
+              v3_fetcherPersist: true,
+              v3_relativeSplatPath: true,
+              v3_throwAbortReason: true,
+            },
+            ignoredRouteFiles: ["**/*.css"], // Optionally ignore certain files
+          }),
       tsconfigPaths(),
     ],
     base: "/", // Ensure base path is set correctly
+    test: {
+      globals: true,
+      environment: "jsdom",
+    },
   });
 };

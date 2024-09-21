@@ -16,9 +16,11 @@ import KeyboardEntered from "../../assets/images/keyboard_entered.jpg";
 import Timer from "../../assets/images/timer.jpg";
 import Blank from "../../assets/images/blank.jpg";
 import { useEffect, useState } from "react";
+import { useTheme } from "../context/ThemeContext";
 
 function ClassicGameplayInstructions() {
   const [isClient, setIsClient] = useState(false);
+  const { darkThemeActive } = useTheme();
 
   useEffect(() => {
     // This will set the component to render only on the client side
@@ -34,10 +36,18 @@ function ClassicGameplayInstructions() {
       id="gameplay-instructions"
       className="flex flex-col w-full justify-center items-center mt-[3.5em]"
     >
-      <h2 className="text-4xl font-nunito text-slate-700 uppercase mb-10">
+      <h2
+        className={`text-4xl font-nunito  uppercase mb-10 ${
+          darkThemeActive ? "text-slate-300" : "text-slate-700"
+        }`}
+      >
         How to play
       </h2>
-      <ul className="flex max-w-[1200px] flex-col gap-14 font-nunito text-center sm:text-start text-slate-600 mx-5 text-lg tracking-wider leading-loose">
+      <ul
+        className={`flex max-w-[1200px] flex-col gap-14 font-nunito text-center sm:text-start mx-5 text-lg tracking-wider leading-loose ${
+          darkThemeActive ? "text-slate-400" : "text-slate-600"
+        }`}
+      >
         <li>Use a keyboard or mobile keypad to start typing a word.</li>
         <img
           className="mx-auto rounded-md"
@@ -87,7 +97,12 @@ function ClassicGameplayInstructions() {
           </span>{" "}
           but does not match the correct word, you lose a life.
         </li>
-        <img className="mx-auto" width={400} src={Life} alt="Lives left" />
+        <img
+          className="mx-auto rounded-md"
+          width={400}
+          src={Life}
+          alt="Lives left"
+        />
         <li>
           When you lose all lives, the game ends. You will be shown the game
           over menu where you can view and share your results or play again.
@@ -119,7 +134,12 @@ function ClassicGameplayInstructions() {
           If you have typed a wrong word and want to try another, use the
           backspace key to delete existing characters.
         </li>
-        <img className="mx-auto" width={400} src={Delete} alt="Word deletion" />
+        <img
+          className="mx-auto rounded-md"
+          width={400}
+          src={Delete}
+          alt="Word deletion"
+        />
         <li>
           If you repeat a word that has already been typed, you will not be
           penalized for it. For example, if you type in the word 'dance' and
@@ -196,7 +216,12 @@ function ClassicGameplayInstructions() {
           The timer will automatically start when an alphanumeric or enter key
           on the keyboard or keypad is pressed.
         </li>
-        <img className="mx-auto" width={200} src={Timer} alt="Timer" />
+        <img
+          className="mx-auto rounded-md"
+          width={200}
+          src={Timer}
+          alt="Timer"
+        />
         <li>
           The black (eyes) and transparent (outline) squares can be ignored as
           they do not count as a character. They are easy to identify as they

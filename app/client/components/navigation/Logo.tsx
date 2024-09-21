@@ -17,13 +17,6 @@ function Logo({ setShowMobileMenu, darkThemeActive }: PropTypes) {
       to="/"
       className={`${styles.logo} relative flex items-center  font-overlock text-[1.25rem] font-black italic tracking-wider gap-1`}
     >
-      {/* <img
-        width={50}
-        height={50}
-        src={LogoImg}
-        className="rounded-lg"
-        alt="logo depicting a chef cooking with emoji as ingredients"
-      /> */}
       <span className="h-[50px] w-[50px] flex justify-center items-center text-4xl">💀</span>
       <div className="hidden sm:flex">
         <p
