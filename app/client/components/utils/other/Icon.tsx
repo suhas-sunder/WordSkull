@@ -221,6 +221,7 @@ const ArrowLeftIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     aria-hidden="true"
+    data-testid="ArrowLeftIcon"
     focusable="false"
     width="24"
     height="24"
