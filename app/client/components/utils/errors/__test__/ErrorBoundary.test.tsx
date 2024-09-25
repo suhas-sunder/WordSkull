@@ -8,7 +8,7 @@ const ProblematicComponent = () => {
   throw new Error("Test error");
 };
 
-describe("ErrorBoundary", () => {
+describe("handles errors correctly", () => {
   it("should render children when there is no error", () => {
     render(
       <ErrorBoundary>
