@@ -93,9 +93,9 @@ function useWordsForSkull({ currentSkull }: { currentSkull?: string[][][] }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSkull]);
 
-  useEffect(() => {
-    wordsForSkull.length > 0 && console.log(wordsForSkull);
-  }, [wordsForSkull]);
+  // useEffect(() => {
+  //   wordsForSkull.length > 0 && console.log(wordsForSkull);
+  // }, [wordsForSkull]);
 
   return { wordsForSkull, wordsList, dispWordHistory, setDispWordHistory };
 }
