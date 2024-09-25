@@ -29,7 +29,7 @@ const MockKeyboard = ({
   );
 };
 
-describe("Keyboard Component", () => {
+describe("renders defaults correctly", () => {
   it("should render keybaord", () => {
     MockKeyboard({
       darkThemeActive: true,
