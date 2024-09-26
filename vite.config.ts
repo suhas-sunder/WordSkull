@@ -35,5 +35,9 @@ export default ({ mode }: { mode: string }) => {
       globals: true,
       environment: "jsdom",
     },
+    define: {
+      'import.meta.env.MODE': JSON.stringify(process.env.MODE || 'development'),
+      'import.meta.env.VITE_PORT': JSON.stringify(process.env.VITE_PORT || '3200'),
+    },
   });
 };
