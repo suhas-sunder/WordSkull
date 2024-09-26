@@ -72,7 +72,6 @@ function ClassicGameLogic({ startPosition, endPosition }: PropType) {
         difficulty="3 - 5 Letters"
         setShowGameOverMenu={setShowGameOverMenu}
       />
-
       <main
         ref={captureAreaRef}
         className="flex relative flex-col gap-1 pt-1 px-5 items-center animate-fadeIn"
