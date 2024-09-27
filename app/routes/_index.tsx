@@ -247,7 +247,7 @@ export default function Index() {
           feel free to reach out to{" "}
           <a
             href="mailto:admin@wordskull.com"
-            className="text-skull-brown hover:text-skull-dark-brown"
+            className="text-skull-dark-brown hover:text-skull-super-dark-brown"
           >
             admin@wordskull.com
           </a>
