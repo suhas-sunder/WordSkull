@@ -100,10 +100,7 @@ function GameSettings({
           </div>
           <button
             data-testid="settings-background"
-            onClick={() => {
-              console.log("Background clicked");
-              setShowSettings(false);
-            }}
+            onClick={() => setShowSettings(false)}
             className="fixed inset-0 h-full w-full flex bg-skull-brown bg-opacity-10 z-30 justify-center"
           ></button>
         </>
