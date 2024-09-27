@@ -6,7 +6,7 @@ import Keyboard from "../Keyboard";
 import { describe, expect, it } from "vitest";
 
 interface PropType {
-  darkThemeActive?: boolean;
+  darkThemeActive: boolean;
   currentlyEnteredWords: string[];
   currentWord: string;
 }

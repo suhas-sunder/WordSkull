@@ -1,7 +1,18 @@
-import { useTheme } from "../context/ThemeContext";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import GameSettings from "../ui/GameSettings";
 import HeaderMenu from "../ui/HeaderMenu";
+import { ThemeContext } from "../context/ThemeContext";
+import { MockThemeContext } from "../../mocks/MockThemeContext";
+const isTestEnvironment = process.env.NODE_ENV === "test";
+
+
+const useTheme = () => {
+  const context = useContext(isTestEnvironment ? MockThemeContext : ThemeContext);
+  if (!context) {
+    throw new Error("ThemeContext has not been initialized");
+  }
+  return context;
+};
 
 interface PropType {
   lives: number | null;
@@ -75,7 +86,10 @@ function Header({
         >
           <span className="text-lg translate-y-[0.05em]">{lives || 0}</span>
           <span className="text-xl translate-y-[0.01em]">x</span>
-          <span className="opacity-85 -translate-x-[0.1em] text-lg">
+          <span
+            data-testid="life-icon"
+            className="opacity-85 -translate-x-[0.1em] text-lg"
+          >
             {darkThemeActive ? "🤍" : "🖤"}
           </span>
         </ul>

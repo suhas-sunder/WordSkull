@@ -5,7 +5,7 @@ interface ThemeContextProps {
   setDarkThemeActive: (value: boolean) => void;
 }
 
-const ThemeContext = createContext<ThemeContextProps>({
+export const ThemeContext = createContext<ThemeContextProps>({
   darkThemeActive: false,
   setDarkThemeActive: () => {},
 });

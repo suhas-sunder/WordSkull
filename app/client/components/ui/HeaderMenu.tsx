@@ -31,6 +31,7 @@ function HeaderMenu({
         {isGameOver && (
           <li className="flex justify-center items-center">
             <button
+              data-testid="results-button"
               onClick={() => setShowGameOverMenu(true)}
               className="cursor-pointer py-2 px-1 w-[2em]  fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
             >
@@ -45,7 +46,9 @@ function HeaderMenu({
         </li>
         <li className="flex justify-center items-center">
           <Link
-            to={`${location?.pathname || "/"}/#gameplay-instructions`}
+            to={`${
+              location?.pathname === "/" ? "" : location?.pathname
+            }/#gameplay-instructions`}
             className="cursor-pointer py-2 px-1 w-[2em]  fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
           >
             <Icon icon="question" title="Rules" />
