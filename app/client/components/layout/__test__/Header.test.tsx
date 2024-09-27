@@ -42,21 +42,6 @@ describe("should display the correct number of lives", () => {
     expect(screen.getByText("🖤")).toBeInTheDocument();
   });
 
-  it("should not display lives and icons when the game is over", () => {
-    MockHeader({
-      darkThemeActive: false,
-      lives: 3,
-      isGameOver: true,
-      showKeyboard: false,
-      setShowGameOverMenu: setShowGameOverMenu,
-      setShowKeyboard: setShowKeyboard,
-    });
-
-    expect(screen.queryByText("3")).not.toBeInTheDocument();
-    expect(screen.queryByText("x")).not.toBeInTheDocument();
-    expect(screen.queryByText("🖤")).not.toBeInTheDocument();
-  });
-
   it("should display black heart when light theme is active", async () => {
     MockHeader({
       darkThemeActive: false,
@@ -93,7 +78,7 @@ describe("should display the correct number of lives", () => {
       lives: 3,
       isGameOver: false,
       showKeyboard: false,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -103,6 +88,39 @@ describe("should display the correct number of lives", () => {
 });
 
 describe("should render and integrate with GameSettings component correctly", () => {
+  it("should not render an x icon for the close button when settings modal is closed", () => {
+    MockHeader({
+      darkThemeActive: false,
+      lives: 3,
+      isGameOver: false,
+      showKeyboard: true,
+      setShowGameOverMenu: setShowGameOverMenu,
+      setShowKeyboard: setShowKeyboard,
+    });
+
+    const iconElement = screen.queryByTestId(/CloseRoundedIcon/i);
+
+    expect(iconElement).not.toBeInTheDocument();
+  });
+
+  it("should render an x icon for the close button when settings modal is open", () => {
+    MockHeader({
+      darkThemeActive: false,
+      lives: 3,
+      isGameOver: false,
+      showKeyboard: true,
+      setShowGameOverMenu: setShowGameOverMenu,
+      setShowKeyboard: setShowKeyboard,
+    });
+
+    const settingsBtnElement = screen.getByTestId(/settings-button/i);
+    fireEvent.click(settingsBtnElement);
+
+    const iconElement = screen.getByTestId(/CloseRoundedIcon/i);
+
+    expect(iconElement).toBeInTheDocument();
+  });
+
   it("should call setShowKeyboard when toggling the keyboard", async () => {
     MockHeader({
       darkThemeActive: false,
@@ -127,9 +145,9 @@ describe("should render and integrate with GameSettings component correctly", ()
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true,
+      isGameOver: false,
       showKeyboard: true,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -145,9 +163,9 @@ describe("should render and integrate with GameSettings component correctly", ()
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true,
+      isGameOver: false,
       showKeyboard: true,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -160,9 +178,9 @@ describe("should render and integrate with GameSettings component correctly", ()
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true,
+      isGameOver: false,
       showKeyboard: true,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -177,9 +195,9 @@ describe("should render and integrate with GameSettings component correctly", ()
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true,
+      isGameOver: false,
       showKeyboard: true,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -194,9 +212,9 @@ describe("should render and integrate with GameSettings component correctly", ()
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true,
+      isGameOver: false,
       showKeyboard: true,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -211,9 +229,9 @@ describe("should render and integrate with GameSettings component correctly", ()
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true,
+      isGameOver: false,
       showKeyboard: true,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -231,9 +249,9 @@ describe("should render and integrate with GameSettings component correctly", ()
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true,
+      isGameOver: false,
       showKeyboard: true,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -248,9 +266,9 @@ describe("should render and integrate with GameSettings component correctly", ()
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true,
+      isGameOver: false,
       showKeyboard: false,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -267,9 +285,9 @@ describe("handles user input correctly when integrating with GameSettings", () =
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true,
+      isGameOver: false,
       showKeyboard: true,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -286,9 +304,9 @@ describe("handles user input correctly when integrating with GameSettings", () =
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true,
+      isGameOver: false,
       showKeyboard: false,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -306,9 +324,9 @@ describe("handles user input correctly when integrating with GameSettings", () =
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true,
+      isGameOver: false,
       showKeyboard: false,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -325,9 +343,9 @@ describe("handles user input correctly when integrating with GameSettings", () =
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true,
+      isGameOver: false,
       showKeyboard: true,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -345,9 +363,9 @@ describe("handles user input correctly when integrating with GameSettings", () =
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true,
+      isGameOver: false,
       showKeyboard: false,
-      setShowGameOverMenu: vi.fn(),
+      setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
@@ -363,19 +381,185 @@ describe("handles user input correctly when integrating with GameSettings", () =
 });
 
 describe("should render and integrate with HeaderMenu component correctly", () => {
-  it("should call setShowGameOverMenu when game is over & the results button is clicked", async () => {
+  it("should render a heading with text W💀RD SKULL", () => {
     MockHeader({
       darkThemeActive: false,
-      lives: 0,
-      isGameOver: true,
+      lives: 3,
+      isGameOver: false,
       showKeyboard: false,
       setShowGameOverMenu: setShowGameOverMenu,
       setShowKeyboard: setShowKeyboard,
     });
 
+    const headerElement = screen.getByRole("heading", { name: /W💀RD SKULL/i });
+
+    expect(headerElement).toBeInTheDocument();
+  });
+
+  it("should render a heading with difficulty text that matches the difficulty prop", () => {
+    MockHeader({
+      darkThemeActive: false,
+      lives: 3,
+      isGameOver: false,
+      showKeyboard: false,
+      setShowGameOverMenu: setShowGameOverMenu,
+      setShowKeyboard: setShowKeyboard,
+    });
+
+    const headerElement = screen.getByRole("heading", { name: /Easy/i });
+
+    expect(headerElement).toBeInTheDocument();
+  });
+
+  it("should not render a display results button by default", () => {
+    MockHeader({
+      darkThemeActive: false,
+      lives: 3,
+      isGameOver: false,
+      showKeyboard: false,
+      setShowGameOverMenu: setShowGameOverMenu,
+      setShowKeyboard: setShowKeyboard,
+    });
+
+    const buttonElement = screen.queryByTestId(/results-button/i);
+
+    expect(buttonElement).not.toBeInTheDocument();
+  });
+
+  it("should render a stats button", () => {
+    MockHeader({
+      darkThemeActive: false,
+      lives: 3,
+      isGameOver: false,
+      showKeyboard: false,
+      setShowGameOverMenu: setShowGameOverMenu,
+      setShowKeyboard: setShowKeyboard,
+    });
+
+    const buttonElement = screen.getByTestId(/stats-button/i);
+
+    expect(buttonElement).toBeInTheDocument();
+  });
+
+  it("should render a link for gameplay instructiosn with the correct href", () => {
+    MockHeader({
+      darkThemeActive: false,
+      lives: 3,
+      isGameOver: false,
+      showKeyboard: false,
+      setShowGameOverMenu: setShowGameOverMenu,
+      setShowKeyboard: setShowKeyboard,
+    });
+
+    const linkElement = screen.getByTestId(/instructions-hashlink/i);
+
+    expect(linkElement).toBeInTheDocument();
+    expect(linkElement).toHaveAttribute(
+      "href",
+      `${
+        location?.pathname === "/" ? "" : location?.pathname
+      }/#gameplay-instructions`
+    );
+  });
+
+  it("should render a settings button", () => {
+    MockHeader({
+      darkThemeActive: false,
+      lives: 3,
+      isGameOver: false,
+      showKeyboard: false,
+      setShowGameOverMenu: setShowGameOverMenu,
+      setShowKeyboard: setShowKeyboard,
+    });
+
+    const buttonElement = screen.getByTestId(/settings-button/i);
+
+    expect(buttonElement).toBeInTheDocument();
+  });
+
+  it("Should render a bar graph icon for the stats button", () => {
+    MockHeader({
+      darkThemeActive: false,
+      lives: 3,
+      isGameOver: false,
+      showKeyboard: false,
+      setShowGameOverMenu: setShowGameOverMenu,
+      setShowKeyboard: setShowKeyboard,
+    });
+
+    const iconElement = screen.getByTestId(/LeaderboardRoundedIcon/i);
+    expect(iconElement).toBeInTheDocument();
+  });
+
+  it("Should render a questionmark icon for the instructions hashlink", () => {
+    MockHeader({
+      darkThemeActive: false,
+      lives: 3,
+      isGameOver: false,
+      showKeyboard: false,
+      setShowGameOverMenu: setShowGameOverMenu,
+      setShowKeyboard: setShowKeyboard,
+    });
+
+    const iconElement = screen.getByTestId(/HelpOutlineRoundedIcon/i);
+    expect(iconElement).toBeInTheDocument();
+  });
+
+  it("Should render a sparkle gears icon for the settings button", () => {
+    MockHeader({
+      darkThemeActive: false,
+      lives: 3,
+      isGameOver: false,
+      showKeyboard: false,
+      setShowGameOverMenu: setShowGameOverMenu,
+      setShowKeyboard: setShowKeyboard,
+    });
+
+    const iconElement = screen.getByTestId(/SettingsSuggestIcon/i);
+    expect(iconElement).toBeInTheDocument();
+  });
+});
+
+describe("handles game over correctly", () => {
+  beforeEach(() => {
+    MockHeader({
+      darkThemeActive: false,
+      lives: 3,
+      isGameOver: true,
+      showKeyboard: false,
+      setShowGameOverMenu: setShowGameOverMenu,
+      setShowKeyboard: setShowKeyboard,
+    });
+  });
+  it("should not display lives and icons when the game is over", () => {
+    expect(screen.queryByText("3")).not.toBeInTheDocument();
+    expect(screen.queryByText("x")).not.toBeInTheDocument();
+    expect(screen.queryByText("🖤")).not.toBeInTheDocument();
+  });
+
+  it("should call setShowGameOverMenu when game is over & the results button is clicked", async () => {
     const resultsButton = screen.getByTestId("results-button");
 
     fireEvent.click(resultsButton);
+
+    expect(setShowGameOverMenu).toHaveBeenCalledWith(true);
+  });
+
+  it("should render a display results button when isGameOver is true", () => {
+    const buttonElement = screen.getByTestId(/results-button/i);
+
+    expect(buttonElement).toBeInTheDocument();
+  });
+
+  it("Should render a flag icon for results button", () => {
+    const iconElement = screen.getByTestId(/SportsScoreIcon/i);
+    expect(iconElement).toBeInTheDocument();
+  });
+
+  it("should call setShowGameOverMenu when the results button is clicked", () => {
+    const buttonElement = screen.getByTestId(/results-button/i);
+
+    fireEvent.click(buttonElement);
 
     expect(setShowGameOverMenu).toHaveBeenCalledWith(true);
   });

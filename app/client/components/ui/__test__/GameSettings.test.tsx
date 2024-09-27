@@ -46,7 +46,7 @@ describe("should render default elements", () => {
       setShowKeyboard: setShowKeyboard,
       setShowSettings: setShowSettings,
     });
-    
+
     expect(screen.getByText("Settings")).toBeInTheDocument();
     expect(screen.getByText("Virtual Keyboard:")).toBeInTheDocument();
     expect(screen.getByText("Difficulty:")).toBeInTheDocument();
@@ -141,6 +141,34 @@ describe("should render default elements", () => {
 
     const keyboardToggleLabel = screen.getByText("Off");
     expect(keyboardToggleLabel).toBeInTheDocument();
+  });
+
+  it("should not render an x icon for the close button when settings modal is closed", () => {
+    MockGameSettings({
+      darkThemeActive: false,
+      showSettings: false,
+      showKeyboard: false,
+      setShowKeyboard: setShowKeyboard,
+      setShowSettings: setShowSettings,
+    });
+
+    const iconElement = screen.queryByTestId(/CloseRoundedIcon/i);
+
+    expect(iconElement).not.toBeInTheDocument();
+  });
+
+  it("should render an x icon for the close button when settings modal is open", () => {
+    MockGameSettings({
+      darkThemeActive: false,
+      showSettings: true,
+      showKeyboard: false,
+      setShowKeyboard: setShowKeyboard,
+      setShowSettings: setShowSettings,
+    });
+
+    const iconElement = screen.getByTestId(/CloseRoundedIcon/i);
+
+    expect(iconElement).toBeInTheDocument();
   });
 });
 

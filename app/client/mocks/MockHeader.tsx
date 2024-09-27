@@ -19,7 +19,7 @@ const MockHeader = ({
   darkThemeActive,
   lives,
   isGameOver,
-  difficulty = "medium",
+  difficulty = "Easy",
   dontFade = false,
   showKeyboard,
   setShowGameOverMenu,
