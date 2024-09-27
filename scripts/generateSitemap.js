@@ -46,7 +46,7 @@ const createSitemap = (pages) => {
 
   pages.forEach((page) => {
     xml += `  <url>\n`;
-    xml += `    <loc>${`https://www.wordskull.com${page}`}</loc>\n`;
+    xml += `    <loc>${`${page}`}</loc>\n`;
     xml += `    <lastmod>${new Date().toISOString()}</lastmod>\n`;
     xml += `  </url>\n`;
   });
