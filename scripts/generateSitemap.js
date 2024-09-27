@@ -42,7 +42,7 @@ const readExistingSitemap = (sitemapPath) => {
 
 const createSitemap = (pages) => {
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap-image/1.1">\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap-image/1.0">\n`;
 
   pages.forEach((page) => {
     xml += `  <url>\n`;
