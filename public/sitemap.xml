@@ -1,79 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap-image/1.0">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/$</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/blog</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/blog</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/cookies-policy</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/cookies-policy</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/faq</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/faq</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/games</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/games</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/privacy-policy</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/privacy-policy</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/rules</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/rules</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/settings</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/settings</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/sitemap</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/sitemap</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/stats</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/stats</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/temp</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/temp</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/temp_1</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/temp_1</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/terms-of-service</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/terms-of-service</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/word-skull-game-easy-mode</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/word-skull-game-easy-mode</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/word-skull-game-extreme-mode</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/word-skull-game-extreme-mode</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/word-skull-game-hard-mode</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/word-skull-game-hard-mode</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/word-skull-game-medium-mode</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/word-skull-game-medium-mode</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/words</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/words</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
   <url>
-    <loc>/_index</loc>
-    <lastmod>2024-09-27T23:27:56.813Z</lastmod>
+    <loc>https://www.wordskull.com/_index</loc>
+    <lastmod>2024-09-27T23:49:27.146Z</lastmod>
   </url>
 </urlset>
