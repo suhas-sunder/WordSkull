@@ -6,8 +6,6 @@ import "@testing-library/jest-dom/vitest";
 const setShowGameOverMenuMock = vi.fn();
 const setShowKeyboardMock = vi.fn();
 
-
-
 describe("should display the correct number of lives", () => {
   it("should display white heart when dark theme is active", async () => {
     // Render the MockHeader with necessary props
@@ -19,7 +17,7 @@ describe("should display the correct number of lives", () => {
       setShowGameOverMenu: setShowGameOverMenuMock,
       setShowKeyboard: setShowKeyboardMock,
     });
-  
+
     // Query the life icon element and assert its content
     const lifeIcon = await waitFor(() => screen.getByTestId("life-icon"));
     expect(lifeIcon).toHaveTextContent("🤍"); // Expect white heart icon to be displayed
@@ -44,7 +42,7 @@ describe("should display the correct number of lives", () => {
     MockHeader({
       darkThemeActive: false,
       lives: 3,
-      isGameOver: true, 
+      isGameOver: true,
       showKeyboard: false,
       setShowGameOverMenu: setShowGameOverMenuMock,
       setShowKeyboard: setShowKeyboardMock,
@@ -69,7 +67,6 @@ describe("should display the correct number of lives", () => {
     const lifeIcon = await screen.findByTestId("life-icon");
     expect(lifeIcon).toHaveTextContent("🖤");
   });
-
 
   it("should display correct lives count", () => {
     MockHeader({
@@ -99,6 +96,39 @@ describe("should display the correct number of lives", () => {
     expect(setShowKeyboardMock).toHaveBeenCalledWith(true);
     localStorage.removeItem("showKeyboard");
   });
-
-  
 });
+
+describe("should render and integrate with child components correctly", () => {
+  
+  it("should call setShowGameOverMenu when game is over & the results button is clicked", async () => {
+    MockHeader({
+      darkThemeActive: false,
+      lives: 0,
+      isGameOver: true,
+      showKeyboard: false,
+      setShowGameOverMenu: setShowGameOverMenuMock,
+      setShowKeyboard: setShowKeyboardMock,
+    });
+
+    const resultsButton = screen.getByTestId("results-button");
+
+    fireEvent.click(resultsButton);
+
+    expect(setShowGameOverMenuMock).toHaveBeenCalledWith(true);
+  });
+
+  it("should call setShowKeyboard when toggling the keyboard", () => {
+    MockHeader({
+      darkThemeActive: false,
+      lives: 3,
+      isGameOver: false,
+      showKeyboard: false,
+      setShowGameOverMenu: setShowGameOverMenuMock,
+      setShowKeyboard: setShowKeyboardMock,
+    });
+
+    fireEvent.click(screen.getByText("x"));
+
+    expect(setShowKeyboardMock).toHaveBeenCalled();
+  });
+})  
