@@ -24,6 +24,7 @@ function GameSettings({
         <>
           <div className="absolute font-roboto top-[22em] left-1/2 -translate-x-1/2 z-[50] items-center py-[2em] flex -translate-y-1/2 bg-white max-w-[38em] w-full min-h-[20em] rounded-lg flex-col gap-7">
             <button
+              data-testid="close-settings"
               onClick={() => setShowSettings(false)}
               className="flex absolute top-[0.8em] right-[0.8em] z-[60]"
             >
@@ -98,7 +99,11 @@ function GameSettings({
             </ul>
           </div>
           <button
-            onClick={() => setShowSettings(false)}
+            data-testid="settings-background"
+            onClick={() => {
+              console.log("Background clicked");
+              setShowSettings(false);
+            }}
             className="fixed inset-0 h-full w-full flex bg-skull-brown bg-opacity-10 z-30 justify-center"
           ></button>
         </>

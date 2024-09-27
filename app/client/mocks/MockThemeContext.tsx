@@ -17,7 +17,6 @@ export default function MockThemeProvider({
 
   // This function matches the expected type
   const mockSetDarkThemeActive = (value: boolean) => {
-    console.log("MockThemeProvider darkThemeActive:", darkThemeActive);
     setDarkThemeActive(value);
   };
 
