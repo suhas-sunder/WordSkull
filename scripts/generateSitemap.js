@@ -10,18 +10,15 @@ const getPages = (dir) => {
     const fullPath = path.join(dir, file);
 
     if (fs.lstatSync(fullPath).isDirectory()) {
-      pages.push(...getPages(fullPath));
+      pages.push(...getPages(fullPath, false)); // Recursively add sub-pages
     } else if (file.endsWith(".tsx") || file.endsWith(".mdx")) {
-      // Replace backslashes with forward slashes
       let route = fullPath
         .replace(/^.*routes/, "")
-        .replace(/\\/g, "/") // Replace backslashes with forward slashes
         .replace(".tsx", "")
         .replace(".mdx", "");
-
       if (route.endsWith("/index")) route = route.replace("/index", "");
       if (route === "/index") route = "/";
-
+      route = route.replace(/\\/g, "/"); 
       pages.push(route);
     }
   });
@@ -46,7 +43,7 @@ const createSitemap = (pages) => {
 
   pages.forEach((page) => {
     xml += `  <url>\n`;
-    xml += `    <loc>${`https://www.wordskull.com${page}`}</loc>\n`;
+    xml += `    <loc>${`${page}`}</loc>\n`;
     xml += `    <lastmod>${new Date().toISOString()}</lastmod>\n`;
     xml += `  </url>\n`;
   });
