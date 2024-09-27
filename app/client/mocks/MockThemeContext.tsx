@@ -1,17 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext, ReactNode, useState } from "react";
 
-const ThemeContext = createContext({
+export const MockThemeContext = createContext({
   darkThemeActive: false,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setDarkThemeActive: (value: boolean) => {},
 });
 
 export default function MockThemeProvider({
   children,
-  darkThemeActive = false,
+  darkThemeActive,
 }: {
   children: ReactNode;
-  darkThemeActive?: boolean;
+  darkThemeActive: boolean;
 }) {
   const [isDarkTheme, setDarkThemeActive] = useState(darkThemeActive);
 
@@ -21,13 +21,13 @@ export default function MockThemeProvider({
   };
 
   return (
-    <ThemeContext.Provider
+    <MockThemeContext.Provider
       value={{
         darkThemeActive: isDarkTheme,
         setDarkThemeActive: mockSetDarkThemeActive,
       }}
     >
       {children}
-    </ThemeContext.Provider>
+    </MockThemeContext.Provider>
   );
 }
