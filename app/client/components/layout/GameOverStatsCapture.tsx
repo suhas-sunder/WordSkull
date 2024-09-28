@@ -8,6 +8,7 @@ interface PropType {
   lives: number | null;
   maxLives: number | null;
   currentRow: number;
+  lettersPerSkull?: string;
   wordsForSkull: string[];
   setShowKeyboard: (value: (prevState: boolean) => boolean) => void;
   showKeyboard: boolean;
@@ -23,6 +24,7 @@ function GameOverStatsCapture({
   maxLives,
   currentRow,
   wordsForSkull,
+  lettersPerSkull,
   setShowKeyboard,
   showKeyboard,
   seconds,
@@ -30,13 +32,13 @@ function GameOverStatsCapture({
   return (
     <>
       {isGameOver && showGameOverMenu && (
-        <div className="flex font-nunito w-full flex-col justify-center items-center gap-4">
+        <div data-testid="game-over-stats-capture" className="flex font-nunito w-full flex-col justify-center items-center gap-4">
           <Header
             showKeyboard={showKeyboard}
             setShowKeyboard={setShowKeyboard}
             lives={lives}
             isGameOver={isGameOver}
-            difficulty="3 - 5 Letters"
+            lettersPerSkull={lettersPerSkull || ""}
             dontFade={true}
             setShowGameOverMenu={setShowGameOverMenu}
           />

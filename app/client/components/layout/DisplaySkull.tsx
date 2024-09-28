@@ -190,6 +190,7 @@ function DisplaySkull({
       {currentSkull.map((skull, index) => {
         return index === 0 ? (
           <div
+            data-testid="display-skull"
             key={index}
             className="relative flex-col w-full max-w-[800px] sm:scale-[0.9]  min-h-[21.5em] sm:min-h-[20em] capitalize flex font-nunito text-slate-400 items-center"
           >

@@ -120,6 +120,7 @@ function WordHistory({
         ></button>
       )}
       <button
+        data-testid="word-history"
         onClick={() => setDispWordHistory(!dispWordHistory)}
         title="Hold 'Shift' or press 'Space Bar' key to view your attempts."
         className="flex z-20 h-5 cursor-pointer min-w-52 min-h-10 max-w-[400px] sm:max-w-[600px] bg-white border-2 hover:border-skull-brown gap-3 mt-[1em] sm:mt-0 mb-4 sm:mb-2 rounded-md sm:rounded-md border-slate-200 justify-center items-center"

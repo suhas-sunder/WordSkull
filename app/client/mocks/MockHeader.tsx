@@ -8,7 +8,7 @@ interface MockHeaderProps {
   darkThemeActive: boolean;
   lives: number | null;
   isGameOver: boolean;
-  difficulty?: string;
+  lettersPerSkull?: string;
   dontFade?: boolean;
   showKeyboard: boolean;
   setShowGameOverMenu: (value: boolean) => void;
@@ -19,7 +19,7 @@ const MockHeader = ({
   darkThemeActive,
   lives,
   isGameOver,
-  difficulty = "Easy",
+  lettersPerSkull = "Easy",
   dontFade = false,
   showKeyboard,
   setShowGameOverMenu,
@@ -32,7 +32,7 @@ const MockHeader = ({
         <Header
           lives={lives}
           isGameOver={isGameOver}
-          difficulty={difficulty}
+          lettersPerSkull={lettersPerSkull}
           dontFade={dontFade}
           showKeyboard={showKeyboard}
           setShowGameOverMenu={setShowGameOverMenu}

@@ -8,7 +8,7 @@ interface PropType {
   setShowGameOverMenu: (value: boolean) => void;
   isGameOver: boolean;
   dontFade?: boolean;
-  difficulty?: string;
+  lettersPerSkull?: string;
   setShowSettings: (value: boolean) => void;
 }
 
@@ -20,7 +20,7 @@ const MockHeaderMenu = ({
   setShowGameOverMenu,
   isGameOver,
   dontFade,
-  difficulty,
+  lettersPerSkull,
   setShowSettings,
 }: PropType) => {
   render(
@@ -30,7 +30,7 @@ const MockHeaderMenu = ({
           setShowGameOverMenu={setShowGameOverMenu}
           isGameOver={isGameOver}
           dontFade={dontFade}
-          difficulty={difficulty}
+          lettersPerSkull={lettersPerSkull}
           setShowSettings={setShowSettings}
         />
       </MockThemeProvider>
@@ -49,7 +49,7 @@ describe("should render default elements", () => {
       setShowGameOverMenu: setShowGameOverMenu,
       isGameOver: false,
       dontFade: true,
-      difficulty: "Easy",
+      lettersPerSkull: "Easy",
       setShowSettings: setShowSettings,
     });
   });
@@ -119,7 +119,7 @@ describe("should behave correctly when the game is over", () => {
       setShowGameOverMenu: setShowGameOverMenu,
       isGameOver: true,
       dontFade: true,
-      difficulty: "Easy",
+      lettersPerSkull: "Easy",
       setShowSettings: setShowSettings,
     });
   });
