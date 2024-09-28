@@ -140,6 +140,7 @@ describe("should render default elements when game is over and game over menu is
   });
 
   it("should show 'Copied!' text after clicking the 'Copy' button", async () => {
+    window.alert = vi.fn();
     const copyButton = screen.getByText(/Copy/i);
     fireEvent.click(copyButton);
 

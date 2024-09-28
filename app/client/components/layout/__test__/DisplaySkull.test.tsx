@@ -137,20 +137,23 @@ describe("handles skull rendering & validation correctly", () => {
     expect(secondSquare.textContent).toBe("");
   });
 
- 
   it("should render the correct text content in squares", () => {
     const props = {
       currentSkull: [
         [
-          ['@', '~', 'A', 'B', 'C'],
-          ['~', 'D', 'E', 'F', '~'],
-          ['G', 'H', '@', 'I', 'J'],
+          ["@", "~", "A", "B", "C"],
+          ["~", "D", "E", "F", "~"],
+          ["G", "H", "@", "I", "J"],
         ],
       ],
       currentRow: 1,
       currentRowIndex: 2,
-      wordsForSkull: ['ABCD', 'DEFG', 'GHIJ'],
-      enteredWords: [['A', 'B'], ['D', 'E', 'F'], ['G', 'H']],
+      wordsForSkull: ["ABCD", "DEFG", "GHIJ"],
+      enteredWords: [
+        ["A", "B"],
+        ["D", "E", "F"],
+        ["G", "H"],
+      ],
       enterPressed: false,
     };
 
@@ -158,11 +161,6 @@ describe("handles skull rendering & validation correctly", () => {
 
     // Log the elements to see what is rendered
     const listItems = screen.getAllByRole("listitem");
-    listItems.forEach((item, index) => {
-      console.log(`List item ${index}:`, item.innerHTML);
-    });
-
-    // Target the correct span after inspection
     const thirdSquareInFirstRow = listItems[2].querySelectorAll("span")[1]; // A
     const firstSquareInSecondRow = listItems[6].querySelectorAll("span")[1]; // D
     const fourthSquareInThirdRow = listItems[13].querySelectorAll("span")[1]; // I

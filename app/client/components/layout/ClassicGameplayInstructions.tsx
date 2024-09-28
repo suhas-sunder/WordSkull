@@ -49,24 +49,28 @@ function ClassicGameplayInstructions() {
         }`}
       >
         <li>Use a keyboard or mobile keypad to start typing a word.</li>
-        <img
-          className="mx-auto rounded-md"
-          width={600}
-          src={KeyboardImg}
-          loading="lazy"
-          alt="Virtual keyboard"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="rounded-md"
+            width={600}
+            src={KeyboardImg}
+            loading="lazy"
+            alt="Virtual keyboard"
+          />
+        </li>
         <li>
           The length of each word depends on the row you are on. Each square is
           labelled with the number of letters in that row.
         </li>
-        <img
-          className="mx-auto rounded-md"
-          width={400}
-          src={SkullInstructions}
-          loading="lazy"
-          alt="First row instructions"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="mx-auto rounded-md"
+            width={400}
+            src={SkullInstructions}
+            loading="lazy"
+            alt="First row instructions"
+          />
+        </li>
         <li>Once you have typed your word, press enter to submit it.</li>
         <img
           className="mx-auto rounded-md"
@@ -83,13 +87,15 @@ function ClassicGameplayInstructions() {
           , and you get it right, you will be moved to the next row. This
           repeats until you complete all rows and win.
         </li>
-        <img
-          className="mx-auto rounded-md"
-          width={400}
-          src={SkullFirstRowEntered}
-          loading="lazy"
-          alt="Entered word"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="mx-auto rounded-md"
+            width={400}
+            src={SkullFirstRowEntered}
+            loading="lazy"
+            alt="Entered word"
+          />
+        </li>
         <li>
           If your submitted word exists in the{" "}
           <span className="text-skull-brown hover:text-skull-dark-brown">
@@ -97,23 +103,27 @@ function ClassicGameplayInstructions() {
           </span>{" "}
           but does not match the correct word, you lose a life.
         </li>
-        <img
-          className="mx-auto rounded-md"
-          width={400}
-          src={Life}
-          alt="Lives left"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="mx-auto rounded-md"
+            width={400}
+            src={Life}
+            alt="Lives left"
+          />
+        </li>
         <li>
           When you lose all lives, the game ends. You will be shown the game
           over menu where you can view and share your results or play again.
         </li>
-        <img
-          className="mx-auto rounded-md"
-          width={700}
-          src={GameEndsEarly}
-          loading="lazy"
-          alt="Game over menu"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="mx-auto rounded-md"
+            width={700}
+            src={GameEndsEarly}
+            loading="lazy"
+            alt="Game over menu"
+          />
+        </li>
         <li>
           If a word does not exist in the{" "}
           <span className="text-skull-brown hover:text-skull-dark-brown">
@@ -123,48 +133,56 @@ function ClassicGameplayInstructions() {
           informs you that the word is not valid for this game and no lives will
           be deducted.
         </li>
-        <img
-          className="mx-auto rounded-md"
-          width={400}
-          src={NotInList}
-          loading="lazy"
-          alt="Invalid word message"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="mx-auto rounded-md"
+            width={400}
+            src={NotInList}
+            loading="lazy"
+            alt="Invalid word message"
+          />
+        </li>
         <li>
           If you have typed a wrong word and want to try another, use the
           backspace key to delete existing characters.
         </li>
-        <img
-          className="mx-auto rounded-md"
-          width={400}
-          src={Delete}
-          alt="Word deletion"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="mx-auto rounded-md"
+            width={400}
+            src={Delete}
+            alt="Word deletion"
+          />
+        </li>
         <li>
           If you repeat a word that has already been typed, you will not be
           penalized for it. For example, if you type in the word 'dance' and
           press enter. Then you type the word 'dance' again and press enter. You
           will not lose a life.
         </li>{" "}
-        <img
-          className="mx-auto rounded-md"
-          width={400}
-          src={Dance}
-          loading="lazy"
-          alt="First row is the word 'dance'"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="mx-auto rounded-md"
+            width={400}
+            src={Dance}
+            loading="lazy"
+            alt="First row is the word 'dance'"
+          />
+        </li>
         <li>
           The difficulty of the game determines how long the maximum length of
           any given word will be, as well as, the total number of rows and
           lives. The higher the difficulty, the longer the words and rows.
         </li>
-        <img
-          className="mx-auto rounded-md"
-          width={600}
-          src={Difficulty}
-          loading="lazy"
-          alt="Difficulty menu"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="mx-auto rounded-md"
+            width={600}
+            src={Difficulty}
+            loading="lazy"
+            alt="Difficulty menu"
+          />
+        </li>
         <li>
           You will notice a bar sitting on top of the skull. This bar will fill
           up with your attempted word when you submit it, and will display the
@@ -174,26 +192,30 @@ function ClassicGameplayInstructions() {
           character is one that exists in the word but is not located in the
           same position.
         </li>
-        <img
-          className="mx-auto rounded-md"
-          width={600}
-          src={EntryBar}
-          loading="lazy"
-          alt="Entered word preview"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="mx-auto rounded-md"
+            width={600}
+            src={EntryBar}
+            loading="lazy"
+            alt="Entered word preview"
+          />
+        </li>
         <li>
           To view all attempts at guessing the current word, either click on the
           bar above the skull, or press either space bar to toggle the display
           or press and hold the shift button to temporarily display the
           attempted words list.
         </li>
-        <img
-          className="mx-auto rounded-md"
-          width={600}
-          src={EntryPreview}
-          loading="lazy"
-          alt="Entered word preview full list"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="mx-auto rounded-md"
+            width={600}
+            src={EntryPreview}
+            loading="lazy"
+            alt="Entered word preview full list"
+          />
+        </li>
         <li>
           Additionally, the keyboard or keypad displayed below the skull will
           highlight characters based on whether or not you have guessed them in
@@ -202,13 +224,15 @@ function ClassicGameplayInstructions() {
           Similarly, slightly matching characters will be highlighted yellow.
           Characters that do not exist in the word will be a shade of grey.
         </li>
-        <img
-          className="mx-auto rounded-md"
-          width={600}
-          src={KeyboardEntered}
-          loading="lazy"
-          alt="Entered word yellow and green character highlights"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="mx-auto rounded-md"
+            width={600}
+            src={KeyboardEntered}
+            loading="lazy"
+            alt="Entered word yellow and green character highlights"
+          />
+        </li>
         <li>
           There is a timer that runs in the background to inform you of how long
           you took to complete the puzzle. It will not be displayed in the
@@ -216,12 +240,14 @@ function ClassicGameplayInstructions() {
           The timer will automatically start when an alphanumeric or enter key
           on the keyboard or keypad is pressed.
         </li>
-        <img
-          className="mx-auto rounded-md"
-          width={200}
-          src={Timer}
-          alt="Timer"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="mx-auto rounded-md"
+            width={200}
+            src={Timer}
+            alt="Timer"
+          />
+        </li>
         <li>
           The black (eyes) and transparent (outline) squares can be ignored as
           they do not count as a character. They are easy to identify as they
@@ -229,19 +255,21 @@ function ClassicGameplayInstructions() {
           game somewhat resemble a skull). So when you type, those squares will
           automatically be skipped.
         </li>
-        <img
-          className="mx-auto rounded-md"
-          width={600}
-          src={Blank}
-          loading="lazy"
-          alt="Placeholder squares"
-        />
+        <li className="flex w-full justify-center">
+          <img
+            className="mx-auto rounded-md"
+            width={600}
+            src={Blank}
+            loading="lazy"
+            alt="Placeholder squares"
+          />
+        </li>
         <li>
           If you have any questions, or found any of the instructions unclear,
           please feel free to contact me at{" "}
           <a
             href="mailto:admin@wordskull.com"
-            className="text-skull-brown hover:text-skull-dark-brown"
+            className="text-skull-dark-brown hover:text-skull-super-dark-brown"
           >
             admin@wordskull.com
           </a>
