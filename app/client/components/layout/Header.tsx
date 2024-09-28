@@ -5,9 +5,10 @@ import { ThemeContext } from "../context/ThemeContext";
 import { MockThemeContext } from "../../mocks/MockThemeContext";
 const isTestEnvironment = process.env.NODE_ENV === "test";
 
-
 const useTheme = () => {
-  const context = useContext(isTestEnvironment ? MockThemeContext : ThemeContext);
+  const context = useContext(
+    isTestEnvironment ? MockThemeContext : ThemeContext
+  );
   if (!context) {
     throw new Error("ThemeContext has not been initialized");
   }
@@ -17,7 +18,7 @@ const useTheme = () => {
 interface PropType {
   lives: number | null;
   isGameOver: boolean;
-  difficulty?: string;
+  lettersPerSkull?: string;
   dontFade?: boolean;
   showKeyboard: boolean;
   setShowGameOverMenu: (value: boolean) => void;
@@ -27,7 +28,7 @@ interface PropType {
 function Header({
   lives,
   isGameOver,
-  difficulty,
+  lettersPerSkull,
   setShowGameOverMenu,
   showKeyboard,
   setShowKeyboard,
@@ -75,7 +76,7 @@ function Header({
         setShowGameOverMenu={setShowGameOverMenu}
         isGameOver={isGameOver}
         dontFade={dontFade}
-        difficulty={difficulty}
+        lettersPerSkull={lettersPerSkull}
         setShowSettings={setShowSettings}
       />
       {!isGameOver && (

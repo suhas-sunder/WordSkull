@@ -1,23 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
 import words from "../data/Words";
-import { useMatches } from "@remix-run/react";
+import { WordsData } from "../../../routes/word-skull-game-easy-mode";
 
-interface WordsData {
-  words?: { [key: number]: string[] };
+interface PropType {
+  currentSkull?: string[][][];
+  wordsData: WordsData;
 }
 
-function useWordsForSkull({ currentSkull }: { currentSkull?: string[][][] }) {
+function useWordsForSkull({ currentSkull, wordsData }: PropType) {
   const [wordsForSkull, setWordsForSkull] = useState<string[]>([]);
   const [dispWordHistory, setDispWordHistory] = useState<boolean>(false);
-  // Get all matched routes and their data
-  const matches = useMatches();
-
-  // Memoize the extraction of words data from matches
-  const wordsData = useMemo(() => {
-    // Find the first match with valid data
-    const match = matches.find((match) => (match.data as WordsData)?.words);
-    return match?.data as WordsData;
-  }, [matches]);
 
   // Memoize the backup words list
   const backupWordsList = useMemo(() => words(), []);
@@ -41,6 +33,8 @@ function useWordsForSkull({ currentSkull }: { currentSkull?: string[][][] }) {
 
     // Get words of a specific length and exclude words with "@" or "~"
     const getWordsOfLength = (length: number) => {
+      if (!wordsList[length]) return [];
+
       return wordsList[length]
         .filter((word) => word.length === length)
         .filter((word) => !word.includes("@") && !word.includes("~"));

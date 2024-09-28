@@ -8,6 +8,7 @@ interface PropType {
   lives: number | null;
   maxLives: number | null;
   currentRow: number;
+  lettersPerSkull?: string;
   wordsForSkull: string[];
   setShowKeyboard: (value: (prevState: boolean) => boolean) => void;
   showKeyboard: boolean;
@@ -23,6 +24,7 @@ function GameOverStatsCapture({
   maxLives,
   currentRow,
   wordsForSkull,
+  lettersPerSkull,
   setShowKeyboard,
   showKeyboard,
   seconds,
@@ -30,20 +32,20 @@ function GameOverStatsCapture({
   return (
     <>
       {isGameOver && showGameOverMenu && (
-        <div className="flex font-nunito w-full flex-col justify-center items-center gap-4">
+        <div data-testid="game-over-stats-capture" className="flex font-nunito w-full flex-col justify-center items-center gap-4">
           <Header
             showKeyboard={showKeyboard}
             setShowKeyboard={setShowKeyboard}
             lives={lives}
             isGameOver={isGameOver}
-            difficulty="3 - 5 Letters"
+            lettersPerSkull={lettersPerSkull || ""}
             dontFade={true}
             setShowGameOverMenu={setShowGameOverMenu}
           />
           <ul className="grid gap-5 sm:grid-cols-3 w-full justify-center items-center">
             <li className="flex col-span-1 flex-col gap-1 w-full justify-center items-center">
               <span className="text-skull-dark-brown text-2xl">
-                {lives || 0}/{maxLives}
+                {`${lives || 0}/${maxLives}`}
               </span>
               <span className="text-skull-super-dark-brown text-xs">
                 Lives Left
@@ -51,7 +53,7 @@ function GameOverStatsCapture({
             </li>
             <li className="flex flex-col gap-1 w-full justify-center items-center">
               <span className="text-skull-dark-brown text-3xl sm:text-4xl">
-                {currentRow || 0}/{wordsForSkull.length || 0}
+                {`${currentRow || 0}/${wordsForSkull.length || 0}`}
               </span>
               <span className="text-skull-super-dark-brown text-xs">
                 Correct Words

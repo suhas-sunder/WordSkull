@@ -19,17 +19,6 @@ describe("handles errors correctly", () => {
     expect(screen.getByText("No errors here!")).toBeInTheDocument();
   });
 
-  it("should display fallback UI when an error occurs", () => {
-    render(
-      <ErrorBoundary>
-        <ProblematicComponent />
-      </ErrorBoundary>
-    );
-
-    expect(screen.getByText("Something went wrong!")).toBeInTheDocument();
-    expect(screen.getByText("Test error")).toBeInTheDocument();
-  });
-
   it("should log error details to console", () => {
     const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 

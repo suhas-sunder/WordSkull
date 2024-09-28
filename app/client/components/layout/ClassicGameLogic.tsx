@@ -10,13 +10,21 @@ import Keyboard from "../ui/Keyboard";
 import Keypad from "../ui/Keypad";
 import GameOverMenu from "../ui/GameOverMenu";
 import GameOverStatsCapture from "./GameOverStatsCapture";
+import { WordsData } from "../../../routes/word-skull-game-easy-mode";
 
 interface PropType {
   startPosition: number;
   endPosition: number;
+  lettersPerSkull: string;
+  wordsData: WordsData;
 }
 
-function ClassicGameLogic({ startPosition, endPosition }: PropType) {
+function ClassicGameLogic({
+  startPosition,
+  endPosition,
+  lettersPerSkull,
+  wordsData,
+}: PropType) {
   const [showGameOverMenu, setShowGameOverMenu] = useState<boolean>(true);
   const [showKeyboard, setShowKeyboard] = useState(true);
 
@@ -32,7 +40,7 @@ function ClassicGameLogic({ startPosition, endPosition }: PropType) {
 
   //Manage words list
   const { wordsForSkull, wordsList, dispWordHistory, setDispWordHistory } =
-    useWordsForSkull({ currentSkull });
+    useWordsForSkull({ currentSkull, wordsData });
 
   //Handle the main game play logic
   const {
@@ -51,6 +59,7 @@ function ClassicGameLogic({ startPosition, endPosition }: PropType) {
     setDispWordHistory,
     wordsForSkull,
   });
+
   const { captureAreaRef } = useCaptureHTML({ isGameOver });
 
   useEffect(() => {
@@ -69,7 +78,7 @@ function ClassicGameLogic({ startPosition, endPosition }: PropType) {
         setShowKeyboard={setShowKeyboard}
         lives={lives}
         isGameOver={isGameOver}
-        difficulty="3 - 5 Letters"
+        lettersPerSkull={lettersPerSkull}
         setShowGameOverMenu={setShowGameOverMenu}
       />
       <main
@@ -101,6 +110,7 @@ function ClassicGameLogic({ startPosition, endPosition }: PropType) {
             lives={lives}
             maxLives={maxLives}
             currentRow={currentRow}
+            lettersPerSkull={lettersPerSkull}
             wordsForSkull={wordsForSkull}
             setShowKeyboard={setShowKeyboard}
             showKeyboard={showKeyboard}
