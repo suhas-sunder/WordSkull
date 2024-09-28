@@ -43,7 +43,7 @@ function GameOverStatsCapture({
           <ul className="grid gap-5 sm:grid-cols-3 w-full justify-center items-center">
             <li className="flex col-span-1 flex-col gap-1 w-full justify-center items-center">
               <span className="text-skull-dark-brown text-2xl">
-                {lives || 0}/{maxLives}
+                {`${lives || 0}/${maxLives}`}
               </span>
               <span className="text-skull-super-dark-brown text-xs">
                 Lives Left
@@ -51,7 +51,7 @@ function GameOverStatsCapture({
             </li>
             <li className="flex flex-col gap-1 w-full justify-center items-center">
               <span className="text-skull-dark-brown text-3xl sm:text-4xl">
-                {currentRow || 0}/{wordsForSkull.length || 0}
+                {`${currentRow || 0}/${wordsForSkull.length || 0}`}
               </span>
               <span className="text-skull-super-dark-brown text-xs">
                 Correct Words
