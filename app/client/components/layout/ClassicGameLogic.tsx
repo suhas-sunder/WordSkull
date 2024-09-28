@@ -14,9 +14,14 @@ import GameOverStatsCapture from "./GameOverStatsCapture";
 interface PropType {
   startPosition: number;
   endPosition: number;
+  lettersPerSkull: string;
 }
 
-function ClassicGameLogic({ startPosition, endPosition }: PropType) {
+function ClassicGameLogic({
+  startPosition,
+  endPosition,
+  lettersPerSkull,
+}: PropType) {
   const [showGameOverMenu, setShowGameOverMenu] = useState<boolean>(true);
   const [showKeyboard, setShowKeyboard] = useState(true);
 
@@ -69,7 +74,7 @@ function ClassicGameLogic({ startPosition, endPosition }: PropType) {
         setShowKeyboard={setShowKeyboard}
         lives={lives}
         isGameOver={isGameOver}
-        difficulty="3 - 5 Letters"
+        lettersPerSkull={lettersPerSkull}
         setShowGameOverMenu={setShowGameOverMenu}
       />
       <main

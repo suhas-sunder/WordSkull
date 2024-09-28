@@ -5,14 +5,14 @@ interface PropType {
   setShowGameOverMenu: (value: boolean) => void;
   isGameOver: boolean;
   dontFade?: boolean;
-  difficulty?: string;
+  lettersPerSkull?: string;
   setShowSettings: (value: boolean) => void;
 }
 function HeaderMenu({
   setShowGameOverMenu,
   isGameOver,
   dontFade,
-  difficulty,
+  lettersPerSkull,
   setShowSettings,
 }: PropType) {
   const location = useLocation();
@@ -25,7 +25,7 @@ function HeaderMenu({
     >
       <h1 className="flex w-full gap-1 items-center">
         <span>W💀RD SKULL</span>
-        {difficulty && <span>({difficulty})</span>}
+        {lettersPerSkull && <span>({lettersPerSkull})</span>}
       </h1>
       <ul className="flex gap-1 justify-center items-center">
         {isGameOver && (

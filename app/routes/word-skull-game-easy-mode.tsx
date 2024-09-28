@@ -19,7 +19,7 @@ export const meta: MetaFunction = () => {
 export default function WordSkullMedium() {
   return (
     <>
-      <ClassicGameLogic startPosition={0} endPosition={4} />
+      <ClassicGameLogic startPosition={0} endPosition={4} lettersPerSkull="3 - 5 letters"/>
       <ClassicGameplayInstructions />
     </>
   );
