@@ -15,6 +15,10 @@ Toggle between light and dark mode with the click of a button.
 <img width="1211" alt="Home Page Full View" src="https://github.com/user-attachments/assets/9c87f452-09db-4acf-9317-098d74b56191">
 
 Select a difficulty and click "play" to start the game.
+Easy = 3 - 5 letters
+Medium = 3 - 6 letters
+Hard = 3 - 7 letters
+Extreme = 3 - 9 letters
 
 <img width="1225" alt="Select Difficulty" src="https://github.com/user-attachments/assets/27b6399e-d77d-4b84-a6ce-fc5b28ab794c">
 
