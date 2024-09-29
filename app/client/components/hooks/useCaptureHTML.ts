@@ -85,7 +85,6 @@ function useCaptureHTML({ isGameOver }: PropType) {
             }),
           ]);
           setImgBlob(blob);
-          console.log("Image captured and copied to clipboard!");
         }
       }
     } catch (error) {

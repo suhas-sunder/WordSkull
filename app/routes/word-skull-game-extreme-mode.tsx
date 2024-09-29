@@ -1,6 +1,9 @@
 import type { MetaFunction } from "@remix-run/node";
 import ClassicGameLogic from "../client/components/layout/ClassicGameLogic";
 import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
+import { useMatches } from "react-router-dom";
+import { useMemo } from "react";
+import { WordsData } from "./word-skull-game-easy-mode";
 
 export const meta: MetaFunction = () => {
   return [
@@ -17,12 +20,20 @@ export const meta: MetaFunction = () => {
 };
 
 export default function WordSkullMedium() {
+  const matches = useMatches();
+  const wordsData = useMemo(() => {
+    // Find the first match with valid data
+    const match = matches?.find((match) => (match?.data as WordsData)?.words);
+    return match?.data as WordsData;
+  }, [matches]);
+
   return (
     <>
       <ClassicGameLogic
         startPosition={12}
         endPosition={15}
         lettersPerSkull="3 - 9 letters"
+        wordsData={wordsData}
       />
       <ClassicGameplayInstructions />
     </>

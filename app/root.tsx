@@ -3,7 +3,7 @@ import NavBar from "./client/components/navigation/NavBar";
 import Footer from "./client/components/navigation/Footer";
 import ReactGA from "react-ga4";
 import cloudflareR2API from "./client/components/api/cloudflareR2API";
-import pako from "pako";
+import { ungzip } from "pako";
 
 import {
   Outlet,
@@ -72,7 +72,7 @@ export const loader = async () => {
   const isGzip = responseData[0] === 0x1f && responseData[1] === 0x8b;
 
   if (isGzip) {
-    const decompressedData = pako.ungzip(responseData, { to: "string" });
+    const decompressedData = ungzip(responseData, { to: "string" });
     words = JSON.parse(decompressedData);
   } else {
     const textData = new TextDecoder().decode(responseData);
