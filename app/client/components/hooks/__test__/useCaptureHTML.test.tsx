@@ -8,8 +8,6 @@ window.alert = vi.fn();
 
 // Mock the navigator APIs
 beforeEach(() => {
-  
-
   // Mock the share function
   mockNavigatorShare();
 
@@ -18,7 +16,7 @@ beforeEach(() => {
 
   // Mock html2canvas directly
   mockHtml2Canvas();
-  
+
   render(<TestComponent isGameOver={false} />);
 });
 
@@ -95,7 +93,6 @@ const TestComponent = ({ isGameOver }: { isGameOver: boolean }) => {
 // Test Suite for useCaptureHTML
 describe("useCaptureHTML", () => {
   it("should call navigator.share when sharing an image", async () => {
-
     // Simulate clicking the share button
     await act(async () => {
       fireEvent.click(screen.getByText("Share"));
