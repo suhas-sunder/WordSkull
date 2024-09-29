@@ -14,7 +14,7 @@
     "app/routes/games.tsx",
     "server_routes/config/dbConfig.js",
     "../typing-test-app/client/src/api/accountAPI.ts"
-  ],
+, "scripts/generateSitemap.js"  ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "types": ["@remix-run/node", "vite/client", "vitest/globals"],

@@ -2,10 +2,16 @@ import type { MetaFunction } from "@remix-run/node";
 import ClassicGameLogic from "../client/components/layout/ClassicGameLogic";
 import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
 import { useMatches } from "react-router-dom";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 export type WordsData = {
   words?: { [key: number]: string[] };
 };
+
+export type InstructionsType = {
+  showInstructions: boolean;
+  setShowInstructions: (value: (prevState: boolean) => boolean) => void;
+};
+
 
 export const meta: MetaFunction = () => {
   return [
@@ -32,10 +38,13 @@ export default function WordSkullMedium() {
     return match?.data as WordsData;
   }, [matches]);
 
+  
+  const [showInstructions, setShowInstructions] = useState(true);
+
   return (
     <>
-      <ClassicGameLogic startPosition={0} endPosition={4} lettersPerSkull="3 - 5 letters" wordsData={wordsData}/>
-      <ClassicGameplayInstructions />
+      <ClassicGameLogic startPosition={0} endPosition={4} lettersPerSkull="3 - 5 letters" wordsData={wordsData} showInstructions={showInstructions} setShowInstructions={setShowInstructions}/>
+      {showInstructions && <ClassicGameplayInstructions />}
     </>
   );
 }

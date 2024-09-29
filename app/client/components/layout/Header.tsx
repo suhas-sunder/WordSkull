@@ -3,6 +3,8 @@ import GameSettings from "../ui/GameSettings";
 import HeaderMenu from "../ui/HeaderMenu";
 import { ThemeContext } from "../context/ThemeContext";
 import { MockThemeContext } from "../../mocks/MockThemeContext";
+import { InstructionsType } from "../../../routes/word-skull-game-easy-mode";
+import { KeyboardType } from "./ClassicGameLogic";
 const isTestEnvironment = process.env.NODE_ENV === "test";
 
 const useTheme = () => {
@@ -15,14 +17,12 @@ const useTheme = () => {
   return context;
 };
 
-interface PropType {
+interface PropType extends KeyboardType, InstructionsType {
   lives: number | null;
   isGameOver: boolean;
   lettersPerSkull?: string;
   dontFade?: boolean;
-  showKeyboard: boolean;
   setShowGameOverMenu: (value: boolean) => void;
-  setShowKeyboard: (value: (prevState: boolean) => boolean) => void;
 }
 
 function Header({
@@ -33,6 +33,8 @@ function Header({
   showKeyboard,
   setShowKeyboard,
   dontFade,
+  showInstructions,
+  setShowInstructions,
 }: PropType) {
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -67,6 +69,8 @@ function Header({
   return (
     <header className="relative w-full justify-center items-center flex-col flex">
       <GameSettings
+        setShowInstructions={setShowInstructions}
+        showInstructions={showInstructions}
         showSettings={showSettings}
         setShowSettings={setShowSettings}
         showKeyboard={showKeyboard}

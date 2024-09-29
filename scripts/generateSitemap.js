@@ -10,7 +10,7 @@ const getPages = (dir) => {
     const fullPath = path.join(dir, file);
 
     if (fs.lstatSync(fullPath).isDirectory()) {
-      pages.push(...getPages(fullPath, false)); // Recursively add sub-pages
+      pages.push(...getPages(fullPath)); // Recursively add sub-pages
     } else if (file.endsWith(".tsx") || file.endsWith(".mdx")) {
       let route = fullPath
         .replace(/^.*routes/, "")
@@ -26,7 +26,7 @@ const getPages = (dir) => {
 
   return pages;
 };
-const pages = getPages("app/routes", true);
+const pages = getPages("app/routes");
 
 // Function to create the sitemap XML
 const createSitemap = (pages) => {
