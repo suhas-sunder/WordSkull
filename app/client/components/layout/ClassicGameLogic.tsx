@@ -10,9 +10,14 @@ import Keyboard from "../ui/Keyboard";
 import Keypad from "../ui/Keypad";
 import GameOverMenu from "../ui/GameOverMenu";
 import GameOverStatsCapture from "./GameOverStatsCapture";
-import { WordsData } from "../../../routes/word-skull-game-easy-mode";
+import { InstructionsType, WordsData } from "../../../routes/word-skull-game-easy-mode";
 
-interface PropType {
+export type KeyboardType = {
+  setShowKeyboard: (value: (prevState: boolean) => boolean) => void;
+  showKeyboard: boolean;
+};
+
+interface PropType extends InstructionsType {
   startPosition: number;
   endPosition: number;
   lettersPerSkull: string;
@@ -24,6 +29,8 @@ function ClassicGameLogic({
   endPosition,
   lettersPerSkull,
   wordsData,
+  showInstructions,
+  setShowInstructions,
 }: PropType) {
   const [showGameOverMenu, setShowGameOverMenu] = useState<boolean>(true);
   const [showKeyboard, setShowKeyboard] = useState(true);
@@ -80,6 +87,8 @@ function ClassicGameLogic({
         isGameOver={isGameOver}
         lettersPerSkull={lettersPerSkull}
         setShowGameOverMenu={setShowGameOverMenu}
+        setShowInstructions={setShowInstructions}
+        showInstructions={showInstructions}
       />
       <main
         ref={captureAreaRef}
