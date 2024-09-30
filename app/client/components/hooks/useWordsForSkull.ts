@@ -31,7 +31,7 @@ function useWordsForSkull({ currentSkull, wordsData }: PropType) {
   useEffect(() => {
     if (wordsForSkull[0] || currentSkull === undefined) return;
 
-    // Get words of a specific length and exclude words with "@" or "~"
+    // Get words of a specific length (Looking back I'm not sure why I excluded words with "@" or "~" here. I'm going to leave it in since it does no harm, but the code is probably unnecessary)
     const getWordsOfLength = (length: number) => {
       if (!wordsList[length]) return [];
 
@@ -87,6 +87,7 @@ function useWordsForSkull({ currentSkull, wordsData }: PropType) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSkull]);
 
+  //Displays list of all answers for debugging purposes
   // useEffect(() => {
   //   wordsForSkull.length > 0 && console.log(wordsForSkull);
   // }, [wordsForSkull]);
