@@ -19,7 +19,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function WordSkullMedium() {  
+export default function WordSkullMedium() {
   const matches = useMatches();
   const wordsData = useMemo(() => {
     const match = matches?.find((match) => (match?.data as WordsData)?.words);
@@ -31,7 +31,8 @@ export default function WordSkullMedium() {
       <ClassicGameLogic
         startPosition={4}
         endPosition={8}
-        lettersPerSkull="3 - 6 letters" wordsData={wordsData}
+        lettersPerSkull="3 - 6 letters"
+        wordsData={wordsData}
       />
       <ClassicGameplayInstructions />
     </>

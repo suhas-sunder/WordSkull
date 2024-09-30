@@ -21,6 +21,7 @@ import {
   useTheme,
 } from "./client/components/context/ThemeContext";
 import localforage from "localforage";
+import { SettingsProvider } from "./client/components/context/SettingsContext";
 
 // Layout Component for rendering HTML structure
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -33,7 +34,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <ThemeProvider>
-        <Body>{children}</Body>
+        <SettingsProvider>
+          <Body>{children}</Body>
+        </SettingsProvider>
       </ThemeProvider>
     </html>
   );

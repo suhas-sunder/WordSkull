@@ -29,7 +29,12 @@ export default function WordSkullMedium() {
 
   return (
     <>
-      <ClassicGameLogic startPosition={8} endPosition={12}  lettersPerSkull="3 - 7 letters" wordsData={wordsData} />
+      <ClassicGameLogic
+        startPosition={8}
+        endPosition={12}
+        lettersPerSkull="3 - 7 letters"
+        wordsData={wordsData}
+      />
       <ClassicGameplayInstructions />
     </>
   );

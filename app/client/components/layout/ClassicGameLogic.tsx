@@ -10,14 +10,10 @@ import Keyboard from "../ui/Keyboard";
 import Keypad from "../ui/Keypad";
 import GameOverMenu from "../ui/GameOverMenu";
 import GameOverStatsCapture from "./GameOverStatsCapture";
-import { InstructionsType, WordsData } from "../../../routes/word-skull-game-easy-mode";
+import { WordsData } from "../../../routes/word-skull-game-easy-mode";
+import { useSettings } from "../context/SettingsContext";
 
-export type KeyboardType = {
-  setShowKeyboard: (value: (prevState: boolean) => boolean) => void;
-  showKeyboard: boolean;
-};
-
-interface PropType extends InstructionsType {
+interface PropType {
   startPosition: number;
   endPosition: number;
   lettersPerSkull: string;
@@ -29,11 +25,8 @@ function ClassicGameLogic({
   endPosition,
   lettersPerSkull,
   wordsData,
-  showInstructions,
-  setShowInstructions,
 }: PropType) {
   const [showGameOverMenu, setShowGameOverMenu] = useState<boolean>(true);
-  const [showKeyboard, setShowKeyboard] = useState(true);
 
   const skulls = useMemo(
     () =>
@@ -45,9 +38,12 @@ function ClassicGameLogic({
 
   const [currentSkull, setCurrentSkull] = useState<string[][][]>([]);
 
+  const {showKeyboard} = useSettings();
+
   //Manage words list
   const { wordsForSkull, wordsList, dispWordHistory, setDispWordHistory } =
     useWordsForSkull({ currentSkull, wordsData });
+
 
   //Handle the main game play logic
   const {
@@ -81,14 +77,10 @@ function ClassicGameLogic({
     <label className=" flex relative flex-col">
       <input type="textbox" className="opacity-[0.01]" />
       <Header
-        showKeyboard={showKeyboard}
-        setShowKeyboard={setShowKeyboard}
         lives={lives}
         isGameOver={isGameOver}
         lettersPerSkull={lettersPerSkull}
         setShowGameOverMenu={setShowGameOverMenu}
-        setShowInstructions={setShowInstructions}
-        showInstructions={showInstructions}
       />
       <main
         ref={captureAreaRef}
@@ -121,9 +113,8 @@ function ClassicGameLogic({
             currentRow={currentRow}
             lettersPerSkull={lettersPerSkull}
             wordsForSkull={wordsForSkull}
-            setShowKeyboard={setShowKeyboard}
-            showKeyboard={showKeyboard}
             seconds={seconds}
+            
           />
           <DisplaySkull
             currentSkull={currentSkull}

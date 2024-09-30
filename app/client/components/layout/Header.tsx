@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext,  useState } from "react";
 import GameSettings from "../ui/GameSettings";
 import HeaderMenu from "../ui/HeaderMenu";
 import { ThemeContext } from "../context/ThemeContext";
 import { MockThemeContext } from "../../mocks/MockThemeContext";
-import { InstructionsType } from "../../../routes/word-skull-game-easy-mode";
-import { KeyboardType } from "./ClassicGameLogic";
 const isTestEnvironment = process.env.NODE_ENV === "test";
 
 const useTheme = () => {
@@ -17,7 +15,7 @@ const useTheme = () => {
   return context;
 };
 
-interface PropType extends KeyboardType, InstructionsType {
+interface PropType {
   lives: number | null;
   isGameOver: boolean;
   lettersPerSkull?: string;
@@ -30,51 +28,18 @@ function Header({
   isGameOver,
   lettersPerSkull,
   setShowGameOverMenu,
-  showKeyboard,
-  setShowKeyboard,
   dontFade,
-  showInstructions,
-  setShowInstructions,
 }: PropType) {
   const [showSettings, setShowSettings] = useState<boolean>(false);
-  const [isLoaded, setIsLoaded] = useState(false);
   const { darkThemeActive } = useTheme();
 
-  useEffect(() => {
-    // Run this effect only on the client side
-    if (typeof window !== "undefined") {
-      const savedState = localStorage.getItem("showKeyboard");
-
-      // Check if there's a valid localStorage entry
-      if (savedState !== null) {
-        try {
-          setShowKeyboard(JSON.parse(savedState));
-        } catch (error) {
-          console.error("Error parsing localStorage value:", error);
-        }
-      }
-
-      // Set loading to true after checking localStorage
-      setIsLoaded(true);
-    }
-  }, [setShowKeyboard]);
-
-  useEffect(() => {
-    // Don't save to localStorage until it's loaded
-    if (typeof window !== "undefined" && isLoaded) {
-      localStorage.setItem("showKeyboard", JSON.stringify(showKeyboard));
-    }
-  }, [showKeyboard, isLoaded]);
+  
 
   return (
     <header className="relative w-full justify-center items-center flex-col flex">
       <GameSettings
-        setShowInstructions={setShowInstructions}
-        showInstructions={showInstructions}
         showSettings={showSettings}
         setShowSettings={setShowSettings}
-        showKeyboard={showKeyboard}
-        setShowKeyboard={setShowKeyboard}
       />
       <HeaderMenu
         setShowGameOverMenu={setShowGameOverMenu}
