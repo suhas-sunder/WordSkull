@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import Icon from "../utils/other/Icon";
-import { InstructionsType } from "../../../routes/word-skull-game-easy-mode";
-import { KeyboardType } from "../layout/ClassicGameLogic";
+import {
+  InstructionsType,
+  KeyboardType,
+  useSettings,
+} from "../context/SettingsContext";
 
-interface PropType extends KeyboardType, InstructionsType {
+interface PropType {
   showSettings: boolean;
   setShowSettings: (value: boolean) => void;
 }
@@ -100,14 +103,8 @@ function InstructionsToggle({
   );
 }
 
-function GameSettings({
-  showSettings,
-  setShowSettings,
-  showKeyboard,
-  setShowKeyboard,
-  setShowInstructions,
-  showInstructions,
-}: PropType) {
+function GameSettings({ showSettings, setShowSettings }: PropType) {
+  const { showKeyboard, setShowKeyboard, showInstructions, setShowInstructions } = useSettings();
   return (
     <>
       {showSettings && (
@@ -130,12 +127,11 @@ function GameSettings({
                   setShowKeyboard: setShowKeyboard,
                 })}
               </li>
-              <li className="flex w-full justify-between md:max-w-[80%] mx-auto gap-5">
-                {DifficultyLinks()}
-              </li>
-
               <li className="flex w-full justify-between md:max-w-[80%] mx-auto">
                 {InstructionsToggle({ showInstructions, setShowInstructions })}
+              </li>
+              <li className="flex w-full justify-between md:max-w-[80%] mx-auto gap-5">
+                {DifficultyLinks()}
               </li>
             </ul>
           </div>
