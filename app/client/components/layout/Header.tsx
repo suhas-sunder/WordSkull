@@ -1,19 +1,8 @@
-import { useContext,  useState } from "react";
+import { useState } from "react";
 import GameSettings from "../ui/GameSettings";
 import HeaderMenu from "../ui/HeaderMenu";
-import { ThemeContext } from "../context/ThemeContext";
-import { MockThemeContext } from "../../mocks/MockThemeContext";
-const isTestEnvironment = process.env.NODE_ENV === "test";
+import { useTheme } from "../context/ThemeContext";
 
-const useTheme = () => {
-  const context = useContext(
-    isTestEnvironment ? MockThemeContext : ThemeContext
-  );
-  if (!context) {
-    throw new Error("ThemeContext has not been initialized");
-  }
-  return context;
-};
 
 interface PropType {
   lives: number | null;

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { MockThemeContext } from "../../../client/mocks/MockThemeContext";
 
 interface ThemeContextProps {
   darkThemeActive: boolean;
@@ -31,12 +32,27 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [darkThemeActive]);
 
   return (
-    <ThemeContext.Provider value={{ darkThemeActive: darkThemeActive ?? false, setDarkThemeActive }}>
+    <ThemeContext.Provider
+      value={{ darkThemeActive: darkThemeActive ?? false, setDarkThemeActive }}
+    >
       {children}
     </ThemeContext.Provider>
   );
 }
 
-export function useTheme() {
+const isTestEnvironment = process.env.NODE_ENV === "test";
+
+//Setup actual context to run during testing so I can test this without the mock
+export function useTestTheme() {
   return useContext(ThemeContext);
+}
+
+export function useTheme() {
+  const context = useContext(
+    isTestEnvironment ? MockThemeContext : ThemeContext
+  );
+  if (!context) {
+    throw new Error("ThemeContext has not been initialized");
+  }
+  return context;
 }

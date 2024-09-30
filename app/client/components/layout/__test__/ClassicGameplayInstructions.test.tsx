@@ -4,19 +4,35 @@ import MockThemeProvider from "../../../../client/mocks/MockThemeContext";
 import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom/vitest";
 import ClassicGameplayInstructions from "../ClassicGameplayInstructions";
+import MockSettingsProvider from "../../../../client/mocks/MockSettingsContext";
+import { InstructionsType, KeyboardType } from "../../context/SettingsContext";
 
-const MockClassicGameplayInstructions = () => {
+interface PropType extends InstructionsType, KeyboardType {}
+
+const MockClassicGameplayInstructions = (props: PropType) => {
   return render(
     <MemoryRouter>
       <MockThemeProvider darkThemeActive={true}>
-        <ClassicGameplayInstructions />
+        <MockSettingsProvider {...props}>
+          <ClassicGameplayInstructions />
+        </MockSettingsProvider>
       </MockThemeProvider>
     </MemoryRouter>
   );
 };
 
+const showKeyboard = true;
+const showInstructions = true;
+const setShowInstructions = vi.fn();
+const setShowKeyboard = vi.fn();
+
 beforeEach(() => {
-  MockClassicGameplayInstructions();
+  MockClassicGameplayInstructions({
+    showKeyboard,
+    showInstructions,
+    setShowInstructions,
+    setShowKeyboard,
+  });
 });
 
 describe("displays gameplay instructions correctly", () => {

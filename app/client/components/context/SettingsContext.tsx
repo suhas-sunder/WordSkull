@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { MockSettingsContext } from "../../../client/mocks/MockSettingsContext";
 
 export type InstructionsType = {
   showInstructions: boolean;
@@ -86,8 +87,18 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
     </SettingsContext.Provider>
   );
 }
-
-
-export function useSettings() {
+const isTestEnvironment = process.env.NODE_ENV === "test";
+//Setup actual context to run during testing so I can test this without the mock
+export function useTestSettings() {
   return useContext(SettingsContext);
+}
+//Mock context if running tests otherwise use real context
+export function useSettings() {
+  const context = useContext(
+    isTestEnvironment ? MockSettingsContext : SettingsContext
+  );
+  if (!context) {
+    throw new Error("SettingsContext has not been initialized");
+  }
+  return context;
 }

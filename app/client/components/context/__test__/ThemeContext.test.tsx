@@ -1,16 +1,16 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { ThemeProvider, useTheme } from "../ThemeContext";
+import { ThemeProvider, useTestTheme } from "../ThemeContext";
 import "@testing-library/jest-dom/vitest";
 
 // A test component to use the ThemeProvider context
 const TestComponent = () => {
-  const { darkThemeActive, setDarkThemeActive } = useTheme();
+  const { darkThemeActive, setDarkThemeActive } = useTestTheme();
 
   return (
     <div>
       <p data-testid="theme-status">
-        Theme is {darkThemeActive ? "Dark" : "Light"}
+        {`Theme is ${darkThemeActive ? "Dark" : "Light"}`}
       </p>
       <button onClick={() => setDarkThemeActive(!darkThemeActive)}>
         Toggle Theme
