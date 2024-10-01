@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import "@testing-library/jest-dom";
 import GameOverStatsCapture from "../GameOverStatsCapture";
-import MockThemeProvider from "../../../../client/mocks/MockThemeContext";
+import MockThemeProvider from "../../../mocks/components/MockThemeContext";
 import { MemoryRouter } from "react-router-dom";
 import SecondsToTime from "../../utils/converters/SecondsToTime";
 

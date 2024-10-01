@@ -107,7 +107,6 @@ function useCaptureHTML({ isGameOver }: PropType) {
             text: "I captured this image.",
             files: [file],
           });
-          console.log("Image shared successfully!");
         } else {
           const blob = (await captureElementAsBlob("capture-area")) as Blob;
           if (blob) {

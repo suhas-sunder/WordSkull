@@ -57,7 +57,7 @@ function GameOverMenu({
             onClick={() => setShowGameOverMenu(false)}
             className="fixed inset-0 h-full w-full flex bg-skull-brown bg-opacity-10 z-30 justify-center"
           ></button>
-          <div className="flex relative flex-col bg-white shadow-lg pb-10 w-full gap-5 z-40 max-w-[700px] font-nunito overflow-hidden mt-20 tracking-widest leading-loose min-h-[26em] min-w-40 mb-auto rounded-lg justify-center items-center">
+          <div className="flex relative flex-col bg-white shadow-lg pb-10 w-full gap-5 z-40 max-w-[700px] font-nunito overflow-hidden mt-[4em] tracking-widest leading-loose min-h-[27em] min-w-40 mb-auto rounded-lg justify-center items-center">
             <button
               data-testid="close-menu-button"
               className="absolute top-2 right-2 rounded-full p-1 scale-75 bg-skull-dark-brown fill-white hover:scale-[0.8]"
@@ -109,7 +109,7 @@ function GameOverMenu({
                 Share Your Results!
               </span>
             </div>
-            <ul className="grid sm:grid-cols-3 gap-5 justify-center items-center">
+            <ul className="grid sm:grid-cols-3 gap-5 justify-center items-center mb-auto">
               {isWebShareSupported && (
                 <li className="flex justify-center items-center w-full">
                   <button

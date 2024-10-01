@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { MockThemeContext } from "../../../client/mocks/MockThemeContext";
+import { MockThemeContext } from "../../mocks/components/MockThemeContext";
 
 interface ThemeContextProps {
   darkThemeActive: boolean;

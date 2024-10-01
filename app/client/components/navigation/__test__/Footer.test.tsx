@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom/vitest";
 import Footer from "../Footer";
-import MockThemeProvider from "../../../mocks/MockThemeContext";
+import MockThemeProvider from "../../../mocks/components/MockThemeContext";
 
 const MockFooter = ({ darkThemeActive }: { darkThemeActive?: boolean }) => {
   render(

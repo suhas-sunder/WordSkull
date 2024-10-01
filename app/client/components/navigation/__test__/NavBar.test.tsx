@@ -2,7 +2,7 @@ import { screen, fireEvent, render } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 import NavBar from "../NavBar";
-import MockThemeProvider from "../../../mocks/MockThemeContext";
+import MockThemeProvider from "../../../mocks/components/MockThemeContext";
 import "@testing-library/jest-dom/vitest";
 
 const MockNavBar = ({ darkThemeActive }: { darkThemeActive?: boolean }) => {

@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import MockThemeProvider from "../../../../client/mocks/MockThemeContext";
+import MockThemeProvider from "../../../mocks/components/MockThemeContext";
 import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom/vitest";
 import ClassicGameplayInstructions from "../ClassicGameplayInstructions";
-import MockSettingsProvider from "../../../../client/mocks/MockSettingsContext";
+import MockSettingsProvider from "../../../mocks/components/MockSettingsContext";
 import { InstructionsType, KeyboardType } from "../../context/SettingsContext";
 
 interface PropType extends InstructionsType, KeyboardType {}

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import MockThemeProvider from "../../../../client/mocks/MockThemeContext";
+import MockThemeProvider from "../../../mocks/components/MockThemeContext";
 import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom/vitest";
 

@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import MockThemeProvider from "../../../mocks/MockThemeContext"; // Adjust the import path as necessary
+import MockThemeProvider from "../../../mocks/components/MockThemeContext"; // Adjust the import path as necessary
 import { MemoryRouter } from "react-router-dom";
 import GameSettings from "../GameSettings";
 import "@testing-library/jest-dom/vitest";

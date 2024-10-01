@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
-import MockHeader from "../../../mocks/MockHeader";
 import { vi } from "vitest";
 import "@testing-library/jest-dom/vitest";
+import MockHeader from "../../../../client/mocks/components/MockHeader";
 
 const setShowGameOverMenu = vi.fn();
 const setShowKeyboard = vi.fn();
