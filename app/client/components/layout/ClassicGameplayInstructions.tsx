@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { useSettings } from "../context/SettingsContext";
 
+
 function ClassicGameplayInstructions() {
   const [isClient, setIsClient] = useState(false);
   const { darkThemeActive } = useTheme();

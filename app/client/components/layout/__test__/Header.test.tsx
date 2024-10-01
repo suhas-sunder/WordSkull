@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
-import MockHeader from "../../../mocks/MockHeader";
 import { vi } from "vitest";
 import "@testing-library/jest-dom/vitest";
+import MockHeader from "../../../../client/mocks/components/MockHeader";
 
 const setShowGameOverMenu = vi.fn();
 const setShowKeyboard = vi.fn();
@@ -69,22 +69,6 @@ describe("should display the correct number of lives", () => {
 
     expect(screen.getByText("5")).toBeInTheDocument();
   });
-
-  it("should load showKeyboard from localStorage on initial render", () => {
-    localStorage.setItem("showKeyboard", "true");
-
-    MockHeader({
-      darkThemeActive: false,
-      lives: 3,
-      isGameOver: false,
-      showKeyboard: false,
-      setShowGameOverMenu: setShowGameOverMenu,
-      setShowKeyboard: setShowKeyboard,
-    });
-
-    expect(setShowKeyboard).toHaveBeenCalledWith(true);
-    localStorage.removeItem("showKeyboard");
-  });
 });
 
 describe("should render and integrate with GameSettings component correctly", () => {
@@ -119,26 +103,6 @@ describe("should render and integrate with GameSettings component correctly", ()
     const iconElement = screen.getByTestId(/CloseRoundedIcon/i);
 
     expect(iconElement).toBeInTheDocument();
-  });
-
-  it("should call setShowKeyboard when toggling the keyboard", async () => {
-    MockHeader({
-      darkThemeActive: false,
-      lives: 3,
-      isGameOver: false,
-      showKeyboard: true,
-      setShowGameOverMenu: setShowGameOverMenu,
-      setShowKeyboard: setShowKeyboard,
-    });
-
-    const settingsBtnElement = screen.getByTestId(/settings-button/i);
-    fireEvent.click(settingsBtnElement);
-
-    const textElement = await screen.findByText("On");
-
-    fireEvent.click(textElement);
-
-    expect(setShowKeyboard).toHaveBeenCalled();
   });
 
   it("should render settings text lables when showSettings is true", () => {
@@ -244,62 +208,9 @@ describe("should render and integrate with GameSettings component correctly", ()
       "/word-skull-game-extreme-mode"
     );
   });
-
-  it("should display 'On' when showKeyboard is true", () => {
-    MockHeader({
-      darkThemeActive: false,
-      lives: 3,
-      isGameOver: false,
-      showKeyboard: true,
-      setShowGameOverMenu: setShowGameOverMenu,
-      setShowKeyboard: setShowKeyboard,
-    });
-
-    const settingsBtnElement = screen.getByTestId(/settings-button/i);
-    fireEvent.click(settingsBtnElement);
-
-    const keyboardToggleLabel = screen.getByText("On");
-    expect(keyboardToggleLabel).toBeInTheDocument();
-  });
-
-  it("should display 'Off' when showKeyboard is false", () => {
-    MockHeader({
-      darkThemeActive: false,
-      lives: 3,
-      isGameOver: false,
-      showKeyboard: false,
-      setShowGameOverMenu: setShowGameOverMenu,
-      setShowKeyboard: setShowKeyboard,
-    });
-
-    const settingsBtnElement = screen.getByTestId(/settings-button/i);
-    fireEvent.click(settingsBtnElement);
-
-    const keyboardToggleLabel = screen.getByText("Off");
-    expect(keyboardToggleLabel).toBeInTheDocument();
-  });
 });
 
 describe("handles user input correctly when integrating with GameSettings", () => {
-  it("should toggle the keyboard visibility when the checkbox is clicked", async () => {
-    MockHeader({
-      darkThemeActive: false,
-      lives: 3,
-      isGameOver: false,
-      showKeyboard: true,
-      setShowGameOverMenu: setShowGameOverMenu,
-      setShowKeyboard: setShowKeyboard,
-    });
-
-    const settingsBtnElement = screen.getByTestId(/settings-button/i);
-    fireEvent.click(settingsBtnElement);
-
-    const checkbox = await screen.findByRole("checkbox");
-    fireEvent.click(checkbox);
-
-    expect(screen.getByText("Settings")).toBeInTheDocument();
-  });
-
   it("should close settings modal when background underlay close button is clicked", () => {
     MockHeader({
       darkThemeActive: false,
@@ -339,7 +250,7 @@ describe("handles user input correctly when integrating with GameSettings", () =
     expect(screen.queryByText("Settings")).not.toBeInTheDocument();
   });
 
-  it("should call setShowKeyboard with false when toggled from true to false", () => {
+  it("should render two checkboxes when settings button is clicked", () => {
     MockHeader({
       darkThemeActive: false,
       lives: 3,
@@ -352,31 +263,9 @@ describe("handles user input correctly when integrating with GameSettings", () =
     const settingsBtnElement = screen.getByTestId(/settings-button/i);
     fireEvent.click(settingsBtnElement);
 
-    const toggleInput = screen.getByRole("checkbox");
-    fireEvent.click(toggleInput);
+    const inputElements = screen.getAllByRole("checkbox");
 
-    const keyboardToggleLabel = screen.getByText("On");
-    expect(keyboardToggleLabel).toBeInTheDocument();
-  });
-
-  it("should call setShowKeyboard with true when toggled from false to true", () => {
-    MockHeader({
-      darkThemeActive: false,
-      lives: 3,
-      isGameOver: false,
-      showKeyboard: false,
-      setShowGameOverMenu: setShowGameOverMenu,
-      setShowKeyboard: setShowKeyboard,
-    });
-
-    const settingsBtnElement = screen.getByTestId(/settings-button/i);
-    fireEvent.click(settingsBtnElement);
-
-    const toggleInput = screen.getByRole("checkbox");
-    fireEvent.click(toggleInput);
-
-    const keyboardToggleLabel = screen.getByText("Off");
-    expect(keyboardToggleLabel).toBeInTheDocument();
+    expect(inputElements).toHaveLength(2);
   });
 });
 

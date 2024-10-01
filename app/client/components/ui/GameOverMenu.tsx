@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useCaptureHTML from "../hooks/useCaptureHTML";
 import SecondsToTime from "../utils/converters/SecondsToTime";
 import Icon from "../utils/other/Icon";
+import { StatsDataType, useStats } from "../context/StatsContext";
+import { v4 as uuidv4 } from "uuid";
 
 interface PropType {
   isGameOver: boolean;
@@ -25,6 +27,47 @@ function GameOverMenu({
   wordsForSkull,
 }: PropType) {
   const [isCopied, setIsCopied] = useState<boolean>(false);
+
+  const { setStats, difficulty, gameMode } = useStats();
+
+  //Update stats data with new stats when game ends
+  useEffect(() => {
+    const updateSats = () => {
+      const newStatEntry: StatsDataType = [
+        {
+          id: uuidv4(),
+          date: new Date().toISOString(),
+          totalLives: maxLives !== null ? maxLives : 0,
+          livesLeft: lives !== null ? lives : 0,
+          totalWords: wordsForSkull.length,
+          correctWords: currentRow,
+          timeSpentSec: seconds,
+          difficulty,
+          gameMode,
+        },
+      ];
+
+      setStats((prevState: StatsDataType) => {
+        if (!Array.isArray(prevState)) {
+          console.error("prevState is not an array!", prevState); // Debugging line
+          return []; // Fallback to an empty array if prevState is not iterable
+        }
+        return [...prevState, ...newStatEntry]; // Append new stat entry
+      });
+    };
+
+    if (isGameOver) updateSats();
+  }, [
+    currentRow,
+    difficulty,
+    gameMode,
+    isGameOver,
+    lives,
+    maxLives,
+    seconds,
+    setStats,
+    wordsForSkull.length,
+  ]);
 
   const {
     downloadPuzzle,
@@ -57,7 +100,7 @@ function GameOverMenu({
             onClick={() => setShowGameOverMenu(false)}
             className="fixed inset-0 h-full w-full flex bg-skull-brown bg-opacity-10 z-30 justify-center"
           ></button>
-          <div className="flex relative flex-col bg-white shadow-lg pb-10 w-full gap-5 z-40 max-w-[700px] font-nunito overflow-hidden mt-20 tracking-widest leading-loose min-h-[26em] min-w-40 mb-auto rounded-lg justify-center items-center">
+          <div className="flex relative flex-col bg-white shadow-lg pb-10 w-full gap-5 z-40 max-w-[700px] font-nunito overflow-hidden mt-[4em] tracking-widest leading-loose min-h-[27em] min-w-40 mb-auto rounded-lg justify-center items-center">
             <button
               data-testid="close-menu-button"
               className="absolute top-2 right-2 rounded-full p-1 scale-75 bg-skull-dark-brown fill-white hover:scale-[0.8]"
@@ -109,7 +152,7 @@ function GameOverMenu({
                 Share Your Results!
               </span>
             </div>
-            <ul className="grid sm:grid-cols-3 gap-5 justify-center items-center">
+            <ul className="grid sm:grid-cols-3 gap-5 justify-center items-center mb-auto">
               {isWebShareSupported && (
                 <li className="flex justify-center items-center w-full">
                   <button

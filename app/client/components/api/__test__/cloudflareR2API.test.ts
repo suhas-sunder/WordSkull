@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, beforeEach } from "vitest";
 import { AxiosInstance } from "axios";
-import "../../../mocks/MockCloudflareR2API";
+import "../../../mocks/components/MockCloudflareR2API";
 
 describe("Axios instance creation in cloudflareR2API", () => {
   let instance: AxiosInstance;

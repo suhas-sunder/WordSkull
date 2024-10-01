@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import "@testing-library/jest-dom";
 import GameOverStatsCapture from "../GameOverStatsCapture";
-import MockThemeProvider from "../../../../client/mocks/MockThemeContext";
+import MockThemeProvider from "../../../mocks/components/MockThemeContext";
 import { MemoryRouter } from "react-router-dom";
 import SecondsToTime from "../../utils/converters/SecondsToTime";
 
@@ -14,9 +14,8 @@ interface PropType {
   lives: number | null;
   maxLives: number | null;
   currentRow: number;
+  lettersPerSkull?: string;
   wordsForSkull: string[];
-  setShowKeyboard: (value: (prevState: boolean) => boolean) => void;
-  showKeyboard: boolean;
   seconds: number;
 }
 
@@ -30,8 +29,6 @@ const MockGameOverStatsCapture = (props: PropType) => {
   );
 };
 
-const setShowKeyboard = vi.fn();
-
 const props = {
   darkthemeActive: true,
   isGameOver: true,
@@ -41,8 +38,6 @@ const props = {
   maxLives: 5,
   currentRow: 2,
   wordsForSkull: ["word1", "word2", "word3"],
-  setShowKeyboard,
-  showKeyboard: true,
   seconds: 120,
 };
 
@@ -67,12 +62,6 @@ describe("GameOverStatsCapture Component", () => {
     expect(screen.getByText("3/5")).toBeInTheDocument(); // Lives
     expect(screen.getByText("2/3")).toBeInTheDocument(); // Correct words
     expect(screen.getByText(SecondsToTime(120))).toBeInTheDocument(); // Time spent
-  });
-
-  it("should load showKeyboard from localStorage on initial render", () => {
-    localStorage.setItem("showKeyboard", "true");
-    expect(setShowKeyboard).toHaveBeenCalledWith(true);
-    localStorage.removeItem("showKeyboard");
   });
 
   it("should render heading element by integrating with Header", () => {

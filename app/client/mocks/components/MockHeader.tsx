@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import MockThemeProvider, { MockThemeContext } from "../mocks/MockThemeContext";
-import Header from "../components/layout/Header";
+import MockThemeProvider, { MockThemeContext } from "./MockThemeContext";
+import Header from "../../components/layout/Header";
 
 interface MockHeaderProps {
   darkThemeActive: boolean;
@@ -21,9 +21,7 @@ const MockHeader = ({
   isGameOver,
   lettersPerSkull = "Easy",
   dontFade = false,
-  showKeyboard,
   setShowGameOverMenu,
-  setShowKeyboard,
 }: MockHeaderProps) => {
   // Render Header component inside MemoryRouter and MockThemeProvider
   return render(
@@ -34,9 +32,7 @@ const MockHeader = ({
           isGameOver={isGameOver}
           lettersPerSkull={lettersPerSkull}
           dontFade={dontFade}
-          showKeyboard={showKeyboard}
           setShowGameOverMenu={setShowGameOverMenu}
-          setShowKeyboard={setShowKeyboard}
         />
         <ToggleButton darkThemeActive={darkThemeActive} />
       </MockThemeProvider>

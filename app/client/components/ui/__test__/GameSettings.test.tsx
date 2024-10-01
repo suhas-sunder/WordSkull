@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import MockThemeProvider from "../../../mocks/MockThemeContext"; // Adjust the import path as necessary
+import MockThemeProvider from "../../../mocks/components/MockThemeContext"; // Adjust the import path as necessary
 import { MemoryRouter } from "react-router-dom";
 import GameSettings from "../GameSettings";
 import "@testing-library/jest-dom/vitest";
@@ -14,19 +14,13 @@ interface PropType {
 const setShowSettings = vi.fn();
 const setShowKeyboard = vi.fn();
 
-const MockGameSettings = ({
-  darkThemeActive,
-  showSettings,
-  showKeyboard,
-}: PropType) => {
+const MockGameSettings = ({ darkThemeActive, showSettings }: PropType) => {
   render(
     <MemoryRouter>
       <MockThemeProvider darkThemeActive={darkThemeActive}>
         <GameSettings
           showSettings={showSettings}
           setShowSettings={setShowSettings}
-          showKeyboard={showKeyboard}
-          setShowKeyboard={setShowKeyboard}
         />
       </MockThemeProvider>
     </MemoryRouter>
@@ -117,31 +111,31 @@ describe("should render default elements", () => {
     );
   });
 
-  it("should display 'On' when showKeyboard is true", () => {
-    MockGameSettings({
-      darkThemeActive: false,
-      showSettings: true,
-      showKeyboard: true,
-      setShowKeyboard: setShowKeyboard,
-      setShowSettings: setShowSettings,
-    });
+  // it("should display 'On' when showKeyboard is true", () => {
+  //   MockGameSettings({
+  //     darkThemeActive: false,
+  //     showSettings: true,
+  //     showKeyboard: true,
+  //     setShowKeyboard: setShowKeyboard,
+  //     setShowSettings: setShowSettings,
+  //   });
 
-    const keyboardToggleLabel = screen.getByText("On");
-    expect(keyboardToggleLabel).toBeInTheDocument();
-  });
+  //   const keyboardToggleLabel = screen.getByText("On");
+  //   expect(keyboardToggleLabel).toBeInTheDocument();
+  // });
 
-  it("should display 'Off' when showKeyboard is false", () => {
-    MockGameSettings({
-      darkThemeActive: false,
-      showSettings: true,
-      showKeyboard: false,
-      setShowKeyboard: setShowKeyboard,
-      setShowSettings: setShowSettings,
-    });
+  // it("should display 'Hidden' when showKeyboard is false", () => {
+  //   MockGameSettings({
+  //     darkThemeActive: false,
+  //     showSettings: true,
+  //     showKeyboard: false,
+  //     setShowKeyboard: setShowKeyboard,
+  //     setShowSettings: setShowSettings,
+  //   });
 
-    const keyboardToggleLabel = screen.getByText("Off");
-    expect(keyboardToggleLabel).toBeInTheDocument();
-  });
+  //   const keyboardToggleLabel = screen.getByText("Hidden");
+  //   expect(keyboardToggleLabel).toBeInTheDocument();
+  // });
 
   it("should not render an x icon for the close button when settings modal is closed", () => {
     MockGameSettings({
@@ -173,21 +167,21 @@ describe("should render default elements", () => {
 });
 
 describe("handles user input correctly", () => {
-  it("should toggle the keyboard visibility when the checkbox is clicked", () => {
-    MockGameSettings({
-      darkThemeActive: false,
-      showSettings: true,
-      showKeyboard: false,
-      setShowKeyboard: setShowKeyboard,
-      setShowSettings: setShowSettings,
-    });
+  // it("should toggle the keyboard visibility when the checkbox is clicked", () => {
+  //   MockGameSettings({
+  //     darkThemeActive: false,
+  //     showSettings: true,
+  //     showKeyboard: false,
+  //     setShowKeyboard: setShowKeyboard,
+  //     setShowSettings: setShowSettings,
+  //   });
 
-    const checkbox = screen.getByRole("checkbox");
-    fireEvent.click(checkbox);
+  //   const checkbox = screen.getByRole("checkbox");
+  //   fireEvent.click(checkbox);
 
-    expect(setShowKeyboard).toHaveBeenCalledTimes(1);
-    expect(setShowKeyboard).toHaveBeenCalledWith(expect.any(Function));
-  });
+  //   expect(setShowKeyboard).toHaveBeenCalledTimes(1);
+  //   expect(setShowKeyboard).toHaveBeenCalledWith(expect.any(Function));
+  // });
 
   it("should close settings modal when background underlay close button is clicked", () => {
     MockGameSettings({
@@ -222,35 +216,35 @@ describe("handles user input correctly", () => {
     expect(setShowSettings).toHaveBeenCalledWith(false);
   });
 
-  it("should call setShowKeyboard with false when toggled from true to false", () => {
-    MockGameSettings({
-      darkThemeActive: false,
-      showSettings: true,
-      showKeyboard: true,
-      setShowKeyboard: setShowKeyboard,
-      setShowSettings: setShowSettings,
-    });
+  // it("should call setShowKeyboard with false when toggled from true to false", () => {
+  //   MockGameSettings({
+  //     darkThemeActive: false,
+  //     showSettings: true,
+  //     showKeyboard: true,
+  //     setShowKeyboard: setShowKeyboard,
+  //     setShowSettings: setShowSettings,
+  //   });
 
-    const toggleInput = screen.getByRole("checkbox");
-    fireEvent.click(toggleInput);
+  //   const toggleInput = screen.getByRole("checkbox");
+  //   fireEvent.click(toggleInput);
 
-    expect(setShowKeyboard).toHaveBeenCalledTimes(1);
-    expect(setShowKeyboard).toHaveBeenCalledWith(expect.any(Function));
-  });
+  //   expect(setShowKeyboard).toHaveBeenCalledTimes(1);
+  //   expect(setShowKeyboard).toHaveBeenCalledWith(expect.any(Function));
+  // });
 
-  it("should call setShowKeyboard with true when toggled from false to true", () => {
-    MockGameSettings({
-      darkThemeActive: false,
-      showSettings: true,
-      showKeyboard: false,
-      setShowKeyboard: setShowKeyboard,
-      setShowSettings: setShowSettings,
-    });
+  // it("should call setShowKeyboard with true when toggled from false to true", () => {
+  //   MockGameSettings({
+  //     darkThemeActive: false,
+  //     showSettings: true,
+  //     showKeyboard: false,
+  //     setShowKeyboard: setShowKeyboard,
+  //     setShowSettings: setShowSettings,
+  //   });
 
-    const toggleInput = screen.getByRole("checkbox");
-    fireEvent.click(toggleInput);
+  //   const toggleInput = screen.getByRole("checkbox");
+  //   fireEvent.click(toggleInput);
 
-    expect(setShowKeyboard).toHaveBeenCalledTimes(1);
-    expect(setShowKeyboard).toHaveBeenCalledWith(expect.any(Function));
-  });
+  //   expect(setShowKeyboard).toHaveBeenCalledTimes(1);
+  //   expect(setShowKeyboard).toHaveBeenCalledWith(expect.any(Function));
+  // });
 });

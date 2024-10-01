@@ -33,6 +33,7 @@ export default function WordSkullMedium() {
         endPosition={8}
         lettersPerSkull="3 - 6 letters"
         wordsData={wordsData}
+        difficulty="medium" gameMode="classic"
       />
       <ClassicGameplayInstructions />
     </>

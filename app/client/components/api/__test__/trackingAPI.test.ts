@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import "../../../mocks/MockDefaultServerAPI";
+import "../../../mocks/components/MockDefaultServerAPI";
 
 // Mock the environment variables before each test
 beforeEach(() => {

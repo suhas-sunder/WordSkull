@@ -12,12 +12,15 @@ import GameOverMenu from "../ui/GameOverMenu";
 import GameOverStatsCapture from "./GameOverStatsCapture";
 import { WordsData } from "../../../routes/word-skull-game-easy-mode";
 import { useSettings } from "../context/SettingsContext";
+import { useStats } from "../context/StatsContext";
 
 interface PropType {
   startPosition: number;
   endPosition: number;
   lettersPerSkull: string;
   wordsData: WordsData;
+  difficulty: string;
+  gameMode: string;
 }
 
 function ClassicGameLogic({
@@ -25,9 +28,10 @@ function ClassicGameLogic({
   endPosition,
   lettersPerSkull,
   wordsData,
+  difficulty,
+  gameMode,
 }: PropType) {
   const [showGameOverMenu, setShowGameOverMenu] = useState<boolean>(true);
-
   const skulls = useMemo(
     () =>
       Skulls()
@@ -37,13 +41,12 @@ function ClassicGameLogic({
   );
 
   const [currentSkull, setCurrentSkull] = useState<string[][][]>([]);
-
-  const {showKeyboard} = useSettings();
+  const { setDifficulty, setGameMode } = useStats(); //Used to update state vars for stats
+  const { showKeyboard } = useSettings(); //Used to show/hide the keyboard
 
   //Manage words list
   const { wordsForSkull, wordsList, dispWordHistory, setDispWordHistory } =
     useWordsForSkull({ currentSkull, wordsData });
-
 
   //Handle the main game play logic
   const {
@@ -73,6 +76,12 @@ function ClassicGameLogic({
     randomizeCurrentSkull();
   }, [skulls]);
 
+  //Update state vars for stats to be applied on game over menu when game ends
+  useEffect(() => {
+    difficulty && setDifficulty(difficulty);
+    gameMode && setGameMode(gameMode);
+  }, [difficulty, gameMode, setDifficulty, setGameMode]);
+
   return (
     <label className=" flex relative flex-col">
       <input type="textbox" className="opacity-[0.01]" />
@@ -86,6 +95,7 @@ function ClassicGameLogic({
         ref={captureAreaRef}
         className="flex relative flex-col gap-1 pt-1 px-5 items-center animate-fadeIn"
       >
+        
         <GameOverMenu
           isGameOver={isGameOver}
           showGameOverMenu={showGameOverMenu}
@@ -114,7 +124,6 @@ function ClassicGameLogic({
             lettersPerSkull={lettersPerSkull}
             wordsForSkull={wordsForSkull}
             seconds={seconds}
-            
           />
           <DisplaySkull
             currentSkull={currentSkull}
