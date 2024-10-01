@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useCaptureHTML from "../hooks/useCaptureHTML";
 import SecondsToTime from "../utils/converters/SecondsToTime";
 import Icon from "../utils/other/Icon";
+import { StatsDataType, useStats } from "../context/StatsContext";
 
 interface PropType {
   isGameOver: boolean;
@@ -25,6 +26,36 @@ function GameOverMenu({
   wordsForSkull,
 }: PropType) {
   const [isCopied, setIsCopied] = useState<boolean>(false);
+
+  const { setStats, difficulty, gameMode } = useStats();
+
+  //Update stats data with new stats when game ends
+  useEffect(() => {
+    const updateSats = () => {
+      const newStatEntry: StatsDataType = [
+        {
+          date: new Date().toISOString(),
+          totalLives: maxLives !== null ? maxLives : 0,
+          livesLeft: lives !== null ? lives : 0,
+          totalWords: wordsForSkull.length,
+          correctWords: currentRow,
+          timeSpentSec: seconds,
+          difficulty,
+          gameMode,
+        },
+      ];
+
+      setStats((prevState: StatsDataType) => {
+        if (!Array.isArray(prevState)) {
+          console.error("prevState is not an array!", prevState); // Debugging line
+          return []; // Fallback to an empty array if prevState is not iterable
+        }
+        return [...prevState, ...newStatEntry]; // Append new stat entry
+      });
+    };
+
+    if (isGameOver) updateSats();
+  }, [currentRow, difficulty, gameMode, isGameOver, lives, maxLives, seconds, setStats, wordsForSkull.length]);
 
   const {
     downloadPuzzle,

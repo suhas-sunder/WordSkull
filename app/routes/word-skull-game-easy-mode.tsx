@@ -37,7 +37,7 @@ export default function WordSkullMedium() {
 
   return (
     <>
-      <ClassicGameLogic startPosition={0} endPosition={4} lettersPerSkull="3 - 5 letters" wordsData={wordsData}/>
+      <ClassicGameLogic startPosition={0} endPosition={4} lettersPerSkull="3 - 5 letters" wordsData={wordsData} difficulty="easy" gameMode="classic"/>
       <ClassicGameplayInstructions />
     </>
   );

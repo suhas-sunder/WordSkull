@@ -34,6 +34,7 @@ export default function WordSkullMedium() {
         endPosition={15}
         lettersPerSkull="3 - 9 letters"
         wordsData={wordsData}
+        difficulty="extreme" gameMode="classic"
       />
       <ClassicGameplayInstructions />
     </>

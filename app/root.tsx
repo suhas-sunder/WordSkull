@@ -22,6 +22,7 @@ import {
 } from "./client/components/context/ThemeContext";
 import localforage from "localforage";
 import { SettingsProvider } from "./client/components/context/SettingsContext";
+import { StatsProvider } from "./client/components/context/StatsContext";
 
 // Layout Component for rendering HTML structure
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -35,7 +36,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <ThemeProvider>
         <SettingsProvider>
-          <Body>{children}</Body>
+          <StatsProvider>
+            <Body>{children}</Body>
+          </StatsProvider>
         </SettingsProvider>
       </ThemeProvider>
     </html>
