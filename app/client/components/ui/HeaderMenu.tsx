@@ -7,6 +7,7 @@ interface PropType {
   dontFade?: boolean;
   lettersPerSkull?: string;
   setShowSettings: (value: boolean) => void;
+  setShowStats: (value: boolean) => void;
 }
 function HeaderMenu({
   setShowGameOverMenu,
@@ -14,6 +15,7 @@ function HeaderMenu({
   dontFade,
   lettersPerSkull,
   setShowSettings,
+  setShowStats
 }: PropType) {
   const location = useLocation();
 
@@ -42,6 +44,7 @@ function HeaderMenu({
         <li className="flex justify-center items-center">
           <button
             data-testid="stats-button"
+            onClick={() => setShowStats(true)}
             className="cursor-pointer py-2 px-1 w-[2em]  fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
           >
             <Icon icon="barGraph" title="Stats" />

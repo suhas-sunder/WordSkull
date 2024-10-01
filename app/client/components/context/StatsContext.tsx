@@ -1,8 +1,9 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { MockStatsContext } from "../../mocks/components/MockStatsContext";
 import { usePersistentState } from "../hooks/usePersistentState";
 
 export type StatsDataType = {
+  id: string;
   date: string;
   totalLives: number;
   livesLeft: number;
@@ -18,8 +19,6 @@ export type StatsType = {
   stats: StatsDataType;
 };
 
-
-
 interface StatsContextProps extends StatsType {
   difficulty: string;
   setDifficulty: (value: string) => void;
@@ -30,6 +29,7 @@ interface StatsContextProps extends StatsType {
 export const StatsContext = createContext<StatsContextProps>({
   stats: [
     {
+      id: "",
       date: "",
       totalLives: 0,
       livesLeft: 0,
@@ -52,10 +52,6 @@ export function StatsProvider({ children }: { children: React.ReactNode }) {
   const [difficulty, setDifficulty] = useState<string>("");
   const [gameMode, setGameMode] = useState<string>("");
 
-  useEffect(() => {
-    console.log("stats", stats);
-  }, [stats]);
-
   return (
     <StatsContext.Provider
       value={{
@@ -64,7 +60,7 @@ export function StatsProvider({ children }: { children: React.ReactNode }) {
         difficulty,
         setDifficulty,
         gameMode,
-        setGameMode
+        setGameMode,
       }}
     >
       {children}

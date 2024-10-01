@@ -6,6 +6,7 @@ import { StatsDataType } from "../../../client/components/context/StatsContext";
 export const MockStatsContext = createContext({
   stats: [
     {
+      id: "",
       date: "",
       totalLives: 0,
       livesLeft: 0,

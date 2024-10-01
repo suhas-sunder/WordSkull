@@ -95,6 +95,7 @@ function ClassicGameLogic({
         ref={captureAreaRef}
         className="flex relative flex-col gap-1 pt-1 px-5 items-center animate-fadeIn"
       >
+        
         <GameOverMenu
           isGameOver={isGameOver}
           showGameOverMenu={showGameOverMenu}

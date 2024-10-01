@@ -2,7 +2,7 @@ import { useState } from "react";
 import GameSettings from "../ui/GameSettings";
 import HeaderMenu from "../ui/HeaderMenu";
 import { useTheme } from "../context/ThemeContext";
-
+import SpecificGameStats from "./SpecificGameStats";
 
 interface PropType {
   lives: number | null;
@@ -20,12 +20,12 @@ function Header({
   dontFade,
 }: PropType) {
   const [showSettings, setShowSettings] = useState<boolean>(false);
+  const [showStats, setShowStats] = useState<boolean>(false);
   const { darkThemeActive } = useTheme();
-
-  
 
   return (
     <header className="relative w-full justify-center items-center flex-col flex">
+      <SpecificGameStats showStats={showStats} setShowStats={setShowStats} />
       <GameSettings
         showSettings={showSettings}
         setShowSettings={setShowSettings}
@@ -36,6 +36,7 @@ function Header({
         dontFade={dontFade}
         lettersPerSkull={lettersPerSkull}
         setShowSettings={setShowSettings}
+        setShowStats={setShowStats}
       />
       {!isGameOver && (
         <ul

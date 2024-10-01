@@ -3,6 +3,7 @@ import useCaptureHTML from "../hooks/useCaptureHTML";
 import SecondsToTime from "../utils/converters/SecondsToTime";
 import Icon from "../utils/other/Icon";
 import { StatsDataType, useStats } from "../context/StatsContext";
+import { v4 as uuidv4 } from "uuid";
 
 interface PropType {
   isGameOver: boolean;
@@ -34,6 +35,7 @@ function GameOverMenu({
     const updateSats = () => {
       const newStatEntry: StatsDataType = [
         {
+          id: uuidv4(),
           date: new Date().toISOString(),
           totalLives: maxLives !== null ? maxLives : 0,
           livesLeft: lives !== null ? lives : 0,
@@ -55,7 +57,17 @@ function GameOverMenu({
     };
 
     if (isGameOver) updateSats();
-  }, [currentRow, difficulty, gameMode, isGameOver, lives, maxLives, seconds, setStats, wordsForSkull.length]);
+  }, [
+    currentRow,
+    difficulty,
+    gameMode,
+    isGameOver,
+    lives,
+    maxLives,
+    seconds,
+    setStats,
+    wordsForSkull.length,
+  ]);
 
   const {
     downloadPuzzle,
