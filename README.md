@@ -8,12 +8,40 @@ This project is still in development but can be viewed live on [WordSkull](https
 ![WordSkull Image](https://github.com/user-attachments/assets/cfa151d8-6c80-495e-a44a-e8325a30d133)
 
 ## How To Use
-- **Getting started**: Clone the repo locally using `git clone` or download & extract zip folder
-- **Setup**: Run `npm install`
-- **Run dev server**: `npm run dev`
-- **Build for deployment**: `npm run build`
-- **Testing**: `npm test`
 
+1. **Getting started**: 
+   - Clone the repository to your local machine using the following command:
+     ```bash
+     git clone <repository-url>
+     ```
+   - Alternatively, you can download the ZIP file of the project and extract it to your local machine.
+
+2. **Setup**: 
+   - Navigate to the project folder and install the required dependencies by running:
+     ```bash
+     npm install
+     ```
+
+3. **Run the development server**: 
+   - Start the development server to view the application locally:
+     ```bash
+     npm run dev
+     ```
+   - The server should start, and you can view the app in your browser at `http://localhost:3000` (or another port depending on your setup).
+
+4. **Build for deployment**: 
+   - When you're ready to deploy the application, build the optimized production version with:
+     ```bash
+     npm run build
+     ```
+   - This will generate static files in the `dist` or `build` folder (depending on the setup), which can be deployed to your hosting service.
+
+5. **Testing**: 
+   - Run the test suite to ensure everything is working as expected:
+     ```bash
+     npm test
+     ```
+   - This will run all the tests defined in the project.
 
 ## Home Page
 Toggle between light and dark mode with the click of a button.
