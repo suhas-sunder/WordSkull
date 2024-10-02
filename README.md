@@ -8,7 +8,7 @@ This project is still in development but can be viewed live on [WordSkull](https
 ![WordSkull Image](https://github.com/user-attachments/assets/cfa151d8-6c80-495e-a44a-e8325a30d133)
 
 ## How To Use
-- **Getting started**: Clone the repo locally using `git clone` or download
+- **Getting started**: Clone the repo locally using `git clone` or download & extract zip folder
 - **Setup**: Run `npm install`
 - **Run dev server**: `npm run dev`
 - **Build for deployment**: `npm run build`
