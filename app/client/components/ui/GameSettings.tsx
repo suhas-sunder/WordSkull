@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import Icon from "../utils/other/Icon";
 import {
   InstructionsType,
   KeyboardType,
   useSettings,
 } from "../context/SettingsContext";
+import ModalWrapper from "./ModalWrapper";
 
 interface PropType {
   showSettings: boolean;
@@ -104,19 +104,20 @@ function InstructionsToggle({
 }
 
 function GameSettings({ showSettings, setShowSettings }: PropType) {
-  const { showKeyboard, setShowKeyboard, showInstructions, setShowInstructions } = useSettings();
+  const {
+    showKeyboard,
+    setShowKeyboard,
+    showInstructions,
+    setShowInstructions,
+  } = useSettings();
   return (
     <>
       {showSettings && (
-        <>
-          <div className="absolute font-roboto top-[22em] left-1/2 -translate-x-1/2 z-[50] items-center py-[2em] flex -translate-y-1/2 bg-white max-w-[38em] w-full min-h-[20em] rounded-lg flex-col gap-7">
-            <button
-              data-testid="close-settings"
-              onClick={() => setShowSettings(false)}
-              className="flex absolute top-[0.8em] right-[0.8em] z-[60]"
-            >
-              <Icon icon="close" />
-            </button>
+        <ModalWrapper
+          setShowModal={setShowSettings}
+          customClass="top-[13em] py-[2em]"
+        >
+          <>
             <h2 className="text-2xl font-nunito text-skull-super-dark-brown">
               Settings
             </h2>
@@ -134,13 +135,8 @@ function GameSettings({ showSettings, setShowSettings }: PropType) {
                 {DifficultyLinks()}
               </li>
             </ul>
-          </div>
-          <button
-            data-testid="settings-background"
-            onClick={() => setShowSettings(false)}
-            className="fixed inset-0 h-full w-full flex bg-skull-brown bg-opacity-10 z-30 justify-center"
-          ></button>
-        </>
+          </>
+        </ModalWrapper>
       )}
     </>
   );

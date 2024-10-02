@@ -1,6 +1,6 @@
 import { useStats } from "../context/StatsContext";
+import ModalWrapper from "../ui/ModalWrapper";
 import SecondsToTime from "../utils/converters/SecondsToTime";
-import Icon from "../utils/other/Icon";
 
 interface PropType {
   showStats: boolean;
@@ -13,15 +13,8 @@ function SpecificGameStats({ showStats, setShowStats }: PropType) {
   return (
     <>
       {showStats && (
-        <>
-          <div className="absolute font-roboto  top-[22em] overflow-auto left-1/2 -translate-x-1/2 z-[50] items-center py-[2em] flex -translate-y-1/2 bg-white max-w-[38em] w-full min-h-[20em] max-h-[80vh] rounded-lg flex-col gap-7">
-            <button
-              data-testid="close-settings"
-              onClick={() => setShowStats(false)}
-              className="flex absolute top-[0.8em] right-[0.8em] z-[60]"
-            >
-              <Icon icon="close" />
-            </button>
+        <ModalWrapper setShowModal={setShowStats} customClass="top-[25em] sm:top-[28em] py-[2em] overflow-auto max-h-[80vh]">
+          <>
             <h2 className="text-2xl font-nunito text-skull-super-dark-brown">
               Game Stats
               <span className="flex flex-col font-nunito w-full justify-center items-center gap-3 mt-3 text-xs">
@@ -29,7 +22,6 @@ function SpecificGameStats({ showStats, setShowStats }: PropType) {
                 <span>Game Mode: {gameMode}</span>
               </span>
             </h2>
-
             <ul>
               {stats.map((data) => (
                 <li key={data.id}>
@@ -46,13 +38,8 @@ function SpecificGameStats({ showStats, setShowStats }: PropType) {
                 </li>
               ))}
             </ul>
-          </div>
-          <button
-            data-testid="settings-background"
-            onClick={() => setShowStats(false)}
-            className="fixed inset-0 h-full w-full flex bg-skull-brown bg-opacity-10 z-30 justify-center"
-          ></button>
-        </>
+          </>
+        </ModalWrapper>
       )}
     </>
   );
