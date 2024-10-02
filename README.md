@@ -7,6 +7,13 @@ This project is still in development but can be viewed live on [WordSkull](https
 
 ![WordSkull Image](https://github.com/user-attachments/assets/cfa151d8-6c80-495e-a44a-e8325a30d133)
 
+##How To Use
+ - **Getting started**: Clone repo locally using git clone or download
+ - **Setup**: Run npm install
+ - **Run dev server**: npm run dev
+ - **Build for deployment**: npm run build
+ - **Testing**: npm test
+
 ## Home Page
 Toggle between light and dark mode with the click of a button.
 
