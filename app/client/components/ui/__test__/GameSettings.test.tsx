@@ -192,7 +192,7 @@ describe("handles user input correctly", () => {
       setShowSettings: setShowSettings,
     });
 
-    const closeButton = screen.getByTestId(/settings-background/i);
+    const closeButton = screen.getByTestId(/modal-background/i);
 
     fireEvent.click(closeButton);
 
@@ -209,7 +209,7 @@ describe("handles user input correctly", () => {
       setShowSettings: setShowSettings,
     });
 
-    const closeButton = screen.getByTestId(/close-settings/i);
+    const closeButton = screen.getByTestId(/close-modal/i);
     fireEvent.click(closeButton);
 
     expect(setShowSettings).toHaveBeenCalledTimes(1);

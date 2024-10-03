@@ -66,13 +66,13 @@ describe("should render default elements when game is over and game over menu is
   });
 
   it("should render game over modal background underlay", () => {
-    const buttonElement = screen.getByTestId(/game-over-background/i);
+    const buttonElement = screen.getByTestId(/modal-background/i);
 
     expect(buttonElement).toBeInTheDocument();
   });
 
   it("should render close menu button", () => {
-    const buttonElement = screen.getByTestId(/close-menu-button/i);
+    const buttonElement = screen.getByTestId(/close-modal/i);
 
     expect(buttonElement).toBeInTheDocument();
   });
@@ -118,7 +118,7 @@ describe("should render default elements when game is over and game over menu is
   });
 
   it("should call setShowGameOverMenu(false) when the background is clicked", () => {
-    const backgroundElement = screen.getByTestId(/game-over-background/i);
+    const backgroundElement = screen.getByTestId(/modal-background/i);
     fireEvent.click(backgroundElement);
     expect(setShowGameOverMenu).toHaveBeenCalledWith(false);
   });

@@ -224,7 +224,7 @@ describe("handles user input correctly when integrating with GameSettings", () =
     const settingsBtnElement = screen.getByTestId(/settings-button/i);
     fireEvent.click(settingsBtnElement);
 
-    const closeButton = screen.getByTestId(/settings-background/i);
+    const closeButton = screen.getByTestId(/modal-background/i);
 
     fireEvent.click(closeButton);
 
@@ -244,7 +244,7 @@ describe("handles user input correctly when integrating with GameSettings", () =
     const settingsBtnElement = screen.getByTestId(/settings-button/i);
     fireEvent.click(settingsBtnElement);
 
-    const closeButton = screen.getByTestId(/close-settings/i);
+    const closeButton = screen.getByTestId(/close-modal/i);
     fireEvent.click(closeButton);
 
     expect(screen.queryByText("Settings")).not.toBeInTheDocument();
