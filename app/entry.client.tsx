@@ -11,14 +11,12 @@ import { hydrateRoot } from "react-dom/client";
 import posthog from "posthog-js";
 
 function PosthogInit() {
-  const passcode = process.env.POSTHOG_API_KEY;
-
   useEffect(() => {
-    posthog.init(passcode || "", {
+    posthog.init("phc_2IQDpa7YpxYMhcOXtPMlgcrrHmNjX4pY3wuvr3LKjS3", {
       api_host: "https://us.i.posthog.com",
       person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
     });
-  }, [passcode]);
+  }, []);
 
   return null;
 }
