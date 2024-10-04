@@ -124,7 +124,7 @@ export default function Keyboard({
       data-testid="keyboard"
       className={`${
         darkThemeActive ? "bg-slate-700" : "bg-slate-600"
-      }  hidden text-slate-600 min-h-[23em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2  p-6 text-xs md:flex lg:text-base`}
+      }  hidden text-slate-600 -translate-y-[2em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2  p-6 text-xs md:flex lg:text-base min-h-[23em]`}
     >
       {Object.values(keyboardData).map((keysArr, index) => {
         return (
