@@ -95,7 +95,6 @@ function ClassicGameLogic({
         ref={captureAreaRef}
         className="flex relative flex-col gap-1 pt-1 px-5 items-center animate-fadeIn"
       >
-        
         <GameOverMenu
           isGameOver={isGameOver}
           showGameOverMenu={showGameOverMenu}
@@ -136,7 +135,7 @@ function ClassicGameLogic({
           <div
             className={`${
               showKeyboard ? "opacity-100" : "opacity-0"
-            } flex max-w-[800px] max-h-[17.5em] overflow-hidden justify-center items-center flex-col`}
+            } flex max-w-[800px] overflow-hidden justify-center items-center`}
           >
             <Keyboard
               currentlyEnteredWords={enteredWords[currentRow]}

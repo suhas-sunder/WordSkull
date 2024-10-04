@@ -38,7 +38,7 @@ function DisplaySkull({
       return (
         <li
           key={uuidv4()}
-          className={`  text-[1.2rem] relative border-slate-700 bg-slate-800 border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center`}
+          className={`  text-[1.2rem] relative border-slate-700 bg-slate-800 border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center`}
         ></li>
       );
 
@@ -48,7 +48,7 @@ function DisplaySkull({
           key={uuidv4()}
           className={`${
             darkThemeActive && "bg-white opacity-95"
-          } text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center`}
+          } text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center`}
         ></li>
       );
 
@@ -159,7 +159,7 @@ function DisplaySkull({
               ? "border-slate-200 text-slate-500 "
               : "border-slate-400 text-slate-500 "
           }  border-[2.5px] `
-        }  text-[1.2rem] relative border-2 sm:text-[2rem] rounded-md sm:rounded-lg min-w-[1.8em] min-h-[1.8em] sm:min-w-[1.7em] sm:min-h-[1.7em] flex justify-center items-center  ${
+        }  text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center  ${
           enterPressed &&
           rowIndex === currentRow &&
           handleValidationStyling({
@@ -176,11 +176,11 @@ function DisplaySkull({
             darkThemeActive
               ? "brightness-[0.9]"
               : "opacity-75 brightness-[0.75]"
-          } absolute text-[0.5rem]  sm:text-sm flex top-[0.02em] left-[0.3em]`}
+          } absolute text-[0.5rem]  xs:text-sm flex top-[0.02em] left-[0.3em]`}
         >
           {squareCount}
         </span>
-        <span className="translate-y-[0.16em] sm:translate-y-1">{square}</span>
+        <span className="translate-y-[0.16em] xs:translate-y-1">{square}</span>
       </li>
     );
   };
@@ -192,7 +192,7 @@ function DisplaySkull({
           <div
             data-testid="display-skull"
             key={index}
-            className="relative flex-col w-full max-w-[800px] sm:scale-[0.9]  min-h-[21.5em] sm:min-h-[20em] capitalize flex font-nunito text-slate-400 items-center"
+            className="relative flex-col w-full max-w-[800px] xs:scale-[0.9]  min-h-[12em] xs:min-h-[20em] capitalize flex font-nunito text-slate-400 items-center"
           >
             {skull.map((row, rowIndex) => {
               let squareCount = 0; // Reset squareCount at the start of each row

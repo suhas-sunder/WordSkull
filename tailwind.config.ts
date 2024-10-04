@@ -63,6 +63,9 @@ export default {
         fadeIn: "fadeIn 1s ease-in-out",
         fadeOut: "fadeOut 1s ease-in-out",
       },
+      screens: {
+        'xs': '480px', // Custom breakpoint between sm and smaller sizes
+      },
     },
   },
   plugins: [
