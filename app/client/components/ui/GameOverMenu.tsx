@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import useCaptureHTML from "../hooks/useCaptureHTML";
 import SecondsToTime from "../utils/converters/SecondsToTime";
-import Icon from "../utils/other/Icon";
 import { StatsDataType, useStats } from "../context/StatsContext";
 import { v4 as uuidv4 } from "uuid";
+import ModalWrapper from "./ModalWrapper";
 
 interface PropType {
   isGameOver: boolean;
@@ -91,27 +91,15 @@ function GameOverMenu({
   return (
     <>
       {isGameOver && showGameOverMenu && (
-        <div
-          data-testid="game-over-menu"
-          className="flex absolute w-full justify-center items-center"
-        >
-          <button
-            data-testid="game-over-background"
-            onClick={() => setShowGameOverMenu(false)}
-            className="fixed inset-0 h-full w-full flex bg-skull-brown bg-opacity-10 z-30 justify-center"
-          ></button>
-          <div className="flex relative flex-col bg-white shadow-lg pb-10 w-full gap-5 z-40 max-w-[700px] font-nunito overflow-hidden mt-[4em] tracking-widest leading-loose min-h-[27em] min-w-40 mb-auto rounded-lg justify-center items-center">
-            <button
-              data-testid="close-menu-button"
-              className="absolute top-2 right-2 rounded-full p-1 scale-75 bg-skull-dark-brown fill-white hover:scale-[0.8]"
-              onClick={() => setShowGameOverMenu(false)}
+        <ModalWrapper setShowModal={setShowGameOverMenu} customClass="top-[23em] sm:top-[14.5em]">
+          <>
+            <div
+              data-testid="game-over-menu"
+              className=" bg-skull-brown text-white w-full justify-center items-center py-2 text-2xl text-center "
             >
-              <Icon icon="close" title="Close Menu" />
-            </button>
-            <div className=" bg-skull-brown text-white w-full justify-center items-center py-2 text-2xl text-center">
               {handleGameOverMsg()}
             </div>
-            <div className="flex w-full flex-col justify-center items-center gap-4">
+            <div className="flex w-full flex-col justify-center items-center gap-4 ">
               <h2 className="text-2xl text-slate-600">Stats</h2>
               <ul className="grid gap-5 sm:grid-cols-3 w-full justify-center items-center">
                 <li className="flex col-span-1 flex-col gap-1 w-full justify-center items-center">
@@ -140,10 +128,9 @@ function GameOverMenu({
                 </li>
               </ul>
             </div>
-
             <button
               onClick={() => window.location.reload()}
-              className="cursor-pointer py-2 gap-2 bg-green-500 text-white px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+              className="cursor-pointer py-2 gap-2 bg-green-500 text-white px-4 mt-1 text-lg font-nunito rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
             >
               Play Again
             </button>
@@ -152,7 +139,7 @@ function GameOverMenu({
                 Share Your Results!
               </span>
             </div>
-            <ul className="grid sm:grid-cols-3 gap-5 justify-center items-center mb-auto">
+            <ul className="grid sm:grid-cols-3 gap-5 justify-center items-center mb-[2.5em]">
               {isWebShareSupported && (
                 <li className="flex justify-center items-center w-full">
                   <button
@@ -188,8 +175,8 @@ function GameOverMenu({
                 </button>
               </li>
             </ul>
-          </div>
-        </div>
+          </>
+        </ModalWrapper>
       )}
     </>
   );
