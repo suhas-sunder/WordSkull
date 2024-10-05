@@ -81,3 +81,40 @@ The app is optimized for all screen sizes!
 - Run the test suite:
   ```bash
   npm test
+
+## Project To-Do List
+
+- [x] Setup project repo
+- [x] Create a project plan
+- [x] Implement NavBar
+- [x] Implement Footer
+- [x] Implement Universal Header
+- [x] Design skull patterns in a JSON file & implement logic to render out the board using these designs & apply appropriate styling.
+- [x] Use designs to create flashy animation on home page.
+- [x] Add menu to home pg that links to each difficulty mode & implement routes for each.
+- [x] Add logic to randomly render skull of a max row length depending on difficulty. Eg. easy difficulty will only include skulls with 3 - 5 characters per row.
+- [x] Add logic to handle keyboard events so that users can type out each row.
+- [x] Add logic to submit each completed row & check for validation.
+- [x] Implement preview for last word entered and have it linked to a modal that opens up to display all attempted words.
+- [x] Add logic to display words preview in modal based on current row. Allow users to check prior row entries too via arrow buttons at the top of the modal menu.
+- [x] Implement & track total lives.
+- [x] Add logic to handle game over (all lives are exhausted or all rows are completed successfully).
+- [x] Add logic to toggle entered words preview modal by either pressing and holding shift or pressing space bar once.
+- [x] Implement virtual keyboard & style it.
+- [x] Add logic to words preview to display validation for each character entered. If a character is in the correct location it should be green. If it is in the word but in the wrong location, it should be yellow.
+- [x] Add logic to both virtual keyboard and apply validation logic to highlight keys are displayed as valid/invalid using the same colour coded logic as the step above for entered words preview.
+- [x] Implement button to handle light/dark mode.
+- [x] Apply styling to all elements based on light/dark mode.
+- [x] Add logic to preserve light/dark mode setting in local storage.
+- [x] Add game over menu that displays words completed, lives used, and time spent.
+- [x] Add unit tests & start consistently unit testing each component alongside each feature/update etc.
+- [x] Deploy to production via Digital Ocean
+- [x] Add to Cloudflare CDN
+- [x] Create a dynamically generated sitemap & submit website/sitemap to Google Search Console & Bing Webmaster for indexing.
+- [x] Update Readme
+- [x] Generate a list of words for each character length & host file on Cloudflare R2. Have the file be loaded from API with a smaller list of words available within the repo for the app to fallback to incase of failure to connect with R2 bucket.
+- [x] Add logic to game over menu to allow users to download/copy/share a snapshot of their gameplay results.
+- [x] Add play again button to game over menu.
+- [x] Update Readme
+- [x] Add buttons in game page header to allow users to view game over modal (when game ends), stats modal, instructions anchor link, and settings modal.
+- [x] Add gameplay instructions to be displayed under keyboard, which includes simple text and image instructions.
