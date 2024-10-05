@@ -1,9 +1,5 @@
 import { Link } from "react-router-dom";
-import {
-  InstructionsType,
-  KeyboardType,
-  useSettings,
-} from "../context/SettingsContext";
+import { useSettings } from "../context/SettingsContext";
 import ModalWrapper from "./ModalWrapper";
 
 interface PropType {
@@ -11,18 +7,32 @@ interface PropType {
   setShowSettings: (value: boolean) => void;
 }
 
-function KeyboardToggle({ showKeyboard, setShowKeyboard }: KeyboardType) {
+interface ToggleOptionsPropType {
+  value: boolean;
+  setValue: (value: (prevState: boolean) => boolean) => void;
+  title: string;
+  offStateText: string;
+  onStateText: string;
+}
+
+function CreateToggleOptions({
+  value,
+  setValue,
+  title,
+  offStateText,
+  onStateText,
+}: ToggleOptionsPropType) {
   return (
     <>
-      <span className="font-lora text-skull-dark-brown">Virtual Keyboard:</span>
+      <span className="font-lora text-skull-dark-brown">{title}:</span>
       <label className="inline-flex items-center gap-5 cursor-pointer">
         <span className=" text-sm font-nunito">
-          {showKeyboard ? "Visible" : "Hidden"}
+          {value ? onStateText : offStateText}
         </span>
         <input
           type="checkbox"
-          checked={showKeyboard}
-          onChange={() => setShowKeyboard((prevState) => !prevState)}
+          checked={value}
+          onChange={() => setValue((prevState: boolean) => !prevState)}
           className="sr-only peer"
         />
         <div className="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
@@ -30,6 +40,7 @@ function KeyboardToggle({ showKeyboard, setShowKeyboard }: KeyboardType) {
     </>
   );
 }
+
 function DifficultyLinks() {
   return (
     <>
@@ -78,37 +89,14 @@ function DifficultyLinks() {
   );
 }
 
-function InstructionsToggle({
-  showInstructions,
-  setShowInstructions,
-}: InstructionsType) {
-  return (
-    <>
-      <span className="font-lora text-skull-dark-brown">
-        Gameplay Instructions:
-      </span>
-      <label className="inline-flex items-center gap-5 cursor-pointer">
-        <span className=" text-sm font-nunito">
-          {showInstructions ? "Visible" : "Hidden"}
-        </span>
-        <input
-          type="checkbox"
-          checked={showInstructions}
-          onChange={() => setShowInstructions((prevState) => !prevState)}
-          className="sr-only peer"
-        />
-        <div className="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-      </label>
-    </>
-  );
-}
-
 function GameSettings({ showSettings, setShowSettings }: PropType) {
   const {
     showKeyboard,
     setShowKeyboard,
     showInstructions,
     setShowInstructions,
+    setMakeKeypadInteractive,
+    makeKeypadInteractive,
   } = useSettings();
   return (
     <>
@@ -123,13 +111,31 @@ function GameSettings({ showSettings, setShowSettings }: PropType) {
             </h2>
             <ul className="w-full flex flex-col gap-5 text-skull-dark-brown px-5 md:px-0">
               <li className="flex w-full justify-between md:max-w-[80%] mx-auto">
-                {KeyboardToggle({
-                  showKeyboard: showKeyboard,
-                  setShowKeyboard: setShowKeyboard,
+                {CreateToggleOptions({
+                  value: showKeyboard,
+                  setValue: setShowKeyboard,
+                  title: "Virtual Keyboard",
+                  offStateText: "Hidden",
+                  onStateText: "Visible",
                 })}
               </li>
               <li className="flex w-full justify-between md:max-w-[80%] mx-auto">
-                {InstructionsToggle({ showInstructions, setShowInstructions })}
+                {CreateToggleOptions({
+                  value: makeKeypadInteractive,
+                  setValue: setMakeKeypadInteractive,
+                  title: "Interactive Keyboard",
+                  onStateText: "Yes",
+                  offStateText: "No",
+                })}
+              </li>
+              <li className="flex w-full justify-between md:max-w-[80%] mx-auto">
+                {CreateToggleOptions({
+                  value: showInstructions,
+                  setValue: setShowInstructions,
+                  title: "Gameplay Instructions",
+                  offStateText: "Hidden",
+                  onStateText: "Visible",
+                })}
               </li>
               <li className="flex w-full justify-between md:max-w-[80%] mx-auto gap-5">
                 {DifficultyLinks()}

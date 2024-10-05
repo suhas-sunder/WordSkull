@@ -12,13 +12,23 @@ export type KeyboardType = {
   showKeyboard: boolean;
 };
 
-interface SettingsContextProps extends InstructionsType, KeyboardType {}
+export type KeyboardInteractivityType = {
+  setMakeKeypadInteractive: (value: (prevState: boolean) => boolean) => void;
+  makeKeypadInteractive: boolean;
+};
+
+interface SettingsContextProps
+  extends InstructionsType,
+    KeyboardType,
+    KeyboardInteractivityType {}
 
 export const SettingsContext = createContext<SettingsContextProps>({
   showInstructions: false,
   setShowInstructions: () => {},
   showKeyboard: false,
   setShowKeyboard: () => {},
+  setMakeKeypadInteractive: () => {},
+  makeKeypadInteractive: true,
 });
 
 export function SettingsProvider({ children }: { children: React.ReactNode }) {
@@ -30,6 +40,8 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
     "showKeyboard",
     true
   ); //Stores state in localStorage
+  const [makeKeypadInteractive, setMakeKeypadInteractive] =
+    usePersistentState<boolean>("makeKeypadInteractive", true); //Stores state in localStorage
 
   return (
     <SettingsContext.Provider
@@ -38,6 +50,8 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
         setShowInstructions,
         showKeyboard,
         setShowKeyboard,
+        setMakeKeypadInteractive,
+        makeKeypadInteractive,
       }}
     >
       {children}
