@@ -39,7 +39,7 @@ function ClassicGameplayInstructions() {
       {showInstructions && (
         <div
           id="gameplay-instructions"
-          className="flex flex-col w-full justify-center items-center"
+          className="flex flex-col w-full justify-center items-center mt-[3.5em] md:mt-0"
         >
           <h2
             className={`text-4xl font-nunito  uppercase mb-10 ${

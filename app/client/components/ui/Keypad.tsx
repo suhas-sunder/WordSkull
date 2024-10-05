@@ -3,6 +3,7 @@ import KeypadData from "../data/KeypadData";
 import { useTheme } from "../context/ThemeContext";
 import { v4 as uuidv4 } from "uuid";
 import useKeyPress from "../hooks/useKeyPress";
+import SimulateKeyPress from "../utils/other/SimulateKeyPress";
 interface PropType {
   currentlyEnteredWords: string[];
   currentWord: string;
@@ -68,25 +69,27 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
             key={uuidv4()}
           >
             {keysArr.map((key) => (
-              <li
-                className={` h-[2.3em] min-w-[1.7em] w-full justify-center items-center flex rounded-sm ${
-                  darkThemeActive
-                    ? "bg-white text-slate-600"
-                    : "bg-slate-600 text-white"
-                } ${
-                  (keyPressed.toLowerCase() === key.defaultKey ||
-                    (keyPressed === " " && key.defaultKey === "space") ||
-                    (keyPressed.toLowerCase() === "capslock" &&
-                      key.defaultKey === "caps") ||
-                    (keyPressed.toLowerCase() === "backspace" &&
-                      key.defaultKey === "delete")) &&
-                  "opacity-75"
-                } ${
-                  currentWord?.includes(key.defaultKey) &&
-                  currentlyEnteredWords?.join("").includes(key.defaultKey) &&
-                  correctCharCount[key.defaultKey] > 0 &&
-                  "!bg-green-300 !text-green-800"
-                }
+              <li className="flex w-full" key={key.id}>
+                <button
+                  onClick={() => SimulateKeyPress(key.defaultKey)}
+                  className={` h-[2.3em] min-w-[1.7em] w-full justify-center items-center flex rounded-sm ${
+                    darkThemeActive
+                      ? "bg-white text-slate-600"
+                      : "bg-slate-600 text-white"
+                  } ${
+                    (keyPressed.toLowerCase() === key.defaultKey ||
+                      (keyPressed === " " && key.defaultKey === "space") ||
+                      (keyPressed.toLowerCase() === "capslock" &&
+                        key.defaultKey === "caps") ||
+                      (keyPressed.toLowerCase() === "backspace" &&
+                        key.defaultKey === "delete")) &&
+                    "opacity-75"
+                  } ${
+                    currentWord?.includes(key.defaultKey) &&
+                    currentlyEnteredWords?.join("").includes(key.defaultKey) &&
+                    correctCharCount[key.defaultKey] > 0 &&
+                    "!bg-green-300 !text-green-800"
+                  }
               ${
                 currentWord?.includes(key.defaultKey) &&
                 currentlyEnteredWords?.join("").includes(key.defaultKey) &&
@@ -99,9 +102,9 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
                  key.defaultKey !== "enter" &&
                  "!bg-slate-400 !text-white"
                }`}
-                key={key.id}
-              >
-                {key.defaultKey}
+                >
+                  {key.defaultKey}
+                </button>
               </li>
             ))}
           </ul>

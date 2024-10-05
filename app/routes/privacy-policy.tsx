@@ -9,6 +9,8 @@ export const meta: MetaFunction = () => {
 };
 
 export default function PrivacyPolicy() {
+
+
   return (
     <div className="my-20 flex flex-col items-center mx-10 justify-center gap-8 font-nunito text-skull-brown">
       <header className="max-w-[1200px]">
