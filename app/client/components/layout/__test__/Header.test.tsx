@@ -265,7 +265,7 @@ describe("handles user input correctly when integrating with GameSettings", () =
 
     const inputElements = screen.getAllByRole("checkbox");
 
-    expect(inputElements).toHaveLength(2);
+    expect(inputElements).toHaveLength(3);
   });
 });
 
