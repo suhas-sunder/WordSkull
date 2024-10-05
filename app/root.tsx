@@ -95,6 +95,10 @@ export const loader = async () => {
   );
 };
 
+export const action = () => {
+  return new Response("Not Found", { status: 404 });
+};
+
 export async function clientLoader({ serverLoader }: ClientLoaderFunctionArgs) {
   const cacheKey = "words";
 
