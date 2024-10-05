@@ -5,6 +5,7 @@ import GenerateDefaultStylingForKeys from "../utils/generators/GenerateDefaultSt
 import useKeyPress from "../hooks/useKeyPress";
 import { useTheme } from "../context/ThemeContext";
 import SimulateKeyPress from "../utils/other/SimulateKeyPress";
+import { useSettings } from "../context/SettingsContext";
 
 //Theres a lot of object/array manipulation for the initial setup so to improve readability it is going into it's own function
 function DefaultKeyboardSetup() {
@@ -58,6 +59,8 @@ export default function Keyboard({
   const [correctCharCount, setCorrectCharCount] = useState<{
     [key: string]: number;
   }>({});
+
+  const {makeKeypadInteractive} = useSettings();
 
   const { defaultKeyStyles, keyboardData } = DefaultKeyboardSetup();
 
@@ -145,7 +148,7 @@ export default function Keyboard({
                   </span>
                 )}
                 <button
-                  onClick={() => SimulateKeyPress(key.defaultKey)}
+                  onClick={() => makeKeypadInteractive && SimulateKeyPress(key.defaultKey)}
                   className={` ${
                     key.defaultKey !== "Shift" &&
                     key.defaultKey !== " " &&

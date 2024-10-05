@@ -6,6 +6,8 @@ export const MockSettingsContext = createContext({
   setShowInstructions: (value: (prevState: boolean) => boolean) => {},
   showKeyboard: true,
   setShowKeyboard: (value: (prevState: boolean) => boolean) => {},
+  makeKeypadInteractive: true,
+  setMakeKeypadInteractive: (value: (prevState: boolean) => boolean) => {},
 });
 
 export default function MockSettingsProvider({
@@ -19,6 +21,8 @@ export default function MockSettingsProvider({
     "showKeyboard",
     true
   ); //Mock saving to localStorage
+  const [makeKeypadInteractive, setMakeKeypadInteractive] =
+    useMockPersistentState<boolean>("makeKeypadInteractive", true); //Stores state in localStorage
 
   const mockSetShowInstructions = (value: (prevState: boolean) => boolean) => {
     setShowInstructions((prevState: boolean) => value(prevState));
@@ -28,6 +32,12 @@ export default function MockSettingsProvider({
     setShowKeyboard((prevState: boolean) => value(prevState));
   };
 
+  const mockSetMakeKeypadInteractive = (
+    value: (prevState: boolean) => boolean
+  ) => {
+    setMakeKeypadInteractive((prevState: boolean) => value(prevState));
+  };
+
   return (
     <MockSettingsContext.Provider
       value={{
@@ -35,6 +45,8 @@ export default function MockSettingsProvider({
         setShowInstructions: mockSetShowInstructions,
         showKeyboard,
         setShowKeyboard: mockSetShowKeyboard,
+        makeKeypadInteractive,
+        setMakeKeypadInteractive: mockSetMakeKeypadInteractive,
       }}
     >
       {children}
