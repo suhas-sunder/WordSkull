@@ -1,4 +1,5 @@
 # WordSkull
+
 A word game website project based on **Wordle**.
 
 I'm using **Remix** with **Vite**, **Tailwind CSS**, **Express**, **PostgreSQL**, **Digital Ocean** for hosting, **Cloudflare CDN**, **Cloudflare R2**, **Vitest** for unit, component, & integration testing, and **Selenium** w/ Python for end-to-end testing (coming soon).
@@ -10,6 +11,7 @@ This project is still in development but can be viewed live on [WordSkull](https
 ---
 
 ## Table of Contents
+
 - [How to Use](#how-to-use)
 - [Home Page Features](#home-page-features)
 - [Responsive Design](#responsive-design)
@@ -19,6 +21,7 @@ This project is still in development but can be viewed live on [WordSkull](https
 ## How To Use
 
 1. **Clone the Repository**:
+
    - Clone the repository to your local machine:
      ```bash
      git clone <repository-url>
@@ -26,12 +29,14 @@ This project is still in development but can be viewed live on [WordSkull](https
    - Alternatively, download the ZIP and extract it to your local machine.
 
 2. **Install Dependencies**:
+
    - Navigate to the project folder and install the required dependencies:
      ```bash
      npm install
      ```
 
 3. **Run the Development Server**:
+
    - Start the local development server:
      ```bash
      npm run dev
@@ -39,6 +44,7 @@ This project is still in development but can be viewed live on [WordSkull](https
    - Access the app via your browser at `http://localhost:3000` (or another port depending on your setup).
 
 4. **Build for Deployment**:
+
    - Build the production version:
      ```bash
      npm run build
@@ -52,12 +58,14 @@ This project is still in development but can be viewed live on [WordSkull](https
      ```
 
 ## Home Page Features
+
 - Toggle between **light** and **dark mode** with a single click.
-  
+
 ![Home Page Light Mode](https://github.com/user-attachments/assets/ca4f0399-8c0f-4b90-8ea0-01bc1d278764)
 ![Home Page Dark Mode](https://github.com/user-attachments/assets/7717845b-5acc-4835-9dca-f96a2f12d636)
 
 ### Difficulty Levels:
+
 - **Easy**: 3 - 5 letters
 - **Medium**: 3 - 6 letters
 - **Hard**: 3 - 7 letters
@@ -66,11 +74,13 @@ This project is still in development but can be viewed live on [WordSkull](https
 ![Select Difficulty](https://github.com/user-attachments/assets/27b6399e-d77d-4b84-a6ce-fc5b28ab794c)
 
 ## Responsive Design
+
 The app is optimized for all screen sizes!
 
 ![Responsive Design](https://github.com/user-attachments/assets/833a310e-860a-4b00-ad44-16e9b490cd4a)
 
 ## Classic WordSkull Game Page - Easy Mode
+
 - Learn how to play: [Word Skull Game Easy Mode Instructions](https://www.wordskull.com/word-skull-game-easy-mode/#gameplay-instructions)
 
 ![Game Page - Easy Mode](https://github.com/user-attachments/assets/cc25033b-b177-4aaa-b4f4-5c4f3ba5021f)
@@ -78,9 +88,11 @@ The app is optimized for all screen sizes!
 ---
 
 ## Testing
+
 - Run the test suite:
   ```bash
   npm test
+  ```
 
 ## Project To-Do List
 
@@ -88,7 +100,7 @@ The app is optimized for all screen sizes!
 - [x] Create a project plan
 - [x] Implement NavBar
 - [x] Implement Footer
-- [x] Implement Universal Header
+- [x] Implement universal header
 - [x] Design skull patterns in a JSON file & implement logic to render out the board using these designs & apply appropriate styling.
 - [x] Use designs to create flashy animation on home page.
 - [x] Add menu to home pg that links to each difficulty mode & implement routes for each.
@@ -110,6 +122,7 @@ The app is optimized for all screen sizes!
 - [x] Add unit tests & start consistently unit testing each component alongside each feature/update etc.
 - [x] Deploy to production via Digital Ocean
 - [x] Add to Cloudflare CDN
+- [x] Apply SSL cert
 - [x] Create a dynamically generated sitemap & submit website/sitemap to Google Search Console & Bing Webmaster for indexing.
 - [x] Update Readme
 - [x] Generate a list of words for each character length & host file on Cloudflare R2. Have the file be loaded from API with a smaller list of words available within the repo for the app to fallback to incase of failure to connect with R2 bucket.
@@ -118,3 +131,43 @@ The app is optimized for all screen sizes!
 - [x] Update Readme
 - [x] Add buttons in game page header to allow users to view game over modal (when game ends), stats modal, instructions anchor link, and settings modal.
 - [x] Add gameplay instructions to be displayed under keyboard, which includes simple text and image instructions.
+- [x] Implement settings modal.
+- [x] Implement responsive design for all existing pages.
+- [x] Implement a virtual mobile keypad for small to medium screens while hiding virtual keyboard. Display virtual keyboard and hide virtual keypad for medium/large screens.
+- [x] Add button & logic to settings modal to hide/show virtual keyboard.
+- [x] Add logic to keyboard/keypad to allow users to interact directly with virtual keyboard.
+- [x] Add settings to toggle on/off keyboard interactivity.
+- [x] Add settings to hide/show gameplay instructions.
+- [ ] Use react portals to render modal correctly.
+- [ ] End 2 End Testing
+- [ ] Add PostHog to track user analytics
+- [ ] Mark existing repo as demo, clone Repo, make new repo private, continue work on private repo.
+- [ ] Animate the eyes.
+- [ ] Add character description page for each skull.
+- [ ] Add unique dialogue/text for each skull.
+- [ ] Add gameplay animations to make game feel more rewarding.
+- [ ] Implement db & server side logic to create universal puzzles that can be shared by users. Use this logic to include daily puzzles that are the same for all users.
+- [ ] Implement blog page to utilize .mdx pages to post well formatted blogs easily.
+- [ ] Implement db table to track & manage stats currently being managed by context/local storage.
+- [ ] Implement stats page which will allow users to track stats across all game modes.
+- [ ] Use chart.js to add graphs to stats page.
+- [ ] Try Drizzle ORM
+- [ ] Implement user login w/ custom auth logic
+- [ ] Implement social user login w/ OAuth
+- [ ] Implement Zen game mode which provides the users with unlimited lives/attempts
+- [ ] Implement Challenge game mode which includes a countdown timer to complete challenge
+- [ ] Implement Num Skull - Word skull with numbers
+- [ ] Implement Sum Skull - Addition game
+- [ ] Implement Sub Skull - Subtraction game
+- [ ] Implement Div Skull - Division game
+- [ ] Implement Mull Skull - Multiplication game
+- [ ] Implement World Skull - Geography trivia word game
+- [ ] Implement Food Skull - Food trivia word game
+- [ ] Implement Food Skull - Food trivia word game
+- [ ] Implement Leaderboard for each game type
+- [ ] Implement Leaderboard that summarizes all gameplay activity across the site
+- [ ] Add comprehensive FAQ page
+- [ ] Add advanced game settings eg. sound, disable entered words menu, etc.
+- [ ] Add contact form using Nodemailer and AWS SES for email & Cloudflare turnstile for CAPTCHA.
+- [ ] Add custom theme options & accessability features.
+- [ ] Start work on implementing games for mobile using React Native.
