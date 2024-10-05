@@ -4,6 +4,7 @@ import { useTheme } from "../context/ThemeContext";
 import { v4 as uuidv4 } from "uuid";
 import useKeyPress from "../hooks/useKeyPress";
 import SimulateKeyPress from "../utils/other/SimulateKeyPress";
+import { useSettings } from "../context/SettingsContext";
 interface PropType {
   currentlyEnteredWords: string[];
   currentWord: string;
@@ -34,6 +35,8 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
   const [correctCharCount, setCorrectCharCount] = useState<{
     [key: string]: number;
   }>({});
+
+  const {makeKeypadInteractive} = useSettings();
 
   useEffect(() => {
     // Create a new object for updated character counts
@@ -71,7 +74,7 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
             {keysArr.map((key) => (
               <li className="flex w-full" key={key.id}>
                 <button
-                  onClick={() => SimulateKeyPress(key.defaultKey)}
+                  onClick={() => makeKeypadInteractive && SimulateKeyPress(key.defaultKey)}
                   className={` h-[2.3em] min-w-[1.7em] w-full justify-center items-center flex rounded-sm ${
                     darkThemeActive
                       ? "bg-white text-slate-600"
