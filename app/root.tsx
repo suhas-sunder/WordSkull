@@ -25,44 +25,6 @@ import { SettingsProvider } from "./client/components/context/SettingsContext";
 import { StatsProvider } from "./client/components/context/StatsContext";
 import ErrorBoundary from "./client/components/utils/errors/ErrorBoundary";
 
-// Layout Component for rendering HTML structure
-export function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <ErrorBoundary>
-        {" "}
-        <ThemeProvider>
-          <SettingsProvider>
-            <StatsProvider>
-              <Body>{children}</Body>
-            </StatsProvider>
-          </SettingsProvider>
-        </ThemeProvider>
-      </ErrorBoundary>
-    </html>
-  );
-}
-
-export function Body({ children }: { children: React.ReactNode }) {
-  const { darkThemeActive } = useTheme();
-
-  return (
-    <body className={`pt-6 ${darkThemeActive && "bg-slate-900"}`}>
-      <NavBar />
-      <div>{children}</div>
-      <ScrollRestoration />
-      <Scripts />
-      <Footer />
-    </body>
-  );
-}
-
 // Loader function to fetch and return data
 export const loader = async () => {
   let words = {};
@@ -130,6 +92,43 @@ export async function clientLoader({ serverLoader }: ClientLoaderFunctionArgs) {
     console.error("Error fetching or decompressing words data:", error);
     return { words: [] }; // Return an empty array in case of failure
   }
+}
+
+// Layout Component for rendering HTML structure
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>{" "}
+      <ErrorBoundary>
+        <ThemeProvider>
+          <SettingsProvider>
+            <StatsProvider>
+              <Body>{children}</Body>
+            </StatsProvider>
+          </SettingsProvider>
+        </ThemeProvider>
+      </ErrorBoundary>
+    </html>
+  );
+}
+
+export function Body({ children }: { children: React.ReactNode }) {
+  const { darkThemeActive } = useTheme();
+
+  return (
+    <body className={`pt-6 ${darkThemeActive && "bg-slate-900"}`}>
+      <NavBar />
+      <div>{children}</div>
+      <ScrollRestoration />
+      <Scripts />
+      <Footer />
+    </body>
+  );
 }
 
 // App Component for managing application state
