@@ -85,15 +85,11 @@ The app is optimized for all screen sizes!
 
 ![Game Page - Easy Mode](https://github.com/user-attachments/assets/cc25033b-b177-4aaa-b4f4-5c4f3ba5021f)
 
-## Feature Demo: Virtual Keyboard & Keypad Functionality
+## Feature Demo #1: Virtual Keyboard & Keypad Functionality
 
 We’ve recently introduced an interactive **virtual keyboard (for large screens)** and **keypad (for small screens)** in WordSkull! Check out the demo to see it in action:
 
 [Watch Feature Demo on YouTube](https://youtu.be/hpjmjN0qjh8)
-
-Or click the image below:
-
-[![Virtual Keyboard & Keypad Demo](https://img.youtube.com/vi/hpjmjN0qjh8/0.jpg)](https://youtu.be/hpjmjN0qjh8)
 
 ---
 
