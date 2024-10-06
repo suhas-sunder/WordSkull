@@ -85,6 +85,12 @@ The app is optimized for all screen sizes!
 
 ![Game Page - Easy Mode](https://github.com/user-attachments/assets/cc25033b-b177-4aaa-b4f4-5c4f3ba5021f)
 
+## Feature Demo #1: Virtual Keyboard & Keypad Functionality
+
+We’ve recently introduced an interactive **virtual keyboard (for large screens)** and **keypad (for small screens)** in WordSkull! Check out the demo to see it in action:
+
+[Watch Feature Demo on YouTube](https://youtu.be/hpjmjN0qjh8)
+
 ---
 
 ## Testing
@@ -125,7 +131,7 @@ The app is optimized for all screen sizes!
 - [x] Apply SSL cert
 - [x] Create a dynamically generated sitemap & submit website/sitemap to Google Search Console & Bing Webmaster for indexing.
 - [x] Update Readme
-- [x] Generate a list of words for each character length & host file on Cloudflare R2. Have the file be loaded from API with a smaller list of words available within the repo for the app to fallback to incase of failure to connect with R2 bucket.
+- [x] Generate a list of words sorted by char length & host list on Cloudflare R2. Load file from API. Have a smaller list of words available within the repo for the app to fallback on if connecting to R2 bucket fails.
 - [x] Add logic to game over menu to allow users to download/copy/share a snapshot of their gameplay results.
 - [x] Add play again button to game over menu.
 - [x] Update Readme
@@ -147,7 +153,6 @@ The app is optimized for all screen sizes!
 - [ ] Add unique dialogue/text for each skull.
 - [ ] Add gameplay animations to make game feel more rewarding.
 - [ ] Implement db & server side logic to create universal puzzles that can be shared by users. Use this logic to include daily puzzles that are the same for all users.
-- [ ] Implement blog page to utilize .mdx pages to post well formatted blogs easily.
 - [ ] Implement db table to track & manage stats currently being managed by context/local storage.
 - [ ] Implement stats page which will allow users to track stats across all game modes.
 - [ ] Use chart.js to add graphs to stats page.
@@ -170,4 +175,6 @@ The app is optimized for all screen sizes!
 - [ ] Add advanced game settings eg. sound, disable entered words menu, etc.
 - [ ] Add contact form using Nodemailer and AWS SES for email & Cloudflare turnstile for CAPTCHA.
 - [ ] Add custom theme options & accessability features.
+- [ ] Implement blog page to utilize .mdx pages to post well formatted blogs easily.
+- [ ] Add articles to blog.
 - [ ] Start work on implementing games for mobile using React Native.

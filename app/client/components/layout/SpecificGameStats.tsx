@@ -108,111 +108,108 @@ function SpecificGameStats({ showStats, setShowStats }: PropType) {
         >
           <>
             <h2 className="text-2xl font-nunito text-skull-super-dark-brown">
-              Game Stats
+              Statistics
               <span className="flex flex-col font-nunito w-full justify-center items-center gap-3 mt-3 text-xs">
                 <span>Difficulty: {difficulty}</span>
                 <span>Game Mode: {gameMode}</span>
               </span>
             </h2>
-            <h2 className="text-xl font-bold mb-4">Statistics</h2>
-              <div className="grid grid-cols-3 gap-4 mb-4">
-                <div className="stat-box">
-                  <h3 className="text-lg font-semibold">{gamesPlayed}</h3>
-                  <p>Games Played</p>
-                </div>
-                <div className="stat-box">
-                  <h3 className="text-lg font-semibold">{gamesWon}</h3>
-                  <p>Games Won</p>
-                </div>
-                <div className="stat-box">
-                  <h3 className="text-lg font-semibold">{winPercentage}%</h3>
-                  <p>% of Wins</p>
-                </div>
-                <div className="stat-box">
-                  <h3 className="text-lg font-semibold">
-                    {bestTime ? SecondsToTime(bestTime.timeSpentSec) : "N/A"}
-                  </h3>
-                  <p>Best Time</p>
-                </div>
-                <div className="stat-box">
-                  <h3 className="text-lg font-semibold">{currentStreak}</h3>
-                  <p>Current Streak</p>
-                </div>
-                <div className="stat-box">
-                  <h3 className="text-lg font-semibold">{maxStreak}</h3>
-                  <p>Max Streak</p>
-                </div>
-              </div>
-              <div className="mb-4 w-full">
-                <h3 className="text-lg font-semibold">
-                  Best Tries Distribution
-                </h3>
-                <div className="flex flex-col mt-2">
-                  {rowCompletionDistribution.map((count, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between"
-                    >
-                      <span className="flex whitespace-nowrap">
-                        Row {index + 1}
-                      </span>
-                      <div className="w-full bg-gray-200 h-2 rounded mx-4">
-                        <div
-                          className="bg-blue-500 h-full rounded"
-                          style={{ width: `${(count / gamesPlayed) * 100}%` }}
-                        />
-                      </div>
-                      <span className="whitespace-nowrap">
-                        ({((count / gamesPlayed) * 100).toFixed(0)}%)
-                      </span>
+            <ul className="grid grid-cols-3 gap-4 mb-4">
+              <li className="stat-box">
+                <p className="text-lg font-semibold">{gamesPlayed}</p>
+                <p>Games Played</p>
+              </li>
+              <li className="stat-box">
+                <p className="text-lg font-semibold">{gamesWon}</p>
+                <p>Games Won</p>
+              </li>
+              <li className="stat-box">
+                <p className="text-lg font-semibold">{winPercentage}%</p>
+                <p>% of Wins</p>
+              </li>
+              <li className="stat-box">
+                <p className="text-lg font-semibold">
+                  {bestTime ? SecondsToTime(bestTime.timeSpentSec) : "N/A"}
+                </p>
+                <p>Best Time</p>
+              </li>
+              <li className="stat-box">
+                <p className="text-lg font-semibold">{currentStreak}</p>
+                <p>Current Streak</p>
+              </li>
+              <li className="stat-box">
+                <p className="text-lg font-semibold">{maxStreak}</p>
+                <p>Max Streak</p>
+              </li>
+            </ul>
+            <div className="mb-4 w-full">
+              <p className="text-lg font-semibold">Best Tries Distribution</p>
+              <div className="flex flex-col mt-2">
+                {rowCompletionDistribution.map((count, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between"
+                  >
+                    <span className="flex whitespace-nowrap">
+                      Row {index + 1}
+                    </span>
+                    <div className="w-full bg-gray-200 h-2 rounded mx-4">
+                      <div
+                        className="bg-blue-500 h-full rounded"
+                        style={{ width: `${(count / gamesPlayed) * 100}%` }}
+                      />
                     </div>
-                  ))}
-                </div>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">
-                Best Win with Least Lives Lost:
-              </h3>
-              <div className="flex gap-4">
-                {bestWinWithLeastLivesLost ? (
-                  <div className="grid grid-cols-4 gap-10">
-                    <div>
-                      <h4 className="text-sm font-semibold">Date</h4>
-                      <h3 className="text-lg font-semibold">
-                        {new Date(
-                          bestWinWithLeastLivesLost.game.date
-                        ).toLocaleDateString()}
-                      </h3>
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold">Words</h4>
-                      <h3 className="text-lg font-semibold">
-                        {bestWinWithLeastLivesLost.game.correctWords}/
-                        {bestWinWithLeastLivesLost.game.totalWords}
-                      </h3>
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold">Lives Left</h4>
-                      <h3 className="text-lg font-semibold">
-                        {bestWinWithLeastLivesLost.game.livesLeft}/
-                        {bestWinWithLeastLivesLost.game.totalLives}
-                      </h3>
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold">Time Spent</h4>
-                      <h3 className="text-lg font-semibold">
-                        {SecondsToTime(
-                          bestWinWithLeastLivesLost.game.timeSpentSec
-                        )}
-                      </h3>
-                    </div>
+                    <span className="whitespace-nowrap">
+                      ({((count / gamesPlayed) * 100).toFixed(0)}%)
+                    </span>
                   </div>
-                ) : (
-                  <div className="stat-box">
-                    <h3 className="text-lg font-semibold">N/A</h3>
-                    <p>No wins found with perfect score.</p>
-                  </div>
-                )}
+                ))}
               </div>
+            </div>
+            <h3 className="text-lg font-semibold mb-2">
+              Best Win with Least Lives Lost:
+            </h3>
+            <div className="flex gap-4">
+              {bestWinWithLeastLivesLost ? (
+                <ul className="grid grid-cols-4 gap-10">
+                  <li>
+                    <h4 className="text-sm font-semibold">Date</h4>
+                    <p className="text-lg font-semibold">
+                      {new Date(
+                        bestWinWithLeastLivesLost.game.date
+                      ).toLocaleDateString()}
+                    </p>
+                  </li>
+                  <li>
+                    <h4 className="text-sm font-semibold">Words</h4>
+                    <p className="text-lg font-semibold">
+                      {bestWinWithLeastLivesLost.game.correctWords}/
+                      {bestWinWithLeastLivesLost.game.totalWords}
+                    </p>
+                  </li>
+                  <li>
+                    <h4 className="text-sm font-semibold">Lives Left</h4>
+                    <p className="text-lg font-semibold">
+                      {bestWinWithLeastLivesLost.game.livesLeft}/
+                      {bestWinWithLeastLivesLost.game.totalLives}
+                    </p>
+                  </li>
+                  <li>
+                    <h4 className="text-sm font-semibold">Time Spent</h4>
+                    <p className="text-lg font-semibold">
+                      {SecondsToTime(
+                        bestWinWithLeastLivesLost.game.timeSpentSec
+                      )}
+                    </p>
+                  </li>
+                </ul>
+              ) : (
+                <div className="stat-box">
+                  <p className="text-lg font-semibold">N/A</p>
+                  <p>No wins found with perfect score.</p>
+                </div>
+              )}
+            </div>
           </>
         </ModalWrapper>
       )}

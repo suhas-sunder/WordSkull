@@ -1,4 +1,5 @@
-import React, { Component, ErrorInfo } from 'react';
+import React, { Component, ErrorInfo } from "react";
+import Error from "../../ui/Error";
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -28,12 +29,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       // Fallback UI
-      return (
-        <div>
-          <h1>Something went wrong!</h1>
-          <pre>{this.state.error?.message}</pre>
-        </div>
-      );
+      return <Error />;
     }
 
     return this.props.children;

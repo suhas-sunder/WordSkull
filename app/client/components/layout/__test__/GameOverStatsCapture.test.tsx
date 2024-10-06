@@ -45,7 +45,7 @@ beforeEach(() => {
   MockGameOverStatsCapture(props);
 });
 
-describe("GameOverStatsCapture Component", () => {
+describe("renders game over elements to be captured & shared", () => {
   it("should renders element with text 'Correct Words'", () => {
     expect(screen.getByText("Correct Words")).toBeInTheDocument();
   });
