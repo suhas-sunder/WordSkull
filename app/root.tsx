@@ -23,6 +23,7 @@ import {
 import localforage from "localforage";
 import { SettingsProvider } from "./client/components/context/SettingsContext";
 import { StatsProvider } from "./client/components/context/StatsContext";
+import ErrorBoundary from "./client/components/utils/errors/ErrorBoundary";
 
 // Layout Component for rendering HTML structure
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -34,13 +35,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <ThemeProvider>
-        <SettingsProvider>
-          <StatsProvider>
-            <Body>{children}</Body>
-          </StatsProvider>
-        </SettingsProvider>
-      </ThemeProvider>
+      <ErrorBoundary>
+        {" "}
+        <ThemeProvider>
+          <SettingsProvider>
+            <StatsProvider>
+              <Body>{children}</Body>
+            </StatsProvider>
+          </SettingsProvider>
+        </ThemeProvider>
+      </ErrorBoundary>
     </html>
   );
 }
