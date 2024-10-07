@@ -9,6 +9,7 @@ interface ModalPropType {
   setShowModal: (value: boolean) => void;
   children: JSX.Element;
   customClass?: string;
+  showModal: boolean;
 }
 
 // Create a mock ModalWrapper with MockThemeProvider and MemoryRouter
@@ -16,11 +17,16 @@ const MockModalWrapper = ({
   setShowModal,
   children,
   customClass,
+  showModal,
 }: ModalPropType) => {
   render(
     <MemoryRouter>
       <MockThemeProvider darkThemeActive={true}>
-        <ModalWrapper setShowModal={setShowModal} customClass={customClass}>
+        <ModalWrapper
+          setShowModal={setShowModal}
+          customClass={customClass}
+          showModal={showModal}
+        >
           {children}
         </ModalWrapper>
       </MockThemeProvider>
@@ -30,19 +36,20 @@ const MockModalWrapper = ({
 
 const setShowModalMock = vi.fn();
 
-beforeEach(() => {
-  MockModalWrapper({
-    setShowModal: setShowModalMock,
-    children: <div data-testid="child">Child Content</div>,
-    customClass: "custom-modal-class",
-  });
-});
-
-afterEach(() => {
-  vi.clearAllMocks();
-});
-
 describe("modal wrapper renders modal correctly", () => {
+  beforeEach(() => {
+    MockModalWrapper({
+      setShowModal: setShowModalMock,
+      children: <div data-testid="child">Child Content</div>,
+      customClass: "custom-modal-class",
+      showModal: true,
+    });
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("should render children correctly", () => {
     const childElement = screen.getByTestId("child");
     expect(childElement).toBeInTheDocument();
@@ -67,10 +74,12 @@ describe("modal wrapper renders modal correctly", () => {
   it("should handle multiple modal instances correctly if rendered simultaneously", () => {
     MockModalWrapper({
       setShowModal: setShowModalMock,
+      showModal: true,
       children: <div data-testid="child-1">Child Content 1</div>,
     });
     MockModalWrapper({
       setShowModal: setShowModalMock,
+      showModal: true,
       children: <div data-testid="child-2">Child Content 2</div>,
     });
 
@@ -82,8 +91,20 @@ describe("modal wrapper renders modal correctly", () => {
   });
 });
 
+describe("handles user events correctly", () => {
+  beforeEach(() => {
+    MockModalWrapper({
+      setShowModal: setShowModalMock,
+      children: <div data-testid="child">Child Content</div>,
+      customClass: "custom-modal-class",
+      showModal: true,
+    });
+  });
 
-describe("handles user events correctly", () => {  
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("should not close the modal when clicking inside the modal content", () => {
     const childElement = screen.getByTestId("child");
     fireEvent.click(childElement);
@@ -110,4 +131,17 @@ describe("handles user events correctly", () => {
 
     expect(setShowModalMock).toHaveBeenCalledWith(false);
   });
-})
+});
+
+describe("should not render", () => {
+  it("should not render modal when showModal is false", () => {
+    MockModalWrapper({
+      setShowModal: setShowModalMock,
+      children: <div data-testid="child"></div>,
+      customClass: "custom-modal-class",
+      showModal: false,
+    });
+    const childElement = screen.queryByTestId("child");
+    expect(childElement).not.toBeInTheDocument();
+  });
+});
