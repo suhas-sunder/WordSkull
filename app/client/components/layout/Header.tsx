@@ -2,7 +2,7 @@ import { useState } from "react";
 import GameSettings from "../ui/GameSettings";
 import HeaderMenu from "../ui/HeaderMenu";
 import { useTheme } from "../context/ThemeContext";
-import SpecificGameStats from "./SpecificGameStats";
+import SpecificGameStats from "../ui/SpecificGameStats";
 
 interface PropType {
   lives: number | null;

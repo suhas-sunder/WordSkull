@@ -4,6 +4,7 @@ import SecondsToTime from "../utils/converters/SecondsToTime";
 import { StatsDataType, useStats } from "../context/StatsContext";
 import { v4 as uuidv4 } from "uuid";
 import ModalWrapper from "./ModalWrapper";
+import useOnlyOnClient from "../hooks/useOnlyOnClient";
 
 interface PropType {
   isGameOver: boolean;
@@ -26,6 +27,8 @@ function GameOverMenu({
   currentRow,
   wordsForSkull,
 }: PropType) {
+  
+  
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
   const { setStats, difficulty, gameMode } = useStats();
@@ -88,10 +91,21 @@ function GameOverMenu({
     return "You Lose!";
   };
 
+  const isClient = useOnlyOnClient(); //Prevent hydration issues
+
+  // Don't render anything until we're on the client
+  if (!isClient) {
+    return null;
+  }
+
   return (
     <>
-      {isGameOver && showGameOverMenu && (
-        <ModalWrapper setShowModal={setShowGameOverMenu} customClass="top-[23em] sm:top-[14.5em]">
+      {isGameOver && (
+        <ModalWrapper
+          showModal={showGameOverMenu}
+          setShowModal={setShowGameOverMenu}
+          customClass="top-[6em]"
+        >
           <>
             <div
               data-testid="game-over-menu"
