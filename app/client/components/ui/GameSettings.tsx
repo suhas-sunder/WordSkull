@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSettings } from "../context/SettingsContext";
 import ModalWrapper from "./ModalWrapper";
+import useOnlyOnClient from "../hooks/useOnlyOnClient";
 
 interface PropType {
   showSettings: boolean;
@@ -98,53 +99,57 @@ function GameSettings({ showSettings, setShowSettings }: PropType) {
     setMakeKeypadInteractive,
     makeKeypadInteractive,
   } = useSettings();
+
+  const isClient = useOnlyOnClient(); //Prevent hydration issues
+
+  // Don't render anything until we're on the client
+  if (!isClient) {
+    return null;
+  }
   return (
-    <>
-      {showSettings && (
-        <ModalWrapper
-          setShowModal={setShowSettings}
-          customClass="top-[13em] py-[2em]"
-        >
-          <>
-            <h2 className="text-2xl font-nunito text-skull-super-dark-brown">
-              Settings
-            </h2>
-            <ul className="w-full flex flex-col gap-5 text-skull-dark-brown px-5 md:px-0">
-              <li className="flex w-full justify-between md:max-w-[80%] mx-auto">
-                {CreateToggleOptions({
-                  value: showKeyboard,
-                  setValue: setShowKeyboard,
-                  title: "Virtual Keyboard",
-                  offStateText: "Hidden",
-                  onStateText: "Visible",
-                })}
-              </li>
-              <li className="flex w-full justify-between md:max-w-[80%] mx-auto">
-                {CreateToggleOptions({
-                  value: makeKeypadInteractive,
-                  setValue: setMakeKeypadInteractive,
-                  title: "Interactive Keyboard",
-                  onStateText: "Yes",
-                  offStateText: "No",
-                })}
-              </li>
-              <li className="flex w-full justify-between md:max-w-[80%] mx-auto">
-                {CreateToggleOptions({
-                  value: showInstructions,
-                  setValue: setShowInstructions,
-                  title: "Gameplay Instructions",
-                  offStateText: "Hidden",
-                  onStateText: "Visible",
-                })}
-              </li>
-              <li className="flex w-full justify-between md:max-w-[80%] mx-auto gap-5">
-                {DifficultyLinks()}
-              </li>
-            </ul>
-          </>
-        </ModalWrapper>
-      )}
-    </>
+    <ModalWrapper
+      showModal={showSettings}
+      setShowModal={setShowSettings}
+      customClass="top-[6em] py-[2em]"
+    >
+      <>
+        <h2 className="text-2xl font-nunito text-skull-super-dark-brown">
+          Settings
+        </h2>
+        <ul className="w-full flex flex-col gap-5 text-skull-dark-brown px-5 md:px-0">
+          <li className="flex w-full justify-between md:max-w-[80%] mx-auto">
+            {CreateToggleOptions({
+              value: showKeyboard,
+              setValue: setShowKeyboard,
+              title: "Virtual Keyboard",
+              offStateText: "Hidden",
+              onStateText: "Visible",
+            })}
+          </li>
+          <li className="flex w-full justify-between md:max-w-[80%] mx-auto">
+            {CreateToggleOptions({
+              value: makeKeypadInteractive,
+              setValue: setMakeKeypadInteractive,
+              title: "Interactive Keyboard",
+              onStateText: "Yes",
+              offStateText: "No",
+            })}
+          </li>
+          <li className="flex w-full justify-between md:max-w-[80%] mx-auto">
+            {CreateToggleOptions({
+              value: showInstructions,
+              setValue: setShowInstructions,
+              title: "Gameplay Instructions",
+              offStateText: "Hidden",
+              onStateText: "Visible",
+            })}
+          </li>
+          <li className="flex w-full justify-between md:max-w-[80%] mx-auto gap-5">
+            {DifficultyLinks()}
+          </li>
+        </ul>
+      </>
+    </ModalWrapper>
   );
 }
 
