@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import HandleShiftIndex from "../utils/other/HandleShiftIndex";
 import { v4 as uuidv4 } from "uuid";
@@ -27,6 +28,7 @@ function DisplaySkull({
   enteredWords,
   enterPressed,
 }: PropType) {
+  const [shouldDelayValidation, setShouldDelayValidation] = useState(false); // To control when to apply validation styling
   const { darkThemeActive } = useTheme();
 
   //Controls styling of characters that have been guessed correctly. Green for exact match, and yellow for partial.
@@ -110,6 +112,24 @@ function DisplaySkull({
     return style;
   };
 
+  //Add delay for validation styling to be applied after CSS animation ends
+  useEffect(() => {
+    let timer = null;
+
+    // When enter is pressed, trigger validation after a delay
+    if (enterPressed) {
+      setShouldDelayValidation(true); // Start the validation process
+      timer = setTimeout(() => {
+        setShouldDelayValidation(false); // Reset after the delay
+      }, 900); // 900ms delay
+    }
+
+    // Cleanup the timer
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [enterPressed]); // Runs when enterPressed changes
+
   return (
     <>
       {currentSkull.map((skull, index) => {
@@ -117,7 +137,7 @@ function DisplaySkull({
           <div
             data-testid="display-skull"
             key={index}
-            className="tile relative flex-col w-full max-w-[800px] xs:scale-[0.9]  min-h-[12em] xs:min-h-[20em] capitalize flex font-nunito text-slate-400 items-center"
+            className="relative flex-col w-full max-w-[800px] xs:scale-[0.9]  min-h-[12em] xs:min-h-[20em] capitalize flex font-nunito text-slate-400 items-center"
           >
             {skull.map((row, rowIndex) => {
               let squareCount = 0; // Reset squareCount at the start of each row
@@ -141,7 +161,7 @@ function DisplaySkull({
                           } text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center`}
                         ></li>
                       );
-                    } else if (square !== "@" && square !== "~") {
+                    } else {
                       squareCount += 1; // Increment squareCount only for empty squares
                       const shiftIndex = HandleShiftIndex({
                         currentRowIndex,
@@ -173,8 +193,8 @@ function DisplaySkull({
                                 : "border-slate-400 text-slate-500 "
                             }  border-[2.5px] `
                           }  text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center  ${
-                            enterPressed &&
                             rowIndex === currentRow &&
+                            !shouldDelayValidation &&
                             handleValidationStyling({
                               enteredWords,
                               currentRow,
@@ -193,14 +213,18 @@ function DisplaySkull({
                           >
                             {squareCount}
                           </span>
-                          <span className="translate-y-[0.16em] xs:translate-y-1">
+                          <span
+                            className={`transition-transform ${
+                              enterPressed && shouldDelayValidation
+                                ? "animate-flip"
+                                : ""
+                            } translate-y-[0.16em] xs:translate-y-1`}
+                          >
                             {square}
                           </span>
                         </li>
                       );
                     }
-
-                    return null;
                   })}
                 </ul>
               );
