@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import HandleShiftIndex from "../utils/other/HandleShiftIndex";
+import HandleShiftIndexForward from "../utils/other/ShiftIndexForward";
 import useHandleGameOver from "./useHandleGameOver";
 import useTotalLives from "./useTotalLives";
 import useDelay from "./useDelay";
+import ShiftIndexBackward from "../utils/other/ShiftIndexBackward";
 
 interface PropType {
   currentSkull: string[][][];
@@ -44,13 +45,13 @@ function useClassicGameplayLogic({
 
   //Handles index shift & updates to current row
   const handleNextRow = useCallback(() => {
-    const shiftIndex = HandleShiftIndex({
+    const shiftedIndex = HandleShiftIndexForward({
       currentSkull,
       currentRow,
       currentRowIndex,
     });
 
-    if (currentRowIndex + shiftIndex === currentSkull[0][currentRow].length) {
+    if (currentRowIndex + shiftedIndex === currentSkull[0][currentRow].length) {
       setCurrentRowIndex(0);
       setCurrentRow((prevState) => prevState + 1);
     }
@@ -76,9 +77,9 @@ function useClassicGameplayLogic({
   useEffect(() => {
     if (isGameOver) return;
 
-    //If a square is marked with "@" or "~" it can't be changed so shift the index to a square that can.
-    const handleUpdateSquare = (key: string) => {
-      const shiftIndex = HandleShiftIndex({
+    //If a square is marked with "@" or "~" it shouldn't be changed so shift the current row index to a square that should.
+    const handleUpdateRowIndex = (key: string) => {
+      const shiftIndex = HandleShiftIndexForward({
         currentSkull,
         currentRow,
         currentRowIndex,
@@ -104,43 +105,27 @@ function useClassicGameplayLogic({
       }
     };
 
-    const handleShiftIndexBackwards = () => {
-      let defaultIndex = currentRowIndex - 1;
-
-      //Skip squares that start with "@" or "~" so that empty and eyeball squares are not changed
-      while (
-        currentSkull[0][currentRow][defaultIndex] === "@" ||
-        currentSkull[0][currentRow][defaultIndex] === "~"
-      ) {
-        defaultIndex--;
-      }
-
-      //For corner squares that start with "@" or "~", the index can be less than 0. If so, set it back to the first empty position in the row.
-      if (defaultIndex < 0) {
-        currentSkull[0][currentRow].forEach((square, index) => {
-          if (defaultIndex < 0 && square === "") defaultIndex = index;
-        });
-      }
-
-      return defaultIndex;
-    };
-
+    //Handle backspace key
     const handleDeleteChar = () => {
       if (currentRowIndex > 0) {
-        const shiftIndexBackwards = handleShiftIndexBackwards();
+        const shiftedIndex = ShiftIndexBackward({
+          currentSkull,
+          currentRow,
+          currentRowIndex,
+        }); //Shift index backwards if condition is met
 
         setCurrentSkull((prevState) => {
           // Create a new copy of the previous state array
           const newState: string[][][] = [...prevState];
 
           // Update the specific element within the row
-          newState[0][currentRow][shiftIndexBackwards] = "";
+          newState[0][currentRow][shiftedIndex] = "";
 
           // Return the updated state
           return newState;
         });
 
-        setCurrentRowIndex(shiftIndexBackwards);
+        setCurrentRowIndex(shiftedIndex);
       }
     };
 
@@ -249,7 +234,7 @@ function useClassicGameplayLogic({
         setEnterPressed(false);
         handleDeleteChar();
       } else {
-        handleUpdateSquare(key);
+        handleUpdateRowIndex(key);
       }
     };
 

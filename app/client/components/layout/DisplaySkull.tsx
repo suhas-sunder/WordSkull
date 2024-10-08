@@ -1,5 +1,5 @@
 import { useTheme } from "../context/ThemeContext";
-import HandleShiftIndex from "../utils/other/HandleShiftIndex";
+import ShiftIndexForward from "../utils/other/ShiftIndexForward";
 import { v4 as uuidv4 } from "uuid";
 import useDelay from "../hooks/useDelay";
 
@@ -130,7 +130,7 @@ function DisplaySkull({
             className="relative flex-col w-full max-w-[800px] xs:scale-[0.9]  min-h-[12em] xs:min-h-[20em] capitalize flex font-nunito text-slate-400 items-center"
           >
             {skull.map((row, rowIndex) => {
-              let squareCount = 0; // Reset squareCount at the start of each row
+              let squareCount = 0; // Reset squareCount at the start of each row. This is the value displayed in the top left corner of each square.
 
               return (
                 <ul key={uuidv4()} className="flex ">
@@ -143,6 +143,7 @@ function DisplaySkull({
                         ></li>
                       );
                     } else if (square === "~") {
+                      //Return empty square with proper styling for "empty squares"
                       return (
                         <li
                           key={uuidv4()}
@@ -152,12 +153,15 @@ function DisplaySkull({
                         ></li>
                       );
                     } else {
-                      squareCount += 1; // Increment squareCount only for empty squares
-                      const shiftIndex = HandleShiftIndex({
+                      //Return all valid characters with proper styling
+                      squareCount += 1; // Increment squareCount only for non-empty squares.
+
+                      const shiftedIndex = ShiftIndexForward({
                         currentRowIndex,
                         currentRow,
                         currentSkull,
                       });
+
                       return (
                         <li
                           key={uuidv4()}
@@ -177,7 +181,7 @@ function DisplaySkull({
                             ${
                               //Apply default styling to all empty squares & vary styling for current square so user can tell which square will be filled in next
                               rowIndex === currentRow &&
-                              squareIndex === currentRowIndex + shiftIndex
+                              squareIndex === currentRowIndex + shiftedIndex
                                 ? `${
                                     darkThemeActive
                                       ? "bg-slate-300  text-slate-700"

@@ -7,7 +7,8 @@ interface PropType {
 // Create a cache map to store the computed shift index values
 const cache = new Map<string, number>();
 
-function HandleShiftIndex({
+//Determine if character index needs to be shifted forward
+export default function ShiftIndexForward({
   currentSkull,
   currentRow,
   currentRowIndex,
@@ -32,22 +33,21 @@ function HandleShiftIndex({
   // Extract the row from the skull and initialize variables
   const row = currentSkull[0][currentRow];
   const length = row.length;
-  let defaultIndex = 0;
+  let shiftedIndex = 0;
 
   // Calculate the shift index by checking the row's content
   while (
-    currentRowIndex + defaultIndex < length &&
-    (row[currentRowIndex + defaultIndex] === "@" ||
-      row[currentRowIndex + defaultIndex] === "~")
+    currentRowIndex + shiftedIndex < length &&
+    (row[currentRowIndex + shiftedIndex] === "@" ||
+      row[currentRowIndex + shiftedIndex] === "~")
   ) {
-    defaultIndex++;
+    shiftedIndex++;
   }
 
   // Store the computed value in the cache
-  cache.set(cacheKey, defaultIndex);
+  cache.set(cacheKey, shiftedIndex);
 
   // Return the computed shift index
-  return defaultIndex;
+  return shiftedIndex;
 }
 
-export default HandleShiftIndex;

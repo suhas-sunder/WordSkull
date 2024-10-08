@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import HandleShiftIndex from "../HandleShiftIndex";
+import HandleShiftIndex from "../ShiftIndexForward";
 
 describe("shifts index correctly", () => {
   it("should return 0 for an out-of-bounds currentRow", () => {
