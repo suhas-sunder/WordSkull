@@ -9,7 +9,7 @@ interface PropType {
   currentRowIndex: number;
   wordsForSkull: string[];
   enteredWords: string[][];
-  enterPressed: boolean;
+  isEnterPressed: boolean;
 }
 
 interface ValidationPropType {
@@ -26,11 +26,11 @@ function DisplaySkull({
   currentRowIndex,
   wordsForSkull,
   enteredWords,
-  enterPressed,
+  isEnterPressed,
 }: PropType) {
   const { darkThemeActive } = useTheme();
   const { isDelaying } = useDelay({
-    enterPressed,
+    isEnterPressed,
 
     msecondsToDelay: 900,
   });
@@ -206,7 +206,7 @@ function DisplaySkull({
                           }  ${
                             //Apply styling based on character correctness
                             rowIndex === currentRow &&
-                            enterPressed &&
+                            isEnterPressed &&
                             !isDelaying &&
                             currentRow === rowIndex &&
                             handleValidationStyling({
@@ -230,7 +230,7 @@ function DisplaySkull({
                           <span
                             className={`transition-transform ${
                               //If a word is entered and the current square is the last square in the row, apply the flip animation
-                              enterPressed &&
+                              isEnterPressed &&
                               isDelaying &&
                               currentRow === rowIndex
                                 ? "animate-flip"

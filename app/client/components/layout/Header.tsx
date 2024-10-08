@@ -1,8 +1,8 @@
 import { useState } from "react";
-import GameSettings from "../ui/GameSettings";
-import HeaderMenu from "../ui/HeaderMenu";
+import GameSettings from "../ui/interactive/GameSettings";
+import HeaderMenu from "../ui/interactive/HeaderMenu";
 import { useTheme } from "../context/ThemeContext";
-import SpecificGameStats from "../ui/SpecificGameStats";
+import SpecificGameStats from "../ui/interactive/SpecificGameStats";
 
 interface PropType {
   lives: number | null;

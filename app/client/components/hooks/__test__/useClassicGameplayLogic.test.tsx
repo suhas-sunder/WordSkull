@@ -22,7 +22,7 @@ const TestComponent = (props: PropType) => {
     currentRow,
     currentRowIndex,
     enteredWords,
-    enterPressed,
+    isEnterPressed,
     isGameOver,
     lives,
     maxLives,
@@ -35,7 +35,7 @@ const TestComponent = (props: PropType) => {
       <div data-testid="current-row">{currentRow}</div>
       <div data-testid="current-row-index">{currentRowIndex}</div>
       <div data-testid="entered-words">{JSON.stringify(enteredWords)}</div>
-      <div data-testid="enter-pressed">{enterPressed ? "true" : "false"}</div>
+      <div data-testid="enter-pressed">{isEnterPressed ? "true" : "false"}</div>
       <div data-testid="is-game-over">{isGameOver ? "true" : "false"}</div>
       <div data-testid="lives">{lives}</div>
       <div data-testid="max-lives">{maxLives}</div>

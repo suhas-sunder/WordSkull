@@ -25,12 +25,12 @@ function useClassicGameplayLogic({
   const [currentRow, setCurrentRow] = useState<number>(0);
   const [currentRowIndex, setCurrentRowIndex] = useState<number>(0);
   const [enteredWords, setEnteredWords] = useState<string[][]>([]);
-  const [enterPressed, setEnterPressed] = useState(false);
+  const [isEnterPressed, setIsEnterPressed] = useState(false);
   const [previouslyEnteredKey, setPreviouslyEnteredKey] =
     useState<string>("ResetKeyState"); //Use this to make sure some events only run on keydown and not on when key is pressed
   const [answerCorrect, setAnswerCorrect] = useState<boolean>(false);
 
-  const { isDelaying } = useDelay({ enterPressed, msecondsToDelay: 950 });
+  const { isDelaying } = useDelay({ isEnterPressed, msecondsToDelay: 950 });
 
   const { isGameOver, setIsGameOver } = useHandleGameOver({
     currentRow,
@@ -61,10 +61,10 @@ function useClassicGameplayLogic({
   useEffect(() => {
     let timer = null;
     if (answerCorrect) {
-      setEnterPressed(true);
+      setIsEnterPressed(true);
       timer = setTimeout(() => {
         setAnswerCorrect(false);
-        setEnterPressed(false);
+        setIsEnterPressed(false);
         handleNextRow();
       }, 1000);
     }
@@ -72,7 +72,7 @@ function useClassicGameplayLogic({
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [answerCorrect, handleNextRow, setAnswerCorrect, setEnterPressed]);
+  }, [answerCorrect, handleNextRow, setAnswerCorrect, setIsEnterPressed]);
 
   useEffect(() => {
     if (isGameOver) return;
@@ -170,7 +170,7 @@ function useClassicGameplayLogic({
             return;
           } else {
             //Update state to check for character validity
-            setEnterPressed(true);
+            setIsEnterPressed(true);
 
             //Only subtract a life if the entered word is in word list but not repeated
             if (
@@ -231,7 +231,7 @@ function useClassicGameplayLogic({
           setAnswerCorrect(true);
         }
       } else if (key === "backspace") {
-        setEnterPressed(false);
+        setIsEnterPressed(false);
         handleDeleteChar();
       } else {
         handleUpdateRowIndex(key);
@@ -255,7 +255,7 @@ function useClassicGameplayLogic({
     currentRow,
     currentRowIndex,
     currentSkull,
-    enterPressed,
+    isEnterPressed,
     enteredWords,
     handleNextRow,
     isGameOver,
@@ -272,7 +272,7 @@ function useClassicGameplayLogic({
     currentRow,
     currentRowIndex,
     enteredWords,
-    enterPressed,
+    isEnterPressed,
     isGameOver,
     lives,
     maxLives,

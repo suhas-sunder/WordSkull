@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import Icon from "../utils/other/Icon";
+import Icon from "../../utils/other/Icon";
 
 interface PropType {
   setShowGameOverMenu: (value: boolean) => void;

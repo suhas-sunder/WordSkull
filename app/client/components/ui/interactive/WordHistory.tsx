@@ -1,8 +1,8 @@
 import { Fragment } from "react/jsx-runtime";
 import { v4 as uuidv4 } from "uuid";
-import Icon from "../utils/other/Icon";
+import Icon from "../../utils/other/Icon";
 import { useState } from "react";
-import useDelay from "../hooks/useDelay";
+import useDelay from "../../hooks/useDelay";
 
 interface ValidationPropType {
   char: string;
@@ -15,7 +15,7 @@ interface PropType {
   currentRow: number;
   wordsForSkull: string[];
   dispWordHistory: boolean;
-  enterPressed: boolean;
+  isEnterPressed: boolean;
   setDispWordHistory: (
     value: ((prevState: boolean) => boolean) | boolean
   ) => void;
@@ -27,11 +27,11 @@ function WordHistory({
   wordsForSkull,
   setDispWordHistory,
   dispWordHistory,
-  enterPressed,
+  isEnterPressed,
 }: PropType) {
   const [enteredWordsIndexOffset, setEnteredWordsIndexOffset] = useState(0);
   const { isDelaying } = useDelay({
-    enterPressed,
+    isEnterPressed,
     
     msecondsToDelay: 900,
   });

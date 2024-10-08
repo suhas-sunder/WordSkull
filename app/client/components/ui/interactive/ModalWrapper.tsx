@@ -1,4 +1,4 @@
-import Icon from "../utils/other/Icon";
+import Icon from "../../utils/other/Icon";
 import { createPortal } from "react-dom";
 
 interface PropType {
