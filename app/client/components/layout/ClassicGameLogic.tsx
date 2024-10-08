@@ -54,7 +54,7 @@ function ClassicGameLogic({
     currentRow,
     currentRowIndex,
     enteredWords,
-    enterPressed,
+    isEnterPressed,
     isGameOver,
     lives,
     maxLives,
@@ -110,7 +110,7 @@ function ClassicGameLogic({
           wordsForSkull={wordsForSkull}
           currentRow={currentRow}
           enteredWords={enteredWords}
-          enterPressed={enterPressed}
+          isEnterPressed={isEnterPressed}
         />
         <div id="capture-area" className="flex gap-2 flex-col">
           <GameOverStatsCapture
@@ -129,7 +129,7 @@ function ClassicGameLogic({
             currentRowIndex={currentRowIndex}
             wordsForSkull={wordsForSkull}
             enteredWords={enteredWords}
-            enterPressed={enterPressed}
+            isEnterPressed={isEnterPressed}
           />
           <div
             className={`${

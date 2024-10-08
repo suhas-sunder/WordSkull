@@ -15,7 +15,7 @@ interface PropType {
   currentRow: number;
   wordsForSkull: string[];
   dispWordHistory: boolean;
-  enterPressed: boolean;
+  isEnterPressed: boolean;
   setDispWordHistory: (
     value: ((prevState: boolean) => boolean) | boolean
   ) => void;
@@ -27,11 +27,11 @@ function WordHistory({
   wordsForSkull,
   setDispWordHistory,
   dispWordHistory,
-  enterPressed,
+  isEnterPressed,
 }: PropType) {
   const [enteredWordsIndexOffset, setEnteredWordsIndexOffset] = useState(0);
   const { isDelaying } = useDelay({
-    enterPressed,
+    isEnterPressed,
     
     msecondsToDelay: 900,
   });
