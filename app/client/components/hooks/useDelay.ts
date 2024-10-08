@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 interface PropType {
   enterPressed: boolean;
@@ -6,9 +6,9 @@ interface PropType {
 }
 
 //Adds a delay. Eg. current usage is for adding delay to validation styling
-function useDelay({enterPressed, msecondsToDelay }: PropType) {
-  const [isDelaying, setIsDelaying] = useState(true); // To control when to apply validation styling
-  
+function useDelay({ enterPressed, msecondsToDelay }: PropType) {
+  const [isDelaying, setIsDelaying] = useState(false); // To control when to apply validation styling
+
   //Add delay for validation styling to be applied after CSS animation ends
   useEffect(() => {
     let timer = null;
@@ -25,9 +25,9 @@ function useDelay({enterPressed, msecondsToDelay }: PropType) {
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [enterPressed, msecondsToDelay]); // Runs when enterPressed changes
+  }, [enterPressed, msecondsToDelay, setIsDelaying]); // Runs when enterPressed changes
 
-  return { isDelaying};
+  return { isDelaying };
 }
 
-export default useDelay
+export default useDelay;

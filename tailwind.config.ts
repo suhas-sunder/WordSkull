@@ -66,6 +66,7 @@ export default {
       animation: {
         scalePulse: "scalePulse 3s ease-in-out infinite",
         fadeIn: "fadeIn 1s ease-in-out",
+        fadeInFast: "fadeIn 0.4s ease-in-out",
         fadeOut: "fadeOut 1s ease-in-out",
         flip: "flip 0.9s ease-in", // 0.6s flip animation
       },

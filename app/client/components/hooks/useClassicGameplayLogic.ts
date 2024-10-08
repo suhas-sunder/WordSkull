@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import HandleShiftIndex from "../utils/other/HandleShiftIndex";
 import useHandleGameOver from "./useHandleGameOver";
 import useTotalLives from "./useTotalLives";
+import useDelay from "./useDelay";
 
 interface PropType {
   currentSkull: string[][][];
@@ -26,18 +27,51 @@ function useClassicGameplayLogic({
   const [enterPressed, setEnterPressed] = useState(false);
   const [previouslyEnteredKey, setPreviouslyEnteredKey] =
     useState<string>("ResetKeyState"); //Use this to make sure some events only run on keydown and not on when key is pressed
+  const [answerCorrect, setAnswerCorrect] = useState<boolean>(false);
+
+  const { isDelaying } = useDelay({ enterPressed, msecondsToDelay: 950 });
 
   const { isGameOver, setIsGameOver } = useHandleGameOver({
     currentRow,
     currentSkull,
   });
-  
 
   //Manage lives
   const { lives, setLives, maxLives } = useTotalLives({
     currentSkull,
     setIsGameOver,
   });
+
+  //Handles index shift & updates to current row
+  const handleNextRow = useCallback(() => {
+    const shiftIndex = HandleShiftIndex({
+      currentSkull,
+      currentRow,
+      currentRowIndex,
+    });
+
+    if (currentRowIndex + shiftIndex === currentSkull[0][currentRow].length) {
+      setCurrentRowIndex(0);
+      setCurrentRow((prevState) => prevState + 1);
+    }
+  }, [currentSkull, currentRow, currentRowIndex]);
+
+  //Go to next row if answer is correct
+  useEffect(() => {
+    let timer = null;
+    if (answerCorrect) {
+      setEnterPressed(true);
+      timer = setTimeout(() => {
+        setAnswerCorrect(false);
+        setEnterPressed(false);
+        handleNextRow();
+      }, 1000);
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [answerCorrect, handleNextRow, setAnswerCorrect, setEnterPressed]);
 
   useEffect(() => {
     if (isGameOver) return;
@@ -91,7 +125,7 @@ function useClassicGameplayLogic({
       return defaultIndex;
     };
 
-    const handleDeleteSquare = () => {
+    const handleDeleteChar = () => {
       if (currentRowIndex > 0) {
         const shiftIndexBackwards = handleShiftIndexBackwards();
 
@@ -109,28 +143,19 @@ function useClassicGameplayLogic({
         setCurrentRowIndex(shiftIndexBackwards);
       }
     };
-    const handleNextRow = () => {
-      const shiftIndex = HandleShiftIndex({
-        currentSkull,
-        currentRow,
-        currentRowIndex,
-      });
-
-      if (currentRowIndex + shiftIndex === currentSkull[0][currentRow].length) {
-        setCurrentRowIndex(0);
-        setCurrentRow((prevState) => prevState + 1);
-      }
-    };
 
     const handleKeydown = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
 
+      if (isDelaying) return; //Add a delay to match CSS animation so that all inputs are disabled during the delay
+
       setPreviouslyEnteredKey(key);
 
       if (key === " " && previouslyEnteredKey !== key)
+        //Display modal for word history
         setDispWordHistory((prevState) => !prevState);
 
-      if (key === "shift") setDispWordHistory(true);
+      if (key === "shift") setDispWordHistory(true); //Display modal for word history
 
       if (key === "tab") return; //Allow tab for accessability reasons but don't track the input for test
 
@@ -142,7 +167,6 @@ function useClassicGameplayLogic({
         key.toLowerCase() !== "enter"
       )
         return;
-
 
       const handleEnteredWord = () => {
         //Check if entered word is valid
@@ -212,18 +236,24 @@ function useClassicGameplayLogic({
             wordsForSkull[currentRow] &&
           !currentSkull[0][currentRow]?.includes("")
         ) {
+          //Incorrect word is entered
           handleEnteredWord();
-        } else {
-          handleNextRow();
+        } else if (
+          currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "").length ===
+          wordsForSkull[currentRow].length
+        ) {
+          //Entered word matches answer
+          setAnswerCorrect(true);
         }
       } else if (key === "backspace") {
-        setEnterPressed(false); //Update state to stop checking for character validity
-        handleDeleteSquare();
+        setEnterPressed(false);
+        handleDeleteChar();
       } else {
         handleUpdateSquare(key);
       }
     };
 
+    //Hide modal for word history (entered words list)
     const handleKeyUp = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
       if (key === "shift") setDispWordHistory(false);
@@ -236,11 +266,13 @@ function useClassicGameplayLogic({
     return () => {
       removeEventListener("keydown", handleKeydown);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     currentRow,
     currentRowIndex,
+    currentSkull,
+    enterPressed,
     enteredWords,
+    handleNextRow,
     isGameOver,
     previouslyEnteredKey,
     setCurrentSkull,
@@ -248,8 +280,8 @@ function useClassicGameplayLogic({
     setLives,
     wordsForSkull,
     wordsList,
+    isDelaying,
   ]);
-
 
   return {
     currentRow,
