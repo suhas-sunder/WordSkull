@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import MockThemeProvider from "../../../mocks/components/MockThemeContext"; // Assuming you have a similar MockThemeProvider
+import MockThemeProvider from "../../../../mocks/components/MockThemeContext"; // Assuming you have a similar MockThemeProvider
 import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom/vitest";
 import ModalWrapper from "../ModalWrapper";

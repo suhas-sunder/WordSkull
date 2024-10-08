@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import KeypadData from "../data/KeypadData";
-import { useTheme } from "../context/ThemeContext";
+import KeypadData from "../../data/KeypadData";
+import { useTheme } from "../../context/ThemeContext";
 import { v4 as uuidv4 } from "uuid";
-import useKeyPress from "../hooks/useKeyPress";
-import SimulateKeyPress from "../utils/other/SimulateKeyPress";
-import { useSettings } from "../context/SettingsContext";
+import useKeyPress from "../../hooks/useKeyPress";
+import SimulateKeyPress from "../../utils/other/SimulateKeyPress";
+import { useSettings } from "../../context/SettingsContext";
 interface PropType {
   currentlyEnteredWords: string[];
   currentWord: string;

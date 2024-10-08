@@ -1,8 +1,8 @@
 import { Fragment } from "react/jsx-runtime";
 import { v4 as uuidv4 } from "uuid";
-import Icon from "../utils/other/Icon";
+import Icon from "../../utils/other/Icon";
 import { useState } from "react";
-import useDelay from "../hooks/useDelay";
+import useDelay from "../../hooks/useDelay";
 
 interface ValidationPropType {
   char: string;

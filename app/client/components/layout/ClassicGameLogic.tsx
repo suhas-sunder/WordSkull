@@ -4,11 +4,11 @@ import Skulls from "../data/Skulls";
 import useClassicGameplayLogic from "../hooks/useClassicGameplayLogic";
 import useCaptureHTML from "../hooks/useCaptureHTML";
 import Header from "./Header";
-import WordHistory from "../ui/WordHistory";
+import WordHistory from "../ui/interactive/WordHistory";
 import DisplaySkull from "./DisplaySkull";
-import Keyboard from "../ui/Keyboard";
-import Keypad from "../ui/Keypad";
-import GameOverMenu from "../ui/GameOverMenu";
+import Keyboard from "../ui/interactive/Keyboard";
+import Keypad from "../ui/interactive/Keypad";
+import GameOverMenu from "../ui/interactive/GameOverMenu";
 import GameOverStatsCapture from "./GameOverStatsCapture";
 import { WordsData } from "../../../routes/word-skull-game-easy-mode";
 import { useSettings } from "../context/SettingsContext";
@@ -47,7 +47,6 @@ function ClassicGameLogic({
   //Manage words list
   const { wordsForSkull, wordsList, dispWordHistory, setDispWordHistory } =
     useWordsForSkull({ currentSkull, wordsData });
-
 
   //Handle the main game play logic
   const {

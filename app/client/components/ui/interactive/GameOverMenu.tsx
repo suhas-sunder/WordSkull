@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import useCaptureHTML from "../hooks/useCaptureHTML";
-import SecondsToTime from "../utils/converters/SecondsToTime";
-import { StatsDataType, useStats } from "../context/StatsContext";
+import useCaptureHTML from "../../hooks/useCaptureHTML";
+import SecondsToTime from "../../utils/converters/SecondsToTime";
+import { StatsDataType, useStats } from "../../context/StatsContext";
 import { v4 as uuidv4 } from "uuid";
 import ModalWrapper from "./ModalWrapper";
-import useOnlyOnClient from "../hooks/useOnlyOnClient";
-import useSecondsTimer from "../hooks/useSecondsTimer";
+import useOnlyOnClient from "../../hooks/useOnlyOnClient";
+import useSecondsTimer from "../../hooks/useSecondsTimer";
 
 interface PropType {
   isGameOver: boolean;

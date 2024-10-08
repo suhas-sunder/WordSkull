@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import MockThemeProvider from "../../../mocks/components/MockThemeContext";
+import MockThemeProvider from "../../../../mocks/components/MockThemeContext";
 import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom/vitest";
 import Keyboard from "../Keyboard";

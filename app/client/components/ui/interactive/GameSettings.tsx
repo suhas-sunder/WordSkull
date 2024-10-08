@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { useSettings } from "../context/SettingsContext";
+import { useSettings } from "../../context/SettingsContext";
 import ModalWrapper from "./ModalWrapper";
-import useOnlyOnClient from "../hooks/useOnlyOnClient";
+import useOnlyOnClient from "../../hooks/useOnlyOnClient";
 
 interface PropType {
   showSettings: boolean;

@@ -1,6 +1,6 @@
-import { StatsDataType, useStats } from "../context/StatsContext";
+import { StatsDataType, useStats } from "../../context/StatsContext";
 import ModalWrapper from "./ModalWrapper";
-import SecondsToTime from "../utils/converters/SecondsToTime";
+import SecondsToTime from "../../utils/converters/SecondsToTime";
 import { useMemo } from "react";
 
 interface PropType {

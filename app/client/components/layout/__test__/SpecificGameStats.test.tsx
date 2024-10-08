@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import "@testing-library/jest-dom/vitest";
-import SpecificGameStats from "../../ui/SpecificGameStats";
+import SpecificGameStats from "../../ui/interactive/SpecificGameStats";
 import MockThemeProvider from "../../../../client/mocks/components/MockThemeContext";
 import { MemoryRouter } from "react-router-dom";
 

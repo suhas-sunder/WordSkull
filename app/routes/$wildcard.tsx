@@ -1,5 +1,5 @@
 import { json, MetaFunction } from "@remix-run/node";
-import Error from "../client/components/ui/Error";
+import Error from "../client/components/ui/interactive/Error";
 
 export const meta: MetaFunction = () => {
   return [
