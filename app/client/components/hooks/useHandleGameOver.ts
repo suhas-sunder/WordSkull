@@ -8,7 +8,7 @@ interface PropType {
 function useHandleGameOver({ currentRow, currentSkull }: PropType) {
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
-  //Handle Game Over!
+  //If current row is greater than total number of rows available, game is over && player wins
   useEffect(() => {
     if (currentRow > currentSkull[0]?.length - 1) {
       setIsGameOver(true);

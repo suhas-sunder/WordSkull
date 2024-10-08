@@ -23,6 +23,7 @@ describe("handles word history default behavior correctly", () => {
         wordsForSkull={wordsForSkull}
         setDispWordHistory={mockSetDispWordHistory}
         dispWordHistory={false}
+        
       />
     );
 

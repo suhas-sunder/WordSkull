@@ -104,7 +104,7 @@ export default function Keyboard({
   useEffect(() => {
     // Create a new object for updated character counts
     const newCharCount: { [key: string]: number } = {};
-
+    
     currentlyEnteredWords?.forEach((word) => {
       word.split("").forEach((char, index) => {
         // Initialize char count if not present
@@ -120,7 +120,6 @@ export default function Keyboard({
 
     // Update state with the new char count object
     setCorrectCharCount(newCharCount);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentlyEnteredWords, currentWord]);
 
   return (

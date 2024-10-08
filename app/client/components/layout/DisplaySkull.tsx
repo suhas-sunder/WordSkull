@@ -31,6 +31,7 @@ function DisplaySkull({
   const { darkThemeActive } = useTheme();
   const { isDelaying } = useDelay({
     enterPressed,
+
     msecondsToDelay: 900,
   });
 
@@ -89,6 +90,7 @@ function DisplaySkull({
 
     const charIndexesInEnteredWord = [];
 
+    //Get indexes of valid characters in guessed word
     for (let i = 0; i < wordGuessed[guessLength].length; i++) {
       if (wordGuessed[guessLength][i] === square) {
         charIndexesInEnteredWord.push(i);
@@ -100,8 +102,10 @@ function DisplaySkull({
       return countChar(answer, square) - correctCharCount[`${square}`];
     }
 
+    //Apply styling based on character correctness
     if (answer[adjustedIndex] === square) {
-      style = "!border-green-400 !text-green-600 !bg-green-100";
+      style =
+        "animate-fadeInFast !border-green-400 !text-green-600 !bg-green-100"; //Exact match
     } else if (
       answer.includes(square) &&
       charIndexesInEnteredWord
@@ -109,7 +113,8 @@ function DisplaySkull({
         .includes(adjustedIndex) &&
       countRemainingChars() > 0
     ) {
-      style = "!border-yellow-400 !text-yellow-600 !bg-yellow-100 ";
+      style =
+        "animate-fadeInFast !border-yellow-400 !text-yellow-600 !bg-yellow-100 "; //Partial match
     }
 
     return style;
@@ -156,20 +161,37 @@ function DisplaySkull({
                       return (
                         <li
                           key={uuidv4()}
-                          className={`${
-                            rowIndex === currentRow &&
-                            squareIndex === currentRowIndex + shiftIndex
-                              ? `${
-                                  darkThemeActive
-                                    ? "bg-slate-300  text-slate-700"
-                                    : "bg-slate-400 bg-opacity-20 border-opacity-75"
-                                }  scale-110 z-[10] border-[2.5px] border-slate-500`
-                              : `${
-                                  darkThemeActive
-                                    ? "bg-white text-slate-400 "
-                                    : "text-slate-300 border-slate-400"
-                                }   border-2`
-                          } ${
+                          className={`text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center
+                              
+                            ${
+                              //Apply styling for words that match the answer
+                              rowIndex !== currentRow &&
+                              square !== "" &&
+                              `${
+                                darkThemeActive
+                                  ? "bg-white text-slate-400 "
+                                  : "!border-green-400 !text-green-600 !bg-green-100"
+                              }   border-2`
+                            }
+                            
+                            ${
+                              //Apply default styling to all empty squares & vary styling for current square so user can tell which square will be filled in next
+                              rowIndex === currentRow &&
+                              squareIndex === currentRowIndex + shiftIndex
+                                ? `${
+                                    darkThemeActive
+                                      ? "bg-slate-300  text-slate-700"
+                                      : "bg-slate-400 bg-opacity-20 border-opacity-75"
+                                  }  scale-110 z-[10] border-[2.5px] border-slate-500`
+                                : `${
+                                    darkThemeActive
+                                      ? "bg-white text-slate-400 "
+                                      : "text-slate-300 border-slate-400"
+                                  }   border-2`
+                            } 
+                          
+                          ${
+                            //Apply default styling to all squares that contain text for the current row
                             square !== "" &&
                             rowIndex === currentRow &&
                             `${
@@ -177,9 +199,12 @@ function DisplaySkull({
                                 ? "border-slate-200 text-slate-500 "
                                 : "border-slate-400 text-slate-500 "
                             }  border-[2.5px] `
-                          }  text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center  ${
+                          }  ${
+                            //Apply styling based on character correctness
                             rowIndex === currentRow &&
+                            enterPressed &&
                             !isDelaying &&
+                            currentRow === rowIndex &&
                             handleValidationStyling({
                               enteredWords,
                               currentRow,
@@ -187,7 +212,7 @@ function DisplaySkull({
                               wordsForSkull,
                               squareIndex,
                             })
-                          } `}
+                          }`}
                         >
                           <span
                             className={`${
@@ -200,7 +225,12 @@ function DisplaySkull({
                           </span>
                           <span
                             className={`transition-transform ${
-                              enterPressed && isDelaying ? "animate-flip" : ""
+                              //If a word is entered and the current square is the last square in the row, apply the flip animation
+                              enterPressed &&
+                              isDelaying &&
+                              currentRow === rowIndex
+                                ? "animate-flip"
+                                : ""
                             } translate-y-[0.16em] xs:translate-y-1`}
                           >
                             {square}

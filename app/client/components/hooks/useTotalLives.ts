@@ -23,6 +23,7 @@ function useTotalLives({ currentSkull, setIsGameOver }: PropType) {
     }
   }, [currentSkull, lives]);
 
+  //Check if game is over based on lives
   useEffect(() => {
     if (lives !== null && lives <= 0) {
       setIsGameOver(true);
