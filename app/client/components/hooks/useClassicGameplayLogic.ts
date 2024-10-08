@@ -77,8 +77,8 @@ function useClassicGameplayLogic({
   useEffect(() => {
     if (isGameOver) return;
 
-    //If a square is marked with "@" or "~" it can't be changed so shift the index to a square that can.
-    const handleUpdateSquare = (key: string) => {
+    //If a square is marked with "@" or "~" it shouldn't be changed so shift the current row index to a square that should.
+    const handleUpdateRowIndex = (key: string) => {
       const shiftIndex = HandleShiftIndexForward({
         currentSkull,
         currentRow,
@@ -234,7 +234,7 @@ function useClassicGameplayLogic({
         setEnterPressed(false);
         handleDeleteChar();
       } else {
-        handleUpdateSquare(key);
+        handleUpdateRowIndex(key);
       }
     };
 

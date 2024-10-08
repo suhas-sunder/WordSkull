@@ -18,12 +18,12 @@ describe("handles word history default behavior correctly", () => {
     const currentRow = 1;
     render(
       <WordHistory
+        enterPressed={false}
         enteredWords={enteredWords}
         currentRow={currentRow}
         wordsForSkull={wordsForSkull}
         setDispWordHistory={mockSetDispWordHistory}
         dispWordHistory={false}
-        
       />
     );
 
@@ -38,6 +38,7 @@ describe("handles word history default behavior correctly", () => {
     const currentRow = 1;
     render(
       <WordHistory
+        enterPressed={false}
         enteredWords={enteredWords}
         currentRow={currentRow}
         wordsForSkull={wordsForSkull}
@@ -58,6 +59,7 @@ describe("handles word history default behavior correctly", () => {
     const currentRow = 1;
     render(
       <WordHistory
+        enterPressed={false}
         enteredWords={enteredWords}
         currentRow={currentRow}
         wordsForSkull={wordsForSkull}
@@ -78,6 +80,7 @@ describe("handles character validation correctly", () => {
     // Set the props directly
     render(
       <WordHistory
+        enterPressed={false}
         enteredWords={[["hello"]]} // The guessed word
         currentRow={0} // We're focusing on the first row
         wordsForSkull={["hello"]} // The correct word
@@ -112,6 +115,7 @@ describe("handles character validation correctly", () => {
   it("should apply correct styles for fully incorrect word", async () => {
     render(
       <WordHistory
+        enterPressed={false}
         enteredWords={[["apple"]]}
         currentRow={0}
         wordsForSkull={["goods"]}
@@ -135,6 +139,7 @@ describe("handles character validation correctly", () => {
   it("should apply correct styles for a single character guess", async () => {
     render(
       <WordHistory
+        enterPressed={false}
         enteredWords={[["h"]]} // Single character
         currentRow={0}
         wordsForSkull={["hello"]}

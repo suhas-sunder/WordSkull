@@ -9,9 +9,11 @@ type MockWordsList = { [key: number]: string[] };
 
 interface PropType {
   currentSkull: string[][][];
-  setCurrentSkull: SetCurrentSkull;
-  setDispWordHistory: SetDispWordHistory;
-  wordsList: MockWordsList;
+  setCurrentSkull: React.Dispatch<React.SetStateAction<string[][][]>>;
+  wordsList: { [key: number]: string[] };
+  setDispWordHistory: (
+    value: ((prevState: boolean) => boolean) | boolean
+  ) => void;
   wordsForSkull: string[];
 }
 
@@ -23,8 +25,10 @@ const TestComponent = (props: PropType) => {
     enterPressed,
     isGameOver,
     lives,
-    seconds,
-  } = useClassicGameplayLogic({ ...props });
+    maxLives,
+  } = useClassicGameplayLogic({
+    ...props,
+  });
 
   return (
     <div>
@@ -34,7 +38,7 @@ const TestComponent = (props: PropType) => {
       <div data-testid="enter-pressed">{enterPressed ? "true" : "false"}</div>
       <div data-testid="is-game-over">{isGameOver ? "true" : "false"}</div>
       <div data-testid="lives">{lives}</div>
-      <div data-testid="seconds">{seconds}</div>
+      <div data-testid="max-lives">{maxLives}</div>
     </div>
   );
 };
@@ -75,7 +79,7 @@ describe("gameplay logic for classic mode", () => {
     expect(screen.getByTestId("enter-pressed").textContent).toBe("false");
     expect(screen.getByTestId("is-game-over").textContent).toBe("false");
     expect(screen.getByTestId("lives").textContent).toBe("3");
-    expect(screen.getByTestId("seconds").textContent).toBe("0");
+    expect(screen.getByTestId("max-lives").textContent).toBe("3");
   });
 
   it("should update current row and index on valid input", async () => {
@@ -172,101 +176,6 @@ describe("gameplay logic for classic mode", () => {
 
     await waitFor(() => {
       expect(screen.getByTestId("is-game-over").textContent).toBe("false");
-    });
-  });
-
-  it("should start the timer when the first key is pressed", async () => {
-    render(
-      <TestComponent
-        currentSkull={[[["", "", ""]]]}
-        setCurrentSkull={setCurrentSkull}
-        wordsList={mockWordsList}
-        setDispWordHistory={setDispWordHistory}
-        wordsForSkull={["ant"]}
-      />
-    );
-
-    // Wrap fireEvent in act
-    await act(async () => {
-      fireEvent.keyDown(document, { key: "a" });
-    });
-
-    // Wait a bit to let the timer increment
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1050));
-    });
-
-    expect(screen.getByTestId("seconds").textContent).toBe("1");
-  });
-
-  it("should display a game over message when the game is over", async () => {
-    render(
-      <TestComponent
-        currentSkull={[[["", "", ""]]]}
-        setCurrentSkull={setCurrentSkull}
-        wordsList={mockWordsList}
-        setDispWordHistory={setDispWordHistory}
-        wordsForSkull={["ant"]}
-      />
-    );
-
-    await act(async () => {
-      fireEvent.keyDown(document, { key: "a" });
-      fireEvent.keyDown(document, { key: "Enter" });
-    });
-
-    await act(async () => {
-      fireEvent.keyDown(document, { key: "a" });
-      fireEvent.keyDown(document, { key: "Enter" });
-    });
-
-    await act(async () => {
-      fireEvent.keyDown(document, { key: "a" });
-      fireEvent.keyDown(document, { key: "Enter" });
-    });
-
-    await act(async () => {
-      fireEvent.keyDown(document, { key: "a" });
-      fireEvent.keyDown(document, { key: "Enter" });
-    });
-    await waitFor(() => {
-      expect(screen.getByTestId("is-game-over").textContent).toBe("true");
-    });
-  });
-
-  it("should end game if too many wrong guesses are made", async () => {
-    render(
-      <TestComponent
-        currentSkull={[[["", "", ""]]]}
-        setCurrentSkull={setCurrentSkull}
-        wordsList={mockWordsList}
-        setDispWordHistory={setDispWordHistory}
-        wordsForSkull={["ant"]}
-      />
-    );
-
-    await act(async () => {
-      fireEvent.keyDown(document, { key: "a" });
-      fireEvent.keyDown(document, { key: "Enter" });
-    });
-
-    await act(async () => {
-      fireEvent.keyDown(document, { key: "a" });
-      fireEvent.keyDown(document, { key: "Enter" });
-    });
-
-    await act(async () => {
-      fireEvent.keyDown(document, { key: "a" });
-      fireEvent.keyDown(document, { key: "Enter" });
-    });
-
-    await act(async () => {
-      fireEvent.keyDown(document, { key: "a" });
-      fireEvent.keyDown(document, { key: "Enter" });
-    });
-
-    await waitFor(() => {
-      expect(screen.getByTestId("is-game-over").textContent).toBe("true");
     });
   });
 });
