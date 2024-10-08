@@ -1,5 +1,5 @@
 import { useTheme } from "../context/ThemeContext";
-import HandleShiftIndex from "../utils/other/HandleShiftIndex";
+import HandleShiftIndex from "../utils/other/ShiftIndexForward";
 import { v4 as uuidv4 } from "uuid";
 import useDelay from "../hooks/useDelay";
 
