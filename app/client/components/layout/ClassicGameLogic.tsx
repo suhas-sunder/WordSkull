@@ -110,6 +110,7 @@ function ClassicGameLogic({
           wordsForSkull={wordsForSkull}
           currentRow={currentRow}
           enteredWords={enteredWords}
+          enterPressed={enterPressed}
         />
         <div id="capture-area" className="flex gap-2 flex-col">
           <GameOverStatsCapture

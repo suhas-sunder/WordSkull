@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import HandleShiftIndex from "../utils/other/HandleShiftIndex";
 import { v4 as uuidv4 } from "uuid";
+import useDelay from "../hooks/useDelay";
 
 interface PropType {
   currentSkull: string[][][];
@@ -28,8 +28,11 @@ function DisplaySkull({
   enteredWords,
   enterPressed,
 }: PropType) {
-  const [shouldDelayValidation, setShouldDelayValidation] = useState(false); // To control when to apply validation styling
   const { darkThemeActive } = useTheme();
+  const { isDelaying } = useDelay({
+    enterPressed,
+    msecondsToDelay: 900,
+  });
 
   //Controls styling of characters that have been guessed correctly. Green for exact match, and yellow for partial.
   const handleValidationStyling = ({
@@ -112,24 +115,6 @@ function DisplaySkull({
     return style;
   };
 
-  //Add delay for validation styling to be applied after CSS animation ends
-  useEffect(() => {
-    let timer = null;
-
-    // When enter is pressed, trigger validation after a delay
-    if (enterPressed) {
-      setShouldDelayValidation(true); // Start the validation process
-      timer = setTimeout(() => {
-        setShouldDelayValidation(false); // Reset after the delay
-      }, 900); // 900ms delay
-    }
-
-    // Cleanup the timer
-    return () => {
-      if (timer) clearTimeout(timer);
-    };
-  }, [enterPressed]); // Runs when enterPressed changes
-
   return (
     <>
       {currentSkull.map((skull, index) => {
@@ -194,7 +179,7 @@ function DisplaySkull({
                             }  border-[2.5px] `
                           }  text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center  ${
                             rowIndex === currentRow &&
-                            !shouldDelayValidation &&
+                            !isDelaying &&
                             handleValidationStyling({
                               enteredWords,
                               currentRow,
@@ -215,9 +200,7 @@ function DisplaySkull({
                           </span>
                           <span
                             className={`transition-transform ${
-                              enterPressed && shouldDelayValidation
-                                ? "animate-flip"
-                                : ""
+                              enterPressed && isDelaying ? "animate-flip" : ""
                             } translate-y-[0.16em] xs:translate-y-1`}
                           >
                             {square}

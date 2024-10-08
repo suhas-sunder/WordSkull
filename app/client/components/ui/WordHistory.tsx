@@ -2,6 +2,7 @@ import { Fragment } from "react/jsx-runtime";
 import { v4 as uuidv4 } from "uuid";
 import Icon from "../utils/other/Icon";
 import { useState } from "react";
+import useDelay from "../hooks/useDelay";
 
 interface ValidationPropType {
   char: string;
@@ -14,6 +15,7 @@ interface PropType {
   currentRow: number;
   wordsForSkull: string[];
   dispWordHistory: boolean;
+  enterPressed: boolean;
   setDispWordHistory: (
     value: ((prevState: boolean) => boolean) | boolean
   ) => void;
@@ -25,8 +27,13 @@ function WordHistory({
   wordsForSkull,
   setDispWordHistory,
   dispWordHistory,
+  enterPressed,
 }: PropType) {
   const [enteredWordsIndexOffset, setEnteredWordsIndexOffset] = useState(0);
+  const { isDelaying } = useDelay({
+    enterPressed,
+    msecondsToDelay: 900,
+  });
 
   const handleValidationStyling = ({
     char,
@@ -125,7 +132,7 @@ function WordHistory({
         title="Hold 'Shift' or press 'Space Bar' key to view your attempts."
         className="flex z-20 h-5 cursor-pointer min-w-52 min-h-10 max-w-[400px] sm:max-w-[600px] bg-white border-2 hover:border-skull-brown gap-3 mt-[1em] sm:mt-0 mb-4 sm:mb-2 rounded-md sm:rounded-md border-slate-200 justify-center items-center"
       >
-        {enteredWords[currentRow]?.length > 0 ? (
+        {!isDelaying && enteredWords[currentRow]?.length > 0 ? (
           <div className="relative flex gap-[4px] justify-center px-3 items-center">
             {enteredWords[currentRow]
               ?.slice(-1)[0]
