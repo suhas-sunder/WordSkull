@@ -20,7 +20,7 @@ const getRandomTransform = () => {
 // Function to generate a unique seed
 const generateSeed = () => `${Date.now()}-${Math.random()}`;
 
-// Deterministic shuffle function with seed
+// Deterministic shuffle function with seed (Was causing issues with rendering animation when rng was not seeded). 
 const shuffleArray = (array: string[][][], seed: string) => {
   const rng = seedrandom(seed);
   const result = array.slice();

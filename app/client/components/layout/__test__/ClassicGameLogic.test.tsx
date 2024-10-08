@@ -11,6 +11,8 @@ interface PropType {
   endPosition: number;
   lettersPerSkull: string;
   wordsData: WordsData;
+  difficulty: string;
+  gameMode: string;
 }
 
 const MockClassicGameplayInstructions = (props: PropType) => {
@@ -33,7 +35,10 @@ beforeEach(() => {
         1: ["cattlesasdf", "battingasdf", "ratttlerasdf"],
         2: ["deerboyasdf", "spiritbearasdf"],
       },
+      
     },
+    difficulty: "easy",
+    gameMode: "classic",
   });
 });
 
