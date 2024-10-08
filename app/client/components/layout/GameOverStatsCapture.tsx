@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import useSecondsTimer from "../hooks/useSecondsTimer";
 import SecondsToTime from "../utils/converters/SecondsToTime";
 import Header from "./Header";
 
@@ -10,7 +12,6 @@ interface PropType {
   currentRow: number;
   lettersPerSkull?: string;
   wordsForSkull: string[];
-  seconds: number;
 }
 
 //Temporairly displays stats above word skull when game over menu is open so that when screen is captured, the stats hidden behind the menu are included along with it.
@@ -23,8 +24,18 @@ function GameOverStatsCapture({
   currentRow,
   wordsForSkull,
   lettersPerSkull,
-  seconds,
 }: PropType) {
+  
+  const { seconds, setStartTimer } = useSecondsTimer();
+
+  useEffect(() => {
+    if (isGameOver) {
+      setStartTimer(false);
+    } else {
+      setStartTimer(true);
+    }
+  }, [isGameOver, setStartTimer]);
+
   return (
     <>
       {isGameOver && showGameOverMenu && (

@@ -57,14 +57,20 @@ export default {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(1.08)" },
         },
+        flip: {
+          "0%": { transform: "rotateY(0)" },
+          "40%": { transform: "rotateY(180deg) scale(0.7) translateY(20%)" },
+          "100%": { transform: "rotateY(0)" },
+        },
       },
       animation: {
         scalePulse: "scalePulse 3s ease-in-out infinite",
         fadeIn: "fadeIn 1s ease-in-out",
         fadeOut: "fadeOut 1s ease-in-out",
+        flip: "flip 0.9s ease-in", // 0.6s flip animation
       },
       screens: {
-        'xs': '480px', // Custom breakpoint between sm and smaller sizes
+        xs: "480px", // Custom breakpoint between sm and smaller sizes
       },
     },
   },

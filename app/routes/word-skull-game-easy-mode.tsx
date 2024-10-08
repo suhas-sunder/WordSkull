@@ -7,7 +7,6 @@ export type WordsData = {
   words?: { [key: number]: string[] };
 };
 
-
 export const meta: MetaFunction = () => {
   return [
     {
@@ -22,10 +21,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-
-
 export default function WordSkullMedium() {
-  
   const matches = useMatches();
   const wordsData = useMemo(() => {
     // Find the first match with valid data
@@ -33,11 +29,16 @@ export default function WordSkullMedium() {
     return match?.data as WordsData;
   }, [matches]);
 
-  
-
   return (
     <>
-      <ClassicGameLogic startPosition={0} endPosition={4} lettersPerSkull="3 - 5 letters" wordsData={wordsData} difficulty="easy" gameMode="classic"/>
+      <ClassicGameLogic
+        startPosition={0}
+        endPosition={4}
+        lettersPerSkull="3 - 5 letters"
+        wordsData={wordsData}
+        difficulty="easy"
+        gameMode="classic"
+      />
       <ClassicGameplayInstructions />
     </>
   );
