@@ -57,11 +57,16 @@ export default {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(1.08)" },
         },
+        flip: {
+          '0%': { transform: 'rotateY(0)' },
+          '100%': { transform: 'rotateY(180deg)' },
+        },
       },
       animation: {
         scalePulse: "scalePulse 3s ease-in-out infinite",
         fadeIn: "fadeIn 1s ease-in-out",
         fadeOut: "fadeOut 1s ease-in-out",
+        flip: 'flip 0.6s ease-in-out forwards',
       },
       screens: {
         'xs': '480px', // Custom breakpoint between sm and smaller sizes

@@ -13,7 +13,11 @@ function HandleShiftIndex({
   currentRowIndex,
 }: PropType) {
   // Construct the cache key using all three inputs
-  const cacheKey = JSON.stringify({ skull: currentSkull, row: currentRow, index: currentRowIndex });
+  const cacheKey = JSON.stringify({
+    skull: currentSkull,
+    row: currentRow,
+    index: currentRowIndex,
+  });
 
   // Check if the cache already has a value for this key
   if (cache.has(cacheKey)) {

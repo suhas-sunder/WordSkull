@@ -24,8 +24,6 @@ function useClassicGameplayLogic({
   const [currentRowIndex, setCurrentRowIndex] = useState<number>(0);
   const [enteredWords, setEnteredWords] = useState<string[][]>([]);
   const [enterPressed, setEnterPressed] = useState(false);
-  const [seconds, setSeconds] = useState<number>(0);
-  const [startTimer, setStartTimer] = useState<boolean>(false);
   const [previouslyEnteredKey, setPreviouslyEnteredKey] =
     useState<string>("ResetKeyState"); //Use this to make sure some events only run on keydown and not on when key is pressed
 
@@ -33,6 +31,7 @@ function useClassicGameplayLogic({
     currentRow,
     currentSkull,
   });
+  
 
   //Manage lives
   const { lives, setLives, maxLives } = useTotalLives({
@@ -144,7 +143,6 @@ function useClassicGameplayLogic({
       )
         return;
 
-      setStartTimer(true);
 
       const handleEnteredWord = () => {
         //Check if entered word is valid
@@ -238,10 +236,10 @@ function useClassicGameplayLogic({
     return () => {
       removeEventListener("keydown", handleKeydown);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     currentRow,
     currentRowIndex,
-    currentSkull,
     enteredWords,
     isGameOver,
     previouslyEnteredKey,
@@ -252,15 +250,6 @@ function useClassicGameplayLogic({
     wordsList,
   ]);
 
-  useEffect(() => {
-    if (!isGameOver && startTimer) {
-      const interval = setInterval(() => {
-        setSeconds((seconds) => seconds + 1);
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }
-  }, [isGameOver, startTimer]);
 
   return {
     currentRow,
@@ -270,7 +259,6 @@ function useClassicGameplayLogic({
     isGameOver,
     lives,
     maxLives,
-    seconds,
   };
 }
 

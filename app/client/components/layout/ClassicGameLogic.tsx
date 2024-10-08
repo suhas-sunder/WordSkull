@@ -48,6 +48,7 @@ function ClassicGameLogic({
   const { wordsForSkull, wordsList, dispWordHistory, setDispWordHistory } =
     useWordsForSkull({ currentSkull, wordsData });
 
+
   //Handle the main game play logic
   const {
     currentRow,
@@ -57,7 +58,6 @@ function ClassicGameLogic({
     isGameOver,
     lives,
     maxLives,
-    seconds,
   } = useClassicGameplayLogic({
     currentSkull,
     setCurrentSkull,
@@ -101,7 +101,6 @@ function ClassicGameLogic({
           setShowGameOverMenu={setShowGameOverMenu}
           lives={lives}
           maxLives={maxLives}
-          seconds={seconds}
           currentRow={currentRow}
           wordsForSkull={wordsForSkull}
         />
@@ -122,7 +121,6 @@ function ClassicGameLogic({
             currentRow={currentRow}
             lettersPerSkull={lettersPerSkull}
             wordsForSkull={wordsForSkull}
-            seconds={seconds}
           />
           <DisplaySkull
             currentSkull={currentSkull}

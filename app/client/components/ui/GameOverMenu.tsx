@@ -5,6 +5,7 @@ import { StatsDataType, useStats } from "../context/StatsContext";
 import { v4 as uuidv4 } from "uuid";
 import ModalWrapper from "./ModalWrapper";
 import useOnlyOnClient from "../hooks/useOnlyOnClient";
+import useSecondsTimer from "../hooks/useSecondsTimer";
 
 interface PropType {
   isGameOver: boolean;
@@ -12,7 +13,6 @@ interface PropType {
   setShowGameOverMenu: (value: boolean) => void;
   lives: number | null;
   maxLives: number | null;
-  seconds: number;
   currentRow: number;
   wordsForSkull: string[];
 }
@@ -23,15 +23,22 @@ function GameOverMenu({
   setShowGameOverMenu,
   lives,
   maxLives,
-  seconds,
   currentRow,
   wordsForSkull,
 }: PropType) {
-  
-  
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
   const { setStats, difficulty, gameMode } = useStats();
+
+  const { seconds, setStartTimer } = useSecondsTimer();
+
+  useEffect(() => {
+    if (isGameOver) {
+      setStartTimer(false);
+    } else {
+      setStartTimer(true);
+    }
+  }, [isGameOver, setStartTimer]);
 
   //Update stats data with new stats when game ends
   useEffect(() => {
