@@ -111,7 +111,10 @@ export default function Index() {
             </li>
           ))}
         </ul>
-        <div className="max-w-[800px] text-center font-nunito text-lg text-slate-500">
+        <div
+          id="find-me"
+          className="max-w-[800px] text-center font-nunito text-lg text-slate-500"
+        >
           If you have any feedback, suggestions, or business inquiries, please
           feel free to reach out to{" "}
           <a
