@@ -329,6 +329,114 @@ function ConfettiPresets() {
       rotationSpeed: { min: -15, max: 15 },
       emojiChance: 0.3,
     },
+    radialBurst: {
+      particleCount: 400,
+      gravity: 0.3,
+      wind: 0, // No wind for pure radial motion
+      colors: ["#FF5733", "#FFC300", "#DAF7A6", "#581845"],
+      size: { min: 5, max: 20 },
+      speedX: { min: -10, max: 10 }, // Control spread in the X direction
+      speedY: { min: -15, max: -30 }, // Control upward speed
+      rotationSpeed: { min: -5, max: 5 },
+      emojiChance: 0.2,
+    },
+    spiralEffect: {
+      particleCount: 500,
+      gravity: 0.2,
+      wind: 0, // No wind to focus on spiral motion
+      colors: ["#4CAF50", "#2196F3", "#FFC107", "#FF5722"],
+      size: { min: 4, max: 12 },
+      speedX: { min: -20, max: 20 }, // Broad X range for spiraling
+      speedY: { min: -25, max: -40 }, // Upward speed for spiraling effect
+      rotationSpeed: { min: -10, max: 10 },
+      emojiChance: 0.3,
+    },
+    fanShape: {
+      particleCount: 500,
+      gravity: 0.5,
+      wind: 1, // Light wind to help particles disperse
+      colors: ["#FF5733", "#33FF57", "#5733FF", "#FF33A1"],
+      size: { min: 6, max: 18 },
+      speedX: { min: -5, max: 5 }, // Narrow X range for focused spread
+      speedY: { min: -20, max: -40 }, // Strong upward motion
+      rotationSpeed: { min: -15, max: 15 },
+      emojiChance: 0.3,
+    },
+    SlowMoFlow: {
+      particleCount: 600,
+      gravity: 0.1,
+      wind: 1.5, // Gentle wind for lateral movement
+      colors: ["#FF69B4", "#00FA9A", "#FFD700", "#8A2BE2"],
+      size: { min: 3, max: 15 },
+      speedX: { min: -10, max: 10 }, // Control lateral motion
+      speedY: { min: -10, max: -30 }, // Upward motion with gentle gravity
+      rotationSpeed: { min: -5, max: 5 },
+      emojiChance: 0.25,
+    },
+    extremeRadialBurst: {
+      particleCount: 800, // Increased particle count for a fuller burst
+      gravity: 0.5, // Increased gravity for faster descent
+      wind: 5, // Added wind for lateral motion
+      colors: ["#FF5733", "#FFC300", "#DAF7A6", "#581845", "#FF00FF"], // More vibrant colors
+      size: { min: 10, max: 30 }, // Larger size for more visibility
+      speedX: { min: -30, max: 30 }, // Broader spread in X direction
+      speedY: { min: -30, max: -60 }, // Stronger upward speed for dramatic bursts
+      rotationSpeed: { min: -20, max: 20 }, // Greater rotation speed for dynamic movement
+      emojiChance: 0.4, // Higher chance of emojis
+    },
+    extremeSpiralEffect: {
+      particleCount: 1000, // Even more particles for a grand display
+      gravity: 0.4, // Moderate gravity for balance
+      wind: 5, // Increased wind to help define the spiral
+      colors: ["#4CAF50", "#2196F3", "#FFC107", "#FF5722", "#FF00FF"],
+      size: { min: 6, max: 25 }, // Increased size for visibility
+      speedX: { min: -40, max: 40 }, // Wide range for dramatic spiraling
+      speedY: { min: -50, max: -80 }, // High upward speed for strong spiraling
+      rotationSpeed: { min: -25, max: 25 }, // Aggressive rotation for dynamic visuals
+      emojiChance: 0.5, // Increased chance for emojis
+    },
+    extremeFanShape: {
+      particleCount: 1000, // Increased particle count for a more substantial effect
+      gravity: 0.6, // Higher gravity for faster descent
+      wind: 3, // Moderate wind for spread
+      colors: ["#FF5733", "#33FF57", "#5733FF", "#FF33A1", "#FF00FF"],
+      size: { min: 8, max: 30 }, // Larger size for visibility
+      speedX: { min: -15, max: 15 }, // Moderate lateral speed for focused spread
+      speedY: { min: -40, max: -80 }, // Strong upward motion for dramatic effect
+      rotationSpeed: { min: -30, max: 30 }, // Greater rotation for excitement
+      emojiChance: 0.5, // High chance of emoji presence
+    },
+    extremeSlowMoFlow: {
+      particleCount: 1200, // High particle count for dynamic visuals
+      gravity: 0.2, // Low gravity for prolonged visibility
+      wind: 4, // Increased wind to help simulate wave motion
+      colors: ["#FF69B4", "#00FA9A", "#FFD700", "#8A2BE2", "#FF00FF"],
+      size: { min: 5, max: 25 }, // Larger size range for dramatic effect
+      speedX: { min: -30, max: 30 }, // Large range for lateral movement
+      speedY: { min: -20, max: -50 }, // Strong upward motion for waves
+      rotationSpeed: { min: -20, max: 20 }, // Wide rotation for visual appeal
+      emojiChance: 0.35, // Significant chance of emoji appearance
+    },
+    ultimateFanExplosion: {
+      particleCount: 1500, // Maximum particle count for an overwhelming effect
+      gravity: 0.7, // Higher gravity for quicker descent and more dramatic fall
+      wind: 6, // Increased wind to enhance the spread effect
+      colors: [
+        "#FF5733", // Bright Red
+        "#33FF57", // Bright Green
+        "#5733FF", // Bright Blue
+        "#FF33A1", // Bright Pink
+        "#FFD700", // Gold
+        "#00FA9A", // Light Green
+        "#00FFFF", // Cyan
+        "#FF4500", // Orange Red
+      ], // Expanded color palette for vibrant visuals
+      size: { min: 6, max: 20 }, // Reasonable size for good visibility without going overboard
+      speedX: { min: -50, max: 50 }, // Wide range for dramatic lateral spread
+      speedY: { min: -60, max: -100 }, // Strong upward speed for a powerful effect
+      rotationSpeed: { min: -40, max: 40 }, // Aggressive rotation for dynamic visuals
+      emojiChance: 0.6, // High chance for emoji inclusion to enhance the fun
+    },
   };
 
   return presets;

@@ -144,9 +144,13 @@ We’ve recently introduced an interactive **virtual keyboard (for large screens
 - [x] Add logic to keyboard/keypad to allow users to interact directly with virtual keyboard.
 - [x] Add settings to toggle on/off keyboard interactivity.
 - [x] Add settings to hide/show gameplay instructions.
-- [ ] Use react portals to render modal correctly.
+- [x] Use react portals to render modal correctly.
+- [x] Add PostHog to track user analytics
+- [x] Add improved animations & delay to gameplay logic/styling
+- [x] Add PostHog to track user analytics
 - [ ] End 2 End Testing
-- [ ] Add PostHog to track user analytics
+- [ ] Add animation that throws confetti when user completes a row successfully or wins the game.
+- [ ] Add settings to disable confetti.
 - [ ] Mark existing repo as demo, clone Repo, make new repo private, continue work on private repo.
 - [ ] Animate the eyes.
 - [ ] Add character description page for each skull.
