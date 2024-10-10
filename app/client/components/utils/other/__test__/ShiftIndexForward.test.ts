@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import HandleShiftIndex from "../ShiftIndexForward";
+import ShiftIndexForward from "../ShiftIndexForward";
 
 describe("shifts index correctly", () => {
   it("should return 0 for an out-of-bounds currentRow", () => {
@@ -12,7 +12,7 @@ describe("shifts index correctly", () => {
     const currentRow = 2; // Out of bounds
     const currentRowIndex = 0;
 
-    const result = HandleShiftIndex({
+    const result = ShiftIndexForward({
       currentSkull,
       currentRow,
       currentRowIndex,
@@ -26,7 +26,7 @@ describe("shifts index correctly", () => {
     const currentRow = 0;
     const currentRowIndex = 0;
 
-    const result = HandleShiftIndex({
+    const result = ShiftIndexForward({
       currentSkull,
       currentRow,
       currentRowIndex,
@@ -40,7 +40,7 @@ describe("shifts index correctly", () => {
     const currentRow = 0;
     const currentRowIndex = 0;
 
-    const result = HandleShiftIndex({
+    const result = ShiftIndexForward({
       currentSkull,
       currentRow,
       currentRowIndex,
@@ -55,7 +55,7 @@ describe("shifts index correctly", () => {
     const currentRowIndex = 0;
 
     // First call should compute and cache the result
-    const resultFirstCall = HandleShiftIndex({
+    const resultFirstCall = ShiftIndexForward({
       currentSkull,
       currentRow,
       currentRowIndex,
@@ -63,7 +63,7 @@ describe("shifts index correctly", () => {
     expect(resultFirstCall).toBe(2);
 
     // Second call should retrieve the cached value
-    const resultSecondCall = HandleShiftIndex({
+    const resultSecondCall = ShiftIndexForward({
       currentSkull,
       currentRow,
       currentRowIndex,
@@ -72,7 +72,7 @@ describe("shifts index correctly", () => {
 
     // Modify the inputs slightly to ensure cache is used correctly
     const currentRowIndexModified = 1;
-    const resultThirdCall = HandleShiftIndex({
+    const resultThirdCall = ShiftIndexForward({
       currentSkull,
       currentRow,
       currentRowIndex: currentRowIndexModified,

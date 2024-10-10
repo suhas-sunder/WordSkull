@@ -5,7 +5,7 @@ import "@testing-library/jest-dom/vitest";
 import Footer from "../Footer";
 import MockThemeProvider from "../../../mocks/components/MockThemeContext";
 
-const MockFooter = ({ darkThemeActive }: { darkThemeActive?: boolean }) => {
+const MockFooter = ({ darkThemeActive }: { darkThemeActive: boolean }) => {
   render(
     <MemoryRouter>
       <MockThemeProvider darkThemeActive={darkThemeActive}>
