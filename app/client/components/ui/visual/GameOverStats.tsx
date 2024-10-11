@@ -21,7 +21,6 @@ function GameOverStats({
   seconds,
 }: PropType) {
   const { setStats, difficulty, gameMode } = useStats();
-
   //Update stats data with new stats when game ends
   useEffect(() => {
     const updateSats = () => {

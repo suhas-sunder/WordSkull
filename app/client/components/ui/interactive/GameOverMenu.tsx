@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ModalWrapper from "./ModalWrapper";
 import useOnlyOnClient from "../../hooks/useOnlyOnClient";
 import GameOverStats from "../visual/GameOverStats";
 import ShareYourResults from "./ShareYourResults";
-import useSecondsTimer from "../../hooks/useSecondsTimer";
 
 interface PropType {
   isGameOver: boolean;
@@ -13,6 +12,7 @@ interface PropType {
   maxLives: number | null;
   currentRow: number;
   wordsForSkull: string[];
+  seconds: number;
 }
 
 //Memoize the game over menu so that it doesn't re-rendered every time a keypress event is fired
@@ -24,17 +24,8 @@ const GameOverMenu = React.memo(function GameOverMenu({
   maxLives,
   currentRow,
   wordsForSkull,
+  seconds,
 }: PropType) {
-  const { seconds, setStartTimer } = useSecondsTimer();
-
-  useEffect(() => {
-    if (isGameOver) {
-      setStartTimer(false);
-    } else {
-      setStartTimer(true);
-    }
-  }, [isGameOver, setStartTimer]);
-
   const handleGameOverMsg = () => {
     const rowsCompleted = currentRow;
 
@@ -83,7 +74,7 @@ const GameOverMenu = React.memo(function GameOverMenu({
             >
               Play Again
             </button>
-            <ShareYourResults isGameOver={isGameOver} />
+            <ShareYourResults isGameOver={isGameOver} seconds={seconds} />
           </>
         </ModalWrapper>
       )}
