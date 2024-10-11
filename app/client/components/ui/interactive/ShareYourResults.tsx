@@ -18,9 +18,9 @@ function ShareYourResults({ isGameOver }: PropType) {
 
   return (
     <div className="cursor-pointer py-2 px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex flex-col gap-5 justify-center items-center">
-      <span className="flex whitespace-nowrap text-xl text-slate-600">
+      <h3 className="flex whitespace-nowrap text-xl text-slate-600">
         Share Your Results!
-      </span>
+      </h3>
       {/* Loading State */}
       {loadingStatus === "loading" && (
         <div className="flex items-center justify-center h-full">
