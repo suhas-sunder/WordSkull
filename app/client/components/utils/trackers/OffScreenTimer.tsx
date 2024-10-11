@@ -15,9 +15,13 @@ export default function OffScreenTimer({ isGameOver, setSeconds }: PropType) {
       setSeconds(seconds);
       setStartTimer(false);
     } else {
-      setStartTimer(true);
+      setStartTimer((prev) => {
+        if (prev === true) return prev; // Don't change if already true
+        return true;
+      });
     }
   }, [isGameOver, seconds, setSeconds, setStartTimer]);
+  
 
   return <></>;
 }

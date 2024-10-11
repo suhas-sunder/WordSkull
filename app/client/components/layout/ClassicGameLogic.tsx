@@ -12,7 +12,7 @@ import GameOverStatsCapture from "./GameOverStatsCapture";
 import { WordsData } from "../../../routes/word-skull-game-easy-mode";
 import { useSettings } from "../context/SettingsContext";
 import { useStats } from "../context/StatsContext";
-import OffScreenTimer from "../utils/timers/OffScreenTimer";
+import OffScreenTimer from "../utils/trackers/OffScreenTimer";
 
 interface PropType {
   startPosition: number;
