@@ -30,7 +30,6 @@ function useCaptureHTML({ isGameOver, captureAreaId }: PropType) {
 
         if (capturedBlob) {
           setImgBlob(capturedBlob);
-          console.log("Image captured successfully:", capturedBlob);
           setLoadingStatus("loaded");
         } else {
           console.log("Image capture failed, blob is null.");

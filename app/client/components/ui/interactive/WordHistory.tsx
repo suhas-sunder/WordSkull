@@ -1,7 +1,7 @@
 import { Fragment } from "react/jsx-runtime";
 import { v4 as uuidv4 } from "uuid";
 import Icon from "../../utils/other/Icon";
-import { useState } from "react";
+import React, { useState } from "react";
 import useDelay from "../../hooks/useDelay";
 
 interface ValidationPropType {
@@ -21,7 +21,7 @@ interface PropType {
   ) => void;
 }
 
-function WordHistory({
+const WordHistory = React.memo(function WordHistory({
   enteredWords,
   currentRow,
   wordsForSkull,
@@ -32,7 +32,7 @@ function WordHistory({
   const [enteredWordsIndexOffset, setEnteredWordsIndexOffset] = useState(0);
   const { isDelaying } = useDelay({
     isEnterPressed,
-    
+
     msecondsToDelay: 900,
   });
 
@@ -219,6 +219,6 @@ function WordHistory({
       )}
     </>
   );
-}
+});
 
 export default WordHistory;

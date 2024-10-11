@@ -34,7 +34,6 @@ function GameOverStats({
   
   //Update stats data with new stats when game ends
   useEffect(() => {
-    console.log("isGameOver", isGameOver);
     const updateSats = () => {
       const newStatEntry: StatsDataType = [
         {
