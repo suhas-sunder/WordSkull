@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import useSecondsTimer from "../../hooks/useSecondsTimer";
 import SecondsToTime from "../../utils/converters/SecondsToTime";
 import { StatsDataType, useStats } from "../../context/StatsContext";
 import { v4 as uuidv4 } from "uuid";
@@ -10,6 +9,7 @@ interface PropType {
   isGameOver: boolean;
   wordsForSkull: string[];
   currentRow: number;
+  seconds: number;
 }
 
 function GameOverStats({
@@ -18,20 +18,10 @@ function GameOverStats({
   isGameOver,
   wordsForSkull,
   currentRow,
+  seconds,
 }: PropType) {
-  const { seconds, setStartTimer } = useSecondsTimer();
   const { setStats, difficulty, gameMode } = useStats();
 
-
-  useEffect(() => {
-    if (isGameOver) {
-      setStartTimer(false);
-    } else {
-      setStartTimer(true);
-    }
-  }, [isGameOver, setStartTimer]);
-
-  
   //Update stats data with new stats when game ends
   useEffect(() => {
     const updateSats = () => {
@@ -70,7 +60,6 @@ function GameOverStats({
     setStats,
     wordsForSkull.length,
   ]);
-
 
   return (
     <div className="flex w-full flex-col justify-center items-center gap-4 ">

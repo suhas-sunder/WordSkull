@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ModalWrapper from "./ModalWrapper";
 import useOnlyOnClient from "../../hooks/useOnlyOnClient";
 import GameOverStats from "../visual/GameOverStats";
 import ShareYourResults from "./ShareYourResults";
+import useSecondsTimer from "../../hooks/useSecondsTimer";
 
 interface PropType {
   isGameOver: boolean;
@@ -24,6 +25,16 @@ const GameOverMenu = React.memo(function GameOverMenu({
   currentRow,
   wordsForSkull,
 }: PropType) {
+  const { seconds, setStartTimer } = useSecondsTimer();
+
+  useEffect(() => {
+    if (isGameOver) {
+      setStartTimer(false);
+    } else {
+      setStartTimer(true);
+    }
+  }, [isGameOver, setStartTimer]);
+
   const handleGameOverMsg = () => {
     const rowsCompleted = currentRow;
 
@@ -64,6 +75,7 @@ const GameOverMenu = React.memo(function GameOverMenu({
               isGameOver={isGameOver}
               wordsForSkull={wordsForSkull}
               currentRow={currentRow}
+              seconds={seconds}
             />
             <button
               onClick={() => window.location.reload()}
