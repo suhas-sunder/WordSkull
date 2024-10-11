@@ -70,14 +70,14 @@ const TestComponent = ({ isGameOver }: { isGameOver: boolean }) => {
     downloadPuzzle,
     isWebShareSupported,
     imgBlob,
-    captureAreaRef,
   } = useCaptureHTML({
     isGameOver,
+    captureAreaId: "capture-area",
   });
 
   return (
     <div id="capture-area">
-      <div ref={captureAreaRef}>
+      <div>
         <h1>Test</h1>
         <img src={testImg} alt="Test" />
       </div>
