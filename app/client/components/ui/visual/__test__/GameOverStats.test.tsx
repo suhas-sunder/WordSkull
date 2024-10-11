@@ -25,6 +25,7 @@ const MockGameOverStats = () => {
           isGameOver={true}
           wordsForSkull={["apple", "banana", "cherry"]}
           currentRow={1}
+          seconds={120}
         />
       </MockStatsProvider>
     </MockThemeProvider>
@@ -103,6 +104,7 @@ describe("should not render", () => {
             isGameOver={false}
             wordsForSkull={["apple", "banana", "cherry"]}
             currentRow={1}
+            seconds={120}
           />
         </MockStatsProvider>
       </MockThemeProvider>
