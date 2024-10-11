@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import useWordsForSkull from "../hooks/useWordsForSkull";
 import Skulls from "../data/Skulls";
 import useClassicGameplayLogic from "../hooks/useClassicGameplayLogic";
-import useCaptureHTML from "../hooks/useCaptureHTML";
 import Header from "./Header";
 import WordHistory from "../ui/interactive/WordHistory";
 import DisplaySkull from "./DisplaySkull";
@@ -65,7 +64,7 @@ function ClassicGameLogic({
     wordsForSkull,
   });
 
-  const { captureAreaRef } = useCaptureHTML({ isGameOver });
+
 
   useEffect(() => {
     const randomizeCurrentSkull = () => {
@@ -91,7 +90,6 @@ function ClassicGameLogic({
         setShowGameOverMenu={setShowGameOverMenu}
       />
       <main
-        ref={captureAreaRef}
         className="flex relative flex-col gap-1 pt-1 px-5 items-center animate-fadeIn"
       >
         <GameOverMenu
