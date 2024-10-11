@@ -8,6 +8,13 @@ window.alert = vi.fn();
 
 // Mock the navigator APIs
 beforeEach(() => {
+  global.getComputedStyle = () => {
+    return {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      getPropertyValue: (prop) => "",
+    } as CSSStyleDeclaration;
+  };
+
   // Mock the share function
   mockNavigatorShare();
 
