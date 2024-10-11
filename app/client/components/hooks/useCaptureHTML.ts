@@ -1,45 +1,60 @@
 import html2canvas from "html2canvas";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface PropType {
   isGameOver: boolean;
+  captureAreaId: string;
 }
 
-function useCaptureHTML({ isGameOver }: PropType) {
+//Use captureAreaId prop to identify the element to be captured when game ends
+function useCaptureHTML({ isGameOver, captureAreaId }: PropType) {
   const [isWebShareSupported, setIsWebShareSupported] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState<string>("loading");
   const [imgBlob, setImgBlob] = useState<Blob | null>(null);
 
+  // Check if Web Share API is supported
   useEffect(() => {
-    // Check if Web Share API is supported
     setIsWebShareSupported(!!navigator.share);
+  }, []);
 
+  useEffect(() => {
     const handleCapture = async () => {
-      const captureArea = captureAreaRef.current;
-      if (!captureArea) return;
+      const element = document.getElementById(captureAreaId);
+      if (!element) return;
 
       // Temporarily remove the fade-in animation
-      captureArea.classList.remove("animate-fadeIn");
+      element.classList.remove("animate-fadeIn");
 
       try {
-        // Capture the element as a blob
-        setImgBlob((await captureElementAsBlob("capture-area")) as Blob);
+        const capturedBlob = await captureElementAsBlob(captureAreaId);
+
+        if (capturedBlob) {
+          setImgBlob(capturedBlob);
+          setLoadingStatus("loaded");
+        } else {
+          console.log("Image capture failed, blob is null.");
+          setLoadingStatus("failed");
+        }
       } catch (error) {
         console.error("Error capturing element:", error);
+        setLoadingStatus("failed");
       }
     };
 
-    if (isGameOver && imgBlob === null) {
+    // Start capturing the image when the game is over
+    if (isGameOver) {
       handleCapture();
     }
-  }, [imgBlob, isGameOver]);
+  }, [captureAreaId, isGameOver]);
 
-  const captureAreaRef = useRef<HTMLDivElement>(null);
-
-  async function captureElementAsBlob(elementId: string): Promise<Blob | null> {
-    const element = document.getElementById(elementId);
+  async function captureElementAsBlob(
+    captureAreaId: string
+  ): Promise<Blob | null> {
+    const element = document.getElementById(captureAreaId);
 
     if (!element) {
-      throw new Error(`Element with id ${elementId} not found`);
+      console.error(`Element with id ${captureAreaId} not found.`);
+      throw new Error(`Element with id ${captureAreaId} not found`);
     }
 
     const canvas = await html2canvas(element);
@@ -58,13 +73,15 @@ function useCaptureHTML({ isGameOver }: PropType) {
       link.download = "screenshot.png";
       link.click();
       URL.revokeObjectURL(url);
+    } else {
+      console.log("No image available to download.");
     }
   };
 
   const copyImageToClipboard = async () => {
     try {
       if (!navigator.clipboard || !window.ClipboardItem) {
-        alert(
+        console.error(
           "Clipboard API not supported. Please manually download the image."
         );
         return;
@@ -72,26 +89,21 @@ function useCaptureHTML({ isGameOver }: PropType) {
 
       if (imgBlob) {
         await navigator.clipboard.write([
-          new ClipboardItem({
-            "image/png": imgBlob,
-          }),
+          new ClipboardItem({ "image/png": imgBlob }),
         ]);
       } else {
-        const blob = (await captureElementAsBlob("capture-area")) as Blob;
+        console.log("No image available, capturing image before copying...");
+        const blob = await captureElementAsBlob(captureAreaId);
         if (blob) {
           await navigator.clipboard.write([
-            new ClipboardItem({
-              "image/png": blob,
-            }),
+            new ClipboardItem({ "image/png": blob }),
           ]);
           setImgBlob(blob);
+          console.log("Image captured and copied to clipboard.");
         }
       }
     } catch (error) {
       console.error("Failed to copy image to clipboard:", error);
-      alert(
-        "Failed to copy image to clipboard. Please manually download the image."
-      );
     }
   };
 
@@ -108,7 +120,8 @@ function useCaptureHTML({ isGameOver }: PropType) {
             files: [file],
           });
         } else {
-          const blob = (await captureElementAsBlob("capture-area")) as Blob;
+          console.log("No image available, capturing image before sharing...");
+          const blob = await captureElementAsBlob(captureAreaId);
           if (blob) {
             const file = new File([blob], "screenshot.png", {
               type: "image/png",
@@ -124,11 +137,9 @@ function useCaptureHTML({ isGameOver }: PropType) {
         }
       } catch (error) {
         console.error("Error sharing image:", error);
-        alert("Failed to share image.");
       }
     } else {
-      // Fallback: copy image to clipboard or download
-      alert("Web Share API not supported. Copying image to clipboard.");
+      console.error("Web Share API not supported. Copying image to clipboard.");
       copyImageToClipboard();
     }
   };
@@ -139,7 +150,7 @@ function useCaptureHTML({ isGameOver }: PropType) {
     shareImage,
     isWebShareSupported,
     imgBlob,
-    captureAreaRef,
+    loadingStatus,
   };
 }
 

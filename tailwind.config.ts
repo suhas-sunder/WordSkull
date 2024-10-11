@@ -62,6 +62,7 @@ export default {
           "40%": { transform: "rotateY(180deg) scale(0.7) translateY(20%)" },
           "100%": { transform: "rotateY(0)" },
         },
+        
       },
       animation: {
         scalePulse: "scalePulse 3s ease-in-out infinite",

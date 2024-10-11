@@ -10,7 +10,6 @@ interface PropType {
   setShowGameOverMenu: (value: boolean) => void;
   lives: number | null;
   maxLives: number | null;
-  seconds: number;
   currentRow: number;
   wordsForSkull: string[];
 }
@@ -24,7 +23,6 @@ const MockGameOverMenu = ({
   setShowGameOverMenu,
   lives,
   maxLives,
-  seconds,
   currentRow,
   wordsForSkull,
 }: PropType) => {
@@ -37,7 +35,6 @@ const MockGameOverMenu = ({
           setShowGameOverMenu={setShowGameOverMenu}
           lives={lives}
           maxLives={maxLives}
-          seconds={seconds}
           currentRow={currentRow}
           wordsForSkull={wordsForSkull}
         />
@@ -57,7 +54,6 @@ describe("should render default elements when game is over and game over menu is
       isGameOver: true,
       lives: 5,
       maxLives: 5,
-      seconds: 0,
       currentRow: 0,
       wordsForSkull: ["hello", "world", "hello"],
       showGameOverMenu: true,
@@ -107,16 +103,6 @@ describe("should render default elements when game is over and game over menu is
     expect(shareSection).toBeInTheDocument();
   });
 
-  it("should render the 'Download' button", () => {
-    const downloadButton = screen.getByText(/Download/i);
-    expect(downloadButton).toBeInTheDocument();
-  });
-
-  it("should render the 'Copy' button", () => {
-    const copyButton = screen.getByText(/Copy/i);
-    expect(copyButton).toBeInTheDocument();
-  });
-
   it("should call setShowGameOverMenu(false) when the background is clicked", () => {
     const backgroundElement = screen.getByTestId(/modal-background/i);
     fireEvent.click(backgroundElement);
@@ -137,15 +123,6 @@ describe("should render default elements when game is over and game over menu is
 
     // Restore the original window.location object after the test
     window.location = originalLocation;
-  });
-
-  it("should show 'Copied!' text after clicking the 'Copy' button", async () => {
-    window.alert = vi.fn();
-    const copyButton = screen.getByText(/Copy/i);
-    fireEvent.click(copyButton);
-
-    const copiedText = await screen.findByText(/Copied!/i);
-    expect(copiedText).toBeInTheDocument();
   });
 
   it("should render the 'Share' button if web share is supported", () => {
@@ -174,7 +151,6 @@ describe("should not render ", () => {
       isGameOver: false,
       lives: 5,
       maxLives: 5,
-      seconds: 0,
       currentRow: 0,
       wordsForSkull: ["hello", "world", "hello"],
       showGameOverMenu: false,

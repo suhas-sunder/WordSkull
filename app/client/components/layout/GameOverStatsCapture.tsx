@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import useSecondsTimer from "../hooks/useSecondsTimer";
 import SecondsToTime from "../utils/converters/SecondsToTime";
 import Header from "./Header";
@@ -15,7 +15,7 @@ interface PropType {
 }
 
 //Temporairly displays stats above word skull when game over menu is open so that when screen is captured, the stats hidden behind the menu are included along with it.
-function GameOverStatsCapture({
+const GameOverStatsCapture = React.memo(function GameOverStatsCapture({
   isGameOver,
   showGameOverMenu,
   setShowGameOverMenu,
@@ -25,7 +25,6 @@ function GameOverStatsCapture({
   wordsForSkull,
   lettersPerSkull,
 }: PropType) {
-  
   const { seconds, setStartTimer } = useSecondsTimer();
 
   useEffect(() => {
@@ -39,7 +38,10 @@ function GameOverStatsCapture({
   return (
     <>
       {isGameOver && showGameOverMenu && (
-        <div data-testid="game-over-stats-capture" className="flex font-nunito w-full flex-col justify-center items-center gap-4">
+        <div
+          data-testid="game-over-stats-capture"
+          className="flex font-nunito w-full flex-col justify-center items-center gap-4"
+        >
           <Header
             lives={lives}
             isGameOver={isGameOver}
@@ -77,6 +79,6 @@ function GameOverStatsCapture({
       )}
     </>
   );
-}
+});
 
 export default GameOverStatsCapture;
