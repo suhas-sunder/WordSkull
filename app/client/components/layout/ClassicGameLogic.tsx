@@ -12,6 +12,7 @@ import GameOverStatsCapture from "./GameOverStatsCapture";
 import { WordsData } from "../../../routes/word-skull-game-easy-mode";
 import { useSettings } from "../context/SettingsContext";
 import { useStats } from "../context/StatsContext";
+import OffScreenTimer from "../utils/trackers/OffScreenTimer";
 
 interface PropType {
   startPosition: number;
@@ -31,6 +32,8 @@ function ClassicGameLogic({
   gameMode,
 }: PropType) {
   const [showGameOverMenu, setShowGameOverMenu] = useState<boolean>(true);
+  const [startOffscreenTimer, setStartOffscreenTimer] = useState<boolean>(false);
+  const [seconds, setSeconds] = useState<number>(0);
   const skulls = useMemo(
     () =>
       Skulls()
@@ -62,6 +65,8 @@ function ClassicGameLogic({
     wordsList,
     setDispWordHistory,
     wordsForSkull,
+    setStartOffscreenTimer,
+    startOffscreenTimer,
   });
 
 
@@ -100,6 +105,7 @@ function ClassicGameLogic({
           maxLives={maxLives}
           currentRow={currentRow}
           wordsForSkull={wordsForSkull}
+          seconds={seconds}
         />
         <WordHistory
           dispWordHistory={dispWordHistory}
@@ -119,6 +125,7 @@ function ClassicGameLogic({
             currentRow={currentRow}
             lettersPerSkull={lettersPerSkull}
             wordsForSkull={wordsForSkull}
+            seconds={seconds}
           />
           <DisplaySkull
             currentSkull={currentSkull}
@@ -143,6 +150,7 @@ function ClassicGameLogic({
             />
           </div>
         </div>
+        <OffScreenTimer  setSeconds={setSeconds} isGameOver={isGameOver} startOffscreenTimer={startOffscreenTimer} />
       </main>
     </label>
   );

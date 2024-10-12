@@ -3,9 +3,10 @@ import useCaptureHTML from "../../hooks/useCaptureHTML";
 
 interface PropType {
   isGameOver: boolean;
+  seconds: number;
 }
 
-function ShareYourResults({ isGameOver }: PropType) {
+function ShareYourResults({ isGameOver, seconds }: PropType) {
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
   const {
@@ -14,7 +15,7 @@ function ShareYourResults({ isGameOver }: PropType) {
     shareImage,
     isWebShareSupported,
     loadingStatus,
-  } = useCaptureHTML({ isGameOver, captureAreaId: "capture-area" }); //Use captureAreaId prop to identify the element to be captured when game ends
+  } = useCaptureHTML({ isGameOver, captureAreaId: "capture-area", seconds }); //Use captureAreaId prop to identify the element to be captured when game ends
 
   return (
     <div className="cursor-pointer py-2 px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex flex-col gap-5 justify-center items-center">

@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 interface PropType {
   isGameOver: boolean;
   captureAreaId: string;
+  seconds: number;
 }
 
 //Use captureAreaId prop to identify the element to be captured when game ends
-function useCaptureHTML({ isGameOver, captureAreaId }: PropType) {
+function useCaptureHTML({ isGameOver, captureAreaId, seconds }: PropType) {
   const [isWebShareSupported, setIsWebShareSupported] = useState(false);
   const [loadingStatus, setLoadingStatus] = useState<string>("loading");
   const [imgBlob, setImgBlob] = useState<Blob | null>(null);
@@ -41,11 +42,11 @@ function useCaptureHTML({ isGameOver, captureAreaId }: PropType) {
       }
     };
 
-    // Start capturing the image when the game is over
-    if (isGameOver) {
+    // Start capturing the image when the game is over && timer has been updated
+    if (isGameOver && seconds > 0) {
       handleCapture();
     }
-  }, [captureAreaId, isGameOver]);
+  }, [captureAreaId, isGameOver, seconds]);
 
   async function captureElementAsBlob(
     captureAreaId: string

@@ -61,7 +61,7 @@ describe("renders game over elements to be captured & shared", () => {
   it("should conditionally render stats when game over menu is shown", () => {
     expect(screen.getByText("3/5")).toBeInTheDocument(); // Lives
     expect(screen.getByText("2/3")).toBeInTheDocument(); // Correct words
-    expect(screen.getByText(SecondsToTime(0))).toBeInTheDocument(); // Time spent
+    expect(screen.getByText(SecondsToTime(120))).toBeInTheDocument(); // Time spent
   });
 
   it("should render heading element by integrating with Header", () => {

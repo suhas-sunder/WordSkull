@@ -37,6 +37,7 @@ const MockGameOverMenu = ({
           maxLives={maxLives}
           currentRow={currentRow}
           wordsForSkull={wordsForSkull}
+          seconds={0}
         />
       </MockThemeProvider>
     </MemoryRouter>

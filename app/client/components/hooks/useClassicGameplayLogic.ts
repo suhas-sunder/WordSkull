@@ -13,6 +13,10 @@ interface PropType {
     value: ((prevState: boolean) => boolean) | boolean
   ) => void;
   wordsForSkull: string[];
+  startOffscreenTimer: boolean;
+  setStartOffscreenTimer: (
+    value: ((prevState: boolean) => boolean) | boolean
+  ) => void;
 }
 
 function useClassicGameplayLogic({
@@ -21,6 +25,8 @@ function useClassicGameplayLogic({
   wordsList,
   setDispWordHistory,
   wordsForSkull,
+  startOffscreenTimer,
+  setStartOffscreenTimer,
 }: PropType) {
   const [currentRow, setCurrentRow] = useState<number>(0);
   const [currentRowIndex, setCurrentRowIndex] = useState<number>(0);
@@ -150,8 +156,11 @@ function useClassicGameplayLogic({
         !/^[a-zA-Z]$/.test(key) &&
         key.toLowerCase() !== "backspace" &&
         key.toLowerCase() !== "enter"
-      )
-        return;
+      ) {
+        return; //Exit if key doesn't match allowed characters
+      } else if (!startOffscreenTimer) {
+        setStartOffscreenTimer(true); //Start timer if appropriate input is detected
+      }
 
       const handleEnteredWord = () => {
         //Check if entered word is valid
@@ -266,6 +275,8 @@ function useClassicGameplayLogic({
     wordsForSkull,
     wordsList,
     isDelaying,
+    startOffscreenTimer,
+    setStartOffscreenTimer,
   ]);
 
   return {
