@@ -32,6 +32,7 @@ function ClassicGameLogic({
   gameMode,
 }: PropType) {
   const [showGameOverMenu, setShowGameOverMenu] = useState<boolean>(true);
+  const [startOffscreenTimer, setStartOffscreenTimer] = useState<boolean>(false);
   const [seconds, setSeconds] = useState<number>(0);
   const skulls = useMemo(
     () =>
@@ -64,6 +65,8 @@ function ClassicGameLogic({
     wordsList,
     setDispWordHistory,
     wordsForSkull,
+    setStartOffscreenTimer,
+    startOffscreenTimer,
   });
 
 
@@ -147,7 +150,7 @@ function ClassicGameLogic({
             />
           </div>
         </div>
-        <OffScreenTimer  setSeconds={setSeconds} isGameOver={isGameOver} />
+        <OffScreenTimer  setSeconds={setSeconds} isGameOver={isGameOver} startOffscreenTimer={startOffscreenTimer} />
       </main>
     </label>
   );
