@@ -15,7 +15,13 @@ interface PropType {
     value: ((prevState: boolean) => boolean) | boolean
   ) => void;
   wordsForSkull: string[];
+  startOffscreenTimer: boolean;
+  setStartOffscreenTimer: (
+    value: ((prevState: boolean) => boolean) | boolean
+  ) => void;
 }
+
+const setStartOffscreenTimer = vi.fn();
 
 const TestComponent = (props: PropType) => {
   const {
@@ -70,6 +76,8 @@ describe("gameplay logic for classic mode", () => {
         wordsList={mockWordsList}
         setDispWordHistory={setDispWordHistory}
         wordsForSkull={["ant"]}
+        startOffscreenTimer={false}
+        setStartOffscreenTimer={setStartOffscreenTimer}
       />
     );
 
@@ -92,6 +100,8 @@ describe("gameplay logic for classic mode", () => {
         }}
         setDispWordHistory={setDispWordHistory}
         wordsForSkull={["ant"]}
+        startOffscreenTimer={false}
+        setStartOffscreenTimer={setStartOffscreenTimer}
       />
     );
 
@@ -119,6 +129,8 @@ describe("gameplay logic for classic mode", () => {
         wordsList={mockWordsList}
         setDispWordHistory={setDispWordHistory}
         wordsForSkull={["cat"]}
+        startOffscreenTimer={false}
+        setStartOffscreenTimer={setStartOffscreenTimer}
       />
     );
 
@@ -141,6 +153,8 @@ describe("gameplay logic for classic mode", () => {
         wordsList={mockWordsList}
         setDispWordHistory={setDispWordHistory}
         wordsForSkull={["ant"]}
+        startOffscreenTimer={false}
+        setStartOffscreenTimer={setStartOffscreenTimer}
       />
     );
 
@@ -163,6 +177,8 @@ describe("gameplay logic for classic mode", () => {
         wordsList={mockWordsList}
         setDispWordHistory={setDispWordHistory}
         wordsForSkull={["ant"]}
+        startOffscreenTimer={false}
+        setStartOffscreenTimer={setStartOffscreenTimer}
       />
     );
 

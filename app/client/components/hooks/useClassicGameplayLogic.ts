@@ -275,6 +275,8 @@ function useClassicGameplayLogic({
     wordsForSkull,
     wordsList,
     isDelaying,
+    startOffscreenTimer,
+    setStartOffscreenTimer,
   ]);
 
   return {
