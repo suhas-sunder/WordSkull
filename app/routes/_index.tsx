@@ -46,7 +46,7 @@ export default function Index() {
       <main
         className={`${
           darkThemeActive && "text-white"
-        } flex flex-col sm:gap-14  -translate-y-5 sm:translate-y-0 items-center animate-fadeIn`}
+        } transition-colors duration-[600ms] flex flex-col sm:gap-14  -translate-y-5 sm:translate-y-0 items-center animate-fadeIn`}
       >
         <SkullAnimation />
         <button
@@ -55,7 +55,7 @@ export default function Index() {
             darkThemeActive
               ? "text-white  hover:text-slate-300"
               : " text-slate-500  hover:text-slate-600"
-          } flex z-10 border-2 px-4  text-xl font-nunito rounded-lg tracking-widest leading-loose border-slate-300 hover:border-slate-400`}
+          } flex z-10 border-2 px-4  text-xl font-nunito rounded-lg transition-colors duration-[600ms] tracking-widest leading-loose border-slate-300 hover:border-slate-400`}
         >
           Play
         </button>

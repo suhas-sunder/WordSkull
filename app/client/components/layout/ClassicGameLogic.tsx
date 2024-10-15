@@ -32,7 +32,8 @@ function ClassicGameLogic({
   gameMode,
 }: PropType) {
   const [showGameOverMenu, setShowGameOverMenu] = useState<boolean>(true);
-  const [startOffscreenTimer, setStartOffscreenTimer] = useState<boolean>(false);
+  const [startOffscreenTimer, setStartOffscreenTimer] =
+    useState<boolean>(false);
   const [seconds, setSeconds] = useState<number>(0);
   const skulls = useMemo(
     () =>
@@ -69,8 +70,6 @@ function ClassicGameLogic({
     startOffscreenTimer,
   });
 
-
-
   useEffect(() => {
     const randomizeCurrentSkull = () => {
       setCurrentSkull([skulls[Math.floor(Math.random() * skulls?.length)]]);
@@ -94,9 +93,7 @@ function ClassicGameLogic({
         lettersPerSkull={lettersPerSkull}
         setShowGameOverMenu={setShowGameOverMenu}
       />
-      <main
-        className="flex relative flex-col gap-1 pt-1 px-5 items-center animate-fadeIn"
-      >
+      <main className="flex relative flex-col gap-1 pt-1 px-5 items-center animate-fadeIn">
         <GameOverMenu
           isGameOver={isGameOver}
           showGameOverMenu={showGameOverMenu}
@@ -135,22 +132,28 @@ function ClassicGameLogic({
             enteredWords={enteredWords}
             isEnterPressed={isEnterPressed}
           />
-          <div
-            className={`${
-              showKeyboard ? "opacity-100" : "opacity-0"
-            } flex max-w-[800px] overflow-hidden justify-center items-center`}
-          >
-            <Keyboard
-              currentlyEnteredWords={enteredWords[currentRow]}
-              currentWord={wordsForSkull[currentRow]}
-            />
-            <Keypad
-              currentlyEnteredWords={enteredWords[currentRow]}
-              currentWord={wordsForSkull[currentRow]}
-            />
-          </div>
+          {showKeyboard ? (
+            <div
+              className={` flex max-w-[800px] overflow-hidden justify-center items-center`}
+            >
+              <Keyboard
+                currentlyEnteredWords={enteredWords[currentRow]}
+                currentWord={wordsForSkull[currentRow]}
+              />
+              <Keypad
+                currentlyEnteredWords={enteredWords[currentRow]}
+                currentWord={wordsForSkull[currentRow]}
+              />
+            </div>
+          ) : (
+            <div className="mb-10"></div>
+          )}
         </div>
-        <OffScreenTimer  setSeconds={setSeconds} isGameOver={isGameOver} startOffscreenTimer={startOffscreenTimer} />
+        <OffScreenTimer
+          setSeconds={setSeconds}
+          isGameOver={isGameOver}
+          startOffscreenTimer={startOffscreenTimer}
+        />
       </main>
     </label>
   );

@@ -61,7 +61,7 @@ function GameOverStats({
   ]);
 
   return (
-    <div className="flex w-full flex-col justify-center items-center gap-4 ">
+    <div className="flex w-full flex-col font-nunito justify-center  items-center gap-4 ">
       <h2 className="text-2xl text-slate-600">Stats</h2>
       <ul className="grid gap-5 sm:grid-cols-3 w-full justify-center items-center">
         <li className="flex col-span-1 flex-col gap-1 w-full justify-center items-center">
