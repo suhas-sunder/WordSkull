@@ -18,14 +18,14 @@ function ShareYourResults({ isGameOver, seconds }: PropType) {
   } = useCaptureHTML({ isGameOver, captureAreaId: "capture-area", seconds }); //Use captureAreaId prop to identify the element to be captured when game ends
 
   return (
-    <div className="cursor-pointer py-2 px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex flex-col gap-5 justify-center items-center">
+    <div className="cursor-pointer font-nunito py-2 px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex flex-col gap-5 justify-center items-center">
       <h3 className="flex whitespace-nowrap text-xl text-slate-600">
         Share Your Results!
       </h3>
       {/* Loading State */}
       {loadingStatus === "loading" && (
         <div className="flex items-center justify-center h-full">
-          <span className="text-lg font-semibold animate-pulse">
+          <span className="text-lg mb-10 text-skull-dark-brown font-semibold animate-pulse">
             Loading...
           </span>
         </div>
@@ -36,7 +36,7 @@ function ShareYourResults({ isGameOver, seconds }: PropType) {
 
       {/* Loaded State */}
       {loadingStatus === "loaded" && (
-        <ul className="grid sm:grid-cols-3 gap-5 justify-center items-center mb-[2.5em]">
+        <ul className="grid sm:grid-cols-3 text-skull-dark-brown gap-5 justify-center items-center mb-[2.5em]">
           {isWebShareSupported && (
             <li className="flex justify-center items-center w-full">
               <button

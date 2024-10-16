@@ -15,10 +15,10 @@ export default function cookiespolicy() {
         <h1 className="mb-5 flex py-2 text-4xl">COOKIE POLICY</h1>
         <h2 className="flex py-2 text-2xl">Last updated August 02, 2024</h2>
         <p className="flex flex-col gap-4 py-2">
-          This Cookie Policy explains how http://wordkull.com
+          This Cookie Policy explains how http://wordskull.com
           ('Company', 'we', 'us', and 'our') uses cookies and similar
           technologies to recognize you when you visit our website at
-          https://wordkull.com ('Website'). It explains what these
+          https://wordskull.com ('Website'). It explains what these
           technologies are and why we use them, as well as your rights to
           control our use of them.
         </p>
@@ -39,7 +39,7 @@ export default function cookiespolicy() {
           </p>
           <p>
             Cookies set by the website owner (in this case,
-            http://wordkull.com) are called 'first-party cookies.'
+            http://wordskull.com) are called 'first-party cookies.'
             Cookies set by parties other than the website owner are called
             'third-party cookies.' Third-party cookies enable third-party
             features or functionality to be provided on or through the website
@@ -127,7 +127,7 @@ export default function cookiespolicy() {
             Purpose: Records a particular ID used to come up with data about
             website usage by the user
           </p>
-          <p>Provider: wordkull.com</p>
+          <p>Provider: wordskull.com</p>
           <p>Service: Google Analytics View Service Privacy Policy</p>
           <p>Country: Canada</p>
           <p>Type: http_cookie</p>
@@ -138,7 +138,7 @@ export default function cookiespolicy() {
             designation of a randomly generated number as client identifier,
             which allows calculation of visits and sessions
           </p>
-          <p>Provider: wordkull.com</p>
+          <p>Provider: wordskull.com</p>
           <p>Service: Google Analytics View Service Privacy Policy</p>
           <p>Country: Canada</p>
           <p>Type: http_cookie</p>
@@ -257,7 +257,7 @@ export default function cookiespolicy() {
           </h2>
           <p>
             If you have any questions about our use of cookies or other
-            technologies, please contact us at: admin@wordkull.com.
+            technologies, please contact us at: admin@wordskull.com.
           </p>
         </section>
       </main>

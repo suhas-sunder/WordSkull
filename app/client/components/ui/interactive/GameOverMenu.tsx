@@ -56,7 +56,7 @@ const GameOverMenu = React.memo(function GameOverMenu({
           <>
             <div
               data-testid="game-over-menu"
-              className=" bg-skull-brown text-white w-full justify-center items-center py-2 text-2xl text-center "
+              className=" bg-skull-brown font-nunito text-white w-full  justify-center items-center py-2 text-2xl text-center "
             >
               {handleGameOverMsg()}
             </div>
@@ -70,7 +70,7 @@ const GameOverMenu = React.memo(function GameOverMenu({
             />
             <button
               onClick={() => window.location.reload()}
-              className="cursor-pointer py-2 gap-2 bg-green-500 text-white px-4 mt-1 text-lg font-nunito rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+              className="cursor-pointer py-2 gap-2 bg-green-500  text-white px-4 mt-1 text-lg font-nunito rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
             >
               Play Again
             </button>
