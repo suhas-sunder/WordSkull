@@ -24,8 +24,8 @@ function PosthogInit() {
       if (error instanceof Error) {
         // Suppress specific error messages
         if (
-          error.message.includes("CSP") ||
-          error.message.includes("inline script")
+          error.message.includes("Content Security Policy") ||
+          error.message.includes("script-src") || error.message.includes("nonce")
         ) {
           // Do nothing
         } else {
