@@ -5,35 +5,19 @@ import { posthog } from "posthog-js";
 
 function PosthogInit() {
   useEffect(() => {
-    try {
-      if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-        requestIdleCallback(() => {
-          posthog.init("phc_2IQDpa7YpxYMhcOXtPMlgcrrHmNjX4pY3wuvr3LKjS3", {
-            api_host: "https://us.i.posthog.com",
-            person_profiles: "identified_only", // or 'always' for anonymous users
-          });
-        });
-      } else {
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      requestIdleCallback(() => {
         posthog.init("phc_2IQDpa7YpxYMhcOXtPMlgcrrHmNjX4pY3wuvr3LKjS3", {
           api_host: "https://us.i.posthog.com",
-          person_profiles: "identified_only",
+          person_profiles: "identified_only", // or 'always' for anonymous users
         });
-      }
-    } catch (error: unknown) {
-      // Check if the error is an instance of Error
-      if (error instanceof Error) {
-        // Suppress specific error messages
-        if (
-          error.message.includes("Content Security Policy") ||
-          error.message.includes("script-src") || error.message.includes("nonce")
-        ) {
-          // Do nothing
-        } else {
-          console.error(error); // Log other errors
-        }
-      } else {
-        console.error("An unknown error occurred:", error);
-      }
+      });
+    } else {
+      // Fallback if requestIdleCallback is not supported
+      posthog.init("phc_2IQDpa7YpxYMhcOXtPMlgcrrHmNjX4pY3wuvr3LKjS3", {
+        api_host: "https://us.i.posthog.com",
+        person_profiles: "identified_only",
+      });
     }
   }, []);
 

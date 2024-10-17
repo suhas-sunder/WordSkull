@@ -1,8 +1,11 @@
-import { useNavigate } from "@remix-run/react";
-import { useState } from "react";
+import { useLoaderData, useNavigate } from "@remix-run/react";
+import { useEffect, useState } from "react";
 import { useTheme } from "../client/components/context/ThemeContext";
 import { MetaFunction } from "@remix-run/node";
 import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
+import crypto from "crypto";
+import { json } from "react-router-dom";
+import { posthog } from "posthog-js";
 
 export const meta: MetaFunction = () => {
   return [
@@ -34,15 +37,41 @@ function Header() {
 
 const difficulties = ["easy", "medium", "hard", "extreme"];
 
+export const loader = async () => {
+  const nonce = crypto.randomBytes(16).toString('base64'); // Generate nonce
+
+  return json(
+      { nonce }, // Return only the nonce
+      {
+          headers: {
+              "Content-Security-Policy": `script-src 'self' https://us-assets.i.posthog.com 'nonce-${nonce}'`, // CSP header
+          },
+      }
+  );
+};
+
 export default function Index() {
   const [difficulty, setDifficulty] = useState<string>("easy");
   const navigate = useNavigate();
 
   const { darkThemeActive } = useTheme();
 
+  const { nonce }: { nonce: string } = useLoaderData();
+
+  useEffect(() => {
+      posthog.init("phc_2IQDpa7YpxYMhcOXtPMlgcrrHmNjX4pY3wuvr3LKjS3", {
+          api_host: "https://us.i.posthog.com",
+          person_profiles: "identified_only",
+      });
+  }, []);
+
+
+
   return (
     <div className="flex  flex-col mt-3 sm:mt-5 overflow-hidden">
       <Header />
+
+      <script nonce={nonce}>
       <main
         className={`${
           darkThemeActive && "text-white"
@@ -126,6 +155,8 @@ export default function Index() {
           .
         </div>
       </main>
+
+      </script>
     </div>
   );
 }
