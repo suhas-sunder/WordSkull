@@ -37,10 +37,10 @@ function MainLinks({
         <li className="flex w-full lg:w-auto">
           <NavLink
             onClick={handleLinkClick}
-            to="/blog"
+            to="/about"
             className="relative flex items-center px-4 justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
           >
-            <span className={`${styles.icon} flex`}>Blog</span>
+            <span className={`${styles.icon} flex`}>About</span>
           </NavLink>
         </li>
       </ul>

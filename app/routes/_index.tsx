@@ -1,8 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useNavigate } from "@remix-run/react";
 import { useState } from "react";
 import { useTheme } from "../client/components/context/ThemeContext";
 import { MetaFunction } from "@remix-run/node";
 import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
+import { Link } from "react-router-dom";
 
 export const meta: MetaFunction = () => {
   return [
@@ -41,12 +43,12 @@ export default function Index() {
   const { darkThemeActive } = useTheme();
 
   return (
-    <div className="flex  flex-col mt-3 sm:mt-5 overflow-hidden">
+    <div className="flex  flex-col mt-3 sm:mt-5 overflow-hidden  justify-center items-center">
       <Header />
       <main
         className={`${
           darkThemeActive && "text-white"
-        } transition-colors duration-[600ms] flex flex-col sm:gap-14  -translate-y-5 sm:translate-y-0 items-center animate-fadeIn`}
+        } transition-colors duration-[600ms] flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5 sm:translate-y-0 items-center animate-fadeIn`}
       >
         <SkullAnimation />
         <button
@@ -111,18 +113,71 @@ export default function Index() {
             </li>
           ))}
         </ul>
+
+        <div>
+          <h2 className="flex py-2 text-4xl font-lora mt-4 text-center w-full justify-center items-center text-slate-500">
+            FAQ
+          </h2>
+          <ul className="text-slate-600">
+            <li>
+              <h3 className="flex py-2 text-2xl font-nunito mt-2 ">
+                What is WordSkull?
+              </h3>
+              <p className="font-lato text-xl pl-5 tracking-wider leading-loose ">
+                <Link
+                  className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+                  to="/word-skull-game-easy-mode"
+                >
+                  WordSkull
+                </Link>{" "}
+                is an interactive word puzzle game designed for quick,
+                challenging gameplay where players solve word-related puzzles,
+                enhanced by engaging animations and visual effects. It's built
+                with Remix and Vite for fast, modern web performance, offering
+                features like score sharing and unique thematic elements
+                inspired by skull motifs.
+              </p>
+            </li>
+            <li>
+              <h3 className="flex py-2 text-2xl font-nunito mt-2 text-slate-700">
+                Why did you make this website?
+              </h3>
+              <p className="font-lato text-xl pl-5 tracking-wider leading-loose">
+                Great question! Long story short, I wanted to make something fun
+                that I would enjoy using myself. Decided to make a twist on some
+                classic word and puzzle games such as NYT Wordle, Cryptogram,
+                Cross Math, Snake, and more. If you want the long store, you can
+                find it on the{" "}
+                <Link
+                  className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+                  to="/about"
+                >
+                  {" "}
+                  about page
+                </Link>
+                !
+              </p>
+            </li>
+          </ul>
+        </div>
         <div
-          id="find-me"
-          className="max-w-[800px] text-center font-nunito text-lg text-slate-500"
+          className="font-lato text-xl pl-5 tracking-wider text-center leading-loose"
         >
           If you have any feedback, suggestions, or business inquiries, please
           feel free to reach out to{" "}
           <a
             href="mailto:admin@wordskull.com"
-            className="text-skull-dark-brown hover:text-skull-super-dark-brown"
+            className="text-skull-super-dark-brown hover:text-skull-brown"
           >
             admin@wordskull.com
           </a>
+          or you can find me on any of my socials listed on the{" "}
+          <Link
+            className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+            to="/socials"
+          >
+            socials page
+          </Link>
           .
         </div>
       </main>
