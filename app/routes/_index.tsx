@@ -14,7 +14,7 @@ export const meta: MetaFunction = () => {
     {
       name: "description",
       content:
-        "Word Skull is an engaging platform where fun meets learning.  It’s a great way to sharpen your vocabulary 📚, but it’s also just a good game to dive into when you want to relax and challenge your mind 🧩. Word Skull is the perfect way to have fun and keep your brain active 🧠! 🎉📲",
+        "Word Skull is an engaging platform where fun meets learning ❤️.  It’s a great way to sharpen your vocabulary, but it’s also just a good word game to dive into when you want to relax, challenge your mind, and word it out 🧩💚. Word Skull is the perfect way to have fun and keep your brain active 🧠💜! 🎉📲",
     },
   ];
 };
@@ -135,7 +135,7 @@ export default function Index() {
                 exciting. The classic mode feels a lot like Wordle but more of a
                 challenges as you solve for multiple words instead of just one.
                 The goal is to guess the correct words in as few tries as
-                possible. More game modes are on the way to mix things up!
+                possible. More game modes are on the way to mix things up and word it out!
               </p>
             </li>
             <li>
