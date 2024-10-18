@@ -16,6 +16,7 @@ const getPages = (dir) => {
         .replace(/^.*routes/, "")
         .replace(".tsx", "")
         .replace("$", "")
+        .replace("wildcard", "")
         .replace(".mdx", "");
       if (route.endsWith("/index")) route = route.replace("/index", "");
       if (route === "/index") route = "/";

@@ -130,12 +130,12 @@ export default function Index() {
                 >
                   WordSkull
                 </Link>{" "}
-                is an interactive word puzzle game designed for quick,
-                challenging gameplay where players solve word-related puzzles,
-                enhanced by engaging animations and visual effects. It's built
-                with Remix and Vite for fast, modern web performance, offering
-                features like score sharing and unique thematic elements
-                inspired by skull motifs.
+                is a fun and fast-paced word puzzle game where you tackle word
+                challenges, with cool animations and effects to keep things
+                exciting. The classic mode feels a lot like Wordle but more of a
+                challenges as you solve for multiple words instead of just one.
+                The goal is to guess the correct words in as few tries as
+                possible. More game modes are on the way to mix things up!
               </p>
             </li>
             <li>
@@ -160,9 +160,7 @@ export default function Index() {
             </li>
           </ul>
         </div>
-        <div
-          className="font-lato text-xl pl-5 tracking-wider text-center leading-loose"
-        >
+        <div className="font-lato text-xl pl-5 tracking-wider text-center leading-loose">
           If you have any feedback, suggestions, or business inquiries, please
           feel free to reach out to{" "}
           <a
