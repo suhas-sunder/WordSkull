@@ -44,14 +44,14 @@ function Header({
             darkThemeActive ? "text-white" : "text-slate-700"
           }`}
         >
-          <span className="text-lg translate-y-[0.05em]">{lives || 0}</span>
-          <span className="text-xl translate-y-[0.01em]">x</span>
-          <span
+          <li className="text-lg translate-y-[0.05em]">{lives || 0}</li>
+          <li className="text-xl translate-y-[0.01em]">x</li>
+          <li
             data-testid="life-icon"
             className="opacity-85 -translate-x-[0.1em] text-lg"
           >
             {darkThemeActive ? "🤍" : "🖤"}
-          </span>
+          </li>
         </ul>
       )}
     </header>
