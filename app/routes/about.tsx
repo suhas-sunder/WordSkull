@@ -28,24 +28,25 @@ function About() {
         <h2 className="flex py-2 text-4xl font-nunito mt-4">Who am I?</h2>
         <p className="font-lato text-xl tracking-wider leading-loose">
           👋🏽Hi! My name is Suhas, and I’m excited to share my journey creating a
-          word game website that blends fun with learning. Check out my
+          word game website that provides a fun and engaging learning
+          experience. Check out my
           <Link
             className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
-            to="www.suhassunder.com"
+            to="https://www.suhassunder.com"
             target="_blank"
             rel="noopener noreferrer"
           >
             {" "}
             portfolio website
           </Link>{" "}
-          or visit any of my{" "}
+          or visit any of my
           <Link
             className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
             to="/socials"
           >
             {" "}
             social pages
-          </Link>
+          </Link>{" "}
           to learn more!
         </p>
         <h2 className="flex py-2 text-4xl font-nunito mt-4">
@@ -54,9 +55,9 @@ function About() {
         <div className="font-lato text-xl tracking-wider leading-loose gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           <p>
             As a software developer, I was searching for a challenging project
-            in the realm of word games to showcase my skills to potential
-            employers while advancing my skills. In mid-2022, I decided to take
-            a break from playing Steam games to be more productive and instead
+            to advance my programming skills and to add to my portfolio for
+            potential employers to review. In mid-2022, I decided to take a
+            break from playing Steam games to be more productive and instead
             focused on shorter puzzle and word games that offered much greater
             learning value. I started by spending a little time each day on
             typing test websites such as
@@ -77,20 +78,21 @@ function About() {
               rel="noopener noreferrer"
             >
               {" "}
-              FreeTypingCamp
+              FreeTypingCamp or Free Typing Camp
             </Link>
             .
           </p>
 
           <p>
             However, after making significant progress, I realized that building
-            the entire typing test application in React and Express as a
-            single-page application might not have been the best approach for
+            the entire keyboard typing test application in React and Express as
+            a single-page application might not have been the best approach for
             several reasons. I completed a working prototype, which was an
             amazing learning experience, but decided to revisit it in the
-            future. I want to refactor the typing test project using a React
-            framework like Next.js or Remix to handle server-side rendering
-            (SSR) and offload more of the heavy lifting to the server side.
+            future. I want to refactor the touch typing test project using a
+            React framework like Next.js or Remix to handle server-side
+            rendering (SSR) and offload more of the heavy lifting to the server
+            side.
           </p>
         </div>
         <h2 className="flex py-2 text-4xl font-nunito mt-4">
@@ -99,10 +101,11 @@ function About() {
         <div className="font-lato text-xl tracking-wider leading-loose gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           <p>
             Around the middle of 2023, I was spending a lot of my free time
-            playing online puzzle games and word games. I started by exploring
-            various online puzzle games, which led me to create my own unique
-            take on the word game genre. Several of these games inspired me to
-            create this website, but the easiest version to implement was the
+            playing online puzzle games and word games. I was having fun playing
+            and trying various online puzzle games, which led me to create my
+            own unique take on the word game genre. While there were several
+            games that inspired me to create this website, the easiest version
+            to implement was the
             <Link
               className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
               to="https://www.nytimes.com/games/wordle/index.html"
@@ -118,9 +121,10 @@ function About() {
               to="/word-skull-game-easy-mode"
             >
               {" "}
-              Classic WordSkull
+              WordSkull
             </Link>
-            , and I implemented it first.
+            , and I implemented it first. Although the domain is named after
+            this game mode, this application is more than just about Wordle.
           </p>
 
           <div className="rounded-lg flex flex-col gap-4">
@@ -189,10 +193,9 @@ function About() {
               to="/project-milestones"
             >
               {" "}
-              future plans and posting
+              future plans and posting feature updates
             </Link>{" "}
-            feature updates on the development progress page to keep everyone in
-            the loop.
+            on the development progress page to keep everyone in the loop.
           </p>
         </div>
         <h2 className="flex py-2 text-4xl font-nunito mt-4">
@@ -212,11 +215,11 @@ function About() {
             Having tested out the game almost daily, I’ve thoroughly enjoyed
             playing this first version of WordSkull, a fun addition to the
             growing world of puzzle games. I'm not very great at it, so I stick
-            to the easy mode for the most part, but I enjoy it a lot, which I
+            to the easy mode for the most part, but I enjoy it a lot which I
             think is a good sign. If I didn't enjoy the gameplay, I would likely
-            have scrapped the idea altogether. It's not all sunshine and
-            rainbows though.
+            have scrapped the idea altogether.
           </p>
+          <p>It's not all sunshine and rainbows though.</p>
         </div>
         <h2 className="flex py-2 text-4xl font-nunito mt-4">
           What do I dislike about the game so far?
@@ -262,35 +265,38 @@ function About() {
             The third issue is the layout and user experience, which does annoy
             me to an extent. Similar to the NYTimes game, I want the classic
             mode to display the guessed words in an intuitive manner while also
-            showing the correct/incorrect characters. In Wordle, you're dealing
-            with one word at a time on a 5 x 5 grid, so you can see every row
-            clearly after completion.
+            showing and highlighting the correct and incorrect characters. In
+            Wordle, you're dealing with one word at a time on a 5 x 5 grid, so
+            you can see every row clearly after completion.
           </p>
 
           <p>
             Unfortunately, with the skull design, after an attempt is made on
             any given row, if the answer is not correct, once you clear the row,
-            you can't see the previous rows.
+            you can't see the previous rows. Obviously, for my version of the
+            word game, this means you can't see the previous attempts for any
+            given row on the skull itself.
           </p>
 
           <p>
-            The only solution I could think of without cluttering the UI was to
-            have a little window above the skull that displays the correct word.
-            That looked great, but what about the previous tries? Since you
-            can't see those, it makes guessing significantly harder. So, to my
-            dismay, I had to resort to adding a modal that displays all prior
-            entries for the row, which I feel is not the best user experience,
-            but I don't really see any way around it.
+            The only solution I could think of without cluttering the user
+            interface was to have a little window above the skull that displays
+            the correct word. That looked great, but what about displaying the
+            words for all previous attempts? Since you can't see those, it makes
+            guessing significantly harder. So, to my dismay, I had to resort to
+            adding a modal (pop-up window) that displays all prior entries for
+            the row, which I feel is not the best user experience.
+            Unfortunately, I don't really see any way around it.
           </p>
 
           <p>
             I did my best to make it easy to toggle between the two modes by
             making the modal clickable while also binding it to the shift and
-            spacebar keys for easy access. I think it's tolerable when playing
-            with a keyboard but can be annoying at times, especially on small
-            screens when using the keypad. It is definitely my biggest gripe
-            about the game and I truly wish I had a better solution. If you have
-            any ideas, I'm all ears.
+            spacebar keys for easy access. I find it tolerable when playing with
+            a keyboard but do find it annoying at times, especially on small
+            screens when using the mobile keypad. It is definitely my biggest
+            gripe about the game and I truly wish I had a better solution. If
+            you have any ideas, I'm all ears.
           </p>
         </div>
         <h2 className="flex py-2 text-4xl font-nunito mt-4">
@@ -303,20 +309,22 @@ function About() {
           excited to learn. The fact that it uses the React framework also makes
           it a natural choice for me. I'm excited to learn the nuances of React
           Native and the challenges it brings in contrast to working with React
-          and software development in general.
+          and browser based web application development in general.
         </p>
         <h2 className="flex py-2 text-4xl font-nunito mt-4">
           Why WordSkull 💀?
         </h2>
         <p className="font-lato text-xl tracking-wider leading-loose gap-8 flex flex-col px-4 sm:px-6 md:px-8">
-          I was looking for a cool domain name that would substantially make for
-          a good design for this game. I had a list of names that were all
-          unavailable. I almost settled on WordSnail (grid formed from different
-          shell shapes), but I'm glad I didn't because WordSkull was available
-          and it's a really cool name. Would especially fit the rogue-light
-          version of the game if I ever end up getting around to developing that
-          (fingers crossed 🤞🏽😊). As a bonus, I get to use the skull emoji all
-          over my site without making it seem cringe which is a nice plus 💀.
+          I was looking for a cool domain name that would make for a
+          substantially good design for this word game. I had a list of domain
+          names that were all unavailable. I almost settled on WordSnail (grid
+          formed from different shell shapes), but I'm glad I didn't because
+          WordSkull was available and it's a really cool name, especially
+          especially since it fits well with the rogue-light version I have
+          planned. Hopefully things go well enough that I can get around to
+          developing the rogue-lite (fingers crossed 🤞🏽😊). As an added bonus, I
+          get to use the skull emoji all over my site without making it seem
+          cringe 💀.
         </p>
         <h2 className="flex py-2 text-4xl font-nunito mt-4">What else?</h2>
         <div className="font-lato text-xl tracking-wider leading-loose gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -325,7 +333,7 @@ function About() {
             skull design, such as animated eyes that track the words and
             characters being typed, dialogue text with witty banter, and
             character bios. However, my priority right now is implementing word
-            games and optimizing the UI & UX.
+            games and optimizing the user interface and user experience.
           </p>
 
           <p>
@@ -363,6 +371,34 @@ function About() {
               source code
             </Link>{" "}
             if you're interested.
+          </p>
+          <p>
+            Another quick project I'm working on is a{" "}
+            <Link
+              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              to="https://www.makeconfetti.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              confetti maker website application
+            </Link>{" "}
+            which I decided to build because I need to implement a confetti
+            maker component for this word game in order to add a little bit of
+            fun to the winning animation. Turning it into it's own website
+            didn't seem very difficult so I decided to build a minimum viable
+            product for now. It's not very fancy and I don't have any major
+            plans for it, but it lets me experiment with the{" "}
+            <Link
+              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              to="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Canvas API
+            </Link>{" "}
+            in a standalone project and I like how it's turned out so far.
           </p>
         </div>
 
