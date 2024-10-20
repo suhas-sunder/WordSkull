@@ -29,7 +29,7 @@ function MainLinks({
         className={`${
           darkThemeActive
             ? "text-white bg-slate-900"
-            : "text-slate-700 bg-white"
+            : "text-slate-700 bg-ivory"
         }  text-base justify-center items-center text-center ${
           showMobileMenu ? styles["mobile-nav"] : styles["main-nav"]
         }`}
@@ -48,9 +48,9 @@ function MainLinks({
         onClick={() => setDarkThemeActive(!darkThemeActive)}
         className={`${
           darkThemeActive
-            ? " bg-slate-500 hover:bg-white border-slate-600"
+            ? " bg-slate-500 hover:bg-ivory"
             : " bg-slate-100 hover:bg-slate-500"
-        } transition-colors duration-[600ms] group justify-center items-center border-2 py-1/2 ml-2 cursor-pointer hover:border-skull-brown hover:border-opacity-60 flex overflow-hidden rounded-full`}
+        } transition-colors duration-[600ms] group justify-center items-center border-2 border-skull-brown py-1/2 ml-2 cursor-pointer hover:border-skull-brown hover:border-opacity-60 flex overflow-hidden rounded-full`}
       >
         <span
           title="Toggle 'Dark' theme"
@@ -102,12 +102,12 @@ export default function NavBar() {
     <nav
       className={`${
         styles.nav
-      } fixed left-0 right-0 top-0 font-nunito border-b-2 text-base tracking-widest z-[100] text-slate-700 ${
-        darkThemeActive ? "bg-slate-900 border-b-slate-800" : "bg-white"
+      } fixed left-0 right-0 top-0 font-nunito border-b-2 border-b-skull-brown text-base tracking-widest z-[100] text-slate-700 ${
+        darkThemeActive ? "bg-slate-900" : "bg-ivory"
       }`}
     >
       <div
-        className={`${styles["fade-in-nav"]} mx-auto flex max-w-[1400px] px-1 sm:px-4 items-center justify-between`}
+        className={`mx-auto flex max-w-[1400px] px-1 sm:px-4 items-center justify-between`}
       >
         <Logo
           setShowMobileMenu={setShowMobileMenu}
@@ -122,7 +122,7 @@ export default function NavBar() {
         {showMobileMenu && (
           <button
             onClick={() => setShowMobileMenu(false)}
-            className="absolute bottom-0 left-0 right-0 top-[3.15em] min-h-[100vh] min-w-[100vw] bg-white bg-opacity-30"
+            className="absolute bottom-0 left-0 right-0 top-[3.15em] min-h-[100vh] min-w-[100vw] bg-ivory bg-opacity-30"
           />
         )}
         <input

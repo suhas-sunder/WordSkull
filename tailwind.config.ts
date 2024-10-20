@@ -43,6 +43,7 @@ export default {
         "skull-brown": "#938289",
         "skull-dark-brown": "#6d5d64",
         "skull-super-dark-brown": "#3e3539",
+        ivory: "#fffffa",
       },
       keyframes: {
         fadeIn: {
@@ -62,7 +63,6 @@ export default {
           "40%": { transform: "rotateY(180deg) scale(0.7) translateY(20%)" },
           "100%": { transform: "rotateY(0)" },
         },
-        
       },
       animation: {
         scalePulse: "scalePulse 3s ease-in-out infinite",
