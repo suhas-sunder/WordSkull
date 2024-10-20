@@ -1,12 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
 import { MetaFunction } from "@remix-run/node";
 import { Link } from "react-router-dom";
+import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
 
 export const meta: MetaFunction = () => {
   return [
     {
       title:
-        "💀 Word Skull - A Unique Collection of Word and Puzzle Games 🎉✨",
+        "💀 About WordSkull - A Unique Collection of Word and Puzzle Games 🎉✨",
     },
     {
       name: "description",
@@ -26,7 +27,7 @@ function About() {
       </header>
       <main className="flex flex-col gap-5 max-w-[1400px] mx-[5em]">
         <h2 className="flex py-2 text-4xl font-nunito mt-4">Who am I?</h2>
-        <p className="font-lato text-xl tracking-wider leading-loose">
+        <p className="font-lato text-xl  tracking-wider leading-loose pl-5">
           👋🏽Hi! My name is Suhas, and I’m excited to share my journey creating a
           word game website that provides a fun and engaging learning
           experience. Check out my
@@ -50,9 +51,26 @@ function About() {
           to learn more!
         </p>
         <h2 className="flex py-2 text-4xl font-nunito mt-4">
+          What is WordSkull?
+        </h2>
+        <p className="font-lato text-xl pl-5 tracking-wider leading-loose">
+          <Link
+            className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+            to="/word-skull-game-easy-mode"
+          >
+            WordSkull
+          </Link>{" "}
+          is a fun and fast-paced word puzzle game where you tackle word
+          challenges, with cool animations and effects to keep things exciting.
+          The classic mode feels a lot like Wordle but more of a challenges as
+          you solve for multiple words instead of just one. The goal is to guess
+          the correct words in as few tries as possible. More game modes are on
+          the way to mix things up and word it out!
+        </p>
+        <h2 className="flex py-2 text-4xl font-nunito mt-4">
           Why did I make this website?
         </h2>
-        <div className="font-lato text-xl tracking-wider leading-loose gap-8 flex flex-col px-4 sm:px-6 md:px-8">
+        <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           <p>
             As a software developer, I was searching for a challenging project
             to advance my programming skills and to add to my portfolio for
@@ -98,7 +116,7 @@ function About() {
         <h2 className="flex py-2 text-4xl font-nunito mt-4">
           What was the inspiration for this project?
         </h2>
-        <div className="font-lato text-xl tracking-wider leading-loose gap-8 flex flex-col px-4 sm:px-6 md:px-8">
+        <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           <p>
             Around the middle of 2023, I was spending a lot of my free time
             playing online puzzle games and word games. I was having fun playing
@@ -168,7 +186,7 @@ function About() {
         <h2 className="flex py-2 text-4xl font-nunito mt-4">
           So what's the game plan?
         </h2>
-        <div className="font-lato text-xl tracking-wider leading-loose gap-8 flex flex-col px-4 sm:px-6 md:px-8">
+        <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           <p>
             Once I’ve implemented a few game modes focused on word games that
             I’m fully satisfied with, I plan to promote the site to gather user
@@ -201,7 +219,7 @@ function About() {
         <h2 className="flex py-2 text-4xl font-nunito mt-4">
           What do I like about the game so far?
         </h2>
-        <div className="font-lato text-xl tracking-wider leading-loose gap-8 flex flex-col px-4 sm:px-6 md:px-8">
+        <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           <p>
             I was skeptical about the game design because it looked good in my
             head, but I wasn't sure how good it would look once rendered in the
@@ -224,7 +242,7 @@ function About() {
         <h2 className="flex py-2 text-4xl font-nunito mt-4">
           What do I dislike about the game so far?
         </h2>
-        <div className="font-lato text-xl tracking-wider leading-loose gap-8 flex flex-col px-4 sm:px-6 md:px-8">
+        <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           <p>
             One thing I need to work on improving is the{" "}
             <Link
@@ -302,7 +320,7 @@ function About() {
         <h2 className="flex py-2 text-4xl font-nunito mt-4">
           Will there be an Android and iOS version?
         </h2>
-        <p className="font-lato text-xl tracking-wider leading-loose gap-8 flex flex-col px-4 sm:px-6 md:px-8">
+        <p className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           That's the plan! I've done a little bit of mobile game development in
           the past using Corona SDK and Godot game engines. I feel like using
           React Native for this application because it's a framework I'm very
@@ -314,7 +332,7 @@ function About() {
         <h2 className="flex py-2 text-4xl font-nunito mt-4">
           Why WordSkull 💀?
         </h2>
-        <p className="font-lato text-xl tracking-wider leading-loose gap-8 flex flex-col px-4 sm:px-6 md:px-8">
+        <p className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           I was looking for a cool domain name that would make for a
           substantially good design for this word game. I had a list of domain
           names that were all unavailable. I almost settled on WordSnail (grid
@@ -327,7 +345,7 @@ function About() {
           cringe 💀.
         </p>
         <h2 className="flex py-2 text-4xl font-nunito mt-4">What else?</h2>
-        <div className="font-lato text-xl tracking-wider leading-loose gap-8 flex flex-col px-4 sm:px-6 md:px-8">
+        <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           <p>
             I plan to add subtle details in the future to breathe life into each
             skull design, such as animated eyes that track the words and
@@ -403,7 +421,7 @@ function About() {
         </div>
 
         <h2 className="flex py-2 text-4xl font-nunito mt-4">Thank you!</h2>
-        <p className="font-lato text-xl tracking-wider leading-loose gap-8 px-4 sm:px-6 md:px-8">
+        <p className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 px-4 sm:px-6 md:px-8">
           If you've reached this far, I'd like to thank you for reading through
           all that. If you have any feedback, I'd love to hear about it. If you
           want to share pictures of your progress or just want to say hi, you
@@ -416,6 +434,10 @@ function About() {
           </Link>
           . Thanks again. I really hope you enjoy playing this game!{" "}
         </p>
+
+        <div className="flex justify-center items-center w-full mt-10">
+          <SkullAnimation />
+        </div>
       </main>
     </div>
   );
