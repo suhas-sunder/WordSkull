@@ -20,7 +20,7 @@ const getRandomTransform = () => {
 // Function to generate a unique seed
 const generateSeed = () => `${Date.now()}-${Math.random()}`;
 
-// Deterministic shuffle function with seed (Was causing issues with rendering animation when rng was not seeded). 
+// Deterministic shuffle function with seed (Was causing issues with rendering animation when rng was not seeded).
 const shuffleArray = (array: string[][][], seed: string) => {
   const rng = seedrandom(seed);
   const result = array.slice();
@@ -91,9 +91,7 @@ function SkullAnimation() {
       return (
         <li
           key={index + "empty-square"}
-          className={`${
-            darkThemeActive ? "bg-white opacity-95" : ""
-          } text-[1.1rem] sm:text-[2rem] border-2 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
+          className={`${darkThemeActive ? 'opacity-30' : 'bg-ivory opacity-95'}   text-[1.1rem] sm:text-[2rem] border-2 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
         ></li>
       );
 
@@ -101,8 +99,8 @@ function SkullAnimation() {
       <li
         key={index + "num-square"}
         className={`${
-          darkThemeActive ? "bg-white text-slate-500" : "text-slate-300"
-        } text-[1.1rem] relative sm:text-[2rem] border-2 border-slate-400 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
+          darkThemeActive ? "text-slate-500" : "text-slate-300"
+        } text-[1.1rem] relative sm:text-[2rem] border-2 bg-white border-slate-400 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
       >
         <span className="absolute text-sm  flex top-[0.02em] left-[0.3em]">
           {squareCount}
@@ -113,7 +111,7 @@ function SkullAnimation() {
   };
 
   return (
-    <div className="relative flex-col w-full max-w-[800px] capitalize flex font-nunito text-slate-400 items-center min-h-[24em] sm:min-h-[40em]">
+    <div className="relative flex-col w-full max-w-[800px] capitalize flex font-nunito text-slate-400 items-center scale-75 min-h-[14em] sm:min-h-[25em]">
       <div
         className={`absolute top-0 left-0  w-full h-full   flex flex-col justify-center items-center transition-opacity duration-2000 ease-in-out ${fadeClass}`}
         style={{

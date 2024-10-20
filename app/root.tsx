@@ -96,8 +96,8 @@ export function Body({ children }: { children: React.ReactNode }) {
 
   return (
     <body
-      className={`pt-6 transition-colors duration-[600ms] ${
-        darkThemeActive && "bg-slate-900"
+      className={`pt-6 animate-fadeIn transition-colors duration-[600ms] ${
+        darkThemeActive ? "bg-slate-900" : "bg-ivory"
       }`}
     >
       <NavBar />

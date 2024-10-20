@@ -148,7 +148,9 @@ function DisplaySkull({
                         <li
                           key={uuidv4()}
                           className={`${
-                            darkThemeActive && "bg-white opacity-95"
+                            darkThemeActive
+                              ? "opacity-30"
+                              : "bg-ivory opacity-95"
                           } text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center`}
                         ></li>
                       );
@@ -189,9 +191,9 @@ function DisplaySkull({
                                   }  scale-110 z-[10] border-[2.5px] border-slate-500`
                                 : `${
                                     darkThemeActive
-                                      ? "bg-white text-slate-400 "
+                                      ? "text-slate-400 "
                                       : "text-slate-300 border-slate-400"
-                                  }   border-2`
+                                  }   border-2 bg-white`
                             } 
                           
                           ${

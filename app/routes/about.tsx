@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { MetaFunction } from "@remix-run/node";
 import { Link } from "react-router-dom";
-import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
 
 export const meta: MetaFunction = () => {
   return [
@@ -435,9 +434,6 @@ function About() {
           . Thanks again. I really hope you enjoy playing this game!{" "}
         </p>
 
-        <div className="flex justify-center items-center w-full mt-10">
-          <SkullAnimation />
-        </div>
       </main>
     </div>
   );
