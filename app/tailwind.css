@@ -28,31 +28,32 @@ font-family: 'Lora', serif;
 
 @font-face {
   font-family: "Nunito";
-  font-weight: bold;
+  font-weight: 700; /* Bold */
   src: local("nunito"), url("/fonts/Nunito-Bold.woff2") format("woff2");
   font-display: swap;
 }
 
 @font-face {
   font-family: "Lato";
-  font-weight: regular;
+  font-weight: 400; /* Regular */
   src: local("lato"), url("/fonts/Lato-Regular.woff2") format("woff2");
   font-display: swap;
 }
 
 @font-face {
   font-family: "Lora";
-  font-weight: regular;
+  font-weight: 700; /* Bold */
   src: local("lora"), url("/fonts/Lora-Bold.woff2") format("woff2");
   font-display: swap;
 }
 
 @font-face {
   font-family: "Overlock";
-  font-weight: bold;
+  font-weight: 900; /* Black Italic */
   src: local("lora"), url("/fonts/Overlock-BlackItalic.woff2") format("woff2");
   font-display: swap;
 }
+
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
