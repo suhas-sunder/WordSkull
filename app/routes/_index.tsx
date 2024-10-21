@@ -80,11 +80,7 @@ export default function Index() {
               <h3 className="text-base font-nunito">Difficulty: Easy</h3>
               <p className="text-sm font-lato">3 - 5 letters per word</p>
               <div
-                className={`${
-                  darkThemeActive
-                    ? "bg-amber-600  group-hover:bg-amber-500"
-                    : "bg-amber-500  group-hover:bg-amber-400"
-                } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
+                className={`${darkThemeActive ? "bg-skull-dark-brown  group-hover:bg-amber-500" : "bg-skull-super-dark-brown  group-hover:bg-amber-600"} flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
                 Play
               </div>
@@ -103,11 +99,7 @@ export default function Index() {
               <h4 className="text-base font-nunito">Difficulty: Medium</h4>
               <p className="text-sm font-lato">3 - 6 letters per word</p>
               <div
-                className={`${
-                  darkThemeActive
-                    ? "bg-amber-600  group-hover:bg-amber-500"
-                    : "bg-amber-500  group-hover:bg-amber-400"
-                } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
+                className={`${darkThemeActive ? "bg-skull-dark-brown  group-hover:bg-amber-500" : "bg-skull-super-dark-brown  group-hover:bg-amber-600"} flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
                 Play
               </div>
@@ -126,11 +118,7 @@ export default function Index() {
               <h4 className="text-base font-nunito">Difficulty: Hard</h4>
               <p className="text-sm font-lato">3 - 7 letters per word</p>
               <div
-                className={`${
-                  darkThemeActive
-                    ? "bg-amber-600  group-hover:bg-amber-500"
-                    : "bg-amber-500  group-hover:bg-amber-400"
-                } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
+                className={`${darkThemeActive ? "bg-skull-dark-brown  group-hover:bg-amber-500" : "bg-skull-super-dark-brown  group-hover:bg-amber-600"} flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
                 Play
               </div>
@@ -149,11 +137,7 @@ export default function Index() {
               <h4 className="text-base font-nunito">Difficulty: Extreme</h4>
               <p className="text-sm font-lato">3 - 9 letters per word</p>
               <div
-                className={`${
-                  darkThemeActive
-                    ? "bg-amber-600  group-hover:bg-amber-500"
-                    : "bg-amber-500  group-hover:bg-amber-400"
-                } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
+                className={`${darkThemeActive ? "bg-skull-dark-brown  group-hover:bg-amber-500" : "bg-skull-super-dark-brown  group-hover:bg-amber-600"} flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
                 Play
               </div>
@@ -172,7 +156,7 @@ export default function Index() {
               </h3>
               <p className="font-lato text-lg pl-5 tracking-wider leading-loose">
                 <Link
-                  className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+                  className="hover:text-amber-600 text-skull-super-dark-brown font-lora"
                   to="/word-skull-game-easy-mode"
                 >
                   WordSkull
@@ -199,7 +183,7 @@ export default function Index() {
                 Cross Math, Snake, and more. If you want the long store, you can
                 find it on the{" "}
                 <Link
-                  className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+                  className="hover:text-amber-600 text-skull-super-dark-brown font-lora"
                   to="/about"
                 >
                   {" "}
@@ -215,13 +199,13 @@ export default function Index() {
           feel free to reach out to{" "}
           <a
             href="mailto:admin@wordskull.com"
-            className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+            className="hover:text-amber-600 text-skull-super-dark-brown font-lora"
           >
             admin@wordskull.com{" "}
           </a>
           or you can find me on any of my socials listed on the{" "}
           <Link
-            className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+            className="hover:text-amber-600 text-skull-super-dark-brown font-lora"
             to="/socials"
           >
             socials page

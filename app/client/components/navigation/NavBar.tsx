@@ -29,7 +29,7 @@ function MainLinks({
         className={`${
           darkThemeActive
             ? "text-white bg-slate-900"
-            : "text-slate-700 bg-ivory"
+            : "text-skull-super-dark-brown bg-ivory"
         }  text-base justify-center items-center text-center ${
           showMobileMenu ? styles["mobile-nav"] : styles["main-nav"]
         }`}
@@ -102,7 +102,7 @@ export default function NavBar() {
     <nav
       className={`${
         styles.nav
-      } fixed left-0 right-0 top-0 font-nunito border-b-2 border-b-skull-brown text-base tracking-widest z-[100] text-slate-700 ${
+      } fixed left-0 right-0 top-0 font-nunito border-b-2 border-b-skull-brown text-base tracking-widest z-[100] text-skull-super-dark-brown ${
         darkThemeActive ? "bg-slate-900" : "bg-ivory"
       }`}
     >
