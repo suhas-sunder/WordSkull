@@ -7,6 +7,10 @@ import Skull_1 from "../client/assets/images/skull_1.png";
 import Skull_2 from "../client/assets/images/skull_2.png";
 import Skull_3 from "../client/assets/images/skull_3.png";
 import Skull_4 from "../client/assets/images/skull_4.png";
+import Skull_1_Webp from "../client/assets/images/skull_1.webp";
+import Skull_2_Webp from "../client/assets/images/skull_2.webp";
+import Skull_3_Webp from "../client/assets/images/skull_3.webp";
+import Skull_4_Webp from "../client/assets/images/skull_4.webp";
 import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
 
 export const meta: MetaFunction = () => {
@@ -75,11 +79,19 @@ export default function Index() {
               className="group flex col-span-2 flex-col gap-2 w-[15em] justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-[300ms] shadow-md rounded-t-[150em] rounded-b-full bg-ivory bg-opacity-10"
             >
               <h3 className="text-lg font-nunito">Boneheads</h3>
-              <img
-                src={Skull_1}
-                alt="Word Skull Classic"
-                className=" w-[180px] h-[180px] rounded-lg"
-              />
+              <picture>
+                <source srcSet={`${Skull_1_Webp}`} type="image/webp" />
+                <source srcSet={`${Skull_1}`} type="image/png" />
+                <img
+                  src={Skull_1}
+                  alt="Word Skull Classic boneheads difficulty easy"
+                  className="w-[180px] h-[180px] rounded-lg"
+                  width="180"
+                  height="180"
+                  loading="lazy"
+                />
+              </picture>
+
               <h3 className="text-base font-nunito">Difficulty: Easy</h3>
               <p className="text-sm font-lato">3 - 5 letters per word</p>
               <div
@@ -98,11 +110,18 @@ export default function Index() {
               className="group flex col-span-2 flex-col gap-2 w-[15em] justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-[300ms] shadow-md rounded-t-[150em] rounded-b-full bg-ivory bg-opacity-10"
             >
               <h3 className="text-lg font-nunito">Specter</h3>
-              <img
-                src={Skull_2}
-                alt="Word Skull Classic"
-                className=" w-[180px] h-[180px] rounded-lg"
-              />
+              <picture>
+                <source srcSet={`${Skull_2_Webp}`} type="image/webp" />
+                <source srcSet={`${Skull_2}`} type="image/png" />
+                <img
+                  src={Skull_2}
+                  alt="Word Skull Classic specter medium difficulty"
+                  className="w-[180px] h-[180px] rounded-lg"
+                  width="180"
+                  height="180"
+                  loading="lazy"
+                />
+              </picture>
               <h4 className="text-base font-nunito">Difficulty: Medium</h4>
               <p className="text-sm font-lato">3 - 6 letters per word</p>
               <div
@@ -121,11 +140,18 @@ export default function Index() {
               className="group flex col-span-2 flex-col gap-2 w-[15em] justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-[300ms] shadow-md rounded-t-[150em] rounded-b-full bg-ivory bg-opacity-10"
             >
               <h3 className="text-lg font-nunito">Reapers</h3>
-              <img
-                src={Skull_3}
-                alt="Word Skull Classic"
-                className=" w-[180px] h-[180px] rounded-lg"
-              />
+              <picture>
+                <source srcSet={`${Skull_3_Webp}`} type="image/webp" />
+                <source srcSet={`${Skull_3}`} type="image/png" />
+                <img
+                  src={Skull_3}
+                  alt="Word Skull Classic reapers hard difficulty"
+                  className="w-[180px] h-[180px] rounded-lg"
+                  width="180"
+                  height="180"
+                  loading="lazy"
+                />
+              </picture>
               <h4 className="text-base font-nunito">Difficulty: Hard</h4>
               <p className="text-sm font-lato">3 - 7 letters per word</p>
               <div
@@ -144,11 +170,18 @@ export default function Index() {
               className="group flex col-span-2 flex-col gap-2 w-[15em] justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-[300ms] shadow-md rounded-t-[150em] rounded-b-full bg-ivory bg-opacity-10"
             >
               <h3 className="text-lg font-nunito">Royal Lichen</h3>
-              <img
-                src={Skull_4}
-                alt="Word Skull Classic"
-                className=" w-[180px] h-[180px] rounded-lg"
-              />
+              <picture>
+                <source srcSet={`${Skull_4_Webp}`} type="image/webp" />
+                <source srcSet={`${Skull_4}`} type="image/png" />
+                <img
+                  src={Skull_4}
+                  alt="Word Skull Classic royal lichen extreme difficulty"
+                  className="w-[180px] h-[180px] rounded-lg"
+                  width="180"
+                  height="180"
+                  loading="lazy"
+                />
+              </picture>
               <h4 className="text-base font-nunito">Difficulty: Extreme</h4>
               <p className="text-sm font-lato">3 - 9 letters per word</p>
               <div
