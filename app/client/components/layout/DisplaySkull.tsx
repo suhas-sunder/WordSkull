@@ -114,7 +114,7 @@ function DisplaySkull({
       countRemainingChars() > 0
     ) {
       style =
-        "animate-fadeInFast !border-yellow-400 !text-yellow-600 !bg-yellow-100 "; //Partial match
+        "animate-fadeInFast !border-yellow-400 !text-yellow-600 !bg-yellow-100"; //Partial match
     }
 
     return style;
@@ -187,13 +187,13 @@ function DisplaySkull({
                                 ? `${
                                     darkThemeActive
                                       ? "bg-slate-300  text-slate-700"
-                                      : "bg-slate-400 bg-opacity-20 border-opacity-75"
+                                      : " bg-slate-200"
                                   }  scale-110 z-[10] border-[2.5px] border-slate-500`
                                 : `${
                                     darkThemeActive
                                       ? "text-slate-400 "
                                       : "text-slate-300 border-slate-400"
-                                  }   border-2 bg-white`
+                                  } border-2 bg-white`
                             } 
                           
                           ${
@@ -204,7 +204,7 @@ function DisplaySkull({
                               darkThemeActive
                                 ? "border-slate-200 text-slate-500 "
                                 : "border-slate-400 text-slate-500 "
-                            }  border-[2.5px] `
+                            }  border-[2.5px]`
                           }  ${
                             //Apply styling based on character correctness
                             rowIndex === currentRow &&

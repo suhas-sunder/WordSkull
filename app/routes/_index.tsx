@@ -3,7 +3,10 @@ import { useNavigate } from "@remix-run/react";
 import { useTheme } from "../client/components/context/ThemeContext";
 import { MetaFunction } from "@remix-run/node";
 import { Link } from "react-router-dom";
-import WordSkullClassicEasy from "../client/assets/images/wordskull_classic_easy.jpg";
+import Skull_1 from "../client/assets/images/skull_1.png";
+import Skull_2 from "../client/assets/images/skull_2.png";
+import Skull_3 from "../client/assets/images/skull_3.png";
+import Skull_4 from "../client/assets/images/skull_4.png";
 import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
 
 export const meta: MetaFunction = () => {
@@ -73,14 +76,18 @@ export default function Index() {
             >
               <h3 className="text-lg font-nunito">Boneheads</h3>
               <img
-                src={WordSkullClassicEasy}
+                src={Skull_1}
                 alt="Word Skull Classic"
-                className="bg-black w-[180px] h-[180px] rounded-lg"
+                className=" w-[180px] h-[180px] rounded-lg"
               />
               <h3 className="text-base font-nunito">Difficulty: Easy</h3>
               <p className="text-sm font-lato">3 - 5 letters per word</p>
               <div
-                className={`${darkThemeActive ? "bg-skull-dark-brown  group-hover:bg-amber-500" : "bg-skull-super-dark-brown  group-hover:bg-amber-600"} flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
+                className={`${
+                  darkThemeActive
+                    ? "bg-skull-dark-brown  group-hover:bg-amber-500"
+                    : "bg-skull-super-dark-brown  group-hover:bg-amber-600"
+                } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
                 Play
               </div>
@@ -92,14 +99,18 @@ export default function Index() {
             >
               <h3 className="text-lg font-nunito">Specter</h3>
               <img
-                src={WordSkullClassicEasy}
+                src={Skull_2}
                 alt="Word Skull Classic"
-                className="bg-black w-[180px] h-[180px] rounded-lg"
+                className=" w-[180px] h-[180px] rounded-lg"
               />
               <h4 className="text-base font-nunito">Difficulty: Medium</h4>
               <p className="text-sm font-lato">3 - 6 letters per word</p>
               <div
-                className={`${darkThemeActive ? "bg-skull-dark-brown  group-hover:bg-amber-500" : "bg-skull-super-dark-brown  group-hover:bg-amber-600"} flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
+                className={`${
+                  darkThemeActive
+                    ? "bg-skull-dark-brown  group-hover:bg-amber-500"
+                    : "bg-skull-super-dark-brown  group-hover:bg-amber-600"
+                } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
                 Play
               </div>
@@ -111,14 +122,18 @@ export default function Index() {
             >
               <h3 className="text-lg font-nunito">Reapers</h3>
               <img
-                src={WordSkullClassicEasy}
+                src={Skull_3}
                 alt="Word Skull Classic"
-                className="bg-black w-[180px] h-[180px] rounded-lg"
+                className=" w-[180px] h-[180px] rounded-lg"
               />
               <h4 className="text-base font-nunito">Difficulty: Hard</h4>
               <p className="text-sm font-lato">3 - 7 letters per word</p>
               <div
-                className={`${darkThemeActive ? "bg-skull-dark-brown  group-hover:bg-amber-500" : "bg-skull-super-dark-brown  group-hover:bg-amber-600"} flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
+                className={`${
+                  darkThemeActive
+                    ? "bg-skull-dark-brown  group-hover:bg-amber-500"
+                    : "bg-skull-super-dark-brown  group-hover:bg-amber-600"
+                } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
                 Play
               </div>
@@ -130,14 +145,18 @@ export default function Index() {
             >
               <h3 className="text-lg font-nunito">Royal Lichen</h3>
               <img
-                src={WordSkullClassicEasy}
+                src={Skull_4}
                 alt="Word Skull Classic"
-                className="bg-black w-[180px] h-[180px] rounded-lg"
+                className=" w-[180px] h-[180px] rounded-lg"
               />
               <h4 className="text-base font-nunito">Difficulty: Extreme</h4>
               <p className="text-sm font-lato">3 - 9 letters per word</p>
               <div
-                className={`${darkThemeActive ? "bg-skull-dark-brown  group-hover:bg-amber-500" : "bg-skull-super-dark-brown  group-hover:bg-amber-600"} flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
+                className={`${
+                  darkThemeActive
+                    ? "bg-skull-dark-brown  group-hover:bg-amber-500"
+                    : "bg-skull-super-dark-brown  group-hover:bg-amber-600"
+                } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
                 Play
               </div>
