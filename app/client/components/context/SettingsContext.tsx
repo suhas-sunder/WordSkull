@@ -34,7 +34,7 @@ export const SettingsContext = createContext<SettingsContextProps>({
 export function SettingsProvider({ children }: { children: React.ReactNode }) {
   const [showInstructions, setShowInstructions] = usePersistentState<boolean>(
     "showInstructions",
-    false
+    true
   ); //Stores state in localStorage
   const [showKeyboard, setShowKeyboard] = usePersistentState<boolean>(
     "showKeyboard",
