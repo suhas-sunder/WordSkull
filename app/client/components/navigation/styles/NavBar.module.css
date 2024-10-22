@@ -5,22 +5,22 @@
 .profile:hover {
   .icon,
   .btn {
-    fill: #f97316;
-    color: #f97316;
+    fill: #ea580c;
+    color: #ea580c;
   }
 
   .logo-com {
-    fill: #f97316;
-    color: #f97316;
+    fill: #ea580c;
+    color: #ea580c;
   }
 
   .btn {
-    fill: #f97316;
-    border: 2.5px solid #f97316;
+    fill: #ea580c;
+    border: 2.5px solid #ea580c;
   }
 
   .img {
-    border: 3px solid #f97316;
+    border: 3px solid #ea580c;
   }
 }
 
