@@ -19,7 +19,6 @@ import { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { useSettings } from "../context/SettingsContext";
 
-
 function ClassicGameplayInstructions() {
   const [isClient, setIsClient] = useState(false);
   const { darkThemeActive } = useTheme();
@@ -37,10 +36,7 @@ function ClassicGameplayInstructions() {
   return (
     <>
       {showInstructions && (
-        <div
-          
-          className="flex relative flex-col w-full justify-center items-center mt-[3.5em] md:mt-0"
-        >
+        <div className="flex relative flex-col w-full justify-center items-center mt-[3.5em] md:mt-0">
           <div id="gameplay-instructions" className="absolute -top-[5em]"></div>
           <h2
             className={`text-4xl font-nunito  uppercase mb-10 ${
