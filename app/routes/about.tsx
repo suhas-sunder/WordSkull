@@ -29,7 +29,19 @@ function About() {
         <p className="font-lato text-xl  tracking-wider leading-loose pl-5">
           👋🏽Hi! My name is Suhas, and I’m excited to share my journey creating a
           word game website that provides a fun and engaging learning
-          experience. Check out my
+          experience. Here is a link to my{" "}
+          <Link
+            className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+            to="https://github.com/suhas-sunder"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            GitHub profile
+          </Link>
+          . My repository for WordSkull is private but feel free to check out my
+          other projects if you are interested. If you want to learn more about
+          me, feel free to visit my
           <Link
             className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
             to="https://www.suhassunder.com"
@@ -433,7 +445,6 @@ function About() {
           </Link>
           . Thanks again. I really hope you enjoy playing this game!{" "}
         </p>
-
       </main>
     </div>
   );
