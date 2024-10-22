@@ -3,6 +3,14 @@ import NavBar from "./client/components/navigation/NavBar";
 import Footer from "./client/components/navigation/Footer";
 import cloudflareR2API from "./client/components/api/cloudflareR2API";
 import { ungzip } from "pako";
+import Skull_1 from "./client/assets/images/skull_1.png";
+import Skull_2 from "./client/assets/images/skull_2.png";
+import Skull_3 from "./client/assets/images/skull_3.png";
+import Skull_4 from "./client/assets/images/skull_4.png";
+import Skull_1_Webp from "./client/assets/images/skull_1.webp";
+import Skull_2_Webp from "./client/assets/images/skull_2.webp";
+import Skull_3_Webp from "./client/assets/images/skull_3.webp";
+import Skull_4_Webp from "./client/assets/images/skull_4.webp";
 
 import {
   Outlet,
@@ -144,7 +152,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
           type="font/woff2"
           crossOrigin="anonymous"
         />
-
+        <link rel="preload" href={Skull_1_Webp} as="image" />
+        <link rel="preload" href={Skull_2_Webp} as="image" />
+        <link rel="preload" href={Skull_3_Webp} as="image" />
+        <link rel="preload" href={Skull_4_Webp} as="image" />
+        <link rel="preload" href={Skull_1} as="image" />
+        <link rel="preload" href={Skull_2} as="image" />
+        <link rel="preload" href={Skull_3} as="image" />
+        <link rel="preload" href={Skull_4} as="image" />
         <Meta />
         <Links />
       </head>{" "}
