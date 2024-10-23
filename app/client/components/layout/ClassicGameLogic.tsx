@@ -85,8 +85,7 @@ function ClassicGameLogic({
   }, [difficulty, gameMode, setDifficulty, setGameMode]);
 
   return (
-    <label className=" flex relative flex-col mt-6">
-      <input type="text" className="absolute -top-[999px]" />
+    <div className=" flex relative flex-col mt-6">
       <Header
         lives={lives}
         isGameOver={isGameOver}
@@ -112,7 +111,8 @@ function ClassicGameLogic({
           enteredWords={enteredWords}
           isEnterPressed={isEnterPressed}
         />
-        <div id="capture-area" className="flex gap-2 flex-col">
+        <label id="capture-area" className="flex gap-2 flex-col">
+          <input type="text" className="absolute -top-[999px]" />
           <GameOverStatsCapture
             isGameOver={isGameOver}
             showGameOverMenu={showGameOverMenu}
@@ -132,30 +132,30 @@ function ClassicGameLogic({
             enteredWords={enteredWords}
             isEnterPressed={isEnterPressed}
           />
-          {showKeyboard ? (
-            <div
-              className={` flex max-w-[800px] overflow-hidden justify-center items-center`}
-            >
-              <Keyboard
-                currentlyEnteredWords={enteredWords[currentRow]}
-                currentWord={wordsForSkull[currentRow]}
-              />
-              <Keypad
-                currentlyEnteredWords={enteredWords[currentRow]}
-                currentWord={wordsForSkull[currentRow]}
-              />
-            </div>
-          ) : (
-            <div className="mb-10"></div>
-          )}
-        </div>
+        </label>
+        {showKeyboard ? (
+          <div
+            className={` flex max-w-[800px] overflow-hidden justify-center items-center`}
+          >
+            <Keyboard
+              currentlyEnteredWords={enteredWords[currentRow]}
+              currentWord={wordsForSkull[currentRow]}
+            />
+            <Keypad
+              currentlyEnteredWords={enteredWords[currentRow]}
+              currentWord={wordsForSkull[currentRow]}
+            />
+          </div>
+        ) : (
+          <div className="mb-10"></div>
+        )}
         <OffScreenTimer
           setSeconds={setSeconds}
           isGameOver={isGameOver}
           startOffscreenTimer={startOffscreenTimer}
         />
       </main>
-    </label>
+    </div>
   );
 }
 
