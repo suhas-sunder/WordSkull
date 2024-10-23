@@ -36,7 +36,7 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
     [key: string]: number;
   }>({});
 
-  const {makeKeypadInteractive} = useSettings();
+  const { makeKeypadInteractive } = useSettings();
 
   useEffect(() => {
     // Create a new object for updated character counts
@@ -74,14 +74,15 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
             {keysArr.map((key) => (
               <li className="flex w-full" key={key.id}>
                 <button
-                  onClick={() => makeKeypadInteractive && SimulateKeyPress(key.defaultKey)}
+                  onClick={() =>
+                    makeKeypadInteractive && SimulateKeyPress(key.defaultKey)
+                  }
                   className={` h-[2.3em] min-w-[1.7em] w-full justify-center items-center flex rounded-sm ${
                     darkThemeActive
                       ? "bg-white text-slate-600"
                       : "bg-slate-600 text-white"
                   } ${
-                    (keyPressed.toLowerCase() === key.defaultKey ||
-                      (keyPressed === " " && key.defaultKey === "space") ||
+                    ((keyPressed === " " && key.defaultKey === "space") ||
                       (keyPressed.toLowerCase() === "capslock" &&
                         key.defaultKey === "caps") ||
                       (keyPressed.toLowerCase() === "backspace" &&
