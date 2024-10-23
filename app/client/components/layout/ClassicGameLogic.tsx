@@ -85,8 +85,8 @@ function ClassicGameLogic({
   }, [difficulty, gameMode, setDifficulty, setGameMode]);
 
   return (
-    <label className=" flex relative flex-col">
-      <input type="textbox" className="opacity-[0.01]" />
+    <label className=" flex relative flex-col mt-6">
+      <input type="text" className="absolute -top-[999px]" />
       <Header
         lives={lives}
         isGameOver={isGameOver}
