@@ -7,10 +7,12 @@ export default ({ mode }: { mode: string }) => {
   process.env = { ...process.env, ...env };
 
   const port = 3200;
+  const host = "0.0.0.0";
 
   return defineConfig({
     server: {
       port,
+      host,
       hmr: {
         protocol: "ws",
         host: "localhost",
@@ -36,8 +38,10 @@ export default ({ mode }: { mode: string }) => {
       environment: "jsdom",
     },
     define: {
-      'import.meta.env.MODE': JSON.stringify(process.env.MODE || 'development'),
-      'import.meta.env.VITE_PORT': JSON.stringify(process.env.VITE_PORT || '3200'),
+      "import.meta.env.MODE": JSON.stringify(process.env.MODE || "development"),
+      "import.meta.env.VITE_PORT": JSON.stringify(
+        process.env.VITE_PORT || "3200"
+      ),
     },
   });
 };
