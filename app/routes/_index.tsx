@@ -221,7 +221,7 @@ export default function Index() {
           <h2
             className={`${
               darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
-            } flex py-2 text-2xl font-lora mt-4 text-center w-full justify-center items-center `}
+            } flex py-2 text-4xl font-lora mt-4 text-center w-full justify-center items-center `}
           >
             FAQ
           </h2>
@@ -234,7 +234,7 @@ export default function Index() {
               <h3
                 className={`${
                   darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-                } flex py-2 text-xl font-nunito mt-2`}
+                } flex py-2 text-2xl font-nunito mt-2`}
               >
                 What is WordSkull?
               </h3>
@@ -264,7 +264,7 @@ export default function Index() {
               <h3
                 className={`${
                   darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-                } flex py-2 text-xl font-nunito mt-2`}
+                } flex py-2 text-2xl font-nunito mt-2`}
               >
                 What was the motivation behind WordSkull?
               </h3>

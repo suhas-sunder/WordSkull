@@ -85,7 +85,7 @@ function About() {
         <h2
           className={`${
             darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-          } flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown`}
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
         >
           What is WordSkull?
         </h2>
@@ -110,7 +110,7 @@ function About() {
         <h2
           className={`${
             darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-          } flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown`}
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
         >
           Why did I make this website?
         </h2>
@@ -167,7 +167,7 @@ function About() {
         <h2
           className={`${
             darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-          } flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown`}
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
         >
           What was the inspiration for this project?
         </h2>
@@ -392,7 +392,7 @@ function About() {
         <h2
           className={`${
             darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-          } flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown`}
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
         >
           So what's the game plan?
         </h2>
@@ -431,7 +431,7 @@ function About() {
         <h2
           className={`${
             darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-          } flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown`}
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
         >
           What do I like about the game so far?
         </h2>
@@ -457,7 +457,7 @@ function About() {
         <h2
           className={`${
             darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-          } flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown`}
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
         >
           What do I dislike about the game so far?
         </h2>
@@ -542,7 +542,7 @@ function About() {
         <h2
           className={`${
             darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-          } flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown`}
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
         >
           Will there be an Android and iOS version?
         </h2>
@@ -558,7 +558,7 @@ function About() {
         <h2
           className={`${
             darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-          } flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown`}
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
         >
           Why WordSkull 💀?
         </h2>
@@ -577,7 +577,7 @@ function About() {
         <h2
           className={`${
             darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-          } flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown`}
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
         >
           What else?
         </h2>
@@ -672,7 +672,7 @@ function About() {
         <h2
           className={`${
             darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-          } flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown`}
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
         >
           Free 4K HD Wallpapers
         </h2>
@@ -695,7 +695,7 @@ function About() {
         <h2
           className={`${
             darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-          } flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown`}
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
         >
           Thank you!
         </h2>

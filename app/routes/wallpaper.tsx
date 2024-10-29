@@ -1,4 +1,5 @@
 import { MetaFunction } from "@remix-run/node";
+import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
   return [
@@ -22,10 +23,11 @@ function Wallpaper() {
           Free 4K HD Wallpapers
         </h1>
       </header>
-      <main className="flex w-full max-w-[1200px] justify-center items-center">
+      <main className="flex flex-col gap-8 w-full max-w-[1200px] justify-center items-center">
         <div className="flex flex-col w-full max-w-[800px]">
           <input type="search" className="flex border-2 rounded-full w-full" />
         </div>
+        <SocialLinks />
       </main>
     </div>
   );
