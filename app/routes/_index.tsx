@@ -12,6 +12,7 @@ import Skull_2_Webp from "../client/assets/images/skull_2.webp";
 import Skull_3_Webp from "../client/assets/images/skull_3.webp";
 import Skull_4_Webp from "../client/assets/images/skull_4.webp";
 import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
+import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
   return [
@@ -34,7 +35,7 @@ function Header() {
       <h1
         className={`${
           darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
-        } w-full z-1 flex-row flex justify-center items-center text-4xl sm:text-5xl text-center mt-9 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-8 sm:mb-3 font-lora`}
+        } w-full z-1 flex-row flex justify-center items-center text-4xl sm:text-5xl text-center mt-9 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-8 sm:mb-3 font-lora tracking-wide`}
       >
         <span className="whitespace-nowrap">
           <span className="inline-flex">W</span>
@@ -270,7 +271,7 @@ export default function Index() {
               <p className="font-lato text-lg pl-5 tracking-wider leading-loose">
                 Great question! Long story short, I wanted to make something fun
                 that I would enjoy using myself. Decided to make a twist on some
-                classic word and puzzle games. If you want the long store, you
+                classic word and puzzle games. If you want the long story, you
                 can find it on the{" "}
                 <Link
                   className={`${
@@ -305,7 +306,7 @@ export default function Index() {
           >
             admin@wordskull.com{" "}
           </a>
-          or you can find me on any of my socials listed on the{" "}
+          or you can find me on any of my socials and associated links listed on the{" "}
           <Link
             className={`${
               darkThemeActive
@@ -318,6 +319,7 @@ export default function Index() {
           </Link>
           .
         </div>
+        <SocialLinks />
       </main>
     </div>
   );

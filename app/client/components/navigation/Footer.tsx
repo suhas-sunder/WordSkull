@@ -10,7 +10,7 @@ function Footer() {
     <nav
       className={`${styles.nav} transition-colors duration-[600ms] ${darkThemeActive && "border-slate-800" } mt-[10em] w-full border-t-2 flex gap-5 sm:gap-20 justify-center items-center py-1 sm:py-2 text-xs font-nunito  bg-white-500 `}
     >
-      <div className="flex text-skull-dark-brown gap-1 font-bold tracking-widest">
+      <div className={`${darkThemeActive ? "text-amber-600" : "text-skull-dark-brown"} flex gap-1 font-bold tracking-widest`}>
         <span>&copy; 2024</span> <span className="hidden md:flex"> | </span>
         <span className="font-overlock hidden sm:flex">WordSkull</span>
         <span className="font-overlock sm:hidden flex">EKG</span>
