@@ -57,9 +57,9 @@ function MainLinks({
         onClick={() => setDarkThemeActive(!darkThemeActive)}
         className={`${
           darkThemeActive
-            ? " bg-slate-500 hover:bg-ivory"
-            : " bg-slate-100 hover:bg-slate-500"
-        } transition-colors duration-[600ms] group justify-center items-center border-2 border-skull-brown py-1/2 ml-2 cursor-pointer hover:border-skull-brown hover:border-opacity-60 flex overflow-hidden rounded-full`}
+            ? " bg-slate-500 hover:bg-ivory border-slate-400"
+            : " bg-slate-100 hover:bg-slate-500 border-skull-brown"
+        } transition-colors duration-[600ms] group justify-center items-center border-2 py-1/2 ml-2 cursor-pointer hover:border-skull-brown hover:border-opacity-60 flex overflow-hidden rounded-full`}
       >
         <span
           title="Toggle 'Dark' theme"
@@ -109,9 +109,9 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`${
-        styles.nav
-      } fixed left-0 right-0 top-0 font-nunito border-b-2 border-b-skull-brown text-base tracking-widest z-[100] text-skull-super-dark-brown ${
+      className={`${styles.nav} ${
+        darkThemeActive ? "border-b-slate-400" : "border-b-skull-brown"
+      } fixed left-0 right-0 top-0 font-nunito border-b-2 text-base tracking-widest z-[100] text-skull-super-dark-brown ${
         darkThemeActive ? "bg-slate-900" : "bg-ivory"
       }`}
     >

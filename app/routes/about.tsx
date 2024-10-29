@@ -18,14 +18,14 @@ export const meta: MetaFunction = () => {
 
 function About() {
   return (
-    <div className="flex justify-center flex-col items-center mt-[4em] text-slate-600">
+    <div className="flex justify-center flex-col items-center mt-[3em] text-skull-dark-brown">
       <header>
-        <h1 className="py-2 text-5xl font-lora text-center max-w-[1400px] text-slate-500">
+        <h1 className="pt-2 text-5xl font-lora text-center max-w-[1400px]">
           About WordSkull
         </h1>
       </header>
       <main className="flex flex-col gap-5 max-w-[1400px] mx-[5em]">
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">Who am I?</h2>
+        <h2 className="flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown">Who am I?</h2>
         <p className="font-lato text-xl  tracking-wider leading-loose pl-5">
           👋🏽Hi! My name is Suhas, and I’m excited to share my journey creating a
           word game website that provides a fun and engaging learning
@@ -61,7 +61,7 @@ function About() {
           </Link>{" "}
           to learn more!
         </p>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2 className="flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown">
           What is WordSkull?
         </h2>
         <p className="font-lato text-xl pl-5 tracking-wider leading-loose">
@@ -78,7 +78,7 @@ function About() {
           the correct words in as few tries as possible. More game modes are on
           the way to mix things up and word it out!
         </p>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2 className="flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown">
           Why did I make this website?
         </h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -124,7 +124,7 @@ function About() {
             side.
           </p>
         </div>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2 className="flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown">
           What was the inspiration for this project?
         </h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -155,7 +155,6 @@ function About() {
             , and I implemented it first. Although the domain is named after
             this game mode, this application is more than just about Wordle.
           </p>
-
           <div className="rounded-lg flex flex-col gap-4">
             <p className="mb-2">Other games I drew inspiration from include:</p>
             <ul className="pl-5 list-disc list-inside space-y-2">
@@ -175,7 +174,6 @@ function About() {
               rogue-lite version.
             </p>
           </div>
-
           <p>
             Obviously, building all of this is a lot of work and time-consuming,
             so I don't intend to rush it or expect to have everything done
@@ -194,7 +192,7 @@ function About() {
             features.
           </p>
         </div>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2 className="flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown">
           So what's the game plan?
         </h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -207,14 +205,12 @@ function About() {
             content knowing I’ve at least reached the key milestones and will
             shift focus to other project ideas.
           </p>
-
           <p>
             The quality of the project and creating a fun, engaging user
             experience are extremely important to me, so I’d love to hear your
             thoughts and feedback. I hope this website helps enhance your
             learning experience and brings some fun along the way!
           </p>
-
           <p>
             I’ll also be creating a checklist of{" "}
             <Link
@@ -227,7 +223,7 @@ function About() {
             on the development progress page to keep everyone in the loop.
           </p>
         </div>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2 className="flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown">
           What do I like about the game so far?
         </h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -239,7 +235,6 @@ function About() {
             enough to a skull to me anyway, and the aesthetics don't hinder the
             gameplay too much.
           </p>
-
           <p>
             Having tested out the game almost daily, I’ve thoroughly enjoyed
             playing this first version of WordSkull, a fun addition to the
@@ -250,7 +245,7 @@ function About() {
           </p>
           <p>It's not all sunshine and rainbows though.</p>
         </div>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2 className="flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown">
           What do I dislike about the game so far?
         </h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -270,7 +265,6 @@ function About() {
             levels. Hopefully, it's not too bad of an issue. If you find any
             word that gives you trouble, please let me know.
           </p>
-
           <p>
             Another thing I noticed was the amount of time I spend on the game.
             Each run lasts around 6 minutes on average while playing on easy
@@ -289,7 +283,6 @@ function About() {
             mind, I felt like it was maybe taking too long, which I think could
             be a pain point for users. Only time will tell, I guess.
           </p>
-
           <p>
             The third issue is the layout and user experience, which does annoy
             me to an extent. Similar to the NYTimes game, I want the classic
@@ -298,7 +291,6 @@ function About() {
             Wordle, you're dealing with one word at a time on a 5 x 5 grid, so
             you can see every row clearly after completion.
           </p>
-
           <p>
             Unfortunately, with the skull design, after an attempt is made on
             any given row, if the answer is not correct, once you clear the row,
@@ -306,7 +298,6 @@ function About() {
             word game, this means you can't see the previous attempts for any
             given row on the skull itself.
           </p>
-
           <p>
             The only solution I could think of without cluttering the user
             interface was to have a little window above the skull that displays
@@ -317,7 +308,6 @@ function About() {
             the row, which I feel is not the best user experience.
             Unfortunately, I don't really see any way around it.
           </p>
-
           <p>
             I did my best to make it easy to toggle between the two modes by
             making the modal clickable while also binding it to the shift and
@@ -328,7 +318,7 @@ function About() {
             you have any ideas, I'm all ears.
           </p>
         </div>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2 className="flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown">
           Will there be an Android and iOS version?
         </h2>
         <p className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -340,7 +330,7 @@ function About() {
           Native and the challenges it brings in contrast to working with React
           and browser based web application development in general.
         </p>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2 className="flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown">
           Why WordSkull 💀?
         </h2>
         <p className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -355,7 +345,7 @@ function About() {
           get to use the skull emoji all over my site without making it seem
           cringe 💀.
         </p>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">What else?</h2>
+        <h2 className="flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown">What else?</h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           <p>
             I plan to add subtle details in the future to breathe life into each
@@ -364,7 +354,6 @@ function About() {
             character bios. However, my priority right now is implementing word
             games and optimizing the user interface and user experience.
           </p>
-
           <p>
             One thing I didn't mention is that when I started developing
             WordSkull, I stumbled upon Google Gboard's{" "}
@@ -382,7 +371,6 @@ function About() {
             out to be beneficial because it covered many concepts I hadn't yet
             learned, which I knew would be essential for my future projects.
           </p>
-
           <p>
             I used it as a playground, and I'm quite proud of the result. While
             the code quality is far from perfect, everything works as intended.
@@ -430,8 +418,7 @@ function About() {
             in a standalone project and I like how it's turned out so far.
           </p>
         </div>
-
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">Thank you!</h2>
+        <h2 className="flex py-2 text-4xl font-nunito mt-4 text-skull-super-dark-brown">Thank you!</h2>
         <p className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 px-4 sm:px-6 md:px-8">
           If you've reached this far, I'd like to thank you for reading through
           all that. If you have any feedback, I'd love to hear about it. If you
