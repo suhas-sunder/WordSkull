@@ -459,7 +459,7 @@ function About() {
             darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
           } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
         >
-          What do I dislike about the game so far?
+          What issues did I face when making this word game?
         </h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           <p>
