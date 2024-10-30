@@ -1,6 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import { MetaFunction } from "@remix-run/node";
 import { Link } from "react-router-dom";
+import { useTheme } from "../client/components/context/ThemeContext";
+import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
   return [
@@ -17,21 +19,32 @@ export const meta: MetaFunction = () => {
 };
 
 function About() {
+  const { darkThemeActive } = useTheme();
+
   return (
-    <div className="flex justify-center flex-col items-center mt-[4em] text-slate-600">
-      <header>
-        <h1 className="py-2 text-5xl font-lora text-center max-w-[1400px] text-slate-500">
+    <div
+      className={`${
+        darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
+      } flex justify-center flex-col items-center mt-[3em]`}
+    >
+      <header className="flex flex-col justify-center items-center gap-5 mb-4 mx-5 text-center">
+        <h1
+          className={`${
+            darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
+          } pt-2 text-5xl font-lora text-center max-w-[1400px] tracking-wide`}
+        >
           About WordSkull
         </h1>
-      </header>
-      <main className="flex flex-col gap-5 max-w-[1400px] mx-[5em]">
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">Who am I?</h2>
-        <p className="font-lato text-xl  tracking-wider leading-loose pl-5">
+        <p className="font-lato text-xl tracking-wider leading-loose pl-5 max-w-[1200px]">
           👋🏽Hi! My name is Suhas, and I’m excited to share my journey creating a
           word game website that provides a fun and engaging learning
           experience. Here is a link to my{" "}
           <Link
-            className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+            className={`${
+              darkThemeActive
+                ? "text-orange-600"
+                : "text-skull-super-dark-brown"
+            } hover:text-amber-600 font-lora`}
             to="https://github.com/suhas-sunder"
             target="_blank"
             rel="noopener noreferrer"
@@ -39,11 +52,13 @@ function About() {
             {" "}
             GitHub profile
           </Link>
-          . My repository for WordSkull is private but feel free to check out my
-          other projects if you are interested. If you want to learn more about
-          me, feel free to visit my
+          . If you want to learn more about me, feel free to visit my
           <Link
-            className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+            className={`${
+              darkThemeActive
+                ? "text-orange-600"
+                : "text-skull-super-dark-brown"
+            } hover:text-amber-600 font-lora`}
             to="https://www.suhassunder.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -53,20 +68,34 @@ function About() {
           </Link>{" "}
           or visit any of my
           <Link
-            className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+            className={`${
+              darkThemeActive
+                ? "text-orange-600"
+                : "text-skull-super-dark-brown"
+            } hover:text-amber-600 font-lora`}
             to="/socials"
           >
             {" "}
             social pages
-          </Link>{" "}
-          to learn more!
+          </Link>
+          .
         </p>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+      </header>
+      <main className="flex flex-col gap-5 max-w-[1200px] mx-10">
+        <h2
+          className={`${
+            darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
+        >
           What is WordSkull?
         </h2>
         <p className="font-lato text-xl pl-5 tracking-wider leading-loose">
           <Link
-            className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+            className={`${
+              darkThemeActive
+                ? "text-orange-600"
+                : "text-skull-super-dark-brown"
+            } hover:text-amber-600 font-lora`}
             to="/word-skull-game-easy-mode"
           >
             WordSkull
@@ -78,7 +107,11 @@ function About() {
           the correct words in as few tries as possible. More game modes are on
           the way to mix things up and word it out!
         </p>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2
+          className={`${
+            darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
+        >
           Why did I make this website?
         </h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -91,27 +124,34 @@ function About() {
             learning value. I started by spending a little time each day on
             typing test websites such as
             <Link
-              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
               to="https://www.typingclub.com/"
               target="_blank"
               rel="noopener noreferrer"
             >
               {" "}
-              TypingClub
+              Typing Club
             </Link>{" "}
             (not affiliated) and decided to make my own improved version called
             <Link
-              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
               to="https://freetypingcamp.com/"
               target="_blank"
               rel="noopener noreferrer"
             >
               {" "}
-              FreeTypingCamp or Free Typing Camp
+              Free Typing Camp
             </Link>
             .
           </p>
-
           <p>
             However, after making significant progress, I realized that building
             the entire keyboard typing test application in React and Express as
@@ -124,7 +164,11 @@ function About() {
             side.
           </p>
         </div>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2
+          className={`${
+            darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
+        >
           What was the inspiration for this project?
         </h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -132,11 +176,14 @@ function About() {
             Around the middle of 2023, I was spending a lot of my free time
             playing online puzzle games and word games. I was having fun playing
             and trying various online puzzle games, which led me to create my
-            own unique take on the word game genre. While there were several
-            games that inspired me to create this website, the easiest version
-            to implement was the
+            own unique take on the word game genre. There were several games
+            that inspired me to create this website including
             <Link
-              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
               to="https://www.nytimes.com/games/wordle/index.html"
               target="_blank"
               rel="noopener noreferrer"
@@ -144,18 +191,163 @@ function About() {
               {" "}
               NYT Wordle
             </Link>
-            -style game, which I called
+            ,{" "}
             <Link
-              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
+              to="https://www.nytimes.com/games/wordle/index.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Scrabble
+            </Link>
+            ,{" "}
+            <Link
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
+              to="https://en.wikipedia.org/wiki/Boggle"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Boggle
+            </Link>
+            ,{" "}
+            <Link
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
+              to="https://wordswithfriends.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Words with Friends
+            </Link>
+            ,{" "}
+            <Link
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
+              to="https://bananagrams.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Bananagrams
+            </Link>
+            ,{" "}
+            <Link
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
+              to="https://en.wikipedia.org/wiki/Letterpress_(video_game)"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Letterpress
+            </Link>
+            ,{" "}
+            <Link
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
+              to="https://nationalpost.com/life/your-daily-puzzmo-play-todays-spelltower"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Spelltower
+            </Link>
+            ,{" "}
+            <Link
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
+              to="https://en.wikipedia.org/wiki/Jumble"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Jumble
+            </Link>
+            ,{" "}
+            <Link
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
+              to="https://en.wikipedia.org/wiki/Bookworm_(video_game)"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Bookworm
+            </Link>
+            ,{" "}
+            <Link
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
+              to="https://en.wikipedia.org/wiki/Ruzzle"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Ruzzle
+            </Link>
+            ,{" "}
+            <Link
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
+              to="https://www.7littlewords.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              7 Little Words
+            </Link>
+            , amongst other popular word games. The first game I made is the
+            classic version of
+            <Link
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
               to="/word-skull-game-easy-mode"
             >
               {" "}
               WordSkull
             </Link>
-            , and I implemented it first. Although the domain is named after
-            this game mode, this application is more than just about Wordle.
+            , named after the domain itself, which is a word game where you have
+            to guess words of varying length before your run out of guesses
+            (lives).
           </p>
-
           <div className="rounded-lg flex flex-col gap-4">
             <p className="mb-2">Other games I drew inspiration from include:</p>
             <ul className="pl-5 list-disc list-inside space-y-2">
@@ -175,13 +367,16 @@ function About() {
               rogue-lite version.
             </p>
           </div>
-
           <p>
             Obviously, building all of this is a lot of work and time-consuming,
             so I don't intend to rush it or expect to have everything done
             anytime soon. I’m taking an{" "}
             <Link
-              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
               to="https://en.wikipedia.org/wiki/Agile_software_development"
               target="_blank"
               rel="noopener noreferrer"
@@ -194,7 +389,11 @@ function About() {
             features.
           </p>
         </div>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2
+          className={`${
+            darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
+        >
           So what's the game plan?
         </h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -207,18 +406,20 @@ function About() {
             content knowing I’ve at least reached the key milestones and will
             shift focus to other project ideas.
           </p>
-
           <p>
             The quality of the project and creating a fun, engaging user
             experience are extremely important to me, so I’d love to hear your
             thoughts and feedback. I hope this website helps enhance your
             learning experience and brings some fun along the way!
           </p>
-
           <p>
             I’ll also be creating a checklist of{" "}
             <Link
-              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
               to="/project-milestones"
             >
               {" "}
@@ -227,7 +428,11 @@ function About() {
             on the development progress page to keep everyone in the loop.
           </p>
         </div>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2
+          className={`${
+            darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
+        >
           What do I like about the game so far?
         </h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -239,7 +444,6 @@ function About() {
             enough to a skull to me anyway, and the aesthetics don't hinder the
             gameplay too much.
           </p>
-
           <p>
             Having tested out the game almost daily, I’ve thoroughly enjoyed
             playing this first version of WordSkull, a fun addition to the
@@ -250,14 +454,22 @@ function About() {
           </p>
           <p>It's not all sunshine and rainbows though.</p>
         </div>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2
+          className={`${
+            darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
+        >
           What do I dislike about the game so far?
         </h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           <p>
             One thing I need to work on improving is the{" "}
             <Link
-              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
               to="/all-words-for-word-game"
             >
               {" "}
@@ -270,14 +482,17 @@ function About() {
             levels. Hopefully, it's not too bad of an issue. If you find any
             word that gives you trouble, please let me know.
           </p>
-
           <p>
             Another thing I noticed was the amount of time I spend on the game.
             Each run lasts around 6 minutes on average while playing on easy
             difficulty, which could be too long considering how short each round
             in{" "}
             <Link
-              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
               to="https://www.nytimes.com/games/wordle/index.html"
               target="_blank"
               rel="noopener noreferrer"
@@ -289,7 +504,6 @@ function About() {
             mind, I felt like it was maybe taking too long, which I think could
             be a pain point for users. Only time will tell, I guess.
           </p>
-
           <p>
             The third issue is the layout and user experience, which does annoy
             me to an extent. Similar to the NYTimes game, I want the classic
@@ -298,7 +512,6 @@ function About() {
             Wordle, you're dealing with one word at a time on a 5 x 5 grid, so
             you can see every row clearly after completion.
           </p>
-
           <p>
             Unfortunately, with the skull design, after an attempt is made on
             any given row, if the answer is not correct, once you clear the row,
@@ -306,7 +519,6 @@ function About() {
             word game, this means you can't see the previous attempts for any
             given row on the skull itself.
           </p>
-
           <p>
             The only solution I could think of without cluttering the user
             interface was to have a little window above the skull that displays
@@ -317,7 +529,6 @@ function About() {
             the row, which I feel is not the best user experience.
             Unfortunately, I don't really see any way around it.
           </p>
-
           <p>
             I did my best to make it easy to toggle between the two modes by
             making the modal clickable while also binding it to the shift and
@@ -328,7 +539,11 @@ function About() {
             you have any ideas, I'm all ears.
           </p>
         </div>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2
+          className={`${
+            darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
+        >
           Will there be an Android and iOS version?
         </h2>
         <p className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -340,7 +555,11 @@ function About() {
           Native and the challenges it brings in contrast to working with React
           and browser based web application development in general.
         </p>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">
+        <h2
+          className={`${
+            darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
+        >
           Why WordSkull 💀?
         </h2>
         <p className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
@@ -355,7 +574,13 @@ function About() {
           get to use the skull emoji all over my site without making it seem
           cringe 💀.
         </p>
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">What else?</h2>
+        <h2
+          className={`${
+            darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
+        >
+          What else?
+        </h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           <p>
             I plan to add subtle details in the future to breathe life into each
@@ -364,12 +589,15 @@ function About() {
             character bios. However, my priority right now is implementing word
             games and optimizing the user interface and user experience.
           </p>
-
           <p>
             One thing I didn't mention is that when I started developing
             WordSkull, I stumbled upon Google Gboard's{" "}
             <Link
-              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
               to="https://www.emojikitchengame.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -382,7 +610,6 @@ function About() {
             out to be beneficial because it covered many concepts I hadn't yet
             learned, which I knew would be essential for my future projects.
           </p>
-
           <p>
             I used it as a playground, and I'm quite proud of the result. While
             the code quality is far from perfect, everything works as intended.
@@ -391,7 +618,11 @@ function About() {
             copy and paste image blobs and Unicode emojis. It was a lot of fun.
             Feel free to check out the{" "}
             <Link
-              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
               to="https://github.com/suhas-sunder/EmojiKitchenGame"
               target="_blank"
               rel="noopener noreferrer"
@@ -404,7 +635,11 @@ function About() {
           <p>
             Another quick project I'm working on is a{" "}
             <Link
-              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
               to="https://www.makeconfetti.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -419,7 +654,11 @@ function About() {
             product for now. It's not very fancy and I don't have any major
             plans for it, but it lets me experiment with the{" "}
             <Link
-              className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+              className={`${
+                darkThemeActive
+                  ? "text-orange-600"
+                  : "text-skull-super-dark-brown"
+              } hover:text-amber-600 font-lora`}
               to="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API"
               target="_blank"
               rel="noopener noreferrer"
@@ -430,21 +669,54 @@ function About() {
             in a standalone project and I like how it's turned out so far.
           </p>
         </div>
-
-        <h2 className="flex py-2 text-4xl font-nunito mt-4">Thank you!</h2>
+        <h2
+          className={`${
+            darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
+        >
+          Free 4K HD Wallpapers
+        </h2>
+        <p className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 px-4 sm:px-6 md:px-8">
+          Aside from word games and puzzles, WordSkull also offers high quality
+          4K HD wallpapers for free! You can download the
+          <Link
+            className={`${
+              darkThemeActive
+                ? "text-orange-600"
+                : "text-skull-super-dark-brown"
+            } hover:text-amber-600 font-lora`}
+            to="/wallpaper"
+          >
+            {" "}
+            wallpapers
+          </Link>{" "}
+          here.
+        </p>
+        <h2
+          className={`${
+            darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+          } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
+        >
+          Thank you!
+        </h2>
         <p className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 px-4 sm:px-6 md:px-8">
           If you've reached this far, I'd like to thank you for reading through
           all that. If you have any feedback, I'd love to hear about it. If you
           want to share pictures of your progress or just want to say hi, you
           can find me on any of my socials listed on the{" "}
           <Link
-            className="hover:text-skull-brown text-skull-super-dark-brown font-lora"
+            className={`${
+              darkThemeActive
+                ? "text-orange-600"
+                : "text-skull-super-dark-brown"
+            } hover:text-amber-600 font-lora`}
             to="/socials"
           >
             socials page
           </Link>
           . Thanks again. I really hope you enjoy playing this game!{" "}
         </p>
+        <SocialLinks />
       </main>
     </div>
   );

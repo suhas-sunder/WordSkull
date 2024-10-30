@@ -12,6 +12,7 @@ import Skull_2_Webp from "../client/assets/images/skull_2.webp";
 import Skull_3_Webp from "../client/assets/images/skull_3.webp";
 import Skull_4_Webp from "../client/assets/images/skull_4.webp";
 import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
+import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
   return [
@@ -27,9 +28,15 @@ export const meta: MetaFunction = () => {
 };
 
 function Header() {
+  const { darkThemeActive } = useTheme();
+
   return (
     <header className="flex flex-col max-w-[1200px] text-center justify-center items-center mb-16">
-      <h1 className="w-full z-1 flex-row flex justify-center items-center text-4xl sm:text-5xl text-center mt-9 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-8 sm:mb-3 text-skull-dark-brown font-lora">
+      <h1
+        className={`${
+          darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
+        } w-full z-1 flex-row flex justify-center items-center text-4xl sm:text-5xl text-center mt-9 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-8 sm:mb-3 font-lora tracking-wide`}
+      >
         <span className="whitespace-nowrap">
           <span className="inline-flex">W</span>
           <span className="inline-flex animate-scalePulse">💀</span>
@@ -37,7 +44,11 @@ function Header() {
         </span>
         <span className="inline-flex">Skull</span>
       </h1>
-      <p className="sm:text-xl leading-relaxed sm:leading-relaxed font-lato text-skull-dark-brown sm:mb-3 mx-3 sm:mt-1 sm:mx-12">
+      <p
+        className={`${
+          darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
+        } sm:text-xl leading-relaxed sm:leading-relaxed font-lato sm:mb-3 mx-3 sm:mt-1 sm:mx-12`}
+      >
         Fellow adventurer, sharpen your mind and wield the strongest weapon at
         your disposal, your words! Conquer the skulls in epic word and puzzle
         challenges. The dungeon awaits...
@@ -61,16 +72,25 @@ export default function Index() {
       <main
         className={`${
           darkThemeActive && "text-white"
-        } transition-colors duration-[600ms] flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5 sm:translate-y-0 items-center animate-fadeIn`}
+        } transition-colors duration-[600ms] flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5 sm:translate-y-0 items-center animate-fadeIn mx-10`}
       >
         <div className="flex flex-col flex-wrap justify-center gap-8 max-w-[1200px] items-center w-full ">
           <div className="flex flex-col justify-center items-center gap-1">
-            <h2 className="font-lora text-2xl text-skull-super-dark-brown">
+            <h2
+              className={`${
+                darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+              } font-lora text-2xl `}
+            >
               WordSkull Classic
             </h2>
-            <p className="text-skull-dark-brown text-base leading-loose font-lato mx-5 sm:mx-8 text-center">
-              This game mode is inspired by NYT Wordle. Complete the puzzle by
-              guessing the correct word for each row before your lives run out.
+            <p
+              className={`${
+                darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
+              }  text-base leading-loose font-lato mx-5 sm:mx-8 text-center`}
+            >
+              Complete this word game puzzle by guessing the correct word for
+              each row before your lives run out. Defeat the skulls to unlock
+              the final boss (coming soon) and win the weekly challenge.
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 xl:grid-cols-8  gap-12 justify-center items-center">
@@ -97,7 +117,7 @@ export default function Index() {
               <div
                 className={`${
                   darkThemeActive
-                    ? "bg-skull-dark-brown  group-hover:bg-amber-500"
+                    ? "bg-orange-700  group-hover:bg-amber-500"
                     : "bg-skull-super-dark-brown  group-hover:bg-amber-600"
                 } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
@@ -127,7 +147,7 @@ export default function Index() {
               <div
                 className={`${
                   darkThemeActive
-                    ? "bg-skull-dark-brown  group-hover:bg-amber-500"
+                    ? "bg-orange-700  group-hover:bg-amber-500"
                     : "bg-skull-super-dark-brown  group-hover:bg-amber-600"
                 } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
@@ -157,7 +177,7 @@ export default function Index() {
               <div
                 className={`${
                   darkThemeActive
-                    ? "bg-skull-dark-brown  group-hover:bg-amber-500"
+                    ? "bg-orange-700  group-hover:bg-amber-500"
                     : "bg-skull-super-dark-brown  group-hover:bg-amber-600"
                 } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
@@ -187,7 +207,7 @@ export default function Index() {
               <div
                 className={`${
                   darkThemeActive
-                    ? "bg-skull-dark-brown  group-hover:bg-amber-500"
+                    ? "bg-orange-700  group-hover:bg-amber-500"
                     : "bg-skull-super-dark-brown  group-hover:bg-amber-600"
                 } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
@@ -198,17 +218,33 @@ export default function Index() {
         </div>
 
         <div>
-          <h2 className="flex py-2 text-2xl font-lora mt-4 text-center w-full justify-center items-center text-skull-super-dark-brown">
+          <h2
+            className={`${
+              darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
+            } flex py-2 text-4xl font-lora mt-4 text-center w-full justify-center items-center `}
+          >
             FAQ
           </h2>
-          <ul className="text-skull-dark-brown flex flex-col gap-4">
+          <ul
+            className={`${
+              darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
+            } flex flex-col gap-4`}
+          >
             <li className="flex flex-col gap-2">
-              <h3 className="flex py-2 text-xl font-nunito mt-2 text-skull-super-dark-brown">
+              <h3
+                className={`${
+                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                } flex py-2 text-2xl font-nunito mt-2`}
+              >
                 What is WordSkull?
               </h3>
               <p className="font-lato text-lg pl-5 tracking-wider leading-loose">
                 <Link
-                  className="hover:text-amber-600 text-skull-super-dark-brown font-lora"
+                  className={`${
+                    darkThemeActive
+                      ? "text-orange-600"
+                      : "text-skull-super-dark-brown"
+                  } hover:text-amber-600 font-lora`}
                   to="/word-skull-game-easy-mode"
                 >
                   WordSkull
@@ -225,17 +261,24 @@ export default function Index() {
               </p>
             </li>
             <li className="flex flex-col gap-2">
-              <h3 className="flex py-2 text-xl font-nunito mt-2 text-skull-super-dark-brown">
+              <h3
+                className={`${
+                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                } flex py-2 text-2xl font-nunito mt-2`}
+              >
                 What was the motivation behind WordSkull?
               </h3>
               <p className="font-lato text-lg pl-5 tracking-wider leading-loose">
                 Great question! Long story short, I wanted to make something fun
                 that I would enjoy using myself. Decided to make a twist on some
-                classic word and puzzle games such as NYT Wordle, Cryptogram,
-                Cross Math, Snake, and more. If you want the long store, you can
-                find it on the{" "}
+                classic word and puzzle games. If you want the long story, you
+                can find it on the{" "}
                 <Link
-                  className="hover:text-amber-600 text-skull-super-dark-brown font-lora"
+                  className={`${
+                    darkThemeActive
+                      ? "text-orange-600"
+                      : "text-skull-super-dark-brown"
+                  } hover:text-amber-600 font-lora`}
                   to="/about"
                 >
                   {" "}
@@ -246,24 +289,37 @@ export default function Index() {
             </li>
           </ul>
         </div>
-        <div className="font-lato text-lg pl-5 tracking-wider text-center leading-loose text-skull-dark-brown">
+        <div
+          className={`${
+            darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
+          } font-lato text-lg pl-5 tracking-wider text-center leading-loose`}
+        >
           If you have any feedback, suggestions, or business inquiries, please
           feel free to reach out to{" "}
           <a
             href="mailto:admin@wordskull.com"
-            className="hover:text-amber-600 text-skull-super-dark-brown font-lora"
+            className={`${
+              darkThemeActive
+                ? "text-orange-600"
+                : "text-skull-super-dark-brown"
+            } hover:text-amber-600 font-lora`}
           >
             admin@wordskull.com{" "}
           </a>
-          or you can find me on any of my socials listed on the{" "}
+          or you can find me on any of my socials and associated links listed on the{" "}
           <Link
-            className="hover:text-amber-600 text-skull-super-dark-brown font-lora"
+            className={`${
+              darkThemeActive
+                ? "text-orange-600"
+                : "text-skull-super-dark-brown"
+            } hover:text-amber-600 font-lora`}
             to="/socials"
           >
             socials page
           </Link>
           .
         </div>
+        <SocialLinks />
       </main>
     </div>
   );
