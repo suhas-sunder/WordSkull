@@ -13,7 +13,7 @@ export const meta: MetaFunction = () => {
     {
       name: "description",
       content:
-        "Explore WordSkull, inspired by popular puzzle games like Wordle, crosswords, and cryptograms. Challenge your mind with unique game modes like Classic WordSkull, Cross Word Skull, Crypto Skull, and more! Continuously evolving with new features and fun game modes! 🎉📲",
+        "WordSkull the ultimate word game inspired by word & puzzle games like Wordle, crosswords, cryptogram, with new features and daily challenges! 🎉📲",
     },
   ];
 };
