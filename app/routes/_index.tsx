@@ -22,7 +22,7 @@ export const meta: MetaFunction = () => {
     {
       name: "description",
       content:
-        "Word Skull is an engaging platform where fun meets learning ❤️.  It’s a great way to sharpen your vocabulary, but it’s also just a good word game to dive into when you want to relax, challenge your mind, and word it out 🧩💚. Word Skull is the perfect way to have fun and keep your brain active 🧠💜! 🎉📲",
+        "WordSkull has fun word games for fun and learning! ❤️ Sharpen your vocabulary, challenge your mind 🧠, and enjoy relaxing gameplay and puzzles 💜.🎉",
     },
   ];
 };
@@ -306,7 +306,8 @@ export default function Index() {
           >
             admin@wordskull.com{" "}
           </a>
-          or you can find me on any of my socials and associated links listed on the{" "}
+          or you can find me on any of my socials and associated links listed on
+          the{" "}
           <Link
             className={`${
               darkThemeActive

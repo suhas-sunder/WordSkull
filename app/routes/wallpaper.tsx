@@ -10,7 +10,7 @@ export const meta: MetaFunction = () => {
     {
       name: "description",
       content:
-        "✨ Discover stunning free 4K wallpapers that bring the fantasy world of Word Skull to life! Whether you’re into epic dragons, cool skull art, anime, or e-girl aesthetics, we’ve got something for every vibe. Download your favorites and give your screen a magical new look! 🖼️✨ 🧠💜",
+        "✨ Free 4K wallpapers from Word Skull's fantasy world! Epic dragons, dungeon, anime, e-girl vibes. Download now to give your screen a magical touch! 🖼️✨",
     },
   ];
 };
