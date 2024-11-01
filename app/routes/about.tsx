@@ -619,7 +619,6 @@ function About() {
             I get to use the skull emoji all over my site without making it seem
             cringe 💀.
           </p>
-
           <h3
             className={`${
               darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
