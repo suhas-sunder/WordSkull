@@ -50,7 +50,7 @@ function SocialLinks() {
     {
       id: 4,
       name: "LinkedIn",
-      url: "https://www.linkedin.com/company/104154929/admin/dashboard/",
+      url: "https://www.linkedin.com/company/104154929/",
       pngImg: linkedin_png,
       webpImg: linkedin_webp,
     },
@@ -131,7 +131,7 @@ function SocialLinks() {
                 <source srcSet={`${link.pngImg}`} type="image/png" />
                 <img
                   src={link.pngImg}
-                  alt="Word Skull Classic boneheads difficulty easy"
+                  alt={link.name + " icon that links to social media page"}
                   className="w-[28px] h-[28px] block"
                   width="48"
                   height="48"

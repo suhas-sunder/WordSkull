@@ -253,7 +253,7 @@ export default function Index() {
                 word challenges. Play the best free online word and puzzle games
                 with a twist on popular classics. Enjoy games inspired by
                 Wordle, word search, math puzzles, cryptograms, and more. The
-                classic mode feels a lot like Wordle but more of a challenges as
+                classic mode feels a lot like Wordle but more of a challenge as
                 you solve for multiple words instead of just one. The goal is to
                 guess the correct words in as few tries as possible. More game
                 modes are on the way, so get ready to mix things up and word it

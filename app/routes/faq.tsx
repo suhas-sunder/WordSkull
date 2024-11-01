@@ -1,5 +1,13 @@
+import SocialLinks from "../client/components/navigation/SocialLinks";
+
 function faq() {
-  return <div>faq</div>;
+  return (
+    <div>
+      <main>
+        <SocialLinks />
+      </main>
+    </div>
+  );
 }
 
 export default faq;

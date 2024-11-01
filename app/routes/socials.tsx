@@ -1,5 +1,6 @@
 import { MetaFunction } from "@remix-run/node";
 import { Link } from "react-router-dom";
+import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
   return [
@@ -224,6 +225,7 @@ export default function Socials() {
             </Link>
           </li>
         </ul>
+        <SocialLinks />
       </main>
     </div>
   );

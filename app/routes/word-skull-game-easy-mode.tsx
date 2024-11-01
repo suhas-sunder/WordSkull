@@ -3,6 +3,7 @@ import ClassicGameLogic from "../client/components/layout/ClassicGameLogic";
 import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
 import { useMatches } from "react-router-dom";
 import { useMemo } from "react";
+import SocialLinks from "../client/components/navigation/SocialLinks";
 export type WordsData = {
   words?: { [key: number]: string[] };
 };
@@ -39,7 +40,12 @@ export default function WordSkullMedium() {
         difficulty="easy"
         gameMode="classic"
       />
-      <ClassicGameplayInstructions />
+      <section>
+        <ClassicGameplayInstructions />
+      </section>
+      <section>
+        <SocialLinks />
+      </section>
     </>
   );
 }
