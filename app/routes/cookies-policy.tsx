@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Link, MetaFunction } from "@remix-run/react";
+import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
   return [
@@ -260,6 +261,8 @@ export default function cookiespolicy() {
             technologies, please contact us at: admin@wordskull.com.
           </p>
         </section>
+        
+        <SocialLinks />
       </main>
     </div>
   );

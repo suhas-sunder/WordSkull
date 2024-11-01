@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { MetaFunction } from "@remix-run/react";
+import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
   return [
@@ -1095,6 +1096,7 @@ export default function TermsOfService() {
           <p>Canada</p>
           <p>admin@wordskull.com</p>
         </section>
+        <SocialLinks />
       </main>
     </div>
   );

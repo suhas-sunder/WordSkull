@@ -27,7 +27,7 @@ function About() {
         darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
       } flex justify-center flex-col items-center mt-[3em]`}
     >
-      <header className="flex flex-col justify-center items-center gap-5 mb-4 mx-5 text-center">
+      <header className="flex flex-col justify-center items-center gap-6 mb-3 mx-5 text-center">
         <h1
           className={`${
             darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
@@ -102,7 +102,7 @@ function About() {
           </Link>{" "}
           is a fun and fast-paced word puzzle game where you tackle word
           challenges, with cool animations and effects to keep things exciting.
-          The classic mode feels a lot like Wordle but more of a challenges as
+          The classic mode feels a lot like Wordle but more of a challenge as
           you solve for multiple words instead of just one. The goal is to guess
           the correct words in as few tries as possible. More game modes are on
           the way to mix things up and word it out!
@@ -394,7 +394,7 @@ function About() {
             darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
           } flex py-2 text-3xl font-nunito mt-4 text-skull-super-dark-brown`}
         >
-          So what's the game plan?
+          So, what's the game plan?
         </h2>
         <div className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
           <p>
@@ -475,12 +475,12 @@ function About() {
               {" "}
               words list
             </Link>{" "}
-            for my word game. Some of the common english words I've aggregated
+            for my word game. Some of the common English words I've aggregated
             are just impossible to guess at times, and since I'm using a massive
             list of words to incorporate 3 to 9 letters, it's going to be tough
             narrowing down that list until it becomes fun for users of all
             levels. Hopefully, it's not too bad of an issue. If you find any
-            word that gives you trouble, please let me know.
+            word that causes you trouble, please let me know.
           </p>
           <p>
             Another thing I noticed was the amount of time I spend on the game.
@@ -535,7 +535,7 @@ function About() {
             spacebar keys for easy access. I find it tolerable when playing with
             a keyboard but do find it annoying at times, especially on small
             screens when using the mobile keypad. It is definitely my biggest
-            gripe about the game and I truly wish I had a better solution. If
+            gripe about the game, and I truly wish I had a better solution. If
             you have any ideas, I'm all ears.
           </p>
         </div>
@@ -563,13 +563,13 @@ function About() {
           Why WordSkull 💀?
         </h2>
         <p className="font-lato text-xl  tracking-wider leading-loose pl-5 gap-8 flex flex-col px-4 sm:px-6 md:px-8">
-          I was looking for a cool domain name that would make for a
-          substantially good design for this word game. I had a list of domain
-          names that were all unavailable. I almost settled on WordSnail (grid
-          formed from different shell shapes), but I'm glad I didn't because
-          WordSkull was available and it's a really cool name, especially
+          I was looking for a cool domain name that would make for a clever play
+          on words to use for the design of this word game. I had a list of
+          domain names that were mostly unavailable. I almost settled on
+          WordSnail (grid formed from different shell shapes), but I'm glad I
+          didn't because WordSkull was available and it's a really cool name,
           especially since it fits well with the rogue-light version I have
-          planned. Hopefully things go well enough that I can get around to
+          planned. Hopefully, things go well enough that I can get around to
           developing the rogue-lite (fingers crossed 🤞🏽😊). As an added bonus, I
           get to use the skull emoji all over my site without making it seem
           cringe 💀.
@@ -650,7 +650,7 @@ function About() {
             which I decided to build because I need to implement a confetti
             maker component for this word game in order to add a little bit of
             fun to the winning animation. Turning it into it's own website
-            didn't seem very difficult so I decided to build a minimum viable
+            didn't seem very difficult, so I decided to build a minimum viable
             product for now. It's not very fancy and I don't have any major
             plans for it, but it lets me experiment with the{" "}
             <Link
