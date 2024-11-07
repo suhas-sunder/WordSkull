@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.13.0",
+    "@mdx-js/react": "^3.1.0",
+    "@mdx-js/rollup": "^3.1.0",
     "@mui/icons-material": "^5.16.5",
     "@remix-run/express": "^2.11.0",
     "@remix-run/node": "^2.10.3",
@@ -33,16 +35,18 @@
     "express-session": "^1.18.0",
     "express-xss-sanitizer": "^1.2.0",
     "fs": "^0.0.1-security",
+    "gray-matter": "^4.0.3",
     "helmet": "^7.1.0",
     "hpp": "^0.2.3",
     "html2canvas": "^1.4.1",
     "isbot": "^5.1.17",
     "localforage": "^1.10.0",
+    "mdx-bundler": "^10.0.3",
     "pako": "^2.1.0",
     "passport": "^0.7.0",
     "path": "^0.12.7",
     "pg": "^8.12.0",
-    "posthog-js": "^1.166.1",
+    "posthog-js": "^1.181.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-paginate": "^8.2.0",
@@ -84,5 +88,8 @@
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "browser": {
+    "fs": false
   }
 }

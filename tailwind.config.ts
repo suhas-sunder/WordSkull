@@ -4,7 +4,7 @@ export default {
   mode: "jit",
   content: [
     "./index.html",
-    "./app/**/*.{js,ts,jsx,tsx,}",
+    "./app/**/*.{js,ts,jsx,tsx,json,css,mdx}",
     "assets/fonts/.**.ttf",
   ],
   theme: {

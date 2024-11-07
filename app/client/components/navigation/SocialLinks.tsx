@@ -123,7 +123,7 @@ function SocialLinks() {
                   : "text-skull-super-dark-brown"
               } group hover:text-amber-600 font-lora flex gap-3 items-center`}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               to={link.url}
             >
               <picture className="group-hover:scale-105 block">
