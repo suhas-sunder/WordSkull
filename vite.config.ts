@@ -47,5 +47,13 @@ export default ({ mode }: { mode: string }) => {
         process.env.VITE_PORT || "3200"
       ),
     },
+    build: {
+      rollupOptions: {
+        external: ["fs"], // Exclude fs from the client-side bundle
+      },
+    },
+    optimizeDeps: {
+      exclude: ["fs"], // Exclude fs from deps optimization
+    },
   });
 };
