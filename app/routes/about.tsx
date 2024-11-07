@@ -8,8 +8,6 @@ import emojiKitchenWEBP from "../client/assets/images/emoji-kitchen-game-preview
 import * as AboutMDX from "./mdx/about-en.mdx";
 import { MDXProvider } from "@mdx-js/react";
 import useFormatMDX from "../client/components/hooks/useFormatMDX";
-import AboutPgTranslations from "../client/components/data/AboutPgTranslations";
-import { useMemo } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const meta: MetaFunction = ({ data }: any) => {
@@ -28,7 +26,6 @@ function About() {
   const { darkThemeActive } = useTheme();
   const CustomComponents = useFormatMDX();
   const location = useLocation();
-  const translations = useMemo(() => AboutPgTranslations(), []);
 
   return (
     <div
@@ -42,17 +39,7 @@ function About() {
             darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
           } w-full z-1 flex-row flex justify-center items-center text-4xl sm:text-5xl text-center mt-1 leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
         >
-          <span className="mr-2">
-            {location.pathname === "/about"
-              ? translations["en"]?.title
-              : translations[
-                  `${
-                    (location.pathname
-                      .split("/")
-                      .slice(-1)[0] as keyof typeof translations) || "en"
-                  }`
-                ]?.title}
-          </span>
+          <span className="mr-2">Discover the Story Behind</span>
           <span className="whitespace-nowrap">
             {" "}
             <span className="inline-flex">W</span>
@@ -62,15 +49,9 @@ function About() {
           <span className="inline-flex">Skull</span>
         </h1>
         <p className="font-lato text-lg tracking-wider leading-loose  mb-3 pl-5 max-w-[1200px]">
-          {location.pathname === "/about"
-            ? translations["en"]?.description_1
-            : translations[
-                `${
-                  (location.pathname
-                    .split("/")
-                    .slice(-1)[0] as keyof typeof translations) || "en"
-                }`
-              ]?.description_1}
+          👋🏽Hi! My name is Suhas, and I’m excited to share my journey creating a
+          word game website that provides a fun and engaging learning
+          experience. Here is a link to my
           <Link
             className={`${
               darkThemeActive
@@ -82,25 +63,9 @@ function About() {
             rel="noopener noreferrer"
           >
             {" "}
-            {location.pathname === "/about"
-              ? translations["en"]?.link_1
-              : translations[
-                  `${
-                    (location.pathname
-                      .split("/")
-                      .slice(-1)[0] as keyof typeof translations) || "en"
-                  }`
-                ]?.link_1}
+            GitHub profile
           </Link>
-          {location.pathname === "/about"
-            ? translations["en"]?.description_2
-            : translations[
-                `${
-                  (location.pathname
-                    .split("/")
-                    .slice(-1)[0] as keyof typeof translations) || "en"
-                }`
-              ]?.description_2}
+          . If you want to learn more about me, feel free to visit my
           <Link
             className={`${
               darkThemeActive
@@ -112,25 +77,9 @@ function About() {
             rel="noopener noreferrer"
           >
             {" "}
-            {location.pathname === "/about"
-              ? translations["en"]?.link_2
-              : translations[
-                  `${
-                    (location.pathname
-                      .split("/")
-                      .slice(-1)[0] as keyof typeof translations) || "en"
-                  }`
-                ]?.link_2}
+            portfolio website
           </Link>{" "}
-          {location.pathname === "/about"
-            ? translations["en"]?.description_3
-            : translations[
-                `${
-                  (location.pathname
-                    .split("/")
-                    .slice(-1)[0] as keyof typeof translations) || "en"
-                }`
-              ]?.description_3}
+          or visit any of my
           <Link
             className={`${
               darkThemeActive
@@ -140,15 +89,7 @@ function About() {
             to="/socials"
           >
             {" "}
-            {location.pathname === "/about"
-              ? translations["en"]?.link_3
-              : translations[
-                  `${
-                    (location.pathname
-                      .split("/")
-                      .slice(-1)[0] as keyof typeof translations) || "en"
-                  }`
-                ]?.link_3}
+            social pages
           </Link>
           .
         </p>
