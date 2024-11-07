@@ -16,18 +16,8 @@ interface AboutMDXData {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const meta: MetaFunction = ({ data, params }: any) => {
-  const { languageList } = Languages();
-
-  const slug = params.lang;
-
-  // Initialize hreflang links
-  const hreflangLinks: { [key: string]: string }[] = [];
-
-  if (languageList.includes(slug)) {
-    hreflangLinks.push({ rel: "alternate" });
-    hreflangLinks.push({ hrefLang: slug });
-  }
+export const meta: MetaFunction = ({ data }: any) => {
+  // const slug = params.lang;
 
   return [
     { title: data?.title || "WordSkull About Page" },
@@ -37,7 +27,6 @@ export const meta: MetaFunction = ({ data, params }: any) => {
         ? data?.description
         : "WordSkull the ultimate word game inspired by word & puzzle games like Wordle, crosswords, cryptogram, with new features and daily challenges! 🎉📲",
     },
-    ...hreflangLinks,
   ];
 };
 
@@ -110,10 +99,10 @@ export async function clientLoader({ serverLoader }: ClientLoaderFunctionArgs) {
     return { code: "", title: "Error", description: "Failed to load content" };
   }
 }
-function AboutLang() {
+function BlogContent() {
   const { code } = useLoaderData() as AboutMDXData;
 
   return <MDXContent code={code} />;
 }
 
-export default AboutLang;
+export default BlogContent;
