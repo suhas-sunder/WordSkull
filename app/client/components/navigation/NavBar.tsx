@@ -34,15 +34,6 @@ function MainLinks({
           showMobileMenu ? styles["mobile-nav"] : styles["main-nav"]
         }`}
       >
-        <li className="flex w-full lg:w-auto">
-          <NavLink
-            onClick={handleLinkClick}
-            to="/about"
-            className="relative flex items-center px-4 justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
-          >
-            <span className={`${styles.icon} flex`}>About</span>
-          </NavLink>
-        </li>
         {/* <li className="flex w-full lg:w-auto">
           <NavLink
             onClick={handleLinkClick}
@@ -52,6 +43,16 @@ function MainLinks({
             <span className={`${styles.icon} flex`}>Games</span>
           </NavLink>
         </li> */}
+        {/* The indie games will showcase my own rogue-lite game at the top, but below it will be games from indie developers that I support. Can reach out to devs on r/IndieDev to ask if they want it showcased. Can also have the games showcased in random order to give every developer a chance with options to sort by new/most liked/genres or tags. Each game an link to the game page on steam, etc. */}
+        <li className="flex w-full lg:w-auto">
+          <NavLink
+            onClick={handleLinkClick}
+            to="/best-indie-games-showcase"
+            className="relative flex items-center px-4 justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
+          >
+            <span className={`${styles.icon} flex`}>Indie Games</span>
+          </NavLink>
+        </li>
         {/* <li className="flex w-full lg:w-auto">
           <NavLink
             onClick={handleLinkClick}
@@ -64,12 +65,21 @@ function MainLinks({
         <li className="flex w-full lg:w-auto">
           <NavLink
             onClick={handleLinkClick}
+            to="/about"
+            className="relative flex items-center px-4 justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
+          >
+            <span className={`${styles.icon} flex`}>About</span>
+          </NavLink>
+        </li>
+        {/* <li className="flex w-full lg:w-auto">
+          <NavLink
+            onClick={handleLinkClick}
             to="/blog"
             className="relative flex items-center px-4 justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
           >
             <span className={`${styles.icon} flex`}>Blog</span>
           </NavLink>
-        </li>
+        </li> */}
       </ul>
       <button
         onClick={() => setDarkThemeActive(!darkThemeActive)}

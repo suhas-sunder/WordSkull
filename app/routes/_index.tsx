@@ -50,11 +50,20 @@ function Header() {
         } sm:text-xl leading-relaxed sm:leading-relaxed font-lato sm:mb-3 mx-3 sm:mt-1 sm:mx-12`}
       >
         Fellow adventurer, sharpen your mind and wield the strongest weapon at
-        your disposal, your words! Conquer the skulls by completing epic word and puzzle
-        challenges. The dungeon awaits...
+        your disposal, your words! Conquer the skulls by completing epic word
+        and puzzle challenges. The dungeon awaits...
       </p>
-
-      <div className="flex justify-center items-center w-full mt-10 mb-3 sm:mb-0">
+      <Link
+        to={"#word-skull-classic"}
+        className={`${
+          darkThemeActive
+            ? "bg-orange-700  hover:bg-amber-500"
+            : "bg-pumpkin-orange  hover:bg-amber-600"
+        } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 py-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
+      >
+        Start Playing!
+      </Link>
+      <div className="flex justify-center items-center w-full mt-14 mb-3 sm:mb-0">
         <SkullAnimation />
       </div>
     </header>
@@ -72,10 +81,11 @@ export default function Index() {
       <main
         className={`${
           darkThemeActive && "text-white"
-        } transition-colors duration-[600ms] flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5 sm:translate-y-0 items-center animate-fadeIn mx-10`}
+        } flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5  items-center mx-10`}
       >
         <div className="flex flex-col flex-wrap justify-center gap-8 max-w-[1200px] items-center w-full ">
-          <div className="flex flex-col justify-center items-center gap-1">
+          <div className="flex relative flex-col justify-center items-center gap-1">
+            <div id="word-skull-classic" className="absolute -top-14"></div>
             <h2
               className={`${
                 darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
@@ -124,7 +134,6 @@ export default function Index() {
                 Play
               </div>
             </button>
-
             <button
               onClick={() => navigate(`/word-skull-game-medium-mode`)}
               className="group flex col-span-2 flex-col gap-2 w-[15em] justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-[300ms] shadow-md rounded-t-[150em] rounded-b-full bg-ivory bg-opacity-10"
@@ -241,9 +250,7 @@ export default function Index() {
               <p className="font-lato text-lg pl-5 tracking-wider leading-loose">
                 <Link
                   className={`${
-                    darkThemeActive
-                      ? "text-orange-600"
-                : "text-pumpkin-orange"
+                    darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
                   } hover:text-amber-600 font-lora`}
                   to="/word-skull-game-easy-mode"
                 >
@@ -275,9 +282,7 @@ export default function Index() {
                 can find it on the{" "}
                 <Link
                   className={`${
-                    darkThemeActive
-                      ? "text-orange-600"
-                : "text-pumpkin-orange"
+                    darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
                   } hover:text-amber-600 font-lora`}
                   to="/about"
                 >
@@ -299,9 +304,7 @@ export default function Index() {
           <a
             href="mailto:admin@wordskull.com"
             className={`${
-              darkThemeActive
-                ? "text-orange-600"
-                : "text-pumpkin-orange"
+              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
             admin@wordskull.com{" "}
@@ -310,9 +313,7 @@ export default function Index() {
           the{" "}
           <Link
             className={`${
-              darkThemeActive
-                ? "text-orange-600"
-                : "text-pumpkin-orange"
+              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/socials"
           >

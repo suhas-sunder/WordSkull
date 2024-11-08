@@ -240,6 +240,72 @@ function About() {
                 darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
               }`}
             >
+              Board Game Reviews
+            </h3>
+            <Link
+              to="/board-game-reviews/learn-how-to-play-settlers-of-catan"
+              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
+            >
+              <h4
+                className={`font-nunito ${
+                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                }`}
+              >
+                Settlers Of Catan
+              </h4>
+              <picture className="rounded-md overflow-hidden">
+                <source srcSet={dragonMythologyWEBP} type="image/webp" />
+                <source srcSet={dragonMythologyJPG} type="image/jpeg" />
+                <img
+                  loading="lazy"
+                  className="flex w-full"
+                  src={dragonMythologyJPG}
+                  alt="A massive pink and purple dragon surrounded by sakura trees and clouds"
+                  width={460}
+                  height={260}
+                />
+              </picture>
+              <p className="mt-1">
+                Learn how to play Catan, game setup, strategy tips, and insigits
+                perfect for newcomers and experienced players.
+              </p>
+            </Link>
+            <Link
+              to="/wallpaper"
+              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
+            >
+              <h4
+                className={`font-nunito ${
+                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                }`}
+              >
+                Monopoly
+              </h4>
+              <picture className="rounded-md overflow-hidden">
+                <source srcSet={wallpaperWEBP} type="image/webp" />
+                <source srcSet={wallpaperJPG} type="image/jpeg" />
+                <img
+                  loading="lazy"
+                  className="flex w-full"
+                  src={wallpaperJPG}
+                  alt="A cartoony witch girl with pink hair in a majestic forest with glowing leave and trees"
+                  width={460}
+                  height={260}
+                />
+              </picture>
+              <p className="mt-1">
+                A comprehensive guided on how to play the Monopoly board game:
+                setup, strategy, and tips to help you win. Perfect for anyone
+                ready to rule the board!
+              </p>
+            </Link>
+          </div>
+          <div className="flex flex-col gap-2">
+            <h3
+              className={`font-lora text-xl ${
+                darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+              }`}
+            >
               Games & Apps
             </h3>
             <Link
