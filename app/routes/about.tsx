@@ -3,11 +3,15 @@ import { MetaFunction } from "@remix-run/node";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useTheme } from "../client/components/context/ThemeContext";
 import SocialLinks from "../client/components/navigation/SocialLinks";
-import emojiKitchenJPG from "../client/assets/images/emoji-kitchen-game-preview.jpg";
-import emojiKitchenWEBP from "../client/assets/images/emoji-kitchen-game-preview.webp";
 import * as AboutMDX from "./mdx/about-en.mdx";
 import { MDXProvider } from "@mdx-js/react";
 import useFormatMDX from "../client/components/hooks/useFormatMDX";
+import emojiKitchenJPG from "../client/assets/images/emoji-kitchen-game-preview.jpg";
+import emojiKitchenWEBP from "../client/assets/images/emoji-kitchen-game-preview.webp";
+import dragonMythologyJPG from "../client/assets/images/sakura-dragon-skull-anime-fantasy-dungeon-wordskull-993.jpg";
+import dragonMythologyWEBP from "../client/assets/images/sakura-dragon-skull-anime-fantasy-dungeon-wordskull-993.webp";
+import wallpaperJPG from "../client/assets/images/wicked-witch-fantasy-dungeon-wordskull-1047.jpg";
+import wallpaperWEBP from "../client/assets/images/wicked-witch-fantasy-dungeon-wordskull-1047.webp";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const meta: MetaFunction = ({ data }: any) => {
@@ -33,30 +37,30 @@ function About() {
         darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
       } flex justify-center flex-col items-center mt-[3em]`}
     >
-      <header className="flex flex-col justify-center items-center gap-6 mb-3 mx-5 text-center">
+      <header className="flex flex-col justify-center items-center gap-3 mb-3 mx-5 text-center">
         <h1
           className={`${
             darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
-          } w-full z-1 flex-row flex justify-center items-center text-4xl sm:text-5xl text-center mt-1 leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
+          } w-full z-1  flex justify-center items-center flex-col md:flex-row text-5xl text-center mt-1 leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
         >
-          <span className="mr-2">Discover the Story Behind</span>
-          <span className="whitespace-nowrap">
-            {" "}
-            <span className="inline-flex">W</span>
-            <span className="inline-flex animate-scalePulse">💀</span>
-            <span className="inline-flex">rd</span>
+          <span className="mr-2">
+            Discover the Story Behind{" "}
+            <span className="whitespace-nowrap">
+              {" "}
+              <span className="inline-flex">W</span>
+              <span className="inline-flex animate-scalePulse">💀</span>
+              <span className="inline-flex">rd</span>
+              <span className="inline-flex">Skull</span>
+            </span>
           </span>
-          <span className="inline-flex">Skull</span>
         </h1>
-        <p className="font-lato text-lg tracking-wider leading-loose  mb-3 pl-5 max-w-[1200px]">
+        <p className="font-lato text-lg tracking-wider leading-loose  mb-3 sm:pl-5 max-w-[1200px]">
           👋🏽Hi! My name is Suhas, and I’m excited to share my journey creating a
           word game website that provides a fun and engaging learning
           experience. Here is a link to my
           <Link
             className={`${
-              darkThemeActive
-                ? "text-orange-600"
-                : "text-skull-super-dark-brown"
+              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="https://github.com/suhas-sunder"
             target="_blank"
@@ -68,9 +72,7 @@ function About() {
           . If you want to learn more about me, feel free to visit my
           <Link
             className={`${
-              darkThemeActive
-                ? "text-orange-600"
-                : "text-skull-super-dark-brown"
+              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="https://www.suhassunder.com"
             target="_blank"
@@ -82,9 +84,7 @@ function About() {
           or visit any of my
           <Link
             className={`${
-              darkThemeActive
-                ? "text-orange-600"
-                : "text-skull-super-dark-brown"
+              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/socials"
           >
@@ -94,8 +94,8 @@ function About() {
           .
         </p>
       </header>
-      <main className="flex max-w-[1200px] w-full mt-4 justify-center px-5">
-        <article className="flex flex-col max-w-[900px] mr-5">
+      <main className="flex max-w-[1200px] w-full mt-4 justify-center flex-col lg:flex-row px-5">
+        <article className="flex flex-col max-w-[900px] sm:mr-5">
           {location.pathname === "/about" ? (
             <MDXProvider>
               <AboutMDX.default components={CustomComponents} />
@@ -104,14 +104,14 @@ function About() {
             <Outlet />
           )}
         </article>
-        <section className="flex w-full mt-4 min-w-[180px] justify-center text-center">
-          <div className="flex flex-col gap-2">
+        <section className="grid xs:grid-cols-2 lg:flex lg:flex-col w-full mt-4 min-w-[180px] gap-5 text-center">
+          {/* <div className="flex flex-col gap-2">
             <h3
               className={`font-lora text-xl ${
                 darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
               }`}
             >
-              Related Websites
+              Related Blogs
             </h3>
             <Link
               to="https://www.emoji-kitchen.com"
@@ -134,11 +134,202 @@ function About() {
                   className="flex w-full"
                   src={emojiKitchenJPG}
                   alt="Description of the article"
+                  width={460}
+                  height={260}
                 />
               </picture>
               <p className="mt-1">
                 😍👾Unleash your creativity by creating your favorite emoji
                 combos! Copy paste text faces (ʘ‿ʘ) & emojis in a snap! 🎉💫
+              </p>
+            </Link>
+            <Link
+              to="https://www.emoji-kitchen.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
+            >
+              <h4
+                className={`font-nunito ${
+                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                }`}
+              >
+                Emoji Kitchen Game
+              </h4>
+              <picture className="rounded-md overflow-hidden">
+                <source srcSet={emojiKitchenWEBP} type="image/webp" />
+                <source srcSet={emojiKitchenJPG} type="image/jpeg" />
+                <img
+                  loading="lazy"
+                  className="flex w-full"
+                  src={emojiKitchenJPG}
+                  alt="Description of the article"
+                  width={460}
+                  height={260}
+                />
+              </picture>
+              <p className="mt-1">
+                😍👾Unleash your creativity by creating your favorite emoji
+                combos! Copy paste text faces (ʘ‿ʘ) & emojis in a snap! 🎉💫
+              </p>
+            </Link>
+            <Link
+              to="https://www.emoji-kitchen.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
+            >
+              <h4
+                className={`font-nunito ${
+                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                }`}
+              >
+                Emoji Kitchen Game
+              </h4>
+              <picture className="rounded-md overflow-hidden">
+                <source srcSet={emojiKitchenWEBP} type="image/webp" />
+                <source srcSet={emojiKitchenJPG} type="image/jpeg" />
+                <img
+                  loading="lazy"
+                  className="flex w-full"
+                  src={emojiKitchenJPG}
+                  alt="Description of the article"
+                  width={460}
+                  height={260}
+                />
+              </picture>
+              <p className="mt-1">
+                😍👾Unleash your creativity by creating your favorite emoji
+                combos! Copy paste text faces (ʘ‿ʘ) & emojis in a snap! 🎉💫
+              </p>
+            </Link>
+            <Link
+              to="https://www.emoji-kitchen.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
+            >
+              <h4
+                className={`font-nunito ${
+                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                }`}
+              >
+                Emoji Kitchen Game
+              </h4>
+              <picture className="rounded-md overflow-hidden">
+                <source srcSet={emojiKitchenWEBP} type="image/webp" />
+                <source srcSet={emojiKitchenJPG} type="image/jpeg" />
+                <img
+                  loading="lazy"
+                  className="flex w-full"
+                  src={emojiKitchenJPG}
+                  alt="Description of the article"
+                  width={460}
+                  height={260}
+                />
+              </picture>
+              <p className="mt-1">
+                😍👾Unleash your creativity by creating your favorite emoji
+                combos! Copy paste text faces (ʘ‿ʘ) & emojis in a snap! 🎉💫
+              </p>
+            </Link>
+          </div> */}
+          <div className="flex flex-col gap-2">
+            <h3
+              className={`font-lora text-xl ${
+                darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+              }`}
+            >
+              Games & Apps
+            </h3>
+            <Link
+              to="https://www.emojikitchengame.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out"
+            >
+              <h4
+                className={`font-nunito ${
+                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                }`}
+              >
+                Emoji Kitchen Game
+              </h4>
+              <picture className="rounded-md overflow-hidden">
+                <source srcSet={emojiKitchenWEBP} type="image/webp" />
+                <source srcSet={emojiKitchenJPG} type="image/jpeg" />
+                <img
+                  loading="lazy"
+                  className="flex w-full"
+                  src={emojiKitchenJPG}
+                  alt="Colorful emojis surrounding text that reads emoji kitchen game"
+                  width={460}
+                  height={260}
+                />
+              </picture>
+              <p className="mt-1">
+                😍👾Unleash your creativity by creating your favorite emoji
+                combos! Copy paste text faces (ʘ‿ʘ) & emojis in a snap! 🎉💫
+              </p>
+            </Link>
+            <Link
+              to="https://www.dragonmythology.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
+            >
+              <h4
+                className={`font-nunito ${
+                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                }`}
+              >
+                Dragon Mythology
+              </h4>
+              <picture className="rounded-md overflow-hidden">
+                <source srcSet={dragonMythologyWEBP} type="image/webp" />
+                <source srcSet={dragonMythologyJPG} type="image/jpeg" />
+                <img
+                  loading="lazy"
+                  className="flex w-full"
+                  src={dragonMythologyJPG}
+                  alt="A massive pink and purple dragon surrounded by sakura trees and clouds"
+                  width={460}
+                  height={260}
+                />
+              </picture>
+              <p className="mt-1">
+                🐲 Explore captivating myths and legends from around the world.
+                Discover Greek, Hindu, Norse, Chinese, and Japanese mythology,
+                and dive into ancient stories and cultural lore. 🐉
+              </p>
+            </Link>
+            <Link
+              to="/wallpaper"
+              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
+            >
+              <h4
+                className={`font-nunito ${
+                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                }`}
+              >
+                Fantasy 4K HD Wallpapers
+              </h4>
+              <picture className="rounded-md overflow-hidden">
+                <source srcSet={wallpaperWEBP} type="image/webp" />
+                <source srcSet={wallpaperJPG} type="image/jpeg" />
+                <img
+                  loading="lazy"
+                  className="flex w-full"
+                  src={wallpaperJPG}
+                  alt="A cartoony witch girl with pink hair in a majestic forest with glowing leave and trees"
+                  width={460}
+                  height={260}
+                />
+              </picture>
+              <p className="mt-1">
+                Similar to the online word games and puzzle on WordSkull, these
+                wallpapers are fantasy dungeon themed and are perfect for your
+                desktop, laptop, social media, profile pics, and more.
               </p>
             </Link>
           </div>

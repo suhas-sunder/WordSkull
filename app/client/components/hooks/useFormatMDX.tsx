@@ -8,6 +8,7 @@ function useFormatMDX() {
     "https://www.emojikitchengame.com",
     "https://www.wordskull.com",
     "https://www.dragonmythology.com",
+    "https://www.dragonmythology.com",
     "https://www.makeconfetti.com",
     "https://www.freetypingcamp.com",
   ];
@@ -17,7 +18,7 @@ function useFormatMDX() {
       <h1
         className={`${
           darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
-        } w-full z-1 flex-row flex justify-center items-center text-4xl sm:text-5xl text-center mt-1 leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
+        } w-full z-1 flex-row flex justify-center items-center text-4xl sm:text-5xl text-center mt-1 sm:leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
         {...props}
       />
     ),
@@ -25,13 +26,13 @@ function useFormatMDX() {
       <h2
         className={`${
           darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-        } flex py-2 text-3xl font-lora mt-4 leading-[0.7em] capitalize text-skull-super-dark-brown mb-3`}
+        } flex py-2 text-3xl font-lora mt-4 text-center justify-center lg:justify-start lg:text-left leading-relaxed sm:leading-[0.7em] capitalize text-skull-super-dark-brown mb-3`}
         {...props}
       />
     ),
     h3: (props: React.HTMLProps<HTMLHeadingElement>) => (
       <h3
-        className={`${
+        className={`leading-relaxed lg:leading-normal ${
           darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
         } flex py-2 text-2xl font-nunito mt-4 text-skull-super-dark-brown`}
         {...props}
@@ -79,7 +80,7 @@ function useFormatMDX() {
         // eslint-disable-next-line react/jsx-no-target-blank
         <Link
           className={`${
-            darkThemeActive ? "text-orange-600" : "text-skull-super-dark-brown"
+            darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
           } hover:text-amber-600 font-lora`}
           to={href as string} // Use 'to' for internal links
           target={isExternal ? "_blank" : undefined}

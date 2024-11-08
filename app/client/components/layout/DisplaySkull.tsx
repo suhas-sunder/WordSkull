@@ -175,7 +175,7 @@ function DisplaySkull({
                               square !== "" &&
                               `${
                                 darkThemeActive
-                                  ? "bg-white text-slate-400 "
+                                  ? "bg-white text-slate-400"
                                   : "!border-green-400 !text-green-600 !bg-green-100"
                               }   border-2`
                             }

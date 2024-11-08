@@ -31,7 +31,7 @@ export default function AllWordsForWordGame() {
             className={`${
               darkThemeActive
                 ? "text-orange-600"
-                : "text-skull-super-dark-brown"
+                : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/all-words-for-word-game-three-letters"
           >
@@ -41,7 +41,7 @@ export default function AllWordsForWordGame() {
             className={`${
               darkThemeActive
                 ? "text-orange-600"
-                : "text-skull-super-dark-brown"
+                : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/all-words-for-word-game-four-letters"
           >
@@ -51,7 +51,7 @@ export default function AllWordsForWordGame() {
             className={`${
               darkThemeActive
                 ? "text-orange-600"
-                : "text-skull-super-dark-brown"
+                : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/all-words-for-word-game-five-letters"
           >
@@ -61,7 +61,7 @@ export default function AllWordsForWordGame() {
             className={`${
               darkThemeActive
                 ? "text-orange-600"
-                : "text-skull-super-dark-brown"
+                : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/all-words-for-word-game-six-letters"
           >
@@ -71,7 +71,7 @@ export default function AllWordsForWordGame() {
             className={`${
               darkThemeActive
                 ? "text-orange-600"
-                : "text-skull-super-dark-brown"
+                : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/all-words-for-word-game-seven-letters"
           >
@@ -81,7 +81,7 @@ export default function AllWordsForWordGame() {
             className={`${
               darkThemeActive
                 ? "text-orange-600"
-                : "text-skull-super-dark-brown"
+                : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/all-words-for-word-game-eight-letters"
           >
@@ -91,7 +91,7 @@ export default function AllWordsForWordGame() {
             className={`${
               darkThemeActive
                 ? "text-orange-600"
-                : "text-skull-super-dark-brown"
+                : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/all-words-for-word-game-nine-letters"
           >

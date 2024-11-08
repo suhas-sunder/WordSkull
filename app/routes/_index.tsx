@@ -50,7 +50,7 @@ function Header() {
         } sm:text-xl leading-relaxed sm:leading-relaxed font-lato sm:mb-3 mx-3 sm:mt-1 sm:mx-12`}
       >
         Fellow adventurer, sharpen your mind and wield the strongest weapon at
-        your disposal, your words! Conquer the skulls in epic word and puzzle
+        your disposal, your words! Conquer the skulls by completing epic word and puzzle
         challenges. The dungeon awaits...
       </p>
 
@@ -118,7 +118,7 @@ export default function Index() {
                 className={`${
                   darkThemeActive
                     ? "bg-orange-700  group-hover:bg-amber-500"
-                    : "bg-skull-super-dark-brown  group-hover:bg-amber-600"
+                    : "bg-pumpkin-orange  group-hover:bg-amber-600"
                 } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
                 Play
@@ -148,7 +148,7 @@ export default function Index() {
                 className={`${
                   darkThemeActive
                     ? "bg-orange-700  group-hover:bg-amber-500"
-                    : "bg-skull-super-dark-brown  group-hover:bg-amber-600"
+                    : "bg-pumpkin-orange  group-hover:bg-amber-600"
                 } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
                 Play
@@ -178,7 +178,7 @@ export default function Index() {
                 className={`${
                   darkThemeActive
                     ? "bg-orange-700  group-hover:bg-amber-500"
-                    : "bg-skull-super-dark-brown  group-hover:bg-amber-600"
+                    : "bg-pumpkin-orange  group-hover:bg-amber-600"
                 } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
                 Play
@@ -208,7 +208,7 @@ export default function Index() {
                 className={`${
                   darkThemeActive
                     ? "bg-orange-700  group-hover:bg-amber-500"
-                    : "bg-skull-super-dark-brown  group-hover:bg-amber-600"
+                    : "bg-pumpkin-orange  group-hover:bg-amber-600"
                 } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
               >
                 Play
@@ -243,7 +243,7 @@ export default function Index() {
                   className={`${
                     darkThemeActive
                       ? "text-orange-600"
-                      : "text-skull-super-dark-brown"
+                : "text-pumpkin-orange"
                   } hover:text-amber-600 font-lora`}
                   to="/word-skull-game-easy-mode"
                 >
@@ -277,7 +277,7 @@ export default function Index() {
                   className={`${
                     darkThemeActive
                       ? "text-orange-600"
-                      : "text-skull-super-dark-brown"
+                : "text-pumpkin-orange"
                   } hover:text-amber-600 font-lora`}
                   to="/about"
                 >
@@ -301,7 +301,7 @@ export default function Index() {
             className={`${
               darkThemeActive
                 ? "text-orange-600"
-                : "text-skull-super-dark-brown"
+                : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
             admin@wordskull.com{" "}
@@ -312,7 +312,7 @@ export default function Index() {
             className={`${
               darkThemeActive
                 ? "text-orange-600"
-                : "text-skull-super-dark-brown"
+                : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/socials"
           >

@@ -43,13 +43,31 @@ function MainLinks({
             <span className={`${styles.icon} flex`}>About</span>
           </NavLink>
         </li>
+        {/* <li className="flex w-full lg:w-auto">
+          <NavLink
+            onClick={handleLinkClick}
+            to="/games"
+            className="relative flex items-center px-4 justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
+          >
+            <span className={`${styles.icon} flex`}>Games</span>
+          </NavLink>
+        </li> */}
+        {/* <li className="flex w-full lg:w-auto">
+          <NavLink
+            onClick={handleLinkClick}
+            to="/board-game-reviews"
+            className="relative flex items-center px-4 justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
+          >
+            <span className={`${styles.icon} flex`}>Board Game Reviews</span>
+          </NavLink>
+        </li> */}
         <li className="flex w-full lg:w-auto">
           <NavLink
             onClick={handleLinkClick}
-            to="/wallpaper"
+            to="/blog"
             className="relative flex items-center px-4 justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
           >
-            <span className={`${styles.icon} flex`}>Wallpaper</span>
+            <span className={`${styles.icon} flex`}>Blog</span>
           </NavLink>
         </li>
       </ul>
