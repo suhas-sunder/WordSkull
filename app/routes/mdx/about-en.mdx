@@ -1,20 +1,32 @@
 ## Learn About WordSkull
 
-<div className="flex gap-3 items-center text-base mb-3 px-3">
-  <img
-    src={"https://www.honeycombartist.com/word-skull/img/dance.jpg"}
-    alt="The author of this article about Word Skull free online word games is Suhas Sunder"
-    className="w-[40px] h-[40px] rounded-full overflow-hidden"
-  />
+<div className="flex flex-col sm:flex-row gap-3 items-center text-base mb-5 sm:mb-4 px-3">
+  <picture>
+    <source
+      srcSet={"https://www.honeycombartist.com/word-skull/img/dance.webp"}
+      type="image/webp"
+    />
+    <source
+      srcSet={"https://www.honeycombartist.com/word-skull/img/dance.jpg"}
+      type="image/jpeg"
+    />
+    <img
+      src={"https://www.honeycombartist.com/word-skull/img/dance.jpg"}
+      alt="The author of this article about Word Skull free online word games is Suhas Sunder"
+      className="w-[40px] h-[40px] rounded-full overflow-hidden"
+      width={40}
+      height={40}
+    />
+  </picture>
   <p>By Suhas Sunder</p>
-  <span> - </span>
+  <span className="hidden sm:flex"> - </span>
   <time dateTime={`${2024}-11-01`}>{`November ${1}, ${2024}`}</time>
 </div>
 
 <figure className="mb-3 px-3">
   <picture>
     <source
-      srcSet={"https://www.honeycombartist.com/word-skull/img/dance.jpg"}
+      srcSet={"https://www.honeycombartist.com/word-skull/img/dance.webp"}
       type="image/webp"
     />
     <source
@@ -25,6 +37,8 @@
       className="flex w-full"
       src={"https://www.honeycombartist.com/word-skull/img/dance.jpg"}
       alt="Description of the article"
+      width={876}
+      height={317}
     />
   </picture>
   <figcaption className="text-center mt-2 text-gray-600">
@@ -44,7 +58,7 @@ However, after making significant progress, I realized that building the entire 
 
 ### What was the inspiration for WordSkull?
 
-Around the middle of 2023, I was spending a lot of my free time playing online puzzle games and word games. I was having fun playing and trying various online puzzle games, which led me to create my own unique take on the word game genre. There were several games that inspired me to create this website including [NYT Wordle](https://www.nytimes.com/games/wordle/index.html), [Scrabble](https://en.wikipedia.org/wiki/Scrabble), [Boggle](https://en.wikipedia.org/wiki/Boggle), [Words with Friends](https://wordswithfriends.com/), [Bananagrams](https://bananagrams.com/), [Letterpress](<https://en.wikipedia.org/wiki/Letterpress_(video_game)>), [Spelltower](https://nationalpost.com/life/your-daily-puzzmo-play-todays-spelltower), [Jumble](https://en.wikipedia.org/wiki/Jumble), [Bookworm](<https://en.wikipedia.org/wiki/Bookworm_(video_game)>), [Ruzzle](https://en.wikipedia.org/wiki/Ruzzle), [7 Little Words](https://www.7littlewords.com/), amongst other popular word games. The first game I made is the classic version of [WordSkull](/word-skull-game-easy-mode), named after the domain itself, which is a word game where you have to guess words of varying length before your run out of guesses (lives).
+Around the middle of 2023, I was spending a lot of my free time playing online puzzle games and word games. I was having fun playing various online puzzle games, which led me to create my own unique take on the word game genre. There were several games that inspired me to create this website including [NYT Wordle](https://www.nytimes.com/games/wordle/index.html), [Scrabble](https://en.wikipedia.org/wiki/Scrabble), [Boggle](https://en.wikipedia.org/wiki/Boggle), [Words with Friends](https://wordswithfriends.com/), [Bananagrams](https://bananagrams.com/), [Letterpress](<https://en.wikipedia.org/wiki/Letterpress_(video_game)>), [Spelltower](https://nationalpost.com/life/your-daily-puzzmo-play-todays-spelltower), [Jumble](https://en.wikipedia.org/wiki/Jumble), [Bookworm](<https://en.wikipedia.org/wiki/Bookworm_(video_game)>), [Ruzzle](https://en.wikipedia.org/wiki/Ruzzle), [7 Little Words](https://www.7littlewords.com/), amongst other popular word games. The first game I made is the classic version of [WordSkull](/word-skull-game-easy-mode), named after the domain itself, which is a word game where you have to guess words of varying length before your run out of guesses (lives).
 
 Other games I drew inspiration from include:
 
@@ -110,31 +124,6 @@ I was looking for a cool domain name that would make for a clever play on words 
 ### Future plans?
 
 I plan to add subtle details in the future to breathe life into each skull design, such as animated eyes that track the words and characters being typed, dialogue text with witty banter, and character bios. However, my priority right now is implementing word games and optimizing the user interface and user experience.
-
-### Free 4K HD Wallpapers
-
-<figure className="mb-3 px-3">
-  <picture>
-    <source
-      srcSet={"https://www.honeycombartist.com/word-skull/img/dance.webp"}
-      type="image/webp"
-    />
-    <source
-      srcSet={"https://www.honeycombartist.com/word-skull/img/dance.jpg"}
-      type="image/jpeg"
-    />
-    <img
-      className="flex w-full"
-      src={"https://www.honeycombartist.com/word-skull/img/dance.jpg"}
-      alt="Description of the article"
-    />
-  </picture>
-  <figcaption className="text-center mt-2 text-gray-600">
-    This is a caption for the image, providing additional context.
-  </figcaption>
-</figure>
-
-Aside from word games and puzzles, WordSkull also offers high quality 4K HD wallpapers for free! You can download the [wallpapers](/wallpaper) here.
 
 ### What about my other projects?
 

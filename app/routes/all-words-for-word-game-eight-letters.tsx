@@ -54,8 +54,7 @@ export default function EightLetterWords() {
                 <span key={uuidv4()}>{word}</span>
               ))}
           </p>
-        </div>
-        
+        </div>        
         <SocialLinks />
       </main>
     </div>

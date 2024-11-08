@@ -36,7 +36,7 @@ function ClassicGameplayInstructions() {
   return (
     <>
       {showInstructions && (
-        <div className="flex relative flex-col w-full justify-center items-center mt-[3.5em] md:mt-0">
+        <div className="flex relative flex-col w-full justify-center items-center mt-[3.5em] md:mt-0 mb-5">
           <div id="gameplay-instructions" className="absolute -top-[5em]"></div>
           <h2
             className={`text-4xl font-nunito  uppercase mb-10 ${
@@ -87,8 +87,8 @@ function ClassicGameplayInstructions() {
             />
             <li className="mx-auto text-center">
               If the word exists in the{" "}
-              <span className="text-skull-brown hover:text-skull-dark-brown">
-                <Link to="/words">dictionary</Link>
+              <span className="text-pumpkin-orange hover:text-orange-500">
+                <Link to="/all-words-for-word-game">dictionary (word list)</Link>
               </span>
               , and you get it right, you will be moved to the next row. This
               repeats until you complete all rows and win.
@@ -104,8 +104,8 @@ function ClassicGameplayInstructions() {
             </li>
             <li className="mx-auto text-center">
               If your submitted word exists in the{" "}
-              <span className="text-skull-brown hover:text-skull-dark-brown">
-                <Link to="/words">dictionary</Link>
+              <span className="text-pumpkin-orange hover:text-orange-500">
+                <Link to="/all-words-for-word-game">dictionary (word list)</Link>
               </span>{" "}
               but does not match the correct word, you lose a life.
             </li>
@@ -132,8 +132,8 @@ function ClassicGameplayInstructions() {
             </li>
             <li className="mx-auto text-center">
               If a word does not exist in the{" "}
-              <span className="text-skull-brown hover:text-skull-dark-brown">
-                <Link to="/words">dictionary</Link>
+              <span className="text-pumpkin-orange hover:text-orange-500">
+                <Link to="/all-words-for-word-game">dictionary (word list)</Link>
               </span>
               , you are not penalized for it. There will be a message displayed
               that informs you that the word is not valid for this game and no
@@ -277,7 +277,7 @@ function ClassicGameplayInstructions() {
               unclear, please feel free to contact me at{" "}
               <a
                 href="mailto:admin@wordskull.com"
-                className="text-skull-dark-brown hover:text-skull-super-dark-brown"
+                className="text-pumpkin-orange hover:text-orange-500"
               >
                 admin@wordskull.com
               </a>

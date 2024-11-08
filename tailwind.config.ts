@@ -44,6 +44,7 @@ export default {
         "skull-dark-brown": "#6d5d64",
         "skull-super-dark-brown": "#3e3539",
         ivory: "#fffffa",
+        "pumpkin-orange": "#d6500b",
       },
       keyframes: {
         fadeIn: {
