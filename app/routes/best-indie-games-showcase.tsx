@@ -42,11 +42,11 @@ function About() {
           pour their hearts into creating rich stories, fun and engaging
           gameplay, and stunning artwork, each title offers a fresh take on
           various genres with innovative mechanics and unique art styles. If
-          you&apos;re looking for a game that&apos;s new and exciting, you&apos;ve come to the
-          right place!
+          you&apos;re looking for a game that&apos;s new and exciting,
+          you&apos;ve come to the right place!
         </p>
       </header>
-      <main className="grid xs:grid-cols-2 md:grid-cols-3 gap-5 lg:grid-cols-4 max-w-[1200px] w-full mt-2 justify-center flex-col mb-10 px-5">
+      <main className="grid xs:grid-cols-2 md:grid-cols-3 gap-5 lg:grid-cols-4 max-w-[1200px] w-full mt-2 justify-center flex-col mb-10 px-5 ">
         <Link
           to="preview-of-your-indie-game"
           className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
@@ -71,7 +71,7 @@ function About() {
             />
           </picture>
           <p className="mt-1 text-center">
-            A breief description about the game. Lorem ipsum dolor sit amet
+            A brief description about the game. Lorem ipsum dolor sit amet
             consectetur adipisicing elit.
           </p>
         </Link>
@@ -99,12 +99,12 @@ function About() {
             />
           </picture>
           <p className="mt-1 text-center">
-            A breief description about the game. Lorem ipsum dolor sit amet
+            A brief description about the game. Lorem ipsum dolor sit amet
             consectetur adipisicing elit.
           </p>
         </Link>
       </main>
-      <section>
+      <section className="mb-5">
         <div className="max-w-[1000px] text-center leading-loose">
           Interested in showcasing your indie game?{" "}
           <Link
