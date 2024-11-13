@@ -118,7 +118,7 @@ function About() {
           with information about your game, and if it qualifies, I will get back
           to you. Here is a{" "}
           <Link
-            to="/indie-game-submission-guide"
+            to="/edit-indie-game"
             className={`${
               darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}

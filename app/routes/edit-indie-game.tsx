@@ -5,7 +5,7 @@ import Icon from "../client/components/utils/other/Icon";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export default function EditIndieGame() {
-  const [showPassword, setShowPassword] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const { darkThemeActive } = useTheme();
@@ -60,7 +60,9 @@ export default function EditIndieGame() {
             darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
           } w-full z-1  flex justify-center items-center flex-col md:flex-row text-5xl text-center mt-1 leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
         >
-          Your Game&apos;s Page Header
+          {showPassword
+            ? "Login: Edit Your Game's Page"
+            : "Your Game's Page Header"}
         </h1>
       </header>
       <main className="flex flex-col gap-5 justify-center items-center w-full max-w-[1200px]">
@@ -102,7 +104,7 @@ export default function EditIndieGame() {
             </div>
           </Form>
         ) : (
-          <div className="flex flex-col w-full max-w-[800px] mx-auto tracking-wider px-5">
+          <div className="flex flex-col w-full max-w-[800px] mx-auto tracking-wider px-5 mt-2">
             <Form method="post" className="flex flex-col w-full gap-5">
               <div className="flex flex-col gap-5 font-lato text-xl">
                 <label
@@ -117,7 +119,7 @@ export default function EditIndieGame() {
                   placeholder="Enter title"
                   id="game-name"
                   required
-                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown outline-skull-dark-brown"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
                 />
               </div>
               <div className="flex flex-col gap-5 font-lato text-xl">
@@ -215,6 +217,46 @@ export default function EditIndieGame() {
                   placeholder="Paste your Itch URL"
                   className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
                 />
+                <label htmlFor="epic" className="font-nunito">
+                  Epic Games Store
+                </label>
+                <input
+                  type="text"
+                  name="epic"
+                  id="epic"
+                  placeholder="Paste your Epic Games URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="apple" className="font-nunito">
+                  Apple App Store
+                </label>
+                <input
+                  type="text"
+                  name="apple"
+                  id="apple"
+                  placeholder="Paste your Apple app URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="android" className="font-nunito">
+                  Android Play Store
+                </label>
+                <input
+                  type="text"
+                  name="android"
+                  id="android"
+                  placeholder="Paste your Android app URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="jolt" className="font-nunito">
+                  Game Jolt
+                </label>
+                <input
+                  type="text"
+                  name="jolt"
+                  id="jolt"
+                  placeholder="Paste your Game Jolt URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
                 <label htmlFor="gog" className="font-nunito">
                   GOG
                 </label>
@@ -225,20 +267,139 @@ export default function EditIndieGame() {
                   placeholder="Paste your GOG URL"
                   className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
                 />
+                <label htmlFor="humble" className="font-nunito">
+                  Humble Bundle
+                </label>
+                <input
+                  type="text"
+                  name="humble"
+                  id="humble"
+                  placeholder="Paste your Humble Bundle URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="nintendo" className="font-nunito">
+                  Nintendo eShop
+                </label>
+                <input
+                  type="text"
+                  name="nintendo"
+                  id="nintendo"
+                  placeholder="Paste your Nintendo eShop URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="playstationdo" className="font-nunito">
+                  PlayStation Store
+                </label>
+                <input
+                  type="text"
+                  name="playstation"
+                  id="playstation"
+                  placeholder="Paste your PlayStation Store URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="landing" className="font-nunito">
+                  Game Landing Page (Personal Website)
+                </label>
+                <input
+                  type="text"
+                  name="landing"
+                  id="landing"
+                  placeholder="Paste your Website URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
               </div>
               <div className="flex flex-col gap-5 text-lg">
                 <h3 className="whitespace-nowrap font-lora w-full justify-center items-center text-center">
                   Social Media Links (Optional)
                 </h3>
-
-                <label htmlFor="Twitter" className="font-nunito">
-                  Twitter
+                <label htmlFor="youtube" className="font-nunito">
+                  YouTube
+                </label>
+                <input
+                  type="text"
+                  name="youtube"
+                  id="youtube"
+                  placeholder="Paste your YouTube URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="tiktok" className="font-nunito">
+                  TikTok
+                </label>
+                <input
+                  type="text"
+                  name="tiktok"
+                  id="tiktok"
+                  placeholder="Paste your TikTok URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="reddit" className="font-nunito">
+                  Reddit
+                </label>
+                <input
+                  type="text"
+                  name="reddit"
+                  id="reddit"
+                  placeholder="Paste your Reddit URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="instagram" className="font-nunito">
+                  Instagram
+                </label>
+                <input
+                  type="text"
+                  name="instagram"
+                  id="instagram"
+                  placeholder="Paste your Instagram URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="facebook" className="font-nunito">
+                  Facebook
+                </label>
+                <input
+                  type="text"
+                  name="facebook"
+                  id="facebook"
+                  placeholder="Paste your Facebook URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="linkedin" className="font-nunito">
+                  LinkedIn
+                </label>
+                <input
+                  type="text"
+                  name="linkedin"
+                  id="linkedin"
+                  placeholder="Paste your LinkedIn URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="twitter" className="font-nunito">
+                  X (Twitter)
                 </label>
                 <input
                   type="text"
                   name="twitter"
                   id="twitter"
                   placeholder="Paste your Twitter URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="mastadon" className="font-nunito">
+                  Mastadon
+                </label>
+                <input
+                  type="text"
+                  name="mastadon"
+                  id="mastadon"
+                  placeholder="Paste your Mastadon URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="pinterest" className="font-nunito">
+                  Pinterest
+                </label>
+                <input
+                  type="text"
+                  name="pinterest"
+                  id="pinterest"
+                  placeholder="Paste your Pinterest URL"
                   className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
                 />
               </div>
@@ -248,7 +409,7 @@ export default function EditIndieGame() {
                 </h3>
 
                 <label htmlFor="payPal" className="font-nunito">
-                  Paypal
+                  PayPal
                 </label>
                 <input
                   type="text"
@@ -275,6 +436,36 @@ export default function EditIndieGame() {
                   name="patreon"
                   id="patreon"
                   placeholder="Paste your Patreon URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="kickstarter" className="font-nunito">
+                  Kickstarter
+                </label>
+                <input
+                  type="text"
+                  name="kickstarter"
+                  id="kickstarter"
+                  placeholder="Paste your Kickstarter URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="indiegogo" className="font-nunito">
+                  Indiegogo
+                </label>
+                <input
+                  type="text"
+                  name="indiegogo"
+                  id="indiegogo"
+                  placeholder="Paste your Indiegogo URL"
+                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+                />
+                <label htmlFor="donationpage" className="font-nunito">
+                  Website (Donate Page)
+                </label>
+                <input
+                  type="text"
+                  name="donationpage"
+                  id="donationpage"
+                  placeholder="Paste your Website URL"
                   className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
                 />
               </div>
