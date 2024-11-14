@@ -1,6 +1,6 @@
-import { Form, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTheme } from "../client/components/context/ThemeContext";
-import { Fragment, useMemo, useState } from "react";
+import {  useState } from "react";
 import Icon from "../client/components/utils/other/Icon";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import TextInput from "../client/components/form/TextInput";
@@ -8,16 +8,13 @@ import TextArea from "../client/components/form/TextArea";
 import UploadImage from "../client/components/form/UploadImage";
 import IndieTOSCheckbox from "../client/components/form/IndieTOSCheckbox";
 import SaveAndSubmit from "../client/components/ui/interactive/SaveAndSubmit";
-import IndieGameLinksData from "../client/components/data/IndieGameLinks";
-import IndieSocialLinks from "../client/components/data/IndieSocialLinks";
+import AllIndieGameLinks from "../client/components/form/AllIndieGameLinks";
+import { Form } from "@remix-run/react";
 
 export default function EditIndieGame() {
   const [showPassword, setShowPassword] = useState(false);
 
   const { darkThemeActive } = useTheme();
-
-  const linkData = useMemo(() => IndieGameLinksData(), []);
-  const socialsData = useMemo(() => IndieSocialLinks(), []);
 
   return (
     <div
@@ -111,111 +108,7 @@ export default function EditIndieGame() {
               <IndieTOSCheckbox id="indie-terms-one" />
               <SaveAndSubmit />
             </Form>
-            <Form
-              method="post"
-              className="flex flex-col gap-8 mt-10 font-lato tracking-wider"
-            >
-              <div className="flex flex-col gap-5 text-lg">
-                <h3 className="whitespace-nowrap font-lora w-full justify-center items-center text-center">
-                  Links To Your Game (Optional)
-                </h3>
-                {linkData.map((link) => (
-                  <Fragment key={link.key}>
-                    <TextInput
-                      id={link.id}
-                      name={link.name}
-                      label={link.label}
-                      maxLength={255}
-                      placeholder={link.placeholder}
-                    />
-                  </Fragment>
-                ))}
-              </div>
-              <div className="flex flex-col gap-5 text-lg">
-                <h3 className="whitespace-nowrap font-lora w-full justify-center items-center text-center">
-                  Social Media Links (Optional)
-                </h3>
-                {socialsData.map((link) => (
-                  <Fragment key={link.key}>
-                    <TextInput
-                      id={link.id}
-                      name={link.name}
-                      label={link.label}
-                      maxLength={255}
-                      placeholder={link.placeholder}
-                    />
-                  </Fragment>
-                ))}
-              </div>
-              <div className="flex flex-col gap-5 text-lg">
-                <h3 className="whitespace-nowrap font-lora w-full justify-center items-center text-center">
-                  Support/Donation Links (Optional)
-                </h3>
-
-                <label htmlFor="payPal" className="font-nunito">
-                  PayPal
-                </label>
-                <input
-                  type="text"
-                  name="payPal"
-                  id="payPal"
-                  placeholder="Paste your PayPal URL"
-                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
-                />
-                <label htmlFor="kofi" className="font-nunito">
-                  Ko-fi
-                </label>
-                <input
-                  type="text"
-                  name="kofi"
-                  id="kofi"
-                  placeholder="Paste your Ko-fi URL"
-                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
-                />
-                <label htmlFor="patreon" className="font-nunito">
-                  Patreon
-                </label>
-                <input
-                  type="text"
-                  name="patreon"
-                  id="patreon"
-                  placeholder="Paste your Patreon URL"
-                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
-                />
-                <label htmlFor="kickstarter" className="font-nunito">
-                  Kickstarter
-                </label>
-                <input
-                  type="text"
-                  name="kickstarter"
-                  id="kickstarter"
-                  placeholder="Paste your Kickstarter URL"
-                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
-                />
-                <label htmlFor="indiegogo" className="font-nunito">
-                  Indiegogo
-                </label>
-                <input
-                  type="text"
-                  name="indiegogo"
-                  id="indiegogo"
-                  placeholder="Paste your Indiegogo URL"
-                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
-                />
-                <label htmlFor="donationpage" className="font-nunito">
-                  Website (Donate Page)
-                </label>
-                <input
-                  type="text"
-                  name="donationpage"
-                  id="donationpage"
-                  placeholder="Paste your Website URL"
-                  className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
-                />
-              </div>
-              <IndieTOSCheckbox id="indie-terms-two" />
-              <SaveAndSubmit />
-            </Form>
+            <AllIndieGameLinks />
             <Form
               method="post"
               className="flex flex-col gap-8 mt-10 font-lato tracking-wider"
