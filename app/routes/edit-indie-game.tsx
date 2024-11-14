@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom";
 import { useTheme } from "../client/components/context/ThemeContext";
-import {  useState } from "react";
-import Icon from "../client/components/utils/other/Icon";
+import { useState } from "react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
-import TextInput from "../client/components/form/TextInput";
-import TextArea from "../client/components/form/TextArea";
-import UploadImage from "../client/components/form/UploadImage";
-import IndieTOSCheckbox from "../client/components/form/IndieTOSCheckbox";
-import SaveAndSubmit from "../client/components/ui/interactive/SaveAndSubmit";
-import AllIndieGameLinks from "../client/components/form/AllIndieGameLinks";
-import { Form } from "@remix-run/react";
+import IndieGameLinksForm from "../client/components/form/IndieGameLinksForm";
+import IndieLoginForm from "../client/components/form/IndieLoginForm";
+import IndieGamesHeaderForm from "../client/components/form/IndieGamesHeaderForm";
+import IndieGameYTForm from "../client/components/form/IndieGameYTForm";
+import IndieGameDetailsForm from "../client/components/form/IndieGameDetailsForm";
+import IndieGameArticlesForm from "../client/components/form/IndieGameArticlesForm";
+import IndieGameSettingsForm from "../client/components/form/IndieGameSettingsForm";
 
 export default function EditIndieGame() {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword] = useState(false);
 
   const { darkThemeActive } = useTheme();
 
@@ -35,136 +34,15 @@ export default function EditIndieGame() {
       </header>
       <main className="flex flex-col gap-5 justify-center items-center w-full max-w-[1200px]">
         {showPassword ? (
-          <Form
-            method="post"
-            className="flex flex-col gap-8 mt-10 font-lato tracking-wider"
-          >
-            <div className="flex gap-5 justify-center items-center text-xl">
-              <label htmlFor="username" className="sr-only">
-                Username
-              </label>
-              <input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Username"
-                className="border-2 rounded-md px-2 py-1"
-              />
-            </div>
-            <div className="flex relative w-full min-h-10">
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                id="password"
-                className="flex border-2 rounded-md px-2 py-1 w-full"
-                placeholder="Password"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword((prev) => !prev)}
-                className="flex absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-500"
-              >
-                {showPassword ? <Icon icon="dice" /> : <Icon icon="copy" />}
-              </button>
-            </div>
-          </Form>
+          <IndieLoginForm />
         ) : (
           <div className="flex flex-col w-full max-w-[800px] mx-auto tracking-wider px-5 mt-2">
-            <Form method="post" className="flex flex-col w-full gap-5">
-              <TextInput
-                id="game-name"
-                name="game-name"
-                label="* Title Of Your Game (1 to 80 chars)"
-                required={true}
-                minLength={1}
-                maxLength={80}
-                placeholder="Enter title"
-              />
-              <TextArea
-                label="* Brief Description (200 to 500 chars)"
-                id="brief-description"
-                name="brief-description"
-                required={true}
-                minLength={200}
-                maxLength={500}
-                placeholder="The text you enter here will be displayed in the header of your game's page. It will also be the preview text when displayed on other pages. I have just two requests: 
-
-                  1. Please write a unique and original description of your game. If I get too many submissions that are 'copy pasted' from other websites, I run the risk of being flagged for duplicate content.
-                  
-                  2. Keep it safe for work. Don't include any profanity or adult content.
-
-                  Thank you 😊!
-                  "
-              />
-              <UploadImage
-                id="image"
-                type="file"
-                accept="image/*"
-                optionalText="game's promotional"
-              />
-              <IndieTOSCheckbox id="indie-terms-one" />
-              <SaveAndSubmit />
-            </Form>
-            <AllIndieGameLinks />
-            <Form
-              method="post"
-              className="flex flex-col gap-8 mt-10 font-lato tracking-wider"
-            >
-              <h2 className="flex py-2 text-4xl font-lora text-center w-full justify-center items-center">
-                YouTube Game Trailer (Optional)
-              </h2>
-              Video title, youtube url
-              <IndieTOSCheckbox id="indie-terms-three" />
-              <SaveAndSubmit />
-            </Form>
-            <Form
-              method="post"
-              className="flex flex-col gap-8 mt-10 font-lato tracking-wider"
-            >
-              <h2 className="flex py-2 text-4xl font-lora text-center w-full justify-center items-center">
-                Additional Game Details (Optional)
-              </h2>
-              Developer, Publisher, Genre, Platforms, Single Player,
-              Multiplayer, Co-op, Achievements, Release Date, Demo, Base Game
-              Price, Controller Support, Tags
-              <IndieTOSCheckbox id="indie-terms-four" />
-              <SaveAndSubmit />
-            </Form>
-            <Form
-              method="post"
-              className="flex flex-col gap-8 mt-10 font-lato tracking-wider"
-            >
-              <h2 className="flex py-2 text-4xl font-lora text-center w-full justify-center items-center">
-                Article (Optional)
-              </h2>
-              title, image or youtube url, description
-              <IndieTOSCheckbox id="indie-terms-five" />
-              <SaveAndSubmit />
-            </Form>
-
-            <Form
-              method="post"
-              className="flex flex-col gap-8 justify-center items-center"
-            >
-              <h2 className="flex py-2 text-4xl font-lora text-center w-full justify-center items-center">
-                Account Settings (Optional?)
-              </h2>
-              <button
-                type="submit"
-                className="flex justify-center items-center rounded-md bg-skull-dark-brown text-white px-4 py-2 w-[20em] hover:bg-skull-brown whitespace-nowrap"
-              >
-                Update Password
-              </button>
-              <button
-                type="submit"
-                className="flex justify-center items-center rounded-md bg-rose-600 text-white px-4 py-2 w-[20em] hover:bg-rose-500 whitespace-nowrap"
-              >
-                Delete Account
-              </button>
-            </Form>
+            <IndieGamesHeaderForm />
+            <IndieGameLinksForm />
+            <IndieGameYTForm />
+            <IndieGameDetailsForm />
+            <IndieGameArticlesForm />
+            <IndieGameSettingsForm />
           </div>
         )}
       </main>

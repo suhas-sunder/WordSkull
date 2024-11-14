@@ -7,7 +7,7 @@ import IndieTOSCheckbox from "./IndieTOSCheckbox";
 import SaveAndSubmit from "../ui/interactive/SaveAndSubmit";
 import { Form } from "@remix-run/react";
 
-function AllIndieGameLinks() {
+function IndieGameLinksForm() {
   const linkData = useMemo(() => IndieGameLinksData(), []);
   const socialsData = useMemo(() => IndieSocialLinks(), []);
   const donoData = useMemo(() => IndieDonationLinks(), []);
@@ -71,4 +71,4 @@ function AllIndieGameLinks() {
   );
 }
 
-export default AllIndieGameLinks;
+export default IndieGameLinksForm;
