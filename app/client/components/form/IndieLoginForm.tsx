@@ -36,9 +36,13 @@ function IndieLoginForm() {
         <button
           type="button"
           onClick={() => setShowPassword((prev) => !prev)}
-          className="flex absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-500"
+          className="flex absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-400 pr-2 hover:text-gray-300"
         >
-          {showPassword ? <Icon icon="dice" /> : <Icon icon="copy" />}
+          {showPassword ? (
+            <Icon icon="showPassword" />
+          ) : (
+            <Icon icon="hidePassword" />
+          )}
         </button>
       </div>
     </Form>

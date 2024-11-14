@@ -8,7 +8,7 @@ import "@testing-library/jest-dom/vitest";
 const MockNavBar = ({ darkThemeActive }: { darkThemeActive?: boolean }) => {
   render(
     <MemoryRouter>
-      <MockThemeProvider darkThemeActive={darkThemeActive}>
+      <MockThemeProvider darkThemeActive={darkThemeActive || false}>
         <NavBar />
       </MockThemeProvider>
     </MemoryRouter>

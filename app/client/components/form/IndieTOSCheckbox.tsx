@@ -11,7 +11,7 @@ function IndieTOSCheckbox({ id }: PropType) {
   return (
     <div className="flex gap-3 my-5">
       <input type="checkbox" id={id} name="terms" required />
-      <label htmlFor="terms-two" className="font-nunito">
+      <label htmlFor={id} className="font-nunito">
         I have read and accept the{" "}
         <Link
           to="#indie-game-terms-of-service"

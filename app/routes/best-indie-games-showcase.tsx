@@ -125,7 +125,7 @@ function About() {
           >
             detailed submission guide
           </Link>{" "}
-          you can review in the meantime .{" "}
+          you can review in the meantime.{" "}
         </div>
       </section>
       <section>
