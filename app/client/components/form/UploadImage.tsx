@@ -1,24 +1,23 @@
 import { useState } from "react";
+import Icon from "../utils/other/Icon";
 
 interface PropType {
   optionalText?: string;
   id: string;
   type: string;
   accept: string;
+  required?: boolean;
 }
 
-function UploadImage({ optionalText, id, type, accept }: PropType) {
+function UploadImage({ optionalText, id, type, accept, required }: PropType) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-  // Validate file size and display preview
   const validateAndPreview = (file: File) => {
-    // Check if file size is less than 1MB
     if (file.size > 1 * 1024 * 1024) {
       alert("File is too large. Please select an image under 1MB.");
       return;
     }
 
-    // Create a file reader to preview the image
     const reader = new FileReader();
     reader.onload = () => {
       setImagePreview(reader.result as string);
@@ -26,7 +25,6 @@ function UploadImage({ optionalText, id, type, accept }: PropType) {
     reader.readAsDataURL(file);
   };
 
-  // Handle file input change (from clicking the browse button)
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -34,7 +32,6 @@ function UploadImage({ optionalText, id, type, accept }: PropType) {
     }
   };
 
-  // Handle drag-and-drop image upload
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const file = e.dataTransfer.files?.[0];
@@ -43,15 +40,25 @@ function UploadImage({ optionalText, id, type, accept }: PropType) {
     }
   };
 
-  // Allow dropping files by preventing the default behavior
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+  };
+
+  const removeImage = () => {
+    setImagePreview(null);
   };
 
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
       {imagePreview ? (
-        <div className="mt-4">
+        <div className="relative mt-4">
+          <button
+            onClick={removeImage}
+            className="absolute top-0 right-0 w-[1em] h-[1em] flex justify-center items-center text-xl bg-red-500 text-white rounded-full p-1 transform -translate-y-1/2 translate-x-1/2 hover:bg-red-600"
+            aria-label="Remove image"
+          >
+            <Icon icon="close" customStyle="fill-white scale-75" />
+          </button>
           <img
             src={imagePreview}
             alt="Preview"
@@ -66,24 +73,24 @@ function UploadImage({ optionalText, id, type, accept }: PropType) {
             accept={accept}
             onChange={handleFileChange}
             className="hidden"
-            required
+            required={required}
           />
           <div
             className="flex flex-col items-center justify-center border-2 border-dashed text-gray-500 text-lg text-center p-8 gap-5 cursor-pointer w-full"
             onDrop={handleDrop}
             onDragOver={handleDragOver}
-            onClick={() => document.getElementById("image-input")?.click()}
+            onClick={() => document.getElementById(id)?.click()}
             onKeyDown={(e) => {
-              // Add logic to handle keypress (e.g., Enter or Spacebar)
               if (e.key === "Enter" || e.key === " ") {
-                document.getElementById("image-input")?.click();
+                document.getElementById(id)?.click();
               }
             }}
-            role="button" // Make the div semantically a button
-            tabIndex={0} // Make it focusable
+            role="button"
+            tabIndex={0}
           >
             <p>
-              * Drag & Drop your {optionalText} image here or click to browse
+              {required ? "*" : "(Optional) "}Drag & Drop your {optionalText} image here or
+              click to browse
             </p>
             <p>
               {" "}

@@ -38,6 +38,7 @@ function IndieGamesHeaderForm() {
         type="file"
         accept="image/*"
         optionalText="game's promotional"
+        required={true}
       />
       <IndieTOSCheckbox id="indie-terms-one" />
       <SaveAndSubmit />

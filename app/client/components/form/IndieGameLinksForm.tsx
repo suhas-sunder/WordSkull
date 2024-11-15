@@ -35,7 +35,7 @@ function IndieGameLinksForm() {
       </div>
       <div className="flex flex-col gap-5 text-lg">
         <h3 className="whitespace-nowrap font-lora w-full justify-center items-center text-center">
-          Social Media Links (Optional)
+          Social Media Links (Optional - 255 chars max)
         </h3>
         {socialsData.map((link) => (
           <Fragment key={link.key}>

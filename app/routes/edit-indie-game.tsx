@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { ActionFunctionArgs, Link } from "react-router-dom";
 import { useTheme } from "../client/components/context/ThemeContext";
 import { useState } from "react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
@@ -10,8 +10,18 @@ import IndieGameDetailsForm from "../client/components/form/IndieGameDetailsForm
 import IndieGameArticlesForm from "../client/components/form/IndieGameArticlesForm";
 import IndieGameSettingsForm from "../client/components/form/IndieGameSettingsForm";
 
+export function loader() {
+  return null;
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  const body = await request.formData();
+  console.log(body);
+  return null;
+}
+
 export default function EditIndieGame() {
-  const [showPassword] = useState(false);
+  const [showEditMenu] = useState(true);
 
   const { darkThemeActive } = useTheme();
 
@@ -27,13 +37,13 @@ export default function EditIndieGame() {
             darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
           } w-full z-1  flex justify-center items-center flex-col md:flex-row text-5xl text-center mt-1 leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
         >
-          {showPassword
+          {showEditMenu
             ? "Login: Edit Your Game's Page"
             : "Your Game's Page Header"}
         </h1>
       </header>
       <main className="flex flex-col gap-5 justify-center items-center w-full max-w-[1200px]">
-        {showPassword ? (
+        {showEditMenu ? (
           <IndieLoginForm />
         ) : (
           <div className="flex flex-col w-full max-w-[800px] mx-auto tracking-wider px-5 mt-2">

@@ -7,7 +7,7 @@ function IndieGameSettingsForm() {
       className="flex flex-col gap-8 justify-center items-center"
     >
       <h2 className="flex py-2 text-4xl font-lora text-center w-full justify-center items-center">
-        Account Settings (Optional?)
+        Account Settings
       </h2>
       <button
         type="submit"
