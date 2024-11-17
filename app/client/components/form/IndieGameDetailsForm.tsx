@@ -9,6 +9,12 @@ function IndieGameDetailsForm() {
       method="post"
       className="flex flex-col gap-8 mt-10 font-lato tracking-wider"
     >
+       <input
+        type="text"
+        id="placeholder-indie-game-details"
+        name="placeholder-indie-game-details"
+        className="hidden"
+      />
       <h2 className="flex py-2 text-4xl font-lora text-center w-full justify-center items-center">
         Additional Game Details (Optional)
       </h2>

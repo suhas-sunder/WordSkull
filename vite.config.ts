@@ -18,6 +18,16 @@ export default ({ mode }: { mode: string }) => {
         protocol: "ws",
         host: "localhost",
       },
+      proxy:
+        mode === "development"
+          ? {
+              "/v1/api": {
+                target: "http://localhost:3300", // Backend server running on port 3300 (adjust as needed)
+                changeOrigin: true,
+                secure: false,
+              },
+            }
+          : {},
     },
     plugins: [
       mdx(),

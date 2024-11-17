@@ -17,6 +17,12 @@ function IndieGameLinksForm() {
       method="post"
       className="flex flex-col gap-8 mt-10 font-lato tracking-wider"
     >
+      <input
+        type="text"
+        id="placeholder-indie-game-links"
+        name="placeholder-indie-game-links"
+        className="hidden"
+      />
       <div className="flex flex-col gap-5 text-lg">
         <h3 className="whitespace-nowrap font-lora w-full justify-center items-center text-center">
           Links To Your Game (Optional)

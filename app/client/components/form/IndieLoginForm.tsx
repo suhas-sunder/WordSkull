@@ -1,6 +1,7 @@
 import { Form } from "@remix-run/react";
 import { useState } from "react";
 import Icon from "../utils/other/Icon";
+import SaveAndSubmit from "../ui/interactive/SaveAndSubmit";
 
 function IndieLoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -8,9 +9,15 @@ function IndieLoginForm() {
   return (
     <Form
       method="post"
-      className="flex flex-col gap-8 mt-10 font-lato tracking-wider"
+      className="flex flex-col gap-10 mt-10 font-lato tracking-wider  min-w-[300px]"
     >
-      <div className="flex gap-5 justify-center items-center text-xl">
+      <input
+        type="text"
+        id="placeholder-indie-game-login"
+        name="placeholder-indie-game-login"
+        className="hidden"
+      />
+      <div className="flex gap-5 text-xl w-full">
         <label htmlFor="username" className="sr-only">
           Username
         </label>
@@ -19,7 +26,8 @@ function IndieLoginForm() {
           name="username"
           id="username"
           placeholder="Username"
-          className="border-2 rounded-md px-2 py-1"
+          required
+          className="flex w-full border-2 rounded-md px-2 py-1"
         />
       </div>
       <div className="flex relative w-full min-h-10">
@@ -30,6 +38,7 @@ function IndieLoginForm() {
           type={showPassword ? "text" : "password"}
           name="password"
           id="password"
+          required
           className="flex border-2 rounded-md px-2 py-1 w-full"
           placeholder="Password"
         />
@@ -45,6 +54,7 @@ function IndieLoginForm() {
           )}
         </button>
       </div>
+      <SaveAndSubmit />
     </Form>
   );
 }

@@ -15,7 +15,7 @@ describe("Axios instance creation in trackingAPI", () => {
     (import.meta.env as any).MODE = "production";
 
     // Re-import the instance to pick up the new environment variable
-    instance = (await import("../trackingAPI")).default;
+    instance = (await import("../submissionAPI")).default;
 
     expect(instance.defaults.baseURL).toBe(
       "https://wordskull.com/v1/api/tracking"
@@ -27,7 +27,7 @@ describe("Axios instance creation in trackingAPI", () => {
     (import.meta.env as any).MODE = "development"; // Default to development
     (import.meta.env as any).VITE_PORT = "3200"; // Set a default port
 
-    instance = (await import("../trackingAPI")).default;
+    instance = (await import("../submissionAPI")).default;
 
     expect(instance.defaults.baseURL).toBe(
       "http://localhost:3200/v1/api/tracking"
