@@ -4,11 +4,11 @@ import { dirname, join } from "path";
 import { createRequestHandler } from "@remix-run/express";
 import * as build from "./build/server/index.js"; // Import the build object
 import cors from "cors";
-import helmet from "helmet";
 import { xss } from "express-xss-sanitizer";
 import hpp from "hpp";
 import dotenv from "dotenv";
-import trackingRouter from "./server_routes/trackingRouter.js";
+import submissionRouter from "./server_routes/submissionRouter.js";
+import accountRouter from "./server_routes/accountRouter.js";
 import crypto from "crypto"; // For generating nonces
 
 dotenv.config({ path: "./.env" });
@@ -26,71 +26,16 @@ app.use((req, res, next) => {
   next();
 });
 
-// Set security HTTP headers with relaxed CSP, allowing everything from specified domains
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'", "*"], // Allow everything from specified domains
-        scriptSrc: [
-          "'self'",
-          "*", // Allow all scripts from specified domains
-          "'unsafe-inline'", // Allow inline scripts (for testing)
-          "'unsafe-eval'", // Allow eval() (for testing)
-        ],
-        styleSrc: [
-          "'self'",
-          "*", // Allow all styles from specified domains
-          "'unsafe-inline'", // Allow inline styles
-        ],
-        imgSrc: [
-          "'self'",
-          "*", // Allow all images from specified domains
-          "data:", // Allow data URIs for images
-        ],
-        connectSrc: [
-          "'self'",
-          "*", // Allow all connections from specified domains
-        ],
-        fontSrc: [
-          "'self'",
-          "*", // Allow all fonts from specified domains
-        ],
-        frameSrc: ["'self'"],
-        objectSrc: ["'self'"],
-        mediaSrc: ["'self'"],
-        childSrc: ["'self'"],
-        manifestSrc: ["'self'"],
-        workerSrc: ["'self'"],
-        scriptSrcElem: [
-          "'self'",
-          "*", // Allow all scripts from specified domains
-          "'unsafe-inline'", // Allow inline scripts in script elements
-          "'unsafe-eval'", // Allow eval() (for testing)
-        ],
-        styleSrcElem: [
-          "'self'",
-          "*", // Allow all styles from specified domains
-          "'unsafe-inline'", // Allow inline styles in style elements
-        ],
-        upgradeInsecureRequests: [], // Allow mixed content
-      },
-    },
-    crossOriginEmbedderPolicy: false,
-    crossOriginOpenerPolicy: false,
-    crossOriginResourcePolicy: false,
-  })
-);
-
 // Middleware for CORS configuration
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
-      "https://emojikitchengame.com",
-      "https://www.emojikitchengame.com",
-      "emojikitchengame.com",
-      "www.emojikitchengame.com",
+      "http://localhost:3300",
+      "http://localhost:5174",
+      "https://wordskull.com",
+      "https://www.wordskull.com",
+      "wordskull.com",
+      "www.wordskull.com",
     ],
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true,
@@ -111,7 +56,8 @@ app.use(hpp());
 app.use(express.static(join(__dirname, "build/client")));
 
 // Routes
-app.use(`/${apiVersion}/api/tracking`, trackingRouter);
+app.use(`/${apiVersion}/api/account`, accountRouter);
+app.use(`/${apiVersion}/api/submission`, submissionRouter);
 
 // Handle all other routes using the Remix request handler
 app.all("*", createRequestHandler({ build })); // Use the build object

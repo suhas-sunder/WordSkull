@@ -19,7 +19,7 @@ function IndieTOSCheckbox({ id }: PropType) {
             darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
           } hover:text-amber-600 font-lora`}
         >
-          Terms and Conditions
+          game submission Terms and Conditions
         </Link>
       </label>
     </div>

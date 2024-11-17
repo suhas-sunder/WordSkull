@@ -9,6 +9,12 @@ function IndieGameYTForm() {
       method="post"
       className="flex flex-col gap-8 mt-10 font-lato tracking-wider"
     >
+      <input
+        type="text"
+        id="placeholder-indie-game-youtube"
+        name="placeholder-indie-game-youtube"
+        className="hidden"
+      />
       <h2 className="flex py-2 text-4xl font-lora text-center w-full justify-center items-center">
         YouTube Game Trailer (Optional)
       </h2>

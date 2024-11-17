@@ -7,9 +7,10 @@ interface PropType {
   type: string;
   accept: string;
   required?: boolean;
+  setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
 }
 
-function UploadImage({ optionalText, id, type, accept, required }: PropType) {
+function UploadImage({ optionalText, id, type, accept, required, setSelectedFile }: PropType) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const validateAndPreview = (file: File) => {
@@ -21,6 +22,7 @@ function UploadImage({ optionalText, id, type, accept, required }: PropType) {
     const reader = new FileReader();
     reader.onload = () => {
       setImagePreview(reader.result as string);
+      setSelectedFile(file);
     };
     reader.readAsDataURL(file);
   };
@@ -44,8 +46,10 @@ function UploadImage({ optionalText, id, type, accept, required }: PropType) {
     e.preventDefault();
   };
 
+
   const removeImage = () => {
     setImagePreview(null);
+    setSelectedFile(null);
   };
 
   return (
@@ -70,10 +74,10 @@ function UploadImage({ optionalText, id, type, accept, required }: PropType) {
           <input
             type={type}
             id={id}
+            name={id}
             accept={accept}
             onChange={handleFileChange}
             className="hidden"
-            required={required}
           />
           <div
             className="flex flex-col items-center justify-center border-2 border-dashed text-gray-500 text-lg text-center p-8 gap-5 cursor-pointer w-full"

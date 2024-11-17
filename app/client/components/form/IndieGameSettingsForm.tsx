@@ -6,6 +6,12 @@ function IndieGameSettingsForm() {
       method="post"
       className="flex flex-col gap-8 justify-center items-center"
     >
+       <input
+        type="text"
+        id="placeholder-indie-game-settings"
+        name="placeholder-indie-game-settings"
+        className="hidden"
+      />
       <h2 className="flex py-2 text-4xl font-lora text-center w-full justify-center items-center">
         Account Settings
       </h2>

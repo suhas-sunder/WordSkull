@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
 
-function Error() {
+// Accepting status and message as props to handle dynamic error content
+function Error({ status, message }: { status: number; message: string }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-3 bg-gray-100 text-center">
+    <div className="flex flex-col items-center justify-center min-h-screen gap-3 text-center">
       <span className="text-9xl mb-8 animate-scalePulse">☠️</span>
-      <h1 className="text-6xl font-bold text-rose-500">Uh Oh, 404</h1>
+      <h1 className="text-6xl font-bold text-rose-500">
+        Uh Oh, {status}
+      </h1>
       <h2 className="mt-4 text-2xl font-semibold text-gray-800">
-        Page Not Found...
+        {message}
       </h2>
       <p className="mt-2 text-gray-600">
-        The page you are looking for does not exist.
+        Please check the URL that you are trying to access.
       </p>
       <Link
         to="/"
