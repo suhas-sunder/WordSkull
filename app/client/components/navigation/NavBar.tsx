@@ -85,17 +85,17 @@ function MainLinks({
         onClick={() => setDarkThemeActive(!darkThemeActive)}
         className={`${
           darkThemeActive
-            ? " bg-slate-500 hover:bg-ivory border-slate-400"
-            : " bg-slate-100 hover:bg-slate-500 border-skull-brown"
-        } transition-colors duration-[600ms] group justify-center items-center border-2 py-1/2 ml-2 cursor-pointer hover:border-skull-brown hover:border-opacity-60 flex overflow-hidden rounded-full`}
+            ? " bg-slate-600 hover:bg-skull-brown"
+            : " bg-skull-brown/90 hover:bg-slate-600"
+        } transition-colors duration-[600ms] flex justify-center items-center w-[3.7em] h-[2em] pt-[0.1em] ml-2 cursor-pointer hover:border-skull-brown hover:border-opacity-60 overflow-hidden rounded-full group`}
       >
         <span
           title="Toggle 'Dark' theme"
           className={`${
             darkThemeActive
-              ? "transition-all duration-[600ms] group-hover:text-2xl group-hover:pr-1 pr-0 text-sm -translate-x-2 group-hover:translate-x-1"
+              ? "transition-all duration-[600ms] text-sm group-hover:text-2xl group-hover:pr-1 pr-0 -translate-x-2 group-hover:translate-x-1"
               : "transition-all duration-[600ms] group-hover:text-sm group-hover:pr-0 pr-1 text-2xl translate-x-1 group-hover:-translate-x-2"
-          }`}
+          } pointer-events-auto`}
         >
           🌞
         </span>
@@ -105,7 +105,7 @@ function MainLinks({
             darkThemeActive
               ? "transition-all duration-[600ms] group-hover:text-sm group-hover:pl-0 pl-1 text-2xl group-hover:translate-x-2 translate-x-0"
               : "transition-all duration-[600ms] group-hover:text-2xl group-hover:pl-1 pl-0 text-sm group-hover:translate-x-0 translate-x-2"
-          }`}
+          } pointer-events-auto`}
         >
           🌝
         </span>
@@ -138,8 +138,8 @@ export default function NavBar() {
   return (
     <nav
       className={`${styles.nav} ${
-        darkThemeActive ? "border-b-slate-400" : "border-b-skull-brown"
-      } fixed left-0 right-0 top-0 font-nunito border-b-2 text-base tracking-widest z-[100] text-skull-super-dark-brown ${
+        darkThemeActive ? "border-b-slate-400/20" : "border-b-skull-brown/20"
+      } fixed left-0 right-0 top-0 font-nunito border-b-2 p-[0.2em] text-base tracking-widest z-[100] text-skull-super-dark-brown ${
         darkThemeActive ? "bg-slate-900" : "bg-ivory"
       }`}
     >

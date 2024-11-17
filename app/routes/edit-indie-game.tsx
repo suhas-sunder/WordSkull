@@ -154,7 +154,7 @@ export default function EditIndieGame() {
           } w-full z-1  flex justify-center items-center flex-col md:flex-row text-5xl text-center mt-1 leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
         >
           {location.pathname === "/edit-indie-game"
-            ? "Login: Edit Your Game's Page"
+            ? "Edit Your Game's Page"
             : "Your Game's Page Header"}
         </h1>
       </header>
