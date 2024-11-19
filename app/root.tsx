@@ -104,12 +104,12 @@ export function Body({ children }: { children: React.ReactNode }) {
 
   return (
     <body
-      className={`pt-6 animate-fadeIn transition-colors duration-[600ms] ${
+      className={`pt-6 transition-colors duration-[600ms] ${
         darkThemeActive ? "bg-slate-900" : "bg-ivory"
       }`}
     >
       <NavBar />
-      <div>{children}</div>
+      <div className="min-h-[100vh]">{children}</div>
       <ScrollRestoration />
       <Scripts />
       <Footer />

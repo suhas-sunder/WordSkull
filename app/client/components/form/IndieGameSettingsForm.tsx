@@ -6,7 +6,7 @@ function IndieGameSettingsForm() {
       method="post"
       className="flex flex-col gap-8 justify-center items-center"
     >
-       <input
+      <input
         type="text"
         id="placeholder-indie-game-settings"
         name="placeholder-indie-game-settings"
@@ -17,12 +17,20 @@ function IndieGameSettingsForm() {
       </h2>
       <button
         type="submit"
+        name="logout"
+        className="flex justify-center items-center rounded-md bg-skull-dark-brown text-white px-4 py-2 w-[20em] hover:bg-skull-brown whitespace-nowrap"
+      >
+        Logout
+      </button>
+      <button
+        type="button"
         className="flex justify-center items-center rounded-md bg-skull-dark-brown text-white px-4 py-2 w-[20em] hover:bg-skull-brown whitespace-nowrap"
       >
         Update Password
       </button>
       <button
         type="submit"
+        name="delete-account"
         className="flex justify-center items-center rounded-md bg-rose-600 text-white px-4 py-2 w-[20em] hover:bg-rose-500 whitespace-nowrap"
       >
         Delete Account

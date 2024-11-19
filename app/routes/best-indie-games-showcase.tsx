@@ -26,7 +26,7 @@ function About() {
     <div
       className={`${
         darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
-      } flex justify-center flex-col items-center mt-[3em]`}
+      } flex animate-fadeIn justify-center flex-col items-center mt-[3em]`}
     >
       <header className="flex flex-col justify-center items-center gap-3 mb-3 mx-5 text-center">
         <h1

@@ -1,13 +1,21 @@
 import express from "express";
 import { pool } from "./config/dbConfig.js";
-// import validator from "validator";
+import validator from "validator";
 
 const router = express.Router();
 
-// Utility function for sanitizing inputs
-// const sanitizeInput = (input) => {
-//   return validator.escape(input);
-// };
+const validateRequestBody = (fields, body) => {
+  for (const field of fields) {
+    if (!body[field]) {
+      return { error: `${field} is required` };
+    }
+    if (typeof body[field] !== "string") {
+      return { error: `${field} must be a string` };
+    }
+  }
+  return null;
+};
+
 
 // Middleware to log request details (only in development)
 router.use((req, res, next) => {
@@ -95,6 +103,51 @@ router.post("/view-count", async (req, res) => {
   }
 });
 
+// Utility function for sanitizing inputs
+const sanitizeInput = (input) => {
+  return validator.escape(input);
+};
 
+
+router.post("/update-indie-header", async (req, res) => {
+  try {
+    const { username, title, description } = req.body.data;
+
+    console.log({ username, title, description });
+
+    // Validate input
+    const validationError = validateRequestBody(
+      ["username", "title", "description"],
+      req.body.data
+    );
+
+    if (validationError) {
+      return res.status(400).json({ error: validationError.error });
+    }
+
+    // Sanitize input
+    const sanitizeUsername = sanitizeInput(username);
+    const sanitizeTitle = sanitizeInput(title);
+    const sanitizeDescription = sanitizeInput(description);
+
+    // Update database
+    const result = await pool.query(
+      `UPDATE indiedevs
+       SET game_title = $2, game_description = $3
+       WHERE username = $1
+       RETURNING *`,
+      [sanitizeUsername, sanitizeTitle, sanitizeDescription]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "username not found" });
+    }
+
+    res.status(200).json({ message: "Header details updated successfully!" });
+  } catch (err) {
+    console.error("Update Indie Header Error:", err.message);
+    res.status(500).json({ error: "Server Error: Could not update header!" });
+  }
+});
 
 export default router;

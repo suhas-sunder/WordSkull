@@ -4,6 +4,7 @@ import IndieGameLinksForm from "../client/components/form/IndieGameLinksForm";
 import IndieGameSettingsForm from "../client/components/form/IndieGameSettingsForm";
 import IndieGamesHeaderForm from "../client/components/form/IndieGamesHeaderForm";
 import IndieGameYTForm from "../client/components/form/IndieGameYTForm";
+import submissionAPI from "../client/components/api/submissionAPI";
 import sharp from "sharp";
 import {
   S3Client,
@@ -11,7 +12,13 @@ import {
   GetObjectCommand,
 } from "@aws-sdk/client-s3";
 
-import { ActionFunctionArgs, json, LoaderFunction } from "@remix-run/node";
+import {
+  ActionFunctionArgs,
+  CookieOptions,
+  createCookie,
+  json,
+  LoaderFunction,
+} from "@remix-run/node";
 import jwt from "jsonwebtoken";
 import { parse } from "cookie"; // Import cookie parser
 import { MyJwtPayload } from "../client/types/authTypes";
@@ -277,17 +284,47 @@ export async function action({ request }: ActionFunctionArgs) {
   const detailsForm = formData.get("placeholder-indie-game-details");
   const settingsForm = formData.get("placeholder-indie-game-settings");
   const youtubeForm = formData.get("placeholder-indie-game-youtube");
+  const headerImage = formData.get("main-header-img") as File;
 
   // Handle header form
   if (headerForm !== null) {
-    const headerTitle = formData.get("game-name") as File;
-    const headerDescription = formData.get("brief-game-description") as File;
-    const headerImage = formData.get("main-header-img") as File;
+    const title = formData.get("game-name");
+    const description = formData.get("brief-game-description");
 
-    if (!headerTitle || !headerDescription || !headerImage) {
+    if (!title || !description) {
       return json({ error: "All fields are required" }, { status: 400 });
     }
 
+    try {
+      // Upload header title and description to database
+      const response = await submissionAPI.post(`/update-indie-header`, {
+        method: "POST",
+        responseType: "arraybuffer",
+        data: { username: usernameInUrl, title, description },
+      });
+      if (response.status === 200) {
+        return json({
+          message:
+            "Header title and description processed and uploaded successfully",
+        });
+      } else {
+        console.error("Header title and description upload failed");
+        return json(
+          { error: "Failed to upload header title and description" },
+          { status: 500 }
+        );
+      }
+    } catch (error) {
+      console.error("Header data processing error:", error);
+      return json(
+        { error: "Failed to upload header title and description" },
+        { status: 500 }
+      );
+    }
+  }
+
+  // Handle header image upload to R2
+  if (headerImage !== null) {
     const allowedFormats = ["image/jpeg", "image/png", "image/gif"];
     if (!allowedFormats.includes(headerImage.type)) {
       return json({ error: "Invalid image format" }, { status: 400 });
@@ -308,36 +345,6 @@ export async function action({ request }: ActionFunctionArgs) {
 
       // Upload the WebP image to R2 directly using HTTP request
       await uploadToR2(imageObjectKey, webpBuffer, "image/webp", usernameInUrl);
-
-      //Upload title and description to database
-
-      // Check for JSON file and handle upload
-      // const jsonFile = formData.get("game-data-json") as File;
-
-      // if (jsonFile) {
-      //   try {
-      //     // Parse the JSON file content
-      //     const jsonBuffer = await jsonFile.arrayBuffer();
-      //     const jsonContent = Buffer.from(jsonBuffer);
-
-      //     // Define the file path and key for the JSON
-      //     const jsonObjectKey = `username-header-img`;
-
-      //     // Upload the JSON file to R2 directly using HTTP request
-      //     await uploadToR2(jsonObjectKey, jsonContent, "application/json");
-      //     console.log("JSON file successfully uploaded to R2:", jsonObjectKey);
-      //   } catch (jsonError) {
-      //     console.error("JSON file processing failed:", jsonError);
-      //     return json(
-      //       { error: "JSON file processing failed" },
-      //       { status: 500 }
-      //     );
-      //   }
-      // }
-
-      return json({
-        message: "Image and JSON processed and uploaded successfully",
-      });
     } catch (error) {
       console.error("Image processing failed:", error);
       return json({ error: "Image processing failed" }, { status: 500 });
@@ -348,6 +355,8 @@ export async function action({ request }: ActionFunctionArgs) {
   if (linksForm !== null) {
     //Import json file from r2 bucket if file exists in https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com/wordskull/indiegames/${username}/game-data.json
     //If it exists, update it with urls. If not, create new.
+
+    // Check for JSON file and handle upload
 
     return json({ message: "Form submitted successfully" });
   }
@@ -362,12 +371,77 @@ export async function action({ request }: ActionFunctionArgs) {
 
   //Handle details form
   if (detailsForm !== null) {
-    //Save data to database
-    return json({ message: "Form submitted successfully" });
+    const details = {
+      developer: formData.get("developer") || "",
+      publisher: formData.get("publisher") || "",
+      genre: formData.get("genre") || "",
+      platforms: formData.get("flatforms") || "",
+      publishers: formData.get("publisher-name") || "",
+      price: formData.get("price") || "",
+      release: formData.get("release") || "",
+      coop: formData.get("coop") || false,
+      achievements: formData.get("achievements") || false,
+      demo: formData.get("demo") || false,
+      controller: formData.get("controller") || false,
+      tags: formData.get("tags") || "",
+    };
+
+    try {
+      // Upload header title and description to database
+      const response = await submissionAPI.post(`/update-indie-header`, {
+        method: "POST",
+        responseType: "arraybuffer",
+        data: { username: usernameInUrl, ...details },
+      });
+      if (response.status === 200) {
+        return json({
+          message:
+            "Additional game details processed and uploaded successfully",
+        });
+      } else {
+        console.error("Additional game details upload failed");
+        return json(
+          { error: "Failed to upload additional game details" },
+          { status: 500 }
+        );
+      }
+    } catch (error) {
+      console.error("Header data processing error:", error);
+      return json(
+        { error: "Failed to upload additional game details" },
+        { status: 500 }
+      );
+    }
   }
 
-  //Handle settings form
+  //Handle account settings form
   if (settingsForm !== null) {
+    if (formData.get("logout") !== null) {
+      // Define shared cookie options
+      const cookieOptions: CookieOptions = {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        path: "/",
+      };
+
+      // Recreate cookies with matching attributes
+      const jwtCookie = createCookie("jwt", cookieOptions);
+      const usernameCookie = createCookie("username", cookieOptions);
+
+      // Clear the cookies by setting `maxAge` to 0
+      return redirect("/edit-indie-game", {
+        headers: new Headers([
+          ["Set-Cookie", await jwtCookie.serialize("", { maxAge: 0 })],
+          ["Set-Cookie", await usernameCookie.serialize("", { maxAge: 0 })],
+        ]),
+      });
+    } else if (formData.get("delete") !== null) {
+      return json({ message: "Account deleted successfully" });
+    } else if (formData.get("change-password") !== null) {
+      return json({ message: "Password changed successfully" });
+    }
+
     //Save data to database
     return json({ message: "Form submitted successfully" });
   }

@@ -105,7 +105,7 @@ function SocialLinks() {
     },
   ];
   return (
-    <div className="flex flex-col gap-8 w-full justify-center items-center">
+    <div className="flex flex-col gap-8 w-full justify-center items-center pb-[5em]">
       <h2
         className={`${
           darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
@@ -143,6 +143,7 @@ function SocialLinks() {
           </li>
         ))}
       </ul>
+    
     </div>
   );
 }

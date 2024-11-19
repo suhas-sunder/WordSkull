@@ -36,7 +36,7 @@ function IndieGamesHeaderForm() {
     <Form
       method="post"
       className="flex flex-col w-full gap-5"
-      onSubmit={handleSubmit} 
+      onSubmit={handleSubmit}
     >
       <input
         type="text"
@@ -69,6 +69,7 @@ function IndieGamesHeaderForm() {
                   Thank you 😊!
                   "
       />
+      {/* If image exist in R2 then show it and disable upload image until user clicks the cancel button. Then allow user to upload new image. This way, the submission form doesn't trigger a new image upload */}
       <UploadImage
         id="main-header-img"
         type="file"
