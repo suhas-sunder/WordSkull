@@ -19,7 +19,6 @@ export async function action({ request }: ActionFunctionArgs) {
   try {
     // Extract form data
     const formData = await request.formData();
-    console.log("formData", formData);
 
     const username = formData.get("username");
     const password = formData.get("password");
@@ -69,7 +68,7 @@ export default function CreateIndieShowcase() {
   const { darkThemeActive } = useTheme();
 
   return (
-    <div className="flex flex-col gap-3 justify-center items-center w-full mt-[3em]">
+    <div className="flex animate-fadeIn flex-col gap-3 justify-center items-center w-full mt-[3em]">
       <header className="flex flex-col justify-center items-center gap-3 mb-3 mx-5 text-center">
         <h1
           className={`${

@@ -11,8 +11,8 @@ import Skull_1_Webp from "../client/assets/images/skull_1.webp";
 import Skull_2_Webp from "../client/assets/images/skull_2.webp";
 import Skull_3_Webp from "../client/assets/images/skull_3.webp";
 import Skull_4_Webp from "../client/assets/images/skull_4.webp";
-import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
 import SocialLinks from "../client/components/navigation/SocialLinks";
+import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
 
 export const meta: MetaFunction = () => {
   return [
@@ -31,11 +31,11 @@ function Header() {
   const { darkThemeActive } = useTheme();
 
   return (
-    <header className="flex flex-col max-w-[1200px] text-center justify-center items-center mb-16">
+    <header className="flex flex-col max-w-[1200px] text-center justify-center items-center mb-12">
       <h1
         className={`${
           darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
-        } w-full z-1 flex-row flex justify-center items-center text-4xl sm:text-5xl text-center mt-9 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-8 sm:mb-3 font-lora tracking-wide`}
+        } w-full z-1 flex-row flex justify-center items-center text-4xl sm:text-5xl text-center mt-9 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-9  font-lora tracking-wide`}
       >
         <span className="whitespace-nowrap">
           <span className="inline-flex">W</span>
@@ -44,28 +44,29 @@ function Header() {
         </span>
         <span className="inline-flex">Skull</span>
       </h1>
-      <p
-        className={`${
-          darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
-        } sm:text-xl leading-relaxed sm:leading-relaxed font-lato sm:mb-3 mx-3 sm:mt-1 sm:mx-12`}
-      >
-        Fellow adventurer, sharpen your mind and wield the strongest weapon at
-        your disposal, your words! Conquer the skulls by completing epic word
-        and puzzle challenges. The dungeon awaits...
-      </p>
+      <div className="flex justify-center items-center w-full mt-10 sm:mt-0 scale-[.7]">
+        <SkullAnimation />
+      </div>
       <Link
         to={"#word-skull-classic"}
         className={`${
           darkThemeActive
             ? "bg-orange-700  hover:bg-amber-500"
             : "bg-pumpkin-orange  hover:bg-amber-600"
-        } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 py-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
+        } flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-4 mb-6 py-2 transition-colors duration-[600ms] tracking-widest leading-relaxed border-slate-300 hover:border-slate-400`}
       >
         Start Playing!
       </Link>
-      <div className="flex justify-center items-center w-full mt-14 mb-3 sm:mb-0">
-        <SkullAnimation />
-      </div>
+      <p
+        className={`${
+          darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
+        } sm:text-xl leading-relaxed sm:leading-loose font-lato sm:mb-3 mx-3 sm:mt-2 sm:mx-12`}
+      >
+        Welcome, fellow adventurer! It's time to embark on a quest to conquer
+        epic word and puzzle challenges and defeat the skulls. Sharpen your
+        vocabulary one word at a time by wielding the strongest weapon at your
+        disposal—your mind! The dungeon awaits...
+      </p>
     </header>
   );
 }
@@ -76,27 +77,29 @@ export default function Index() {
   const { darkThemeActive } = useTheme();
 
   return (
-    <div className="flex flex-col leading-relaxed tracking-wider mt-3 sm:mt-5 overflow-hidden justify-center items-center">
+    <div className="flex relative  animate-fadeIn flex-col leading-relaxed tracking-wider mt-3 sm:mt-5 overflow-hidden justify-center items-center">
       <Header />
       <main
         className={`${
           darkThemeActive && "text-white"
         } flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5  items-center mx-10`}
       >
-        <div className="flex flex-col flex-wrap justify-center gap-8 max-w-[1200px] items-center w-full ">
-          <div className="flex relative flex-col justify-center items-center gap-1">
-            <div id="word-skull-classic" className="absolute -top-14"></div>
-            <h2
+        <div className="flex flex-col-reverse flex-wrap justify-center gap-10 max-w-[1200px] items-center w-full ">
+          <div className="flex flex-col justify-center items-center gap-1">
+            <div id="word-skull-classic" className="absolute -top-20"></div>
+            {/* <h2
               className={`${
-                darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                darkThemeActive ? "text-white" : "text-skull-dark-brown"
               } font-lora text-2xl `}
             >
               WordSkull Classic
-            </h2>
+            </h2> */}
             <p
               className={`${
-                darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
-              }  text-base leading-loose font-lato mx-5 sm:mx-8 text-center`}
+                darkThemeActive
+                  ? "text-slate-300"
+                  : "text-skull-super-dark-brown"
+              }  text-lg leading-loose font-lato mx-5 sm:mx-8 text-center`}
             >
               Complete this word game puzzle by guessing the correct word for
               each row before your lives run out. Defeat the skulls to unlock

@@ -11,7 +11,7 @@ export const meta: MetaFunction = () => {
 
 export default function cookiespolicy() {
   return (
-    <div className="my-20 flex flex-col  mx-10 items-center justify-center gap-8 font-nunito text-skull-brown">
+    <div className="my-20 animate-fadeIn flex flex-col  mx-10 items-center justify-center gap-8 font-nunito text-skull-brown">
       <header className="max-w-[1200px]">
         <h1 className="mb-5 flex py-2 text-4xl">COOKIE POLICY</h1>
         <h2 className="flex py-2 text-2xl">Last updated August 02, 2024</h2>

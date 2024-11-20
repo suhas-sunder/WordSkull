@@ -60,8 +60,6 @@ export function loader({ request }: LoaderFunctionArgs) {
   }
 }
 
-
-
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   console.log("formData", formData);
@@ -145,7 +143,7 @@ export default function EditIndieGame() {
     <div
       className={`${
         darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
-      } flex justify-center flex-col items-center mt-[3em]`}
+      } flex animate-fadeIn justify-center flex-col items-center mt-[3em]`}
     >
       <header className="flex flex-col justify-center items-center gap-3 mb-3 mx-5 text-center">
         <h1
@@ -214,28 +212,29 @@ export default function EditIndieGame() {
           Final Notes
         </h2>
         <p>
-          Just as a precaution, submissions for all sections are limited to 50
-          per day collectively for each user, which should be plenty. If you
-          somehow manage to reach the limit, please wait a day and try again.
-          Additionally, submissions may take some time to process for certain
-          sections so don&apos;t leave the page until the submission is
-          complete. Delays will likely occur when images are involved, because
-          the image is resized and optimized for web before being uploaded to
-          the back-end while also processing the text content. Images will
-          likely be resized to 640px by 360px, so a 16:9 aspect ratio is
-          recommended for best results. Ideally, your image should be in PNG or
-          JPEG format. You can experiment with other formats if you like, but
-          there&apos;s a chance it may not be processed correctly. I&apos;ve
-          added logic to handle GIFs which should work in most cases, but I have
-          not tested it extensively.
+          The header section is mandatory. If you haven&apos;t filled out the
+          header section of the form and submitted it, your game will not show
+          up on the{" "}
+          <Link
+            to="/best-indie-games-showcase"
+            className={`${
+              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
+            } hover:text-amber-600 font-lora`}
+          >
+            Indie Games page
+          </Link>
+          , even if you save changes to other sections. Submissions may take
+          some time to process for certain sections so don&apos;t leave the page
+          until the submission is complete. All images are resized and optimized
+          for web before being uploaded to the back-end. They will likely be
+          resized to 640px by 360px, so a 16:9 aspect ratio is recommended for
+          best results. Ideally, your image should be in PNG or JPEG format. You
+          can experiment with other formats if you prefer, but there&apos;s a
+          chance it may be rejected. I&apos;ve added logic to handle GIFs which
+          should work in most cases, but I have not tested it extensively.
         </p>
         <p>
-          Once you have submitted your game information, I may post a link to
-          your page on social media. If you don&apos;t want me to share it for
-          any reason, please let me know.
-        </p>
-        <p>
-          I&apos;m planning on displaying all games in random order on the{" "}
+          All games will be featured in random order on the{" "}
           <Link
             to="/best-indie-games-showcase"
             className={`${
@@ -245,8 +244,8 @@ export default function EditIndieGame() {
             Indie Games page
           </Link>
           , as well as, the sidebar on relevant pages. This way all contributors
-          get a fair chance at being featured. I won&apos;t put priority towards
-          any game on the{" "}
+          get a fair chance at being featured. There will be no favoritism
+          towards any game on the{" "}
           <Link
             to="/best-indie-games-showcase"
             className={`${
@@ -255,18 +254,10 @@ export default function EditIndieGame() {
           >
             Indie Games page
           </Link>
-          , including my own. Additionally, I will not be accepting paid
-          promotions to have any games featured above others.
+          .
         </p>
         <p>
-          Eventually, depending on how things go with my games, I may monetize
-          it with ads. I haven&apos;t thought that far ahead to be honest. Just
-          working on getting my word and puzzle games finished. However, I
-          don&apos;t want it to come as a surprise if I do decide to monetize my
-          site in the future, so this is the disclaimer.{" "}
-        </p>
-        <p>
-          Thank you for your submission. If my submission form is missing any
+          Thank you for your submission. If the submission form is missing any
           features, or if you have any questions or concerns, please don&apos;t
           hesitate to{" "}
           <Link
@@ -289,14 +280,14 @@ export default function EditIndieGame() {
           !
         </p>
         <p>
-          You can view your{" "}
+          Once published, you can find your game on the{" "}
           <Link
-            to="/"
+            to="/best-indie-games-showcase"
             className={`${
               darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
-            indie game&apos;s featured page here
+            indie game&apos;s featured page
           </Link>
           !
         </p>

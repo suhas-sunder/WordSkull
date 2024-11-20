@@ -32,7 +32,7 @@ export default function NineLetterWords() {
   }, [matches]);
 
   return (
-    <div className="flex flex-col justify-center items-center mt-10">
+    <div className="flex animate-fadeIn flex-col justify-center items-center mt-10">
       <header>
         <h1 className="mt-[0.7em] text-5xl font-nunito text-skull-dark-brown mb-12">
           Words List - Word & Puzzle Games

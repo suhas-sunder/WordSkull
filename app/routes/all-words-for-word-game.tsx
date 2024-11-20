@@ -19,7 +19,7 @@ export const meta: MetaFunction = () => {
 export default function AllWordsForWordGame() {
   const { darkThemeActive } = useTheme();
   return (
-    <div className="flex flex-col justify-center items-center mt-10">
+    <div className="flex animate-fadeIn flex-col justify-center items-center mt-10">
       <header>
         <h1 className="mt-[0.7em] text-3xl font-nunito text-skull-dark-brown mb-12">
           Words List - All words used for word and Puzzle Games 🎉✨
