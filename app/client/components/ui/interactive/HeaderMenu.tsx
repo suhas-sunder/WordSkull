@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import Icon from "../../utils/other/Icon";
+import WordHistory from "./WordHistory";
 
 interface PropType {
   setShowGameOverMenu: (value: boolean) => void;
@@ -8,14 +9,27 @@ interface PropType {
   lettersPerSkull?: string;
   setShowSettings: (value: boolean) => void;
   setShowStats: (value: boolean) => void;
+  dispWordHistory: boolean;
+  setDispWordHistory: (
+    value: ((prevState: boolean) => boolean) | boolean
+  ) => void;
+  enteredWords: string[][];
+  currentRow: number;
+  wordsForSkull: string[];
+  isEnterPressed: boolean;
 }
 function HeaderMenu({
   setShowGameOverMenu,
   isGameOver,
   dontFade,
-  lettersPerSkull,
   setShowSettings,
-  setShowStats,
+  // setShowStats,
+  dispWordHistory,
+  setDispWordHistory,
+  enteredWords,
+  currentRow,
+  wordsForSkull,
+  isEnterPressed,
 }: PropType) {
   const location = useLocation();
 
@@ -23,38 +37,34 @@ function HeaderMenu({
     <div
       className={`${
         !dontFade && "animate-fadeIn"
-      } flex w-full items-center px-2 sm:mt-2 justify-center max-w-[700px] sm:mb-0 text-stone-500 font-lora leading-snug text-xs sm:text-base`}
+      } flex relative w-full items-center px-2 mt-5 mb-2 sm:mt-7 justify-between max-w-[700px] gap-5  text-stone-500 font-lora leading-snug text-xs sm:text-base`}
     >
-      <h1 className="flex w-full gap-1 items-center">
-        <span>W💀RD SKULL</span>
-        {lettersPerSkull && <span>({lettersPerSkull})</span>}
-      </h1>
       <ul className="flex gap-1 justify-center items-center">
         {isGameOver && (
           <li className="flex justify-center items-center">
             <button
               data-testid="results-button"
               onClick={() => setShowGameOverMenu(true)}
-              className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-orange-500 flex justify-center items-center"
+              className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
             >
               <Icon icon="flag" title="Results" />
             </button>
           </li>
         )}
-        <li className="flex justify-center items-center">
+        {/* <li className="flex justify-center items-center">
           <button
             data-testid="stats-button"
             onClick={() => setShowStats(true)}
-            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-orange-500 flex justify-center items-center"
+            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
           >
             <Icon icon="barGraph" title="Stats" />
           </button>
-        </li>
+        </li> */}
         <li className="flex justify-center items-center">
           <Link
             data-testid="instructions-hashlink"
             to={`${location?.pathname}#gameplay-instructions`}
-            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-orange-500 flex justify-center items-center"
+            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
           >
             <Icon icon="question" title="Rules" />
           </Link>
@@ -63,7 +73,56 @@ function HeaderMenu({
           <button
             data-testid="settings-button"
             onClick={() => setShowSettings(true)}
-            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-orange-500 flex justify-center items-center"
+            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
+          >
+            <Icon icon="settingSparkle" title="Settings" />
+          </button>
+        </li>
+      </ul>
+      <WordHistory
+        dispWordHistory={dispWordHistory}
+        setDispWordHistory={setDispWordHistory}
+        wordsForSkull={wordsForSkull}
+        currentRow={currentRow}
+        enteredWords={enteredWords}
+        isEnterPressed={isEnterPressed}
+      />
+      
+      <ul className="flex gap-1 justify-center items-center">
+        {isGameOver && (
+          <li className="flex justify-center items-center">
+            <button
+              data-testid="results-button"
+              onClick={() => setShowGameOverMenu(true)}
+              className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
+            >
+              <Icon icon="flag" title="Results" />
+            </button>
+          </li>
+        )}
+        {/* <li className="flex justify-center items-center">
+          <button
+            data-testid="stats-button"
+            onClick={() => setShowStats(true)}
+            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
+          >
+            <Icon icon="barGraph" title="Stats" />
+          </button>
+        </li> */}
+        <li className="flex justify-center items-center">
+          <Link
+            data-testid="instructions-hashlink"
+            to={`${location?.pathname}#gameplay-instructions`}
+            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
+          >
+            <Icon icon="question" title="Rules" />
+          </Link>
+        </li>
+        <li className="flex justify-center items-center">
+          <button
+            data-testid="settings-button"
+            onClick={() => setShowSettings(true)}
+            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
           >
             <Icon icon="settingSparkle" title="Settings" />
           </button>

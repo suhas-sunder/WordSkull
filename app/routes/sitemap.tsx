@@ -23,56 +23,56 @@ export default function Sitemap() {
       <main className="max-w-[1200px]  my-10 text-pumpkin-orange text-lg flex flex-col w-full">
         <ol className="flex  flex-col list-decimal font-nunito mr-auto gap-5 mb-5">
           <li>
-            <Link to="/" className=" hover:text-orange-500 flex mr-auto">
+            <Link to="/" className=" hover:text-amber-500 flex mr-auto">
               Word Skull (Home)
             </Link>
           </li>
           <li>
             <Link
               to="/best-indie-games-showcase"
-              className="hover: hover:text-orange-500"
+              className="hover: hover:text-amber-500"
             >
               Indie Games
             </Link>
           </li>
           <li>
-            <Link to="/blog" className="hover: hover:text-orange-500">
+            <Link to="/blog" className="hover: hover:text-amber-500">
               Blog
             </Link>
           </li>
           <li>
             <Link
               to="/board-game-reviews"
-              className="hover: hover:text-orange-500"
+              className="hover: hover:text-amber-500"
             >
               Board Game Reviews
             </Link>
           </li>
           <li>
-            <Link to="/faq" className="hover: hover:text-orange-500">
+            <Link to="/faq" className="hover: hover:text-amber-500">
               FAQ
             </Link>
           </li>
           <li>
             <Link
               to="/terms-of-service"
-              className="hover: hover:text-orange-500"
+              className="hover: hover:text-amber-500"
             >
               Terms of Service
             </Link>
           </li>
           <li>
-            <Link to="/cookies-policy" className="hover: hover:text-orange-500">
+            <Link to="/cookies-policy" className="hover: hover:text-amber-500">
               Cookies Policy
             </Link>
           </li>
           <li>
-            <Link to="/privacy-policy" className="hover: hover:text-orange-500">
+            <Link to="/privacy-policy" className="hover: hover:text-amber-500">
               Privacy Policy
             </Link>
           </li>
           <li>
-            <Link to="/wallpaper" className="hover: hover:text-orange-500">
+            <Link to="/wallpaper" className="hover: hover:text-amber-500">
               4K HD Wallpapers - Fantasy Themed
             </Link>
           </li>
@@ -80,7 +80,7 @@ export default function Sitemap() {
             <Link
               target="_blank"
               to="http://www.emojikitchengame.com/"
-              className="hover: hover:text-orange-500"
+              className="hover: hover:text-amber-500"
               rel="noreferrer noopenner"
             >
               Emoji Kitchen Game
@@ -90,7 +90,7 @@ export default function Sitemap() {
             <Link
               target="_blank"
               to="http://www.dragonmythology.com/"
-              className="hover: hover:text-orange-500"
+              className="hover: hover:text-amber-500"
               rel="noreferrer noopenner"
             >
               Dragon Mythology
@@ -100,7 +100,7 @@ export default function Sitemap() {
             <Link
               target="_blank"
               to="http://www.productivitygarden.com/"
-              className="hover: hover:text-orange-500"
+              className="hover: hover:text-amber-500"
               rel="noreferrer noopenner"
             >
               Productivity Garden
@@ -110,7 +110,7 @@ export default function Sitemap() {
             <Link
               target="_blank"
               to="https://freetypingcamp.com/"
-              className="hover: hover:text-orange-500"
+              className="hover: hover:text-amber-500"
               rel="noreferrer noopenner"
             >
               Free Typing Camp
@@ -119,7 +119,7 @@ export default function Sitemap() {
           <li>
             <Link
               to="/#word-skull-classic"
-              className=" hover:text-orange-500 flex mr-auto"
+              className=" hover:text-amber-500 flex mr-auto"
             >
               Word Skull Classic
             </Link>

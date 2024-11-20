@@ -10,6 +10,14 @@ interface PropType {
   lettersPerSkull?: string;
   dontFade?: boolean;
   setShowGameOverMenu: (value: boolean) => void;
+  dispWordHistory: boolean;
+  setDispWordHistory: (
+    value: ((prevState: boolean) => boolean) | boolean
+  ) => void;
+  enteredWords: string[][];
+  currentRow: number;
+  wordsForSkull: string[];
+  isEnterPressed: boolean;
 }
 
 function Header({
@@ -18,6 +26,12 @@ function Header({
   lettersPerSkull,
   setShowGameOverMenu,
   dontFade,
+  dispWordHistory,
+  setDispWordHistory,
+  enteredWords,
+  currentRow,
+  wordsForSkull,
+  isEnterPressed,
 }: PropType) {
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showStats, setShowStats] = useState<boolean>(false);
@@ -37,6 +51,12 @@ function Header({
         lettersPerSkull={lettersPerSkull}
         setShowSettings={setShowSettings}
         setShowStats={setShowStats}
+        dispWordHistory={dispWordHistory}
+        setDispWordHistory={setDispWordHistory}
+        enteredWords={enteredWords}
+        currentRow={currentRow}
+        wordsForSkull={wordsForSkull}
+        isEnterPressed={isEnterPressed}
       />
       {!isGameOver && (
         <ul

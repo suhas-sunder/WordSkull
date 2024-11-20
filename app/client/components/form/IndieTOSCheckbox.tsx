@@ -16,7 +16,7 @@ function IndieTOSCheckbox({ id }: PropType) {
         <Link
           to="#indie-game-terms-of-service"
           className={`${
-            darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
+            darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
           } hover:text-amber-600 font-lora`}
         >
           game submission Terms and Conditions

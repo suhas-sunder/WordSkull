@@ -119,7 +119,7 @@ function SocialLinks() {
             <Link
               className={`${
                 darkThemeActive
-                  ? "text-orange-600"
+                  ? "text-amber-600"
                   : "text-pumpkin-orange"
               } group hover:text-amber-600 font-lora flex gap-3 items-center`}
               target="_blank"
