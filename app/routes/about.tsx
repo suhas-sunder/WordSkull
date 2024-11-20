@@ -34,13 +34,13 @@ function About() {
   return (
     <div
       className={`${
-        darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
+        darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
       } flex animate-fadeIn justify-center flex-col items-center mt-[3em]`}
     >
       <header className="flex flex-col justify-center items-center gap-3 mb-3 mx-5 text-center">
         <h1
           className={`${
-            darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
+            darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
           } w-full z-1  flex justify-center items-center flex-col md:flex-row text-5xl text-center mt-1 leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
         >
           <span className="mr-2">
@@ -266,12 +266,12 @@ function About() {
                 />
               </picture>
               <p className="mt-1">
-                Learn how to play Catan, game setup, strategy tips, and insigits
+                Learn how to play Catan, game setup, strategy tips, and insights
                 perfect for newcomers and experienced players.
               </p>
             </Link>
             <Link
-              to="/wallpaper"
+              to="/board-game-reviews/learn-how-to-play-monopoly"
               className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
             >
               <h4
@@ -369,6 +369,7 @@ function About() {
                 and dive into ancient stories and cultural lore. 🐉
               </p>
             </Link>
+
             <Link
               to="/wallpaper"
               className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
@@ -396,6 +397,36 @@ function About() {
                 Similar to the online word games and puzzle on WordSkull, these
                 wallpapers are fantasy dungeon themed and are perfect for your
                 desktop, laptop, social media, profile pics, and more.
+              </p>
+            </Link>
+            <Link
+              to="https://www.dragonmythology.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
+            >
+              <h4
+                className={`font-nunito ${
+                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                }`}
+              >
+                Productivity Garden
+              </h4>
+              <picture className="rounded-md overflow-hidden">
+                <source srcSet={dragonMythologyWEBP} type="image/webp" />
+                <source srcSet={dragonMythologyJPG} type="image/jpeg" />
+                <img
+                  loading="lazy"
+                  className="flex w-full"
+                  src={dragonMythologyJPG}
+                  alt="A massive pink and purple dragon surrounded by sakura trees and clouds"
+                  width={460}
+                  height={260}
+                />
+              </picture>
+              <p className="mt-1">
+                🌱 Discover tips, tricks, tools, and strategies to optimize your
+                workflow and boost your productivity. 🌿📚
               </p>
             </Link>
           </div>

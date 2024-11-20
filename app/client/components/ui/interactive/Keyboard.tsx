@@ -3,7 +3,6 @@ import useHighlightKeys from "../../hooks/useHighlightKeys";
 import KeyboardData from "../../data/KeyboardData";
 import GenerateDefaultStylingForKeys from "../../utils/generators/GenerateDefaultStylingForKeys";
 import useKeyPress from "../../hooks/useKeyPress";
-import { useTheme } from "../../context/ThemeContext";
 import SimulateKeyPress from "../../utils/other/SimulateKeyPress";
 import { useSettings } from "../../context/SettingsContext";
 
@@ -55,12 +54,11 @@ export default function Keyboard({
   currentlyEnteredWords,
   currentWord,
 }: PropType) {
-  const { darkThemeActive } = useTheme();
   const [correctCharCount, setCorrectCharCount] = useState<{
     [key: string]: number;
   }>({});
 
-  const {makeKeypadInteractive} = useSettings();
+  const { makeKeypadInteractive } = useSettings();
 
   const { defaultKeyStyles, keyboardData } = DefaultKeyboardSetup();
 
@@ -104,7 +102,7 @@ export default function Keyboard({
   useEffect(() => {
     // Create a new object for updated character counts
     const newCharCount: { [key: string]: number } = {};
-    
+
     currentlyEnteredWords?.forEach((word) => {
       word.split("").forEach((char, index) => {
         // Initialize char count if not present
@@ -125,9 +123,7 @@ export default function Keyboard({
   return (
     <div
       data-testid="keyboard"
-      className={`${
-        darkThemeActive ? "bg-slate-700" : "bg-slate-600"
-      }  hidden text-slate-600 -translate-y-[2em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2  p-6 text-xs md:flex lg:text-base min-h-[23em]`}
+      className={`bg-stone-800 hidden text-stone-950 -translate-y-[2em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2  p-6 text-xs md:flex lg:text-base min-h-[23em]`}
     >
       {Object.values(keyboardData).map((keysArr, index) => {
         return (
@@ -137,31 +133,33 @@ export default function Keyboard({
                 key={key.id}
                 className={`${
                   keyStyles[`${key.defaultKey} `]
-                }  relative flex w-full items-center justify-center`}
+                }  relative flex w-full items-center justify-center group`}
               >
                 {key.shiftKey !== "" && (
                   <span
-                    className={`absolute left-1/2 top-[12px] flex -translate-x-1/2 -translate-y-1/2 `}
+                    className={`absolute left-1/2 top-[12px] flex -translate-x-1/2 -translate-y-1/2 group-hover:text-white`}
                   >
                     {key.shiftKey}
                   </span>
                 )}
                 <button
-                  onClick={() => makeKeypadInteractive && SimulateKeyPress(key.defaultKey)}
-                  className={` ${
+                  onClick={() =>
+                    makeKeypadInteractive && SimulateKeyPress(key.defaultKey)
+                  }
+                  className={` hover:bg-pumpkin-orange/90 hover:text-white  ${
                     key.defaultKey !== "Shift" &&
                     key.defaultKey !== " " &&
                     key.defaultKey !== "Backspace"
                       ? handleKeyStyling(key)
                       : keyPressed !== key.defaultKey
-                      ? "bg-white"
+                      ? "bg-white "
                       : ""
                   }  ${
                     keyPressed === key.defaultKey &&
                     (keyPressed === " " ||
                       keyPressed === "Backspace" ||
                       keyPressed === "Shift") &&
-                    "bg-slate-600 text-white"
+                    "bg-pumpkin-orange/90 text-white"
                   } ${handleBtnStyle(key.defaultKey)}   mx-auto rounded-lg  ${
                     currentWord?.includes(key.defaultKey) &&
                     currentlyEnteredWords?.join("").includes(key.defaultKey) &&
@@ -177,12 +175,12 @@ export default function Keyboard({
                  ${
                    !currentWord?.includes(key.defaultKey) &&
                    currentlyEnteredWords?.join("").includes(key.defaultKey) &&
-                   "!bg-slate-500 !text-white"
+                   "!bg-stone-500 !text-white"
                  } bg-black `}
                 >
                   <span
                     className={`${
-                      key.shiftKey !== "" && "translate-y-[8.5px]"
+                      key.shiftKey !== "" && "translate-y-[8.5px] "
                     } flex items-center uppercase justify-center py-3 `}
                   >
                     {key.defaultKey === " " ? "SpaceBar" : key.defaultKey}

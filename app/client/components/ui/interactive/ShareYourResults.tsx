@@ -18,8 +18,8 @@ function ShareYourResults({ isGameOver, seconds }: PropType) {
   } = useCaptureHTML({ isGameOver, captureAreaId: "capture-area", seconds }); //Use captureAreaId prop to identify the element to be captured when game ends
 
   return (
-    <div className="cursor-pointer font-nunito py-2 px-4 rounded-md fill-slate-500 hover:fill-skull-brown flex flex-col gap-5 justify-center items-center">
-      <h3 className="flex whitespace-nowrap text-xl text-slate-600">
+    <div className="cursor-pointer font-nunito py-2 px-4 rounded-md fill-stone-500 hover:fill-skull-brown flex flex-col gap-5 justify-center items-center">
+      <h3 className="flex whitespace-nowrap text-xl text-stone-600">
         Share Your Results!
       </h3>
       {/* Loading State */}
@@ -40,7 +40,7 @@ function ShareYourResults({ isGameOver, seconds }: PropType) {
           {isWebShareSupported && (
             <li className="flex justify-center items-center w-full">
               <button
-                className="cursor-pointer w-[8em] hover:border-skull-brown hover:text-skull-super-dark-brown h-[3.5em] py-2 gap-2 border-2 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+                className="cursor-pointer w-[8em] hover:border-skull-brown hover:text-skull-super-dark-brown h-[3.5em] py-2 gap-2 border-2 rounded-md fill-stone-500 hover:fill-skull-brown flex justify-center items-center"
                 onClick={shareImage}
               >
                 Share
@@ -50,7 +50,7 @@ function ShareYourResults({ isGameOver, seconds }: PropType) {
           <li className="flex justify-center items-center w-full">
             <button
               onClick={downloadPuzzle}
-              className="cursor-pointer py-2 w-[8em] hover:border-skull-brown hover:text-skull-super-dark-brown h-[3.5em] border-2 rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+              className="cursor-pointer py-2 w-[8em] hover:border-skull-brown hover:text-skull-super-dark-brown h-[3.5em] border-2 rounded-md fill-stone-500 hover:fill-skull-brown flex justify-center items-center"
             >
               Download
             </button>
@@ -64,7 +64,7 @@ function ShareYourResults({ isGameOver, seconds }: PropType) {
                   setIsCopied(false);
                 }, 500);
               }}
-              className="cursor-pointer py-2 gap-2 border-2 hover:border-skull-brown hover:text-skull-super-dark-brown w-[8em] h-[3.5em] rounded-md fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+              className="cursor-pointer py-2 gap-2 border-2 hover:border-skull-brown hover:text-skull-super-dark-brown w-[8em] h-[3.5em] rounded-md fill-stone-500 hover:fill-skull-brown flex justify-center items-center"
             >
               {isCopied ? "Copied!" : "Copy"}
             </button>

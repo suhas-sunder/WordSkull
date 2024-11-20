@@ -266,7 +266,7 @@ export default function EditIndieGame() {
               darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
-            contact me
+            contact us
           </Link>
           . I&apos;m excited to have your game showcased on{" "}
           <Link

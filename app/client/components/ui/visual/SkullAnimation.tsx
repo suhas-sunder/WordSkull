@@ -6,8 +6,8 @@ import { useTheme } from "../../context/ThemeContext";
 const getRandomTransform = () => {
   const scale = Math.random() * (1 - 0.6) + 0.6; // Random scale between 0.7 and 1.1
   const rotate = Math.floor(Math.random() * 360); // Random rotation between 0 and 360 degrees
-  const translateX = Math.random() * 60 - 30; // Random horizontal translation
-  const translateY = Math.random() * 60 - 30; // Random vertical translation
+  const translateX = Math.random() * 10 - 30; // Random horizontal translation
+  const translateY = Math.random() * 10 - 30; // Random vertical translation
 
   return {
     scale: `scale(${scale.toFixed(2)})`,
@@ -83,7 +83,7 @@ function SkullAnimation() {
       return (
         <li
           key={index + "eye-square"}
-          className={` text-[1.1rem] sm:text-[2rem] border-2 border-slate-700 bg-slate-800 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
+          className={` text-[1.1rem] sm:text-[2rem] border-2 border-stone-700 bg-stone-800 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
         ></li>
       );
 
@@ -91,7 +91,7 @@ function SkullAnimation() {
       return (
         <li
           key={index + "empty-square"}
-          className={`${darkThemeActive ? 'opacity-30' : 'bg-ivory opacity-95'}   text-[1.1rem] sm:text-[2rem] border-2 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
+          className={`bg-stone-100 opacity-95   text-[1.1rem] sm:text-[2rem] border-2 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
         ></li>
       );
 
@@ -99,8 +99,8 @@ function SkullAnimation() {
       <li
         key={index + "num-square"}
         className={`${
-          darkThemeActive ? "text-slate-500" : "text-slate-300"
-        } text-[1.1rem] relative sm:text-[2rem] border-2 bg-white border-slate-400 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
+          darkThemeActive ? "text-stone-500" : "text-stone-300"
+        } text-[1.1rem] relative sm:text-[2rem] border-2 bg-white border-stone-400 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
       >
         <span className="absolute text-sm  flex top-[0.02em] left-[0.3em]">
           {squareCount}
@@ -111,7 +111,7 @@ function SkullAnimation() {
   };
 
   return (
-    <div className="relative flex-col w-full max-w-[800px] capitalize flex font-nunito text-slate-400 items-center scale-75 min-h-[14em] sm:min-h-[25em]">
+    <div className="relative flex-col w-full max-w-[800px] capitalize flex font-nunito text-stone-400 items-center scale-75 min-h-[14em] sm:min-h-[25em]">
       <div
         className={`absolute top-0 left-0  w-full h-full   flex flex-col justify-center items-center transition-opacity duration-2000 ease-in-out ${fadeClass}`}
         style={{
