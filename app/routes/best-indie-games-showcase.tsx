@@ -113,10 +113,11 @@ function About() {
               darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
-            Contact me
+            Contact us
           </Link>{" "}
-          with information about your game, and if it qualifies, I will get back
-          to you. Here is a{" "}
+          with information about your game to find out if it qualifies. Once
+          we&apos;ve reviewed your game, we&apos;ll get back to you with
+          information on how to submit. Here is a{" "}
           <Link
             to="/edit-indie-game"
             className={`${

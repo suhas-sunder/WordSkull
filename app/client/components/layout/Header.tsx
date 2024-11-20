@@ -41,16 +41,18 @@ function Header({
       {!isGameOver && (
         <ul
           className={`animate-fadeIn flex fixed z-[100] top-[0.95em]  sm:top-[0.45em] font-nunito gap-2 my-1 justify-center items-center ${
-            darkThemeActive ? "text-white" : "text-slate-700"
+            darkThemeActive ? "text-stone-300" : "text-stone-700"
           }`}
         >
           <li className="text-lg translate-y-[0.05em]">{lives || 0}</li>
           <li className="text-xl translate-y-[0.01em]">x</li>
           <li
             data-testid="life-icon"
-            className="opacity-85 -translate-x-[0.1em] text-lg"
+            className={`${
+              darkThemeActive ? " brightness-[1.75]" : "brightness-50"
+            } opacity-85 -translate-x-[0.1em] text-lg `}
           >
-            {darkThemeActive ? "🤍" : "🖤"}
+            🤎
           </li>
         </ul>
       )}

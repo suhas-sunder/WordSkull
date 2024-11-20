@@ -65,7 +65,7 @@ function DisplaySkull({
     const guessLength = wordGuessed.length - 1;
 
     //Set default styling
-    let style = "border-slate-300 text-slate-500";
+    let style = "border-stone-300 text-stone-500";
     const correctCharCount: { [key: string]: number } = { [`${square}`]: 0 }; //This is used to track the total green squares so that yellow squares do not count as green, which is an issue when there are multiple of the same 'valid' character
 
     //Map the total number of correct characters in guessed word onto 'hashmap'
@@ -127,7 +127,7 @@ function DisplaySkull({
           <div
             data-testid="display-skull"
             key={index}
-            className="relative flex-col w-full max-w-[800px] xs:scale-[0.9]  min-h-[12em] xs:min-h-[20em] capitalize flex font-nunito text-slate-400 items-center"
+            className="relative flex-col w-full max-w-[800px] xs:scale-[0.9]  min-h-[12em] xs:min-h-[20em] capitalize flex font-nunito text-stone-400 items-center"
           >
             {skull.map((row, rowIndex) => {
               let squareCount = 0; // Reset squareCount at the start of each row. This is the value displayed in the top left corner of each square.
@@ -139,7 +139,7 @@ function DisplaySkull({
                       return (
                         <li
                           key={uuidv4()}
-                          className={`  text-[1.2rem] relative border-slate-700 bg-slate-800 border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center`}
+                          className={`  text-[1.2rem] relative border-stone-700 bg-stone-800 border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center`}
                         ></li>
                       );
                     } else if (square === "~") {
@@ -147,11 +147,7 @@ function DisplaySkull({
                       return (
                         <li
                           key={uuidv4()}
-                          className={`${
-                            darkThemeActive
-                              ? "opacity-30"
-                              : "bg-ivory opacity-95"
-                          } text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center`}
+                          className={`bg-stone-100 bg-opacity-95  text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center`}
                         ></li>
                       );
                     } else {
@@ -175,7 +171,7 @@ function DisplaySkull({
                               square !== "" &&
                               `${
                                 darkThemeActive
-                                  ? "bg-white text-slate-400"
+                                  ? "bg-white text-stone-400"
                                   : "!border-green-400 !text-green-600 !bg-green-100"
                               }   border-2`
                             }
@@ -186,13 +182,13 @@ function DisplaySkull({
                               squareIndex === currentRowIndex + shiftedIndex
                                 ? `${
                                     darkThemeActive
-                                      ? "bg-slate-300  text-slate-700"
-                                      : " bg-slate-200"
-                                  }  scale-110 z-[10] border-[2.5px] border-slate-500`
+                                      ? "bg-stone-500/20 text-stone-500 border-stone-500/70"
+                                      : "bg-stone-500/10 text-stone-500/70 border-stone-500/60"
+                                  }  scale-110 z-[10] border-[2.5px]`
                                 : `${
                                     darkThemeActive
-                                      ? "text-slate-400 "
-                                      : "text-slate-300 border-slate-400"
+                                      ? "text-stone-400 "
+                                      : "text-stone-300 border-stone-400"
                                   } border-2 bg-white`
                             } 
                           
@@ -202,8 +198,8 @@ function DisplaySkull({
                             rowIndex === currentRow &&
                             `${
                               darkThemeActive
-                                ? "border-slate-200 text-slate-500 "
-                                : "border-slate-400 text-slate-500 "
+                                ? "border-stone-200 text-stone-500 "
+                                : "border-stone-400 text-stone-500 "
                             }  border-[2.5px]`
                           }  ${
                             //Apply styling based on character correctness

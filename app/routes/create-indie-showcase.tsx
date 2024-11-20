@@ -72,7 +72,7 @@ export default function CreateIndieShowcase() {
       <header className="flex flex-col justify-center items-center gap-3 mb-3 mx-5 text-center">
         <h1
           className={`${
-            darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
+            darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
           } w-full z-1  flex justify-center items-center flex-col md:flex-row text-5xl text-center mt-1 leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
         >
           Manage Indie Showcase

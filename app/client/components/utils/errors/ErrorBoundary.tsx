@@ -29,7 +29,12 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       // Fallback UI
-      return <Error />;
+      return (
+        <Error
+          status={500}
+          message={this.state.error?.message || "Server Error!"}
+        />
+      );
     }
 
     return this.props.children;

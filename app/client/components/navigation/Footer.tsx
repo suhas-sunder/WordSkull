@@ -8,7 +8,7 @@ function Footer() {
 
   return (
     <nav
-      className={`${styles.nav} transition-colors duration-[600ms] ${darkThemeActive && "border-slate-800" } w-full border-t-2 flex gap-5 sm:gap-20 justify-center items-center py-1 sm:py-2 text-xs font-nunito  bg-white-500 `}
+      className={`${styles.nav} transition-colors duration-[600ms] ${darkThemeActive ? "border-stone-600/10" : "border-stone-200" } w-full border-t-2 flex gap-5 sm:gap-20 justify-center items-center py-1 sm:py-2 text-xs font-nunito  bg-white `}
     >
       <div className={`${darkThemeActive ? "text-amber-600" : "text-skull-dark-brown"} flex gap-1 font-bold tracking-widest`}>
         <span>&copy; 2024</span> <span className="hidden md:flex"> | </span>
@@ -18,7 +18,7 @@ function Footer() {
       </div>
       <ul
         className={`${
-          darkThemeActive ? "text-white" : "text-slate-700"
+          darkThemeActive ? "text-white" : "text-stone-700"
         } flex max-w-[500px] items-center justify-around `}
       >
         <li className="hidden sm:flex">

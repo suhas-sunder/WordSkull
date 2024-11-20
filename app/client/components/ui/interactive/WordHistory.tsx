@@ -44,7 +44,7 @@ const WordHistory = React.memo(function WordHistory({
     if (!enteredWords[currentRow] || enteredWords[currentRow]?.length <= 0)
       return;
 
-    let style = "border-slate-300 text-slate-500 ";
+    let style = "border-stone-300 text-stone-500 ";
     const correctCharCount: { [key: string]: number } = { [`${char}`]: 0 }; //This is used to track the total green squares so that yellow squares do not count as green
 
     //Count total number of correct characters in guessed word. If rowIndex is being passed in, it means we're iterating over all guessed words and validating all for display. If not, we're just validating the most recent guess.
@@ -124,14 +124,14 @@ const WordHistory = React.memo(function WordHistory({
       {dispWordHistory && (
         <button
           onClick={() => setDispWordHistory(false)}
-          className="fixed inset-0 h-full w-full flex bg-skull-brown bg-opacity-10 z-30 justify-center"
+          className="fixed inset-0 h-full w-full flex bg-orange-400 bg-opacity-10 z-30 justify-center"
         ></button>
       )}
       <button
         data-testid="word-history"
         onClick={() => setDispWordHistory(!dispWordHistory)}
         title="Hold 'Shift' or press 'Space Bar' key to view your attempts."
-        className="flex z-20 h-5 cursor-pointer min-w-52 min-h-10 max-w-[400px] sm:max-w-[600px] bg-white border-2 hover:border-skull-brown gap-3 mt-[1em] sm:mt-0 mb-4 sm:mb-2 rounded-md sm:rounded-md border-slate-200 justify-center items-center"
+        className="flex z-20 h-5 cursor-pointer min-w-52 min-h-10 max-w-[400px] sm:max-w-[600px] bg-orange-100/10 border-2 hover:border-orange-500/50 gap-3 mt-[1em] sm:mt-0 mb-4 sm:mb-2 rounded-md sm:rounded-md border-pumpkin-orange/60 justify-center items-center"
       >
         {!isDelaying && enteredWords[currentRow]?.length > 0 ? (
           <div className="animate-fadeInFast relative flex gap-[4px] justify-center px-3 items-center">
@@ -155,7 +155,7 @@ const WordHistory = React.memo(function WordHistory({
         )}
       </button>
       {dispWordHistory && (
-        <div className="flex flex-col absolute z-[35] bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 max-h-[450px] max-w-[400px] rounded-lg">
+        <div className="flex flex-col absolute z-[35] bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto scrollbar-thin scrollbar-thumb-stone-700 scrollbar-track-stone-300 max-h-[450px] max-w-[400px] rounded-lg">
           <div className="flex justify-center items-center">
             <button
               onClick={() => {
@@ -188,7 +188,7 @@ const WordHistory = React.memo(function WordHistory({
                 {enteredWord.split("").map((char, charIndex) => (
                   <Fragment key={uuidv4()}>
                     {charIndex === 0 && (
-                      <li className="w-[1.7em] pt-[0.2em] h-[1.7em] text-slate-600">
+                      <li className="w-[1.7em] pt-[0.2em] h-[1.7em] text-stone-600">
                         {rowIndex + 1}.
                       </li>
                     )}

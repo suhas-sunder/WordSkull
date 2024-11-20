@@ -23,7 +23,7 @@ function HeaderMenu({
     <div
       className={`${
         !dontFade && "animate-fadeIn"
-      } flex w-full items-center px-2 sm:mt-2 justify-center max-w-[700px] sm:mb-0 text-slate-500 font-lora leading-snug text-xs sm:text-base`}
+      } flex w-full items-center px-2 sm:mt-2 justify-center max-w-[700px] sm:mb-0 text-stone-500 font-lora leading-snug text-xs sm:text-base`}
     >
       <h1 className="flex w-full gap-1 items-center">
         <span>W💀RD SKULL</span>
@@ -35,7 +35,7 @@ function HeaderMenu({
             <button
               data-testid="results-button"
               onClick={() => setShowGameOverMenu(true)}
-              className="cursor-pointer py-2 px-1 w-[2em]  fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+              className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-orange-500 flex justify-center items-center"
             >
               <Icon icon="flag" title="Results" />
             </button>
@@ -45,7 +45,7 @@ function HeaderMenu({
           <button
             data-testid="stats-button"
             onClick={() => setShowStats(true)}
-            className="cursor-pointer py-2 px-1 w-[2em]  fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-orange-500 flex justify-center items-center"
           >
             <Icon icon="barGraph" title="Stats" />
           </button>
@@ -54,7 +54,7 @@ function HeaderMenu({
           <Link
             data-testid="instructions-hashlink"
             to={`${location?.pathname}#gameplay-instructions`}
-            className="cursor-pointer py-2 px-1 w-[2em]  fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-orange-500 flex justify-center items-center"
           >
             <Icon icon="question" title="Rules" />
           </Link>
@@ -63,7 +63,7 @@ function HeaderMenu({
           <button
             data-testid="settings-button"
             onClick={() => setShowSettings(true)}
-            className="cursor-pointer py-2 px-1 w-[2em]  fill-slate-500 hover:fill-skull-brown flex justify-center items-center"
+            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-orange-500 flex justify-center items-center"
           >
             <Icon icon="settingSparkle" title="Settings" />
           </button>

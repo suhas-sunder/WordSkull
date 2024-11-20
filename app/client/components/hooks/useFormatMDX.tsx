@@ -8,7 +8,7 @@ function useFormatMDX() {
     "https://www.emojikitchengame.com",
     "https://www.wordskull.com",
     "https://www.dragonmythology.com",
-    "https://www.dragonmythology.com",
+    "https://www.productivitygarden.com",
     "https://www.makeconfetti.com",
     "https://www.freetypingcamp.com",
   ];
@@ -17,7 +17,7 @@ function useFormatMDX() {
     h1: (props: React.HTMLProps<HTMLHeadingElement>) => (
       <h1
         className={`${
-          darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
+          darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
         } w-full z-1 flex-row flex justify-center items-center text-4xl sm:text-5xl text-center mt-1 sm:leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
         {...props}
       />
@@ -25,7 +25,7 @@ function useFormatMDX() {
     h2: (props: React.HTMLProps<HTMLHeadingElement>) => (
       <h2
         className={`${
-          darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+          darkThemeActive ? "text-stone-100" : "text-skull-super-dark-brown"
         } flex py-2 text-3xl font-lora mt-4 text-center justify-center lg:justify-start lg:text-left leading-relaxed sm:leading-[0.7em] capitalize text-skull-super-dark-brown mb-3`}
         {...props}
       />
@@ -33,21 +33,23 @@ function useFormatMDX() {
     h3: (props: React.HTMLProps<HTMLHeadingElement>) => (
       <h3
         className={`leading-relaxed lg:leading-normal ${
-          darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+          darkThemeActive ? "text-stone-100" : "text-skull-super-dark-brown"
         } flex py-2 text-2xl font-nunito mt-4 text-skull-super-dark-brown`}
         {...props}
       />
     ),
     p: (props: React.HTMLProps<HTMLParagraphElement>) => (
       <p
-        className="font-lato text-lg tracking-wider leading-loose pl-2 mb-3 gap-8"
+        className={`${
+          darkThemeActive ? "text-stone-100" : "text-skull-super-dark-brown"
+        } font-lato text-lg tracking-wider leading-loose pl-2 mb-3 gap-8`}
         {...props}
       />
     ),
     ul: (props: React.HTMLProps<HTMLUListElement>) => (
       <ul
         className={`${
-          darkThemeActive ? "text-slate-400" : "text-skull-super-dark-brown"
+          darkThemeActive ? "text-stone-200" : "text-skull-super-dark-brown"
         } font-lato text-lg tracking-wider  leading-loose pl-8 gap-8 px-4 sm:px-6 md:px-14 list-decimal list-inside space-y-2 mb-3`}
         {...props}
       />
@@ -63,7 +65,7 @@ function useFormatMDX() {
       return (
         <ol
           className={`${
-            darkThemeActive ? "text-slate-400" : "text-skull-super-dark-brown"
+            darkThemeActive ? "text-stone-200" : "text-skull-super-dark-brown"
           } font-lato text-lg tracking-wider  leading-loose pl-8 gap-8 px-4 sm:px-6 md:px-14 list-decimal list-inside space-y-2 mb-3`}
           type={validType}
           {...restProps}
