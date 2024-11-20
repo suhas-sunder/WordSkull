@@ -87,7 +87,7 @@ function ClassicGameplayInstructions() {
             />
             <li className="mx-auto text-center">
               If the word exists in the{" "}
-              <span className="text-pumpkin-orange hover:text-orange-500">
+              <span className="text-pumpkin-orange hover:text-amber-500">
                 <Link to="/all-words-for-word-game">dictionary (word list)</Link>
               </span>
               , and you get it right, you will be moved to the next row. This
@@ -104,7 +104,7 @@ function ClassicGameplayInstructions() {
             </li>
             <li className="mx-auto text-center">
               If your submitted word exists in the{" "}
-              <span className="text-pumpkin-orange hover:text-orange-500">
+              <span className="text-pumpkin-orange hover:text-amber-500">
                 <Link to="/all-words-for-word-game">dictionary (word list)</Link>
               </span>{" "}
               but does not match the correct word, you lose a life.
@@ -132,7 +132,7 @@ function ClassicGameplayInstructions() {
             </li>
             <li className="mx-auto text-center">
               If a word does not exist in the{" "}
-              <span className="text-pumpkin-orange hover:text-orange-500">
+              <span className="text-pumpkin-orange hover:text-amber-500">
                 <Link to="/all-words-for-word-game">dictionary (word list)</Link>
               </span>
               , you are not penalized for it. There will be a message displayed
@@ -277,7 +277,7 @@ function ClassicGameplayInstructions() {
               unclear, please feel free to contact me at{" "}
               <a
                 href="mailto:admin@wordskull.com"
-                className="text-pumpkin-orange hover:text-orange-500"
+                className="text-pumpkin-orange hover:text-amber-500"
               >
                 admin@wordskull.com
               </a>

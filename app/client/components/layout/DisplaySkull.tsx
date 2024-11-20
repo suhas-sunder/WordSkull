@@ -127,7 +127,7 @@ function DisplaySkull({
           <div
             data-testid="display-skull"
             key={index}
-            className="relative flex-col w-full max-w-[800px] xs:scale-[0.9]  min-h-[12em] xs:min-h-[20em] capitalize flex font-nunito text-stone-400 items-center"
+            className="relative flex-col w-full max-w-[800px] xs:scale-[0.9]  min-h-[12em] mt-2 xs:min-h-[20em] capitalize flex font-nunito text-stone-400 items-center"
           >
             {skull.map((row, rowIndex) => {
               let squareCount = 0; // Reset squareCount at the start of each row. This is the value displayed in the top left corner of each square.

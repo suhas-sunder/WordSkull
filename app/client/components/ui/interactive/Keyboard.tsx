@@ -123,7 +123,7 @@ export default function Keyboard({
   return (
     <div
       data-testid="keyboard"
-      className={`bg-stone-800 hidden text-stone-950 -translate-y-[2em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2  p-6 text-xs md:flex lg:text-base min-h-[23em]`}
+      className={`bg-stone-800 hidden text-stone-950 -translate-y-[2.5em] -mb-[2.5em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2  p-6 text-xs md:flex lg:text-base min-h-[23em]`}
     >
       {Object.values(keyboardData).map((keysArr, index) => {
         return (

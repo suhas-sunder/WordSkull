@@ -26,11 +26,9 @@ function MainLinks({
     <div className="flex ml-auto pr-3 justify-center items-center">
       <ul
         id={showMobileMenu ? "mobile-links" : "main-links"}
-        className={`${
-          darkThemeActive
-            ? "text-white bg-stone-900"
-            : "text-skull-super-dark-brown bg-white"
-        }  text-base justify-center items-center text-center ${
+        className={`text-pumpkin-orange  text-base justify-center items-center text-center ${
+          darkThemeActive ? "bg-stone-800" : "bg-white"
+        } ${
           showMobileMenu ? styles["mobile-nav"] : styles["main-nav"]
         }`}
       >
@@ -85,8 +83,8 @@ function MainLinks({
         onClick={() => setDarkThemeActive(!darkThemeActive)}
         className={`${
           darkThemeActive
-            ? " bg-stone-950 hover:bg-orange-50 border-stone-800 hover:border-orange-200"
-            : " bg-orange-50 hover:bg-stone-600 border-orange-200 hover:border-stone-800"
+            ? " bg-stone-950 hover:bg-amber-50 border-stone-800 hover:border-amber-200"
+            : " bg-amber-50 hover:bg-stone-600 border-amber-200 hover:border-stone-800"
         } transition-colors duration-[600ms] flex justify-center items-center border  w-[3.7em] h-[2em] pt-[0.1em] ml-2 cursor-pointer  hover:border-opacity-60 overflow-hidden rounded-full group`}
       >
         <span
@@ -139,8 +137,8 @@ export default function NavBar() {
     <nav
       className={`${styles.nav} ${
         darkThemeActive ? "border-b-stone-500/10" : "border-b-skull-brown/10"
-      } fixed left-0 right-0 top-0 font-nunito border-b-2 p-[0.15em] text-base tracking-widest z-[100] text-skull-super-dark-brown ${
-        darkThemeActive ? "bg-stone-900" : "bg-white"
+      } fixed left-0 right-0 top-0 font-nunito border-b-2 p-[0.15em] text-base tracking-widest z-[100] text-pumpkin-orange ${
+        darkThemeActive ? "bg-stone-800" : "bg-white"
       }`}
     >
       <div

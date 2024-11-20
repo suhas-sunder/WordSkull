@@ -176,7 +176,7 @@ export default function EditIndieGame() {
           <Link
             to="/"
             className={`${
-              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
             WordSkull
@@ -218,7 +218,7 @@ export default function EditIndieGame() {
           <Link
             to="/best-indie-games-showcase"
             className={`${
-              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
             Indie Games page
@@ -238,7 +238,7 @@ export default function EditIndieGame() {
           <Link
             to="/best-indie-games-showcase"
             className={`${
-              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
             Indie Games page
@@ -249,7 +249,7 @@ export default function EditIndieGame() {
           <Link
             to="/best-indie-games-showcase"
             className={`${
-              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
             Indie Games page
@@ -263,7 +263,7 @@ export default function EditIndieGame() {
           <Link
             to="/socials"
             className={`${
-              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
             contact us
@@ -272,7 +272,7 @@ export default function EditIndieGame() {
           <Link
             to="/"
             className={`${
-              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
             WordSkull
@@ -284,7 +284,7 @@ export default function EditIndieGame() {
           <Link
             to="/best-indie-games-showcase"
             className={`${
-              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
             indie game&apos;s featured page

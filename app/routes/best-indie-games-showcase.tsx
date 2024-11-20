@@ -110,7 +110,7 @@ function About() {
           <Link
             to="/socials"
             className={`${
-              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
             Contact us
@@ -121,7 +121,7 @@ function About() {
           <Link
             to="/edit-indie-game"
             className={`${
-              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
           >
             detailed submission guide

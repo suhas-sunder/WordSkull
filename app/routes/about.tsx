@@ -34,13 +34,13 @@ function About() {
   return (
     <div
       className={`${
-        darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
+        darkThemeActive ? "text-stone-200" : "text-skull-dark-brown"
       } flex animate-fadeIn justify-center flex-col items-center mt-[3em]`}
     >
       <header className="flex flex-col justify-center items-center gap-3 mb-3 mx-5 text-center">
         <h1
           className={`${
-            darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
+            darkThemeActive ? "text-stone-100" : "text-skull-dark-brown"
           } w-full z-1  flex justify-center items-center flex-col md:flex-row text-5xl text-center mt-1 leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
         >
           <span className="mr-2">
@@ -59,9 +59,7 @@ function About() {
           word game website that provides a fun and engaging learning
           experience. Here is a link to my
           <Link
-            className={`${
-              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
-            } hover:text-amber-600 font-lora`}
+            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
             to="https://github.com/suhas-sunder"
             target="_blank"
             rel="noopener noreferrer"
@@ -71,9 +69,7 @@ function About() {
           </Link>
           . If you want to learn more about me, feel free to visit my
           <Link
-            className={`${
-              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
-            } hover:text-amber-600 font-lora`}
+            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
             to="https://www.suhassunder.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -83,9 +79,7 @@ function About() {
           </Link>{" "}
           or visit any of my
           <Link
-            className={`${
-              darkThemeActive ? "text-orange-600" : "text-pumpkin-orange"
-            } hover:text-amber-600 font-lora`}
+            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
             to="/socials"
           >
             {" "}

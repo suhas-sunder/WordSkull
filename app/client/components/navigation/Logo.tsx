@@ -20,12 +20,12 @@ function Logo({ setShowMobileMenu, darkThemeActive }: PropTypes) {
       <span className="h-[50px] w-[50px] flex justify-center items-center text-4xl">💀</span>
       <div className="hidden sm:flex">
         <p
-          className={`font-Overlock text-sm sm:text-xl italic font-bold ${darkThemeActive && "text-white"} ${styles["logo-long"]}`}
+          className={`font-Overlock text-sm sm:text-xl italic font-bold ${darkThemeActive && "text-pumpkin-orange"} ${styles["logo-long"]}`}
         >
           WordSkull
         </p>
         <p
-          className={`font-overlock text-sm sm:text-xl italic ${darkThemeActive && "text-white"} font-bold ${styles["logo-com"]}`}
+          className={`font-overlock text-sm sm:text-xl italic ${darkThemeActive && "text-pumpkin-orange"} font-bold ${styles["logo-com"]}`}
         >
           .com
         </p>

@@ -119,19 +119,19 @@ const WordHistory = React.memo(function WordHistory({
   };
 
   return (
-    <>
+    <div className="flex relative w-full justify-center ">
       {" "}
       {dispWordHistory && (
         <button
           onClick={() => setDispWordHistory(false)}
-          className="fixed inset-0 h-full w-full flex bg-orange-400 bg-opacity-10 z-30 justify-center"
+          className="fixed inset-0 h-full w-full flex bg-black/40 z-30 justify-center"
         ></button>
       )}
       <button
         data-testid="word-history"
         onClick={() => setDispWordHistory(!dispWordHistory)}
         title="Hold 'Shift' or press 'Space Bar' key to view your attempts."
-        className="flex z-20 h-5 cursor-pointer min-w-52 min-h-10 max-w-[400px] sm:max-w-[600px] bg-orange-100/10 border-2 hover:border-orange-500/50 gap-3 mt-[1em] sm:mt-0 mb-4 sm:mb-2 rounded-md sm:rounded-md border-pumpkin-orange/60 justify-center items-center"
+        className="flex z-20 h-5 cursor-pointer min-h-10 w-full bg-amber-100/10 border-2 hover:border-amber-500/50 gap-3   rounded-md sm:rounded-md border-pumpkin-orange/60 justify-center items-center"
       >
         {!isDelaying && enteredWords[currentRow]?.length > 0 ? (
           <div className="animate-fadeInFast relative flex gap-[4px] justify-center px-3 items-center">
@@ -165,7 +165,11 @@ const WordHistory = React.memo(function WordHistory({
               }}
               className="pr-3"
             >
-              <Icon icon="arrowLeft" title="arrow left" />
+              <Icon
+                icon="arrowLeft"
+                title="arrow left"
+                customStyle="text-pumpkin-orange hover:text-amber-500"
+              />
             </button>
             <h2>Guesses for Row {currentRow + enteredWordsIndexOffset + 1}</h2>{" "}
             <button
@@ -176,7 +180,11 @@ const WordHistory = React.memo(function WordHistory({
               }}
               className="rotate-180 pr-3"
             >
-              <Icon icon="arrowLeft" title="arrow right" />
+              <Icon
+                icon="arrowLeft"
+                title="arrow right"
+                customStyle="text-pumpkin-orange hover:text-amber-500"
+              />
             </button>
           </div>
           {enteredWords[currentRow + enteredWordsIndexOffset]?.map(
@@ -217,7 +225,7 @@ const WordHistory = React.memo(function WordHistory({
           )}
         </div>
       )}
-    </>
+    </div>
   );
 });
 

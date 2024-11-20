@@ -3,7 +3,6 @@ import useWordsForSkull from "../hooks/useWordsForSkull";
 import Skulls from "../data/Skulls";
 import useClassicGameplayLogic from "../hooks/useClassicGameplayLogic";
 import Header from "./Header";
-import WordHistory from "../ui/interactive/WordHistory";
 import DisplaySkull from "./DisplaySkull";
 import Keyboard from "../ui/interactive/Keyboard";
 import Keypad from "../ui/interactive/Keypad";
@@ -13,6 +12,7 @@ import { WordsData } from "../../../routes/word-skull-game-easy-mode";
 import { useSettings } from "../context/SettingsContext";
 import { useStats } from "../context/StatsContext";
 import OffScreenTimer from "../utils/trackers/OffScreenTimer";
+import { useTheme } from "../context/ThemeContext";
 
 interface PropType {
   startPosition: number;
@@ -50,6 +50,8 @@ function ClassicGameLogic({
   //Manage words list
   const { wordsForSkull, wordsList, dispWordHistory, setDispWordHistory } =
     useWordsForSkull({ currentSkull, wordsData });
+
+  const { darkThemeActive } = useTheme();
 
   //Handle the main game play logic
   const {
@@ -91,6 +93,12 @@ function ClassicGameLogic({
         isGameOver={isGameOver}
         lettersPerSkull={lettersPerSkull}
         setShowGameOverMenu={setShowGameOverMenu}
+        dispWordHistory={dispWordHistory}
+        setDispWordHistory={setDispWordHistory}
+        enteredWords={enteredWords}
+        currentRow={currentRow}
+        wordsForSkull={wordsForSkull}
+        isEnterPressed={isEnterPressed}
       />
       <main className="flex relative flex-col gap-1 pt-1 px-5 items-center animate-fadeIn">
         <GameOverMenu
@@ -103,14 +111,7 @@ function ClassicGameLogic({
           wordsForSkull={wordsForSkull}
           seconds={seconds}
         />
-        <WordHistory
-          dispWordHistory={dispWordHistory}
-          setDispWordHistory={setDispWordHistory}
-          wordsForSkull={wordsForSkull}
-          currentRow={currentRow}
-          enteredWords={enteredWords}
-          isEnterPressed={isEnterPressed}
-        />
+
         <label id="capture-area" className="flex gap-2 flex-col">
           <input type="text" className="absolute -top-[999px]" />
           <GameOverStatsCapture
@@ -149,6 +150,14 @@ function ClassicGameLogic({
         ) : (
           <div className="mb-10"></div>
         )}
+        <h1
+          className={`${
+            darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
+          } w-full z-1 flex-row flex justify-center items-center gap-5 text-3xl mb-[1.6em] sm:text-4xl text-center  leading-snug  font-lora tracking-wide`}
+        >
+          <span>W💀RD SKULL</span>
+          {lettersPerSkull && <span>({lettersPerSkull})</span>}
+        </h1>
         <OffScreenTimer
           setSeconds={setSeconds}
           isGameOver={isGameOver}

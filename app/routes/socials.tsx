@@ -36,7 +36,7 @@ export default function Socials() {
           <li>
             <Link
               to="mailto:admin@wordskull.com"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               Gmail (admin@wordskull.com)
             </Link>
@@ -46,7 +46,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.linkedin.com/in/word-skull/"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               LinkedIn
             </Link>
@@ -56,7 +56,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.youtube.com/@WordSkullGame"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               YouTube
             </Link>
@@ -66,7 +66,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.facebook.com/profile.php?id=61566613301910"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               Facebook
             </Link>
@@ -76,7 +76,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://x.com/WordSkullGame"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               Twitter
             </Link>
@@ -86,7 +86,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://mastodon.social/@wordskull"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               Mastadon
             </Link>
@@ -96,7 +96,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.linkedin.com/in/word-skull/"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               LinkedIn
             </Link>
@@ -106,7 +106,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.reddit.com/r/WordSkull/"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               Reddit
             </Link>
@@ -116,7 +116,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.tiktok.com/@wordskull"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               TikTok
             </Link>
@@ -126,7 +126,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://github.com/suhas-sunder"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               GitHub
             </Link>
@@ -136,7 +136,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.suhassunder.com/"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               Portfolio
             </Link>
@@ -152,7 +152,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.emojikitchen.com"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               Emoji Kitchen Game
             </Link>
@@ -162,7 +162,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.emojikitchen.com"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               Emoji Kitchen Game
             </Link>
@@ -172,7 +172,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.dragonmythology.com"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               DragonMythology
             </Link>
@@ -182,7 +182,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.freetypingcamp.com"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               Free Typing Camp
             </Link>
@@ -197,7 +197,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.wordskull.com/word-skull-game-easy-mode"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               WordSkull (3 - 5 letters) Easy Mode - Defeat the boneheads!
             </Link>
@@ -207,7 +207,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.wordskull.com/word-skull-game-medium-mode"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               WordSkull(3 - 6 letters) Medium Mode
             </Link>
@@ -217,7 +217,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.wordskull.com/word-skull-game-hard-mode"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               WordSkull (3 - 7 letters) Hard Mode - Defeat the reapers!
             </Link>
@@ -227,7 +227,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.wordskull.com/word-skull-game-extreme-mode"
-              className="font-lora hover:text-orange-500 text-pumpkin-orange"
+              className="font-lora hover:text-amber-500 text-pumpkin-orange"
             >
               WordSkull (3 - 9 letters) Extreme Mode - Defat the royal lichen!
             </Link>
