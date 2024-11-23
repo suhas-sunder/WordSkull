@@ -131,8 +131,13 @@ const WordHistory = React.memo(function WordHistory({
         data-testid="word-history"
         onClick={() => setDispWordHistory(!dispWordHistory)}
         title="Hold 'Shift' or press 'Space Bar' key to view your attempts."
-        className="flex z-20 h-5 cursor-pointer min-h-10 w-full bg-amber-100/10 border-2 hover:border-amber-500/50 gap-3   rounded-md sm:rounded-md border-pumpkin-orange/60 justify-center items-center"
+        className="group flex z-20 h-5 cursor-pointer min-h-10 w-full bg-orange-100/10 border-2 hover:border-orange-500/60 gap-3  rounded-md sm:rounded-md border-pumpkin-orange/50 justify-center items-center"
       >
+        {enteredWords.length === 0 && (
+          <span className="group-hover:text-orange-600/80 text-pumpkin-orange">
+            Click to View Entered Words
+          </span>
+        )}
         {!isDelaying && enteredWords[currentRow]?.length > 0 ? (
           <div className="animate-fadeInFast relative flex gap-[4px] justify-center px-3 items-center">
             {enteredWords[currentRow]
@@ -155,7 +160,7 @@ const WordHistory = React.memo(function WordHistory({
         )}
       </button>
       {dispWordHistory && (
-        <div className="flex flex-col absolute z-[35] bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto scrollbar-thin scrollbar-thumb-stone-700 scrollbar-track-stone-300 max-h-[450px] max-w-[400px] rounded-lg">
+        <div className="flex flex-col absolute z-[35] bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto scrollbar-thin scrollbar-thumb-amber-500 scrollbar-track-amber-200 max-h-[450px] max-w-[400px] rounded-lg">
           <div className="flex justify-center items-center">
             <button
               onClick={() => {

@@ -58,7 +58,7 @@ function UploadImage({ optionalText, id, type, accept, required, setSelectedFile
         <div className="relative mt-4">
           <button
             onClick={removeImage}
-            className="absolute top-0 right-0 w-[1em] h-[1em] flex justify-center items-center text-xl bg-red-500 text-white rounded-full p-1 transform -translate-y-1/2 translate-x-1/2 hover:bg-red-600"
+            className="absolute top-0 right-0 w-[1em] h-[1em] flex justify-center items-center text-xl bg-red-500 text-white rounded-full p-1 transform -translate-y-1/2 translate-x-1/2 hover:bg-red-600 "
             aria-label="Remove image"
           >
             <Icon icon="close" customStyle="fill-white scale-75" />
@@ -80,7 +80,7 @@ function UploadImage({ optionalText, id, type, accept, required, setSelectedFile
             className="hidden"
           />
           <div
-            className="flex flex-col items-center justify-center border-2 border-dashed text-gray-500 text-lg text-center p-8 gap-5 cursor-pointer w-full"
+            className="flex flex-col items-center justify-center border-2 border-dashed text-gray-500 text-lg text-center p-8 gap-5 cursor-pointer w-full border-orange-400"
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onClick={() => document.getElementById(id)?.click()}

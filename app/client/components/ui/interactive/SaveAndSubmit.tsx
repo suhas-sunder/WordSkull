@@ -9,7 +9,7 @@ function SaveAndSubmit() {
       </button> */}
       <button
         type="submit"
-        className="flex justify-center items-center rounded-md bg-green-600 text-white px-4 py-2 w-[10em] hover:bg-green-500"
+        className="flex justify-center items-center rounded-md text-white px-4 py-2 w-[10em] hover:bg-amber-600 bg-pumpkin-orange "
       >
         Submit
       </button>

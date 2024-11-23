@@ -30,7 +30,7 @@ function TextInput({
         required={required}
         minLength={minLength}
         maxLength={maxLength}
-        className="flex border-2 rounded-md px-4 py-2 w-full outline-skull-dark-brown"
+        className="flex border-2 rounded-md px-4 py-2 w-full outline-orange-400 border-orange-300"
       />
     </div>
   );
