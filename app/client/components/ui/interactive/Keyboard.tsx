@@ -34,7 +34,8 @@ function DefaultKeyboardSetup() {
     () =>
       GenerateDefaultStylingForKeys({
         keyArr: allValidKeys,
-        styling: "bg-white",
+        styling:
+          "border-pumpkin-orange border-2 bg-amber-100/10 text-pumpkin-orange",
       }),
     [allValidKeys]
   );
@@ -123,7 +124,7 @@ export default function Keyboard({
   return (
     <div
       data-testid="keyboard"
-      className={`bg-stone-800 hidden text-stone-950 -translate-y-[2.5em] -mb-[2.5em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2  p-6 text-xs md:flex lg:text-base min-h-[23em]`}
+      className={` hidden text-pumpkin-orange -translate-y-[2.5em] -mb-[2.5em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2 border-pumpkin-orange p-6 text-xs md:flex lg:text-base min-h-[23em]`}
     >
       {Object.values(keyboardData).map((keysArr, index) => {
         return (
@@ -133,11 +134,11 @@ export default function Keyboard({
                 key={key.id}
                 className={`${
                   keyStyles[`${key.defaultKey} `]
-                }  relative flex w-full items-center justify-center group`}
+                }  relative flex w-full items-center justify-center group `}
               >
                 {key.shiftKey !== "" && (
                   <span
-                    className={`absolute left-1/2 top-[12px] flex -translate-x-1/2 -translate-y-1/2 group-hover:text-white`}
+                    className={`absolute left-1/2 top-[12px] flex -translate-x-1/2 -translate-y-[38%] group-hover:text-white `}
                   >
                     {key.shiftKey}
                   </span>
@@ -146,41 +147,41 @@ export default function Keyboard({
                   onClick={() =>
                     makeKeypadInteractive && SimulateKeyPress(key.defaultKey)
                   }
-                  className={` hover:bg-pumpkin-orange/90 hover:text-white  ${
+                  className={` group-hover:bg-amber-600 group-hover:border-transparent group-hover:text-white  ${
                     key.defaultKey !== "Shift" &&
                     key.defaultKey !== " " &&
                     key.defaultKey !== "Backspace"
                       ? handleKeyStyling(key)
                       : keyPressed !== key.defaultKey
-                      ? "bg-white "
-                      : ""
+                      ? `border-pumpkin-orange border-2  text-pumpkin-orange`
+                      : "bg-amber-600 text-white border-2 border-transparent"
                   }  ${
                     keyPressed === key.defaultKey &&
                     (keyPressed === " " ||
                       keyPressed === "Backspace" ||
                       keyPressed === "Shift") &&
-                    "bg-pumpkin-orange/90 text-white"
+                    "group-hover:bg-amber-600 group-hover:border-transparent group-text-white"
                   } ${handleBtnStyle(key.defaultKey)}   mx-auto rounded-lg  ${
                     currentWord?.includes(key.defaultKey) &&
                     currentlyEnteredWords?.join("").includes(key.defaultKey) &&
                     correctCharCount[key.defaultKey] > 0 &&
-                    "!bg-green-300 !text-green-800"
+                    "!bg-green-300 !text-green-800 !border-transparent"
                   }
                 ${
                   currentWord?.includes(key.defaultKey) &&
                   currentlyEnteredWords?.join("").includes(key.defaultKey) &&
                   correctCharCount[key.defaultKey] === 0 &&
-                  "!bg-yellow-200 !text-yellow-800"
+                  "!bg-yellow-200 !text-yellow-800 !border-transparent"
                 }
                  ${
                    !currentWord?.includes(key.defaultKey) &&
                    currentlyEnteredWords?.join("").includes(key.defaultKey) &&
-                   "!bg-stone-500 !text-white"
-                 } bg-black `}
+                   "!bg-stone-500/70 !text-white !brightness-80 !border-transparent"
+                 } bg-orange-100/10`}
                 >
                   <span
                     className={`${
-                      key.shiftKey !== "" && "translate-y-[8.5px] "
+                      key.shiftKey !== "" && "translate-y-[10.3px] "
                     } flex items-center uppercase justify-center py-3 `}
                   >
                     {key.defaultKey === " " ? "SpaceBar" : key.defaultKey}

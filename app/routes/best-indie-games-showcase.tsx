@@ -25,14 +25,14 @@ function About() {
   return (
     <div
       className={`${
-        darkThemeActive ? "text-slate-300" : "text-skull-dark-brown"
+        darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
       } flex animate-fadeIn justify-center flex-col items-center mt-[3em]`}
     >
       <header className="flex flex-col justify-center items-center gap-3 mb-3 mx-5 text-center">
         <h1
           className={`${
-            darkThemeActive ? "text-slate-400" : "text-skull-dark-brown"
-          } w-full z-1  flex justify-center items-center flex-col md:flex-row text-5xl text-center mt-1 leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
+            darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
+          } w-full z-1  flex justify-center items-center flex-col md:flex-row text-5xl text-center mt-1 leading-snug -transtone-y-[0.3em] sm:transtone-y-0 font-lora tracking-wide`}
         >
           Best Indie Games To Play In {new Date().getFullYear()}
         </h1>

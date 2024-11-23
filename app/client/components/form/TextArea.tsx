@@ -26,7 +26,7 @@ function TextArea({
         name={name}
         id={id}
         placeholder={placeholder}
-        className="flex border-2 rounded-md px-4 py-3 w-full min-h-[19em] scrollbar-thin scrollbar-thumb-skull-dark-brown scrollbar-track-skull-brown outline-skull-dark-brown"
+        className="flex border-2 rounded-md px-4 py-3 w-full min-h-[19em] scrollbar-thin scrollbar-thumb-amber-500 scrollbar-track-amber-100 outline-orange-400 border-orange-300"
         minLength={minLength}
         maxLength={maxLength}
         required={required}

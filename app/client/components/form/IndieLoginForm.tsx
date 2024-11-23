@@ -27,7 +27,7 @@ function IndieLoginForm() {
           id="username"
           placeholder="Username"
           required
-          className="flex w-full border-2 rounded-md px-2 py-1"
+          className="flex w-full border-2 rounded-md px-2 py-1  outline-orange-400 border-orange-300"
         />
       </div>
       <div className="flex relative w-full min-h-10">
@@ -39,7 +39,7 @@ function IndieLoginForm() {
           name="password"
           id="password"
           required
-          className="flex border-2 rounded-md px-2 py-1 w-full"
+          className="flex border-2 rounded-md px-2 py-1 w-full  outline-orange-400 border-orange-300"
           placeholder="Password"
         />
         <button

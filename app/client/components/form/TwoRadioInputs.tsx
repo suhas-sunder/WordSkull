@@ -22,25 +22,27 @@ function TwoRadioInputs({
       <div>
         <legend className="text-lg font-medium inline-block">{legend}:</legend>
       </div>
-      <label className="flex items-center">
+
+      <label className="flex items-center cursor-pointer">
         <input
           type="radio"
           id={id + firstOption}
           name={name}
           defaultChecked={firstInputChecked}
           value="yes"
-          className="cursor-pointer h-4 w-4 text-blue-500 border-gray-300 focus:ring-blue-500"
+          className="appearance-none cursor-pointer w-4 h-4 rounded-full border-2 border-orange-400 bg-white checked:bg-orange-500 checked:border-orange-200 focus:outline-none relative"
         />
         <span className="ml-2">{firstOption}</span>
       </label>
-      <label className="flex items-center">
+
+      <label className="flex items-center cursor-pointer">
         <input
           type="radio"
           id={id + secondOption}
           name={name}
           defaultChecked={secondInputChecked}
           value="no"
-          className="cursor-pointer h-4 w-4 text-blue-500 border-gray-300 focus:ring-blue-500"
+          className="appearance-none cursor-pointer w-4 h-4 rounded-full border-2 border-orange-400 bg-white checked:bg-orange-500 checked:border-orange-200 focus:outline-none relative"
         />
         <span className="ml-2">{secondOption}</span>
       </label>
