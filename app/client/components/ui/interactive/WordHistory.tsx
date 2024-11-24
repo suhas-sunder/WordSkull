@@ -134,8 +134,8 @@ const WordHistory = React.memo(function WordHistory({
         className="group flex z-20 h-5 cursor-pointer min-h-10 w-full bg-orange-100/10 border-2 hover:border-orange-500/60 gap-3  rounded-md sm:rounded-md border-pumpkin-orange/50 justify-center items-center"
       >
         {enteredWords.length === 0 && (
-          <span className="group-hover:text-orange-600/80 text-pumpkin-orange">
-            Click to View Entered Words
+          <span className="group-hover:text-orange-600/80 text-pumpkin-orange font-nunito text-sm leading-loose tracking-widest">
+            View Entered Words
           </span>
         )}
         {!isDelaying && enteredWords[currentRow]?.length > 0 ? (
