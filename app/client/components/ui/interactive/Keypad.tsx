@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import KeypadData from "../../data/KeypadData";
-import { useTheme } from "../../context/ThemeContext";
 import { v4 as uuidv4 } from "uuid";
 import useKeyPress from "../../hooks/useKeyPress";
 import SimulateKeyPress from "../../utils/other/SimulateKeyPress";
@@ -29,7 +28,6 @@ function DefaultKeypadSetup() {
 }
 
 function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
-  const { darkThemeActive } = useTheme();
   const { keypadData } = DefaultKeypadSetup();
   const { keyPressed } = useKeyPress(); //Handle key press highlight & toggle between capital and small letters on keyboard
   const [correctCharCount, setCorrectCharCount] = useState<{
@@ -63,7 +61,7 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
   return (
     <div
       data-testid="keypad"
-      className={` text-stone-600 flex min-h-[13em] select-none flex-col gap-y-5 mt-5 xs:mt-3 font-nunito rounded-xl uppercase  text-base md:hidden`}
+      className={`text-stone-600 flex min-h-[13em] select-none flex-col gap-y-5 mt-5 xs:mt-3 font-nunito rounded-xl uppercase  text-base md:hidden`}
     >
       {Object.values(keypadData).map((keysArr) => {
         return (
@@ -77,11 +75,7 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
                   onClick={() =>
                     makeKeypadInteractive && SimulateKeyPress(key.defaultKey)
                   }
-                  className={` h-[2.3em] min-w-[1.7em] w-full justify-center items-center flex rounded-sm ${
-                    darkThemeActive
-                      ? "bg-white text-stone-600"
-                      : "bg-stone-600 text-white"
-                  } ${
+                  className={` h-[2.3em] min-w-[1.7em] xs:min-w-[2.6em] xs:h-[2.6em] w-full justify-center items-center flex border-pumpkin-orange text-pumpkin-orange border-2 rounded-md hover:bg-amber-600 hover:text-white hover:border-transparent ${
                     ((keyPressed === " " && key.defaultKey === "space") ||
                       (keyPressed.toLowerCase() === "capslock" &&
                         key.defaultKey === "caps") ||
@@ -92,22 +86,22 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
                     currentWord?.includes(key.defaultKey) &&
                     currentlyEnteredWords?.join("").includes(key.defaultKey) &&
                     correctCharCount[key.defaultKey] > 0 &&
-                    "!bg-green-300 !text-green-800"
+                    "!bg-green-300 !text-green-800 !border-transparent"
                   }
               ${
                 currentWord?.includes(key.defaultKey) &&
                 currentlyEnteredWords?.join("").includes(key.defaultKey) &&
                 correctCharCount[key.defaultKey] === 0 &&
-                "!bg-yellow-200 !text-yellow-800"
+                "!bg-yellow-200 !text-yellow-800 !border-transparent"
               }
                ${
                  !currentWord?.includes(key.defaultKey) &&
                  currentlyEnteredWords?.join("").includes(key.defaultKey) &&
                  key.defaultKey !== "enter" &&
-                 "!bg-stone-400 !text-white"
+                 "!bg-stone-400 !text-white !border-transparent"
                }`}
                 >
-                  {key.defaultKey}
+                  {key.defaultKey === "space" ? "word menu" : key.defaultKey}
                 </button>
               </li>
             ))}
