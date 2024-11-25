@@ -23,7 +23,7 @@ function HeaderMenu({
   isGameOver,
   dontFade,
   setShowSettings,
-  // setShowStats,
+  setShowStats,
   dispWordHistory,
   setDispWordHistory,
   enteredWords,
@@ -40,18 +40,16 @@ function HeaderMenu({
       } flex relative w-full items-center px-2 mt-5 mb-2 sm:mt-7 justify-between max-w-[700px] gap-5  text-stone-500 font-lora leading-snug text-xs sm:text-base`}
     >
       <ul className="flex gap-1 justify-center items-center">
-        {isGameOver && (
-          <li className="flex justify-center items-center">
+      <li className="flex justify-center items-center">
             <button
               data-testid="results-button"
-              onClick={() => setShowGameOverMenu(true)}
-              className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
+              onClick={() => isGameOver && setShowGameOverMenu(true)}
+              className={`${isGameOver ? "fill-pumpkin-orange hover:fill-amber-500 cursor-pinter" : "fill-skull-brown cursor-default"} cursor-pointer py-2 px-1 w-[2em]   flex justify-center items-center`}
             >
               <Icon icon="flag" title="Results" />
             </button>
           </li>
-        )}
-        {/* <li className="flex justify-center items-center">
+        <li className="flex justify-center items-center">
           <button
             data-testid="stats-button"
             onClick={() => setShowStats(true)}
@@ -59,25 +57,8 @@ function HeaderMenu({
           >
             <Icon icon="barGraph" title="Stats" />
           </button>
-        </li> */}
-        <li className="flex justify-center items-center">
-          <Link
-            data-testid="instructions-hashlink"
-            to={`${location?.pathname}#gameplay-instructions`}
-            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
-          >
-            <Icon icon="question" title="Rules" />
-          </Link>
         </li>
-        <li className="flex justify-center items-center">
-          <button
-            data-testid="settings-button"
-            onClick={() => setShowSettings(true)}
-            className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
-          >
-            <Icon icon="settingSparkle" title="Settings" />
-          </button>
-        </li>
+       
       </ul>
       <WordHistory
         dispWordHistory={dispWordHistory}

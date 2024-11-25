@@ -73,7 +73,8 @@ export default {
         flip: "flip 0.9s ease-in", // 0.6s flip animation
       },
       screens: {
-        xs: "480px", // Custom breakpoint between sm and smaller sizes
+        xxs: "350px", // Custom breakpoint smaller
+        xs: "480px", // Custom breakpoint small
       },
     },
   },
