@@ -57,7 +57,7 @@ function Header() {
       </p>
       <Link
         to={"#word-skull-classic"}
-        className={`hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8  transition-colors duration-300 text-lg font-nunito rounded-full mt-2 py-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
+        className={`hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8  text-lg font-nunito rounded-full mt-2 py-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
       >
         Start Playing!
       </Link>
