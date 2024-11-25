@@ -40,14 +40,14 @@ function ClassicGameplayInstructions() {
           <div id="gameplay-instructions" className="absolute -top-[5em]"></div>
           <h2
             className={`text-4xl font-nunito  uppercase mb-10 ${
-              darkThemeActive ? "text-stone-300" : "text-stone-700"
+              darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
             }`}
           >
             How to play
           </h2>
           <ul
-            className={`flex max-w-[900px] flex-col gap-14 font-nunito text-center sm:text-start mx-5 text-lg tracking-wider leading-loose ${
-              darkThemeActive ? "text-stone-400" : "text-stone-600"
+            className={`flex max-w-[900px] flex-col gap-14 font-lato text-center sm:text-start mx-5 text-xl tracking-wider leading-loose ${
+              darkThemeActive ? "text-stone-400" : "text-skull-super-dark-brown"
             }`}
           >
             <li className="mx-auto text-center">

@@ -153,10 +153,12 @@ function ClassicGameLogic({
         <h1
           className={`${
             darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
-          } w-full z-1 flex-row flex justify-center items-center gap-5 text-3xl mb-[1.6em] sm:text-4xl text-center  leading-snug  font-lora tracking-wide`}
+          } w-full z-1 flex-col flex justify-center mt-[2em] md:mt-[0.3em] items-center gap-5 text-2xl md:mb-[1.4em] sm:text-3xl text-center  leading-snug  font-lora tracking-wide`}
         >
-          <span>W💀RD SKULL</span>
-          {lettersPerSkull && <span>({lettersPerSkull})</span>}
+          <span className="flex">W💀RD SKULL</span>
+          {lettersPerSkull && (
+            <span className="text-xl flex">({lettersPerSkull})</span>
+          )}
         </h1>
         <OffScreenTimer
           setSeconds={setSeconds}
