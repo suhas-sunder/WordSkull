@@ -136,7 +136,7 @@ function ClassicGameLogic({
         </label>
         {showKeyboard ? (
           <div
-            className={` flex max-w-[800px] overflow-hidden justify-center items-center`}
+            className={` flex max-w-[800px] w-full overflow-hidden justify-center items-center`}
           >
             <Keyboard
               currentlyEnteredWords={enteredWords[currentRow]}

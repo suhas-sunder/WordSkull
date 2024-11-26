@@ -133,11 +133,6 @@ const WordHistory = React.memo(function WordHistory({
         title="Hold 'Shift' or press 'Space Bar' key to view your attempts."
         className="group flex z-20 h-5 cursor-pointer min-h-10 w-full bg-orange-100/10 border-2 hover:border-orange-500/60 gap-3  rounded-md sm:rounded-md border-pumpkin-orange/50 justify-center items-center"
       >
-        {enteredWords.length === 0 && (
-          <span className="group-hover:text-orange-600/80 text-pumpkin-orange font-nunito text-sm leading-loose tracking-widest">
-            View Entered Words
-          </span>
-        )}
         {!isDelaying && enteredWords[currentRow]?.length > 0 ? (
           <div className="animate-fadeInFast relative flex gap-[4px] justify-center px-3 items-center">
             {enteredWords[currentRow]
@@ -156,7 +151,10 @@ const WordHistory = React.memo(function WordHistory({
               ))}
           </div>
         ) : (
-          <div className="h-5"></div>
+          <div className="group-hover:text-orange-600/80 text-pumpkin-orange  font-nunito text-sm leading-loose tracking-widest">
+            <span className="hidden xxs:inline">View</span>{" "}
+            <span className="inline">Entered Words</span>
+          </div>
         )}
       </button>
       {dispWordHistory && (

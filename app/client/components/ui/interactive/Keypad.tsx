@@ -61,21 +61,21 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
   return (
     <div
       data-testid="keypad"
-      className={`text-stone-600 flex min-h-[13em] select-none flex-col gap-y-5 mt-5 xs:mt-3 font-nunito rounded-xl uppercase  text-base md:hidden`}
+      className={`text-stone-600 w-full flex min-h-[13em] select-none flex-col gap-y-5 mt-5 xs:mt-3 font-nunito rounded-xl uppercase text-base md:hidden`}
     >
       {Object.values(keypadData).map((keysArr) => {
         return (
           <ul
-            className="flex w-full gap-[0.25em] justify-center items-center"
+            className="flex w-full gap-[0.56em] xs:gap-2 sm:gap-5"
             key={uuidv4()}
           >
             {keysArr.map((key) => (
-              <li className="flex w-full" key={key.id}>
+              <li className="flex w-full " key={key.id}>
                 <button
                   onClick={() =>
                     makeKeypadInteractive && SimulateKeyPress(key.defaultKey)
                   }
-                  className={` h-[2.3em] min-w-[1.7em] xs:min-w-[2.6em] xs:h-[2.6em] w-full justify-center items-center flex border-pumpkin-orange text-pumpkin-orange border-2 rounded-md hover:bg-amber-600 hover:text-white hover:border-transparent ${
+                  className={`h-[2.3em]  xs:min-w-[2.25em] xs:h-[2.6em] w-full justify-center items-center flex border-pumpkin-orange text-pumpkin-orange border-2 rounded-md hover:bg-amber-600 hover:text-white hover:border-transparent ${
                     ((keyPressed === " " && key.defaultKey === "space") ||
                       (keyPressed.toLowerCase() === "capslock" &&
                         key.defaultKey === "caps") ||
