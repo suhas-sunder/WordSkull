@@ -1,6 +1,5 @@
 import React from "react";
 import SecondsToTime from "../utils/converters/SecondsToTime";
-import Header from "./Header";
 
 interface PropType {
   isGameOver: boolean;
@@ -18,12 +17,10 @@ interface PropType {
 const GameOverStatsCapture = React.memo(function GameOverStatsCapture({
   isGameOver,
   showGameOverMenu,
-  setShowGameOverMenu,
   lives,
   maxLives,
   currentRow,
   wordsForSkull,
-  lettersPerSkull,
   seconds,
 }: PropType) {
   return (
@@ -31,15 +28,8 @@ const GameOverStatsCapture = React.memo(function GameOverStatsCapture({
       {isGameOver && showGameOverMenu && (
         <div
           data-testid="game-over-stats-capture"
-          className="flex font-nunito w-full flex-col justify-center items-center gap-4"
+          className="flex font-nunito w-full flex-col justify-center items-center gap-4 py-4"
         >
-          <Header
-            lives={lives}
-            isGameOver={isGameOver}
-            lettersPerSkull={lettersPerSkull || ""}
-            dontFade={true}
-            setShowGameOverMenu={setShowGameOverMenu}
-          />
           <ul className="grid gap-5 sm:grid-cols-3 w-full justify-center items-center">
             <li className="flex col-span-1 flex-col gap-1 w-full justify-center items-center">
               <span className="text-skull-dark-brown text-2xl">
