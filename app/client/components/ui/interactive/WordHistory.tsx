@@ -133,7 +133,7 @@ const WordHistory = React.memo(function WordHistory({
         title="Hold 'Shift' or press 'Space Bar' key to view your attempts."
         className="group flex z-20 h-5 cursor-pointer min-h-10 w-full bg-orange-100/10 border-2 hover:border-orange-500/60 gap-3  rounded-md sm:rounded-md border-pumpkin-orange/50 justify-center items-center"
       >
-        {!isDelaying && enteredWords[currentRow]?.length > 0 ? (
+        {!isDelaying && enteredWords && enteredWords[currentRow]?.length > 0 ? (
           <div className="animate-fadeInFast relative flex gap-[4px] justify-center px-3 items-center">
             {enteredWords[currentRow]
               ?.slice(-1)[0]
