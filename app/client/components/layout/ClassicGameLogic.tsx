@@ -111,7 +111,6 @@ function ClassicGameLogic({
           wordsForSkull={wordsForSkull}
           seconds={seconds}
         />
-
         <label id="capture-area" className="flex gap-2 flex-col">
           <input type="text" className="absolute -top-[999px]" />
           <GameOverStatsCapture
@@ -136,7 +135,7 @@ function ClassicGameLogic({
         </label>
         {showKeyboard ? (
           <div
-            className={` flex max-w-[800px] w-full overflow-hidden justify-center items-center`}
+            className={` flex max-w-[800px] w-full justify-center items-center`}
           >
             <Keyboard
               currentlyEnteredWords={enteredWords[currentRow]}
@@ -153,9 +152,9 @@ function ClassicGameLogic({
         <h1
           className={`${
             darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
-          } w-full z-1 flex-col flex justify-center mt-[2em] md:mt-[0.3em] items-center gap-5 text-2xl md:mb-[1.4em] sm:text-3xl text-center  leading-snug  font-lora tracking-wide`}
+          } w-full z-1 flex-col flex justify-center mt-[2em] lg-md:mt-[0.3em] items-center gap-5 text-2xl md:mb-[1.4em] sm:text-3xl text-center  leading-snug  font-lora tracking-wide`}
         >
-          <span className="flex">W💀RD SKULL</span>
+          <span className="flex">W💀RD SKULL CLASSIC</span>
           {lettersPerSkull && (
             <span className="text-xl flex">({lettersPerSkull})</span>
           )}

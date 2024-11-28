@@ -38,7 +38,7 @@ function Header({
   const { darkThemeActive } = useTheme();
 
   return (
-    <header className="relative w-full justify-center items-center flex-col flex">
+    <header className="relative w-full justify-center items-center flex-col flex">      
       <SpecificGameStats showStats={showStats} setShowStats={setShowStats} />
       <GameSettings
         showSettings={showSettings}

@@ -22,7 +22,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function WordSkullMedium() {
+export default function WordSkullEasy() {
   const matches = useMatches();
   const wordsData = useMemo(() => {
     // Find the first match with valid data
@@ -35,11 +35,18 @@ export default function WordSkullMedium() {
       <ClassicGameLogic
         startPosition={0}
         endPosition={4}
-        lettersPerSkull="3 - 5 letters"
+        lettersPerSkull="Easy Difficulty: 3 - 5 letters"
         wordsData={wordsData}
         difficulty="easy"
         gameMode="classic"
       />
+      <div className="flex w-full justify-center">
+        Display shortcuts to other related game modes here with current one
+        selected.
+      </div>
+      <div className="flex w-full justify-center">
+        List of all other game modes on the nav bar to the right.
+      </div>
       <section>
         <ClassicGameplayInstructions />
       </section>

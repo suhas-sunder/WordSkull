@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import words from "../data/Words";
-import { WordsData } from "../../../routes/word-skull-game-easy-mode";
+import { WordsData } from "../../../routes/.word-skull-game-easy-mode";
 
 interface PropType {
   currentSkull?: string[][][];

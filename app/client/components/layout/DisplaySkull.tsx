@@ -65,7 +65,7 @@ function DisplaySkull({
     const guessLength = wordGuessed.length - 1;
 
     //Set default styling
-    let style = "border-stone-300 text-stone-500";
+    let style = "!bg-stone-400 text-stone-600 !border-stone-500 brightness-125";
     const correctCharCount: { [key: string]: number } = { [`${square}`]: 0 }; //This is used to track the total green squares so that yellow squares do not count as green, which is an issue when there are multiple of the same 'valid' character
 
     //Map the total number of correct characters in guessed word onto 'hashmap'
@@ -127,7 +127,7 @@ function DisplaySkull({
           <div
             data-testid="display-skull"
             key={index}
-            className="relative flex-col w-full max-w-[800px] xs:scale-[0.9]  min-h-[12em] mt-2 xs:min-h-[20em] capitalize flex font-nunito text-stone-400 items-center"
+            className="relative flex-col w-full max-w-[800px] xs:scale-[0.9]  min-h-[12em] mt-3 xs:mt-2 xs:min-h-[20em] capitalize flex font-nunito text-stone-400 items-center"
           >
             {skull.map((row, rowIndex) => {
               let squareCount = 0; // Reset squareCount at the start of each row. This is the value displayed in the top left corner of each square.
@@ -214,7 +214,7 @@ function DisplaySkull({
                               wordsForSkull,
                               squareIndex,
                             })
-                          }`}
+                          } `}
                         >
                           <span
                             className={`${
