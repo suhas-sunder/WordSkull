@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom/vitest";
 
 import ClassicGameLogic from "../ClassicGameLogic";
-import { WordsData } from "../../../../routes/word-skull-game-easy-mode";
+import { WordsData } from "../../../../routes/.word-skull-game-easy-mode";
 interface PropType {
   startPosition: number;
   endPosition: number;
@@ -35,7 +35,6 @@ beforeEach(() => {
         1: ["cattlesasdf", "battingasdf", "ratttlerasdf"],
         2: ["deerboyasdf", "spiritbearasdf"],
       },
-      
     },
     difficulty: "easy",
     gameMode: "classic",

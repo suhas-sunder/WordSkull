@@ -35,7 +35,7 @@ function Header() {
       <h1
         className={`${
           darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
-        } w-full z-1 flex-row flex justify-center items-center text-4xl mb-[0.2em] sm:text-5xl text-center mt-9 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-9  font-lora tracking-wide`}
+        } w-full z-1 flex-row flex justify-center items-center text-4xl sm:mb-[0.2em] sm:text-5xl text-center mt-12 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-9  font-lora tracking-wide`}
       >
         <span className="whitespace-nowrap">
           <span className="inline-flex">W</span>
@@ -48,16 +48,19 @@ function Header() {
       <p
         className={`${
           darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
-        } sm:text-xl leading-relaxed sm:leading-loose font-lato sm:mb-3 mx-3 sm:mt-2 sm:mx-12`}
+        } sm:text-xl leading-relaxed sm:leading-loose font-lato italic mb-4 mx-3 sm:mt-2 sm:mx-12`}
       >
-        Welcome, fellow adventurer! It's time to embark on a quest to conquer
-        epic word and puzzle challenges to defeat the skulls. Sharpen your
-        vocabulary one word at a time by wielding the strongest weapon at your
-        disposal—your mind! The dungeon awaits...
+        Welcome, fellow adventurer! It's time to embark on a quest to defeat the
+        skulls{" "}
+        <span className="hidden sm:inline">
+          in this challenging, word and puzzle game, fantasy themed adventure
+        </span>
+        ! Sharpen your vocabulary one word at a time by wielding the strongest
+        weapon at your disposal—your mind! The dungeon awaits...
       </p>
       <Link
-        to={"#word-skull-classic"}
-        className={`hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8  text-lg font-nunito rounded-full mt-2 py-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
+        to={"/word-skull-game-easy-mode"}
+        className={`hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8  text-lg font-nunito rounded-full mt-3 py-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
       >
         Start Playing!
       </Link>
@@ -74,15 +77,15 @@ export default function Index() {
   const { darkThemeActive } = useTheme();
 
   return (
-    <div className="flex relative  animate-fadeIn flex-col leading-relaxed tracking-wider mt-3 sm:mt-5 overflow-hidden justify-center items-center">
+    <div className="flex relative animate-fadeIn flex-col leading-relaxed tracking-wider mt-3 sm:mt-6 overflow-hidden justify-center items-center mx-7">
       <Header />
       <main
         className={`${
           darkThemeActive && "text-white"
-        } flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5  items-center mx-10`}
+        } flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5  items-center`}
       >
         <div className="flex flex-col flex-wrap justify-center gap-10 max-w-[1200px] items-center w-full ">
-          <div className="flex flex-col justify-center items-center gap-1">
+          <div className="flex flex-col justify-center items-center gap-2">
             <div id="word-skull-classic" className="absolute -top-20"></div>
             <h2
               className={`${
@@ -96,11 +99,14 @@ export default function Index() {
                 darkThemeActive
                   ? "text-stone-300"
                   : "text-skull-super-dark-brown"
-              }  text-lg leading-loose font-lato mx-5 sm:mx-8 text-center`}
+              }  sm:text-lg leading-loose font-lato mx-5 sm:mx-8 text-center`}
             >
-              Complete this word game puzzle by guessing the correct word for
-              each row before your lives run out. Defeat the skulls to unlock
-              the final boss (coming soon) and win the weekly challenge.
+              <span className="hidden sm:inline">
+                Complete this word game puzzle by guessing
+              </span>{" "}
+              <span className="inline sm:hidden">Guess</span> the correct word
+              for each row before your lives run out. Defeat the skulls to
+              unlock the final boss (coming soon) and win the weekly challenge.
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 xl:grid-cols-8  gap-12 justify-center items-center">

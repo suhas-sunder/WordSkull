@@ -113,6 +113,9 @@ const WordHistory = React.memo(function WordHistory({
       countRemainingChars() > 0
     ) {
       style = "!border-yellow-400 !text-yellow-600 !bg-yellow-100 ";
+    } else {
+      style =
+        "!bg-stone-400 text-stone-600 !border-stone-500 brightness-125 ";
     }
 
     return style;
@@ -124,7 +127,7 @@ const WordHistory = React.memo(function WordHistory({
       {dispWordHistory && (
         <button
           onClick={() => setDispWordHistory(false)}
-          className="fixed inset-0 h-full w-full flex bg-black/40 z-30 justify-center"
+          className="fixed inset-0 h-full w-full flex bg-skull-super-dark-brown/50 z-30 justify-center"
         ></button>
       )}
       <button
@@ -151,14 +154,14 @@ const WordHistory = React.memo(function WordHistory({
               ))}
           </div>
         ) : (
-          <div className="group-hover:text-orange-600/80 text-pumpkin-orange  font-nunito text-sm leading-loose tracking-widest">
+          <div className="group-hover:text-orange-600/80 text-pumpkin-orange font-nunito text-sm leading-loose tracking-widest">
             <span className="hidden xxs:inline">View</span>{" "}
             <span className="inline">Entered Words</span>
           </div>
         )}
       </button>
       {dispWordHistory && (
-        <div className="flex flex-col absolute z-[35] bg-white w-full font-nunito items-center gap-5 py-10 border-2 overflow-auto scrollbar-thin scrollbar-thumb-amber-500 scrollbar-track-amber-200 max-h-[450px] max-w-[400px] rounded-lg">
+        <div className="flex flex-col absolute z-[35] bg-amber-50 border-pumpkin-orange/50 w-full font-nunito items-center gap-5 py-10 border-4 overflow-auto scrollbar-thin scrollbar-thumb-amber-500 scrollbar-track-amber-200 max-h-[450px] max-w-[400px] rounded-lg">
           <div className="flex justify-center items-center">
             <button
               onClick={() => {
@@ -208,7 +211,18 @@ const WordHistory = React.memo(function WordHistory({
                         char,
                         rowIndex,
                         charIndex,
-                      })}} text-[1.2rem] p-0 m-0 sm:text-[1rem] capitalize border-2 rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
+                      })}} text-[1.2rem] p-0 m-0 ${
+                        wordsForSkull[
+                          currentRow + enteredWordsIndexOffset
+                        ]?.includes(char)
+                          ? "bg-yellow-100 border-yellow-400 text-yellow-600"
+                          : "!bg-stone-400 text-stone-600 !border-stone-500 brightness-125"
+                      } ${
+                        char ===
+                          wordsForSkull[currentRow + enteredWordsIndexOffset][
+                            charIndex
+                          ] && "!bg-green-100 !border-green-400 !text-green-600"
+                      }  sm:text-[1rem] capitalize border-2 rounded-lg w-[1.7em] h-[1.7em] flex justify-center items-center`}
                     >
                       {char}
                     </li>

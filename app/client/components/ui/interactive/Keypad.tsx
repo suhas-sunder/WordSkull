@@ -61,7 +61,7 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
   return (
     <div
       data-testid="keypad"
-      className={`text-stone-600 w-full flex min-h-[13em] select-none flex-col gap-y-5 mt-5 xs:mt-3 font-nunito rounded-xl uppercase text-base md:hidden`}
+      className={`text-stone-600 w-full flex min-h-[13em] select-none flex-col gap-y-5 mt-5 xs:mt-4 font-nunito rounded-xl uppercase text-base lg-md:hidden max-w-[600px]`}
     >
       {Object.values(keypadData).map((keysArr) => {
         return (
@@ -86,19 +86,19 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
                     currentWord?.includes(key.defaultKey) &&
                     currentlyEnteredWords?.join("").includes(key.defaultKey) &&
                     correctCharCount[key.defaultKey] > 0 &&
-                    "!bg-green-300 !text-green-800 !border-transparent"
+                    "!bg-green-300 !text-green-800 !border-green-500"
                   }
               ${
                 currentWord?.includes(key.defaultKey) &&
                 currentlyEnteredWords?.join("").includes(key.defaultKey) &&
                 correctCharCount[key.defaultKey] === 0 &&
-                "!bg-yellow-200 !text-yellow-800 !border-transparent"
+                "!bg-yellow-200 !text-yellow-800 !border-yellow-500"
               }
                ${
                  !currentWord?.includes(key.defaultKey) &&
                  currentlyEnteredWords?.join("").includes(key.defaultKey) &&
                  key.defaultKey !== "enter" &&
-                 "!bg-stone-400 !text-white !border-transparent"
+                 "!bg-stone-400 !text-stone-600 !border-stone-500 !brightness-125"
                }`}
                 >
                   {key.defaultKey === "space" ? "word menu" : key.defaultKey}

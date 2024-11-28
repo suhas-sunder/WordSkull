@@ -84,15 +84,15 @@ export default function Keyboard({
     let style = "flex justify-center items-center  h-full ";
 
     if (key === " ") {
-      style += "  px-[8em] lg:px-[10em]";
+      style += " px-[10em]";
     } else if (key === "Enter") {
-      style += "  px-6 lg:px-8";
+      style += " px-8";
     } else if (key === "Caps" || key === "Option" || key === "Menu") {
-      style += "  px-4 lg:px-5";
+      style += " px-5";
     } else if (key === "Shift") {
-      style += "  px-5 lg:px-6";
+      style += " px-6";
     } else {
-      style += "px-[1.25em] lg:px-5";
+      style += " px-5";
     }
 
     key.length === 1 ? (style += " min-w-[3.3em]") : (style += " text-xs");
@@ -124,7 +124,7 @@ export default function Keyboard({
   return (
     <div
       data-testid="keyboard"
-      className={` hidden text-pumpkin-orange -translate-y-[2em] -mb-[2.5em] scale-[0.75] select-none flex-col gap-y-5 font-nunito rounded-xl border-2 border-pumpkin-orange p-6 text-xs md:flex lg:text-base min-h-[23em]`}
+      className={`hidden text-pumpkin-orange -translate-y-[1.5em] -mb-[2.5em] scale-[0.8] select-none flex-col gap-y-5 font-nunito rounded-xl border-2 border-pumpkin-orange p-6 lg-md:flex text-base min-h-[23em]`}
     >
       {Object.values(keyboardData).map((keysArr, index) => {
         return (
@@ -165,18 +165,18 @@ export default function Keyboard({
                     currentWord?.includes(key.defaultKey) &&
                     currentlyEnteredWords?.join("").includes(key.defaultKey) &&
                     correctCharCount[key.defaultKey] > 0 &&
-                    "!bg-green-300 !text-green-800 !border-transparent"
+                    "!bg-green-300 !text-green-800 !border-green-500"
                   }
                 ${
                   currentWord?.includes(key.defaultKey) &&
                   currentlyEnteredWords?.join("").includes(key.defaultKey) &&
                   correctCharCount[key.defaultKey] === 0 &&
-                  "!bg-yellow-200 !text-yellow-800 !border-transparent"
+                  "!bg-yellow-100 !text-yellow-800 !border-yellow-500"
                 }
                  ${
                    !currentWord?.includes(key.defaultKey) &&
                    currentlyEnteredWords?.join("").includes(key.defaultKey) &&
-                   "!bg-stone-500/70 !text-white !brightness-80 !border-transparent"
+                   "!bg-stone-400 !text-stone-600 !border-stone-500 !brightness-125"
                  } bg-orange-100/10`}
                 >
                   <span

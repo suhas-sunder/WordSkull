@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { vi } from "vitest";
 import useWordsForSkull from "../useWordsForSkull";
-import { WordsData } from "../../../../routes/word-skull-game-easy-mode";
+import { WordsData } from "../../../../routes/.word-skull-game-easy-mode";
 import "@testing-library/jest-dom/vitest";
 import words from "../../data/Words"; // Import the function to get the backup words list
 

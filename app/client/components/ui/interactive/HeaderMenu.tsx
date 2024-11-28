@@ -37,7 +37,7 @@ function HeaderMenu({
     <div
       className={`${
         !dontFade && "animate-fadeIn"
-      } flex relative w-full items-center px-2 mt-5 mb-2 sm:mt-7 justify-between max-w-[700px] gap-5  text-stone-500 font-lora leading-snug text-xs sm:text-base`}
+      } flex relative w-full items-center px-2 mt-5 mb-2 sm:mt-7 justify-between max-w-[700px] gap-2 xs:gap-5  text-stone-500 font-lora leading-snug text-xs sm:text-base`}
     >
       <ul className="flex gap-1 justify-center items-center">
         <li className="flex justify-center items-center">

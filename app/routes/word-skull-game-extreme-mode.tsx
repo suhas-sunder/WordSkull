@@ -33,11 +33,12 @@ export default function WordSkullMedium() {
       <ClassicGameLogic
         startPosition={12}
         endPosition={15}
-        lettersPerSkull="3 - 9 letters"
+        lettersPerSkull="Extreme Difficulty: 3 - 9 letters"
         wordsData={wordsData}
-        difficulty="extreme" gameMode="classic"
+        difficulty="extreme"
+        gameMode="classic"
       />
-      
+
       <section>
         <ClassicGameplayInstructions />
       </section>
