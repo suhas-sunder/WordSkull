@@ -46,15 +46,13 @@ function About() {
           you&apos;ve come to the right place!
         </p>
       </header>
-      <main className="grid xs:grid-cols-2 md:grid-cols-3 gap-5 lg:grid-cols-4 max-w-[1200px] w-full mt-2 justify-center flex-col mb-10 px-5 ">
+      <main className="grid xs:grid-cols-2 md:grid-cols-3 gap-5 lg:grid-cols-4 max-w-[1200px] w-full mt-2 justify-center flex-col mb-10 px-5">
         <Link
           to="preview-of-your-indie-game"
-          className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
+          className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
         >
           <h4
-            className={`font-nunito text-center capitalize ${
-              darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-            }`}
+            className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-center text-lg`}
           >
             Name of Game 1
           </h4>
@@ -77,12 +75,10 @@ function About() {
         </Link>
         <Link
           to="preview-of-your-indie-game"
-          className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
+          className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
         >
           <h4
-            className={`font-nunito text-center capitalize ${
-              darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-            }`}
+            className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-center text-lg`}
           >
             Name of your Game 2
           </h4>

@@ -125,6 +125,7 @@ function DisplaySkull({
       {currentSkull.map((skull, index) => {
         return index === 0 ? (
           <div
+          id="skull"
             data-testid="display-skull"
             key={index}
             className="relative flex-col w-full max-w-[800px] xs:scale-[0.9]  min-h-[12em] mt-3 xs:mt-2 xs:min-h-[20em] capitalize flex font-nunito text-stone-400 items-center"
@@ -183,7 +184,7 @@ function DisplaySkull({
                                 ? `${
                                     darkThemeActive
                                       ? "bg-stone-500/20 text-stone-500 border-stone-500/70"
-                                      : "bg-stone-500/10 text-stone-500/70 border-stone-500/60"
+                                      : "bg-orange-50 text-orange-400 border-orange-300"
                                   }  scale-110 z-[10] border-[2.5px]`
                                 : `${
                                     darkThemeActive

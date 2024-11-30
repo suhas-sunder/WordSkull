@@ -98,7 +98,7 @@ function About() {
             <Outlet />
           )}
         </article>
-        <section className="grid xs:grid-cols-2 lg:flex lg:flex-col w-full mt-4 min-w-[180px] gap-5 text-center">
+        <section className="flex flex-col w-full mt-4 min-w-[180px] gap-5 text-center">
           {/* <div className="flex flex-col gap-2">
             <h3
               className={`font-lora text-xl ${
@@ -236,63 +236,61 @@ function About() {
             >
               Board Game Reviews
             </h3>
-            <Link
-              to="/board-game-reviews/learn-how-to-play-settlers-of-catan"
-              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
-            >
-              <h4
-                className={`font-nunito ${
-                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-                }`}
+            <div className="flex xs:grid grid-cols-2 gap-5 lg:gap-2 lg:flex flex-col">
+              <Link
+                to="/board-game-reviews/learn-how-to-play-settlers-of-catan"
+                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
-                Settlers Of Catan
-              </h4>
-              <picture className="rounded-md overflow-hidden">
-                <source srcSet={dragonMythologyWEBP} type="image/webp" />
-                <source srcSet={dragonMythologyJPG} type="image/jpeg" />
-                <img
-                  loading="lazy"
-                  className="flex w-full"
-                  src={dragonMythologyJPG}
-                  alt="A massive pink and purple dragon surrounded by sakura trees and clouds"
-                  width={460}
-                  height={260}
-                />
-              </picture>
-              <p className="mt-1">
-                Learn how to play Catan, game setup, strategy tips, and insights
-                perfect for newcomers and experienced players.
-              </p>
-            </Link>
-            <Link
-              to="/board-game-reviews/learn-how-to-play-monopoly"
-              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
-            >
-              <h4
-                className={`font-nunito ${
-                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-                }`}
+                <h4
+                  className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-lg`}
+                >
+                  Settlers Of Catan
+                </h4>
+                <picture className="rounded-md overflow-hidden">
+                  <source srcSet={dragonMythologyWEBP} type="image/webp" />
+                  <source srcSet={dragonMythologyJPG} type="image/jpeg" />
+                  <img
+                    loading="lazy"
+                    className="flex w-full"
+                    src={dragonMythologyJPG}
+                    alt="A massive pink and purple dragon surrounded by sakura trees and clouds"
+                    width={460}
+                    height={260}
+                  />
+                </picture>
+                <p className="mt-1">
+                  Learn how to play Catan, game setup, strategy tips, and
+                  insights perfect for newcomers and experienced players.
+                </p>
+              </Link>
+              <Link
+                to="/board-game-reviews/learn-how-to-play-monopoly"
+                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
-                Monopoly
-              </h4>
-              <picture className="rounded-md overflow-hidden">
-                <source srcSet={wallpaperWEBP} type="image/webp" />
-                <source srcSet={wallpaperJPG} type="image/jpeg" />
-                <img
-                  loading="lazy"
-                  className="flex w-full"
-                  src={wallpaperJPG}
-                  alt="A cartoony witch girl with pink hair in a majestic forest with glowing leave and trees"
-                  width={460}
-                  height={260}
-                />
-              </picture>
-              <p className="mt-1">
-                A comprehensive guided on how to play the Monopoly board game:
-                setup, strategy, and tips to help you win. Perfect for anyone
-                ready to rule the board!
-              </p>
-            </Link>
+                <h4
+                  className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-lg`}
+                >
+                  Monopoly
+                </h4>
+                <picture className="rounded-md overflow-hidden">
+                  <source srcSet={wallpaperWEBP} type="image/webp" />
+                  <source srcSet={wallpaperJPG} type="image/jpeg" />
+                  <img
+                    loading="lazy"
+                    className="flex w-full"
+                    src={wallpaperJPG}
+                    alt="A cartoony witch girl with pink hair in a majestic forest with glowing leave and trees"
+                    width={460}
+                    height={260}
+                  />
+                </picture>
+                <p className="mt-1">
+                  A comprehensive guided on how to play the Monopoly board game:
+                  setup, strategy, and tips to help you win. Perfect for anyone
+                  ready to rule the board!
+                </p>
+              </Link>
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             <h3
@@ -302,127 +300,122 @@ function About() {
             >
               Games & Apps
             </h3>
-            <Link
-              to="https://www.emojikitchengame.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out"
-            >
-              <h4
-                className={`font-nunito ${
-                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-                }`}
+            <div className="flex xs:grid grid-cols-2 gap-5 lg:gap-2 lg:flex flex-col">
+              <Link
+                to="https://www.emojikitchengame.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
-                Emoji Kitchen Game
-              </h4>
-              <picture className="rounded-md overflow-hidden">
-                <source srcSet={emojiKitchenWEBP} type="image/webp" />
-                <source srcSet={emojiKitchenJPG} type="image/jpeg" />
-                <img
-                  loading="lazy"
-                  className="flex w-full"
-                  src={emojiKitchenJPG}
-                  alt="Colorful emojis surrounding text that reads emoji kitchen game"
-                  width={460}
-                  height={260}
-                />
-              </picture>
-              <p className="mt-1">
-                😍👾Unleash your creativity by creating your favorite emoji
-                combos! Copy paste text faces (ʘ‿ʘ) & emojis in a snap! 🎉💫
-              </p>
-            </Link>
-            <Link
-              to="https://www.dragonmythology.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
-            >
-              <h4
-                className={`font-nunito ${
-                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-                }`}
+                <h4
+                  className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-lg`}
+                >
+                  Emoji Kitchen Game
+                </h4>
+                <picture className="rounded-md overflow-hidden">
+                  <source srcSet={emojiKitchenWEBP} type="image/webp" />
+                  <source srcSet={emojiKitchenJPG} type="image/jpeg" />
+                  <img
+                    loading="lazy"
+                    className="flex w-full"
+                    src={emojiKitchenJPG}
+                    alt="Colorful emojis surrounding text that reads emoji kitchen game"
+                    width={460}
+                    height={260}
+                  />
+                </picture>
+                <p className="mt-1">
+                  😍👾Unleash your creativity by creating your favorite emoji
+                  combos! Copy paste text faces (ʘ‿ʘ) & emojis in a snap! 🎉💫
+                </p>
+              </Link>
+              <Link
+                to="https://www.dragonmythology.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
-                Dragon Mythology
-              </h4>
-              <picture className="rounded-md overflow-hidden">
-                <source srcSet={dragonMythologyWEBP} type="image/webp" />
-                <source srcSet={dragonMythologyJPG} type="image/jpeg" />
-                <img
-                  loading="lazy"
-                  className="flex w-full"
-                  src={dragonMythologyJPG}
-                  alt="A massive pink and purple dragon surrounded by sakura trees and clouds"
-                  width={460}
-                  height={260}
-                />
-              </picture>
-              <p className="mt-1">
-                🐲 Explore captivating myths and legends from around the world.
-                Discover Greek, Hindu, Norse, Chinese, and Japanese mythology,
-                and dive into ancient stories and cultural lore. 🐉
-              </p>
-            </Link>
+                <h4
+                  className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-lg`}
+                >
+                  Dragon Mythology
+                </h4>
+                <picture className="rounded-md overflow-hidden">
+                  <source srcSet={dragonMythologyWEBP} type="image/webp" />
+                  <source srcSet={dragonMythologyJPG} type="image/jpeg" />
+                  <img
+                    loading="lazy"
+                    className="flex w-full"
+                    src={dragonMythologyJPG}
+                    alt="A massive pink and purple dragon surrounded by sakura trees and clouds"
+                    width={460}
+                    height={260}
+                  />
+                </picture>
+                <p className="mt-1">
+                  🐲 Explore captivating myths and legends from around the
+                  world. Discover Greek, Hindu, Norse, Chinese, and Japanese
+                  mythology, and dive into ancient stories and cultural lore. 🐉
+                </p>
+              </Link>
 
-            <Link
-              to="/wallpaper"
-              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
-            >
-              <h4
-                className={`font-nunito ${
-                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-                }`}
+              <Link
+                to="/wallpaper"
+                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
-                Fantasy 4K HD Wallpapers
-              </h4>
-              <picture className="rounded-md overflow-hidden">
-                <source srcSet={wallpaperWEBP} type="image/webp" />
-                <source srcSet={wallpaperJPG} type="image/jpeg" />
-                <img
-                  loading="lazy"
-                  className="flex w-full"
-                  src={wallpaperJPG}
-                  alt="A cartoony witch girl with pink hair in a majestic forest with glowing leave and trees"
-                  width={460}
-                  height={260}
-                />
-              </picture>
-              <p className="mt-1">
-                Similar to the online word games and puzzle on WordSkull, these
-                wallpapers are fantasy dungeon themed and are perfect for your
-                desktop, laptop, social media, profile pics, and more.
-              </p>
-            </Link>
-            <Link
-              to="https://www.dragonmythology.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3"
-            >
-              <h4
-                className={`font-nunito ${
-                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
-                }`}
+                <h4
+                  className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-lg`}
+                >
+                  Fantasy 4K HD Wallpapers
+                </h4>
+                <picture className="rounded-md overflow-hidden">
+                  <source srcSet={wallpaperWEBP} type="image/webp" />
+                  <source srcSet={wallpaperJPG} type="image/jpeg" />
+                  <img
+                    loading="lazy"
+                    className="flex w-full"
+                    src={wallpaperJPG}
+                    alt="A cartoony witch girl with pink hair in a majestic forest with glowing leave and trees"
+                    width={460}
+                    height={260}
+                  />
+                </picture>
+                <p className="mt-1">
+                  Similar to the online word games and puzzle on WordSkull,
+                  these wallpapers are fantasy dungeon themed and are perfect
+                  for your desktop, laptop, social media, profile pics, and
+                  more.
+                </p>
+              </Link>
+              <Link
+                to="https://www.dragonmythology.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
-                Productivity Garden
-              </h4>
-              <picture className="rounded-md overflow-hidden">
-                <source srcSet={dragonMythologyWEBP} type="image/webp" />
-                <source srcSet={dragonMythologyJPG} type="image/jpeg" />
-                <img
-                  loading="lazy"
-                  className="flex w-full"
-                  src={dragonMythologyJPG}
-                  alt="A massive pink and purple dragon surrounded by sakura trees and clouds"
-                  width={460}
-                  height={260}
-                />
-              </picture>
-              <p className="mt-1">
-                🌱 Discover tips, tricks, tools, and strategies to optimize your
-                workflow and boost your productivity. 🌿📚
-              </p>
-            </Link>
+                <h4
+                  className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-lg`}
+                >
+                  Productivity Garden
+                </h4>
+                <picture className="rounded-md overflow-hidden">
+                  <source srcSet={dragonMythologyWEBP} type="image/webp" />
+                  <source srcSet={dragonMythologyJPG} type="image/jpeg" />
+                  <img
+                    loading="lazy"
+                    className="flex w-full"
+                    src={dragonMythologyJPG}
+                    alt="A massive pink and purple dragon surrounded by sakura trees and clouds"
+                    width={460}
+                    height={260}
+                  />
+                </picture>
+                <p className="mt-1">
+                  🌱 Discover tips, tricks, tools, and strategies to optimize
+                  your workflow and boost your productivity. 🌿📚
+                </p>
+              </Link>
+            </div>
           </div>
         </section>
       </main>
