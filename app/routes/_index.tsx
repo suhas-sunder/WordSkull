@@ -109,10 +109,10 @@ export default function Index() {
               unlock the final boss (coming soon) and win the weekly challenge.
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 xl:grid-cols-8  gap-12 justify-center items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 xl:grid-cols-8 gap-12 justify-center items-center">
             <button
               onClick={() => navigate(`/word-skull-game-easy-mode`)}
-              className="group flex col-span-2 flex-col gap-2 w-[15em] justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-300 shadow-md rounded-t-[150em] rounded-b-full bg-white bg-opacity-10"
+              className="group flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12 hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
             >
               <h3 className="text-lg font-nunito">Boneheads</h3>
               <picture>
@@ -121,15 +121,14 @@ export default function Index() {
                 <img
                   src={Skull_1}
                   alt="Word Skull Classic boneheads difficulty easy"
-                  className="w-[180px] h-[180px] rounded-lg"
+                  className="flex rounded-lg"
                   width="180"
                   height="180"
                   loading="lazy"
                 />
               </picture>
-
-              <h3 className="text-base font-nunito">Difficulty: Easy</h3>
-              <p className="text-sm font-lato">3 - 5 letters per word</p>
+              <h3 className="font-lato mt-auto">Difficulty: Easy</h3>
+              <p className="font-lato">3 - 5 letters per word</p>
               <div
                 className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
               >
@@ -138,7 +137,7 @@ export default function Index() {
             </button>
             <button
               onClick={() => navigate(`/word-skull-game-medium-mode`)}
-              className="group flex col-span-2 flex-col gap-2 w-[15em] justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-300 shadow-md rounded-t-[150em] rounded-b-full bg-white bg-opacity-10"
+              className="group flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
             >
               <h3 className="text-lg font-nunito">Specter</h3>
               <picture>
@@ -147,14 +146,14 @@ export default function Index() {
                 <img
                   src={Skull_2}
                   alt="Word Skull Classic specter medium difficulty"
-                  className="w-[180px] h-[180px] rounded-lg"
+                  className="flex rounded-lg"
                   width="180"
                   height="180"
                   loading="lazy"
                 />
               </picture>
-              <h4 className="text-base font-nunito">Difficulty: Medium</h4>
-              <p className="text-sm font-lato">3 - 6 letters per word</p>
+              <h4 className="font-lato mt-auto">Difficulty: Medium</h4>
+              <p className="font-lato">3 - 6 letters per word</p>
               <div
                 className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
               >
@@ -164,7 +163,7 @@ export default function Index() {
 
             <button
               onClick={() => navigate(`/word-skull-game-hard-mode`)}
-              className="group flex col-span-2 flex-col gap-2 w-[15em] justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-300 shadow-md rounded-t-[150em] rounded-b-full bg-white bg-opacity-10"
+              className="group flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12 hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
             >
               <h3 className="text-lg font-nunito">Reapers</h3>
               <picture>
@@ -173,14 +172,14 @@ export default function Index() {
                 <img
                   src={Skull_3}
                   alt="Word Skull Classic reapers hard difficulty"
-                  className="w-[180px] h-[180px] rounded-lg"
+                  className="flex rounded-lg"
                   width="180"
                   height="180"
                   loading="lazy"
                 />
               </picture>
-              <h4 className="text-base font-nunito">Difficulty: Hard</h4>
-              <p className="text-sm font-lato">3 - 7 letters per word</p>
+              <h4 className="font-lato mt-auto">Difficulty: Hard</h4>
+              <p className="font-lato">3 - 7 letters per word</p>
               <div
                 className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
               >
@@ -189,7 +188,7 @@ export default function Index() {
             </button>
             <button
               onClick={() => navigate(`/word-skull-game-extreme-mode`)}
-              className="group flex col-span-2 flex-col gap-2 w-[15em] justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-300 shadow-md rounded-t-[150em] rounded-b-full bg-white bg-opacity-10"
+              className="group flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
             >
               <h3 className="text-lg font-nunito">Royal Lichen</h3>
               <picture>
@@ -198,14 +197,14 @@ export default function Index() {
                 <img
                   src={Skull_4}
                   alt="Word Skull Classic royal lichen extreme difficulty"
-                  className="w-[180px] h-[180px] rounded-lg"
+                  className="flex rounded-lg"
                   width="180"
                   height="180"
                   loading="lazy"
                 />
               </picture>
-              <h4 className="text-base font-nunito">Difficulty: Extreme</h4>
-              <p className="text-sm font-lato">3 - 9 letters per word</p>
+              <h4 className="font-lato mt-auto">Difficulty: Extreme</h4>
+              <p className="font-lato">3 - 9 letters per word</p>
               <div
                 className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
               >

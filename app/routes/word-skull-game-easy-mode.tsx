@@ -40,13 +40,13 @@ export default function WordSkullEasy() {
         difficulty="easy"
         gameMode="classic"
       />
-      <div className="flex w-full justify-center">
+      {/* <div className="flex w-full justify-center">
         Display shortcuts to other related game modes here with current one
         selected.
       </div>
       <div className="flex w-full justify-center">
         List of all other game modes on the nav bar to the right.
-      </div>
+      </div> */}
       <section>
         <ClassicGameplayInstructions />
       </section>
