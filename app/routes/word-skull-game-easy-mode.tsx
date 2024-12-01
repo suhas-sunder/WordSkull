@@ -4,6 +4,7 @@ import ClassicGameplayInstructions from "../client/components/layout/ClassicGame
 import { useMatches } from "react-router-dom";
 import { useMemo } from "react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
+import GameLinks from "../client/components/layout/GameLinks";
 export type WordsData = {
   words?: { [key: number]: string[] };
 };
@@ -47,7 +48,8 @@ export default function WordSkullEasy() {
       <div className="flex w-full justify-center">
         List of all other game modes on the nav bar to the right.
       </div> */}
-      <section>
+      <GameLinks />
+      <section className="mt-20">
         <ClassicGameplayInstructions />
       </section>
       <section>

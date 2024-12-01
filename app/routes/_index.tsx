@@ -1,18 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useNavigate } from "@remix-run/react";
 import { useTheme } from "../client/components/context/ThemeContext";
 import { MetaFunction } from "@remix-run/node";
 import { Link } from "react-router-dom";
-import Skull_1 from "../client/assets/images/skull_1.png";
-import Skull_2 from "../client/assets/images/skull_2.png";
-import Skull_3 from "../client/assets/images/skull_3.png";
-import Skull_4 from "../client/assets/images/skull_4.png";
-import Skull_1_Webp from "../client/assets/images/skull_1.webp";
-import Skull_2_Webp from "../client/assets/images/skull_2.webp";
-import Skull_3_Webp from "../client/assets/images/skull_3.webp";
-import Skull_4_Webp from "../client/assets/images/skull_4.webp";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
+import GameLinks from "../client/components/layout/GameLinks";
 
 export const meta: MetaFunction = () => {
   return [
@@ -72,7 +64,7 @@ function Header() {
 }
 
 export default function Index() {
-  const navigate = useNavigate();
+  
 
   const { darkThemeActive } = useTheme();
 
@@ -81,139 +73,10 @@ export default function Index() {
       <Header />
       <main
         className={`${
-          darkThemeActive && "text-white"
-        } flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5  items-center`}
+          darkThemeActive && "text-stone-400"
+        } flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5 items-center`}
       >
-        <div className="flex flex-col flex-wrap justify-center gap-10 max-w-[1200px] items-center w-full ">
-          <div className="flex flex-col justify-center items-center gap-2">
-            <div id="word-skull-classic" className="absolute -top-20"></div>
-            <h2
-              className={`${
-                darkThemeActive ? "text-white" : "text-skull-dark-brown"
-              } font-lora text-2xl `}
-            >
-              WordSkull Classic
-            </h2>
-            <p
-              className={`${
-                darkThemeActive
-                  ? "text-stone-300"
-                  : "text-skull-super-dark-brown"
-              }  sm:text-lg leading-loose font-lato mx-5 sm:mx-8 text-center`}
-            >
-              <span className="hidden sm:inline">
-                Complete this word game puzzle by guessing
-              </span>{" "}
-              <span className="inline sm:hidden">Guess</span> the correct word
-              for each row before your lives run out. Defeat the skulls to
-              unlock the final boss (coming soon) and win the weekly challenge.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 xl:grid-cols-8 gap-12 justify-center items-center">
-            <button
-              onClick={() => navigate(`/word-skull-game-easy-mode`)}
-              className="group flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12 hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
-            >
-              <h3 className="text-lg font-nunito">Boneheads</h3>
-              <picture>
-                <source srcSet={`${Skull_1_Webp}`} type="image/webp" />
-                <source srcSet={`${Skull_1}`} type="image/png" />
-                <img
-                  src={Skull_1}
-                  alt="Word Skull Classic boneheads difficulty easy"
-                  className="flex rounded-lg"
-                  width="180"
-                  height="180"
-                  loading="lazy"
-                />
-              </picture>
-              <h3 className="font-lato mt-auto">Difficulty: Easy</h3>
-              <p className="font-lato">3 - 5 letters per word</p>
-              <div
-                className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
-              >
-                Play
-              </div>
-            </button>
-            <button
-              onClick={() => navigate(`/word-skull-game-medium-mode`)}
-              className="group flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
-            >
-              <h3 className="text-lg font-nunito">Specter</h3>
-              <picture>
-                <source srcSet={`${Skull_2_Webp}`} type="image/webp" />
-                <source srcSet={`${Skull_2}`} type="image/png" />
-                <img
-                  src={Skull_2}
-                  alt="Word Skull Classic specter medium difficulty"
-                  className="flex rounded-lg"
-                  width="180"
-                  height="180"
-                  loading="lazy"
-                />
-              </picture>
-              <h4 className="font-lato mt-auto">Difficulty: Medium</h4>
-              <p className="font-lato">3 - 6 letters per word</p>
-              <div
-                className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
-              >
-                Play
-              </div>
-            </button>
-
-            <button
-              onClick={() => navigate(`/word-skull-game-hard-mode`)}
-              className="group flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12 hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
-            >
-              <h3 className="text-lg font-nunito">Reapers</h3>
-              <picture>
-                <source srcSet={`${Skull_3_Webp}`} type="image/webp" />
-                <source srcSet={`${Skull_3}`} type="image/png" />
-                <img
-                  src={Skull_3}
-                  alt="Word Skull Classic reapers hard difficulty"
-                  className="flex rounded-lg"
-                  width="180"
-                  height="180"
-                  loading="lazy"
-                />
-              </picture>
-              <h4 className="font-lato mt-auto">Difficulty: Hard</h4>
-              <p className="font-lato">3 - 7 letters per word</p>
-              <div
-                className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
-              >
-                Play
-              </div>
-            </button>
-            <button
-              onClick={() => navigate(`/word-skull-game-extreme-mode`)}
-              className="group flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
-            >
-              <h3 className="text-lg font-nunito">Royal Lichen</h3>
-              <picture>
-                <source srcSet={`${Skull_4_Webp}`} type="image/webp" />
-                <source srcSet={`${Skull_4}`} type="image/png" />
-                <img
-                  src={Skull_4}
-                  alt="Word Skull Classic royal lichen extreme difficulty"
-                  className="flex rounded-lg"
-                  width="180"
-                  height="180"
-                  loading="lazy"
-                />
-              </picture>
-              <h4 className="font-lato mt-auto">Difficulty: Extreme</h4>
-              <p className="font-lato">3 - 9 letters per word</p>
-              <div
-                className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
-              >
-                Play
-              </div>
-            </button>
-          </div>
-        </div>
-
+        <GameLinks />
         <div>
           <h2
             className={`${
@@ -230,16 +93,14 @@ export default function Index() {
             <li className="flex flex-col gap-2">
               <h3
                 className={`${
-                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                  darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
                 } flex py-2 text-2xl font-nunito mt-2`}
               >
                 What is WordSkull?
               </h3>
               <p className="font-lato text-lg pl-5 tracking-wider leading-loose">
                 <Link
-                  className={`${
-                    darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
-                  } hover:text-amber-600 font-lora`}
+                  className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
                   to="/word-skull-game-easy-mode"
                 >
                   WordSkull
@@ -258,7 +119,7 @@ export default function Index() {
             <li className="flex flex-col gap-2">
               <h3
                 className={`${
-                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                  darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
                 } flex py-2 text-2xl font-nunito mt-2`}
               >
                 What was the motivation behind WordSkull?
@@ -269,9 +130,7 @@ export default function Index() {
                 classic word and puzzle games. If you want the long story, you
                 can find it on the{" "}
                 <Link
-                  className={`${
-                    darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
-                  } hover:text-amber-600 font-lora`}
+                  className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
                   to="/about"
                 >
                   {" "}
@@ -291,18 +150,14 @@ export default function Index() {
           feel free to reach out to{" "}
           <a
             href="mailto:admin@wordskull.com"
-            className={`${
-              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
-            } hover:text-amber-600 font-lora`}
+            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
           >
             admin@wordskull.com{" "}
           </a>
           or you can find me on any of my socials and associated links listed on
           the{" "}
           <Link
-            className={`${
-              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
-            } hover:text-amber-600 font-lora`}
+            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
             to="/socials"
           >
             socials page

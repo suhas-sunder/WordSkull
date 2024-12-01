@@ -5,6 +5,7 @@ import { WordsData } from "./word-skull-game-easy-mode";
 import { useMemo } from "react";
 import { useMatches } from "react-router-dom";
 import SocialLinks from "../client/components/navigation/SocialLinks";
+import GameLinks from "../client/components/layout/GameLinks";
 
 export const meta: MetaFunction = () => {
   return [
@@ -37,7 +38,8 @@ export default function WordSkullMedium() {
         difficulty="medium"
         gameMode="classic"
       />
-      <section>
+      <GameLinks />
+      <section className="mt-20">
         <ClassicGameplayInstructions />
       </section>
       <section>

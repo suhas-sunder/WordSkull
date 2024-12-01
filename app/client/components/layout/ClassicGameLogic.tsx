@@ -135,7 +135,7 @@ function ClassicGameLogic({
         </label>
         {showKeyboard ? (
           <div
-            className={` flex max-w-[800px] w-full justify-center items-center`}
+            className={` flex max-w-[800px] w-full justify-center items-center mt-1/2`}
           >
             <Keyboard
               currentlyEnteredWords={enteredWords[currentRow]}
@@ -152,7 +152,7 @@ function ClassicGameLogic({
         <h1
           className={`${
             darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
-          } w-full z-1 flex-col flex justify-center mt-[2em] lg-md:mt-[0.3em] items-center gap-5 text-2xl md:mb-[1.4em] sm:text-3xl text-center  leading-snug  font-lora tracking-wide`}
+          } w-full z-1 flex-col flex justify-center mt-[2em] lg-md:mt-[0.3em] items-center gap-5 text-2xl mb-3 sm:text-3xl text-center  leading-snug  font-lora tracking-wide`}
         >
           <span className="flex">W💀RD SKULL CLASSIC</span>
           {lettersPerSkull && (

@@ -181,11 +181,7 @@ function DisplaySkull({
                               //Apply default styling to all empty squares & vary styling for current square so user can tell which square will be filled in next
                               rowIndex === currentRow &&
                               squareIndex === currentRowIndex + shiftedIndex
-                                ? `${
-                                    darkThemeActive
-                                      ? "bg-stone-500/20 text-stone-500 border-stone-500/70"
-                                      : "bg-orange-50 text-orange-400 border-orange-300"
-                                  }  scale-110 z-[10] border-[2.5px]`
+                                ? `bg-orange-50 text-orange-400 border-orange-300 scale-110 z-[10] border-[2.5px]`
                                 : `${
                                     darkThemeActive
                                       ? "text-stone-400 "

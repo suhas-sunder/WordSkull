@@ -117,11 +117,7 @@ function SocialLinks() {
         {linksData.map((link) => (
           <li key={link.id}>
             <Link
-              className={`${
-                darkThemeActive
-                  ? "text-amber-600"
-                  : "text-pumpkin-orange"
-              } group hover:text-amber-600 font-lora flex gap-3 items-center`}
+              className={`text-pumpkin-orange group hover:text-amber-600 font-lora flex gap-3 items-center`}
               target="_blank"
               rel="noopener noreferrer nofollow"
               to={link.url}
