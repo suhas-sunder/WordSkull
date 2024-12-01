@@ -44,7 +44,7 @@ function ClassicGameplayInstructions() {
             ></div>
             <h2
               className={`text-4xl font-nunito  uppercase mb-10 ${
-                darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
+                darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
               }`}
             >
               How to play
@@ -52,7 +52,7 @@ function ClassicGameplayInstructions() {
             <ul
               className={`flex max-w-[900px] flex-col gap-14 font-lato text-center sm:text-start mx-5 text-xl tracking-wider leading-loose ${
                 darkThemeActive
-                  ? "text-stone-400"
+                  ? "text-stone-300"
                   : "text-skull-super-dark-brown"
               }`}
             >

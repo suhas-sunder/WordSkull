@@ -8,12 +8,11 @@ function Footer() {
 
   return (
     <nav
-      className={`${styles.nav} transition-colors duration-[600ms] ${darkThemeActive ? "border-stone-600/10" : "border-stone-200" } w-full border-t-2 flex gap-5 sm:gap-20 justify-center items-center py-1 sm:py-2 text-xs font-nunito  bg-white `}
+      className={`${styles.nav} transition-colors duration-[600ms] ${darkThemeActive ? "border-stone-600/10 bg-stone-800" : "border-stone-200 bg-white" } w-full border-t-2 flex gap-5 sm:gap-20 justify-center items-center py-1 sm:py-2 text-xs font-nunito   `}
     >
       <div className={`${darkThemeActive ? "text-amber-600" : "text-skull-dark-brown"} flex gap-1 font-bold tracking-widest`}>
         <span>&copy; 2024</span> <span className="hidden md:flex"> | </span>
-        <span className="font-overlock hidden sm:flex">WordSkull</span>
-        <span className="font-overlock sm:hidden flex">EKG</span>
+        <span className="font-overlock flex">WordSkull</span>
         <span className="hidden md:flex"> - All Rights Reserved.</span>
       </div>
       <ul

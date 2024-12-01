@@ -34,13 +34,13 @@ function About() {
   return (
     <div
       className={`${
-        darkThemeActive ? "text-stone-200" : "text-skull-dark-brown"
+        darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
       } flex animate-fadeIn justify-center flex-col items-center mt-12`}
     >
       <header className="flex flex-col justify-center items-center gap-3 mb-3 mx-5 text-center">
         <h1
           className={`${
-            darkThemeActive ? "text-stone-100" : "text-skull-dark-brown"
+            darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
           } w-full z-1  flex justify-center items-center flex-col md:flex-row text-5xl text-center mt-1 leading-snug -translate-y-[0.3em] sm:translate-y-0 font-lora tracking-wide`}
         >
           <span className="mr-2">
@@ -102,7 +102,7 @@ function About() {
           {/* <div className="flex flex-col gap-2">
             <h3
               className={`font-lora text-xl ${
-                darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                darkThemeActive ? "text-stone-200" : "text-skull-super-dark-brown"
               }`}
             >
               Related Blogs
@@ -115,7 +115,7 @@ function About() {
             >
               <h4
                 className={`font-nunito ${
-                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                  darkThemeActive ? "text-stone-200" : "text-skull-super-dark-brown"
                 }`}
               >
                 Emoji Kitchen Game
@@ -145,7 +145,7 @@ function About() {
             >
               <h4
                 className={`font-nunito ${
-                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                  darkThemeActive ? "text-stone-200" : "text-skull-super-dark-brown"
                 }`}
               >
                 Emoji Kitchen Game
@@ -175,7 +175,7 @@ function About() {
             >
               <h4
                 className={`font-nunito ${
-                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                  darkThemeActive ? "text-stone-200" : "text-skull-super-dark-brown"
                 }`}
               >
                 Emoji Kitchen Game
@@ -205,7 +205,7 @@ function About() {
             >
               <h4
                 className={`font-nunito ${
-                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                  darkThemeActive ? "text-stone-200" : "text-skull-super-dark-brown"
                 }`}
               >
                 Emoji Kitchen Game
@@ -231,7 +231,7 @@ function About() {
           <div className="flex flex-col gap-2">
             <h3
               className={`font-lora text-xl ${
-                darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                darkThemeActive ? "text-stone-200" : "text-skull-super-dark-brown"
               }`}
             >
               Board Game Reviews
@@ -239,10 +239,10 @@ function About() {
             <div className="flex xs:grid grid-cols-2 gap-5 lg:gap-2 lg:flex flex-col">
               <Link
                 to="/board-game-reviews/learn-how-to-play-settlers-of-catan"
-                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
+                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-lg`}
+                  className={`font-nunito text-lg`}
                 >
                   Settlers Of Catan
                 </h4>
@@ -265,10 +265,10 @@ function About() {
               </Link>
               <Link
                 to="/board-game-reviews/learn-how-to-play-monopoly"
-                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
+                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-lg`}
+                  className={`font-nunito text-lg`}
                 >
                   Monopoly
                 </h4>
@@ -295,7 +295,7 @@ function About() {
           <div className="flex flex-col gap-2">
             <h3
               className={`font-lora text-xl ${
-                darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
+                darkThemeActive ? "text-stone-200" : "text-skull-super-dark-brown"
               }`}
             >
               Games & Apps
@@ -305,10 +305,10 @@ function About() {
                 to="https://www.emojikitchengame.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
+                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-lg`}
+                  className={`font-nunito text-lg`}
                 >
                   Emoji Kitchen Game
                 </h4>
@@ -333,10 +333,10 @@ function About() {
                 to="https://www.dragonmythology.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
+                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-lg`}
+                  className={`font-nunito text-lg`}
                 >
                   Dragon Mythology
                 </h4>
@@ -361,10 +361,10 @@ function About() {
 
               <Link
                 to="/wallpaper"
-                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
+                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-lg`}
+                  className={`font-nunito text-lg`}
                 >
                   Fantasy 4K HD Wallpapers
                 </h4>
@@ -391,10 +391,10 @@ function About() {
                 to="https://www.dragonmythology.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-orange-700 hover:text-amber-700 shadow-md hover:shadow-lg hover:shadow-pumpkin-orange/20 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
+                className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-lg`}
+                  className={`font-nunito text-lg`}
                 >
                   Productivity Garden
                 </h4>

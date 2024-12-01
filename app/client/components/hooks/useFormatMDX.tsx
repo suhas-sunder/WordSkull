@@ -25,32 +25,32 @@ function useFormatMDX() {
     h2: (props: React.HTMLProps<HTMLHeadingElement>) => (
       <h2
         className={`${
-          darkThemeActive ? "text-stone-100" : "text-skull-super-dark-brown"
-        } flex py-2 text-3xl font-lora mt-4 text-center justify-center lg:justify-start lg:text-left leading-relaxed sm:leading-[0.7em] capitalize text-skull-super-dark-brown mb-3`}
+          darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
+        } flex py-2 text-3xl font-lora mt-4 text-center justify-center sm:justify-start sm:text-left leading-relaxed sm:leading-[0.7em] capitalize text-skull-dark-brown mb-3`}
         {...props}
       />
     ),
     h3: (props: React.HTMLProps<HTMLHeadingElement>) => (
       <h3
         className={`leading-relaxed lg:leading-normal ${
-          darkThemeActive ? "text-stone-100" : "text-skull-super-dark-brown"
-        } flex py-2 text-2xl font-nunito mt-4 text-skull-super-dark-brown`}
+          darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
+        } flex py-2 text-2xl font-nunito mt-4 text-skull-dark-brown`}
         {...props}
       />
     ),
     p: (props: React.HTMLProps<HTMLParagraphElement>) => (
       <p
         className={`${
-          darkThemeActive ? "text-stone-100" : "text-skull-super-dark-brown"
-        } font-lato text-lg tracking-wider leading-loose pl-2 mb-3 gap-8`}
+          darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
+        } font-lato text-lg tracking-wider leading-loose mb-3 gap-8`}
         {...props}
       />
     ),
     ul: (props: React.HTMLProps<HTMLUListElement>) => (
       <ul
         className={`${
-          darkThemeActive ? "text-stone-200" : "text-skull-super-dark-brown"
-        } font-lato text-lg tracking-wider  leading-loose pl-8 gap-8 px-4 sm:px-6 md:px-14 list-decimal list-inside space-y-2 mb-3`}
+          darkThemeActive ? "text-stone-200" : "text-skull-dark-brown"
+        } font-lato text-lg tracking-wider leading-loose gap-8 px-4 sm:px-6 list-decimal list-inside space-y-2 mb-3`}
         {...props}
       />
     ),
@@ -65,8 +65,8 @@ function useFormatMDX() {
       return (
         <ol
           className={`${
-            darkThemeActive ? "text-stone-200" : "text-skull-super-dark-brown"
-          } font-lato text-lg tracking-wider  leading-loose pl-8 gap-8 px-4 sm:px-6 md:px-14 list-decimal list-inside space-y-2 mb-3`}
+            darkThemeActive ? "text-stone-200" : "text-skull-dark-brown"
+          } font-lato text-lg tracking-wider  leading-loose gap-8 px-4 sm:px-6 list-decimal list-inside space-y-2 mb-3`}
           type={validType}
           {...restProps}
         />
