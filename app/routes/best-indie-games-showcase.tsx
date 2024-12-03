@@ -68,7 +68,7 @@ function About() {
               height={260}
             />
           </picture>
-          <p className="mt-1 text-center">
+          <p className="mt-1 text-center group-hover:text-amber-600">
             A brief description about the game. Lorem ipsum dolor sit amet
             consectetur adipisicing elit.
           </p>
@@ -94,7 +94,7 @@ function About() {
               height={260}
             />
           </picture>
-          <p className="mt-1 text-center">
+          <p className="mt-1 text-center group-hover:text-amber-600">
             A brief description about the game. Lorem ipsum dolor sit amet
             consectetur adipisicing elit.
           </p>
@@ -105,9 +105,7 @@ function About() {
           Interested in showcasing your indie game?{" "}
           <Link
             to="/socials"
-            className={`${
-              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
-            } hover:text-amber-600 font-lora`}
+            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
           >
             Contact us
           </Link>{" "}
@@ -116,9 +114,7 @@ function About() {
           information on how to submit. Here is a{" "}
           <Link
             to="/edit-indie-game"
-            className={`${
-              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
-            } hover:text-amber-600 font-lora`}
+            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
           >
             detailed submission guide
           </Link>{" "}

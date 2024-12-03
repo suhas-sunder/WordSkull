@@ -15,6 +15,11 @@ function GameLinks() {
       {/* Tik Tak Toe */}
       {/* <GameDifficultyMenu title="🦴 Skull and B💀ne 🦴" emoji="🦴💀🦴" />
       <GameDifficultyMenu title="Bl🧱ckSkull" emoji="🧱" /> */}
+      {/* A game similar to topsoil but about archeology and harvesting fossils - will probably need custom art for this */}
+      {/* <GameDifficultyMenu title="💀🌱 Harvest Skull 🪨⛏️" emoji="💀🌱🪨⛏️" /> */}
+      {/* <GameDifficultyMenu title="W🐍rdGobbler" emoji="🐍" /> */}
+      {/* Crossy road but you have to type the word at the right time for the animal to jump onto the log or w/e */}
+      {/* <GameDifficultyMenu title="Cr🐸ssyWords" emoji="🐸" /> */}
     </>
   );
 }

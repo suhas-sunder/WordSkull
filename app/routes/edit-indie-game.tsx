@@ -183,7 +183,7 @@ export default function EditIndieGame() {
           </Link>
           , you agree to the following terms and conditions:
         </p>
-        <ul className="font-nunito pl-5 flex gap-5 flex-col list-disc">
+        <ul className="font-lato pl-7 flex gap-5 flex-col list-disc">
           <li>
             You will post original content that does not infringe any
             third-party intellectual property rights.

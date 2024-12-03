@@ -124,11 +124,11 @@ export default function Keyboard({
   return (
     <div
       data-testid="keyboard"
-      className={`hidden text-pumpkin-orange -translate-y-[1.5em] -mb-[2.5em] scale-[0.8] select-none flex-col gap-y-5 font-nunito rounded-xl border-2 border-pumpkin-orange p-6 lg-md:flex text-base min-h-[23em]`}
+      className={`hidden  text-pumpkin-orange -translate-y-[1.5em] -mb-[2.5em] scale-[0.8] select-none flex-col gap-y-5 font-nunito rounded-xl border-2 border-pumpkin-orange p-6 lg-md:flex text-base min-h-[23em]`}
     >
       {Object.values(keyboardData).map((keysArr, index) => {
         return (
-          <div key={`keyboard-rows${index}-id`} className="flex gap-3">
+          <div key={`keyboard-rows${index}-id`} className="flex gap-3 ">
             {keysArr.map((key) => (
               <div
                 key={key.id}
@@ -147,7 +147,7 @@ export default function Keyboard({
                   onClick={() =>
                     makeKeypadInteractive && SimulateKeyPress(key.defaultKey)
                   }
-                  className={` group-hover:bg-amber-600 group-hover:border-transparent group-hover:text-white  ${
+                  className={`group-hover:bg-amber-600 group-hover:border-transparent group-hover:text-white  ${
                     key.defaultKey !== "Shift" &&
                     key.defaultKey !== " " &&
                     key.defaultKey !== "Backspace"
@@ -182,7 +182,7 @@ export default function Keyboard({
                   <span
                     className={`${
                       key.shiftKey !== "" && "translate-y-[10.3px] "
-                    } flex items-center uppercase justify-center py-3 `}
+                    } flex items-center uppercase justify-center py-3`}
                   >
                     {key.defaultKey === " " ? "SpaceBar" : key.defaultKey}
                   </span>
