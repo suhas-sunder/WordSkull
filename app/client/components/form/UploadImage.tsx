@@ -80,7 +80,7 @@ function UploadImage({ optionalText, id, type, accept, required, setSelectedFile
             className="hidden"
           />
           <div
-            className="flex flex-col items-center justify-center border-2 border-dashed text-gray-500 text-lg text-center p-8 gap-5 cursor-pointer w-full border-orange-400"
+            className="flex flex-col items-center justify-center border-2 border-dashed text-lg text-center p-8 gap-5 cursor-pointer w-full border-orange-400 text-skull-brown"
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onClick={() => document.getElementById(id)?.click()}

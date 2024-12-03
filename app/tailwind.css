@@ -24,6 +24,9 @@ font-family: 'Lora', serif;
   img {
     display: inline-block;
   }
+  *:focus {
+    outline-color: #7b3303;
+  }
 }
 
 @font-face {

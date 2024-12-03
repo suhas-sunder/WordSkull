@@ -132,7 +132,7 @@ function About() {
                   height={260}
                 />
               </picture>
-              <p className="mt-1">
+              <p className="mt-1 group-hover:text-amber-600">
                 😍👾Unleash your creativity by creating your favorite emoji
                 combos! Copy paste text faces (ʘ‿ʘ) & emojis in a snap! 🎉💫
               </p>
@@ -162,7 +162,7 @@ function About() {
                   height={260}
                 />
               </picture>
-              <p className="mt-1">
+              <p className="mt-1 group-hover:text-amber-600">
                 😍👾Unleash your creativity by creating your favorite emoji
                 combos! Copy paste text faces (ʘ‿ʘ) & emojis in a snap! 🎉💫
               </p>
@@ -192,7 +192,7 @@ function About() {
                   height={260}
                 />
               </picture>
-              <p className="mt-1">
+              <p className="mt-1 group-hover:text-amber-600">
                 😍👾Unleash your creativity by creating your favorite emoji
                 combos! Copy paste text faces (ʘ‿ʘ) & emojis in a snap! 🎉💫
               </p>
@@ -222,7 +222,7 @@ function About() {
                   height={260}
                 />
               </picture>
-              <p className="mt-1">
+              <p className="mt-1 group-hover:text-amber-600">
                 😍👾Unleash your creativity by creating your favorite emoji
                 combos! Copy paste text faces (ʘ‿ʘ) & emojis in a snap! 🎉💫
               </p>
@@ -242,7 +242,7 @@ function About() {
                 className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-lg`}
+                  className={`font-nunito text-lg group-hover:text-amber-600`}
                 >
                   Settlers Of Catan
                 </h4>
@@ -258,7 +258,7 @@ function About() {
                     height={260}
                   />
                 </picture>
-                <p className="mt-1">
+                <p className="mt-1 group-hover:text-amber-600">
                   Learn how to play Catan, game setup, strategy tips, and
                   insights perfect for newcomers and experienced players.
                 </p>
@@ -268,7 +268,7 @@ function About() {
                 className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-lg`}
+                  className={`font-nunito text-lg group-hover:text-amber-600`}
                 >
                   Monopoly
                 </h4>
@@ -284,7 +284,7 @@ function About() {
                     height={260}
                   />
                 </picture>
-                <p className="mt-1">
+                <p className="mt-1 group-hover:text-amber-600">
                   A comprehensive guided on how to play the Monopoly board game:
                   setup, strategy, and tips to help you win. Perfect for anyone
                   ready to rule the board!
@@ -308,7 +308,7 @@ function About() {
                 className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-lg`}
+                  className={`font-nunito text-lg group-hover:text-amber-600`}
                 >
                   Emoji Kitchen Game
                 </h4>
@@ -324,7 +324,7 @@ function About() {
                     height={260}
                   />
                 </picture>
-                <p className="mt-1">
+                <p className="mt-1 group-hover:text-amber-600">
                   😍👾Unleash your creativity by creating your favorite emoji
                   combos! Copy paste text faces (ʘ‿ʘ) & emojis in a snap! 🎉💫
                 </p>
@@ -336,7 +336,7 @@ function About() {
                 className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-lg`}
+                  className={`font-nunito text-lg group-hover:text-amber-600`}
                 >
                   Dragon Mythology
                 </h4>
@@ -352,7 +352,7 @@ function About() {
                     height={260}
                   />
                 </picture>
-                <p className="mt-1">
+                <p className="mt-1 group-hover:text-amber-600">
                   🐲 Explore captivating myths and legends from around the
                   world. Discover Greek, Hindu, Norse, Chinese, and Japanese
                   mythology, and dive into ancient stories and cultural lore. 🐉
@@ -364,7 +364,7 @@ function About() {
                 className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-lg`}
+                  className={`font-nunito text-lg group-hover:text-amber-600`}
                 >
                   Fantasy 4K HD Wallpapers
                 </h4>
@@ -380,7 +380,7 @@ function About() {
                     height={260}
                   />
                 </picture>
-                <p className="mt-1">
+                <p className="mt-1 group-hover:text-amber-600">
                   Similar to the online word games and puzzle on WordSkull,
                   these wallpapers are fantasy dungeon themed and are perfect
                   for your desktop, laptop, social media, profile pics, and
@@ -394,7 +394,7 @@ function About() {
                 className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-lg`}
+                  className={`font-nunito text-lg group-hover:text-amber-600`}
                 >
                   Productivity Garden
                 </h4>
@@ -410,7 +410,7 @@ function About() {
                     height={260}
                   />
                 </picture>
-                <p className="mt-1">
+                <p className="mt-1 group-hover:text-amber-600">
                   🌱 Discover tips, tricks, tools, and strategies to optimize
                   your workflow and boost your productivity. 🌿📚
                 </p>
