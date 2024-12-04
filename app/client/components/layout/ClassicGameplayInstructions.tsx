@@ -1,6 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Link } from "@remix-run/react";
-import KeyboardImg from "../../assets/images/keyboard.jpg";
+import KeyboardJpg from "../../assets/images/keyboard.jpg";
+import KeyboardWebp from "../../assets/images/keyboard.webp";
+import KeypadJpg from "../../assets/images/mobile-keypad.jpg";
+import KeypadWebp from "../../assets/images/mobile-keypad.webp";
 import SkullInstructions from "../../assets/images/first_row.jpg";
 import SkullFirstRow from "../../assets/images/first_row_entry.jpg";
 import SkullFirstRowEntered from "../../assets/images/first_row_submitted.jpg";
@@ -37,36 +40,48 @@ function ClassicGameplayInstructions() {
     <>
       {showInstructions && (
         <>
-          <div className="flex relative flex-col w-full justify-center items-center mt-[3.5em] md:mt-0 mb-5">
+          <div className="flex relative flex-col w-full justify-center items-center -mt-12 mb-5">
             <div
               id="gameplay-instructions"
               className="absolute -top-[5em]"
             ></div>
             <h2
-              className={`text-4xl font-nunito  uppercase mb-10 ${
+              className={`text-4xl font-nunito  uppercase mb-5 ${
                 darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
               }`}
             >
               How to play
             </h2>
             <ul
-              className={`flex max-w-[900px] flex-col gap-14 font-lato text-center sm:text-start mx-5 text-xl tracking-wider leading-loose ${
-                darkThemeActive
-                  ? "text-stone-300"
-                  : "text-skull-super-dark-brown"
+              className={`flex max-w-[900px] flex-col gap-6 font-lato text-center sm:text-start mx-5 text-xl tracking-wider leading-loose ${
+                darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
               }`}
             >
               <li className="mx-auto text-center">
                 Use a keyboard or mobile keypad to start typing a word.
               </li>
-              <li className="flex w-full justify-center">
-                <img
-                  className="rounded-md"
-                  width={600}
-                  src={KeyboardImg}
-                  loading="lazy"
-                  alt="Virtual keyboard"
-                />
+              <li className="flex flex-col w-full justify-center gap-6 items-center">
+                <picture>
+                  <source srcSet={KeyboardWebp} type="image/webp" />
+                  <img
+                    className="rounded-md"
+                    width={600}
+                    src={KeyboardJpg}
+                    loading="lazy"
+                    alt="Virtual keyboard"
+                  />
+                </picture>
+                <picture>
+                  <source srcSet={KeypadWebp} type="image/webp" />
+                  <img
+                    className="rounded-md"
+                    width={300}
+                    height={153}
+                    src={KeypadJpg}
+                    loading="lazy"
+                    alt="Virtual keyboard"
+                  />
+                </picture>
               </li>
               <li className="mx-auto text-center">
                 The length of each word depends on the row you are on. Each
