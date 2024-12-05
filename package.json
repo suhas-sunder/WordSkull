@@ -17,7 +17,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",
     "@emotion/styled": "^11.13.0",
-    "@mdx-js/react": "^3.1.0",
+    "@mdx-js/react": "^2.1.4",
     "@mdx-js/rollup": "^3.1.0",
     "@mui/icons-material": "^5.16.5",
     "@remix-run/express": "^2.11.0",
@@ -94,8 +94,5 @@
   },
   "engines": {
     "node": ">=20.0.0"
-  },
-  "browser": {
-    "fs": false
   }
 }

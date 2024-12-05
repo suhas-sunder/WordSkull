@@ -4,7 +4,6 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { useTheme } from "../client/components/context/ThemeContext";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import * as AboutMDX from "./mdx/about-en.mdx";
-import { MDXProvider } from "@mdx-js/react";
 import useFormatMDX from "../client/components/hooks/useFormatMDX";
 import emojiKitchenJPG from "../client/assets/images/emoji-kitchen-game-preview.jpg";
 import emojiKitchenWEBP from "../client/assets/images/emoji-kitchen-game-preview.webp";
@@ -91,9 +90,7 @@ function About() {
       <main className="flex max-w-[1200px] w-full mt-4 justify-center flex-col lg:flex-row px-5">
         <article className="flex flex-col max-w-[900px] sm:mr-5">
           {location.pathname === "/about" ? (
-            <MDXProvider>
-              <AboutMDX.default components={CustomComponents} />
-            </MDXProvider>
+            <AboutMDX.default components={CustomComponents} />
           ) : (
             <Outlet />
           )}
@@ -231,7 +228,9 @@ function About() {
           <div className="flex flex-col gap-2">
             <h3
               className={`font-lora text-xl ${
-                darkThemeActive ? "text-stone-200" : "text-skull-super-dark-brown"
+                darkThemeActive
+                  ? "text-stone-200"
+                  : "text-skull-super-dark-brown"
               }`}
             >
               Board Game Reviews
@@ -295,7 +294,9 @@ function About() {
           <div className="flex flex-col gap-2">
             <h3
               className={`font-lora text-xl ${
-                darkThemeActive ? "text-stone-200" : "text-skull-super-dark-brown"
+                darkThemeActive
+                  ? "text-stone-200"
+                  : "text-skull-super-dark-brown"
               }`}
             >
               Games & Apps

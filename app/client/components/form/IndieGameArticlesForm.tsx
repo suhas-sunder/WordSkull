@@ -19,10 +19,10 @@ const ArticleSection = ({ index, setSelectedFile }: PropType) => {
       <TextInput
         id={`article-title-${index}`}
         name={`article-title-${index}`}
-        label={`Section ${index} Title - (1 to 80 chars)`}
+        label={`Title for Section ${index} - (1 to 80 chars)`}
         minLength={1}
         maxLength={80}
-        placeholder="Enter title"
+        placeholder={`Enter Section ${index} title`}
       />
       <UploadImage
         id={`article-image-${index}`}
@@ -32,16 +32,16 @@ const ArticleSection = ({ index, setSelectedFile }: PropType) => {
         setSelectedFile={setSelectedFile}
       />
       <TextArea
-        label="Brief Description (200 to 1000 chars)"
+        label={`Brief Description for Section ${index} - (200 to 1000 chars)`}
         id="brief-description"
         name="brief-description"
         minLength={200}
         maxLength={1000}
-        placeholder="Please write a unique and original description of your game. If I get too many submissions that are 'copy pasted' from other websites, I run the risk of being flagged for duplicate content.
+        placeholder={`Section ${index}: Please write a unique and original description of your game. If I get too many submissions that are 'copy pasted' from other websites, I run the risk of being flagged for duplicate content.
                   
 Keep it safe for work. Don't include any profanity or adult content.
 
-Thank you 😊!"
+Thank you 😊!`}
       />
     </>
   );
@@ -109,6 +109,7 @@ function IndieGameArticlesForm() {
           <ArticleSection index={index + 1} setSelectedFile={setSelectedFile} />
         </Fragment>
       ))}
+      <p className="text-lg mx-auto">Total Article Sections: {sections}</p>
       <div className="flex gap-5 w-full justify-center items-center">
         {sections < 20 && (
           <button
@@ -119,17 +120,17 @@ function IndieGameArticlesForm() {
             Add Section
           </button>
         )}
-        <button
+        {sections > 1 && <button
           type="button"
-          className="flex justify-center items-center rounded-md bg-pumpkin-orange  text-white px-4 py-2 w-[12em] hover:bg-orange-500 whitespace-nowrap"
+          className="flex justify-center items-center rounded-md bg-rose-500  text-white px-4 py-2 w-[12em] hover:bg-rose-400 whitespace-nowrap"
           onClick={() =>
             setSections((prevState) =>
               prevState > 1 ? prevState - 1 : prevState
             )
           }
         >
-          Remove Section
-        </button>
+          ☠️ Delete Section
+        </button>}
       </div>
       <IndieTOSCheckbox id="indie-terms-articles" />
       <SaveAndSubmit />
