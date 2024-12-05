@@ -16,7 +16,6 @@ import {
   ActionFunctionArgs,
   CookieOptions,
   createCookie,
-  json,
   LoaderFunction,
 } from "@remix-run/node";
 import jwt from "jsonwebtoken";
@@ -82,10 +81,20 @@ export const loader: LoaderFunction = async ({ request }) => {
 
     //Fetch data from the server based on the userid and send it to the client
 
-    return json({});
+    return new Response(JSON.stringify({}), {
+      status: 200, // Default status is 200 (OK), but you can adjust as needed
+      headers: {
+        "Content-Type": "application/json", // Ensure the response is treated as JSON
+      },
+    });
   } catch (error) {
     console.error("Error during loader:", error);
-    return json({ error: "An error occurred" }, { status: 500 });
+    return new Response(JSON.stringify({ error: "An error occurred" }), {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
 };
 
@@ -275,7 +284,10 @@ export async function action({ request }: ActionFunctionArgs) {
   const usernameInUrl = currentUrl.pathname.split("/").slice(-1)[0] || "";
 
   if (!usernameInUrl) {
-    return json({ error: "Username not found in URL" }, { status: 400 });
+    return new Response(
+      JSON.stringify({ error: "Username not found in URL" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
   }
 
   const headerForm = formData.get("placeholder-indie-game-header");
@@ -292,7 +304,15 @@ export async function action({ request }: ActionFunctionArgs) {
     const description = formData.get("brief-game-description");
 
     if (!title || !description) {
-      return json({ error: "All fields are required" }, { status: 400 });
+      return new Response(
+        JSON.stringify({ error: "All fields are required" }),
+        {
+          status: 400,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
 
     try {
@@ -303,22 +323,42 @@ export async function action({ request }: ActionFunctionArgs) {
         data: { username: usernameInUrl, title, description },
       });
       if (response.status === 200) {
-        return json({
-          message:
-            "Header title and description processed and uploaded successfully",
-        });
+        return new Response(
+          JSON.stringify({
+            message:
+              "Header title and description processed and uploaded successfully",
+          }),
+          {
+            status: 200,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
       } else {
         console.error("Header title and description upload failed");
-        return json(
-          { error: "Failed to upload header title and description" },
-          { status: 500 }
+        return new Response(
+          JSON.stringify({
+            error: "Failed to upload header title and description",
+          }),
+          {
+            status: 500,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
       }
     } catch (error) {
       console.error("Header data processing error:", error);
-      return json(
-        { error: "Failed to upload header title and description" },
-        { status: 500 }
+      return new Response(
+        JSON.stringify({
+          error: "Failed to upload header title and description",
+        }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        }
       );
     }
   }
@@ -327,7 +367,10 @@ export async function action({ request }: ActionFunctionArgs) {
   if (headerImage !== null) {
     const allowedFormats = ["image/jpeg", "image/png", "image/gif"];
     if (!allowedFormats.includes(headerImage.type)) {
-      return json({ error: "Invalid image format" }, { status: 400 });
+      return new Response(JSON.stringify({ error: "Invalid image format" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
     }
 
     const buffer = await headerImage.arrayBuffer();
@@ -347,7 +390,13 @@ export async function action({ request }: ActionFunctionArgs) {
       await uploadToR2(imageObjectKey, webpBuffer, "image/webp", usernameInUrl);
     } catch (error) {
       console.error("Image processing failed:", error);
-      return json({ error: "Image processing failed" }, { status: 500 });
+      return new Response(
+        JSON.stringify({ error: "Image processing failed" }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
   }
 
@@ -357,16 +406,20 @@ export async function action({ request }: ActionFunctionArgs) {
     //If it exists, update it with urls. If not, create new.
 
     // Check for JSON file and handle upload
-
-    return json({ message: "Form submitted successfully" });
+    return new Response(
+      JSON.stringify({ message: "Form submitted successfully" }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 
   //Handle article form
   if (articleForm !== null) {
     //Import json file from r2 bucket if file exists in https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com/wordskull/indiegames/${username}/game-data.json
     //If it exists, update it with urls. If not, create new.
-
-    return json({ message: "Form submitted successfully" });
+    return { message: "Form submitted successfully" };
   }
 
   //Handle details form
@@ -394,22 +447,22 @@ export async function action({ request }: ActionFunctionArgs) {
         data: { username: usernameInUrl, ...details },
       });
       if (response.status === 200) {
-        return json({
+        return {
           message:
             "Additional game details processed and uploaded successfully",
-        });
+        };
       } else {
         console.error("Additional game details upload failed");
-        return json(
-          { error: "Failed to upload additional game details" },
-          { status: 500 }
+        return new Response(
+          JSON.stringify({ error: "Failed to upload additional game details" }),
+          { status: 500, headers: { "Content-Type": "application/json" } }
         );
       }
     } catch (error) {
       console.error("Header data processing error:", error);
-      return json(
-        { error: "Failed to upload additional game details" },
-        { status: 500 }
+      return new Response(
+        JSON.stringify({ error: "Failed to upload additional game details" }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
       );
     }
   }
@@ -437,24 +490,33 @@ export async function action({ request }: ActionFunctionArgs) {
         ]),
       });
     } else if (formData.get("delete") !== null) {
-      return json({ message: "Account deleted successfully" });
+      return new Response(
+        JSON.stringify({ message: "Account deleted successfully" }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
     } else if (formData.get("change-password") !== null) {
-      return json({ message: "Password changed successfully" });
+      return new Response(
+        JSON.stringify({ message: "Password changed successfully" }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
     }
 
     //Save data to database
-    return json({ message: "Form submitted successfully" });
+    return { message: "Form submitted successfully" };
   }
 
   //Handle youtube form
   if (youtubeForm !== null) {
     //Import json file from r2 bucket if file exists in https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com/wordskull/indiegames/${username}/game-data.json
     //If it exists, update it with urls. If not, create new.
-    return json({ message: "Form submitted successfully" });
+    return new Response(
+      JSON.stringify({ message: "Form submitted successfully" }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
   }
-  return json(
-    { error: "Something went wrong. Form submission failed. " },
-    { status: 500 }
+  return new Response(
+    JSON.stringify({ error: "Something went wrong. Form submission failed." }),
+    { status: 500, headers: { "Content-Type": "application/json" } }
   );
 }
 

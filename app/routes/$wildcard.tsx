@@ -1,4 +1,4 @@
-import { json, MetaFunction } from "@remix-run/node";
+import { MetaFunction } from "@remix-run/node";
 import { useEffect, useState } from "react";
 import Error from "../client/components/ui/interactive/Error";
 
@@ -16,7 +16,10 @@ export const meta: MetaFunction = () => {
 };
 
 export function loader() {
-  return json({ error: "Not Found" }, { status: 404 });
+  return new Response(JSON.stringify({ error: "Not Found" }), {
+    status: 404,
+    headers: { "Content-Type": "application/json" },
+  });
 }
 
 export const action = async ({ request }: { request: Request }) => {

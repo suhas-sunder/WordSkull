@@ -9,7 +9,7 @@ import {
 import { useTheme } from "../client/components/context/ThemeContext";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import IndieLoginForm from "../client/components/form/IndieLoginForm";
-import { json, createCookie, CookieOptions } from "@remix-run/node";
+import { createCookie, CookieOptions } from "@remix-run/node";
 import accountAPI from "../client/components/api/accountAPI";
 
 import { parse } from "cookie";
@@ -32,8 +32,14 @@ export function loader({ request }: LoaderFunctionArgs) {
     const jwtToken = cookies.jwt;
     const username = cookies.username;
 
+    // If no JWT token exists, return empty response
     if (!username || !jwtToken) {
-      return json({});
+      return new Response(JSON.stringify({}), {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     }
 
     const base64Username =
@@ -51,12 +57,22 @@ export function loader({ request }: LoaderFunctionArgs) {
     if (currentUrl.pathname === "/edit-indie-game") {
       return redirect(`/edit-indie-game/${usernameWithoutQuotes}`);
     } else {
-      return json({});
+      return new Response(JSON.stringify({}), {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     }
   } catch (error) {
     // Handle errors and JWT verification failures
     console.error("JWT verification error:", error);
-    return json({ error: "JWT verification failed" }, { status: 401 });
+    return new Response(JSON.stringify({ error: "JWT verification failed" }), {
+      status: 401,
+      headers: {
+        "Content-Type": "application/json", // Ensure the response is treated as JSON
+      },
+    });
   }
 }
 
@@ -86,7 +102,15 @@ export async function action({ request }: ActionFunctionArgs) {
 
       // Validate form fields
       if (!username || !password) {
-        return json({ error: "All fields are required." }, { status: 400 });
+        return new Response(
+          JSON.stringify({ error: "All fields are required." }),
+          {
+            status: 400,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
       }
 
       // Make the POST request to your API
@@ -112,27 +136,52 @@ export async function action({ request }: ActionFunctionArgs) {
         return redirect(`/edit-indie-game/${username}`, { headers });
       }
 
-      return json(
-        { error: "Login failed. Please try again." },
-        { status: response.status }
+      return new Response(
+        JSON.stringify({ error: "Login failed. Please try again." }),
+        {
+          status: response.status,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
     } catch (error) {
       console.error("Error during form submission:", error);
 
       if (error instanceof Error) {
-        return json(
-          { error: `An error occurred: ${error.message}` },
-          { status: 500 }
+        return new Response(
+          JSON.stringify({ error: `An error occurred: ${error.message}` }),
+          {
+            status: 500,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
       }
 
-      return json({ error: "An unknown error occurred." }, { status: 500 });
+      return new Response(
+        JSON.stringify({ error: "An unknown error occurred." }),
+        {
+          status: 500,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
   }
 
-  return json(
-    { error: "Something went wrong. Form submission failed. " },
-    { status: 500 }
+  return new Response(
+    JSON.stringify({
+      error: "Something went wrong. Form submission failed.",
+    }),
+    {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
   );
 }
 export default function EditIndieGame() {
