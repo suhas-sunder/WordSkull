@@ -18,7 +18,6 @@ import {
   Meta,
   Scripts,
   ScrollRestoration,
-  json,
   ClientLoaderFunctionArgs,
 } from "@remix-run/react";
 import {
@@ -56,11 +55,13 @@ export const loader = async () => {
     words = JSON.parse(textData);
   }
 
-  return json(
-    { words }, // Return initial empty array or modify as needed
+  return new Response(
+    JSON.stringify({ words }), // Return the 'words' object as a JSON string
     {
+      status: 200, // Default status is 200 OK
       headers: {
-        "Cache-Control": "max-age=3600, public",
+        "Content-Type": "application/json", // Ensure the content type is JSON
+        "Cache-Control": "max-age=3600, public", // Cache settings
       },
     }
   );
