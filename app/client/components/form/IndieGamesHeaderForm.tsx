@@ -1,23 +1,25 @@
-import { Form } from "@remix-run/react";
+import { Form, useSubmit } from "@remix-run/react";
 import TextInput from "./TextInput";
 import TextArea from "./TextArea";
 import UploadImage from "./UploadImage";
 import IndieTOSCheckbox from "./IndieTOSCheckbox";
 import SaveAndSubmit from "../ui/interactive/SaveAndSubmit";
-import { useFetcher } from "react-router-dom";
 import { useState } from "react";
+import FormSuccessErrorMsg from "../utils/errors/FormSuccessErrorMsg";
 
-function IndieGamesHeaderForm() {
+type PropType = {
+  actionData: { error?: string; message?: string };
+};
+
+function IndieGamesHeaderForm({ actionData }: PropType) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const fetcher = useFetcher();
+  const submit = useSubmit(); // Get submit function from Remix
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevents default form submission
+    event.preventDefault(); // Prevent default form submission
 
-    // Create a new FormData object from the form
     const formData = new FormData(event.currentTarget);
 
-    // Add selected image file if available
     if (selectedFile) {
       formData.set("main-header-img", selectedFile);
     } else {
@@ -25,10 +27,10 @@ function IndieGamesHeaderForm() {
       return;
     }
 
-    // Submit the form data with all fields included
-    fetcher.submit(formData, {
+    // Use the submit function from Remix
+    submit(formData, {
       method: "post",
-      encType: "multipart/form-data",
+      encType: "multipart/form-data", // Ensure encoding is correct for file uploads
     });
   };
 
@@ -36,6 +38,7 @@ function IndieGamesHeaderForm() {
     <Form
       method="post"
       className="flex flex-col w-full gap-5"
+      encType="multipart/form-data"
       onSubmit={handleSubmit}
     >
       <input
@@ -79,6 +82,7 @@ function IndieGamesHeaderForm() {
         setSelectedFile={setSelectedFile} // Set selected file for image upload
       />
       <IndieTOSCheckbox id="indie-terms-one" />
+      <FormSuccessErrorMsg actionData={actionData} />
       <SaveAndSubmit />
     </Form>
   );
