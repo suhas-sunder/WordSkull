@@ -21,7 +21,13 @@ import {
 import jwt from "jsonwebtoken";
 import { parse } from "cookie"; // Import cookie parser
 import { MyJwtPayload } from "../client/types/authTypes";
-import { redirect } from "react-router-dom";
+import { redirect, useActionData } from "react-router-dom";
+import { useEffect } from "react";
+
+interface ActionResponse {
+  error?: string;
+  message?: string;
+}
 
 export const loader: LoaderFunction = async ({ request }) => {
   try {
@@ -298,70 +304,72 @@ export async function action({ request }: ActionFunctionArgs) {
   const youtubeForm = formData.get("placeholder-indie-game-youtube");
   const headerImage = formData.get("main-header-img") as File;
 
-  // Handle header form
-  if (headerForm !== null) {
-    const title = formData.get("game-name");
-    const description = formData.get("brief-game-description");
+  //Handle header title an description after image is successfully uploaded
+  const postHeaderData = async () => {
+    // Handle header form
+    if (headerForm !== null) {
+      const title = formData.get("game-name");
+      const description = formData.get("brief-game-description");
 
-    if (!title || !description) {
-      return new Response(
-        JSON.stringify({ error: "All fields are required" }),
-        {
-          status: 400,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
-
-    try {
-      // Upload header title and description to database
-      const response = await submissionAPI.post(`/update-indie-header`, {
-        method: "POST",
-        responseType: "arraybuffer",
-        data: { username: usernameInUrl, title, description },
-      });
-      if (response.status === 200) {
+      if (!title || !description) {
         return new Response(
-          JSON.stringify({
-            message:
-              "Header title and description processed and uploaded successfully",
-          }),
+          JSON.stringify({ error: "All fields are required" }),
           {
-            status: 200,
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-      } else {
-        console.error("Header title and description upload failed");
-        return new Response(
-          JSON.stringify({
-            error: "Failed to upload header title and description",
-          }),
-          {
-            status: 500,
+            status: 400,
             headers: {
               "Content-Type": "application/json",
             },
           }
         );
       }
-    } catch (error) {
-      console.error("Header data processing error:", error);
-      return new Response(
-        JSON.stringify({
-          error: "Failed to upload header title and description",
-        }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json" },
+
+      try {
+        // Upload header title and description to database
+        const response = await submissionAPI.post(`/update-indie-header`, {
+          method: "POST",
+          responseType: "arraybuffer",
+          data: { username: usernameInUrl, title, description },
+        });
+        if (response.status === 200) {
+          return new Response(
+            JSON.stringify({
+              message:
+                "Header (title, description, and image) has been processed and uploaded successfully",
+            }),
+            {
+              status: 200,
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+        } else {
+          return new Response(
+            JSON.stringify({
+              error: "Failed to upload header title and description",
+            }),
+            {
+              status: 500,
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
         }
-      );
+      } catch (error) {
+        console.error("Header data processing error:", error);
+        return new Response(
+          JSON.stringify({
+            error: "Failed to upload header title and description",
+          }),
+          {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      }
     }
-  }
+  };
 
   // Handle header image upload to R2
   if (headerImage !== null) {
@@ -388,6 +396,9 @@ export async function action({ request }: ActionFunctionArgs) {
 
       // Upload the WebP image to R2 directly using HTTP request
       await uploadToR2(imageObjectKey, webpBuffer, "image/webp", usernameInUrl);
+
+      // If the upload succeeds, store data in the database
+      return await postHeaderData();
     } catch (error) {
       console.error("Image processing failed:", error);
       return new Response(
@@ -521,9 +532,16 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function EditIndieUsername() {
+  const actionData = useActionData() as ActionResponse;
+
+  useEffect(() => {
+    console.log("actionData", actionData);
+  }, [actionData]);
+
   return (
     <div className="flex flex-col w-full max-w-[800px] mx-auto tracking-wider px-5 mt-2">
-      <IndieGamesHeaderForm />
+      <IndieGamesHeaderForm actionData={actionData} />
+
       <IndieGameLinksForm />
       <IndieGameYTForm />
       <IndieGameDetailsForm />

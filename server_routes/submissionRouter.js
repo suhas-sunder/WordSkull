@@ -67,10 +67,12 @@ router.post("/view-count", async (req, res) => {
 
     // Validate the input
     if (!username) {
+      console.log("Error: username is required");
       return res.status(400).json({ error: "username is required" });
     }
 
     if (typeof username !== "string") {
+      console.log("Error: username must be a string");
       return res.status(400).json({ error: "username must be a string" });
     }
 
@@ -85,6 +87,7 @@ router.post("/view-count", async (req, res) => {
 
     // Check if the username exists in the table
     if (result.rowCount === 0) {
+      console.log("Error: username not found");
       return res.status(404).json({ error: "username not found" });
     }
 
@@ -113,7 +116,7 @@ router.post("/update-indie-header", async (req, res) => {
   try {
     const { username, title, description } = req.body.data;
 
-    console.log({ username, title, description });
+    console.log(username.length, title.length, description.length);
 
     // Validate input
     const validationError = validateRequestBody(
@@ -122,6 +125,7 @@ router.post("/update-indie-header", async (req, res) => {
     );
 
     if (validationError) {
+      console.log(validationError.error);
       return res.status(400).json({ error: validationError.error });
     }
 
@@ -129,6 +133,7 @@ router.post("/update-indie-header", async (req, res) => {
     const sanitizeUsername = sanitizeInput(username);
     const sanitizeTitle = sanitizeInput(title);
     const sanitizeDescription = sanitizeInput(description);
+    console.log(sanitizeUsername.trim(), sanitizeTitle.trim(), sanitizeDescription.trim());
 
     // Update database
     const result = await pool.query(
@@ -136,10 +141,12 @@ router.post("/update-indie-header", async (req, res) => {
        SET game_title = $2, game_description = $3
        WHERE username = $1
        RETURNING *`,
-      [sanitizeUsername, sanitizeTitle, sanitizeDescription]
+      [sanitizeUsername.trim(), sanitizeTitle.trim(), sanitizeDescription.trim()]
     );
 
+
     if (result.rowCount === 0) {
+      console.log("Error: username not found");
       return res.status(404).json({ error: "username not found" });
     }
 

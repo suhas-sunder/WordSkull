@@ -57,12 +57,7 @@ export function loader({ request }: LoaderFunctionArgs) {
     if (currentUrl.pathname === "/edit-indie-game") {
       return redirect(`/edit-indie-game/${usernameWithoutQuotes}`);
     } else {
-      return new Response(JSON.stringify({}), {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      return {};
     }
   } catch (error) {
     // Handle errors and JWT verification failures
@@ -78,7 +73,6 @@ export function loader({ request }: LoaderFunctionArgs) {
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
-  console.log("formData", formData);
   const loginForm = formData.get("placeholder-indie-game-login");
 
   // Handle login form
