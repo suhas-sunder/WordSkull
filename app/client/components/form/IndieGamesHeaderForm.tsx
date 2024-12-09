@@ -38,7 +38,6 @@ function IndieGamesHeaderForm({ actionData }: PropType) {
     <Form
       method="post"
       className="flex flex-col w-full gap-5"
-      encType="multipart/form-data"
       onSubmit={handleSubmit}
     >
       <input

@@ -5,12 +5,8 @@ import IndieGameSettingsForm from "../client/components/form/IndieGameSettingsFo
 import IndieGamesHeaderForm from "../client/components/form/IndieGamesHeaderForm";
 import IndieGameYTForm from "../client/components/form/IndieGameYTForm";
 import submissionAPI from "../client/components/api/submissionAPI";
+import PostIndieDevImgToR2 from "../client/components/utils/requests/PostIndieDevImgToR2";
 import sharp from "sharp";
-import {
-  S3Client,
-  PutObjectCommand,
-  GetObjectCommand,
-} from "@aws-sdk/client-s3";
 
 import {
   ActionFunctionArgs,
@@ -104,185 +100,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   }
 };
 
-async function uploadToR2(
-  key: string,
-  body: Buffer,
-  contentType: string,
-  username: string
-) {
-  // Function to generate x-amz-date timestamp in the required format for Cloudflare R2
-  function getFormattedTimestamp(): string {
-    const now = new Date();
-    const year = now.getUTCFullYear();
-    const month = (now.getUTCMonth() + 1).toString().padStart(2, "0");
-    const day = now.getUTCDate().toString().padStart(2, "0");
-    const hours = now.getUTCHours().toString().padStart(2, "0");
-    const minutes = now.getUTCMinutes().toString().padStart(2, "0");
-    const seconds = now.getUTCSeconds().toString().padStart(2, "0");
-
-    return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
-  }
-
-  const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID;
-  const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID;
-  const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY;
-  const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME;
-
-  if (
-    !R2_ACCOUNT_ID ||
-    !R2_ACCESS_KEY_ID ||
-    !R2_SECRET_ACCESS_KEY ||
-    !R2_BUCKET_NAME
-  ) {
-    throw new Error("R2 environment variables are not properly configured.");
-  }
-
-  // Configure the AWS SDK S3 client for Cloudflare R2
-  const s3Client = new S3Client({
-    region: "auto", // Cloudflare R2 doesn't require a specific region, so 'auto' works
-    endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-    credentials: {
-      accessKeyId: process.env.R2_ACCESS_KEY_ID!,
-      secretAccessKey: process.env.R2_SECRET_ACCESS_KEY!,
-    },
-    forcePathStyle: true, // Required for R2 compatibility
-  });
-
-  // Specify the folder structure
-  const folderPath = `wordskull/indiegames/${username}/`;
-  const fullKey = `${folderPath}${key}`; // Add the file name to the folder path
-
-  // Prepare the headers, including the R2 credentials and x-amz-date
-  const xAmzDate = getFormattedTimestamp();
-
-  // Create the parameters for the PutObjectCommand
-  const params = {
-    Bucket: process.env.R2_BUCKET_NAME!,
-    Key: fullKey,
-    Body: body,
-    ContentType: contentType,
-    Metadata: {
-      "x-amz-date": xAmzDate,
-    },
-  };
-
-  try {
-    // Perform the upload using the S3 client
-    const command = new PutObjectCommand(params);
-    const response = await s3Client.send(command);
-
-    // Log the response for debugging
-    console.log("Upload success:", response);
-    return response;
-  } catch (error) {
-    console.error("Error during upload:", error);
-    throw new Error(`Upload failed: ${error}`);
-  }
-}
-
-async function fetchFromR2(key: string, username: string) {
-  // Function to generate x-amz-date timestamp in the required format for Cloudflare R2
-  function getFormattedTimestamp(): string {
-    const now = new Date();
-    const year = now.getUTCFullYear();
-    const month = (now.getUTCMonth() + 1).toString().padStart(2, "0");
-    const day = now.getUTCDate().toString().padStart(2, "0");
-    const hours = now.getUTCHours().toString().padStart(2, "0");
-    const minutes = now.getUTCMinutes().toString().padStart(2, "0");
-    const seconds = now.getUTCSeconds().toString().padStart(2, "0");
-
-    return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
-  }
-
-  const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID;
-  const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID;
-  const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY;
-  const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME;
-
-  if (
-    !R2_ACCOUNT_ID ||
-    !R2_ACCESS_KEY_ID ||
-    !R2_SECRET_ACCESS_KEY ||
-    !R2_BUCKET_NAME
-  ) {
-    throw new Error("R2 environment variables are not properly configured.");
-  }
-
-  // Configure the AWS SDK S3 client for Cloudflare R2
-  const s3Client = new S3Client({
-    region: "auto", // Cloudflare R2 doesn't require a specific region, so 'auto' works
-    endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-    credentials: {
-      accessKeyId: process.env.R2_ACCESS_KEY_ID!,
-      secretAccessKey: process.env.R2_SECRET_ACCESS_KEY!,
-    },
-    forcePathStyle: true, // Required for R2 compatibility
-  });
-
-  // Specify the folder structure
-  const folderPath = `wordskull/indiegames/${username}/game-data.json`;
-  const fullKey = `${folderPath}${key}`; // Add the file name to the folder path
-
-  // Prepare the headers, including the R2 credentials and x-amz-date
-  const xAmzDate = getFormattedTimestamp();
-
-  // Create the parameters for the GetObjectCommand
-  const params = {
-    Bucket: process.env.R2_BUCKET_NAME!,
-    Key: fullKey,
-    Metadata: {
-      "x-amz-date": xAmzDate,
-    },
-  };
-
-  try {
-    // Perform the fetch using the S3 client
-    const command = new GetObjectCommand(params);
-    const response = await s3Client.send(command);
-
-    // If the file exists, read and parse the JSON content
-    if (response.Body) {
-      // Convert the stream to string
-      const bodyText = await streamToString(
-        response.Body as ReadableStream<Uint8Array>
-      );
-      const jsonData = JSON.parse(bodyText); // Assuming it's a JSON file
-      console.log("Fetched JSON data:", jsonData);
-      return jsonData;
-    } else {
-      //If file doesn't exist return null so that we can create it
-      return null;
-    }
-  } catch (error) {
-    console.error("Error during fetch:", error);
-    throw new Error(`Fetch failed: ${error}`);
-  }
-}
-
-// Helper function to convert a stream to string (for handling S3 body)
-async function streamToString(
-  stream: ReadableStream<Uint8Array>
-): Promise<string> {
-  const reader = stream.getReader();
-  const chunks: Uint8Array[] = [];
-  let done = false;
-
-  while (!done) {
-    const { value, done: readerDone } = await reader.read();
-    if (value) {
-      chunks.push(value);
-    }
-    done = readerDone;
-  }
-
-  // Flatten the chunks array and convert it to a single Uint8Array
-  const allBytes = new Uint8Array(chunks.flatMap((chunk) => Array.from(chunk)));
-
-  // Decode the Uint8Array into a string
-  const decoder = new TextDecoder("utf-8");
-  return decoder.decode(allBytes);
-}
-
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   console.log("formData", formData);
@@ -373,12 +190,35 @@ export async function action({ request }: ActionFunctionArgs) {
 
   // Handle header image upload to R2
   if (headerImage !== null) {
-    const allowedFormats = ["image/jpeg", "image/png", "image/gif"];
+    const allowedFormats = [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+    ];
     if (!allowedFormats.includes(headerImage.type)) {
       return new Response(JSON.stringify({ error: "Invalid image format" }), {
         status: 400,
         headers: { "Content-Type": "application/json" },
       });
+    }
+
+    //For Cloudflare R2
+    const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID;
+    const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID;
+    const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY;
+    const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME;
+
+    if (
+      !R2_ACCOUNT_ID ||
+      !R2_ACCESS_KEY_ID ||
+      !R2_SECRET_ACCESS_KEY ||
+      !R2_BUCKET_NAME
+    ) {
+      return {
+        error:
+          "Internal Server Error: Image upload credentials not properly configured.",
+      };
     }
 
     const buffer = await headerImage.arrayBuffer();
@@ -392,10 +232,20 @@ export async function action({ request }: ActionFunctionArgs) {
         .toBuffer();
 
       // Define the file path and key in R2 for the image
-      const imageObjectKey = `header-img-for-indie-game-showcase.webp`;
+      const imageObjectKey = `header-img-for-indie-game-showcase.txt`;
+      const imgType = "image/webp";
 
       // Upload the WebP image to R2 directly using HTTP request
-      await uploadToR2(imageObjectKey, webpBuffer, "image/webp", usernameInUrl);
+      await PostIndieDevImgToR2({
+        imageObjectKey,
+        webpBuffer,
+        imgType,
+        usernameInUrl,
+        R2_ACCOUNT_ID,
+        R2_ACCESS_KEY_ID,
+        R2_SECRET_ACCESS_KEY,
+        R2_BUCKET_NAME,
+      });
 
       // If the upload succeeds, store data in the database
       return await postHeaderData();
