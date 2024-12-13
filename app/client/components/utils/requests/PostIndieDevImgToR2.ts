@@ -29,6 +29,8 @@ export default async function PostIndieDevImgToR2({
     R2_SECRET_ACCESS_KEY,
   });
 
+  if (!usernameInUrl) return { error: "Form submission failed: Username not found in URL" };
+
   // Specify the folder structure
   const folderPath = `indiegamedevs/${usernameInUrl}/`;
   const fullKey = `${folderPath}${imageObjectKey}`; // Add the file name to the folder path
@@ -52,11 +54,33 @@ export default async function PostIndieDevImgToR2({
     const command = new PutObjectCommand(params);
     const response = await s3Client.send(command);
 
-    // Log the response for debugging
-    console.log("Upload success:", response);
-    return response;
+    if (response.$metadata.httpStatusCode === 200) {
+      return new Response(
+        JSON.stringify({
+          message:
+            "Header (title, description, and image) has been processed and uploaded successfully",
+        }),
+        {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } else {
+      return new Response(
+        JSON.stringify({
+          error: "Internal Server Error: Failed to upload header image!",
+        }),
+        {
+          status: 500,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
   } catch (error) {
-    console.error("Error during upload:", error);
     throw new Error(`Upload failed: ${error}`);
   }
 }

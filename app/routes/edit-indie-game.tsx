@@ -4,181 +4,85 @@ import {
   LoaderFunctionArgs,
   Outlet,
   redirect,
+  useActionData,
   useLocation,
 } from "react-router-dom";
 import { useTheme } from "../client/components/context/ThemeContext";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import IndieLoginForm from "../client/components/form/IndieLoginForm";
-import { createCookie, CookieOptions } from "@remix-run/node";
-import accountAPI from "../client/components/api/accountAPI";
+import VerifyJWT from "../client/components/utils/validation/VerifyJWTIndieLogin";
+import PostIndieLogin from "../client/components/utils/requests/PostIndieLogin";
+import ProcessTryCatchErrors from "../client/components/utils/errors/ProcessTryCatchErrors";
 
-import { parse } from "cookie";
-export function loader({ request }: LoaderFunctionArgs) {
+interface ActionResponse {
+  error?: string;
+  message?: string;
+}
+
+export async function loader({ request }: LoaderFunctionArgs) {
   try {
-    const JWT_SECRET = process.env.JWT_SECRET;
-
-    // Check if JWT_SECRET exists
-    if (!JWT_SECRET) {
-      throw new Error("JWT_SECRET environment variable is not set.");
-    }
-
-    // Get cookies from the request
-    const cookieHeader = request.headers.get("Cookie");
-
-    // Parse cookies using a parsing library like 'cookie'
-    const cookies = cookieHeader ? parse(cookieHeader) : {};
-
-    // Retrieve the JWT token from cookies
-    const jwtToken = cookies.jwt;
-    const username = cookies.username;
-
-    // If no JWT token exists, return empty response
-    if (!username || !jwtToken) {
-      return new Response(JSON.stringify({}), {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    }
-
-    const base64Username =
-      username.replace(/-/g, "+").replace(/_/g, "/") + "==";
-
-    // Decode the token (if you're manually decoding for logging or debugging purposes)
-    const decodedUsername = Buffer.from(base64Username, "base64").toString(
-      "utf-8"
-    );
-
-    const usernameWithoutQuotes = decodedUsername.replace(/^"([^"]*)"$/, "$1");
     const currentUrl = new URL(request.url);
+    const jwtVerifiedUsername = await VerifyJWT({ request }); // Verify JWT token and retrieve username
 
-    // If no JWT token exists, return empty response
-    if (currentUrl.pathname === "/edit-indie-game") {
-      return redirect(`/edit-indie-game/${usernameWithoutQuotes}`);
+    // If JWT token exists, ensure the user has access to the submission form or redirect to 403
+    if (jwtVerifiedUsername) {
+      // If the user is trying to access the edit page but it's not their page, redirect to 403
+      if (
+        currentUrl.pathname !== "/edit-indie-game" &&
+        currentUrl.pathname !== `/edit-indie-game/${jwtVerifiedUsername}`
+      ) {
+        return redirect("/403");
+      }
+
+      // Redirect to user's specific edit page if they're visiting the general edit page
+      if (currentUrl.pathname === "/edit-indie-game") {
+        return redirect(`/edit-indie-game/${jwtVerifiedUsername}`);
+      }
     } else {
-      return {};
+      // If no JWT token exists, redirect to the login page unless already on the login page
+      if (currentUrl.pathname !== "/edit-indie-game") {
+        return redirect("/edit-indie-game");
+      }
     }
+
+    return {}; // If no action was taken, return an empty response
   } catch (error) {
-    // Handle errors and JWT verification failures
-    console.error("JWT verification error:", error);
-    return new Response(JSON.stringify({ error: "JWT verification failed" }), {
+    return ProcessTryCatchErrors({
+      error,
+      customError: "JWT verification failed",
       status: 401,
-      headers: {
-        "Content-Type": "application/json", // Ensure the response is treated as JSON
-      },
     });
   }
 }
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
-  const loginForm = formData.get("placeholder-indie-game-login");
+  const username = formData.get("username")?.toString();
+  const password = formData.get("password")?.toString();
 
-  // Handle login form
-  if (loginForm !== null) {
-    // Define shared cookie options
-    const cookieOptions: CookieOptions = {
-      httpOnly: true, // Keep the cookie secure and inaccessible to client-side scripts
-      maxAge: 60 * 60 * 24 * 30, // 30 days
-      secure: process.env.NODE_ENV === "production", // Set secure flag for production
-      sameSite: "strict", // Must match the union type
-      path: "/", // Path for the cookie
-    };
-
-    // Create cookies with shared options
-    const jwtCookie = createCookie("jwt", cookieOptions);
-    const usernameCookie = createCookie("username", cookieOptions);
-
-    try {
-      const username = formData.get("username");
-      const password = formData.get("password");
-
-      // Validate form fields
-      if (!username || !password) {
-        return new Response(
-          JSON.stringify({ error: "All fields are required." }),
-          {
-            status: 400,
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-      }
-
-      // Make the POST request to your API
-      const response = await accountAPI.post(`/login-indie-dev`, {
-        method: "POST",
-        responseType: "arraybuffer",
-        data: { username, password },
-      });
-
-      const token = response.data.jwt_token;
-
-      if (response.status === 200 && token) {
-        // Serialize the cookies
-        const jwtSerialized = await jwtCookie.serialize(token);
-        const usernameSerialized = await usernameCookie.serialize(username);
-
-        // Create a Headers object and add both Set-Cookie headers
-        const headers = new Headers();
-        headers.append("Set-Cookie", jwtSerialized);
-        headers.append("Set-Cookie", usernameSerialized);
-
-        // Return the response with the headers
-        return redirect(`/edit-indie-game/${username}`, { headers });
-      }
-
-      return new Response(
-        JSON.stringify({ error: "Login failed. Please try again." }),
-        {
-          status: response.status,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    } catch (error) {
-      console.error("Error during form submission:", error);
-
-      if (error instanceof Error) {
-        return new Response(
-          JSON.stringify({ error: `An error occurred: ${error.message}` }),
-          {
-            status: 500,
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-      }
-
-      return new Response(
-        JSON.stringify({ error: "An unknown error occurred." }),
-        {
-          status: 500,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
-  }
-
-  return new Response(
-    JSON.stringify({
-      error: "Something went wrong. Form submission failed.",
-    }),
-    {
-      status: 500,
+  // Validate form fields
+  if (!username || !password) {
+    return new Response(JSON.stringify({ error: "All fields are required." }), {
+      status: 400,
       headers: {
         "Content-Type": "application/json",
       },
-    }
-  );
+    });
+  }
+
+  try {
+    return await PostIndieLogin({ username, password }); //Login & redirect to submission form or display error
+  } catch (error) {
+    return ProcessTryCatchErrors({
+      error,
+      customError: "Something went wrong. Form submission failed.",
+      status: 500,
+    });
+  }
 }
+
 export default function EditIndieGame() {
+  const actionData = useActionData() as ActionResponse;
   const location = useLocation();
   const { darkThemeActive } = useTheme();
 
@@ -201,7 +105,7 @@ export default function EditIndieGame() {
       </header>
       <main className="flex flex-col gap-5 justify-center items-center w-full max-w-[1200px]">
         {location.pathname === "/edit-indie-game" ? (
-          <IndieLoginForm />
+          <IndieLoginForm actionData={actionData} />
         ) : (
           <Outlet />
         )}

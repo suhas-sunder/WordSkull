@@ -2,21 +2,20 @@ import { Form } from "@remix-run/react";
 import { useState } from "react";
 import Icon from "../utils/other/Icon";
 import SaveAndSubmit from "../ui/interactive/SaveAndSubmit";
+import FormSuccessErrorMsg from "../utils/errors/FormSuccessErrorMsg";
 
-function IndieLoginForm() {
+interface PropType {
+  actionData: { error?: string; message?: string };
+}
+
+function IndieLoginForm({ actionData }: PropType) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Form
       method="post"
-      className="flex flex-col gap-10 mt-10 font-lato tracking-wider  min-w-[300px]"
+      className="flex flex-col gap-10 mt-10 font-lato tracking-wider  max-w-[350px] w-full text-center"
     >
-      <input
-        type="text"
-        id="placeholder-indie-game-login"
-        name="placeholder-indie-game-login"
-        className="hidden"
-      />
       <div className="flex gap-5 text-xl w-full">
         <label htmlFor="username" className="sr-only">
           Username
@@ -54,6 +53,7 @@ function IndieLoginForm() {
           )}
         </button>
       </div>
+      <FormSuccessErrorMsg actionData={actionData} />
       <SaveAndSubmit />
     </Form>
   );

@@ -42,7 +42,7 @@ export default function Wildcard() {
       // If the URL contains "restricted", trigger 403
       if (currentUrl === "/403") {
         setStatus(403);
-        setMessage("Restricted area. You do not have access to this page.");
+        setMessage("Restricted area. You are either not authorized to view this page or your session has expired. Please try loggin in again.");
       }
     }
   }, []); // Empty dependency array ensures this only runs on the client-side

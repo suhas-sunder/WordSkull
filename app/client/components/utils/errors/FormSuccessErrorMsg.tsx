@@ -1,10 +1,14 @@
-type PropType = {
+interface PropType {
   actionData: { error?: string; message?: string };
-};
+}
 
 function FormSuccessErrorMsg({ actionData }: PropType) {
   return (
-    <div className="flex justify-center items-center w-full mb-1 text-lg">
+    <div
+      className={`${
+        actionData?.error || actionData?.message ? "flex" : "hidden"
+      } justify-center items-center w-full mb-1 text-lg`}
+    >
       {actionData?.error && (
         <div className="text-rose-600">🪦 {actionData.error}</div>
       )}
