@@ -12,107 +12,27 @@ import {
   ActionFunctionArgs,
   CookieOptions,
   createCookie,
-  LoaderFunction,
 } from "@remix-run/node";
-import jwt from "jsonwebtoken";
-import { parse } from "cookie"; // Import cookie parser
-import { MyJwtPayload } from "../client/types/authTypes";
 import { redirect, useActionData } from "react-router-dom";
-import { useEffect } from "react";
+import ProcessTryCatchErrors from "../client/components/utils/errors/ProcessTryCatchErrors";
+import PostIndieDevHeaderForm from "../client/components/utils/requests/PostIndieDevHeaderForm";
+import GetIndieDevJson from "../client/components/utils/requests/GetIndieDevJson";
 
 interface ActionResponse {
   error?: string;
   message?: string;
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  try {
-    const JWT_SECRET = process.env.JWT_SECRET;
-
-    // Check if JWT_SECRET exists
-    if (!JWT_SECRET) {
-      throw new Error("JWT_SECRET environment variable is not set.");
-    }
-
-    const cookieHeader = request.headers.get("Cookie");
-
-    const cookies = cookieHeader ? parse(cookieHeader) : {};
-
-    const jwtToken = cookies.jwt;
-    const username = cookies.username;
-
-    if (!username || !jwtToken) {
-      return redirect("/edit-indie-game");
-    }
-
-    const base64Username =
-      username.replace(/-/g, "+").replace(/_/g, "/") + "==";
-
-    // Decode the token (if you're manually decoding for logging or debugging purposes)
-    const decodedUsername = Buffer.from(base64Username, "base64").toString(
-      "utf-8"
-    );
-
-    const usernameWithoutQuotes = decodedUsername.replace(/^"([^"]*)"$/, "$1");
-
-    // Get the current URL
-    const currentUrl = new URL(request.url);
-    const usernameInUrl = currentUrl.pathname.split("/").slice(-1)[0];
-
-    console.log("usernameInUrl", usernameInUrl);
-    if (usernameInUrl && usernameInUrl !== usernameWithoutQuotes) {
-      // Redirect to the /403 route
-      return redirect("/403");
-    }
-
-    // Handle potential Base64Url issues (JWT might be Base64Url encoded)
-    const base64Url = jwtToken.replace(/-/g, "+").replace(/_/g, "/");
-    const base64 = base64Url + "==";
-
-    const decodedToken = Buffer.from(base64, "base64").toString("utf-8");
-
-    // Ensure there are no additional quotes in the token string (remove surrounding quotes)
-    const tokenWithoutQuotes = decodedToken.replace(/^"([^"]*)"$/, "$1");
-
-    // Verify the JWT token using the secret (Ensure it's Base64Url decoded correctly)
-    const decoded = jwt.verify(tokenWithoutQuotes, JWT_SECRET) as MyJwtPayload; // Verify the token and cast to MyJwtPayload
-
-    const userid = decoded.user;
-
-    console.log("User ID from JWT:", userid);
-
-    //Fetch data from the server based on the userid and send it to the client
-
-    return new Response(JSON.stringify({}), {
-      status: 200, // Default status is 200 (OK), but you can adjust as needed
-      headers: {
-        "Content-Type": "application/json", // Ensure the response is treated as JSON
-      },
-    });
-  } catch (error) {
-    console.error("Error during loader:", error);
-    return new Response(JSON.stringify({ error: "An error occurred" }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-};
-
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
-  console.log("formData", formData);
   const currentUrl = new URL(request.url);
   const usernameInUrl = currentUrl.pathname.split("/").slice(-1)[0] || "";
 
   if (!usernameInUrl) {
-    return new Response(
-      JSON.stringify({ error: "Username not found in URL" }),
-      { status: 400, headers: { "Content-Type": "application/json" } }
-    );
+    return { error: "Username not found in URL" };
   }
 
+  //Placeholder input used to identify which form is being submitted. This way I can check for mandatory fields related to each form after the form is identified.
   const headerForm = formData.get("placeholder-indie-game-header");
   const linksForm = formData.get("placeholder-indie-game-links");
   const articleForm = formData.get("placeholder-indie-game-article");
@@ -121,88 +41,13 @@ export async function action({ request }: ActionFunctionArgs) {
   const youtubeForm = formData.get("placeholder-indie-game-youtube");
   const headerImage = formData.get("main-header-img") as File;
 
-  //Handle header title an description after image is successfully uploaded
-  const postHeaderData = async () => {
-    // Handle header form
-    if (headerForm !== null) {
-      const title = formData.get("game-name");
-      const description = formData.get("brief-game-description");
+  //Get IndieDev json template from R2
+  const jsonData = await GetIndieDevJson({ username: usernameInUrl }); //Default json template if one doesn't already exist in R2
 
-      if (!title || !description) {
-        return new Response(
-          JSON.stringify({ error: "All fields are required" }),
-          {
-            status: 400,
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-      }
-
-      try {
-        // Upload header title and description to database
-        const response = await submissionAPI.post(`/update-indie-header`, {
-          method: "POST",
-          responseType: "arraybuffer",
-          data: { username: usernameInUrl, title, description },
-        });
-        if (response.status === 200) {
-          return new Response(
-            JSON.stringify({
-              message:
-                "Header (title, description, and image) has been processed and uploaded successfully",
-            }),
-            {
-              status: 200,
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
-        } else {
-          return new Response(
-            JSON.stringify({
-              error: "Failed to upload header title and description",
-            }),
-            {
-              status: 500,
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
-        }
-      } catch (error) {
-        console.error("Header data processing error:", error);
-        return new Response(
-          JSON.stringify({
-            error: "Failed to upload header title and description",
-          }),
-          {
-            status: 500,
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-      }
-    }
-  };
+  console.log(jsonData);
 
   // Handle header image upload to R2
-  if (headerImage !== null) {
-    const allowedFormats = [
-      "image/jpeg",
-      "image/png",
-      "image/gif",
-      "image/webp",
-    ];
-    if (!allowedFormats.includes(headerImage.type)) {
-      return new Response(JSON.stringify({ error: "Invalid image format" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-
+  if (headerImage !== null && headerForm !== null) {
     //For Cloudflare R2
     const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID;
     const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID;
@@ -221,6 +66,35 @@ export async function action({ request }: ActionFunctionArgs) {
       };
     }
 
+    const title = formData.get("game-name")?.toString();
+    const description = formData.get("brief-game-description")?.toString();
+
+    if (!title || !description) {
+      return new Response(
+        JSON.stringify({ error: "All fields are required" }),
+        {
+          status: 400,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
+
+    const allowedFormats = [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+    ];
+
+    if (!allowedFormats.includes(headerImage.type)) {
+      return new Response(JSON.stringify({ error: "Invalid image format" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
     const buffer = await headerImage.arrayBuffer();
     const imageBuffer = Buffer.from(buffer);
 
@@ -235,8 +109,31 @@ export async function action({ request }: ActionFunctionArgs) {
       const imageObjectKey = `header-img-for-indie-game-showcase.txt`;
       const imgType = "image/webp";
 
+      // If the upload succeeds, store data in the database
+
+      // Handle header form
+      try {
+        const result = await PostIndieDevHeaderForm({
+          usernameInUrl,
+          title,
+          description,
+        });
+
+        // Check if the first request was successful
+        if (!result || result?.status !== 200) {
+          // Handle failure: Do not proceed with the second upload
+          return result;
+        }
+      } catch (error) {
+        return ProcessTryCatchErrors({
+          error,
+          customError:
+            "Something went wrong: Failed to upload header title and description",
+          status: 500,
+        });
+      }
       // Upload the WebP image to R2 directly using HTTP request
-      await PostIndieDevImgToR2({
+      return await PostIndieDevImgToR2({
         imageObjectKey,
         webpBuffer,
         imgType,
@@ -246,18 +143,12 @@ export async function action({ request }: ActionFunctionArgs) {
         R2_SECRET_ACCESS_KEY,
         R2_BUCKET_NAME,
       });
-
-      // If the upload succeeds, store data in the database
-      return await postHeaderData();
     } catch (error) {
-      console.error("Image processing failed:", error);
-      return new Response(
-        JSON.stringify({ error: "Image processing failed" }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      return ProcessTryCatchErrors({
+        error,
+        customError: "Something went wrong: Header form submission failed.",
+        status: 500,
+      });
     }
   }
 
@@ -315,16 +206,20 @@ export async function action({ request }: ActionFunctionArgs) {
       } else {
         console.error("Additional game details upload failed");
         return new Response(
-          JSON.stringify({ error: "Failed to upload additional game details" }),
+          JSON.stringify({
+            error:
+              "Internal Server Error: Failed to upload additional game details",
+          }),
           { status: 500, headers: { "Content-Type": "application/json" } }
         );
       }
     } catch (error) {
-      console.error("Header data processing error:", error);
-      return new Response(
-        JSON.stringify({ error: "Failed to upload additional game details" }),
-        { status: 500, headers: { "Content-Type": "application/json" } }
-      );
+      return ProcessTryCatchErrors({
+        error,
+        customError:
+          "Something went wrong. Failed to submit additional game details.",
+        status: 500,
+      });
     }
   }
 
@@ -351,19 +246,23 @@ export async function action({ request }: ActionFunctionArgs) {
         ]),
       });
     } else if (formData.get("delete") !== null) {
-      return new Response(
-        JSON.stringify({ message: "Account deleted successfully" }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
-      );
+      // return new Response(
+      //   JSON.stringify({ message: "Account deleted successfully" }),
+      //   { status: 200, headers: { "Content-Type": "application/json" } }
+      // );
     } else if (formData.get("change-password") !== null) {
-      return new Response(
-        JSON.stringify({ message: "Password changed successfully" }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
-      );
+      // return new Response(
+      //   JSON.stringify({ message: "Password changed successfully" }),
+      //   { status: 200, headers: { "Content-Type": "application/json" } }
+      // );
     }
 
-    //Save data to database
-    return { message: "Form submitted successfully" };
+    return new Response(
+      JSON.stringify({
+        error: "Something went wrong. Failed to submit account settings form.",
+      }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
   }
 
   //Handle youtube form
@@ -375,18 +274,18 @@ export async function action({ request }: ActionFunctionArgs) {
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   }
+
+  //If none of the above forms are submitted, return an error
   return new Response(
-    JSON.stringify({ error: "Something went wrong. Form submission failed." }),
+    JSON.stringify({
+      error: "Something went wrong. All form submissions failed.",
+    }),
     { status: 500, headers: { "Content-Type": "application/json" } }
   );
 }
 
 export default function EditIndieUsername() {
   const actionData = useActionData() as ActionResponse;
-
-  useEffect(() => {
-    console.log("actionData", actionData);
-  }, [actionData]);
 
   return (
     <div className="flex flex-col w-full max-w-[800px] mx-auto tracking-wider px-5 mt-2">

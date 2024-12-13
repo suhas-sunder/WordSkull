@@ -40,6 +40,7 @@ function IndieGamesHeaderForm({ actionData }: PropType) {
       className="flex flex-col w-full gap-5"
       onSubmit={handleSubmit}
     >
+      {/* Used to identify which form is being submitted when processed in action */}
       <input
         type="text"
         id="placeholder-indie-game-header"

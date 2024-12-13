@@ -47,8 +47,6 @@ async function PostJSONToR2({
 
 
   try {
-    console.log("S3 Client Initialization Started");
-
     const command = new PutObjectCommand({
       Bucket: R2_BUCKET_NAME,
       Key: fullKey,
@@ -59,9 +57,7 @@ async function PostJSONToR2({
       },
     });
 
-    console.log(`Uploading JSON to R2 at key: ${fullKey}`);
     const response = await s3Client.send(command);
-    console.log("Upload successful:", response);
     return response;
   } catch (error) {
     console.error("Error during upload:", error);

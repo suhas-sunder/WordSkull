@@ -2,7 +2,7 @@ import express from "express";
 import { pool } from "./config/dbConfig.js";
 import validation from "./utils/validation.js";
 import jwtGenerator from "./utils/jwtGenerator.js";
-import authorization from "./middleware/authorization.js";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 const { sanitize, validateString } = validation();
@@ -112,31 +112,52 @@ router.post("/login-indie-dev", async (req, res) => {
 });
 
 //Verify user login session via jwt token
-router.get("/is-verify", authorization, async (req, res) => {
+router.get("/verify", async (req, res) => {
   try {
-    // Extract user ID from the authorization token
-    const userId = req.user;
+    // Extract token from Authorization header
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.startsWith("Bearer ")
+      ? authHeader.split(" ")[1]
+      : null;
 
-    // Query the database to get user details
+    if (!token) {
+      return res.status(400).json({ error: "Invalid/expired token" });
+    }
+
+    let decoded;
+
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+      console.error("JWT verification error:", error.message);
+      return res.status(401).json({ error: "Invalid or expired token" });
+    }
+
+    const userId = decoded.user;
+
+    if (!userId) {
+      return res.status(403).json({ error: "Authorization Error: Invalid User!" });
+    }
+
     const result = await pool.query(
-      "SELECT username FROM indiedevs WHERE id = $1",
+      "SELECT * FROM indiedevs WHERE id = $1",
       [userId]
     );
 
-    // Check if user details were found
     if (result.rows.length === 0) {
-      return res.status(404).json("User not found");
+      return res.status(404).json({ error: "Authorization Error: User not allowed!" });
     }
 
-    // Extract user details from the query result
-    const userName = result.rows[0].username;
+    const username = result.rows[0].username;
 
-    // Respond with user details and verification status
-    res.json({ verified: true, userId, userName });
+    res.json({ username });
   } catch (err) {
-    res.status(500).json("Internal Server Error: Failed to verify user");
+    console.error("Error during user verification:", err.message);
+    res.status(500).json({ error: "Internal Server Error: Failed to verify user" });
   }
 });
+
+
 
 router.post("/logout", async (req, res) => {
   try {
