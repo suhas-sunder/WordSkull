@@ -28,6 +28,7 @@ import localforage from "localforage";
 import { SettingsProvider } from "./client/components/context/SettingsContext";
 import { StatsProvider } from "./client/components/context/StatsContext";
 import ErrorBoundary from "./client/components/utils/errors/ErrorBoundary";
+import GoogleAutoAds from "./client/components/utils/other/GoogleAutoAds";
 
 // Loader function to fetch and return data
 export const loader = async () => {
@@ -113,6 +114,7 @@ export function Body({ children }: { children: React.ReactNode }) {
       <div className="min-h-[100vh]">{children}</div>
       <ScrollRestoration />
       <Scripts />
+      <GoogleAutoAds />
       <Footer />
     </body>
   );
