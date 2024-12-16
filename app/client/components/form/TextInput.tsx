@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 interface PropType {
   label: string;
   id: string;
@@ -6,7 +8,7 @@ interface PropType {
   required?: boolean;
   minLength?: number;
   maxLength?: number;
-  value?: string
+  value?: string;
 }
 
 function TextInput({
@@ -17,8 +19,16 @@ function TextInput({
   required,
   minLength,
   maxLength,
-  value
+  value,
 }: PropType) {
+  // Initialize the local state with the `value` prop or an empty string
+  const [inputValue, setInputValue] = useState(value || "");
+
+  // Handle change event and update the state
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <div className="flex flex-col gap-5 font-lato text-lg">
       <label htmlFor={id} className="whitespace-nowrap font-nunito">
@@ -32,7 +42,8 @@ function TextInput({
         required={required}
         minLength={minLength}
         maxLength={maxLength}
-        value={value}
+        value={inputValue} // Use the local state here
+        onChange={handleChange} // Handle changes
         className="flex border-2 rounded-md px-4 py-2 w-full outline-orange-200 border-orange-400 placeholder:text-skull-brown text-amber-600"
       />
     </div>
