@@ -35,5 +35,7 @@ config.env
 *.env
 database.sql
 ecosystem.config.json
+*.timestamp.ts*
+
 
 

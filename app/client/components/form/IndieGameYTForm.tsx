@@ -2,8 +2,16 @@ import { Form } from "@remix-run/react";
 import SaveAndSubmit from "../ui/interactive/SaveAndSubmit";
 import IndieTOSCheckbox from "./IndieTOSCheckbox";
 import TextInput from "./TextInput";
+import FormSuccessErrorMsg from "../utils/errors/FormSuccessErrorMsg";
+import { ActionDataMsgErr } from "../utils/errors/ProcessErrors";
+import { GameInfoJSONType } from "../utils/requests/GetIndieDevJson";
 
-function IndieGameYTForm() {
+interface PropType {
+  data: GameInfoJSONType;
+  actionData: ActionDataMsgErr;
+}
+
+function IndieGameYTForm({ data, actionData }: PropType) {
   return (
     <Form
       method="post"
@@ -22,6 +30,7 @@ function IndieGameYTForm() {
         id="yt-title"
         name="yt-title"
         label="Title Of Your Video (80 chars max)"
+        value={(data?.youtubeTrailerTitle as string) || undefined}
         maxLength={80}
         placeholder="Enter title"
       />
@@ -29,10 +38,12 @@ function IndieGameYTForm() {
         id="yt-url"
         name="yt-url"
         label="YT Video URL (255 chars max)"
+        value={(data?.youtubeVideoTrailerUrl as string) || undefined}
         maxLength={255}
         placeholder="Enter YT URL (Remember, it must be public or unlisted)"
       />
       <IndieTOSCheckbox id="indie-terms-three" />
+      <FormSuccessErrorMsg actionData={actionData} />
       <SaveAndSubmit />
     </Form>
   );

@@ -4,6 +4,7 @@ interface PropType {
   secondOption: string;
   id: string;
   name: string;
+  value?: boolean;
   firstInputChecked: boolean;
   secondInputChecked: boolean;
 }
@@ -14,6 +15,7 @@ function TwoRadioInputs({
   secondOption,
   id,
   name,
+  value,
   firstInputChecked,
   secondInputChecked,
 }: PropType) {
@@ -28,7 +30,7 @@ function TwoRadioInputs({
           type="radio"
           id={id + firstOption}
           name={name}
-          defaultChecked={firstInputChecked}
+          defaultChecked={typeof value === "boolean" ? value : firstInputChecked}
           value="yes"
           className="appearance-none cursor-pointer w-4 h-4 rounded-full border-2 border-orange-400 bg-white checked:bg-orange-500 checked:border-orange-200 focus:outline-none relative"
         />
@@ -40,7 +42,7 @@ function TwoRadioInputs({
           type="radio"
           id={id + secondOption}
           name={name}
-          defaultChecked={secondInputChecked}
+          defaultChecked={typeof value === "boolean" ? value : secondInputChecked}
           value="no"
           className="appearance-none cursor-pointer w-4 h-4 rounded-full border-2 border-orange-400 bg-white checked:bg-orange-500 checked:border-orange-200 focus:outline-none relative"
         />

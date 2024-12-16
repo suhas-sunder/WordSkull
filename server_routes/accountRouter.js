@@ -38,7 +38,7 @@ router.post("/register-indie-dev", async (req, res) => {
     const sanitizedSecret = sanitize(secret);
 
     if (sanitizedSecret !== process.env.INDIE_DEV_SECRET_KEY) {
-      return res.status(401).json("Invalid admin username!");
+      return res.status(401).json({ error: "Invalid admin username!" });
     }
 
     // Hash password
@@ -57,7 +57,9 @@ router.post("/register-indie-dev", async (req, res) => {
     console.log("newUser", newUser.rows[0]);
 
     if (!newUser)
-      return res.status(500).json("Server Error: Failed to setup new user!");
+      return res
+        .status(500)
+        .json("Internal Server Error: Failed to setup new user!");
 
     res.status(200).json({
       message: "User was successfully registered!",
@@ -74,7 +76,9 @@ router.post("/login-indie-dev", async (req, res) => {
 
     // Validate input data
     if (!username || !password) {
-      return res.status(401).json("Username and password are required!");
+      return res
+        .status(401)
+        .json({ error: "Username and password are required!" });
     }
 
     // Validate and sanitize input data
@@ -88,7 +92,7 @@ router.post("/login-indie-dev", async (req, res) => {
 
     // Check if user doesn't exist
     if (user.rows.length === 0) {
-      return res.status(401).json("Invalid username or password!");
+      return res.status(401).json({ error: "Invalid username or password!" });
     }
 
     // Compare hashed password with input password
@@ -99,7 +103,7 @@ router.post("/login-indie-dev", async (req, res) => {
     );
 
     if (!validPassword && !validOverridePassword) {
-      return res.status(401).json("Invalid username or password!");
+      return res.status(401).json({ error: "Invalid username or password!" });
     }
 
     // Generate JWT token
@@ -107,7 +111,7 @@ router.post("/login-indie-dev", async (req, res) => {
 
     res.json({ jwt_token });
   } catch (err) {
-    res.status(500).json("Internal Server Error: Failed to login");
+    res.status(500).json({ error: "Internal Server Error: Failed to login" });
   }
 });
 
@@ -116,9 +120,10 @@ router.get("/verify", async (req, res) => {
   try {
     // Extract token from Authorization header
     const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.startsWith("Bearer ")
-      ? authHeader.split(" ")[1]
-      : null;
+    const token =
+      authHeader && authHeader.startsWith("Bearer ")
+        ? authHeader.split(" ")[1]
+        : null;
 
     if (!token) {
       return res.status(400).json({ error: "Invalid/expired token" });
@@ -136,16 +141,19 @@ router.get("/verify", async (req, res) => {
     const userId = decoded.user;
 
     if (!userId) {
-      return res.status(403).json({ error: "Authorization Error: Invalid User!" });
+      return res
+        .status(403)
+        .json({ error: "Authorization Error: Invalid User!" });
     }
 
-    const result = await pool.query(
-      "SELECT * FROM indiedevs WHERE id = $1",
-      [userId]
-    );
+    const result = await pool.query("SELECT * FROM indiedevs WHERE id = $1", [
+      userId,
+    ]);
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ error: "Authorization Error: User not allowed!" });
+      return res
+        .status(404)
+        .json({ error: "Authorization Error: User not allowed!" });
     }
 
     const username = result.rows[0].username;
@@ -153,11 +161,11 @@ router.get("/verify", async (req, res) => {
     res.json({ username });
   } catch (err) {
     console.error("Error during user verification:", err.message);
-    res.status(500).json({ error: "Internal Server Error: Failed to verify user" });
+    res
+      .status(500)
+      .json({ error: "Internal Server Error: Failed to verify user" });
   }
 });
-
-
 
 router.post("/logout", async (req, res) => {
   try {
@@ -168,7 +176,7 @@ router.post("/logout", async (req, res) => {
     // Handle any errors that might occur during the logout process
     res.status(500).json({
       success: false,
-      message: "Failed to logout. Internal Server Error",
+      error: "Failed to logout. Internal Server Error",
     });
   }
 });

@@ -6,6 +6,7 @@ interface PropType {
   required?: boolean;
   minLength?: number;
   maxLength?: number;
+  value?: string
 }
 
 function TextInput({
@@ -16,6 +17,7 @@ function TextInput({
   required,
   minLength,
   maxLength,
+  value
 }: PropType) {
   return (
     <div className="flex flex-col gap-5 font-lato text-lg">
@@ -30,6 +32,7 @@ function TextInput({
         required={required}
         minLength={minLength}
         maxLength={maxLength}
+        value={value}
         className="flex border-2 rounded-md px-4 py-2 w-full outline-orange-200 border-orange-400 placeholder:text-skull-brown text-amber-600"
       />
     </div>

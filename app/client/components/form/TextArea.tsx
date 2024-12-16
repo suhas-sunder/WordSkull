@@ -6,6 +6,7 @@ interface PropType {
   required?: boolean;
   minLength?: number;
   maxLength?: number;
+  value?: string;
 }
 
 function TextArea({
@@ -15,6 +16,7 @@ function TextArea({
   placeholder,
   required,
   minLength,
+  value,
   maxLength,
 }: PropType) {
   return (
@@ -25,6 +27,7 @@ function TextArea({
       <textarea
         name={name}
         id={id}
+        value={value}
         placeholder={placeholder}
         className="flex border-2 rounded-md px-4 py-3 w-full min-h-[19em] scrollbar-thin scrollbar-thumb-amber-500 scrollbar-track-amber-100 outline-orange-200 border-orange-400 placeholder:text-skull-brown text-amber-600"
         minLength={minLength}

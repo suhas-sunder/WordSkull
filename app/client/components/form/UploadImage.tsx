@@ -8,9 +8,18 @@ interface PropType {
   accept: string;
   required?: boolean;
   setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
+  imgUrl?: string;
 }
 
-function UploadImage({ optionalText, id, type, accept, required, setSelectedFile }: PropType) {
+function UploadImage({
+  optionalText,
+  id,
+  type,
+  accept,
+  required,
+  setSelectedFile,
+  imgUrl,
+}: PropType) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const validateAndPreview = (file: File) => {
@@ -46,7 +55,6 @@ function UploadImage({ optionalText, id, type, accept, required, setSelectedFile
     e.preventDefault();
   };
 
-
   const removeImage = () => {
     setImagePreview(null);
     setSelectedFile(null);
@@ -64,7 +72,7 @@ function UploadImage({ optionalText, id, type, accept, required, setSelectedFile
             <Icon icon="close" customStyle="fill-white scale-75" />
           </button>
           <img
-            src={imagePreview}
+            src={imgUrl ? imgUrl : imagePreview}
             alt="Preview"
             className="max-w-full max-h-60 object-contain"
           />
@@ -93,8 +101,8 @@ function UploadImage({ optionalText, id, type, accept, required, setSelectedFile
             tabIndex={0}
           >
             <p>
-              {required ? "*" : "(Optional) "}Drag & Drop your {optionalText} image here or
-              click to browse
+              {required ? "*" : "(Optional) "}Drag & Drop your {optionalText}{" "}
+              image here or click to browse
             </p>
             <p>
               {" "}

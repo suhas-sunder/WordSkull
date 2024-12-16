@@ -6,13 +6,30 @@ import TextInput from "./TextInput";
 import UploadImage from "./UploadImage";
 import TextArea from "./TextArea";
 import { useFetcher } from "react-router-dom";
+import { ActionDataMsgErr } from "../utils/errors/ProcessErrors";
+import FormSuccessErrorMsg from "../utils/errors/FormSuccessErrorMsg";
+import { GameInfoJSONType } from "../utils/requests/GetIndieDevJson";
 
 interface PropType {
-  index: number;
-  setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
+  data: GameInfoJSONType;
+  actionData: ActionDataMsgErr;
 }
 
-const ArticleSection = ({ index, setSelectedFile }: PropType) => {
+interface ArticlePropType {
+  index: number;
+  setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
+  title?: string;
+  imgUrl?: string;
+  description?: string;
+}
+
+const ArticleSection = ({
+  index,
+  setSelectedFile,
+  title,
+  imgUrl,
+  description,
+}: ArticlePropType) => {
   return (
     <>
       {" "}
@@ -21,6 +38,7 @@ const ArticleSection = ({ index, setSelectedFile }: PropType) => {
         name={`article-title-${index}`}
         label={`Title for Section ${index} - (1 to 80 chars)`}
         minLength={1}
+        value={title}
         maxLength={80}
         placeholder={`Enter Section ${index} title`}
       />
@@ -28,6 +46,7 @@ const ArticleSection = ({ index, setSelectedFile }: PropType) => {
         id={`article-image-${index}`}
         type="file"
         accept="image/*"
+        imgUrl={imgUrl}
         optionalText=""
         setSelectedFile={setSelectedFile}
       />
@@ -35,6 +54,7 @@ const ArticleSection = ({ index, setSelectedFile }: PropType) => {
         label={`Brief Description for Section ${index} - (200 to 1000 chars)`}
         id="brief-description"
         name="brief-description"
+        value={description}
         minLength={200}
         maxLength={1000}
         placeholder={`Section ${index}: Please write a unique and original description of your game. If I get too many submissions that are 'copy pasted' from other websites, I run the risk of being flagged for duplicate content.
@@ -47,7 +67,7 @@ Thank you 😊!`}
   );
 };
 
-function IndieGameArticlesForm() {
+function IndieGameArticlesForm({ data, actionData }: PropType) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [sections, setSections] = useState(1);
   const fetcher = useFetcher();
@@ -92,6 +112,7 @@ function IndieGameArticlesForm() {
         id={`article-author`}
         name={`article-author`}
         label={`Author Name - Will be your username if left blank (1 to 80 chars)`}
+        value={(data?.authorName as string) || undefined}
         minLength={1}
         maxLength={80}
         placeholder="Enter author name"
@@ -101,12 +122,21 @@ function IndieGameArticlesForm() {
         name={`article-profession`}
         label={`Profession - Will default to "Indie Game Developer" if left blank (1 to 80 chars)`}
         minLength={1}
+        value={(data?.profession as string) || undefined}
         maxLength={80}
         placeholder="Enter profession"
       />
       {new Array(sections).fill("").map((_, index) => (
         <Fragment key={index}>
-          <ArticleSection index={index + 1} setSelectedFile={setSelectedFile} />
+          <ArticleSection
+            index={index + 1}
+            title={(data?.articles[index]?.title as string) || undefined}
+            imgUrl={(data?.articles[index]?.imgUrl as string) || undefined}
+            description={
+              (data?.articles[index]?.description as string) || undefined
+            }
+            setSelectedFile={setSelectedFile}
+          />
         </Fragment>
       ))}
       <p className="text-lg mx-auto">Total Article Sections: {sections}</p>
@@ -120,19 +150,22 @@ function IndieGameArticlesForm() {
             Add Section
           </button>
         )}
-        {sections > 1 && <button
-          type="button"
-          className="flex justify-center items-center rounded-md bg-rose-500  text-white px-4 py-2 w-[12em] hover:bg-rose-400 whitespace-nowrap"
-          onClick={() =>
-            setSections((prevState) =>
-              prevState > 1 ? prevState - 1 : prevState
-            )
-          }
-        >
-          ☠️ Delete Section
-        </button>}
+        {sections > 1 && (
+          <button
+            type="button"
+            className="flex justify-center items-center rounded-md bg-rose-500  text-white px-4 py-2 w-[12em] hover:bg-rose-400 whitespace-nowrap"
+            onClick={() =>
+              setSections((prevState) =>
+                prevState > 1 ? prevState - 1 : prevState
+              )
+            }
+          >
+            ☠️ Delete Section
+          </button>
+        )}
       </div>
       <IndieTOSCheckbox id="indie-terms-articles" />
+      <FormSuccessErrorMsg actionData={actionData} />
       <SaveAndSubmit />
     </Form>
   );
