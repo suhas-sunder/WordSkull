@@ -6,8 +6,15 @@ import TextInput from "./TextInput";
 import IndieTOSCheckbox from "./IndieTOSCheckbox";
 import SaveAndSubmit from "../ui/interactive/SaveAndSubmit";
 import { Form } from "@remix-run/react";
+import { ActionDataMsgErr } from "../utils/errors/ProcessErrors";
+import FormSuccessErrorMsg from "../utils/errors/FormSuccessErrorMsg";
 
-function IndieGameLinksForm() {
+interface PropType {
+  data: Record<string, unknown>;
+  actionData: ActionDataMsgErr;
+}
+
+function IndieGameLinksForm({ data, actionData }: PropType) {
   const linkData = useMemo(() => IndieGameLinksData(), []);
   const socialsData = useMemo(() => IndieSocialLinks(), []);
   const donoData = useMemo(() => IndieDonationLinks(), []);
@@ -32,6 +39,7 @@ function IndieGameLinksForm() {
             <TextInput
               id={link.id}
               name={link.name}
+              value={(data?.[`${link.name}Url`] as string) || undefined}
               label={link.label}
               maxLength={255}
               placeholder={link.placeholder}
@@ -49,6 +57,7 @@ function IndieGameLinksForm() {
               id={link.id}
               name={link.name}
               label={link.label}
+              value={(data?.[`${link.name}Url`] as string) || undefined}
               maxLength={255}
               placeholder={link.placeholder}
             />
@@ -65,6 +74,7 @@ function IndieGameLinksForm() {
               id={link.id}
               name={link.name}
               label={link.label}
+              value={(data?.[`${link.name}Url`] as string) || undefined}
               maxLength={255}
               placeholder={link.placeholder}
             />
@@ -72,6 +82,7 @@ function IndieGameLinksForm() {
         ))}
       </div>
       <IndieTOSCheckbox id="indie-terms-two" />
+      <FormSuccessErrorMsg actionData={actionData} />
       <SaveAndSubmit />
     </Form>
   );

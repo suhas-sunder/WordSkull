@@ -13,23 +13,53 @@ import {
   CookieOptions,
   createCookie,
 } from "@remix-run/node";
-import { redirect, useActionData } from "react-router-dom";
-import ProcessTryCatchErrors from "../client/components/utils/errors/ProcessTryCatchErrors";
+import { redirect, useActionData, useLoaderData } from "react-router-dom";
+import ProcessTryCatchErrors from "../client/components/utils/errors/ProcessErrors";
 import PostIndieDevHeaderForm from "../client/components/utils/requests/PostIndieDevHeaderForm";
-import GetIndieDevJson from "../client/components/utils/requests/GetIndieDevJson";
+import GetIndieDevJson, { GameInfoJSONType } from "../client/components/utils/requests/GetIndieDevJson";
+import validateAndTransformYouTubeLink from "../client/components/utils/validation/ValidateAndTransformYTLink";
+import PostJSONToR2 from "../client/components/utils/requests/PostJSONFromR2";
 
 interface ActionResponse {
   error?: string;
   message?: string;
 }
 
-export async function action({ request }: ActionFunctionArgs) {
-  const formData = await request.formData();
+export async function loader({ request }: ActionFunctionArgs) {
   const currentUrl = new URL(request.url);
   const usernameInUrl = currentUrl.pathname.split("/").slice(-1)[0] || "";
 
   if (!usernameInUrl) {
-    return { error: "Username not found in URL" };
+    return redirect("/403");
+  }
+
+  const jsonData = await GetIndieDevJson({ username: usernameInUrl }); //Default json template if one doesn't already exist in R2
+  return jsonData;
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  const currentUrl = new URL(request.url);
+  const usernameInUrl = currentUrl.pathname.split("/").slice(-1)[0] || "";
+  //For Cloudflare R2
+  const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID;
+  const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID;
+  const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY;
+  const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME;
+  const objectKey = `json-data-for-indie-game-showcase.json`; //JSON File name for the R2 bucket
+  const imageObjectKey = `header-img-for-indie-game-showcase.webp`; //Webp Img file name for the R2 bucket
+
+  if (
+    !R2_ACCOUNT_ID ||
+    !R2_ACCESS_KEY_ID ||
+    !R2_SECRET_ACCESS_KEY ||
+    !R2_BUCKET_NAME ||
+    !usernameInUrl
+  ) {
+    return {
+      error:
+        "Internal Server Error: Image upload credentials not properly configured.",
+    };
   }
 
   //Placeholder input used to identify which form is being submitted. This way I can check for mandatory fields related to each form after the form is identified.
@@ -44,28 +74,8 @@ export async function action({ request }: ActionFunctionArgs) {
   //Get IndieDev json template from R2
   const jsonData = await GetIndieDevJson({ username: usernameInUrl }); //Default json template if one doesn't already exist in R2
 
-  console.log(jsonData);
-
   // Handle header image upload to R2
   if (headerImage !== null && headerForm !== null) {
-    //For Cloudflare R2
-    const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID;
-    const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID;
-    const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY;
-    const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME;
-
-    if (
-      !R2_ACCOUNT_ID ||
-      !R2_ACCESS_KEY_ID ||
-      !R2_SECRET_ACCESS_KEY ||
-      !R2_BUCKET_NAME
-    ) {
-      return {
-        error:
-          "Internal Server Error: Image upload credentials not properly configured.",
-      };
-    }
-
     const title = formData.get("game-name")?.toString();
     const description = formData.get("brief-game-description")?.toString();
 
@@ -105,8 +115,6 @@ export async function action({ request }: ActionFunctionArgs) {
         .toFormat("webp", { quality: 80 }) // Adjust quality for desired compression
         .toBuffer();
 
-      // Define the file path and key in R2 for the image
-      const imageObjectKey = `header-img-for-indie-game-showcase.txt`;
       const imgType = "image/webp";
 
       // If the upload succeeds, store data in the database
@@ -266,13 +274,39 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   //Handle youtube form
+
+  // Backend logic
+
   if (youtubeForm !== null) {
-    //Import json file from r2 bucket if file exists in https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com/wordskull/indiegames/${username}/game-data.json
-    //If it exists, update it with urls. If not, create new.
-    return new Response(
-      JSON.stringify({ message: "Form submitted successfully" }),
-      { status: 200, headers: { "Content-Type": "application/json" } }
-    );
+    const titleForYT = formData.get("yt-title")?.toString() || "";
+    const linkForYT = formData.get("yt-url")?.toString() || "";
+
+    if (!titleForYT || !linkForYT) {
+      return {
+        error:
+          "YouTube title and URL cannot be empty when submitting the optional YouTube Game Trailer form.",
+      };
+    }
+
+    // Validate and transform the YouTube URL
+    const validationResult = validateAndTransformYouTubeLink({ linkForYT });
+
+    if (validationResult?.error) {
+      return validationResult;
+    }
+
+    jsonData.youtubeTrailerTitle = validationResult?.embedLink;
+    jsonData.youtubeVideoTrailerUrl = titleForYT;
+
+    return await PostJSONToR2({
+      usernameInUrl,
+      R2_ACCOUNT_ID,
+      R2_ACCESS_KEY_ID,
+      R2_SECRET_ACCESS_KEY,
+      R2_BUCKET_NAME,
+      objectKey,
+      jsonData,
+    });
   }
 
   //If none of the above forms are submitted, return an error
@@ -285,17 +319,19 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function EditIndieUsername() {
+  const data = useLoaderData() as GameInfoJSONType;
   const actionData = useActionData() as ActionResponse;
+
+  console.log(data)
 
   return (
     <div className="flex flex-col w-full max-w-[800px] mx-auto tracking-wider px-5 mt-2">
-      <IndieGamesHeaderForm actionData={actionData} />
-
-      <IndieGameLinksForm />
-      <IndieGameYTForm />
-      <IndieGameDetailsForm />
-      <IndieGameArticlesForm />
-      <IndieGameSettingsForm />
+      <IndieGamesHeaderForm data={data} actionData={actionData}/>
+      <IndieGameLinksForm data={data} actionData={actionData}/>
+      <IndieGameYTForm data={data} actionData={actionData}/>
+      <IndieGameDetailsForm data={data} actionData={actionData}/>
+      <IndieGameArticlesForm data={data} actionData={actionData}/>
+      <IndieGameSettingsForm actionData={actionData}/>
     </div>
   );
 }

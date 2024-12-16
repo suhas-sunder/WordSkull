@@ -40,11 +40,10 @@ async function PostJSONToR2({
   });
 
   // Specify the folder structure
-  const folderPath = `indiegamedevs/${usernameInUrl}/game-data.json`;
+  const folderPath = `indiegamedevs/${usernameInUrl}/`;
   const fullKey = `${folderPath}${objectKey}`; // Add the file name to the folder path
 
   const xAmzDate = GeneratexAmzDate();
-
 
   try {
     const command = new PutObjectCommand({
@@ -58,7 +57,12 @@ async function PostJSONToR2({
     });
 
     const response = await s3Client.send(command);
-    return response;
+
+    if (response.$metadata.httpStatusCode !== 200) {
+      return { error: "Failed to upload JSON data to R2." };
+    }
+
+    return { message: "Congratulations! Upload or update successful!" };
   } catch (error) {
     console.error("Error during upload:", error);
     throw new Error(`Upload failed: ${error}`);

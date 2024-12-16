@@ -66,7 +66,7 @@ app.all("*", createRequestHandler({ build })); // Use the build object
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   console.error("Server error:", err);
-  res.status(500).send("Internal Server Error");
+  res.status(500).send({ error: "Internal Server Error: Something went wrong with request" });
 });
 
 // Start the server

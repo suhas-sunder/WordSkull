@@ -6,12 +6,14 @@ import IndieTOSCheckbox from "./IndieTOSCheckbox";
 import SaveAndSubmit from "../ui/interactive/SaveAndSubmit";
 import { useState } from "react";
 import FormSuccessErrorMsg from "../utils/errors/FormSuccessErrorMsg";
+import { ActionDataMsgErr } from "../utils/errors/ProcessErrors";
 
-type PropType = {
-  actionData: { error?: string; message?: string };
-};
+interface PropType {
+  data: Record<string, unknown>;
+  actionData: ActionDataMsgErr;
+}
 
-function IndieGamesHeaderForm({ actionData }: PropType) {
+function IndieGamesHeaderForm({ data, actionData }: PropType) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const submit = useSubmit(); // Get submit function from Remix
 
@@ -50,7 +52,8 @@ function IndieGamesHeaderForm({ actionData }: PropType) {
       <TextInput
         id="game-name"
         name="game-name"
-        label="* Title Of Your Game (1 to 80 chars)"
+        label="* Title Of Your Game (1 to 80 chars)"        
+        value={(data?.titleOfGame as string) || undefined}
         required={true}
         minLength={1}
         maxLength={80}
@@ -60,6 +63,7 @@ function IndieGamesHeaderForm({ actionData }: PropType) {
         label="* Brief Description (300 to 1000 chars)"
         id="brief-game-description"
         name="brief-game-description"
+        value={(data?.descriptionOfGame as string) || undefined}
         required={true}
         minLength={300}
         maxLength={1000}

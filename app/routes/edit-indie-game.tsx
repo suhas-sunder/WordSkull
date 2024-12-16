@@ -12,7 +12,7 @@ import SocialLinks from "../client/components/navigation/SocialLinks";
 import IndieLoginForm from "../client/components/form/IndieLoginForm";
 import VerifyJWT from "../client/components/utils/validation/VerifyJWTIndieLogin";
 import PostIndieLogin from "../client/components/utils/requests/PostIndieLogin";
-import ProcessTryCatchErrors from "../client/components/utils/errors/ProcessTryCatchErrors";
+import ProcessTryCatchErrors from "../client/components/utils/errors/ProcessErrors";
 
 interface ActionResponse {
   error?: string;
@@ -70,15 +70,7 @@ export async function action({ request }: ActionFunctionArgs) {
     });
   }
 
-  try {
-    return await PostIndieLogin({ username, password }); //Login & redirect to submission form or display error
-  } catch (error) {
-    return ProcessTryCatchErrors({
-      error,
-      customError: "Something went wrong. Form submission failed.",
-      status: 500,
-    });
-  }
+  return await PostIndieLogin({ username, password }); // Post IndieDev login credentials to API
 }
 
 export default function EditIndieGame() {

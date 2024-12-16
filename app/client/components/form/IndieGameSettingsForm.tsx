@@ -1,6 +1,12 @@
 import { Form } from "@remix-run/react";
+import { ActionDataMsgErr } from "../utils/errors/ProcessErrors";
+import FormSuccessErrorMsg from "../utils/errors/FormSuccessErrorMsg";
 
-function IndieGameSettingsForm() {
+interface PropType {
+  actionData: ActionDataMsgErr;
+}
+
+function IndieGameSettingsForm({  actionData }: PropType) {
   return (
     <Form
       method="post"
@@ -35,6 +41,7 @@ function IndieGameSettingsForm() {
       >
        ☠️ Delete Account
       </button>
+      <FormSuccessErrorMsg actionData={actionData} />
     </Form>
   );
 }

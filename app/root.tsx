@@ -1,8 +1,6 @@
 import "./tailwind.css";
 import NavBar from "./client/components/navigation/NavBar";
 import Footer from "./client/components/navigation/Footer";
-import cloudflareR2API from "./client/components/api/cloudflareR2API";
-import { ungzip } from "pako";
 import Skull_1 from "./client/assets/images/skull_1.png";
 import Skull_2 from "./client/assets/images/skull_2.png";
 import Skull_3 from "./client/assets/images/skull_3.png";
@@ -29,43 +27,11 @@ import { SettingsProvider } from "./client/components/context/SettingsContext";
 import { StatsProvider } from "./client/components/context/StatsContext";
 import ErrorBoundary from "./client/components/utils/errors/ErrorBoundary";
 import GoogleAutoAds from "./client/components/utils/other/GoogleAutoAds";
+import GetWordsForSkull from "./client/components/utils/requests/GetWordsForSkull";
 
 // Loader function to fetch and return data
 export const loader = async () => {
-  let words = {};
-
-  // Fetch gzipped file from Cloudflare R2 if not cached
-  const response = await cloudflareR2API.get(
-    "/word-skull/sortedWords.json.gz",
-    {
-      method: "GET",
-      responseType: "arraybuffer",
-    }
-  );
-
-  const responseData = new Uint8Array(response.data);
-
-  // Check if the response data is Gzipped
-  const isGzip = responseData[0] === 0x1f && responseData[1] === 0x8b;
-
-  if (isGzip) {
-    const decompressedData = ungzip(responseData, { to: "string" });
-    words = JSON.parse(decompressedData);
-  } else {
-    const textData = new TextDecoder().decode(responseData);
-    words = JSON.parse(textData);
-  }
-
-  return new Response(
-    JSON.stringify({ words }), // Return the 'words' object as a JSON string
-    {
-      status: 200, // Default status is 200 OK
-      headers: {
-        "Content-Type": "application/json", // Ensure the content type is JSON
-        "Cache-Control": "max-age=3600, public", // Cache settings
-      },
-    }
-  );
+  return await GetWordsForSkull();
 };
 
 export const action = async ({ request }: { request: Request }) => {

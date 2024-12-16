@@ -1,5 +1,7 @@
+import { ActionDataMsgErr } from "./ProcessErrors";
+
 interface PropType {
-  actionData: { error?: string; message?: string };
+  actionData: ActionDataMsgErr;
 }
 
 function FormSuccessErrorMsg({ actionData }: PropType) {
@@ -7,7 +9,7 @@ function FormSuccessErrorMsg({ actionData }: PropType) {
     <div
       className={`${
         actionData?.error || actionData?.message ? "flex" : "hidden"
-      } justify-center items-center w-full mb-1 text-lg`}
+      } justify-center items-center w-full mb-1 text-lg text-center leading-loose`}
     >
       {actionData?.error && (
         <div className="text-rose-600">🪦 {actionData.error}</div>
