@@ -2,6 +2,8 @@ import cloudflareR2API from "../../api/cloudflareR2API";
 import ProcessTryCatchErrors from "../errors/ProcessErrors";
 
 export type GameInfoJSONType = {
+  titleOfGame?: string;
+  descriptionOfGame?: string;
   steamUrl: string;
   itchUrl: string;
   epicUrl: string;
@@ -31,25 +33,24 @@ export type GameInfoJSONType = {
   websiteDonationUrl: string;
   youtubeTrailerTitle: string;
   youtubeVideoTrailerUrl: string;
-  devName: string;
-  publisherName: string;
-  genre: string;
-  platforms: string[];
-  baseGamePrice: string;
-  releaseDate: string;
-  singlePlayer: boolean;
-  multiplayer: boolean;
-  coop: boolean;
-  achievements: boolean;
-  demo: boolean;
-  controllerSupport: boolean;
-  tenCustomTags: string[];
-  additionalTagsFromList: string[];
+  devName?: string;
+  publisherName?: string;
+  genre?: string;
+  platforms?: string[];
+  baseGamePrice?: string;
+  releaseDate?: string;
+  singlePlayer?: boolean;
+  multiplayer?: boolean;
+  coop?: boolean;
+  achievements?: boolean;
+  demo?: boolean;
+  controllerSupport?: boolean;
+  tenCustomTags?: string[];
+  additionalTagsFromList?: string[];
   authorName: string;
   profession: string;
   articles: { title: string; description: string; imgUrl: string }[];
-}
-
+};
 
 export default async function GetIndieDevJson({
   username,
@@ -86,20 +87,6 @@ export default async function GetIndieDevJson({
     websiteDonationUrl: "",
     youtubeTrailerTitle: "",
     youtubeVideoTrailerUrl: "",
-    devName: "",
-    publisherName: "",
-    genre: "",
-    platforms: [],
-    baseGamePrice: "",
-    releaseDate: "",
-    singlePlayer: true,
-    multiplayer: false,
-    coop: false,
-    achievements: false,
-    demo: false,
-    controllerSupport: false,
-    tenCustomTags: [],
-    additionalTagsFromList: [],
     authorName: "",
     profession: "",
     articles: [
@@ -111,7 +98,9 @@ export default async function GetIndieDevJson({
     ],
   };
 
-  console.log(`/indiegamedevs/${username}/json-data-for-indie-game-showcase.json`)
+  console.log(
+    `/indiegamedevs/${username}/json-data-for-indie-game-showcase.json`
+  );
 
   try {
     const response = await cloudflareR2API.get(

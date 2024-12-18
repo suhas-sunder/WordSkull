@@ -3,18 +3,14 @@ import IndieTOSCheckbox from "./IndieTOSCheckbox";
 import SaveAndSubmit from "../ui/interactive/SaveAndSubmit";
 import TextInput from "./TextInput";
 import TwoRadioInputs from "./TwoRadioInputs";
-import { ActionDataMsgErr } from "../utils/errors/ProcessErrors";
 import FormSuccessErrorMsg from "../utils/errors/FormSuccessErrorMsg";
+import { FormType } from "../../../routes/edit-indie-game.$username";
 
-interface PropType {
-  data: Record<string, unknown>;
-  actionData: ActionDataMsgErr;
-}
-
-function IndieGameDetailsForm({ data, actionData }: PropType) {
+function IndieGameDetailsForm({ data, actionData, trackFormSubmitted, setTrackFormSubmitted }: FormType) {
   return (
     <Form
       method="post"
+      onSubmit={() => setTrackFormSubmitted("game-details")}
       className="flex flex-col gap-8 mt-10 font-lato tracking-wider"
     >
       <input
@@ -146,7 +142,7 @@ function IndieGameDetailsForm({ data, actionData }: PropType) {
       </fieldset>
       Tags from list.
       <IndieTOSCheckbox id="indie-terms-four" />
-      <FormSuccessErrorMsg actionData={actionData} />
+      {trackFormSubmitted === "game-details" && <FormSuccessErrorMsg actionData={actionData} />}
       <SaveAndSubmit />
     </Form>
   );

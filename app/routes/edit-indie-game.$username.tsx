@@ -14,16 +14,32 @@ import {
   createCookie,
 } from "@remix-run/node";
 import { redirect, useActionData, useLoaderData } from "react-router-dom";
-import ProcessTryCatchErrors from "../client/components/utils/errors/ProcessErrors";
+import ProcessTryCatchErrors, {
+  ActionDataMsgErr,
+} from "../client/components/utils/errors/ProcessErrors";
 import PostIndieDevHeaderForm from "../client/components/utils/requests/PostIndieDevHeaderForm";
-import GetIndieDevJson, { GameInfoJSONType } from "../client/components/utils/requests/GetIndieDevJson";
+import GetIndieDevJson, {
+  GameInfoJSONType,
+} from "../client/components/utils/requests/GetIndieDevJson";
 import validateAndTransformYouTubeLink from "../client/components/utils/validation/ValidateAndTransformYTLink";
 import PostJSONToR2 from "../client/components/utils/requests/PostJSONFromR2";
+import { useMemo, useState } from "react";
+import ValidateIndieGameLinks from "../client/components/utils/validation/ValidateIndieGameLinks";
+import IndieSocialLinks from "../client/components/data/IndieSocialLinks";
+import IndieGameLinks from "../client/components/data/IndieGameLinks";
+import IndieDonationLinks from "../client/components/data/IndieDonationLinks";
 
 interface ActionResponse {
   error?: string;
   message?: string;
 }
+
+export type FormType = {
+  data: GameInfoJSONType;
+  actionData: ActionDataMsgErr;
+  trackFormSubmitted: string;
+  setTrackFormSubmitted: React.Dispatch<React.SetStateAction<string>>;
+};
 
 export async function loader({ request }: ActionFunctionArgs) {
   const currentUrl = new URL(request.url);
@@ -64,7 +80,9 @@ export async function action({ request }: ActionFunctionArgs) {
 
   //Placeholder input used to identify which form is being submitted. This way I can check for mandatory fields related to each form after the form is identified.
   const headerForm = formData.get("placeholder-indie-game-header");
-  const linksForm = formData.get("placeholder-indie-game-links");
+  const gameLinksForm = formData.get("placeholder-indie-game-links");
+  const socialLinksForm = formData.get("placeholder-indie-social-links");
+  const donoLinksForm = formData.get("placeholder-indie-dono-links");
   const articleForm = formData.get("placeholder-indie-game-article");
   const detailsForm = formData.get("placeholder-indie-game-details");
   const settingsForm = formData.get("placeholder-indie-game-settings");
@@ -160,21 +178,83 @@ export async function action({ request }: ActionFunctionArgs) {
     }
   }
 
-  //Handle links form
-  if (linksForm !== null) {
-    //Import json file from r2 bucket if file exists in https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com/wordskull/indiegames/${username}/game-data.json
-    //If it exists, update it with urls. If not, create new.
+  //Handle game links form
+  if (gameLinksForm !== null) {
+    const urls = {
+      steam_url: formData.get("steam_url")?.toString(),
+      itch_url: formData.get("itch_url")?.toString(),
+      epic_url: formData.get("epic_url")?.toString(),
+      apple_url: formData.get("apple_url")?.toString(),
+      play_store_url: formData.get("play_store_url")?.toString(),
+      game_jolt_url: formData.get("game_jolt_url")?.toString(),
+      gog_url: formData.get("gog_url")?.toString(),
+      humble_bundle_url: formData.get("humble_bundle_url")?.toString(),
+      nintendo_shop_url: formData.get("nintendo_shop_url")?.toString(),
+      playstation_store_url: formData.get("playstation_store_url")?.toString(),
+      game_landing_page_url: formData.get("game_landing_page_url")?.toString(),
+    };
+
+    const validationError = ValidateIndieGameLinks({ urls });
+
+    if (validationError) {
+      return Object.values(validationError)[0]; // Return the error object if validation fails
+    }
 
     // Check for JSON file and handle upload
-    return new Response(
-      JSON.stringify({ message: "Form submitted successfully" }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    return { message: "Form submitted successfully" };
   }
 
+  //Handle social links form
+  if (socialLinksForm !== null) {
+    const urls = {
+      youtube_url: formData.get("youtube_url")?.toString(),
+      tiktok_url: formData.get("tiktok_url")?.toString(),
+      reddit_url: formData.get("reddit_url")?.toString(),
+      discord_url: formData.get("discord_url")?.toString(),
+      instagram_url: formData.get("instagram_url")?.toString(),
+      facebook_url: formData.get("facebook_url")?.toString(),
+      linkedin_url: formData.get("linkedin_url")?.toString(),
+      twitter_url: formData.get("twitter_url")?.toString(),
+      mastodon_url: formData.get("mastodon_url")?.toString(),
+      pinterest_url: formData.get("pinterest_url")?.toString(),
+    };
+
+    const validationError = ValidateIndieGameLinks({ urls });
+
+    if (validationError) {
+      return Object.values(validationError)[0]; // Return the error object if validation fails
+    }
+
+    // Check for JSON file and handle upload
+    return { message: "Form submitted successfully" };
+  }
+
+  //Handle donation links form
+  if (donoLinksForm !== null) {
+    const urls = {
+      paypal_url: formData.get("paypal_url")?.toString(),
+      kofi_url: formData.get("kofi_url")?.toString(),
+      patreon_url: formData.get("patreon_url")?.toString(),
+      kickstarter_url: formData.get("kickstarter_url")?.toString(),
+      indiegogo_url: formData.get("indiegogo_url")?.toString(),
+      website_donation_url: formData.get("website_donation_url")?.toString(),
+      youtube_trailer_title: formData.get("youtube_trailer_title")?.toString(),
+      youtube_video_trailer_url: formData
+        .get("youtube_video_trailer_url")
+        ?.toString(),
+    };
+
+    const validationError = ValidateIndieGameLinks({ urls });
+
+    console.log(validationError);
+
+    if (validationError) {
+      return Object.values(validationError)[0]; // Return the error object if validation fails
+    }
+
+    // Check for JSON file and handle upload
+    return { message: "Form submitted successfully" };
+  }
   //Handle article form
   if (articleForm !== null) {
     //Import json file from r2 bucket if file exists in https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com/wordskull/indiegames/${username}/game-data.json
@@ -201,7 +281,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
     try {
       // Upload header title and description to database
-      const response = await submissionAPI.post(`/update-indie-header`, {
+      const response = await submissionAPI.post(`/update-indie-details`, {
         method: "POST",
         responseType: "arraybuffer",
         data: { username: usernameInUrl, ...details },
@@ -211,8 +291,7 @@ export async function action({ request }: ActionFunctionArgs) {
           message:
             "Additional game details processed and uploaded successfully",
         };
-      } else {
-        console.error("Additional game details upload failed");
+      } else {        console.error("Additional game details upload failed");
         return new Response(
           JSON.stringify({
             error:
@@ -295,8 +374,8 @@ export async function action({ request }: ActionFunctionArgs) {
       return validationResult;
     }
 
-    jsonData.youtubeTrailerTitle = validationResult?.embedLink;
-    jsonData.youtubeVideoTrailerUrl = titleForYT;
+    jsonData.youtubeTrailerTitle = titleForYT;
+    jsonData.youtubeVideoTrailerUrl = validationResult?.embedLink;
 
     return await PostJSONToR2({
       usernameInUrl,
@@ -321,17 +400,69 @@ export async function action({ request }: ActionFunctionArgs) {
 export default function EditIndieUsername() {
   const data = useLoaderData() as GameInfoJSONType;
   const actionData = useActionData() as ActionResponse;
-
-  console.log(data)
+  const [trackFormSubmitted, setTrackFormSubmitted] = useState(""); //Keeps track of which form has been submitted to control where to display error messages
+  const gameData = useMemo(() => IndieGameLinks(), []);
+  const socialsData = useMemo(() => IndieSocialLinks(), []);
+  const donoData = useMemo(() => IndieDonationLinks(), []);
 
   return (
     <div className="flex flex-col w-full max-w-[800px] mx-auto tracking-wider px-5 mt-2">
-      <IndieGamesHeaderForm data={data} actionData={actionData}/>
-      <IndieGameLinksForm data={data} actionData={actionData}/>
-      <IndieGameYTForm data={data} actionData={actionData}/>
-      <IndieGameDetailsForm data={data} actionData={actionData}/>
-      <IndieGameArticlesForm data={data} actionData={actionData}/>
-      <IndieGameSettingsForm actionData={actionData}/>
+      <IndieGamesHeaderForm
+        trackFormSubmitted={trackFormSubmitted}
+        setTrackFormSubmitted={setTrackFormSubmitted}
+        data={data}
+        actionData={actionData}
+      />
+      <IndieGameLinksForm
+        trackFormSubmitted={trackFormSubmitted}
+        setTrackFormSubmitted={setTrackFormSubmitted}
+        data={data}
+        actionData={actionData}
+        formName="game-links"
+        linkData={gameData}
+        formTitle="Links To Your Game"
+      />
+      <IndieGameLinksForm
+        trackFormSubmitted={trackFormSubmitted}
+        setTrackFormSubmitted={setTrackFormSubmitted}
+        data={data}
+        actionData={actionData}
+        formName="social-links"
+        linkData={socialsData}
+        formTitle="Links To Your Socials"
+      />
+      <IndieGameLinksForm
+        trackFormSubmitted={trackFormSubmitted}
+        setTrackFormSubmitted={setTrackFormSubmitted}
+        data={data}
+        actionData={actionData}
+        formName="dono-links"
+        linkData={donoData}
+        formTitle="Links To Donation Platforms"
+      />
+      <IndieGameYTForm
+        trackFormSubmitted={trackFormSubmitted}
+        setTrackFormSubmitted={setTrackFormSubmitted}
+        data={data}
+        actionData={actionData}
+      />
+      <IndieGameDetailsForm
+        trackFormSubmitted={trackFormSubmitted}
+        setTrackFormSubmitted={setTrackFormSubmitted}
+        data={data}
+        actionData={actionData}
+      />
+      <IndieGameArticlesForm
+        trackFormSubmitted={trackFormSubmitted}
+        setTrackFormSubmitted={setTrackFormSubmitted}
+        data={data}
+        actionData={actionData}
+      />
+      <IndieGameSettingsForm
+        trackFormSubmitted={trackFormSubmitted}
+        setTrackFormSubmitted={setTrackFormSubmitted}
+        actionData={actionData}
+      />
     </div>
   );
 }
