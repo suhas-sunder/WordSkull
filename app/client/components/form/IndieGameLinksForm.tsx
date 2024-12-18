@@ -1,7 +1,4 @@
-import { Fragment, useMemo } from "react";
-import IndieGameLinksData from "../data/IndieGameLinks";
-import IndieSocialLinks from "../data/IndieSocialLinks";
-import IndieDonationLinks from "../data/IndieDonationLinks";
+import { Fragment } from "react";
 import TextInput from "./TextInput";
 import IndieTOSCheckbox from "./IndieTOSCheckbox";
 import SaveAndSubmit from "../ui/interactive/SaveAndSubmit";
@@ -12,27 +9,31 @@ import FormSuccessErrorMsg from "../utils/errors/FormSuccessErrorMsg";
 interface PropType {
   data: Record<string, unknown>;
   actionData: ActionDataMsgErr;
+  trackFormSubmitted: string;
+  setTrackFormSubmitted: React.Dispatch<React.SetStateAction<string>>;
+  formName: string;
+  linkData: { [key: string]: string }[];
+  formTitle: string;
 }
 
-function IndieGameLinksForm({ data, actionData }: PropType) {
-  const linkData = useMemo(() => IndieGameLinksData(), []);
-  const socialsData = useMemo(() => IndieSocialLinks(), []);
-  const donoData = useMemo(() => IndieDonationLinks(), []);
+function IndieGameLinksForm({ data, actionData, trackFormSubmitted, setTrackFormSubmitted, formName, linkData, formTitle }: PropType) {
+  
 
   return (
     <Form
       method="post"
+      onSubmit={() => setTrackFormSubmitted(formName)}
       className="flex flex-col gap-8 mt-10 font-lato tracking-wider"
     >
       <input
         type="text"
         id="placeholder-indie-game-links"
-        name="placeholder-indie-game-links"
+        name={`placeholder-indie-${formName}`}
         className="hidden"
       />
       <div className="flex flex-col gap-5 text-lg">
         <h3 className="whitespace-nowrap font-lora w-full justify-center items-center text-center">
-          Links To Your Game (Optional)
+          {formTitle} (Optional)
         </h3>
         {linkData.map((link) => (
           <Fragment key={link.key}>
@@ -47,42 +48,8 @@ function IndieGameLinksForm({ data, actionData }: PropType) {
           </Fragment>
         ))}
       </div>
-      <div className="flex flex-col gap-5 text-lg">
-        <h3 className="whitespace-nowrap font-lora w-full justify-center items-center text-center">
-          Social Media Links (Optional - 255 chars max)
-        </h3>
-        {socialsData.map((link) => (
-          <Fragment key={link.key}>
-            <TextInput
-              id={link.id}
-              name={link.name}
-              label={link.label}
-              value={(data?.[`${link.name}Url`] as string) || undefined}
-              maxLength={255}
-              placeholder={link.placeholder}
-            />
-          </Fragment>
-        ))}
-      </div>
-      <div className="flex flex-col gap-5 text-lg">
-        <h3 className="whitespace-nowrap font-lora w-full justify-center items-center text-center">
-          Support/Donation Links (Optional)
-        </h3>
-        {donoData.map((link) => (
-          <Fragment key={link.key}>
-            <TextInput
-              id={link.id}
-              name={link.name}
-              label={link.label}
-              value={(data?.[`${link.name}Url`] as string) || undefined}
-              maxLength={255}
-              placeholder={link.placeholder}
-            />
-          </Fragment>
-        ))}
-      </div>
       <IndieTOSCheckbox id="indie-terms-two" />
-      <FormSuccessErrorMsg actionData={actionData} />
+      {trackFormSubmitted === formName && <FormSuccessErrorMsg actionData={actionData} />}
       <SaveAndSubmit />
     </Form>
   );

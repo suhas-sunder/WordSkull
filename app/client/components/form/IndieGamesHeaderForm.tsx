@@ -6,19 +6,20 @@ import IndieTOSCheckbox from "./IndieTOSCheckbox";
 import SaveAndSubmit from "../ui/interactive/SaveAndSubmit";
 import { useState } from "react";
 import FormSuccessErrorMsg from "../utils/errors/FormSuccessErrorMsg";
-import { ActionDataMsgErr } from "../utils/errors/ProcessErrors";
+import { FormType } from "../../../routes/edit-indie-game.$username";
 
-interface PropType {
-  data: Record<string, unknown>;
-  actionData: ActionDataMsgErr;
-}
-
-function IndieGamesHeaderForm({ data, actionData }: PropType) {
+function IndieGamesHeaderForm({
+  data,
+  actionData,
+  trackFormSubmitted,
+  setTrackFormSubmitted,
+}: FormType) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const submit = useSubmit(); // Get submit function from Remix
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevent default form submission
+    setTrackFormSubmitted("game-header");
 
     const formData = new FormData(event.currentTarget);
 
@@ -52,7 +53,7 @@ function IndieGamesHeaderForm({ data, actionData }: PropType) {
       <TextInput
         id="game-name"
         name="game-name"
-        label="* Title Of Your Game (1 to 80 chars)"        
+        label="* Title Of Your Game (1 to 80 chars)"
         value={(data?.titleOfGame as string) || undefined}
         required={true}
         minLength={1}
@@ -86,7 +87,9 @@ function IndieGamesHeaderForm({ data, actionData }: PropType) {
         setSelectedFile={setSelectedFile} // Set selected file for image upload
       />
       <IndieTOSCheckbox id="indie-terms-one" />
-      <FormSuccessErrorMsg actionData={actionData} />
+      {trackFormSubmitted === "game-header" && (
+        <FormSuccessErrorMsg actionData={actionData} />
+      )}
       <SaveAndSubmit />
     </Form>
   );

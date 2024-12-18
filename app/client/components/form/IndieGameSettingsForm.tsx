@@ -4,12 +4,19 @@ import FormSuccessErrorMsg from "../utils/errors/FormSuccessErrorMsg";
 
 interface PropType {
   actionData: ActionDataMsgErr;
+  trackFormSubmitted: string;
+  setTrackFormSubmitted: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function IndieGameSettingsForm({  actionData }: PropType) {
+function IndieGameSettingsForm({
+  actionData,
+  trackFormSubmitted,
+  setTrackFormSubmitted,
+}: PropType) {
   return (
     <Form
       method="post"
+      onSubmit={() => setTrackFormSubmitted("game-settings")}
       className="flex flex-col gap-8 justify-center items-center"
     >
       <input
@@ -39,9 +46,9 @@ function IndieGameSettingsForm({  actionData }: PropType) {
         name="delete-account"
         className="flex justify-center items-center rounded-md bg-rose-600 text-white px-4 py-2 w-[20em] hover:bg-rose-500 whitespace-nowrap"
       >
-       ☠️ Delete Account
+        ☠️ Delete Account
       </button>
-      <FormSuccessErrorMsg actionData={actionData} />
+      {trackFormSubmitted === "game-settings" && <FormSuccessErrorMsg actionData={actionData} />}
     </Form>
   );
 }

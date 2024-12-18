@@ -6,14 +6,8 @@ import TextInput from "./TextInput";
 import UploadImage from "./UploadImage";
 import TextArea from "./TextArea";
 import { useFetcher } from "react-router-dom";
-import { ActionDataMsgErr } from "../utils/errors/ProcessErrors";
 import FormSuccessErrorMsg from "../utils/errors/FormSuccessErrorMsg";
-import { GameInfoJSONType } from "../utils/requests/GetIndieDevJson";
-
-interface PropType {
-  data: GameInfoJSONType;
-  actionData: ActionDataMsgErr;
-}
+import { FormType } from "../../../routes/edit-indie-game.$username";
 
 interface ArticlePropType {
   index: number;
@@ -67,13 +61,19 @@ Thank you 😊!`}
   );
 };
 
-function IndieGameArticlesForm({ data, actionData }: PropType) {
+function IndieGameArticlesForm({
+  data,
+  actionData,
+  trackFormSubmitted,
+  setTrackFormSubmitted,
+}: FormType) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [sections, setSections] = useState(1);
   const fetcher = useFetcher();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevents default form submission
+    setTrackFormSubmitted("game-articles");
 
     // Create a new FormData object from the form
     const formData = new FormData(event.currentTarget);
@@ -144,7 +144,7 @@ function IndieGameArticlesForm({ data, actionData }: PropType) {
         {sections < 20 && (
           <button
             type="button"
-            className="flex justify-center items-center rounded-md bg-pumpkin-orange text-white px-4 py-2 w-[12em] hover:bg-orange-500 whitespace-nowrap"
+            className="flex justify-center items-center rounded-md bg-green-600 text-white px-4 py-2 w-[12em] hover:bg-green-700 whitespace-nowrap"
             onClick={() => setSections((prevState) => prevState + 1)}
           >
             Add Section
@@ -165,7 +165,9 @@ function IndieGameArticlesForm({ data, actionData }: PropType) {
         )}
       </div>
       <IndieTOSCheckbox id="indie-terms-articles" />
-      <FormSuccessErrorMsg actionData={actionData} />
+      {trackFormSubmitted === "game-articles" && (
+        <FormSuccessErrorMsg actionData={actionData} />
+      )}
       <SaveAndSubmit />
     </Form>
   );
