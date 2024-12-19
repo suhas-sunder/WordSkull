@@ -26,7 +26,7 @@ export default function ProcessErrors({
   // Axios-specific error (e.g., status 4xx or 5xx)
   if (error instanceof AxiosError) {
     const errorMessage =
-      error.response?.data?.message || "API Error: Unknown issue";
+      error?.response?.data?.message || error?.response?.data?.error || "Something Went Wrong. Try Again Later.";
     const errorStatus = error.response?.status || 500;
 
     return new Response(
@@ -47,7 +47,7 @@ export default function ProcessErrors({
         error: `${
           // If the error message has a colon, it already has the error type included so no need to add it
           error.message.includes(":") ? "" : handleErrorType(error)
-        }: ${error?.message}`,
+        }: ${error?.message || "An unknown error occurred. Try Again Later."}`,
       }),
       {
         status: status,
@@ -60,7 +60,7 @@ export default function ProcessErrors({
     // Unknown error type (e.g., not an instance of Error or AxiosError) where I might send in a custom error.
     return new Response(
       JSON.stringify({
-        error: customError ? customError : "An unknown error occurred.",
+        error: customError ? customError : "Uh oh, An unknown error occurred. Try Again Later.",
       }),
       {
         status: status,
