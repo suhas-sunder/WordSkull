@@ -195,13 +195,24 @@ export async function action({ request }: ActionFunctionArgs) {
     };
 
     const validationError = ValidateIndieGameLinks({ urls });
+    
 
     if (validationError) {
       return Object.values(validationError)[0]; // Return the error object if validation fails
     }
 
-    // Check for JSON file and handle upload
-    return { message: "Form submitted successfully" };
+    
+    const newJsonData = { ...jsonData, ...urls };
+
+    return await PostJSONToR2({
+      usernameInUrl,
+      R2_ACCOUNT_ID,
+      R2_ACCESS_KEY_ID,
+      R2_SECRET_ACCESS_KEY,
+      R2_BUCKET_NAME,
+      objectKey,
+      jsonData: newJsonData,
+    });
   }
 
   //Handle social links form
@@ -225,8 +236,17 @@ export async function action({ request }: ActionFunctionArgs) {
       return Object.values(validationError)[0]; // Return the error object if validation fails
     }
 
-    // Check for JSON file and handle upload
-    return { message: "Form submitted successfully" };
+    const newJsonData = { ...jsonData, ...urls };
+
+    return await PostJSONToR2({
+      usernameInUrl,
+      R2_ACCOUNT_ID,
+      R2_ACCESS_KEY_ID,
+      R2_SECRET_ACCESS_KEY,
+      R2_BUCKET_NAME,
+      objectKey,
+      jsonData: newJsonData,
+    });
   }
 
   //Handle donation links form
@@ -252,8 +272,17 @@ export async function action({ request }: ActionFunctionArgs) {
       return Object.values(validationError)[0]; // Return the error object if validation fails
     }
 
-    // Check for JSON file and handle upload
-    return { message: "Form submitted successfully" };
+    const newJsonData = { ...jsonData, ...urls };
+
+    return await PostJSONToR2({
+      usernameInUrl,
+      R2_ACCOUNT_ID,
+      R2_ACCESS_KEY_ID,
+      R2_SECRET_ACCESS_KEY,
+      R2_BUCKET_NAME,
+      objectKey,
+      jsonData: newJsonData,
+    });
   }
   //Handle article form
   if (articleForm !== null) {

@@ -16,9 +16,15 @@ interface PropType {
   formTitle: string;
 }
 
-function IndieGameLinksForm({ data, actionData, trackFormSubmitted, setTrackFormSubmitted, formName, linkData, formTitle }: PropType) {
-  
-
+function IndieGameLinksForm({
+  data,
+  actionData,
+  trackFormSubmitted,
+  setTrackFormSubmitted,
+  formName,
+  linkData,
+  formTitle,
+}: PropType) {
   return (
     <Form
       method="post"
@@ -27,7 +33,7 @@ function IndieGameLinksForm({ data, actionData, trackFormSubmitted, setTrackForm
     >
       <input
         type="text"
-        id="placeholder-indie-game-links"
+        id={`placeholder-indie-${formName}`}
         name={`placeholder-indie-${formName}`}
         className="hidden"
       />
@@ -40,7 +46,7 @@ function IndieGameLinksForm({ data, actionData, trackFormSubmitted, setTrackForm
             <TextInput
               id={link.id}
               name={link.name}
-              value={(data?.[`${link.name}Url`] as string) || undefined}
+              value={(data[`${link.name}`] as string) || undefined}
               label={link.label}
               maxLength={255}
               placeholder={link.placeholder}
@@ -48,8 +54,10 @@ function IndieGameLinksForm({ data, actionData, trackFormSubmitted, setTrackForm
           </Fragment>
         ))}
       </div>
-      <IndieTOSCheckbox id="indie-terms-two" />
-      {trackFormSubmitted === formName && <FormSuccessErrorMsg actionData={actionData} />}
+      <IndieTOSCheckbox id={`indie-terms-two-${formName}`} />
+      {trackFormSubmitted === formName && (
+        <FormSuccessErrorMsg actionData={actionData} />
+      )}
       <SaveAndSubmit />
     </Form>
   );
