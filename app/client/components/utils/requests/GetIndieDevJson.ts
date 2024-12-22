@@ -98,10 +98,6 @@ export default async function GetIndieDevJson({
     ],
   };
 
-  console.log(
-    `/indiegamedevs/${username}/json-data-for-indie-game-showcase.json`
-  );
-
   try {
     const response = await cloudflareR2API.get(
       `/indiegamedevs/${username}/json-data-for-indie-game-showcase.json`,
