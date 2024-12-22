@@ -41,6 +41,18 @@ export type FormType = {
   setTrackFormSubmitted: React.Dispatch<React.SetStateAction<string>>;
 };
 
+interface Article {
+  title: string;
+  description: string;
+  imgUrl: string;
+}
+
+interface Data {
+  authorName: string;
+  profession: string;
+  articles: Article[];
+}
+
 export async function loader({ request }: ActionFunctionArgs) {
   const currentUrl = new URL(request.url);
   const usernameInUrl = currentUrl.pathname.split("/").slice(-1)[0] || "";
@@ -48,6 +60,8 @@ export async function loader({ request }: ActionFunctionArgs) {
   if (!usernameInUrl) {
     return redirect("/403");
   }
+
+  // Get Indie Dev Header Data from Db and append to R2 Data
 
   const jsonData = await GetIndieDevJson({ username: usernameInUrl }); //Default json template if one doesn't already exist in R2
   return jsonData;
@@ -195,13 +209,11 @@ export async function action({ request }: ActionFunctionArgs) {
     };
 
     const validationError = ValidateIndieGameLinks({ urls });
-    
 
     if (validationError) {
       return Object.values(validationError)[0]; // Return the error object if validation fails
     }
 
-    
     const newJsonData = { ...jsonData, ...urls };
 
     return await PostJSONToR2({
@@ -286,9 +298,50 @@ export async function action({ request }: ActionFunctionArgs) {
   }
   //Handle article form
   if (articleForm !== null) {
-    //Import json file from r2 bucket if file exists in https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com/wordskull/indiegames/${username}/game-data.json
-    //If it exists, update it with urls. If not, create new.
-    return { message: "Form submitted successfully" };
+    const data: Data = {
+      authorName: (formData.get("article-author") as string) || "",
+      profession: (formData.get("article-profession") as string) || "",
+      articles: [],
+    };
+
+    // Determine the number of sections dynamically
+    let maxIndex = 0;
+
+    for (const key of formData.keys()) {
+      const match = key.match(/article-title-(\d+)/);
+      if (match) {
+        const index = parseInt(match[1], 10);
+        maxIndex = Math.max(maxIndex, index);
+      }
+    }
+
+    // Populate articles dynamically
+    for (let index = 0; index <= maxIndex; index++) {
+      const title = (formData.get(`article-title-${index}`) as string) || "";
+      const description =
+        (formData.get(`article-description-${index}`) as string) || "";
+      const imgUrl = (formData.get(`article-image-${index}`) as Base64URLString) || "";
+
+      if (title || description || imgUrl) {
+        data.articles.push({
+          title,
+          description,
+          imgUrl,
+        });
+      }
+    }
+
+    const newJsonData = { ...jsonData, ...data };
+
+    return await PostJSONToR2({
+      usernameInUrl,
+      R2_ACCOUNT_ID,
+      R2_ACCESS_KEY_ID,
+      R2_SECRET_ACCESS_KEY,
+      R2_BUCKET_NAME,
+      objectKey,
+      jsonData: newJsonData,
+    });
   }
 
   //Handle details form
@@ -320,7 +373,8 @@ export async function action({ request }: ActionFunctionArgs) {
           message:
             "Additional game details processed and uploaded successfully",
         };
-      } else {        console.error("Additional game details upload failed");
+      } else {
+        console.error("Additional game details upload failed");
         return new Response(
           JSON.stringify({
             error:
@@ -382,9 +436,6 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   //Handle youtube form
-
-  // Backend logic
-
   if (youtubeForm !== null) {
     const titleForYT = formData.get("yt-title")?.toString() || "";
     const linkForYT = formData.get("yt-url")?.toString() || "";

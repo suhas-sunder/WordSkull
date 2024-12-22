@@ -41,13 +41,14 @@ const ArticleSection = ({
         type="file"
         accept="image/*"
         imgUrl={imgUrl}
+        required={false}
         optionalText=""
         setSelectedFile={setSelectedFile}
       />
       <TextArea
         label={`Brief Description for Section ${index} - (200 to 1000 chars)`}
-        id="brief-description"
-        name="brief-description"
+        id={`article-description-${index}`}
+        name={`article-description-${index}`}
         value={description}
         minLength={200}
         maxLength={1000}
@@ -68,30 +69,44 @@ function IndieGameArticlesForm({
   setTrackFormSubmitted,
 }: FormType) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [sections, setSections] = useState(1);
+  const [sections, setSections] = useState(data.articles.length || 1);
   const fetcher = useFetcher();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevents default form submission
     setTrackFormSubmitted("game-articles");
-
+  
     // Create a new FormData object from the form
     const formData = new FormData(event.currentTarget);
-
-    // Add selected image file if available
+  
+    // Handle selected file (existing logic for single image)
     if (selectedFile) {
-      formData.set("article-img", selectedFile);
+      formData.set("article-img", selectedFile); // Add the selected file under the name "article-img"
     } else {
       alert("Please select an image before submitting.");
       return;
     }
-
+  
+    // Handle other image inputs with dynamic names like "article-img-0", "article-img-1", etc.
+    const fileInputs = event.currentTarget.querySelectorAll('input[type="file"]');
+    
+    fileInputs.forEach((input, index) => {
+      const file = (input as HTMLInputElement).files?.[0]; // Get the file from the input element
+      if (file) {
+        formData.set(`article-img-${index}`, file); // Attach the file to the correct index
+      } else {
+        alert(`Please select an image for article ${index + 1}.`);
+        return;
+      }
+    });
+  
     // Submit the form data with all fields included
     fetcher.submit(formData, {
       method: "post",
       encType: "multipart/form-data",
     });
   };
+  
 
   return (
     <Form

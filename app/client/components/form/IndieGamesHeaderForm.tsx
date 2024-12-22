@@ -37,6 +37,8 @@ function IndieGamesHeaderForm({
     });
   };
 
+console.log(data);
+
   return (
     <Form
       method="post"

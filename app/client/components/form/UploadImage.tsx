@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Icon from "../utils/other/Icon";
 
 interface PropType {
@@ -18,9 +18,16 @@ function UploadImage({
   accept,
   required,
   setSelectedFile,
-  imgUrl,
+  imgUrl = "", // default to an empty string
 }: PropType) {
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>("https://www.doodlegarden.com/indiegamedevs/asdfasdf/header-img-for-indie-game-showcase.webp"); //Change the username to be dynamic
+
+  // Set imagePreview based on imgUrl or selected file
+  useEffect(() => {
+    if (imgUrl) {
+      setImagePreview(imgUrl);
+    }
+  }, [imgUrl]);
 
   const validateAndPreview = (file: File) => {
     if (file.size > 1 * 1024 * 1024) {
@@ -72,7 +79,7 @@ function UploadImage({
             <Icon icon="close" customStyle="fill-white scale-75" />
           </button>
           <img
-            src={imgUrl ? imgUrl : imagePreview}
+            src={imagePreview}
             alt="Preview"
             className="max-w-full max-h-60 object-contain"
           />
@@ -84,6 +91,7 @@ function UploadImage({
             id={id}
             name={id}
             accept={accept}
+            {...(required && { required: true })}
             onChange={handleFileChange}
             className="hidden"
           />
