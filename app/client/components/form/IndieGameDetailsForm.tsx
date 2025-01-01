@@ -7,6 +7,8 @@ import FormSuccessErrorMsg from "../utils/errors/FormSuccessErrorMsg";
 import { FormType } from "../../../routes/edit-indie-game.$username";
 
 function IndieGameDetailsForm({ data, actionData, trackFormSubmitted, setTrackFormSubmitted }: FormType) {
+
+  
   return (
     <Form
       method="post"
@@ -51,7 +53,7 @@ function IndieGameDetailsForm({ data, actionData, trackFormSubmitted, setTrackFo
         name="game-platforms"
         label="Platforms (Comma separated list - 255 chars max)"
         value={
-          ((data?.platforms as string[]).join(", ").toString() as string) ||
+          ((data?.platforms as string[] )?.join(", ")?.toString() as string) ||
           undefined
         }
         maxLength={255}

@@ -18,14 +18,16 @@ function UploadImage({
   accept,
   required,
   setSelectedFile,
-  imgUrl = "", // default to an empty string
+  imgUrl,
 }: PropType) {
-  const [imagePreview, setImagePreview] = useState<string | null>("https://www.doodlegarden.com/indiegamedevs/asdfasdf/header-img-for-indie-game-showcase.webp"); //Change the username to be dynamic
+  const [imagePreview, setImagePreview] = useState<string | null>(""); //Change the username to be dynamic
 
   // Set imagePreview based on imgUrl or selected file
   useEffect(() => {
     if (imgUrl) {
       setImagePreview(imgUrl);
+    } else {
+      setImagePreview(null);
     }
   }, [imgUrl]);
 
@@ -96,7 +98,7 @@ function UploadImage({
             className="hidden"
           />
           <div
-            className="flex flex-col items-center justify-center border-2 border-dashed text-lg text-center p-8 gap-5 cursor-pointer w-full border-orange-400 text-skull-brown"
+            className="flex flex-col items-center justify-center border-2 border-dashed text-lg text-center p-8 gap-5 cursor-pointer w-full border-orange-400 text-skull-brown/40"
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onClick={() => document.getElementById(id)?.click()}
