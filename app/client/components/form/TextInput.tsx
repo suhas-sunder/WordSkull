@@ -44,7 +44,7 @@ function TextInput({
         maxLength={maxLength}
         value={inputValue} // Use the local state here
         onChange={handleChange} // Handle changes
-        className="flex border-2 rounded-md px-4 py-2 w-full outline-orange-200 border-orange-400 placeholder:text-skull-brown text-amber-600"
+        className="flex border-2 rounded-md px-4 py-2 w-full outline-orange-200 border-orange-400 placeholder:text-skull-brown/40 text-amber-600"
       />
     </div>
   );

@@ -40,7 +40,7 @@ function TextArea({
         value={inputValue} // Use state as value for the textarea
         onChange={handleChange} // Update state on input change
         placeholder={placeholder}
-        className="flex border-2 rounded-md px-4 py-3 w-full min-h-[19em] scrollbar-thin scrollbar-thumb-amber-500 scrollbar-track-amber-100 outline-orange-200 border-orange-400 placeholder:text-skull-brown text-amber-600"
+        className="flex border-2 rounded-md px-4 py-3 w-full min-h-[19em] scrollbar-thin scrollbar-thumb-amber-500 scrollbar-track-amber-100 outline-orange-200 border-orange-400 placeholder:text-skull-brown/40 text-amber-600"
         minLength={minLength}
         maxLength={maxLength}
         required={required}

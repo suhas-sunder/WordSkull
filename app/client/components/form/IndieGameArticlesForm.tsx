@@ -23,7 +23,7 @@ const ArticleSection = ({
   title,
   imgUrl,
   description,
-}: ArticlePropType) => {
+}: ArticlePropType) => {  console.log("ArticleSection", title, imgUrl, description);
   return (
     <>
       {" "}
@@ -75,38 +75,36 @@ function IndieGameArticlesForm({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevents default form submission
     setTrackFormSubmitted("game-articles");
-  
+
     // Create a new FormData object from the form
     const formData = new FormData(event.currentTarget);
-  
+
     // Handle selected file (existing logic for single image)
     if (selectedFile) {
       formData.set("article-img", selectedFile); // Add the selected file under the name "article-img"
     } else {
-      alert("Please select an image before submitting.");
-      return;
+      fetcher.submit(formData, {
+        method: "post",
+      });
     }
-  
+
     // Handle other image inputs with dynamic names like "article-img-0", "article-img-1", etc.
-    const fileInputs = event.currentTarget.querySelectorAll('input[type="file"]');
-    
+    const fileInputs =
+      event.currentTarget.querySelectorAll('input[type="file"]');
+
     fileInputs.forEach((input, index) => {
       const file = (input as HTMLInputElement).files?.[0]; // Get the file from the input element
       if (file) {
         formData.set(`article-img-${index}`, file); // Attach the file to the correct index
-      } else {
-        alert(`Please select an image for article ${index + 1}.`);
-        return;
-      }
+      } 
     });
-  
+
     // Submit the form data with all fields included
     fetcher.submit(formData, {
       method: "post",
       encType: "multipart/form-data",
     });
   };
-  
 
   return (
     <Form
