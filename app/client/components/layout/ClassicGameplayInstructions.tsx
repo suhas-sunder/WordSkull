@@ -99,13 +99,15 @@ function ClassicGameplayInstructions() {
               <li className="mx-auto text-center">
                 Once you have typed your word, press enter to submit it.
               </li>
-              <img
-                className="mx-auto rounded-md"
-                width={400}
-                src={SkullFirstRow}
-                loading="lazy"
-                alt="Typed word"
-              />
+              <li className="flex w-full justify-center">
+                <img
+                  className="mx-auto rounded-md"
+                  width={400}
+                  src={SkullFirstRow}
+                  loading="lazy"
+                  alt="Typed word"
+                />
+              </li>
               <li className="mx-auto text-center">
                 If the word exists in the{" "}
                 <span className="text-pumpkin-orange hover:text-amber-500">

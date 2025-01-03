@@ -31,13 +31,13 @@ function IndieGameSettingsForm({
       <button
         type="submit"
         name="logout"
-        className="flex justify-center items-center rounded-md hover:bg-amber-600 bg-pumpkin-orange  text-white px-4 py-2 w-[20em] whitespace-nowrap"
+        className="flex justify-center items-center rounded-md hover:bg-amber-600 bg-pumpkin-orange text-white px-4 py-2 w-[20em] whitespace-nowrap"
       >
         Logout
       </button>
       <button
         type="button"
-        className="flex justify-center items-center rounded-md hover:bg-amber-600 bg-pumpkin-orange  text-white px-4 py-2 w-[20em] whitespace-nowrap"
+        className="flex justify-center items-center rounded-md hover:bg-amber-600 bg-pumpkin-orange text-white px-4 py-2 w-[20em] whitespace-nowrap"
       >
         Update Password
       </button>
