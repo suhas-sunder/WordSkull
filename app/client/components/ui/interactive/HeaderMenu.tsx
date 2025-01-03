@@ -43,6 +43,7 @@ function HeaderMenu({
         <li className="flex justify-center items-center">
           <button
             data-testid="results-button"
+            name="results-button"
             onClick={() => isGameOver && setShowGameOverMenu(true)}
             className={`${
               isGameOver
@@ -56,6 +57,7 @@ function HeaderMenu({
         <li className="flex justify-center items-center">
           <button
             data-testid="stats-button"
+            name="stats-button"
             onClick={() => setShowStats(true)}
             className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
           >
@@ -75,6 +77,7 @@ function HeaderMenu({
         <li className="flex justify-center items-center">
           <Link
             data-testid="instructions-hashlink"
+            name="instructions-hashlink"
             to={`${location?.pathname}#gameplay-instructions`}
             className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
           >
@@ -84,6 +87,7 @@ function HeaderMenu({
         <li className="flex justify-center items-center">
           <button
             data-testid="settings-button"
+            name="settings-button"
             onClick={() => setShowSettings(true)}
             className="cursor-pointer py-2 px-1 w-[2em]  fill-pumpkin-orange hover:fill-amber-500 flex justify-center items-center"
           >
