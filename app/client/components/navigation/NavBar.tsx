@@ -28,9 +28,7 @@ function MainLinks({
         id={showMobileMenu ? "mobile-links" : "main-links"}
         className={`text-pumpkin-orange  text-base justify-center items-center text-center ${
           darkThemeActive ? "bg-stone-800" : "bg-white"
-        } ${
-          showMobileMenu ? styles["mobile-nav"] : styles["main-nav"]
-        }`}
+        } ${showMobileMenu ? styles["mobile-nav"] : styles["main-nav"]}`}
       >
         {/* <li className="flex w-full lg:w-auto">
           <NavLink
@@ -156,6 +154,8 @@ export default function NavBar() {
         />
         {showMobileMenu && (
           <button
+            name="bg-overlay-mobile-menu"
+            aria-label="bg-overlay-mobile-menu"
             onClick={() => setShowMobileMenu(false)}
             className="absolute bottom-0 left-0 right-0 top-[3.15em] min-h-[100vh] min-w-[100vw] bg-white bg-opacity-30"
           />
@@ -164,13 +164,13 @@ export default function NavBar() {
           id="burger"
           type="checkbox"
           checked={showMobileMenu}
-          readOnly
+          onChange={() => setShowMobileMenu((prev) => !prev)} // Toggling the burger menu state on change
           className="relative hidden"
         />
         <label
           htmlFor="burger"
+          aria-label={showMobileMenu ? "Close menu" : "Open menu"} // Provide context for screen readers
           data-testid="burger-icons"
-          onClick={() => setShowMobileMenu((prev) => !prev)}
           className={`${styles["burger-label"]} relative hover:cursor-pointer`}
         >
           {showMobileMenu ? (

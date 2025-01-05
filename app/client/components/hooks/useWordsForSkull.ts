@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import words from "../data/Words";
-import { WordsData } from "../../../routes/.word-skull-game-easy-mode";
+import { WordsData } from "../../../routes/word-skull-game-easy-mode";
 
 interface PropType {
   currentSkull?: string[][][];
@@ -17,12 +17,8 @@ function useWordsForSkull({ currentSkull, wordsData }: PropType) {
   // Use the fetched words if available and valid, otherwise use the static backup words list
   const wordsList: { [key: number]: string[] } = useMemo(() => {
     // Check if wordsData exists and has valid words; otherwise, use backupWordsList
-    if (
-      wordsData &&
-      wordsData.words &&
-      Object.keys(wordsData.words).length > 0
-    ) {
-      return wordsData.words;
+    if (wordsData?.words && Object.keys(wordsData?.words)?.length > 0) {
+      return wordsData?.words;
     } else {
       return backupWordsList;
     }
@@ -36,8 +32,8 @@ function useWordsForSkull({ currentSkull, wordsData }: PropType) {
       if (!wordsList[length]) return [];
 
       return wordsList[length]
-        .filter((word) => word.length === length)
-        .filter((word) => !word.includes("@") && !word.includes("~"));
+        ?.filter((word) => word?.length === length)
+        ?.filter((word) => !word?.includes("@") && !word?.includes("~"));
     };
 
     // Calculate the effective length of a row, ignoring "@" and "~"
@@ -55,27 +51,27 @@ function useWordsForSkull({ currentSkull, wordsData }: PropType) {
       const rowLength = calculateEffectiveLength(row);
       let wordsOfCorrectLength = getWordsOfLength(rowLength);
 
-      if (wordsOfCorrectLength.length === 0) {
+      if (wordsOfCorrectLength?.length === 0) {
         return; //Handle edge case where no valid words found for length
       }
 
       // Filter out words that have already been used
-      wordsOfCorrectLength = wordsOfCorrectLength.filter(
-        (word) => !usedWords.has(word)
+      wordsOfCorrectLength = wordsOfCorrectLength?.filter(
+        (word) => !usedWords?.has(word)
       );
 
-      if (wordsOfCorrectLength.length === 0) {
+      if (wordsOfCorrectLength?.length === 0) {
         return; //Handle edge case where no remaining unused words for length
       }
 
       // Select a random unused word
       const randomWord =
         wordsOfCorrectLength[
-          Math.floor(Math.random() * wordsOfCorrectLength.length)
+          Math.floor(Math.random() * wordsOfCorrectLength?.length)
         ];
 
       // Add the chosen word to the usedWords set
-      usedWords.add(randomWord);
+      usedWords?.add(randomWord);
 
       setWordsForSkull((prevState) => {
         const newState = [...prevState];

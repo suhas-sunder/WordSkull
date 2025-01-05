@@ -17,10 +17,11 @@ function DefaultKeypadSetup() {
 
   //Generate list of valid keys from saved data
   Object.values(keypadData).forEach((row) =>
-    row.map((data) => {
+    row.forEach((data) => {
       validKeys.push(data.defaultKey);
     })
   );
+  
 
   return {
     keypadData,

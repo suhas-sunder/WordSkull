@@ -15,7 +15,7 @@ function DefaultKeyboardSetup() {
 
   //Generate list of valid keys from saved data
   Object.values(keyboardData).forEach((row) =>
-    row.map((data) => {
+    row.forEach((data) => {
       validKeys.push(data.defaultKey);
       validKeys.push(data.shiftKey);
     })

@@ -15,8 +15,9 @@ function useCaptureHTML({ isGameOver, captureAreaId, seconds }: PropType) {
 
   // Check if Web Share API is supported
   useEffect(() => {
-    setIsWebShareSupported(!!navigator.share);
+    setIsWebShareSupported(Boolean(navigator.share));
   }, []);
+  
 
   useEffect(() => {
     const handleCapture = async () => {
