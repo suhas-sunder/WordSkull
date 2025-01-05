@@ -120,45 +120,42 @@ router.get("/verify", async (req, res) => {
   try {
     // Extract token from Authorization header
     const authHeader = req.headers.authorization;
-    const token =
-     authHeader?.startsWith("Bearer")
-        ? authHeader.split(" ")[1]
-        : null;
+    const token = authHeader?.startsWith("Bearer")
+      ? authHeader.split(" ")[1]
+      : null;
 
     if (!token) {
       return res.status(400).json({ error: "Invalid/expired token" });
     }
 
-    let decoded;
-
     try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+      const userId = decoded.user;
+
+      if (!userId) {
+        return res
+          .status(403)
+          .json({ error: "Authorization Error: Invalid User!" });
+      }
+
+      const result = await pool.query("SELECT * FROM indiedevs WHERE id = $1", [
+        userId,
+      ]);
+
+      if (result.rows.length === 0) {
+        return res
+          .status(404)
+          .json({ error: "Authorization Error: User not allowed!" });
+      }
+
+      const username = result.rows[0].username;
+
+      res.json({ username });
     } catch (error) {
       console.error("JWT verification error:", error.message);
       return res.status(401).json({ error: "Invalid or expired token" });
     }
-
-    const userId = decoded.user;
-
-    if (!userId) {
-      return res
-        .status(403)
-        .json({ error: "Authorization Error: Invalid User!" });
-    }
-
-    const result = await pool.query("SELECT * FROM indiedevs WHERE id = $1", [
-      userId,
-    ]);
-
-    if (result.rows.length === 0) {
-      return res
-        .status(404)
-        .json({ error: "Authorization Error: User not allowed!" });
-    }
-
-    const username = result.rows[0].username;
-
-    res.json({ username });
   } catch (err) {
     console.error("Error during user verification:", err.message);
     res

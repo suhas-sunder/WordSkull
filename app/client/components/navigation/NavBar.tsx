@@ -131,9 +131,6 @@ export default function NavBar() {
     document.body.classList.toggle("overflow-y-hidden", showMobileMenu);
   }, [showMobileMenu]);
 
-  // Toggle mobile burger menu
-  const handleToggleMenu = () => setShowMobileMenu((prev) => !prev);
-
   return (
     <nav
       className={`${styles.nav} ${
@@ -159,7 +156,7 @@ export default function NavBar() {
           <button
             name="bg-overlay-mobile-menu"
             aria-label="bg-overlay-mobile-menu"
-            onChange={handleToggleMenu}
+            onChange={() => setShowMobileMenu((prev) => !prev)}
             className="absolute bottom-0 left-0 right-0 top-[3.15em] min-h-[100vh] min-w-[100vw] bg-white bg-opacity-30"
           />
         )}
@@ -167,7 +164,7 @@ export default function NavBar() {
           id="burger"
           type="checkbox"
           checked={showMobileMenu}
-          onChange={handleToggleMenu}
+          onChange={() => setShowMobileMenu((prev) => !prev)}
           className="relative hidden"
         />
         <label
