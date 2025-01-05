@@ -131,6 +131,8 @@ export default function NavBar() {
     document.body.classList.toggle("overflow-y-hidden", showMobileMenu);
   }, [showMobileMenu]);
 
+  const handleToggleMenu = () => setShowMobileMenu((prev) => !prev);
+
   return (
     <nav
       className={`${styles.nav} ${
@@ -156,7 +158,7 @@ export default function NavBar() {
           <button
             name="bg-overlay-mobile-menu"
             aria-label="bg-overlay-mobile-menu"
-            onClick={() => setShowMobileMenu(false)}
+            onChange={handleToggleMenu}
             className="absolute bottom-0 left-0 right-0 top-[3.15em] min-h-[100vh] min-w-[100vw] bg-white bg-opacity-30"
           />
         )}
