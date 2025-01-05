@@ -122,18 +122,18 @@ function IndieGameArticlesForm({
         Article (Optional)
       </h2>
       <TextInput
-        id={`article-author`}
-        name={`article-author`}
-        label={`Author Name - Will be your username if left blank (1 to 80 chars)`}
+        id={"article-author"}
+        name={"article-author"}
+        label={"Author Name - Will be your username if left blank (1 to 80 chars)"}
         value={(data?.authorName as string) || undefined}
         minLength={1}
         maxLength={80}
         placeholder="Enter author name"
       />
       <TextInput
-        id={`article-profession`}
-        name={`article-profession`}
-        label={`Profession - Will default to "Indie Game Developer" if left blank (1 to 80 chars)`}
+        id={"article-profession"}
+        name={"article-profession"}
+        label={'Profession - Will default to "Indie Game Developer" if left blank (1 to 80 chars)'}
         minLength={1}
         value={(data?.profession as string) || undefined}
         maxLength={80}

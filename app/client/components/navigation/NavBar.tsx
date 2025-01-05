@@ -143,7 +143,7 @@ export default function NavBar() {
       }`}
     >
       <div
-        className={`mx-auto flex max-w-[1400px] px-1 sm:px-4 items-center justify-between`}
+        className={"mx-auto flex max-w-[1400px] px-1 sm:px-4 items-center justify-between"}
       >
         <Logo
           setShowMobileMenu={setShowMobileMenu}

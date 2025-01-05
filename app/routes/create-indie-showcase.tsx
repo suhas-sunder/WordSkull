@@ -30,7 +30,7 @@ export async function action({ request }: ActionFunctionArgs) {
     }
 
     // Make the POST request
-    const response = await accountAPI.post(`/register-indie-dev`, {
+    const response = await accountAPI.post("/register-indie-dev", {
       method: "POST",
       responseType: "arraybuffer",
       data: {
@@ -135,14 +135,14 @@ export default function CreateIndieShowcase() {
           </div>
           {data?.error && (
             <div
-              className={` text-rose-500 font-lato flex w-full justify-center items-center max-w-[300px] text-center leading-loose`}
+              className={" text-rose-500 font-lato flex w-full justify-center items-center max-w-[300px] text-center leading-loose"}
             >
               {data?.error}
             </div>
           )}
           {data?.message && (
             <div
-              className={` text-green-500 font-lato flex w-full justify-center items-center max-w-[300px] text-center leading-loose`}
+              className={" text-green-500 font-lato flex w-full justify-center items-center max-w-[300px] text-center leading-loose"}
             >
               {data?.message}
             </div>

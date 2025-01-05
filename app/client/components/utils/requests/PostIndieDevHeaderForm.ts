@@ -11,7 +11,7 @@ async function PostIndieDevHeaderForm({ usernameInUrl, title, description }: Pro
    
 
    // Upload header title and description to database
-   const response = await submissionAPI.post(`/update-indie-header`, {
+   const response = await submissionAPI.post("/update-indie-header", {
     data: { username: usernameInUrl, title, description },
   });
   if (response.status === 200) {

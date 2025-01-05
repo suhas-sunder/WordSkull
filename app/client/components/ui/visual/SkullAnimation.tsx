@@ -83,7 +83,7 @@ function SkullAnimation() {
       return (
         <li
           key={index + "eye-square"}
-          className={` text-[1.1rem] sm:text-[2rem] border-2 border-stone-700 bg-stone-800 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
+          className={" text-[1.1rem] sm:text-[2rem] border-2 border-stone-700 bg-stone-800 rounded-lg w-[2em] h-[2em] flex justify-center items-center"}
          />
       );
 
@@ -91,7 +91,7 @@ function SkullAnimation() {
       return (
         <li
           key={index + "empty-square"}
-          className={`bg-stone-100 opacity-95   text-[1.1rem] sm:text-[2rem] border-2 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
+          className={"bg-stone-100 opacity-95   text-[1.1rem] sm:text-[2rem] border-2 rounded-lg w-[2em] h-[2em] flex justify-center items-center"}
          />
       );
 

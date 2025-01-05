@@ -47,7 +47,7 @@ function DifficultyLinks() {
     <>
       <span className="font-lora text-skull-dark-brown">Difficulty:</span>
       <div
-        className={` grid grid-cols-2  md:flex gap-5 font-nunito text-sm text-stone-400`}
+        className={" grid grid-cols-2  md:flex gap-5 font-nunito text-sm text-stone-400"}
       >
         <Link
           to="/word-skull-game-easy-mode"

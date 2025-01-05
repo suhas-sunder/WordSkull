@@ -52,7 +52,7 @@ function Header() {
       </p>
       <Link
         to={"/word-skull-game-easy-mode"}
-        className={`hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8  text-lg font-nunito rounded-full mt-3 py-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
+        className={"hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8  text-lg font-nunito rounded-full mt-3 py-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400"}
       >
         Start Playing!
       </Link>
@@ -100,7 +100,7 @@ export default function Index() {
               </h3>
               <p className="font-lato text-lg pl-5 tracking-wider leading-loose">
                 <Link
-                  className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
+                  className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
                   to="/word-skull-game-easy-mode"
                 >
                   WordSkull
@@ -130,7 +130,7 @@ export default function Index() {
                 classic word and puzzle games. If you want the long story, you
                 can find it on the{" "}
                 <Link
-                  className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
+                  className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
                   to="/about"
                 >
                   {" "}
@@ -150,14 +150,14 @@ export default function Index() {
           feel free to reach out to{" "}
           <a
             href="mailto:admin@wordskull.com"
-            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
+            className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
           >
             admin@wordskull.com{" "}
           </a>
           or you can find me on any of my socials and associated links listed on
           the{" "}
           <Link
-            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
+            className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
             to="/socials"
           >
             socials page

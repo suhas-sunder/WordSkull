@@ -58,7 +58,7 @@ function About() {
           word game website that provides a fun and engaging learning
           experience. Here is a link to my
           <Link
-            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
+            className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
             to="https://github.com/suhas-sunder"
             target="_blank"
             rel="noopener noreferrer"
@@ -68,7 +68,7 @@ function About() {
           </Link>
           . If you want to learn more about me, feel free to visit my
           <Link
-            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
+            className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
             to="https://www.suhassunder.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -78,7 +78,7 @@ function About() {
           </Link>{" "}
           or visit any of my
           <Link
-            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
+            className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
             to="/socials"
           >
             {" "}
@@ -241,7 +241,7 @@ function About() {
                 className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-lg group-hover:text-amber-600`}
+                  className={"font-nunito text-lg group-hover:text-amber-600"}
                 >
                   Settlers Of Catan
                 </h4>
@@ -267,7 +267,7 @@ function About() {
                 className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-lg group-hover:text-amber-600`}
+                  className={"font-nunito text-lg group-hover:text-amber-600"}
                 >
                   Monopoly
                 </h4>
@@ -309,7 +309,7 @@ function About() {
                 className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-lg group-hover:text-amber-600`}
+                  className={"font-nunito text-lg group-hover:text-amber-600"}
                 >
                   Emoji Kitchen Game
                 </h4>
@@ -337,7 +337,7 @@ function About() {
                 className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-lg group-hover:text-amber-600`}
+                  className={"font-nunito text-lg group-hover:text-amber-600"}
                 >
                   Dragon Mythology
                 </h4>
@@ -365,7 +365,7 @@ function About() {
                 className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-lg group-hover:text-amber-600`}
+                  className={"font-nunito text-lg group-hover:text-amber-600"}
                 >
                   Fantasy 4K HD Wallpapers
                 </h4>
@@ -395,7 +395,7 @@ function About() {
                 className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
               >
                 <h4
-                  className={`font-nunito text-lg group-hover:text-amber-600`}
+                  className={"font-nunito text-lg group-hover:text-amber-600"}
                 >
                   Productivity Garden
                 </h4>

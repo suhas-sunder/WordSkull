@@ -31,17 +31,17 @@ const pages = getPages("app/routes");
 
 // Function to create the sitemap XML
 const createSitemap = (pages) => {
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 
   pages.forEach((page) => {
-    xml += `  <url>\n`;
+    xml += "  <url>\n";
     xml += `    <loc>${`https://www.wordskull.com${page}`}</loc>\n`;
     xml += `    <lastmod>${new Date().toISOString()}</lastmod>\n`;
-    xml += `  </url>\n`;
+    xml += "  </url>\n";
   });
 
-  xml += `</urlset>`;
+  xml += "</urlset>";
   return xml;
 };
 

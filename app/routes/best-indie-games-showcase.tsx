@@ -52,7 +52,7 @@ function About() {
           className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600  shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
         >
           <h4
-            className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-center text-lg`}
+            className={"font-nunito text-pumpkin-orange group-hover:text-amber-600 text-center text-lg"}
           >
             Name of Game 1
           </h4>
@@ -78,7 +78,7 @@ function About() {
           className="group flex flex-col gap-2 hover:scale-105 transition duration-300 ease-in-out mt-3 text-pumpkin-orange group-hover:text-amber-600  shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-xl py-4 px-4 shadow-pumpkin-orange/20 bg-opacity-10"
         >
           <h4
-            className={`font-nunito text-pumpkin-orange group-hover:text-amber-600 text-center text-lg`}
+            className={"font-nunito text-pumpkin-orange group-hover:text-amber-600 text-center text-lg"}
           >
             Name of your Game 2
           </h4>
@@ -105,7 +105,7 @@ function About() {
           Interested in showcasing your indie game?{" "}
           <Link
             to="/socials"
-            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
+            className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
           >
             Contact us
           </Link>{" "}
@@ -114,7 +114,7 @@ function About() {
           information on how to submit. Here is a{" "}
           <Link
             to="/edit-indie-game"
-            className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
+            className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
           >
             detailed submission guide
           </Link>{" "}

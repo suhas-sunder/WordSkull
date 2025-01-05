@@ -76,8 +76,8 @@ export async function action({ request }: ActionFunctionArgs) {
   const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID;
   const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY;
   const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME;
-  const objectKey = `json-data-for-indie-game-showcase.json`; //JSON File name for the R2 bucket
-  const imageObjectKey = `header-img-for-indie-game-showcase.webp`; //Webp Img file name for the R2 bucket
+  const objectKey = "json-data-for-indie-game-showcase.json"; //JSON File name for the R2 bucket
+  const imageObjectKey = "header-img-for-indie-game-showcase.webp"; //Webp Img file name for the R2 bucket
 
   if (
     !R2_ACCOUNT_ID ||
@@ -363,7 +363,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
     try {
       // Upload header title and description to database
-      const response = await submissionAPI.post(`/update-indie-details`, {
+      const response = await submissionAPI.post("/update-indie-details", {
         method: "POST",
         responseType: "arraybuffer",
         data: { username: usernameInUrl, ...details },
