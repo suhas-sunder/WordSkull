@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 const MockError = () => {
   render(
     <MemoryRouter>
-      <MockThemeProvider darkThemeActive={true}>
+      <MockThemeProvider darkThemeActive>
         <Error />
       </MockThemeProvider>
     </MemoryRouter>

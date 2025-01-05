@@ -45,7 +45,7 @@ const MockShareYourResults = async ({
 }) => {
   render(
     <MemoryRouter>
-      <MockThemeProvider darkThemeActive={true}>
+      <MockThemeProvider darkThemeActive>
         <div>
           <ShareYourResults isGameOver={isGameOver} />
           <div id="capture-area">Blob me</div>
