@@ -131,6 +131,7 @@ export default function NavBar() {
     document.body.classList.toggle("overflow-y-hidden", showMobileMenu);
   }, [showMobileMenu]);
 
+  // Toggle mobile burger menu
   const handleToggleMenu = () => setShowMobileMenu((prev) => !prev);
 
   return (
@@ -166,7 +167,7 @@ export default function NavBar() {
           id="burger"
           type="checkbox"
           checked={showMobileMenu}
-          onChange={() => setShowMobileMenu((prev) => !prev)} // Toggling the burger menu state on change
+          onChange={handleToggleMenu}
           className="relative hidden"
         />
         <label
