@@ -23,7 +23,7 @@ async function PostIndieLogin({ username, password }: PropType) {
     const jwtCookie = createCookie("jwt", cookieOptions);
 
     // Make the POST request to your API
-    const response = await accountAPI.post(`/login-indie-dev`, {
+    const response = await accountAPI.post("/login-indie-dev", {
       data: { username, password },
     });
 

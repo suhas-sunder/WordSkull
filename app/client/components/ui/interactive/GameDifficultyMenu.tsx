@@ -44,7 +44,7 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-12 lg:gap-16 justify-center items-center">
         <button
-          onClick={() => navigate(`/word-skull-game-easy-mode`)}
+          onClick={() => navigate("/word-skull-game-easy-mode")}
           className="group relative flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12 hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
         >
           <div className="absolute bottom-2 shadow-inner rounded-full p-[0.08em] shadow-pumpkin-orange/20 group-hover:shadow-amber-600/30  opacity-65">{emoji}</div>
@@ -64,13 +64,13 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
           <h3 className="font-lato mt-auto">Difficulty: Easy</h3>
           <p className="font-lato">3 - 5 letters per word</p>
           <div
-            className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300`}
+            className={"group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300"}
           >
             Play
           </div>
         </button>
         <button
-          onClick={() => navigate(`/word-skull-game-medium-mode`)}
+          onClick={() => navigate("/word-skull-game-medium-mode")}
           className="group relative flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
         >
           <div className="absolute bottom-2 shadow-inner rounded-full p-[0.08em] shadow-pumpkin-orange/20 group-hover:shadow-amber-600/30  opacity-65">{emoji}</div>
@@ -90,13 +90,13 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
           <h4 className="font-lato mt-auto">Difficulty: Medium</h4>
           <p className="font-lato">3 - 6 letters per word</p>
           <div
-            className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300`}
+            className={"group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300"}
           >
             Play
           </div>
         </button>
         <button
-          onClick={() => navigate(`/word-skull-game-hard-mode`)}
+          onClick={() => navigate("/word-skull-game-hard-mode")}
           className="group relative flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12 hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
         >
           <div className="absolute bottom-2 shadow-inner rounded-full p-[0.08em] shadow-pumpkin-orange/20 group-hover:shadow-amber-600/30  opacity-65">{emoji}</div>
@@ -116,13 +116,13 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
           <h4 className="font-lato mt-auto">Difficulty: Hard</h4>
           <p className="font-lato">3 - 7 letters per word</p>
           <div
-            className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300`}
+            className={"group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300"}
           >
             Play
           </div>
         </button>
         <button
-          onClick={() => navigate(`/word-skull-game-extreme-mode`)}
+          onClick={() => navigate("/word-skull-game-extreme-mode")}
           className="group relative flex h-full col-span-2 flex-col lg:col-start-3 xl:col-start-auto gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
         >
           <div className="absolute bottom-2 shadow-inner rounded-full p-[0.08em] shadow-pumpkin-orange/20 group-hover:shadow-amber-600/30  opacity-65">{emoji}</div>
@@ -142,7 +142,7 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
           <h4 className="font-lato mt-auto">Difficulty: Extreme</h4>
           <p className="font-lato">3 - 9 letters per word</p>
           <div
-            className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300`}
+            className={"group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300"}
           >
             Play
           </div>

@@ -9,7 +9,7 @@ export async function action({ request }: ActionFunctionArgs) {
 // Determine the base URL based on environment variables
 const baseURL =
   import.meta.env.MODE === "production"
-    ? `https://wordskull.com/v1/api/account`
+    ? "https://wordskull.com/v1/api/account"
     : `http://localhost:${import.meta.env.VITE_PORT || 3200}/v1/api/account`;
 
 const instance = axios.create({

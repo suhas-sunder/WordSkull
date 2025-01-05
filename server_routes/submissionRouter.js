@@ -53,7 +53,7 @@ router.get("/indie-games-data", async(req, res) => {
     console.log(sanitizeUsername);
 
     const result = await pool.query(
-      `GET * FROM indiedevs WHERE username = $1`,
+      "GET * FROM indiedevs WHERE username = $1",
       [sanitizeUsername.trim()]
     );
 
