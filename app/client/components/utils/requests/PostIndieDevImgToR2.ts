@@ -39,11 +39,11 @@ export default async function PostIndieDevImgToR2({
 
   // Create the parameters for the PutObjectCommand
   const params = {
-    Bucket: R2_BUCKET_NAME!,
+    Bucket: R2_BUCKET_NAME,
     Key: fullKey,
     Body: webpBuffer,
     ContentType: imgType,
-    ContentLength: webpBuffer.length, // Explicitly set ContentLength to disable multipart
+    ContentLength: webpBuffer?.length || 0, // Explicitly set ContentLength to disable multipart
     Metadata: {
       "x-amz-date": xAmzDate,
     },

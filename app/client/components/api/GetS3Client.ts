@@ -9,7 +9,11 @@ interface PropType {
 }
 
 //Setup S3 Client for Cloudflare R2
-export default function GetS3Client({ R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY }: PropType) {
+export default function GetS3Client({
+  R2_ACCOUNT_ID,
+  R2_ACCESS_KEY_ID,
+  R2_SECRET_ACCESS_KEY,
+}: PropType) {
   if (s3Client) {
     // If client is already initialized, log the message and return the existing client
     console.log("S3 Client already initialized");
@@ -24,8 +28,8 @@ export default function GetS3Client({ R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET
     region: "auto", // Cloudflare R2 doesn't require a specific region
     endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
     credentials: {
-      accessKeyId: R2_ACCESS_KEY_ID!,
-      secretAccessKey: R2_SECRET_ACCESS_KEY!,
+      accessKeyId: R2_ACCESS_KEY_ID,
+      secretAccessKey: R2_SECRET_ACCESS_KEY,
     },
     forcePathStyle: true, // Required for R2 compatibility
     maxAttempts: 2, // Reduce retries to limit additional operations

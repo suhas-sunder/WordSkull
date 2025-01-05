@@ -121,7 +121,7 @@ router.get("/verify", async (req, res) => {
     // Extract token from Authorization header
     const authHeader = req.headers.authorization;
     const token =
-      authHeader && authHeader.startsWith("Bearer ")
+     authHeader?.startsWith("Bearer")
         ? authHeader.split(" ")[1]
         : null;
 

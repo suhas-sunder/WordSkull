@@ -21,8 +21,8 @@ export default function ShiftIndexForward({
   });
 
   // Check if the cache already has a value for this key
-  if (cache.has(cacheKey)) {
-    return cache.get(cacheKey)!;
+  if (cache?.has(cacheKey)) {
+    return cache?.get(cacheKey);
   }
 
   // Validate that the currentRow is within bounds of the currentSkull array

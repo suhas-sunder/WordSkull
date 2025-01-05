@@ -186,12 +186,12 @@ const Confetti: React.FC<ConfettiProps> = ({
       ctx.fillText(particle.emoji, -particle.size / 2, particle.size / 2);
     } else if (particle.shape) {
       if (particle.shape === "circle") {
-        ctx.fillStyle = particle.color!;
+        ctx.fillStyle = particle?.color || "white";
         ctx.beginPath();
         ctx.arc(0, 0, particle.size, 0, Math.PI * 2);
         ctx.fill();
       } else {
-        ctx.fillStyle = particle.color!;
+        ctx.fillStyle = particle?.color || "white";
         ctx.fillRect(
           -particle.size / 2,
           -particle.size / 2,

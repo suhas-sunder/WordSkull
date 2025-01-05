@@ -28,14 +28,13 @@ router.use((req, res, next) => {
 
 // Utility function for sanitizing inputs
 const sanitizeInput = (input) => {
-  return validator.escape(input);
+  return validator.escape(input).trim();
 };
 
 router.get("/indie-games-data", async(req, res) => {
   try {
     const { username } = req.body.data;
 
-    console.log(username.length);
 
     // Validate input
     const validationError = validateRequestBody(
@@ -50,6 +49,8 @@ router.get("/indie-games-data", async(req, res) => {
 
     // Sanitize input
     const sanitizeUsername = sanitizeInput(username);
+    
+    console.log(sanitizeUsername);
 
     const result = await pool.query(
       `GET * FROM indiedevs WHERE username = $1`,
@@ -74,8 +75,6 @@ router.post("/update-indie-header", async (req, res) => {
   try {
     const { username, title, description } = req.body.data;
 
-    console.log(username.length, title.length, description.length);
-
     // Validate input
     const validationError = validateRequestBody(
       ["username", "title", "description"],
@@ -91,7 +90,7 @@ router.post("/update-indie-header", async (req, res) => {
     const sanitizeUsername = sanitizeInput(username);
     const sanitizeTitle = sanitizeInput(title);
     const sanitizeDescription = sanitizeInput(description);
-    console.log(sanitizeUsername.trim(), sanitizeTitle.trim(), sanitizeDescription.trim());
+    console.log(sanitizeUsername, sanitizeTitle, sanitizeDescription);
 
     // Update database
     const result = await pool.query(
@@ -99,7 +98,7 @@ router.post("/update-indie-header", async (req, res) => {
        SET game_title = $2, game_description = $3
        WHERE username = $1
        RETURNING *`,
-      [sanitizeUsername.trim(), sanitizeTitle.trim(), sanitizeDescription.trim()]
+      [sanitizeUsername, sanitizeTitle, sanitizeDescription]
     );
 
 
