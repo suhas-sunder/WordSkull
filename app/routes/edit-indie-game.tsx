@@ -106,7 +106,7 @@ export default function EditIndieGame() {
         <div
           className="absolute -top-[5em]"
           id="indie-game-terms-of-service"
-        ></div>
+         />
         <h2 className="flex py-2 text-4xl font-lora text-center w-full justify-center items-center mb-2">
           Terms and Conditions for Game Submission
         </h2>

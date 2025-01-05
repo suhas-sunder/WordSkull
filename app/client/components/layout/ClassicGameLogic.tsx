@@ -147,7 +147,7 @@ function ClassicGameLogic({
             />
           </div>
         ) : (
-          <div className="mb-10"></div>
+          <div className="mb-10" />
         )}
         <h1
           className={`${

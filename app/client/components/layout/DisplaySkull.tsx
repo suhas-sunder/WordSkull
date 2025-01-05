@@ -141,7 +141,7 @@ function DisplaySkull({
                         <li
                           key={uuidv4()}
                           className={`  text-[1.2rem] relative border-stone-700 bg-stone-800 border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center`}
-                        ></li>
+                         />
                       );
                     } else if (square === "~") {
                       //Return empty square with proper styling for "empty squares"
@@ -149,7 +149,7 @@ function DisplaySkull({
                         <li
                           key={uuidv4()}
                           className={`bg-stone-100 bg-opacity-95  text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center`}
-                        ></li>
+                         />
                       );
                     } else {
                       //Return all valid characters with proper styling

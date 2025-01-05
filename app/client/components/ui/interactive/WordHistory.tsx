@@ -128,7 +128,7 @@ const WordHistory = React.memo(function WordHistory({
         <button
           onClick={() => setDispWordHistory(false)}
           className="fixed inset-0 h-full w-full flex bg-skull-super-dark-brown/50 z-30 justify-center"
-        ></button>
+         />
       )}
       <button
         data-testid="word-history"

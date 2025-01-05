@@ -38,7 +38,7 @@ function ModalWrapper({
               data-testid="modal-background"
               onClick={() => setShowModal(false)}
               className="animate-fadeInFast fixed inset-0 h-full w-full flex bg-skull-brown bg-opacity-10 z-30 justify-center"
-            ></button>
+             />
           </>,
           document.body
         )}

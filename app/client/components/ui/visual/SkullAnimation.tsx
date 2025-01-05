@@ -84,7 +84,7 @@ function SkullAnimation() {
         <li
           key={index + "eye-square"}
           className={` text-[1.1rem] sm:text-[2rem] border-2 border-stone-700 bg-stone-800 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
-        ></li>
+         />
       );
 
     if (square === "~")
@@ -92,7 +92,7 @@ function SkullAnimation() {
         <li
           key={index + "empty-square"}
           className={`bg-stone-100 opacity-95   text-[1.1rem] sm:text-[2rem] border-2 rounded-lg w-[2em] h-[2em] flex justify-center items-center`}
-        ></li>
+         />
       );
 
     return (
