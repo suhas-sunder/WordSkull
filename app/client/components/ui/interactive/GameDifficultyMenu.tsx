@@ -21,7 +21,7 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
   return (
     <div className="flex flex-col flex-wrap justify-center gap-10 items-center w-full pb-14">
       <div className="flex flex-col justify-center max-w-[1200px] items-center gap-2">
-        <div className="absolute -top-20"></div>
+        <div className="absolute -top-20" />
         <h2
           className={`${
             darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"

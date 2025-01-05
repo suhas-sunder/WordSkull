@@ -137,7 +137,7 @@ describe("should not render", () => {
   it("should not render modal when showModal is false", () => {
     MockModalWrapper({
       setShowModal: setShowModalMock,
-      children: <div data-testid="child"></div>,
+      children: <div data-testid="child" />,
       customClass: "custom-modal-class",
       showModal: false,
     });

@@ -44,7 +44,7 @@ function ClassicGameplayInstructions() {
             <div
               id="gameplay-instructions"
               className="absolute -top-[5em]"
-            ></div>
+             />
             <h2
               className={`text-4xl font-nunito  uppercase mb-5 ${
                 darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"

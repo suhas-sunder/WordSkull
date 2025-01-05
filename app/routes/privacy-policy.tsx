@@ -1069,7 +1069,7 @@ export default function PrivacyPolicy() {
               to={
                 "https://www.oag.state.va.us/consumer-protection/index.php/file-a-complaint"
               }
-            ></Link>{" "}
+             />{" "}
             Attorney General to submit a complaint.
           </p>
         </section>
