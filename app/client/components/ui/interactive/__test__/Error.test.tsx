@@ -20,7 +20,7 @@ describe("renders defaults correctly", () => {
   it("should render skull and crossbones emoji with animation class", () => {
     MockError();
 
-    const textElement = screen.getByText(/☠️/i);
+    const textElement = screen.getByText(/☠️/iu);
     expect(textElement).toBeInTheDocument();
     expect(textElement).toHaveClass(/animate-scalePulse/i);
   });

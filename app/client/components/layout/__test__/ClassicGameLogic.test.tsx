@@ -48,18 +48,18 @@ describe("integrates will all required components & renders all game logic corre
   });
 
   it("should render a white heart in dark mode", () => {
-    const headerElement = screen.getByText(/🤍/i); // Replace with actual header text
+    const headerElement = screen.getByText(/🤍/iu); // Replace with actual header text
     expect(headerElement).toBeInTheDocument();
   });
 
   it("should render a white heart in dark mode", () => {
-    const textElement = screen.getByText(/🤍/i); // Replace with actual header text
+    const textElement = screen.getByText(/🤍/iu); // Replace with actual header text
     expect(textElement).toBeInTheDocument();
   });
 
   it("should render a proper heading by integrating with Header component", () => {
     const headingElement = screen.getByRole("heading", {
-      name: /W💀RD SKULL/i,
+      name: /W💀RD SKULL/iu,
     });
 
     expect(headingElement).toBeInTheDocument();
@@ -111,7 +111,7 @@ describe("integrates will all required components & renders all game logic corre
   });
 
   it("should render a label for the input", () => {
-    const labelElement = screen.getByLabelText(/W💀RD SKULL/i);
+    const labelElement = screen.getByLabelText(/W💀RD SKULL/iu);
     expect(labelElement).toBeInTheDocument();
   });
 });
