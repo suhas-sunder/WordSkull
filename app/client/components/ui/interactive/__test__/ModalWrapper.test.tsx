@@ -21,7 +21,7 @@ const MockModalWrapper = ({
 }: ModalPropType) => {
   render(
     <MemoryRouter>
-      <MockThemeProvider darkThemeActive={true}>
+      <MockThemeProvider darkThemeActive>
         <ModalWrapper
           setShowModal={setShowModal}
           customClass={customClass}

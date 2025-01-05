@@ -18,7 +18,7 @@ interface PropType {
 const MockClassicGameplayInstructions = (props: PropType) => {
   return render(
     <MemoryRouter>
-      <MockThemeProvider darkThemeActive={true}>
+      <MockThemeProvider darkThemeActive>
         <ClassicGameLogic {...props} />
       </MockThemeProvider>
     </MemoryRouter>

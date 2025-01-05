@@ -12,7 +12,7 @@ interface PropType extends InstructionsType, KeyboardType {}
 const MockClassicGameplayInstructions = (props: PropType) => {
   return render(
     <MemoryRouter>
-      <MockThemeProvider darkThemeActive={true}>
+      <MockThemeProvider darkThemeActive>
         <MockSettingsProvider {...props}>
           <ClassicGameplayInstructions />
         </MockSettingsProvider>

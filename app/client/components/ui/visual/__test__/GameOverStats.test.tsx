@@ -17,12 +17,12 @@ const mockSetStats = vi.fn();
 
 const MockGameOverStats = () => {
   return render(
-    <MockThemeProvider darkThemeActive={true}>
+    <MockThemeProvider darkThemeActive>
       <MockStatsProvider>
         <GameOverStats
           lives={2}
           maxLives={5}
-          isGameOver={true}
+          isGameOver
           wordsForSkull={["apple", "banana", "cherry"]}
           currentRow={1}
           seconds={120}
@@ -96,7 +96,7 @@ describe("GameOverStats component", () => {
 describe("should not render", () => {
   it("should not update stats when the game is not over", async () => {
     render(
-      <MockThemeProvider darkThemeActive={true}>
+      <MockThemeProvider darkThemeActive>
         <MockStatsProvider>
           <GameOverStats
             lives={2}

@@ -80,7 +80,7 @@ function IndieGameDetailsForm({ data, actionData, trackFormSubmitted, setTrackFo
         firstOption="Yes"
         secondOption="No"
         value={(data?.singlePlayer as boolean) || undefined}
-        firstInputChecked={true}
+        firstInputChecked
         secondInputChecked={false}
         id="single-player"
         name="single-player"
@@ -89,7 +89,7 @@ function IndieGameDetailsForm({ data, actionData, trackFormSubmitted, setTrackFo
         legend="Multiplayer"
         firstOption="Yes"
         firstInputChecked={false}
-        secondInputChecked={true}
+        secondInputChecked
         value={(data?.multiplayer as boolean) || undefined}
         secondOption="No"
         id="multiplayer"
@@ -99,7 +99,7 @@ function IndieGameDetailsForm({ data, actionData, trackFormSubmitted, setTrackFo
         legend="Co-op"
         firstOption="Yes"
         firstInputChecked={false}
-        secondInputChecked={true}
+        secondInputChecked
         value={(data?.coop as boolean) || undefined}
         secondOption="No"
         id="coop"
@@ -110,7 +110,7 @@ function IndieGameDetailsForm({ data, actionData, trackFormSubmitted, setTrackFo
         firstOption="Yes"
         value={(data?.achievements as boolean) || undefined}
         firstInputChecked={false}
-        secondInputChecked={true}
+        secondInputChecked
         secondOption="No"
         id="achievements"
         name="achievements"
@@ -120,7 +120,7 @@ function IndieGameDetailsForm({ data, actionData, trackFormSubmitted, setTrackFo
         firstOption="Yes"
         value={(data?.demo as boolean) || undefined}
         firstInputChecked={false}
-        secondInputChecked={true}
+        secondInputChecked
         secondOption="No"
         id="demo"
         name="demo"
@@ -130,7 +130,7 @@ function IndieGameDetailsForm({ data, actionData, trackFormSubmitted, setTrackFo
         firstOption="Yes"
         value={(data?.controllerSupport as boolean) || undefined}
         firstInputChecked={false}
-        secondInputChecked={true}
+        secondInputChecked
         secondOption="No"
         id="controller-support"
         name="controller-support"

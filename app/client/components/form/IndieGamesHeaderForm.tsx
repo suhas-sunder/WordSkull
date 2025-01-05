@@ -57,7 +57,7 @@ console.log(data);
         name="game-name"
         label="* Title Of Your Game (1 to 80 chars)"
         value={(data?.titleOfGame as string) || undefined}
-        required={true}
+        required
         minLength={1}
         maxLength={80}
         placeholder="Enter title"
@@ -67,7 +67,7 @@ console.log(data);
         id="brief-game-description"
         name="brief-game-description"
         value={(data?.descriptionOfGame as string) || undefined}
-        required={true}
+        required
         minLength={300}
         maxLength={1000}
         placeholder="The text you enter here will be displayed in the header of your game's page. It will also be the preview text when displayed on other pages. I have just two requests: 
@@ -85,7 +85,7 @@ console.log(data);
         type="file"
         accept="image/*"
         optionalText="game's promotional"
-        required={true}
+        required
         setSelectedFile={setSelectedFile} // Set selected file for image upload
       />
       <IndieTOSCheckbox id="indie-terms-one" />

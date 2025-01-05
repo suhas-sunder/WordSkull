@@ -6,7 +6,7 @@ import MockThemeProvider from "../../../../../client/mocks/components/MockThemeC
 
 const MockSkullAnimation = () => {
   return render(
-    <MockThemeProvider darkThemeActive={true}>
+    <MockThemeProvider darkThemeActive>
       <SkullAnimation />
     </MockThemeProvider>
   );

@@ -18,7 +18,7 @@ describe("OffScreenTimer", () => {
   });
 
   it("should call setSeconds with the current seconds when isGameOver is true", () => {
-    render(<OffScreenTimer isGameOver={true} setSeconds={mockSetSeconds} />);
+    render(<OffScreenTimer isGameOver setSeconds={mockSetSeconds} />);
 
     expect(mockSetSeconds).toHaveBeenCalledWith(10);
     expect(mockSetStartTimer).toHaveBeenCalledWith(false);
@@ -31,7 +31,7 @@ describe("OffScreenTimer", () => {
   });
 
   it("should call setSeconds only once when isGameOver is true", () => {
-    render(<OffScreenTimer isGameOver={true} setSeconds={mockSetSeconds} />);
+    render(<OffScreenTimer isGameOver setSeconds={mockSetSeconds} />);
 
     expect(mockSetSeconds).toHaveBeenCalledTimes(1);
   });
@@ -43,7 +43,7 @@ describe("OffScreenTimer", () => {
   });
 
   it("should stop the timer when isGameOver is true", () => {
-    render(<OffScreenTimer isGameOver={true} setSeconds={mockSetSeconds} />);
+    render(<OffScreenTimer isGameOver setSeconds={mockSetSeconds} />);
 
     expect(mockSetStartTimer).toHaveBeenCalledWith(false);
   });
