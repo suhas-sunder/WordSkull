@@ -46,11 +46,6 @@ export default function Sitemap() {
             </Link>
           </li> */}
           <li>
-            <Link to="/privacy-policy" className="hover: hover:text-amber-500">
-              Privacy Policy
-            </Link>
-          </li>
-          <li>
             <Link to="/wallpaper" className="hover: hover:text-amber-500">
               4K HD Wallpapers - Fantasy Themed
             </Link>
@@ -97,10 +92,34 @@ export default function Sitemap() {
           </li>
           <li>
             <Link
-              to="/#word-skull-classic"
+              to="/game/word-skull-game-easy-mode"
               className=" hover:text-amber-500 flex mr-auto"
             >
-              Word Skull Classic
+              Word Skull Classic - Easy Difficulty (3 - 5 letters)
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/game/word-skull-game-medium-mode"
+              className=" hover:text-amber-500 flex mr-auto"
+            >
+              Word Skull Classic - Medium Difficulty (3 - 6 letters)
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/game/word-skull-game-hard-mode"
+              className=" hover:text-amber-500 flex mr-auto"
+            >
+              Word Skull Classic - Hard Difficulty (3 - 7 letters)
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/game/word-skull-game-extreme-mode"
+              className=" hover:text-amber-500 flex mr-auto"
+            >
+              Word Skull Classic - Extreme Difficulty (3 - 9 letters)
             </Link>
           </li>
         </ol>
