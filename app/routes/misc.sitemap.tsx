@@ -27,20 +27,7 @@ export default function Sitemap() {
               Word Skull (Home)
             </Link>
           </li>
-          <li>
-            <Link
-              to="/best-indie-games-showcase"
-              className="hover: hover:text-amber-500"
-            >
-              Indie Games
-            </Link>
-          </li>
-          <li>
-            <Link to="/blog" className="hover: hover:text-amber-500">
-              Blog
-            </Link>
-          </li>
-          <li>
+          {/* <li>
             <Link
               to="/board-game-reviews"
               className="hover: hover:text-amber-500"
@@ -49,28 +36,15 @@ export default function Sitemap() {
             </Link>
           </li>
           <li>
+            <Link to="/blog" className="hover: hover:text-amber-500">
+              Blog
+            </Link>
+          </li>
+          <li>
             <Link to="/faq" className="hover: hover:text-amber-500">
               FAQ
             </Link>
-          </li>
-          <li>
-            <Link
-              to="/terms-of-service"
-              className="hover: hover:text-amber-500"
-            >
-              Terms of Service
-            </Link>
-          </li>
-          <li>
-            <Link to="/cookies-policy" className="hover: hover:text-amber-500">
-              Cookies Policy
-            </Link>
-          </li>
-          <li>
-            <Link to="/privacy-policy" className="hover: hover:text-amber-500">
-              Privacy Policy
-            </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/wallpaper" className="hover: hover:text-amber-500">
               4K HD Wallpapers - Fantasy Themed
@@ -118,10 +92,34 @@ export default function Sitemap() {
           </li>
           <li>
             <Link
-              to="/#word-skull-classic"
+              to="/game/word-skull-game-easy-mode"
               className=" hover:text-amber-500 flex mr-auto"
             >
-              Word Skull Classic
+              Word Skull Classic - Easy Difficulty (3 - 5 letters)
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/game/word-skull-game-medium-mode"
+              className=" hover:text-amber-500 flex mr-auto"
+            >
+              Word Skull Classic - Medium Difficulty (3 - 6 letters)
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/game/word-skull-game-hard-mode"
+              className=" hover:text-amber-500 flex mr-auto"
+            >
+              Word Skull Classic - Hard Difficulty (3 - 7 letters)
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/game/word-skull-game-extreme-mode"
+              className=" hover:text-amber-500 flex mr-auto"
+            >
+              Word Skull Classic - Extreme Difficulty (3 - 9 letters)
             </Link>
           </li>
         </ol>

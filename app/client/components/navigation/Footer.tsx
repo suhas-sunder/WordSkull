@@ -21,22 +21,22 @@ function Footer() {
         } flex max-w-[500px] items-center justify-around `}
       >
         <li className="hidden sm:flex">
-          <NavLink to="/sitemap" className="flex px-3">
+          <NavLink to="/misc/sitemap" className="flex px-3">
             <span className={`${styles.icon}`}>Sitemap</span>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/privacy-policy" className="flex px-3">
+          <NavLink to="/misc/privacy-policy" className="flex px-3">
             <span className={`${styles.icon}`}>Privacy</span>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/cookies-policy" className="flex px-3">
+          <NavLink to="/misc/cookies-policy" className="flex px-3">
             <span className={`${styles.icon}`}>Cookie</span>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/terms-of-service" className="flex px-3">
+          <NavLink to="/misc/terms-of-service" className="flex px-3">
             <span className={`${styles.icon} hidden sm:flex`}>
               Terms Of Service
             </span>

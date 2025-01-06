@@ -3,7 +3,7 @@ import ClassicGameLogic from "../client/components/layout/ClassicGameLogic";
 import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
 import { useMatches } from "react-router-dom";
 import { useMemo } from "react";
-import { WordsData } from "./word-skull-game-easy-mode";
+import { WordsData } from "./game.word-skull-game-easy-mode";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import GameLinks from "../client/components/layout/GameLinks";
 

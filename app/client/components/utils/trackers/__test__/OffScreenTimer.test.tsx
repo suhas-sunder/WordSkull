@@ -12,38 +12,40 @@ vi.mock("../../../../../client/components/hooks/useSecondsTimer", () => ({
   }),
 }));
 
+
+
 describe("OffScreenTimer", () => {
   afterEach(() => {
     vi.resetAllMocks();
   });
 
   it("should call setSeconds with the current seconds when isGameOver is true", () => {
-    render(<OffScreenTimer isGameOver setSeconds={mockSetSeconds} />);
+    render(<OffScreenTimer isGameOver startOffscreenTimer setSeconds={mockSetSeconds} />);
 
     expect(mockSetSeconds).toHaveBeenCalledWith(10);
     expect(mockSetStartTimer).toHaveBeenCalledWith(false);
   });
 
   it("should set the timer to start when isGameOver is fals unless the timer is already started", () => {
-    render(<OffScreenTimer isGameOver={false} setSeconds={mockSetSeconds} />);
+    render(<OffScreenTimer isGameOver={false} startOffscreenTimer setSeconds={mockSetSeconds} />);
 
     expect(mockSetSeconds).not.toHaveBeenCalled();
   });
 
   it("should call setSeconds only once when isGameOver is true", () => {
-    render(<OffScreenTimer isGameOver setSeconds={mockSetSeconds} />);
+    render(<OffScreenTimer isGameOver startOffscreenTimer setSeconds={mockSetSeconds} />);
 
     expect(mockSetSeconds).toHaveBeenCalledTimes(1);
   });
 
   it("should not stop the timer when isGameOver is false", () => {
-    render(<OffScreenTimer isGameOver={false} setSeconds={mockSetSeconds} />);
+    render(<OffScreenTimer isGameOver={false} startOffscreenTimer setSeconds={mockSetSeconds} />);
 
     expect(mockSetStartTimer).not.toHaveBeenCalledWith(false);
   });
 
   it("should stop the timer when isGameOver is true", () => {
-    render(<OffScreenTimer isGameOver setSeconds={mockSetSeconds} />);
+    render(<OffScreenTimer isGameOver startOffscreenTimer setSeconds={mockSetSeconds} />);
 
     expect(mockSetStartTimer).toHaveBeenCalledWith(false);
   });

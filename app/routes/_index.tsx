@@ -51,8 +51,8 @@ function Header() {
         weapon at your disposal—your mind! The dungeon awaits...
       </p>
       <Link
-        to={"/word-skull-game-easy-mode"}
-        className={"hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8  text-lg font-nunito rounded-full mt-3 py-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400"}
+        to={"/game/word-skull-game-easy-mode"}
+        className="hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8  text-lg font-nunito rounded-full mt-3 py-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400"
       >
         Start Playing!
       </Link>
@@ -64,8 +64,6 @@ function Header() {
 }
 
 export default function Index() {
-  
-
   const { darkThemeActive } = useTheme();
 
   return (
@@ -100,8 +98,8 @@ export default function Index() {
               </h3>
               <p className="font-lato text-lg pl-5 tracking-wider leading-loose">
                 <Link
-                  className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
-                  to="/word-skull-game-easy-mode"
+                  className="text-pumpkin-orange hover:text-amber-600 font-lora"
+                  to="/game/word-skull-game-easy-mode"
                 >
                   WordSkull
                 </Link>{" "}
@@ -130,7 +128,9 @@ export default function Index() {
                 classic word and puzzle games. If you want the long story, you
                 can find it on the{" "}
                 <Link
-                  className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
+                  className={
+                    "text-pumpkin-orange hover:text-amber-600 font-lora"
+                  }
                   to="/about"
                 >
                   {" "}

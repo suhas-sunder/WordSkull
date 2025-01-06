@@ -159,7 +159,7 @@ function DisplaySkull({
                         currentRowIndex,
                         currentRow,
                         currentSkull,
-                      });
+                      }) || 0;
 
                       return (
                         <li
