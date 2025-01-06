@@ -8,7 +8,7 @@ import Keyboard from "../ui/interactive/Keyboard";
 import Keypad from "../ui/interactive/Keypad";
 import GameOverMenu from "../ui/interactive/GameOverMenu";
 import GameOverStatsCapture from "./GameOverStatsCapture";
-import { WordsData } from "../../../routes/word-skull-game-easy-mode";
+import { WordsData } from "../../../routes/game.word-skull-game-easy-mode";
 import { useSettings } from "../context/SettingsContext";
 import { useStats } from "../context/StatsContext";
 import OffScreenTimer from "../utils/trackers/OffScreenTimer";

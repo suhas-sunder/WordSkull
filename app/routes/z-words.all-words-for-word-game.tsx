@@ -33,7 +33,7 @@ export default function AllWordsForWordGame() {
                 ? "text-amber-600"
                 : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
-            to="/all-words-for-word-game-three-letters"
+            to="/z-words/all-words-for-word-game-three-letters"
           >
             View list of all three letter words
           </Link>{" "}
@@ -43,7 +43,7 @@ export default function AllWordsForWordGame() {
                 ? "text-amber-600"
                 : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
-            to="/all-words-for-word-game-four-letters"
+            to="/z-words/all-words-for-word-game-four-letters"
           >
             View list of all four letter words
           </Link>{" "}
@@ -53,7 +53,7 @@ export default function AllWordsForWordGame() {
                 ? "text-amber-600"
                 : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
-            to="/all-words-for-word-game-five-letters"
+            to="/z-words/all-words-for-word-game-five-letters"
           >
             View list of all five letter words
           </Link>{" "}
@@ -63,7 +63,7 @@ export default function AllWordsForWordGame() {
                 ? "text-amber-600"
                 : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
-            to="/all-words-for-word-game-six-letters"
+            to="/z-words/all-words-for-word-game-six-letters"
           >
             View list of all six letter words
           </Link>{" "}
@@ -73,7 +73,7 @@ export default function AllWordsForWordGame() {
                 ? "text-amber-600"
                 : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
-            to="/all-words-for-word-game-seven-letters"
+            to="/z-words/all-words-for-word-game-seven-letters"
           >
             View list of all seven letter words
           </Link>{" "}
@@ -83,7 +83,7 @@ export default function AllWordsForWordGame() {
                 ? "text-amber-600"
                 : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
-            to="/all-words-for-word-game-eight-letters"
+            to="/z-words/all-words-for-word-game-eight-letters"
           >
             View list of all eight letter words
           </Link>{" "}
@@ -93,7 +93,7 @@ export default function AllWordsForWordGame() {
                 ? "text-amber-600"
                 : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
-            to="/all-words-for-word-game-nine-letters"
+            to="/z-words/all-words-for-word-game-nine-letters"
           >
             View list of all nine letter words
           </Link>

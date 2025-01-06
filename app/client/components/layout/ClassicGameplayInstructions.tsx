@@ -111,7 +111,7 @@ function ClassicGameplayInstructions() {
               <li className="mx-auto text-center">
                 If the word exists in the{" "}
                 <span className="text-pumpkin-orange hover:text-amber-500">
-                  <Link to="/all-words-for-word-game">
+                  <Link to="/z-words/all-words-for-word-game">
                     dictionary (word list)
                   </Link>
                 </span>
@@ -130,7 +130,7 @@ function ClassicGameplayInstructions() {
               <li className="mx-auto text-center">
                 If your submitted word exists in the{" "}
                 <span className="text-pumpkin-orange hover:text-amber-500">
-                  <Link to="/all-words-for-word-game">
+                  <Link to="/z-words/all-words-for-word-game">
                     dictionary (word list)
                   </Link>
                 </span>{" "}
@@ -161,7 +161,7 @@ function ClassicGameplayInstructions() {
               <li className="mx-auto text-center">
                 If a word does not exist in the{" "}
                 <span className="text-pumpkin-orange hover:text-amber-500">
-                  <Link to="/all-words-for-word-game">
+                  <Link to="/z-words/all-words-for-word-game">
                     dictionary (word list)
                   </Link>
                 </span>

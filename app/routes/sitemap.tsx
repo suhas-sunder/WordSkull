@@ -27,20 +27,7 @@ export default function Sitemap() {
               Word Skull (Home)
             </Link>
           </li>
-          <li>
-            <Link
-              to="/best-indie-games-showcase"
-              className="hover: hover:text-amber-500"
-            >
-              Indie Games
-            </Link>
-          </li>
-          <li>
-            <Link to="/blog" className="hover: hover:text-amber-500">
-              Blog
-            </Link>
-          </li>
-          <li>
+          {/* <li>
             <Link
               to="/board-game-reviews"
               className="hover: hover:text-amber-500"
@@ -49,23 +36,15 @@ export default function Sitemap() {
             </Link>
           </li>
           <li>
+            <Link to="/blog" className="hover: hover:text-amber-500">
+              Blog
+            </Link>
+          </li>
+          <li>
             <Link to="/faq" className="hover: hover:text-amber-500">
               FAQ
             </Link>
-          </li>
-          <li>
-            <Link
-              to="/terms-of-service"
-              className="hover: hover:text-amber-500"
-            >
-              Terms of Service
-            </Link>
-          </li>
-          <li>
-            <Link to="/cookies-policy" className="hover: hover:text-amber-500">
-              Cookies Policy
-            </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/privacy-policy" className="hover: hover:text-amber-500">
               Privacy Policy

@@ -1,9 +1,9 @@
 import type { MetaFunction } from "@remix-run/node";
 import ClassicGameLogic from "../client/components/layout/ClassicGameLogic";
 import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
-import { useMatches } from "react-router-dom";
+import { WordsData } from "./game.word-skull-game-easy-mode";
 import { useMemo } from "react";
-import { WordsData } from "./word-skull-game-easy-mode";
+import { useMatches } from "react-router-dom";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import GameLinks from "../client/components/layout/GameLinks";
 
@@ -11,7 +11,7 @@ export const meta: MetaFunction = () => {
   return [
     {
       title:
-        "💀 Word Skull Hard - Hard difficulty offers learning for 3 to 5 letter words 🎉✨",
+        "💀 Word Skull Medium - Medium difficulty offers learning for 3 to 5 letter words 🎉✨",
     },
     {
       name: "description",
@@ -24,7 +24,6 @@ export const meta: MetaFunction = () => {
 export default function WordSkullMedium() {
   const matches = useMatches();
   const wordsData = useMemo(() => {
-    // Find the first match with valid data
     const match = matches?.find((match) => (match?.data as WordsData)?.words);
     return match?.data as WordsData;
   }, [matches]);
@@ -32,11 +31,11 @@ export default function WordSkullMedium() {
   return (
     <>
       <ClassicGameLogic
-        startPosition={8}
-        endPosition={12}
-        lettersPerSkull="Hard Difficulty: 3 - 7 letters"
+        startPosition={4}
+        endPosition={8}
+        lettersPerSkull="Medium Difficulty: 3 - 6 letters"
         wordsData={wordsData}
-        difficulty="hard"
+        difficulty="medium"
         gameMode="classic"
       />
       <GameLinks />
