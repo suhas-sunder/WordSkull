@@ -50,7 +50,7 @@ router.post("/register-indie-dev", async (req, res) => {
     );
 
     const newUser = await pool.query(
-      `INSERT INTO indiedevs (username, password, password_override) VALUES ($1, $2, $3) RETURNING *`,
+      "INSERT INTO indiedevs (username, password, password_override) VALUES ($1, $2, $3) RETURNING *",
       [sanitizedUsername, hashedPassword, hashedPasswordOverride]
     );
 

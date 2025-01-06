@@ -62,7 +62,7 @@ function Keypad({ currentlyEnteredWords, currentWord }: PropType) {
   return (
     <div
       data-testid="keypad"
-      className={`text-stone-600 w-full flex min-h-[13em] select-none flex-col gap-y-5 mt-5 xs:mt-4 font-nunito rounded-xl uppercase text-base lg-md:hidden max-w-[600px]`}
+      className={"text-stone-600 w-full flex min-h-[13em] select-none flex-col gap-y-5 mt-5 xs:mt-4 font-nunito rounded-xl uppercase text-base lg-md:hidden max-w-[600px]"}
     >
       {Object.values(keypadData).map((keysArr) => {
         return (

@@ -64,7 +64,7 @@ describe("handles word history default behavior correctly", () => {
         currentRow={currentRow}
         wordsForSkull={wordsForSkull}
         setDispWordHistory={mockSetDispWordHistory}
-        dispWordHistory={true}
+        dispWordHistory
       />
     );
 
@@ -85,7 +85,7 @@ describe("handles character validation correctly", () => {
         currentRow={0} // We're focusing on the first row
         wordsForSkull={["hello"]} // The correct word
         setDispWordHistory={() => {}} // Placeholder function
-        dispWordHistory={true} // Make sure history is displayed
+        dispWordHistory // Make sure history is displayed
       />
     );
 
@@ -120,7 +120,7 @@ describe("handles character validation correctly", () => {
         currentRow={0}
         wordsForSkull={["goods"]}
         setDispWordHistory={() => {}}
-        dispWordHistory={true}
+        dispWordHistory
       />
     );
 
@@ -144,7 +144,7 @@ describe("handles character validation correctly", () => {
         currentRow={0}
         wordsForSkull={["hello"]}
         setDispWordHistory={() => {}}
-        dispWordHistory={true}
+        dispWordHistory
       />
     );
 

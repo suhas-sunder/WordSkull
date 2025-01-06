@@ -16,7 +16,7 @@ interface PropType {
 const MockDisplaySkull = (props: PropType) => {
   return render(
     <MemoryRouter>
-      <MockThemeProvider darkThemeActive={true}>
+      <MockThemeProvider darkThemeActive>
         <DisplaySkull {...props} />
       </MockThemeProvider>
     </MemoryRouter>

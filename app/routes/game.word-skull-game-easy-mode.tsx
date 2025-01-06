@@ -1,10 +1,10 @@
 import type { MetaFunction } from "@remix-run/node";
 import ClassicGameLogic from "../client/components/layout/ClassicGameLogic";
-import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
 import { useMatches } from "react-router-dom";
 import { useMemo } from "react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import GameLinks from "../client/components/layout/GameLinks";
+import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
 export type WordsData = {
   words?: { [key: number]: string[] };
 };

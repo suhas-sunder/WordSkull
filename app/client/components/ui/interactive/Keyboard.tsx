@@ -124,7 +124,7 @@ export default function Keyboard({
   return (
     <div
       data-testid="keyboard"
-      className={`hidden  text-pumpkin-orange -translate-y-[1.5em] -mb-[2.5em] scale-[0.8] select-none flex-col gap-y-5 font-nunito rounded-xl border-2 border-pumpkin-orange p-6 lg-md:flex text-base min-h-[23em]`}
+      className={"hidden  text-pumpkin-orange -translate-y-[1.5em] -mb-[2.5em] scale-[0.8] select-none flex-col gap-y-5 font-nunito rounded-xl border-2 border-pumpkin-orange p-6 lg-md:flex text-base min-h-[23em]"}
     >
       {Object.values(keyboardData).map((keysArr, index) => {
         return (
@@ -138,7 +138,7 @@ export default function Keyboard({
               >
                 {key.shiftKey !== "" && (
                   <span
-                    className={`absolute left-1/2 top-[12px] flex -translate-x-1/2 -translate-y-[38%] group-hover:text-white `}
+                    className={"absolute left-1/2 top-[12px] flex -translate-x-1/2 -translate-y-[38%] group-hover:text-white "}
                   >
                     {key.shiftKey}
                   </span>
@@ -153,7 +153,7 @@ export default function Keyboard({
                     key.defaultKey !== "Backspace"
                       ? handleKeyStyling(key)
                       : keyPressed !== key.defaultKey
-                      ? `border-pumpkin-orange border-2  text-pumpkin-orange`
+                      ? "border-pumpkin-orange border-2  text-pumpkin-orange"
                       : "bg-amber-600 text-white border-2 border-transparent"
                   }  ${
                     keyPressed === key.defaultKey &&

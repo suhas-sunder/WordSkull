@@ -101,7 +101,7 @@ function useFormatMDX() {
       return (
         // eslint-disable-next-line react/jsx-no-target-blank
         <Link
-          className={`text-pumpkin-orange hover:text-amber-600 font-lora`}
+          className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
           to={href as string} // Use 'to' for internal links
           target={isExternal ? "_blank" : undefined}
           rel={

@@ -64,7 +64,7 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
           <h3 className="font-lato mt-auto">Difficulty: Easy</h3>
           <p className="font-lato">3 - 5 letters per word</p>
           <div
-            className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300`}
+            className={"group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300"}
           >
             Play
           </div>
@@ -90,7 +90,7 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
           <h4 className="font-lato mt-auto">Difficulty: Medium</h4>
           <p className="font-lato">3 - 6 letters per word</p>
           <div
-            className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300`}
+            className={"group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300"}
           >
             Play
           </div>
@@ -116,7 +116,7 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
           <h4 className="font-lato mt-auto">Difficulty: Hard</h4>
           <p className="font-lato">3 - 7 letters per word</p>
           <div
-            className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300`}
+            className={"group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300"}
           >
             Play
           </div>
@@ -142,7 +142,7 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
           <h4 className="font-lato mt-auto">Difficulty: Extreme</h4>
           <p className="font-lato">3 - 9 letters per word</p>
           <div
-            className={`group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300`}
+            className={"group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300"}
           >
             Play
           </div>

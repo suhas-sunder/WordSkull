@@ -140,7 +140,7 @@ function DisplaySkull({
                       return (
                         <li
                           key={uuidv4()}
-                          className={`  text-[1.2rem] relative border-stone-700 bg-stone-800 border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center`}
+                          className={"  text-[1.2rem] relative border-stone-700 bg-stone-800 border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center"}
                          />
                       );
                     } else if (square === "~") {
@@ -148,7 +148,7 @@ function DisplaySkull({
                       return (
                         <li
                           key={uuidv4()}
-                          className={`bg-stone-100 bg-opacity-95  text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center`}
+                          className={"bg-stone-100 bg-opacity-95  text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center"}
                          />
                       );
                     } else {
@@ -159,7 +159,7 @@ function DisplaySkull({
                         currentRowIndex,
                         currentRow,
                         currentSkull,
-                      });
+                      }) || 0;
 
                       return (
                         <li
@@ -181,7 +181,7 @@ function DisplaySkull({
                               //Apply default styling to all empty squares & vary styling for current square so user can tell which square will be filled in next
                               rowIndex === currentRow &&
                               squareIndex === currentRowIndex + shiftedIndex
-                                ? `bg-orange-50 text-orange-400 border-orange-300 scale-110 z-[10] border-[2.5px]`
+                                ? "bg-orange-50 text-orange-400 border-orange-300 scale-110 z-[10] border-[2.5px]"
                                 : `${
                                     darkThemeActive
                                       ? "text-stone-400 "

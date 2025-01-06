@@ -6,7 +6,7 @@ interface   PropType {
 
 async function PostVerifyJWT({ token }: PropType) {
   try {
-    const response = await accountAPI.get(`/verify`, {
+    const response = await accountAPI.get("/verify", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
