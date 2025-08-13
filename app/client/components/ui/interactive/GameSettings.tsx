@@ -47,10 +47,12 @@ function DifficultyLinks() {
     <>
       <span className="font-lora text-skull-dark-brown">Difficulty:</span>
       <div
-        className={" grid grid-cols-2  md:flex gap-5 font-nunito text-sm text-stone-400"}
+        className={
+          " grid grid-cols-2  md:flex gap-5 font-nunito text-sm text-stone-400"
+        }
       >
         <Link
-          to="/word-skull-game-easy-mode"
+          to="/game/word-skull-game-easy-mode"
           className={`${
             location.pathname.includes("easy") &&
             "text-skull-brown border-skull-brown"
@@ -59,7 +61,7 @@ function DifficultyLinks() {
           Easy
         </Link>
         <Link
-          to="/word-skull-game-medium-mode"
+          to="/game/word-skull-game-medium-mode"
           className={`${
             location.pathname.includes("medium") &&
             "text-skull-brown border-skull-brown"
@@ -68,7 +70,7 @@ function DifficultyLinks() {
           Medium
         </Link>
         <Link
-          to="/word-skull-game-hard-mode"
+          to="/game/word-skull-game-hard-mode"
           className={`${
             location.pathname.includes("hard") &&
             "text-skull-brown border-skull-brown"
@@ -77,7 +79,7 @@ function DifficultyLinks() {
           Hard
         </Link>
         <Link
-          to="/word-skull-game-extreme-mode"
+          to="/game/word-skull-game-extreme-mode"
           className={`${
             location.pathname.includes("extreme") &&
             "text-skull-brown border-skull-brown"
