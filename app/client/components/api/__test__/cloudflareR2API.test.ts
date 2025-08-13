@@ -11,7 +11,7 @@ describe("Axios instance creation in cloudflareR2API", () => {
   });
 
   it("should create an axios instance with the correct baseURL and timeout", () => {
-    expect(instance.defaults.baseURL).toBe("https://www.honeycombartist.com");
+    expect(instance.defaults.baseURL).toBe("https://www.doodlegarden.com");
     expect(instance.defaults.timeout).toBe(30000);
   });
 
