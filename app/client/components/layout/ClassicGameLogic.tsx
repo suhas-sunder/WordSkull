@@ -100,7 +100,7 @@ function ClassicGameLogic({
         wordsForSkull={wordsForSkull}
         isEnterPressed={isEnterPressed}
       />
-      <main className="flex relative flex-col gap-1 pt-1 px-5 items-center animate-fadeIn">
+      <main className="flex relative flex-col gap-1 pt-1 px-5 items-center ">
         <GameOverMenu
           isGameOver={isGameOver}
           showGameOverMenu={showGameOverMenu}
@@ -135,7 +135,9 @@ function ClassicGameLogic({
         </label>
         {showKeyboard ? (
           <div
-            className={" flex max-w-[800px] w-full justify-center items-center mt-1/2"}
+            className={
+              " flex max-w-[800px] w-full justify-center items-center mt-1/2"
+            }
           >
             <Keyboard
               currentlyEnteredWords={enteredWords[currentRow]}

@@ -17,15 +17,11 @@ function useCaptureHTML({ isGameOver, captureAreaId, seconds }: PropType) {
   useEffect(() => {
     setIsWebShareSupported(Boolean(navigator.share));
   }, []);
-  
 
   useEffect(() => {
     const handleCapture = async () => {
       const element = document.getElementById(captureAreaId);
       if (!element) return;
-
-      // Temporarily remove the fade-in animation
-      element.classList.remove("animate-fadeIn");
 
       try {
         const capturedBlob = await captureElementAsBlob(captureAreaId);

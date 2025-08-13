@@ -19,7 +19,7 @@ export const meta: MetaFunction = () => {
 export default function AllWordsForWordGame() {
   const { darkThemeActive } = useTheme();
   return (
-    <div className="flex animate-fadeIn flex-col justify-center items-center mt-10">
+    <div className="flex  flex-col justify-center items-center mt-10">
       <header>
         <h1 className="mt-[0.7em] text-3xl font-nunito text-skull-dark-brown mb-12">
           Words List - All words used for word and Puzzle Games 🎉✨
@@ -29,9 +29,7 @@ export default function AllWordsForWordGame() {
         <div className="grid sm:grid-cols-2 sm:gap-x-16 gap-y-10">
           <Link
             className={`${
-              darkThemeActive
-                ? "text-amber-600"
-                : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/z-words/all-words-for-word-game-three-letters"
           >
@@ -39,9 +37,7 @@ export default function AllWordsForWordGame() {
           </Link>{" "}
           <Link
             className={`${
-              darkThemeActive
-                ? "text-amber-600"
-                : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/z-words/all-words-for-word-game-four-letters"
           >
@@ -49,9 +45,7 @@ export default function AllWordsForWordGame() {
           </Link>{" "}
           <Link
             className={`${
-              darkThemeActive
-                ? "text-amber-600"
-                : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/z-words/all-words-for-word-game-five-letters"
           >
@@ -59,9 +53,7 @@ export default function AllWordsForWordGame() {
           </Link>{" "}
           <Link
             className={`${
-              darkThemeActive
-                ? "text-amber-600"
-                : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/z-words/all-words-for-word-game-six-letters"
           >
@@ -69,9 +61,7 @@ export default function AllWordsForWordGame() {
           </Link>{" "}
           <Link
             className={`${
-              darkThemeActive
-                ? "text-amber-600"
-                : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/z-words/all-words-for-word-game-seven-letters"
           >
@@ -79,9 +69,7 @@ export default function AllWordsForWordGame() {
           </Link>{" "}
           <Link
             className={`${
-              darkThemeActive
-                ? "text-amber-600"
-                : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/z-words/all-words-for-word-game-eight-letters"
           >
@@ -89,9 +77,7 @@ export default function AllWordsForWordGame() {
           </Link>{" "}
           <Link
             className={`${
-              darkThemeActive
-                ? "text-amber-600"
-                : "text-pumpkin-orange"
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
             } hover:text-amber-600 font-lora`}
             to="/z-words/all-words-for-word-game-nine-letters"
           >

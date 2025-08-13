@@ -114,8 +114,7 @@ const WordHistory = React.memo(function WordHistory({
     ) {
       style = "!border-yellow-400 !text-yellow-600 !bg-yellow-100 ";
     } else {
-      style =
-        "!bg-stone-400 text-stone-600 !border-stone-500 brightness-125 ";
+      style = "!bg-stone-400 text-stone-600 !border-stone-500 brightness-125 ";
     }
 
     return style;
@@ -128,7 +127,7 @@ const WordHistory = React.memo(function WordHistory({
         <button
           onClick={() => setDispWordHistory(false)}
           className="fixed inset-0 h-full w-full flex bg-skull-super-dark-brown/50 z-30 justify-center"
-         />
+        />
       )}
       <button
         data-testid="word-history"
@@ -137,7 +136,7 @@ const WordHistory = React.memo(function WordHistory({
         className="group flex z-20 h-5 cursor-pointer min-h-10 w-full bg-orange-100/10 border-2 hover:border-orange-500/60 gap-3  rounded-md sm:rounded-md border-pumpkin-orange/50 justify-center items-center"
       >
         {!isDelaying && enteredWords && enteredWords[currentRow]?.length > 0 ? (
-          <div className="animate-fadeInFast relative flex gap-[4px] justify-center px-3 items-center">
+          <div className="relative flex gap-[4px] justify-center px-3 items-center">
             {enteredWords[currentRow]
               ?.slice(-1)[0]
               .split("")

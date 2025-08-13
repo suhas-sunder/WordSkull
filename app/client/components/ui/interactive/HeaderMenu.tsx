@@ -5,7 +5,6 @@ import WordHistory from "./WordHistory";
 interface PropType {
   setShowGameOverMenu: (value: boolean) => void;
   isGameOver: boolean;
-  dontFade?: boolean;
   lettersPerSkull?: string;
   setShowSettings: (value: boolean) => void;
   setShowStats: (value: boolean) => void;
@@ -21,7 +20,6 @@ interface PropType {
 function HeaderMenu({
   setShowGameOverMenu,
   isGameOver,
-  dontFade,
   setShowSettings,
   setShowStats,
   dispWordHistory,
@@ -35,9 +33,7 @@ function HeaderMenu({
 
   return (
     <div
-      className={`${
-        !dontFade && "animate-fadeIn"
-      } flex relative w-full items-center px-2 mt-5 mb-2 sm:mt-7 justify-between max-w-[700px] gap-2 xs:gap-5  text-stone-500 font-lora leading-snug text-xs sm:text-base`}
+      className={` flex relative w-full items-center px-2 mt-5 mb-2 sm:mt-7 justify-between max-w-[700px] gap-2 xs:gap-5  text-stone-500 font-lora leading-snug text-xs sm:text-base`}
     >
       <ul className="flex gap-1 justify-center items-center">
         <li className="flex justify-center items-center">

@@ -4,7 +4,7 @@ import { vi } from "vitest";
 vi.mock("axios", () => {
   const mockAxiosInstance = {
     defaults: {
-      baseURL: "https://www.honeycombartist.com",
+      baseURL: "https://www.doodlegarden.com",
       timeout: 30000,
     },
     get: vi.fn(),

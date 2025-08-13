@@ -1,10 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useTheme } from "../client/components/context/ThemeContext";
 import { MetaFunction } from "@remix-run/node";
-import { Link } from "react-router-dom";
+import { Link, useMatches } from "react-router-dom";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
 import GameLinks from "../client/components/layout/GameLinks";
+import ClassicGameLogic from "~/client/components/layout/ClassicGameLogic";
+import { useMemo } from "react";
+import { WordsData } from "./game.word-skull-game-easy-mode";
+import ClassicGameplayInstructions from "~/client/components/layout/ClassicGameplayInstructions";
 
 export const meta: MetaFunction = () => {
   return [
@@ -20,45 +24,23 @@ export const meta: MetaFunction = () => {
 };
 
 function Header() {
-  const { darkThemeActive } = useTheme();
+  const matches = useMatches();
+  const wordsData = useMemo(() => {
+    // Find the first match with valid data
+    const match = matches?.find((match) => (match?.data as WordsData)?.words);
+    return match?.data as WordsData;
+  }, [matches]);
 
   return (
     <header className="flex flex-col max-w-[1200px] text-center justify-center items-center mb-8">
-      <h1
-        className={`${
-          darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
-        } w-full z-1 flex-row flex justify-center items-center text-4xl sm:mb-[0.2em] sm:text-5xl text-center mt-12 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-9  font-lora tracking-wide`}
-      >
-        <span className="whitespace-nowrap">
-          <span className="inline-flex">W</span>
-          <span className="inline-flex animate-scalePulse">💀</span>
-          <span className="inline-flex">rd</span>
-        </span>
-        <span className="inline-flex">Skull</span>
-      </h1>
-
-      <p
-        className={`${
-          darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
-        } sm:text-xl leading-relaxed sm:leading-loose font-lato italic mb-4 mx-3 sm:mt-2 sm:mx-12`}
-      >
-        Welcome, fellow adventurer! It's time to embark on a quest to defeat the
-        skulls{" "}
-        <span className="hidden sm:inline">
-          in this challenging, word and puzzle game, fantasy themed adventure
-        </span>
-        ! Sharpen your vocabulary one word at a time by wielding the strongest
-        weapon at your disposal—your mind! The dungeon awaits...
-      </p>
-      <Link
-        to={"/game/word-skull-game-easy-mode"}
-        className="hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8  text-lg font-nunito rounded-full mt-3 py-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400"
-      >
-        Start Playing!
-      </Link>
-      <div className="flex justify-center items-center w-full mt-10 sm:mt-3 scale-[.75]">
-        <SkullAnimation />
-      </div>
+      <ClassicGameLogic
+        startPosition={0}
+        endPosition={4}
+        lettersPerSkull="Easy Difficulty: 3 - 5 letters"
+        wordsData={wordsData}
+        difficulty="easy"
+        gameMode="classic"
+      />
     </header>
   );
 }
@@ -67,7 +49,7 @@ export default function Index() {
   const { darkThemeActive } = useTheme();
 
   return (
-    <div className="flex relative animate-fadeIn flex-col leading-relaxed tracking-wider mt-3 sm:mt-6 overflow-hidden justify-center items-center mx-7">
+    <div className="flex relative flex-col leading-relaxed tracking-wider mt-3 sm:mt-6 overflow-hidden justify-center items-center mx-7">
       <Header />
       <main
         className={`${
@@ -75,6 +57,9 @@ export default function Index() {
         } flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5 items-center`}
       >
         <GameLinks />
+        <section className="mt-10">
+          <ClassicGameplayInstructions />
+        </section>
         <div>
           <h2
             className={`${
@@ -140,6 +125,9 @@ export default function Index() {
               </p>
             </li>
           </ul>
+        </div>
+        <div className="flex justify-center items-center w-full mt-10 sm:mt-3 scale-[.75]">
+          <SkullAnimation />
         </div>
         <div
           className={`${

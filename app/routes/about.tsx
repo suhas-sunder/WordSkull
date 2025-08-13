@@ -34,7 +34,7 @@ function About() {
     <div
       className={`${
         darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
-      } flex animate-fadeIn justify-center flex-col items-center mt-12`}
+      } flex  justify-center flex-col items-center mt-12`}
     >
       <header className="flex flex-col justify-center items-center gap-3 mb-3 mx-5 text-center">
         <h1

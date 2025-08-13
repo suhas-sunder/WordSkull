@@ -32,7 +32,7 @@ export default function EightLetterWords() {
   }, [matches]);
 
   return (
-    <div className="flex animate-fadeIn flex-col justify-center items-center mt-10">
+    <div className="flex  flex-col justify-center items-center mt-10">
       <header>
         <h1 className="mt-[0.7em] text-5xl font-nunito text-skull-dark-brown mb-12">
           Words List - Word & Puzzle Games
@@ -54,7 +54,7 @@ export default function EightLetterWords() {
                 <span key={uuidv4()}>{word}</span>
               ))}
           </p>
-        </div>        
+        </div>
         <SocialLinks />
       </main>
     </div>

@@ -40,7 +40,7 @@ export default async function GetWordsForSkull() {
       }
     );
   } catch (error) {
-    console.error("Error fetching or decompressing words data:");
+    console.error("Error fetching or decompressing words data:", error);
     return ProcessErrors({
       error,
       customError: "Error fetching or decompressing words data",

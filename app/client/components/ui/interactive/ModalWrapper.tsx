@@ -8,7 +8,7 @@ interface PropType {
   customClass?: string;
 }
 
-//Creates a modal that wraps the children passed in. 
+//Creates a modal that wraps the children passed in.
 //Use portal to render the modal at the top of the DOM
 function ModalWrapper({
   setShowModal,
@@ -23,7 +23,7 @@ function ModalWrapper({
           <>
             {" "}
             <div
-              className={`animate-fadeInFast absolute font-roboto overflow-auto left-1/2 -translate-x-1/2 z-[50] items-center flex bg-white max-w-[44em] w-full min-h-[20em] rounded-lg flex-col gap-7 ${customClass}`}
+              className={`Fast absolute font-roboto overflow-auto left-1/2 -translate-x-1/2 z-[50] items-center flex bg-white max-w-[44em] w-full min-h-[20em] rounded-lg flex-col gap-7 ${customClass}`}
             >
               <button
                 data-testid="close-modal"
@@ -37,8 +37,8 @@ function ModalWrapper({
             <button
               data-testid="modal-background"
               onClick={() => setShowModal(false)}
-              className="animate-fadeInFast fixed inset-0 h-full w-full flex bg-skull-brown bg-opacity-10 z-30 justify-center"
-             />
+              className="Fast fixed inset-0 h-full w-full flex bg-skull-brown bg-opacity-10 z-30 justify-center"
+            />
           </>,
           document.body
         )}

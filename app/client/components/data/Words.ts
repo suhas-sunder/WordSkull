@@ -171,8 +171,6 @@ const wordsList = {
   ],
 };
 
-function words() {
+export default function Words() {
   return wordsList;
 }
-
-export default words;

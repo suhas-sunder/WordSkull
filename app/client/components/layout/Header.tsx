@@ -25,7 +25,6 @@ function Header({
   isGameOver,
   lettersPerSkull,
   setShowGameOverMenu,
-  dontFade,
   dispWordHistory,
   setDispWordHistory,
   enteredWords,
@@ -38,7 +37,7 @@ function Header({
   const { darkThemeActive } = useTheme();
 
   return (
-    <header className="relative w-full justify-center items-center flex-col flex">      
+    <header className="relative w-full justify-center items-center flex-col flex">
       <SpecificGameStats showStats={showStats} setShowStats={setShowStats} />
       <GameSettings
         showSettings={showSettings}
@@ -47,7 +46,6 @@ function Header({
       <HeaderMenu
         setShowGameOverMenu={setShowGameOverMenu}
         isGameOver={isGameOver}
-        dontFade={dontFade}
         lettersPerSkull={lettersPerSkull}
         setShowSettings={setShowSettings}
         setShowStats={setShowStats}
@@ -60,7 +58,7 @@ function Header({
       />
       {!isGameOver && (
         <ul
-          className={`animate-fadeIn flex fixed z-[100] top-[0.95em]  sm:top-[0.45em] font-nunito gap-2 my-1 justify-center items-center ${
+          className={`flex fixed z-[100] top-[0.95em]  sm:top-[0.45em] font-nunito gap-2 my-1 justify-center items-center ${
             darkThemeActive ? "text-stone-300" : "text-stone-700"
           }`}
         >

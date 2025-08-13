@@ -104,8 +104,7 @@ function DisplaySkull({
 
     //Apply styling based on character correctness
     if (answer[adjustedIndex] === square) {
-      style =
-        "animate-fadeInFast !border-green-400 !text-green-600 !bg-green-100"; //Exact match
+      style = "!border-green-400 !text-green-600 !bg-green-100"; //Exact match
     } else if (
       answer.includes(square) &&
       charIndexesInEnteredWord
@@ -113,8 +112,7 @@ function DisplaySkull({
         .includes(adjustedIndex) &&
       countRemainingChars() > 0
     ) {
-      style =
-        "animate-fadeInFast !border-yellow-400 !text-yellow-600 !bg-yellow-100"; //Partial match
+      style = "!border-yellow-400 !text-yellow-600 !bg-yellow-100"; //Partial match
     }
 
     return style;
@@ -125,7 +123,7 @@ function DisplaySkull({
       {currentSkull.map((skull, index) => {
         return index === 0 ? (
           <div
-          id="skull"
+            id="skull"
             data-testid="display-skull"
             key={index}
             className="relative flex-col w-full max-w-[800px] xs:scale-[0.9]  min-h-[12em] mt-3 xs:mt-2 xs:min-h-[20em] capitalize flex font-nunito text-stone-400 items-center"
@@ -140,26 +138,31 @@ function DisplaySkull({
                       return (
                         <li
                           key={uuidv4()}
-                          className={"  text-[1.2rem] relative border-stone-700 bg-stone-800 border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center"}
-                         />
+                          className={
+                            "  text-[1.2rem] relative border-stone-700 bg-stone-800 border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center"
+                          }
+                        />
                       );
                     } else if (square === "~") {
                       //Return empty square with proper styling for "empty squares"
                       return (
                         <li
                           key={uuidv4()}
-                          className={"bg-stone-100 bg-opacity-95  text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center"}
-                         />
+                          className={
+                            "bg-stone-100 bg-opacity-95  text-[1.2rem] relative border-2 xs:text-[2rem] rounded-md xs:rounded-lg min-w-[1.8em] min-h-[1.8em] xs:min-w-[1.7em] xs:min-h-[1.7em] flex justify-center items-center"
+                          }
+                        />
                       );
                     } else {
                       //Return all valid characters with proper styling
                       squareCount += 1; // Increment squareCount only for non-empty squares.
 
-                      const shiftedIndex = ShiftIndexForward({
-                        currentRowIndex,
-                        currentRow,
-                        currentSkull,
-                      }) || 0;
+                      const shiftedIndex =
+                        ShiftIndexForward({
+                          currentRowIndex,
+                          currentRow,
+                          currentSkull,
+                        }) || 0;
 
                       return (
                         <li
