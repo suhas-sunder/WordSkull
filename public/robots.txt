@@ -1,20 +1,5 @@
-User-agent: Googlebot
-Allow: /
-User-agent: APIs-Google
-Allow: /
-User-agent: Mediapartners-Google
-Allow: /
-User-agent: AdsBot-Google-Mobile
-Allow: /
-User-agent: AdsBot-Google
-Allow: /
-User-agent: Googlebot-Image
-Allow: /
-User-agent: Googlebot-News
-Allow: /
-User-agent: Googlebot-Video
-Allow: /
-User-agent: Storebot-Google
+# robots.txt
+User-agent: *
 Allow: /
 
-Sitemap: https://freetypingcamp.com/sitemap.xml
+Sitemap: https://www.wordskull.com/sitemap.xml
