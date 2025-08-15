@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useId } from "react";
 import { useSettings } from "../../context/SettingsContext";
 import ModalWrapper from "./ModalWrapper";
 import useOnlyOnClient from "../../hooks/useOnlyOnClient";
@@ -16,79 +17,92 @@ interface ToggleOptionsPropType {
   onStateText: string;
 }
 
-function CreateToggleOptions({
+function ToggleOption({
   value,
   setValue,
   title,
   offStateText,
   onStateText,
 }: ToggleOptionsPropType) {
+  const id = useId();
   return (
-    <>
-      <span className="font-lora text-skull-dark-brown">{title}:</span>
-      <label className="inline-flex items-center gap-5 cursor-pointer">
-        <span className=" text-sm font-nunito">
+    <div className="flex w-full items-center justify-between gap-4">
+      <label
+        htmlFor={id}
+        className="font-lora text-skull-dark-brown select-none"
+      >
+        {title}:
+      </label>
+
+      <div className="inline-flex items-center gap-4">
+        <span
+          className={`text-sm font-nunito ${
+            value ? "text-skull-dark-brown" : "text-stone-500"
+          }`}
+        >
           {value ? onStateText : offStateText}
         </span>
-        <input
-          type="checkbox"
-          checked={value}
-          onChange={() => setValue((prevState: boolean) => !prevState)}
-          className="sr-only peer"
-        />
-        <div className="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600" />
-      </label>
-    </>
+
+        <button
+          id={id}
+          type="button"
+          role="switch"
+          aria-checked={value}
+          onClick={() => setValue((prev) => !prev)}
+          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors
+            shadow-sm ring-1 ring-inset
+            ${
+              value
+                ? "bg-pumpkin-orange/70 ring-pumpkin-orange/50"
+                : "bg-stone-200 ring-stone-300"
+            }
+            focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pumpkin-orange/40
+          `}
+        >
+          <span
+            className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform
+              ${value ? "translate-x-5" : "translate-x-1"}
+            `}
+          />
+        </button>
+      </div>
+    </div>
   );
 }
 
 function DifficultyLinks() {
-  return (
-    <>
-      <span className="font-lora text-skull-dark-brown">Difficulty:</span>
-      <div
-        className={
-          " grid grid-cols-2  md:flex gap-5 font-nunito text-sm text-stone-400"
-        }
+  const { pathname } = useLocation();
+  const base =
+    "px-4 py-1 rounded-md border-2 transition-colors text-sm font-nunito";
+  const hover = "hover:text-skull-brown hover:border-skull-brown";
+  const item = (to: string, label: string) => {
+    const active = pathname.includes(
+      to.split("-mode")[0].split("/").pop() || ""
+    );
+    return (
+      <Link
+        to={to}
+        className={`${base} ${hover} ${
+          active
+            ? "text-skull-brown border-skull-brown"
+            : "text-stone-400 border-stone-300"
+        }`}
       >
-        <Link
-          to="/game/word-skull-game-easy-mode"
-          className={`${
-            location.pathname.includes("easy") &&
-            "text-skull-brown border-skull-brown"
-          } border-2 px-4 py-1 rounded-md hover:text-skull-brown hover:border-skull-brown`}
-        >
-          Easy
-        </Link>
-        <Link
-          to="/game/word-skull-game-medium-mode"
-          className={`${
-            location.pathname.includes("medium") &&
-            "text-skull-brown border-skull-brown"
-          } border-2 px-4 py-1 rounded-md hover:text-skull-brown hover:border-skull-brown`}
-        >
-          Medium
-        </Link>
-        <Link
-          to="/game/word-skull-game-hard-mode"
-          className={`${
-            location.pathname.includes("hard") &&
-            "text-skull-brown border-skull-brown"
-          } border-2 px-4 py-1 rounded-md hover:text-skull-brown hover:border-skull-brown`}
-        >
-          Hard
-        </Link>
-        <Link
-          to="/game/word-skull-game-extreme-mode"
-          className={`${
-            location.pathname.includes("extreme") &&
-            "text-skull-brown border-skull-brown"
-          } border-2 px-4 py-1 rounded-md hover:text-skull-brown hover:border-skull-brown`}
-        >
-          Extreme
-        </Link>
+        {label}
+      </Link>
+    );
+  };
+
+  return (
+    <div className="flex flex-col gap-2">
+      <span className="font-lora text-skull-dark-brown">Difficulty:</span>
+      <div className="grid grid-cols-2 md:flex md:flex-wrap gap-3">
+        {item("/game/word-skull-game-easy-mode", "Easy")}
+        {item("/game/word-skull-game-medium-mode", "Medium")}
+        {item("/game/word-skull-game-hard-mode", "Hard")}
+        {item("/game/word-skull-game-extreme-mode", "Extreme")}
       </div>
-    </>
+    </div>
   );
 }
 
@@ -102,54 +116,59 @@ function GameSettings({ showSettings, setShowSettings }: PropType) {
     makeKeypadInteractive,
   } = useSettings();
 
-  const isClient = useOnlyOnClient(); //Prevent hydration issues
+  const isClient = useOnlyOnClient(); // Prevent hydration issues
+  if (!isClient) return null;
 
-  // Don't render anything until we're on the client
-  if (!isClient) {
-    return null;
-  }
   return (
     <ModalWrapper
       showModal={showSettings}
       setShowModal={setShowSettings}
-      customClass="top-[6em] py-[2em]"
+      customClass="top-[6em] py-[2em] px-6 sm:px-8 w-[min(92vw,720px)]"
     >
       <>
-        <h2 className="text-2xl font-nunito text-skull-super-dark-brown">
+        <h2 className="text-2xl font-nunito text-skull-super-dark-brown mb-4">
           Settings
         </h2>
-        <ul className="w-full flex flex-col gap-5 text-skull-dark-brown px-5 md:px-0">
-          <li className="flex w-full justify-between md:max-w-[80%] mx-auto">
-            {CreateToggleOptions({
-              value: showKeyboard,
-              setValue: setShowKeyboard,
-              title: "Virtual Keyboard",
-              offStateText: "Hidden",
-              onStateText: "Visible",
-            })}
-          </li>
-          <li className="flex w-full justify-between md:max-w-[80%] mx-auto">
-            {CreateToggleOptions({
-              value: makeKeypadInteractive,
-              setValue: setMakeKeypadInteractive,
-              title: "Interactive Keyboard",
-              onStateText: "Yes",
-              offStateText: "No",
-            })}
-          </li>
-          <li className="flex w-full justify-between md:max-w-[80%] mx-auto">
-            {CreateToggleOptions({
-              value: showInstructions,
-              setValue: setShowInstructions,
-              title: "Gameplay Instructions",
-              offStateText: "Hidden",
-              onStateText: "Visible",
-            })}
-          </li>
-          <li className="flex w-full justify-between md:max-w-[80%] mx-auto gap-5">
-            {DifficultyLinks()}
-          </li>
-        </ul>
+
+        <div className="w-full space-y-6">
+          {/* Toggles card */}
+          <div className="rounded-xl border border-pumpkin-orange/30 bg-amber-100/10 p-4 sm:p-5 shadow-sm">
+            <ul className="w-full flex flex-col gap-5 text-skull-dark-brown">
+              <li>
+                <ToggleOption
+                  value={showKeyboard}
+                  setValue={setShowKeyboard}
+                  title="Virtual Keyboard"
+                  offStateText="Hidden"
+                  onStateText="Visible"
+                />
+              </li>
+              <li>
+                <ToggleOption
+                  value={makeKeypadInteractive}
+                  setValue={setMakeKeypadInteractive}
+                  title="Interactive Keyboard"
+                  onStateText="Yes"
+                  offStateText="No"
+                />
+              </li>
+              <li>
+                <ToggleOption
+                  value={showInstructions}
+                  setValue={setShowInstructions}
+                  title="Gameplay Instructions"
+                  offStateText="Hidden"
+                  onStateText="Visible"
+                />
+              </li>
+            </ul>
+          </div>
+
+          {/* Difficulty card */}
+          <div className="rounded-xl border border-pumpkin-orange/30 bg-amber-100/10 p-4 sm:p-5 shadow-sm">
+            <DifficultyLinks />
+          </div>
+        </div>
       </>
     </ModalWrapper>
   );
