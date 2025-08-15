@@ -15,7 +15,7 @@ interface PropType {
   seconds: number;
 }
 
-//Memoize the game over menu so that it doesn't re-rendered every time a keypress event is fired
+// Memoize so it doesn't re-render every keypress (unchanged)
 const GameOverMenu = React.memo(function GameOverMenu({
   isGameOver,
   showGameOverMenu,
@@ -28,22 +28,14 @@ const GameOverMenu = React.memo(function GameOverMenu({
 }: PropType) {
   const handleGameOverMsg = () => {
     const rowsCompleted = currentRow;
-
     if (rowsCompleted === 3) return "Great Effort!";
-
     if (rowsCompleted === 4) return "So Close!";
-
     if (rowsCompleted >= 5) return "You Won!";
-
     return "You Lose!";
   };
 
-  const isClient = useOnlyOnClient(); //Prevent hydration issues
-
-  // Don't render anything until we're on the client
-  if (!isClient) {
-    return null;
-  }
+  const isClient = useOnlyOnClient(); // Prevent hydration issues
+  if (!isClient) return null;
 
   return (
     <>
@@ -51,30 +43,40 @@ const GameOverMenu = React.memo(function GameOverMenu({
         <ModalWrapper
           showModal={showGameOverMenu}
           setShowModal={setShowGameOverMenu}
-          customClass="top-[6em]"
+          // let the header go edge-to-edge; pad body ourselves
+          customClass="top-[6em] px-0 pb-6 pt-0 w-[min(92vw,960px)]"
         >
           <>
+            {/* Edge-to-edge banner that matches modal width */}
             <div
               data-testid="game-over-menu"
-              className=" bg-skull-brown font-nunito text-white w-full  justify-center items-center py-2 text-2xl text-center "
+              className="bg-skull-brown text-white w-full text-2xl text-center py-3 rounded-t-xl font-nunito"
             >
               {handleGameOverMsg()}
             </div>
-            <GameOverStats
-              lives={lives}
-              maxLives={maxLives}
-              isGameOver={isGameOver}
-              wordsForSkull={wordsForSkull}
-              currentRow={currentRow}
-              seconds={seconds}
-            />
-            <button
-              onClick={() => window.location.reload()}
-              className="cursor-pointer py-2 gap-2 bg-green-500  text-white px-4 mt-1 text-lg font-nunito rounded-md fill-stone-500 hover:fill-skull-brown flex justify-center items-center"
-            >
-              Play Again
-            </button>
-            <ShareYourResults isGameOver={isGameOver} seconds={seconds} />
+
+            {/* Body container: even padding, consistent spacing */}
+            <div className="px-6 sm:px-8 pt-6 flex flex-col items-center gap-6">
+              <GameOverStats
+                lives={lives}
+                maxLives={maxLives}
+                isGameOver={isGameOver}
+                wordsForSkull={wordsForSkull}
+                currentRow={currentRow}
+                seconds={seconds}
+              />
+
+              <button
+                onClick={() => window.location.reload()}
+                className="cursor-pointer inline-flex items-center justify-center rounded-lg bg-green-500 hover:bg-green-600 text-white px-6 py-2 text-lg font-nunito shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500/40"
+              >
+                Play Again
+              </button>
+
+              <div className="w-full">
+                <ShareYourResults isGameOver={isGameOver} seconds={seconds} />
+              </div>
+            </div>
           </>
         </ModalWrapper>
       )}

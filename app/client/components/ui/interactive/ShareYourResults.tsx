@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import useCaptureHTML from "../../hooks/useCaptureHTML";
 
 interface PropType {
@@ -15,14 +15,30 @@ function ShareYourResults({ isGameOver, seconds }: PropType) {
     shareImage,
     isWebShareSupported,
     loadingStatus,
-  } = useCaptureHTML({ isGameOver, captureAreaId: "capture-area", seconds }); //Use captureAreaId prop to identify the element to be captured when game ends
+  } = useCaptureHTML({ isGameOver, captureAreaId: "capture-area", seconds });
+
+  // Responsive columns: 3 when share is available, otherwise 2
+  const gridCols = useMemo(
+    () =>
+      isWebShareSupported
+        ? "grid-cols-1 sm:grid-cols-3"
+        : "grid-cols-1 sm:grid-cols-2",
+    [isWebShareSupported]
+  );
+
+  // Common button classes to keep sizes aligned
+  const btn =
+    "inline-flex items-center justify-center h-14 w-full max-w-[10rem] border-2 rounded-md transition-colors " +
+    "border-stone-300 text-skull-super-dark-brown hover:border-skull-brown hover:text-skull-super-dark-brown " +
+    "fill-stone-500 hover:fill-skull-brown";
 
   return (
-    <div className="cursor-pointer font-nunito py-2 px-4 rounded-md fill-stone-500 hover:fill-skull-brown flex flex-col gap-5 justify-center items-center">
+    <div className="cursor-pointer font-nunito pt-2 px-4 rounded-md flex flex-col gap-5 justify-center items-center">
       <h3 className="flex whitespace-nowrap text-xl text-stone-600">
         Share Your Results!
       </h3>
-      {/* Loading State */}
+
+      {/* Loading */}
       {loadingStatus === "loading" && (
         <div className="flex items-center justify-center h-full">
           <span className="text-lg mb-10 text-skull-dark-brown font-semibold animate-pulse">
@@ -31,42 +47,48 @@ function ShareYourResults({ isGameOver, seconds }: PropType) {
         </div>
       )}
 
-      {/* Failed State */}
-      {loadingStatus === "failed" && <div>Something went wrong</div>}
+      {/* Failed */}
+      {loadingStatus === "failed" && (
+        <div className="text-sm text-red-600">Something went wrong</div>
+      )}
 
-      {/* Loaded State */}
+      {/* Loaded */}
       {loadingStatus === "loaded" && (
-        <ul className="grid sm:grid-cols-3 text-skull-dark-brown gap-5 justify-center items-center mb-[2.5em]">
+        <ul
+          className={`grid ${gridCols} gap-4 sm:gap-5 justify-items-center items-center mb-[2.5em] w-full`}
+        >
           {isWebShareSupported && (
-            <li className="flex justify-center items-center w-full">
+            <li className="w-full flex justify-center">
               <button
-                className="cursor-pointer w-[8em] hover:border-skull-brown hover:text-skull-super-dark-brown h-[3.5em] py-2 gap-2 border-2 rounded-md fill-stone-500 hover:fill-skull-brown flex justify-center items-center"
+                className={btn}
                 onClick={shareImage}
+                // Web Share API requires a user gesture + HTTPS + supported UA
+                // shareImage already handles the actual `navigator.share` call
               >
                 Share
               </button>
             </li>
           )}
-          <li className="flex justify-center items-center w-full">
-            <button
-              onClick={downloadPuzzle}
-              className="cursor-pointer py-2 w-[8em] hover:border-skull-brown hover:text-skull-super-dark-brown h-[3.5em] border-2 rounded-md fill-stone-500 hover:fill-skull-brown flex justify-center items-center"
-            >
+
+          <li className="w-full flex justify-center">
+            <button className={btn} onClick={downloadPuzzle}>
               Download
             </button>
           </li>
-          <li className="flex justify-center items-center w-full">
+
+          <li className="w-full flex justify-center">
             <button
+              className={btn}
               onClick={() => {
                 copyImageToClipboard();
                 setIsCopied(true);
-                setTimeout(() => {
-                  setIsCopied(false);
-                }, 500);
+                window.setTimeout(() => setIsCopied(false), 500);
               }}
-              className="cursor-pointer py-2 gap-2 border-2 hover:border-skull-brown hover:text-skull-super-dark-brown w-[8em] h-[3.5em] rounded-md fill-stone-500 hover:fill-skull-brown flex justify-center items-center"
             >
-              {isCopied ? "Copied!" : "Copy"}
+              {/* Keep width stable: reserve space for the longer label */}
+              <span className="inline-block w-[4.5ch] text-center">
+                {isCopied ? "Copied!" : "Copy"}
+              </span>
             </button>
           </li>
         </ul>

@@ -21,7 +21,8 @@ function GameOverStats({
   seconds,
 }: PropType) {
   const { setStats, difficulty, gameMode } = useStats();
-  //Update stats data with new stats when game ends
+
+  // Update stats when game ends (unchanged)
   useEffect(() => {
     const updateSats = () => {
       const newStatEntry: StatsDataType = [
@@ -40,10 +41,10 @@ function GameOverStats({
 
       setStats((prevState: StatsDataType) => {
         if (!Array.isArray(prevState)) {
-          console.error("prevState is not an array!", prevState); // Debugging line
-          return []; // Fallback to an empty array if prevState is not iterable
+          console.error("prevState is not an array!", prevState);
+          return [];
         }
-        return [...prevState, ...newStatEntry]; // Append new stat entry
+        return [...prevState, ...newStatEntry];
       });
     };
 
@@ -60,33 +61,37 @@ function GameOverStats({
     wordsForSkull.length,
   ]);
 
+  // Card styles (stronger specificity via "!")
+  const card =
+    "w-full rounded-2xl border-2 !border-pumpkin-orange/30 !bg-amber-100/10 shadow-sm px-6 py-5 flex flex-col items-center justify-center";
+  const value =
+    "text-skull-dark-brown font-semibold tracking-wide text-3xl sm:text-4xl";
+  const label =
+    "text-skull-super-dark-brown uppercase tracking-wide text-[11px] sm:text-xs mt-1";
+
   return (
-    <div className="flex w-full flex-col font-nunito justify-center  items-center gap-4 ">
-      <h2 className="text-2xl text-stone-600">Stats</h2>
-      <ul className="grid gap-5 sm:grid-cols-3 w-full justify-center items-center">
-        <li className="flex col-span-1 flex-col gap-1 w-full justify-center items-center">
-          <span className="text-skull-dark-brown text-2xl">
-            {lives || 0}/{maxLives}
+    <div className="flex w-full flex-col font-nunito justify-center items-center gap-5">
+      <h2 className="text-2xl sm:text-3xl text-skull-dark-brown mb-1">Stats</h2>
+
+      {/* Centered row of 3 cards; stacks on small screens */}
+      <ul className="grid w-full max-w-[860px] grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mx-auto px-3 sm:px-4">
+        <li className={`${card} min-h-[96px]`}>
+          <span className={value}>
+            {lives ?? 0}/{maxLives ?? 0}
           </span>
-          <span className="text-skull-super-dark-brown text-xs">
-            Lives Left
-          </span>
+          <span className={label}>Lives Left</span>
         </li>
-        <li className="flex flex-col gap-1 w-full justify-center items-center">
-          <span className="text-skull-dark-brown text-3xl sm:text-4xl">
-            {currentRow || 0}/{wordsForSkull.length || 0}
+
+        <li className={`${card} min-h-[96px]`}>
+          <span className={value}>
+            {currentRow ?? 0}/{wordsForSkull.length ?? 0}
           </span>
-          <span className="text-skull-super-dark-brown text-xs">
-            Correct Words
-          </span>
+          <span className={label}>Correct Words</span>
         </li>
-        <li className="text-skull-dark-brown flex flex-col gap-1 w-full justify-center items-center">
-          <span className="text-2xl">
-            {SecondsToTime(seconds) || "00:00:00"}
-          </span>
-          <span className="text-skull-super-dark-brown text-xs">
-            Time Spent
-          </span>
+
+        <li className={`${card} min-h-[96px]`}>
+          <span className={value}>{SecondsToTime(seconds) || "00:00:00"}</span>
+          <span className={label}>Time Spent</span>
         </li>
       </ul>
     </div>
