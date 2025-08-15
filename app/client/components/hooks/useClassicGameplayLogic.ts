@@ -57,7 +57,10 @@ function useClassicGameplayLogic({
       currentRowIndex,
     });
 
-    if (currentRowIndex + shiftedIndex === currentSkull[0][currentRow].length) {
+    if (
+      currentRowIndex + (shiftedIndex ?? 0) ===
+      currentSkull[0][currentRow].length
+    ) {
       setCurrentRowIndex(0);
       setCurrentRow((prevState) => prevState + 1);
     }
@@ -93,7 +96,7 @@ function useClassicGameplayLogic({
 
       //Update the current square with a letter
       if (
-        currentRowIndex + shiftIndex <=
+        currentRowIndex + (shiftIndex ?? 0) <=
         currentSkull[0][currentRow].length - 1
       ) {
         setCurrentSkull((prevState) => {
@@ -101,13 +104,13 @@ function useClassicGameplayLogic({
           const newState: string[][][] = [...prevState];
 
           // Update the specific element within the row
-          newState[0][currentRow][currentRowIndex + shiftIndex] = key;
+          newState[0][currentRow][currentRowIndex + (shiftIndex ?? 0)] = key;
 
           // Return the updated state
           return newState;
         });
 
-        setCurrentRowIndex((prevState) => prevState + 1 + shiftIndex);
+        setCurrentRowIndex((prevState) => prevState + 1 + (shiftIndex ?? 0));
       }
     };
 

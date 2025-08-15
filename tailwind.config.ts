@@ -74,8 +74,8 @@ export default {
       },
       screens: {
         xxs: "350px", // Custom breakpoint smaller
-        xs: "480px", // Custom breakpoint small
-        "lg-md": "840px",
+        xs: "600px", // Custom breakpoint small
+        "lg-md": "1040px",
       },
     },
   },

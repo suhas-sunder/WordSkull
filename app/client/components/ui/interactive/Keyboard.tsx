@@ -224,7 +224,7 @@ export default function Keyboard({
     <div
       data-testid="keyboard"
       className={
-        "hidden  text-pumpkin-orange -translate-y-[1.5em] -mb-[2.5em] scale-[0.8] select-none flex-col gap-y-5 font-nunito rounded-xl border-2 border-pumpkin-orange p-6 lg-md:flex text-base min-h-[23em]"
+        "hidden text-pumpkin-orange -translate-y-[1.5em] -mb-[2.5em] scale-[0.8] select-none flex-col gap-y-5 font-nunito rounded-xl border-2 border-pumpkin-orange p-6 lg-md:flex text-base text-lg min-h-[23em]"
       }
     >
       {Object.values(keyboardData).map((keysArr, index) => {
