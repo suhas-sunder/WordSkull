@@ -1,16 +1,23 @@
+import { Outlet, useLocation } from "@remix-run/react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 
-function games() {
+export default function Games() {
+  const { pathname } = useLocation();
+  const isJustGames = pathname === "/games";
+
   return (
     <div>
-      <header>
-        <h1>games</h1>
-      </header>
-      <main>
-        <SocialLinks />
-      </main>
+      {isJustGames ? (
+        <>
+          <header>
+            <h1 className="flex bg-black min-h-20">games</h1>
+          </header>
+          <main>
+            <SocialLinks />
+          </main>
+        </>
+      ) : null}
+      <Outlet />
     </div>
   );
 }
-
-export default games;

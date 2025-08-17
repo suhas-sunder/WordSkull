@@ -18,6 +18,10 @@ import {
   ScrollRestoration,
   ClientLoaderFunctionArgs,
 } from "@remix-run/react";
+
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+
 import {
   ThemeProvider,
   useTheme,
@@ -29,70 +33,107 @@ import ErrorBoundary from "./client/components/utils/errors/ErrorBoundary";
 import GoogleAutoAds from "./client/components/utils/other/GoogleAutoAds";
 import GetWordsForSkull from "./client/components/utils/requests/GetWordsForSkull";
 
-// Loader function to fetch and return data
-export const loader = async () => {
-  return await GetWordsForSkull();
+// --- Loader / action / clientLoader ---
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const url = new URL(request.url);
+
+  // Normalize: strip trailing slashes on non-root
+  if (url.pathname !== "/" && url.pathname.endsWith("/")) {
+    url.pathname = url.pathname.replace(/\/+$/, "");
+    throw redirect(url.toString(), { status: 301 });
+  }
+
+  // Normalize: strip trailing periods or spaces
+  if (/[.\s]+$/.test(url.pathname)) {
+    url.pathname = url.pathname.replace(/[.\s]+$/, "");
+    throw redirect(url.toString(), { status: 301 });
+  }
+
+  // Build canonical (no trailing slash on path)
+  const canonical = url.origin + (url.pathname || "/") + url.search;
+
+  // Keep your existing data shape, just add canonical
+  const wordsData = await GetWordsForSkull(); // { words: ... }
+  return json({ ...wordsData, canonical });
 };
 
 export const action = async ({ request }: { request: Request }) => {
   if (request.method !== "POST") {
     return new Response("Method Not Allowed", { status: 405 });
   }
-
-  // Handle POST request (bot or other unknown POST routes)
   return new Response("Not Found", { status: 404 });
 };
 
 export async function clientLoader({ serverLoader }: ClientLoaderFunctionArgs) {
   const cacheKey = "words";
-
   try {
-    // Check if words are already cached in localForage
     const cachedWords = await localforage.getItem(cacheKey);
-
     if (cachedWords) {
       return { words: cachedWords };
     } else {
       const { words }: { words: { [keys: number]: string[] } } =
         await serverLoader();
-
-      // Store the words in localForage for future use
       await localforage.setItem(cacheKey, words);
-
       return { words };
     }
   } catch (error) {
     console.error("Error fetching or decompressing words data:", error);
-    return { words: [] }; // Return an empty array in case of failure
+    return { words: [] };
   }
 }
 
-export function Body({ children }: { children: React.ReactNode }) {
-  const { darkThemeActive } = useTheme();
+// --- Meta ---
 
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  const canonical = data?.canonical ?? "";
+  return [
+    { title: "Word Skull" },
+    {
+      name: "description",
+      content:
+        "Play Word Skull: Classic, Royal Lichen, and more. Fast word challenges with 3 to 9 letter play.",
+    },
+    // canonical link via Meta API
+    { tagName: "link", rel: "canonical", href: canonical },
+    // social tags
+    { property: "og:url", content: canonical },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+  ];
+};
+
+// --- UI shells ---
+
+function Shell({ children }: { children: React.ReactNode }) {
+  const { darkThemeActive } = useTheme();
   return (
-    <body
+    <div
       className={`pt-6 transition-colors duration-[600ms] ${
         darkThemeActive ? "bg-stone-900" : "bg-amber-50/10"
       }`}
     >
       <NavBar />
       <div className="min-h-[100vh]">{children}</div>
-      <ScrollRestoration />
-      <Scripts />
-      <GoogleAutoAds />
       <Footer />
-    </body>
+    </div>
   );
 }
 
-// Layout Component for rendering HTML structure
+// Body is now a shell DIV, not a <body>
+export function Body({ children }: { children: React.ReactNode }) {
+  return <Shell>{children}</Shell>;
+}
+
+// --- Document layout ---
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
         <link
           rel="preload"
           href="/fonts/Nunito-Bold.woff2"
@@ -121,6 +162,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           type="font/woff2"
           crossOrigin="anonymous"
         />
+
         <link rel="preload" href={Skull_1_Webp} as="image" />
         <link rel="preload" href={Skull_2_Webp} as="image" />
         <link rel="preload" href={Skull_3_Webp} as="image" />
@@ -129,23 +171,32 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <link rel="preload" href={Skull_2} as="image" />
         <link rel="preload" href={Skull_3} as="image" />
         <link rel="preload" href={Skull_4} as="image" />
+
         <Meta />
         <Links />
-      </head>{" "}
-      <ErrorBoundary>
-        <ThemeProvider>
-          <SettingsProvider>
-            <StatsProvider>
-              <Body>{children}</Body>
-            </StatsProvider>
-          </SettingsProvider>
-        </ThemeProvider>
-      </ErrorBoundary>
+      </head>
+      <body>
+        <ErrorBoundary>
+          <ThemeProvider>
+            <SettingsProvider>
+              <StatsProvider>
+                <Body>{children}</Body>
+              </StatsProvider>
+            </SettingsProvider>
+          </ThemeProvider>
+        </ErrorBoundary>
+
+        {/* Runtime scripts at the end of <body> */}
+        <ScrollRestoration />
+        <Scripts />
+        <GoogleAutoAds />
+      </body>
     </html>
   );
 }
 
-// App Component for managing application state
+// --- App ---
+
 export default function App() {
   return <Outlet />;
 }
