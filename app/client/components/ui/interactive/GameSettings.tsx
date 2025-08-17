@@ -97,10 +97,16 @@ function DifficultyLinks() {
     <div className="flex flex-col gap-2">
       <span className="font-lora text-skull-dark-brown">Difficulty:</span>
       <div className="grid grid-cols-2 md:flex md:flex-wrap gap-3">
-        {item("/game/word-skull-game-easy-mode", "Easy")}
-        {item("/game/word-skull-game-medium-mode", "Medium")}
-        {item("/game/word-skull-game-hard-mode", "Hard")}
-        {item("/game/word-skull-game-extreme-mode", "Extreme")}
+        {item("/games/classic/boneheads-easy-3-to-5-letter-words", "Easy")}
+        {item(
+          "/games/classic/specter-knights-medium-3-to-6-letter-words",
+          "Medium"
+        )}
+        {item("/games/classic/grim-reapers-hard-3-to-7-letter-words", "Hard")}
+        {item(
+          "/games/classic/royal-lichen-extreme-3-to-9-letter-words",
+          "Extreme"
+        )}
       </div>
     </div>
   );
