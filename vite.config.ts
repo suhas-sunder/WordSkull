@@ -29,6 +29,12 @@ export default ({ mode }: { mode: string }) => {
             }
           : {},
     },
+    css: { devSourcemap: false },
+    optimizeDeps: {
+      esbuildOptions: {
+        sourcemap: false,
+      },
+    },
     plugins: [
       mdx(),
       // Include remix plugin only if not in test environment

@@ -119,7 +119,7 @@ export default function AllWordsForWordGame() {
 
       <header>
         <h1 className="mt-[0.7em] text-3xl font-nunito text-skull-dark-brown mb-3">
-          Words List — Word & Puzzle Games
+          Words List - Word & Puzzle Games
         </h1>
         <p className="text-center font-lato text-skull-super-dark-brown/90 max-w-2xl">
           Explore curated word lists by length. Perfect for training, solving
@@ -157,7 +157,7 @@ export default function AllWordsForWordGame() {
             <Link
               key={`pill-${n}`}
               to={`/words-list/all-${n}-letter-words-for-word-games`}
-              className="rounded-full border border-stone-300 px-3 py-1 text-sm hover:bg-stone-50 dark:border-stone-700 dark:hover:bg-stone-800"
+              className="rounded-full border border-stone-300 px-3 py-1 text-sm hover:bg-stone-50 dark:border-stone-700 hover:bg-pumpkin-orange hover:text-white hover:border-pumpkin-orange"
             >
               {n}-letter
             </Link>

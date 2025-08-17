@@ -34,7 +34,14 @@ import { StatsProvider } from "./client/components/context/StatsContext";
 import ErrorBoundary from "./client/components/utils/errors/ErrorBoundary";
 // REMOVED top-level GoogleAutoAds import
 import GetWordsForSkull from "./client/components/utils/requests/GetWordsForSkull";
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect, lazy, Suspense, useState } from "react";
+
+/* ========= simple server memo cache for words ========= */
+type WordsPayload = { words: Record<number, string[]> };
+let WORDS_CACHE: WordsPayload | null = null;
+let WORDS_LOADED_AT = 0;
+const WORDS_TTL_MS = 60 * 60 * 1000; // 1 hour
+/* ===================================================== */
 
 // --- Loader / action / clientLoader ---
 
@@ -56,9 +63,28 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   // Build canonical (no trailing slash on path)
   const canonical = url.origin + (url.pathname || "/") + url.search;
 
-  // Keep your existing data shape, just add canonical
-  const wordsData = await GetWordsForSkull(); // { words: ... }
-  return json({ ...wordsData, canonical });
+  // Memoize/fetch words once per TTL
+  const now = Date.now();
+  if (!WORDS_CACHE || now - WORDS_LOADED_AT > WORDS_TTL_MS) {
+    const data = (await GetWordsForSkull()) as
+      | WordsPayload
+      | { [k: string]: any };
+    WORDS_CACHE = (data as WordsPayload).words
+      ? (data as WordsPayload)
+      : { words: data as any };
+    WORDS_LOADED_AT = now;
+  }
+
+  return json(
+    { ...WORDS_CACHE, canonical },
+    {
+      headers: {
+        // CDN+browser friendly; keeps SSR snappy without redoing work
+        "Cache-Control":
+          "public, s-maxage=86400, max-age=1800, stale-while-revalidate=604800",
+      },
+    }
+  );
 };
 
 export const action = async ({ request }: { request: Request }) => {
@@ -166,11 +192,23 @@ function ScrollToTopOnRouteChange() {
 }
 
 /** Client-only, lazy-loaded Google ads */
-const GoogleAutoAdsLazy = lazy(
-  () => import("./client/components/utils/other/GoogleAutoAds")
-);
+
+const GoogleAutoAdsLazy = lazy(async () => {
+  try {
+    const mod = await import("./client/components/utils/other/GoogleAutoAds"); // .tsx file
+    return { default: mod.default ?? (() => null) };
+  } catch (err) {
+    if (import.meta.env.DEV) console.warn("GoogleAutoAds failed to load:", err);
+    return { default: () => null };
+  }
+});
+
 function AdsClientOnly() {
-  if (typeof document === "undefined") return null; // don't render on SSR
+  // Ensure server and first client render match (both render nothing)
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+
   return (
     <Suspense fallback={null}>
       <GoogleAutoAdsLazy />
@@ -245,7 +283,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {/* Removed <ScrollRestoration /> to avoid conflicts */}
         <Scripts />
         {/* Lazy, client-only ads */}
-        <AdsClientOnly />
+        <div id="ads-root" suppressHydrationWarning>
+          <AdsClientOnly />
+        </div>
       </body>
     </html>
   );
