@@ -57,6 +57,15 @@ function MainLinks({
             <span className={`${styles.icon} flex`}>Words</span>
           </NavLink>
         </li>
+        <li className="flex w-full lg:w-auto">
+          <NavLink
+            onClick={handleLinkClick}
+            to="/blog"
+            className="relative flex items-center px-4 justify-center w-full lg:w-auto py-4 lg:hover:bg-transparent lg:py-3 tracking-[0.1em]"
+          >
+            <span className={`${styles.icon} flex`}>Blog</span>
+          </NavLink>
+        </li>
       </ul>
       <button
         onClick={() => setDarkThemeActive(!darkThemeActive)}
