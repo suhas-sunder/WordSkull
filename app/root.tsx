@@ -48,6 +48,17 @@ const WORDS_TTL_MS = 60 * 60 * 1000; // 1 hour
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
 
+  // translate ?trk=slug into a pretty path /slug
+  if (url.pathname === "/" && url.searchParams.has("trk")) {
+    const trk = url.searchParams.get("trk") || "";
+    const safe = trk.toLowerCase().match(/^[a-z0-9_-]+$/)?.[0];
+    if (safe) {
+      url.pathname = `/${safe}`;
+      url.search = ""; // drop the tracking querystring
+      throw redirect(url.toString(), { status: 301 });
+    }
+  }
+
   // Normalize: strip trailing slashes on non-root
   if (url.pathname !== "/" && url.pathname.endsWith("/")) {
     url.pathname = url.pathname.replace(/\/+$/, "");
