@@ -48,7 +48,7 @@ function SkeletonSkull({
       }`}
     >
       <div className="flex flex-col mt-2 gap-2 h-full w-full items-center justify-center">
-        <p className="text-pumpkin-orange">Loading...</p>
+        <p className="text-pumpkin-orange animate-pulse">Loading...</p>
         <div className="flex flex-col gap-[2px]">
           {Array.from({ length: rows }).map((_, r) => (
             <div key={r} className="flex gap-[2px]">
