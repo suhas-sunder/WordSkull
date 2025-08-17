@@ -1,26 +1,26 @@
 import type { MetaFunction } from "@remix-run/node";
 import ClassicGameLogic from "../client/components/layout/ClassicGameLogic";
 import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
-import { useMatches } from "react-router-dom";
 import { useMemo } from "react";
-import { WordsData } from "./games.classic.boneheads-easy-3-to-5-letter-words";
+import { useMatches } from "react-router-dom";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import GameLinks from "../client/components/layout/GameLinks";
+import { WordsData } from "./games.classic.boneheads-easy-3-to-5-letter-words";
 
 type RootMatch = { id: string; data?: { canonical?: string } };
 
-/* ===================== META ===================== */
+// ---------- META ----------
 export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as RootMatch | undefined;
 
-  // Canonical from root (preferred), with a safe fallback:
+  // Fallback canonical if root loader didn't provide one
   const canonical =
     root?.data?.canonical ??
-    "https://www.wordskull.com/games/classic/grim-reapers-hard-3-to-7-letter-words";
+    "https://www.wordskull.com/games/classic/specter-knights-medium-3-to-6-letter-words";
 
-  const title = "Word Skull Classic Grim Reapers (Hard, 3–7 Letter Words)";
+  const title = "Word Skull Classic Medium (3–6 Letter Words) | Specter Mode";
   const description =
-    "Tackle Word Skull’s Hard mode: Grim Reapers. Guess 3–7 letter words, sharpen your vocabulary, and climb toward Extreme difficulty.";
+    "Sharpen your skills in Specter (Medium). Guess 3–6 letter words, build vocabulary, and climb difficulty—perfect for quick, satisfying word-puzzle sessions.";
 
   return [
     { title },
@@ -36,26 +36,26 @@ export const meta: MetaFunction = ({ matches }) => {
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
-    // Robots
+    // Crawl directives
     { name: "robots", content: "index,follow,max-image-preview:large" },
   ];
 };
 
-/* ===================== PAGE ===================== */
-export default function WordSkullHard() {
+// ---------- PAGE ----------
+export default function WordSkullMedium() {
   const matches = useMatches();
-
   const wordsData = useMemo(() => {
     const match = matches?.find((m) => (m?.data as WordsData)?.words);
     return match?.data as WordsData;
   }, [matches]);
 
-  // JSON-LD (Breadcrumbs + WebApplication)
+  // Canonical for JSON-LD
   const root = matches.find((m) => m.id === "root") as RootMatch | undefined;
   const canonical =
     root?.data?.canonical ??
-    "https://www.wordskull.com/games/classic/grim-reapers-hard-3-to-7-letter-words";
+    "https://www.wordskull.com/games/classic/specter-knights-medium-3-to-6-letter-words";
 
+  // JSON-LD (Breadcrumb + WebApplication)
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -80,19 +80,19 @@ export default function WordSkullHard() {
             name: "Classic",
             item: "https://www.wordskull.com/games/classic",
           },
-          { "@type": "ListItem", position: 4, name: "Grim Reapers (Hard)" },
+          { "@type": "ListItem", position: 4, name: "Specter (Medium)" },
         ],
       },
       {
         "@type": "WebApplication",
-        name: "Word Skull Classic: Grim Reapers (Hard)",
+        name: "Word Skull Classic: Specter (Medium)",
         url: canonical,
         applicationCategory: "Game",
         operatingSystem: "Web",
         inLanguage: "en",
         genre: ["Word", "Puzzle"],
         description:
-          "Play Grim Reapers (Hard) in Word Skull Classic. Guess 3–7 letter words, improve vocabulary, and prepare for Extreme mode.",
+          "Play Specter (Medium) in Word Skull Classic. Guess 3–6 letter words, expand vocabulary, and enjoy quick, challenging rounds.",
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
         creator: { "@type": "Organization", name: "Word Skull" },
       },
@@ -101,9 +101,9 @@ export default function WordSkullHard() {
 
   return (
     <>
-      {/* SR-only H1: improves semantics without altering your layout */}
+      {/* Accessible H1 for SEO without changing your layout */}
       <h1 className="sr-only">
-        Word Skull Classic Grim Reapers (Hard) · 3–7 Letter Words
+        Word Skull Classic Specter (Medium) · 3–6 Letter Words
       </h1>
 
       {/* Structured data */}
@@ -112,22 +112,25 @@ export default function WordSkullHard() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* GAME UI (unchanged) */}
+      {/* GAME */}
       <ClassicGameLogic
-        startPosition={8}
-        endPosition={12}
-        lettersPerSkull="Hard Difficulty: 3 - 7 letters"
+        startPosition={4}
+        endPosition={8}
+        lettersPerSkull="Medium Difficulty: 3 - 6 letters"
         wordsData={wordsData}
-        difficulty="hard"
+        difficulty="medium"
         gameMode="classic"
       />
 
+      {/* Cross-links to other modes */}
       <GameLinks />
 
+      {/* How to play */}
       <section className="mt-20">
         <ClassicGameplayInstructions />
       </section>
 
+      {/* Socials */}
       <section>
         <SocialLinks />
       </section>

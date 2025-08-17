@@ -7,7 +7,7 @@ import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
 import GameLinks from "../client/components/layout/GameLinks";
 import ClassicGameLogic from "~/client/components/layout/ClassicGameLogic";
 import { useMemo } from "react";
-import { WordsData } from "./game.word-skull-game-easy-mode";
+import { WordsData } from "./games.classic.boneheads-easy-3-to-5-letter-words";
 import ClassicGameplayInstructions from "~/client/components/layout/ClassicGameplayInstructions";
 
 export const meta: MetaFunction = () => {
@@ -84,7 +84,7 @@ export default function Index() {
               <p className="font-lato text-lg pl-5 tracking-wider leading-loose">
                 <Link
                   className="text-pumpkin-orange hover:text-amber-600 font-lora"
-                  to="/game/word-skull-game-easy-mode"
+                  to="/game/classic/boneheads-easy-3-to-5-letter-words"
                 >
                   WordSkull
                 </Link>{" "}

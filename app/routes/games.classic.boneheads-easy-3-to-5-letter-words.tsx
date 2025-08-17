@@ -1,11 +1,14 @@
 import type { MetaFunction } from "@remix-run/node";
 import ClassicGameLogic from "../client/components/layout/ClassicGameLogic";
-import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
 import { useMatches } from "react-router-dom";
 import { useMemo } from "react";
-import { WordsData } from "./games.classic.boneheads-easy-3-to-5-letter-words";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import GameLinks from "../client/components/layout/GameLinks";
+import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
+
+export type WordsData = {
+  words?: { [key: number]: string[] };
+};
 
 type RootMatch = { id: string; data?: { canonical?: string } };
 
@@ -13,14 +16,14 @@ type RootMatch = { id: string; data?: { canonical?: string } };
 export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as RootMatch | undefined;
 
-  // Canonical from root (preferred), with a safe fallback:
+  // Prefer canonical from root loader; fallback to this route’s public URL
   const canonical =
     root?.data?.canonical ??
-    "https://www.wordskull.com/games/classic/grim-reapers-hard-3-to-7-letter-words";
+    "https://www.wordskull.com/games/classic/boneheads-easy-3-to-5-letter-words";
 
-  const title = "Word Skull Classic Grim Reapers (Hard, 3–7 Letter Words)";
+  const title = "Word Skull Classic Boneheads (Easy, 3–5 Letter Words)";
   const description =
-    "Tackle Word Skull’s Hard mode: Grim Reapers. Guess 3–7 letter words, sharpen your vocabulary, and climb toward Extreme difficulty.";
+    "Warm up with Word Skull’s Easy mode: Boneheads. Guess 3–5 letter words, build confidence, and get ready for tougher skulls.";
 
   return [
     { title },
@@ -42,7 +45,7 @@ export const meta: MetaFunction = ({ matches }) => {
 };
 
 /* ===================== PAGE ===================== */
-export default function WordSkullHard() {
+export default function WordSkullEasy() {
   const matches = useMatches();
 
   const wordsData = useMemo(() => {
@@ -54,7 +57,7 @@ export default function WordSkullHard() {
   const root = matches.find((m) => m.id === "root") as RootMatch | undefined;
   const canonical =
     root?.data?.canonical ??
-    "https://www.wordskull.com/games/classic/grim-reapers-hard-3-to-7-letter-words";
+    "https://www.wordskull.com/games/classic/boneheads-easy-3-to-5-letter-words";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -80,19 +83,19 @@ export default function WordSkullHard() {
             name: "Classic",
             item: "https://www.wordskull.com/games/classic",
           },
-          { "@type": "ListItem", position: 4, name: "Grim Reapers (Hard)" },
+          { "@type": "ListItem", position: 4, name: "Boneheads (Easy)" },
         ],
       },
       {
         "@type": "WebApplication",
-        name: "Word Skull Classic: Grim Reapers (Hard)",
+        name: "Word Skull Classic: Boneheads (Easy)",
         url: canonical,
         applicationCategory: "Game",
         operatingSystem: "Web",
         inLanguage: "en",
         genre: ["Word", "Puzzle"],
         description:
-          "Play Grim Reapers (Hard) in Word Skull Classic. Guess 3–7 letter words, improve vocabulary, and prepare for Extreme mode.",
+          "Play Boneheads (Easy) in Word Skull Classic. Guess 3–5 letter words, build vocabulary, and warm up for Medium and Hard modes.",
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
         creator: { "@type": "Organization", name: "Word Skull" },
       },
@@ -101,9 +104,9 @@ export default function WordSkullHard() {
 
   return (
     <>
-      {/* SR-only H1: improves semantics without altering your layout */}
+      {/* Semantic H1 for SEO, invisible to users */}
       <h1 className="sr-only">
-        Word Skull Classic Grim Reapers (Hard) · 3–7 Letter Words
+        Word Skull Classic Boneheads (Easy) · 3–5 Letter Words
       </h1>
 
       {/* Structured data */}
@@ -112,22 +115,19 @@ export default function WordSkullHard() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* GAME UI (unchanged) */}
+      {/* --- Your existing UI (unchanged) --- */}
       <ClassicGameLogic
-        startPosition={8}
-        endPosition={12}
-        lettersPerSkull="Hard Difficulty: 3 - 7 letters"
+        startPosition={0}
+        endPosition={4}
+        lettersPerSkull="Easy Difficulty: 3 - 5 letters"
         wordsData={wordsData}
-        difficulty="hard"
+        difficulty="easy"
         gameMode="classic"
       />
-
       <GameLinks />
-
       <section className="mt-20">
         <ClassicGameplayInstructions />
       </section>
-
       <section>
         <SocialLinks />
       </section>

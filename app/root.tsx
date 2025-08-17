@@ -15,8 +15,10 @@ import {
   Links,
   Meta,
   Scripts,
-  ScrollRestoration,
+  // REMOVED: ScrollRestoration,
   ClientLoaderFunctionArgs,
+  useLocation,
+  useNavigation,
 } from "@remix-run/react";
 
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
@@ -32,6 +34,7 @@ import { StatsProvider } from "./client/components/context/StatsContext";
 import ErrorBoundary from "./client/components/utils/errors/ErrorBoundary";
 import GoogleAutoAds from "./client/components/utils/other/GoogleAutoAds";
 import GetWordsForSkull from "./client/components/utils/requests/GetWordsForSkull";
+import { useEffect } from "react";
 
 // --- Loader / action / clientLoader ---
 
@@ -125,6 +128,40 @@ export function Body({ children }: { children: React.ReactNode }) {
   return <Shell>{children}</Shell>;
 }
 
+/** Disable native scroll restoration once */
+function UseManualScrollRestoration() {
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      const prev = window.history.scrollRestoration as "auto" | "manual";
+      window.history.scrollRestoration = "manual";
+      return () => {
+        window.history.scrollRestoration = prev ?? "auto";
+      };
+    }
+  }, []);
+  return null;
+}
+
+/** Scroll to top after route navigation completes */
+function ScrollToTopOnRouteChange() {
+  const location = useLocation();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    if (navigation.state === "idle") {
+      const id = requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        // extra safety across engines
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      });
+      return () => cancelAnimationFrame(id);
+    }
+  }, [location.pathname, location.search, navigation.state]);
+
+  return null;
+}
+
 // --- Document layout ---
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -180,14 +217,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <ThemeProvider>
             <SettingsProvider>
               <StatsProvider>
+                {/* ensure manual control + force scroll-to-top */}
+                <UseManualScrollRestoration />
+                <ScrollToTopOnRouteChange />
                 <Body>{children}</Body>
               </StatsProvider>
             </SettingsProvider>
           </ThemeProvider>
         </ErrorBoundary>
 
-        {/* Runtime scripts at the end of <body> */}
-        <ScrollRestoration />
+        {/* Removed <ScrollRestoration /> to avoid conflicts */}
         <Scripts />
         <GoogleAutoAds />
       </body>

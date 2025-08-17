@@ -14,6 +14,14 @@ interface PropType {
   emoji: string;
 }
 
+// centralize paths used in sitemap.xml
+const ROUTES = {
+  easy: "/games/classic/boneheads-easy-3-to-5-letter-words",
+  medium: "/games/classic/specter-knights-medium-3-to-6-letter-words",
+  hard: "/games/classic/grim-reapers-hard-3-to-7-letter-words",
+  extreme: "/games/classic/royal-lichen-extreme-3-to-9-letter-words",
+};
+
 function GameDifficultyMenu({ title, emoji }: PropType) {
   const { darkThemeActive } = useTheme();
   const navigate = useNavigate();
@@ -42,16 +50,19 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
           final boss (coming soon) and win the weekly challenge.
         </p>
       </div>
+
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-12 lg:gap-16 justify-center items-center">
         <button
-          onClick={() => navigate(`/game/word-skull-game-easy-mode`)}
+          onClick={() => navigate(ROUTES.easy)}
           className="group relative flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12 hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
         >
-          <div className="absolute bottom-2 shadow-inner rounded-full p-[0.08em] shadow-pumpkin-orange/20 group-hover:shadow-amber-600/30  opacity-65">{emoji}</div>
+          <div className="absolute bottom-2 shadow-inner rounded-full p-[0.08em] shadow-pumpkin-orange/20 group-hover:shadow-amber-600/30  opacity-65">
+            {emoji}
+          </div>
           <h3 className="text-lg font-nunito">Boneheads</h3>
           <picture>
-            <source srcSet={`${Skull_1_Webp}`} type="image/webp" />
-            <source srcSet={`${Skull_1}`} type="image/png" />
+            <source srcSet={Skull_1_Webp} type="image/webp" />
+            <source srcSet={Skull_1} type="image/png" />
             <img
               src={Skull_1}
               alt="Word Skull Classic boneheads difficulty easy"
@@ -63,21 +74,22 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
           </picture>
           <h3 className="font-lato mt-auto">Difficulty: Easy</h3>
           <p className="font-lato">3 - 5 letters per word</p>
-          <div
-            className={"group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300"}
-          >
+          <div className="group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300">
             Play
           </div>
         </button>
+
         <button
-          onClick={() => navigate(`/game/word-skull-game-medium-mode`)}
+          onClick={() => navigate(ROUTES.medium)}
           className="group relative flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
         >
-          <div className="absolute bottom-2 shadow-inner rounded-full p-[0.08em] shadow-pumpkin-orange/20 group-hover:shadow-amber-600/30  opacity-65">{emoji}</div>
+          <div className="absolute bottom-2 shadow-inner rounded-full p-[0.08em] shadow-pumpkin-orange/20 group-hover:shadow-amber-600/30  opacity-65">
+            {emoji}
+          </div>
           <h3 className="text-lg font-nunito">Specter</h3>
           <picture>
-            <source srcSet={`${Skull_2_Webp}`} type="image/webp" />
-            <source srcSet={`${Skull_2}`} type="image/png" />
+            <source srcSet={Skull_2_Webp} type="image/webp" />
+            <source srcSet={Skull_2} type="image/png" />
             <img
               src={Skull_2}
               alt="Word Skull Classic specter medium difficulty"
@@ -89,21 +101,22 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
           </picture>
           <h4 className="font-lato mt-auto">Difficulty: Medium</h4>
           <p className="font-lato">3 - 6 letters per word</p>
-          <div
-            className={"group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300"}
-          >
+          <div className="group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300">
             Play
           </div>
         </button>
+
         <button
-          onClick={() => navigate(`/game/word-skull-game-hard-mode`)}
+          onClick={() => navigate(ROUTES.hard)}
           className="group relative flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12 hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
         >
-          <div className="absolute bottom-2 shadow-inner rounded-full p-[0.08em] shadow-pumpkin-orange/20 group-hover:shadow-amber-600/30  opacity-65">{emoji}</div>
+          <div className="absolute bottom-2 shadow-inner rounded-full p-[0.08em] shadow-pumpkin-orange/20 group-hover:shadow-amber-600/30  opacity-65">
+            {emoji}
+          </div>
           <h3 className="text-lg font-nunito">Reapers</h3>
           <picture>
-            <source srcSet={`${Skull_3_Webp}`} type="image/webp" />
-            <source srcSet={`${Skull_3}`} type="image/png" />
+            <source srcSet={Skull_3_Webp} type="image/webp" />
+            <source srcSet={Skull_3} type="image/png" />
             <img
               src={Skull_3}
               alt="Word Skull Classic reapers hard difficulty"
@@ -115,21 +128,22 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
           </picture>
           <h4 className="font-lato mt-auto">Difficulty: Hard</h4>
           <p className="font-lato">3 - 7 letters per word</p>
-          <div
-            className={"group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300"}
-          >
+          <div className="group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300">
             Play
           </div>
         </button>
+
         <button
-          onClick={() => navigate(`/game/word-skull-game-extreme-mode`)}
+          onClick={() => navigate(ROUTES.extreme)}
           className="group relative flex h-full col-span-2 flex-col lg:col-start-3 xl:col-start-auto gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12  hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
         >
-          <div className="absolute bottom-2 shadow-inner rounded-full p-[0.08em] shadow-pumpkin-orange/20 group-hover:shadow-amber-600/30  opacity-65">{emoji}</div>
+          <div className="absolute bottom-2 shadow-inner rounded-full p-[0.08em] shadow-pumpkin-orange/20 group-hover:shadow-amber-600/30  opacity-65">
+            {emoji}
+          </div>
           <h3 className="text-lg font-nunito">Royal Lichen</h3>
           <picture>
-            <source srcSet={`${Skull_4_Webp}`} type="image/webp" />
-            <source srcSet={`${Skull_4}`} type="image/png" />
+            <source srcSet={Skull_4_Webp} type="image/webp" />
+            <source srcSet={Skull_4} type="image/png" />
             <img
               src={Skull_4}
               alt="Word Skull Classic royal lichen extreme difficulty"
@@ -141,9 +155,7 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
           </picture>
           <h4 className="font-lato mt-auto">Difficulty: Extreme</h4>
           <p className="font-lato">3 - 9 letters per word</p>
-          <div
-            className={"group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300"}
-          >
+          <div className="group-hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8 text-lg font-nunito rounded-full mt-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400 transition-scale duration-300">
             Play
           </div>
         </button>
