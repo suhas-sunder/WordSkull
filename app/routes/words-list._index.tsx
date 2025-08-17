@@ -157,7 +157,7 @@ export default function AllWordsForWordGame() {
             <Link
               key={`pill-${n}`}
               to={`/words-list/all-${n}-letter-words-for-word-games`}
-              className="rounded-full border border-stone-300 px-3 py-1 text-sm hover:bg-stone-50 dark:border-stone-700 hover:bg-pumpkin-orange hover:text-white hover:border-pumpkin-orange"
+              className="rounded-full border border-stone-300 px-3 py-1 text-sm dark:border-stone-700 hover:bg-pumpkin-orange hover:text-white hover:border-pumpkin-orange"
             >
               {n}-letter
             </Link>
