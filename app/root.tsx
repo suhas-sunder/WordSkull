@@ -139,6 +139,13 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
+// NEW: document-level headers to avoid stale HTML pointing to deleted chunks
+export const headers = () => {
+  return {
+    "Cache-Control": "no-store",
+  };
+};
+
 // --- UI shells ---
 
 function Shell({ children }: { children: React.ReactNode }) {
@@ -175,21 +182,58 @@ function UseManualScrollRestoration() {
   return null;
 }
 
-/** Scroll to top after route navigation completes */
-function ScrollToTopOnRouteChange() {
+/* ---------- NEW: Anchor-aware scroll handler ---------- */
+
+function getFixedHeaderOffset() {
+  const candidates = Array.from(
+    document.querySelectorAll<HTMLElement>("nav, header, [data-fixed-header]")
+  );
+  for (const el of candidates) {
+    const cs = getComputedStyle(el);
+    if (cs.position === "fixed" || cs.position === "sticky") {
+      return el.getBoundingClientRect().height || 0;
+    }
+  }
+  return 0;
+}
+
+function AnchorAwareScroll() {
   const location = useLocation();
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (navigation.state === "idle") {
-      const id = requestAnimationFrame(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-      });
-      return () => cancelAnimationFrame(id);
+    if (navigation.state !== "idle") return;
+
+    // Keep a CSS var other parts can use with `scroll-margin-top`
+    const offset = getFixedHeaderOffset();
+    document.documentElement.style.setProperty(
+      "--anchor-offset",
+      `${offset + 12}px`
+    );
+
+    if (location.hash) {
+      const id = decodeURIComponent(location.hash.slice(1));
+      let tries = 0;
+      const maxTries = 24; // ~24 frames ≈ 400ms at 60fps
+
+      const tryScroll = () => {
+        const el = document.getElementById(id);
+        if (el) {
+          const y =
+            el.getBoundingClientRect().top + window.pageYOffset - (offset + 12);
+          window.scrollTo({ top: y, behavior: "smooth" });
+          return;
+        }
+        if (tries++ < maxTries) requestAnimationFrame(tryScroll);
+      };
+
+      requestAnimationFrame(tryScroll);
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
     }
-  }, [location.pathname, location.search, navigation.state]);
+  }, [location.pathname, location.search, location.hash, navigation.state]);
 
   return null;
 }
@@ -208,6 +252,25 @@ function AdsClientOnly() {
       <GoogleAutoAdsLazy />
     </Suspense>
   );
+}
+
+/** NEW: Dev-only cleanup of old SW + caches (prevents stale chunk 404s) */
+function KillOldServiceWorkers() {
+  useEffect(() => {
+    const isDev =
+      (typeof import.meta !== "undefined" && (import.meta as any).env?.DEV) ||
+      false;
+
+    if ("serviceWorker" in navigator && isDev) {
+      navigator.serviceWorker.getRegistrations().then((regs) => {
+        regs.forEach((r) => r.unregister());
+      });
+      if ("caches" in window) {
+        caches.keys().then((keys) => keys.forEach((k) => caches.delete(k)));
+      }
+    }
+  }, []);
+  return null;
 }
 
 // --- Document layout ---
@@ -266,7 +329,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <SettingsProvider>
               <StatsProvider>
                 <UseManualScrollRestoration />
-                <ScrollToTopOnRouteChange />
+                {/* replaced ScrollToTopOnRouteChange with anchor-aware scroll */}
+                <AnchorAwareScroll />
                 <Body>{children}</Body>
               </StatsProvider>
             </SettingsProvider>
@@ -275,6 +339,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         <Scripts />
         <AdsClientOnly />
+        {/* Dev-only cleanup to avoid stale chunk 404s in Brave, etc. */}
+        <KillOldServiceWorkers />
       </body>
     </html>
   );
