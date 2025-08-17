@@ -254,27 +254,7 @@ function AdsClientOnly() {
   );
 }
 
-/** NEW: Dev-only cleanup of old SW + caches (prevents stale chunk 404s) */
-function KillOldServiceWorkers() {
-  useEffect(() => {
-    const isDev =
-      (typeof import.meta !== "undefined" && (import.meta as any).env?.DEV) ||
-      false;
-
-    if ("serviceWorker" in navigator && isDev) {
-      navigator.serviceWorker.getRegistrations().then((regs) => {
-        regs.forEach((r) => r.unregister());
-      });
-      if ("caches" in window) {
-        caches.keys().then((keys) => keys.forEach((k) => caches.delete(k)));
-      }
-    }
-  }, []);
-  return null;
-}
-
 // --- Document layout ---
-
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -339,8 +319,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         <Scripts />
         <AdsClientOnly />
-        {/* Dev-only cleanup to avoid stale chunk 404s in Brave, etc. */}
-        <KillOldServiceWorkers />
       </body>
     </html>
   );
