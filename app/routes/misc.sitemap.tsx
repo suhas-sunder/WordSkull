@@ -174,13 +174,13 @@ export default function Sitemap() {
             Help & Legal
           </h2>
           <li>
-            <Link to="/faq" className="hover:text-amber-500 flex mr-auto">
+            <Link to="/misc/faq" className="hover:text-amber-500 flex mr-auto">
               FAQ
             </Link>
           </li>
           <li>
             <Link
-              to="/privacy-policy"
+              to="/misc/privacy-policy"
               className="hover:text-amber-500 flex mr-auto"
             >
               Privacy Policy
@@ -188,7 +188,7 @@ export default function Sitemap() {
           </li>
           <li>
             <Link
-              to="/cookies-policy"
+              to="/misc/cookies-policy"
               className="hover:text-amber-500 flex mr-auto"
             >
               Cookies Policy
@@ -196,7 +196,7 @@ export default function Sitemap() {
           </li>
           <li>
             <Link
-              to="/terms-of-service"
+              to="/misc/terms-of-service"
               className="hover:text-amber-500 flex mr-auto"
             >
               Terms of Service
@@ -245,6 +245,187 @@ export default function Sitemap() {
               className="hover:text-amber-500 flex mr-auto"
             >
               Free Typing Camp
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://jurassicwords.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Jurassic Words - Dinosaur Word Game
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://dinowordgame.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Jurassic Words - Dinosaur Word Game
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://advisorbees.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Advisor Bees
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://codetranslators.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Code Translators - Morse code translator, Binary translator, and
+              more
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://coloringcardgames.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Coloring Card Games - Coloring Pages for Card Games like
+              Solitaire, Freecell, and more
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://doodlegarden.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Doodle Garden - A Creative Space for Doodling and Drawing with fun
+              stories explained with doodles
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://morsewords.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Morse Words - A Fun Way to Learn Morse Code
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://mythologypuzzle.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Mythology Puzzle - Fun and Educational Puzzle Games
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://sushiclicker.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Sushi Clicker - A Fun and Addictive Sushi Restaurant Game
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://terrawords.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Terra Words - A Fun and Educational Word Game Focused on Earth,
+              Geography, and Nature
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://typingbooks.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Typing Books - Improve Your Typing Skills with Fun and Engaging
+              Lessons
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://typingstories.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Typing Stories - Improve Your Typing Skills with Fun and Engaging
+              Stories
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://wordmythology.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Word Mythology - Explore the Myths and Legends Behind Words
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://funmoneygames.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Fun Money Games - Play Games and Learn About Money Management
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://learnwordgames.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Learn Word Games - Improve Your Vocabulary and Word Skills
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://dragontyping.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-amber-500 flex mr-auto"
+            >
+              Dragon Typing - Improve Your Typing Skills with Fun and Engaging
+              Lessons
             </a>
           </li>
         </ol>
