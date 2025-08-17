@@ -41,10 +41,7 @@ function ClassicGameplayInstructions() {
       {showInstructions && (
         <>
           <div className="flex relative flex-col w-full justify-center items-center -mt-12 mb-5">
-            <div
-              id="gameplay-instructions"
-              className="absolute -top-[5em]"
-             />
+            <div id="gameplay-instructions" className="absolute -top-[5em]" />
             <h2
               className={`text-4xl font-nunito  uppercase mb-5 ${
                 darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
@@ -111,9 +108,7 @@ function ClassicGameplayInstructions() {
               <li className="mx-auto text-center">
                 If the word exists in the{" "}
                 <span className="text-pumpkin-orange hover:text-amber-500">
-                  <Link to="/z-words/all-words-for-word-game">
-                    dictionary (word list)
-                  </Link>
+                  <Link to="/words-list">dictionary (word list)</Link>
                 </span>
                 , and you get it right, you will be moved to the next row. This
                 repeats until you complete all rows and win.
@@ -130,9 +125,7 @@ function ClassicGameplayInstructions() {
               <li className="mx-auto text-center">
                 If your submitted word exists in the{" "}
                 <span className="text-pumpkin-orange hover:text-amber-500">
-                  <Link to="/z-words/all-words-for-word-game">
-                    dictionary (word list)
-                  </Link>
+                  <Link to="/words-list">dictionary (word list)</Link>
                 </span>{" "}
                 but does not match the correct word, you lose a life.
               </li>
@@ -161,9 +154,7 @@ function ClassicGameplayInstructions() {
               <li className="mx-auto text-center">
                 If a word does not exist in the{" "}
                 <span className="text-pumpkin-orange hover:text-amber-500">
-                  <Link to="/z-words/all-words-for-word-game">
-                    dictionary (word list)
-                  </Link>
+                  <Link to="/words-list">dictionary (word list)</Link>
                 </span>
                 , you are not penalized for it. There will be a message
                 displayed that informs you that the word is not valid for this
