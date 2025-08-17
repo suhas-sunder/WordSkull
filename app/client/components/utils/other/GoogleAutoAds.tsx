@@ -1,24 +1,17 @@
-// app/client/components/utils/other/GoogleAutoAds.tsx
 import { useEffect } from "react";
-
-declare global {
-  interface Window {
-    adsbygoogle: { push: (config: object) => void };
-  }
-}
 
 export default function GoogleAutoAds() {
   useEffect(() => {
     if (typeof window === "undefined" || typeof document === "undefined")
       return;
 
-    const ensureScriptOnce = () => {
-      let s = document.querySelector<HTMLScriptElement>(
-        "#adsbygoogleaftermount"
-      );
-      if (!s) {
-        s = document.createElement("script");
-        s.id = "adsbygoogleaftermount";
+    const w = window as any;
+
+    const injectScriptOnce = () => {
+      const id = "adsbygoogleaftermount";
+      if (!document.getElementById(id)) {
+        const s = document.createElement("script");
+        s.id = id;
         s.async = true;
         s.crossOrigin = "anonymous";
         s.src =
@@ -27,37 +20,57 @@ export default function GoogleAutoAds() {
       }
     };
 
+    const pushAd = () => (w.adsbygoogle || (w.adsbygoogle = [])).push({});
+
     const initSlots = () => {
-      if (!window.adsbygoogle)
-        window.adsbygoogle = { push: (config: object) => {} };
       document.querySelectorAll<HTMLElement>(".adsbygoogle").forEach((el) => {
+        // Don’t double-init the same slot
         if (el.dataset.adsbygoogleInitialized === "true") return;
         if (el.getAttribute("data-ad-status") === "filled") {
           el.dataset.adsbygoogleInitialized = "true";
           return;
         }
         try {
-          window.adsbygoogle!.push({});
+          pushAd();
           el.dataset.adsbygoogleInitialized = "true";
         } catch {
-          /* script may not be ready yet; retries below will cover it */
+          // Script not ready yet; later retries will catch it
         }
       });
     };
 
-    ensureScriptOnce();
-    // First attempts (script is async)
-    initSlots();
-    const t1 = window.setTimeout(initSlots, 400);
-    const t2 = window.setTimeout(initSlots, 1200);
+    // Delay until AFTER the first paint + window load, so hydration is done
+    const afterLoad = () => {
+      injectScriptOnce();
+      const idle =
+        w.requestIdleCallback || ((cb: () => void) => setTimeout(cb, 1000));
+      idle(() => setTimeout(initSlots, 150));
+    };
 
-    // Watch for route-driven DOM changes (no router hooks needed)
-    const mo = new MutationObserver(initSlots);
+    if (document.readyState === "complete") {
+      afterLoad();
+    } else {
+      const onLoad = () => {
+        window.removeEventListener("load", onLoad);
+        afterLoad();
+      };
+      window.addEventListener("load", onLoad, { once: true });
+    }
+
+    // Re-scan on route changes/dom mutations (throttled)
+    let raf = 0;
+    const scheduleScan = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        initSlots();
+      });
+    };
+    const mo = new MutationObserver(scheduleScan);
     mo.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
+      if (raf) cancelAnimationFrame(raf);
       mo.disconnect();
     };
   }, []);

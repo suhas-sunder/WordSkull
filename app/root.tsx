@@ -15,7 +15,6 @@ import {
   Links,
   Meta,
   Scripts,
-  // REMOVED: ScrollRestoration,
   ClientLoaderFunctionArgs,
   useLocation,
   useNavigation,
@@ -28,11 +27,9 @@ import {
   ThemeProvider,
   useTheme,
 } from "./client/components/context/ThemeContext";
-// REMOVED top-level localforage import
 import { SettingsProvider } from "./client/components/context/SettingsContext";
 import { StatsProvider } from "./client/components/context/StatsContext";
 import ErrorBoundary from "./client/components/utils/errors/ErrorBoundary";
-// REMOVED top-level GoogleAutoAds import
 import GetWordsForSkull from "./client/components/utils/requests/GetWordsForSkull";
 import { useEffect, lazy, Suspense, useState } from "react";
 
@@ -63,23 +60,33 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   // Build canonical (no trailing slash on path)
   const canonical = url.origin + (url.pathname || "/") + url.search;
 
-  // Memoize/fetch words once per TTL
+  // Memoize/fetch words once per TTL, robust to Response|object shapes
   const now = Date.now();
   if (!WORDS_CACHE || now - WORDS_LOADED_AT > WORDS_TTL_MS) {
-    const data = (await GetWordsForSkull()) as
-      | WordsPayload
-      | { [k: string]: any };
-    WORDS_CACHE = (data as WordsPayload).words
-      ? (data as WordsPayload)
-      : { words: data as any };
-    WORDS_LOADED_AT = now;
+    try {
+      const resOrObj = await GetWordsForSkull();
+      let words: Record<number, string[]> | undefined;
+
+      if (resOrObj && typeof (resOrObj as any).json === "function") {
+        const data = await (resOrObj as Response).json();
+        words = (data as any)?.words ?? (data as any);
+      } else {
+        words = (resOrObj as any)?.words ?? (resOrObj as any);
+      }
+
+      WORDS_CACHE = { words: words ?? {} };
+      WORDS_LOADED_AT = now;
+    } catch (e) {
+      console.error("GetWordsForSkull failed in root loader:", e);
+      WORDS_CACHE = { words: {} };
+      WORDS_LOADED_AT = now;
+    }
   }
 
   return json(
     { ...WORDS_CACHE, canonical },
     {
       headers: {
-        // CDN+browser friendly; keeps SSR snappy without redoing work
         "Cache-Control":
           "public, s-maxage=86400, max-age=1800, stale-while-revalidate=604800",
       },
@@ -97,7 +104,6 @@ export const action = async ({ request }: { request: Request }) => {
 export async function clientLoader({ serverLoader }: ClientLoaderFunctionArgs) {
   const cacheKey = "words";
   try {
-    // CLIENT-ONLY import to keep it out of the server bundle
     const { default: localforage } = await import("localforage");
 
     const cachedWords = await localforage.getItem(cacheKey);
@@ -110,7 +116,7 @@ export async function clientLoader({ serverLoader }: ClientLoaderFunctionArgs) {
       return { words };
     }
   } catch (error) {
-    console.error("Error fetching or decompressing words data:", error);
+    console.error("Error fetching or caching words data:", error);
     return { words: [] };
   }
 }
@@ -126,9 +132,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
       content:
         "Play Word Skull: Classic, Royal Lichen, and more. Fast word challenges with 3 to 9 letter play.",
     },
-    // canonical link via Meta API
     { tagName: "link", rel: "canonical", href: canonical },
-    // social tags
     { property: "og:url", content: canonical },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
@@ -141,6 +145,7 @@ function Shell({ children }: { children: React.ReactNode }) {
   const { darkThemeActive } = useTheme();
   return (
     <div
+      suppressHydrationWarning
       className={`pt-6 transition-colors duration-[600ms] ${
         darkThemeActive ? "bg-stone-900" : "bg-amber-50/10"
       }`}
@@ -152,7 +157,6 @@ function Shell({ children }: { children: React.ReactNode }) {
   );
 }
 
-// Body is now a shell DIV, not a <body>
 export function Body({ children }: { children: React.ReactNode }) {
   return <Shell>{children}</Shell>;
 }
@@ -180,7 +184,6 @@ function ScrollToTopOnRouteChange() {
     if (navigation.state === "idle") {
       const id = requestAnimationFrame(() => {
         window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-        // extra safety across engines
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
       });
@@ -192,23 +195,14 @@ function ScrollToTopOnRouteChange() {
 }
 
 /** Client-only, lazy-loaded Google ads */
-
-const GoogleAutoAdsLazy = lazy(async () => {
-  try {
-    const mod = await import("./client/components/utils/other/GoogleAutoAds"); // .tsx file
-    return { default: mod.default ?? (() => null) };
-  } catch (err) {
-    if (import.meta.env.DEV) console.warn("GoogleAutoAds failed to load:", err);
-    return { default: () => null };
-  }
-});
+const GoogleAutoAdsLazy = lazy(
+  () => import("./client/components/utils/other/GoogleAutoAds")
+);
 
 function AdsClientOnly() {
-  // Ensure server and first client render match (both render nothing)
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
-
+  if (!mounted) return null; // no SSR markup; no hydration race
   return (
     <Suspense fallback={null}>
       <GoogleAutoAdsLazy />
@@ -220,7 +214,7 @@ function AdsClientOnly() {
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -271,7 +265,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <ThemeProvider>
             <SettingsProvider>
               <StatsProvider>
-                {/* ensure manual control + force scroll-to-top */}
                 <UseManualScrollRestoration />
                 <ScrollToTopOnRouteChange />
                 <Body>{children}</Body>
@@ -280,12 +273,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </ThemeProvider>
         </ErrorBoundary>
 
-        {/* Removed <ScrollRestoration /> to avoid conflicts */}
         <Scripts />
-        {/* Lazy, client-only ads */}
-        <div id="ads-root" suppressHydrationWarning>
-          <AdsClientOnly />
-        </div>
+        <AdsClientOnly />
       </body>
     </html>
   );

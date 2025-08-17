@@ -52,7 +52,9 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const count = data?.count;
   const title = `All ${LENGTH}-Letter Words for Word Games | Word Skull`;
   const desc = count
-    ? `Browse ${count.toLocaleString()} curated ${LENGTH}-letter words for word games like Wordle, crosswords, anagrams, and cryptograms. Great for practice, puzzles, and vocabulary building.`
+    ? `Browse ${count.toLocaleString(
+        "en-US"
+      )} curated ${LENGTH}-letter words for word games like Wordle, crosswords, anagrams, and cryptograms. Great for practice, puzzles, and vocabulary building.`
     : `Browse curated ${LENGTH}-letter words for word games like Wordle, crosswords, anagrams, and cryptograms. Great for practice, puzzles, and vocabulary building.`;
 
   const url =
@@ -157,7 +159,8 @@ export default function SevenLetterWords() {
       <main className="flex max-w-[1200px] flex-col w-full">
         <div className="flex flex-col gap-5 justify-center items-center">
           <h2 className="text-2xl">
-            There {count === 1 ? "is" : "are"} {count.toLocaleString()} word
+            There {count === 1 ? "is" : "are"} {count.toLocaleString("en-US")}{" "}
+            word
             {count === 1 ? "" : "s"} in this list!
           </h2>
 
