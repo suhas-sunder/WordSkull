@@ -3,12 +3,43 @@ import { Link } from "@remix-run/react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
+  const canonical = "https://www.wordskull.com/sitemap";
+
+  const title = "Sitemap | WordSkull";
+  const description =
+    "Browse the WordSkull sitemap for quick access to all game modes, word lists, FAQs, and help pages.";
+
+  const ogImage = "https://www.wordskull.com/og/wordskull-sitemap.jpg";
+
   return [
-    { title: "Sitemap | Word Skull" },
+    // Title & Description
+    { title },
+    { name: "description", content: description },
+
+    // Canonical
+    { tagName: "link", rel: "canonical", href: canonical },
+
+    // Open Graph
+    { property: "og:site_name", content: "WordSkull" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: canonical },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:alt", content: "WordSkull sitemap overview" },
+    { property: "og:locale", content: "en_US" },
+
+    // Twitter
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: ogImage },
+
+    // Robots (indexable, since it's useful for discovery)
     {
-      name: "description",
+      name: "robots",
       content:
-        "Quick links to everything on Word Skull: games, word lists, help pages, and more.",
+        "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1",
     },
   ];
 };

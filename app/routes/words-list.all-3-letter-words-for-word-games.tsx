@@ -50,29 +50,51 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 /* ===================== META ===================== */
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  const count = data?.count;
-  const title = `All ${LENGTH}-Letter Words for Word Games | Word Skull`;
+  const count = data?.count as number | undefined;
+
+  const title = "All 3-Letter Words for Word Games | WordSkull";
   const desc = count
     ? `Browse ${count.toLocaleString(
         "en-US"
-      )} curated ${LENGTH}-letter words for word games like Wordle, crosswords, anagrams, and cryptograms. Great for warm-ups, speed rounds, and vocabulary drills.`
-    : `Browse curated ${LENGTH}-letter words for word games like Wordle, crosswords, anagrams, and cryptograms. Great for warm-ups, speed rounds, and vocabulary drills.`;
+      )} 3-letter words for crosswords, anagrams, Boggle, and CVC practice. Ideal for quick fills, warmups, and speed drills.`
+    : "Browse 3-letter words for crosswords, anagrams, Boggle, and CVC practice. Ideal for quick fills, warmups, and speed drills.";
 
   const url =
     data?.canonical ??
-    `https://www.wordskull.com/words-list/all-${LENGTH}-letter-words-for-word-games`;
+    "https://www.wordskull.com/words-list/all-3-letter-words-for-word-games";
+
+  const ogImage = "https://www.wordskull.com/og/wordskull-words-3.jpg";
 
   return [
+    // Title & Description
     { title },
     { name: "description", content: desc },
+
+    // Canonical
+    { tagName: "link", rel: "canonical", href: url },
+
+    // Open Graph
+    { property: "og:site_name", content: "WordSkull" },
     { property: "og:title", content: title },
     { property: "og:description", content: desc },
     { property: "og:type", content: "website" },
     { property: "og:url", content: url },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:alt", content: "WordSkull 3-letter word list" },
+    { property: "og:locale", content: "en_US" },
+
+    // Twitter
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: desc },
-    { name: "robots", content: "index,follow,max-image-preview:large" },
+    { name: "twitter:image", content: ogImage },
+
+    // Robots
+    {
+      name: "robots",
+      content:
+        "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1",
+    },
   ];
 };
 

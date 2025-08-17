@@ -21,34 +21,57 @@ export const meta: MetaFunction = ({ matches }) => {
   const counts = LENGTHS.map(
     (n, i) =>
       words?.[n]?.length ??
-      (words ? Object.values(words)[i]?.length : undefined)
+      (words ? (Object.values(words) as any[])[i]?.length : undefined)
   );
   const total = counts.every((c) => typeof c === "number")
     ? (counts as number[]).reduce((a, b) => a + b, 0)
     : undefined;
 
-  const title = "All 3–9 Letter Words for Word Games | Word Skull";
+  const title = "All 3-9 Letter Words for Word Games | WordSkull";
   const desc = total
-    ? `Browse ${total.toLocaleString()} curated words organized by length (3–9 letters) for word & puzzle games like Wordle, crosswords, anagrams, and cryptograms. Great for practice, puzzles, and vocabulary building.`
-    : "Browse curated words organized by length (3–9 letters) for word & puzzle games like Wordle, crosswords, anagrams, and cryptograms. Great for practice, puzzles, and vocabulary building.";
+    ? `Browse ${total.toLocaleString()} words by length (3-9 letters) for Wordle, crosswords, anagrams, and more. Great for puzzles and practice.`
+    : "Browse words by length (3-9 letters) for Wordle, crosswords, anagrams, and more. Great for puzzles and practice.";
 
   const url = root?.data?.canonical ?? "https://www.wordskull.com/words-list";
+  const ogImage = "https://www.wordskull.com/og/wordskull-words-list.jpg";
 
   return [
+    // Title & Description
     { title },
     { name: "description", content: desc },
-    // canonical
+
+    // Canonical
     { tagName: "link", rel: "canonical", href: url },
-    // Social
+
+    // Open Graph
+    { property: "og:site_name", content: "WordSkull" },
     { property: "og:title", content: title },
     { property: "og:description", content: desc },
     { property: "og:type", content: "website" },
     { property: "og:url", content: url },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:alt", content: "WordSkull word lists by length" },
+    { property: "og:locale", content: "en_US" },
+
+    // Twitter
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: desc },
-    // Crawling hint
-    { name: "robots", content: "index,follow,max-image-preview:large" },
+    { name: "twitter:image", content: ogImage },
+
+    // Robots (consistent, non-conflicting)
+    {
+      name: "robots",
+      content:
+        "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1",
+    },
+
+    // Optional helpful keywords
+    {
+      name: "keywords",
+      content:
+        "word lists, 3 letter words, 4 letter words, 5 letter words, 6 letter words, 7 letter words, 8 letter words, 9 letter words, word games, crossword helper, anagram helper",
+    },
   ];
 };
 

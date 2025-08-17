@@ -13,31 +13,48 @@ type RootMatch = { id: string; data?: { canonical?: string } };
 export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as RootMatch | undefined;
 
-  // Canonical from root (preferred), with a safe fallback:
+  // Canonical from root when provided, with a safe fallback
   const canonical =
     root?.data?.canonical ??
     "https://www.wordskull.com/games/classic/grim-reapers-hard-3-to-7-letter-words";
 
-  const title = "Word Skull Classic Grim Reapers (Hard, 3–7 Letter Words)";
+  const title = "Grim Reapers Hard Mode | Classic WordSkull (3-7 Letter Words)";
   const description =
-    "Tackle Word Skull’s Hard mode: Grim Reapers. Guess 3–7 letter words, sharpen your vocabulary, and climb toward Extreme difficulty.";
+    "Play Classic WordSkull: Grim Reapers, the Hard mode. Guess 3-7 letter words to defeat skulls. Step up from Specter and prepare for Royal Lichen.";
+
+  // Real image, 1200x630+, returns 200 OK
+  const ogImage = "https://www.wordskull.com/og/wordskull-grim-reapers.jpg";
 
   return [
+    // Title & Description
     { title },
     { name: "description", content: description },
-    // canonical
+
+    // Canonical
     { tagName: "link", rel: "canonical", href: canonical },
+
     // Open Graph
+    { property: "og:site_name", content: "WordSkull" },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
     { property: "og:url", content: canonical },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:alt", content: "WordSkull Grim Reapers hard mode" },
+    { property: "og:locale", content: "en_US" },
+
     // Twitter
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
+    { name: "twitter:image", content: ogImage },
+
     // Robots
-    { name: "robots", content: "index,follow,max-image-preview:large" },
+    {
+      name: "robots",
+      content:
+        "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1",
+    },
   ];
 };
 

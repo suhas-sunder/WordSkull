@@ -3,9 +3,40 @@ import { MetaFunction } from "@remix-run/react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
+  const canonical = "https://www.wordskull.com/terms";
+
+  const title = "Terms of Service | WordSkull";
+  const description =
+    "Read the WordSkull Terms of Service. Learn about your rights and responsibilities when playing the game and using the website.";
+
+  const ogImage = "https://www.wordskull.com/og/wordskull-terms.jpg";
+
   return [
-    { title: "Terms of Service 📜" },
-    { name: "description", content: "Emoji Kitchen Game Terms of Service!" },
+    // Title & Description
+    { title },
+    { name: "description", content: description },
+
+    // Canonical
+    { tagName: "link", rel: "canonical", href: canonical },
+
+    // Open Graph
+    { property: "og:site_name", content: "WordSkull" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: canonical },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:alt", content: "WordSkull terms of service" },
+    { property: "og:locale", content: "en_US" },
+
+    // Twitter
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: ogImage },
+
+    // Robots (policies usually don’t need to rank, but links should be followed)
+    { name: "robots", content: "noindex,follow" },
   ];
 };
 
@@ -21,9 +52,9 @@ export default function TermsOfService() {
           We are https://wordskull.com ('Company', 'we', 'us', 'our').
         </p>
         <p>
-          We operate the website https://wordskull.com (the 'Site'), as
-          well as any other related products and services that refer or link to
-          these legal terms (the 'Legal Terms') (collectively, the 'Services').
+          We operate the website https://wordskull.com (the 'Site'), as well as
+          any other related products and services that refer or link to these
+          legal terms (the 'Legal Terms') (collectively, the 'Services').
         </p>
         <p>
           You can contact us by email at admin@wordskull.com or by mail to
@@ -777,16 +808,15 @@ export default function TermsOfService() {
           <h2 className="flex py-2 text-2xl">16. PRIVACY POLICY</h2>
           <p>
             We care about data privacy and security. Please review our Privacy
-            Policy: https://wordskull.com/privacypolicy. By using the
-            Services, you agree to be bound by our Privacy Policy, which is
-            incorporated into these Legal Terms. Please be advised the Services
-            are hosted in Canada. If you access the Services from any other
-            region of the world with laws or other requirements governing
-            personal data collection, use, or disclosure that differ from
-            applicable laws in Canada, then through your continued use of the
-            Services, you are transferring your data to Canada, and you
-            expressly consent to have your data transferred to and processed in
-            Canada.
+            Policy: https://wordskull.com/privacypolicy. By using the Services,
+            you agree to be bound by our Privacy Policy, which is incorporated
+            into these Legal Terms. Please be advised the Services are hosted in
+            Canada. If you access the Services from any other region of the
+            world with laws or other requirements governing personal data
+            collection, use, or disclosure that differ from applicable laws in
+            Canada, then through your continued use of the Services, you are
+            transferring your data to Canada, and you expressly consent to have
+            your data transferred to and processed in Canada.
           </p>
         </section>
         <section className="flex flex-col gap-4">
@@ -890,11 +920,10 @@ export default function TermsOfService() {
             Arbitration Chamber (Belgium, Brussels, Avenue Louise, 146)
             according to the Rules of this ICAC, which, as a result of referring
             to it, is considered as the part of this clause. The number of
-            arbitrators shall be http://wordskull.com. The seat, or legal
-            place, or arbitration shall be http://wordskull.com. The
-            language of the proceedings shall be http://wordskull.com. The
-            governing law of these Legal Terms shall be substantive law of
-            http://wordskull.com.
+            arbitrators shall be http://wordskull.com. The seat, or legal place,
+            or arbitration shall be http://wordskull.com. The language of the
+            proceedings shall be http://wordskull.com. The governing law of
+            these Legal Terms shall be substantive law of http://wordskull.com.
           </p>
           <h3>Restrictions</h3>
           <p>

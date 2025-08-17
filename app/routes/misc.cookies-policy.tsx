@@ -3,9 +3,40 @@ import { Link, MetaFunction } from "@remix-run/react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
+  const canonical = "https://www.wordskull.com/cookies";
+
+  const title = "Cookies Policy | WordSkull";
+  const description =
+    "Read the WordSkull cookies policy. Learn how cookies are used in fantasy word games across the WordSkull website.";
+
+  const ogImage = "https://www.wordskull.com/og/wordskull-cookies.jpg";
+
   return [
-    { title: "Cookies Policy 🍪" },
-    { name: "description", content: "Emoji Kitchen Game Cookies policy!" },
+    // Title & Description
+    { title },
+    { name: "description", content: description },
+
+    // Canonical
+    { tagName: "link", rel: "canonical", href: canonical },
+
+    // Open Graph
+    { property: "og:site_name", content: "WordSkull" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: canonical },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:alt", content: "WordSkull cookies policy" },
+    { property: "og:locale", content: "en_US" },
+
+    // Twitter
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: ogImage },
+
+    // Robots
+    { name: "robots", content: "noindex,follow" }, // policies are usually not useful for ranking
   ];
 };
 

@@ -47,31 +47,40 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   });
 };
 
-/* ===================== META ===================== */
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  const count = data?.count;
-  const title = `All ${LENGTH}-Letter Words for Word Games | Word Skull`;
+  const count = data?.count as number | undefined;
+
+  const title = "All 5-Letter Words for Word Games | WordSkull";
   const desc = count
     ? `Browse ${count.toLocaleString(
         "en-US"
-      )} curated ${LENGTH}-letter words for word games like Wordle, crosswords, anagrams, and cryptograms. Perfect for practice, puzzles, and vocabulary building.`
-    : `Browse curated ${LENGTH}-letter words for word games like Wordle, crosswords, anagrams, and cryptograms. Perfect for practice, puzzles, and vocabulary building.`;
+      )} 5-letter words for Wordle, crosswords, anagrams, and puzzles. Perfect for daily Wordle training and vocab growth.`
+    : "Browse 5-letter words for Wordle, crosswords, anagrams, and puzzles. Perfect for daily Wordle training and vocab growth.";
 
   const url =
     data?.canonical ??
-    `https://www.wordskull.com/words-list/all-${LENGTH}-letter-words-for-word-games`;
+    "https://www.wordskull.com/words-list/all-5-letter-words-for-word-games";
+  const ogImage = "https://www.wordskull.com/og/wordskull-words-5.jpg";
 
   return [
     { title },
     { name: "description", content: desc },
+    { tagName: "link", rel: "canonical", href: url },
     { property: "og:title", content: title },
     { property: "og:description", content: desc },
     { property: "og:type", content: "website" },
     { property: "og:url", content: url },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:alt", content: "WordSkull 5-letter word list" },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: desc },
-    { name: "robots", content: "index,follow,max-image-preview:large" },
+    { name: "twitter:image", content: ogImage },
+    {
+      name: "robots",
+      content:
+        "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1",
+    },
   ];
 };
 

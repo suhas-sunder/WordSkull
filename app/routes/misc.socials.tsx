@@ -3,15 +3,43 @@ import { Link } from "react-router-dom";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
+  const canonical = "https://www.wordskull.com/links";
+
+  const title = "Links Hub | WordSkull – Socials, News & Resources";
+  const description =
+    "Your hub for all things WordSkull: connect on socials, get news updates, share scores, and dive deeper into the world of wordplay.";
+
+  const ogImage = "https://www.wordskull.com/og/wordskull-links.jpg";
+
   return [
+    // Title & Description
+    { title },
+    { name: "description", content: description },
+
+    // Canonical
+    { tagName: "link", rel: "canonical", href: canonical },
+
+    // Open Graph
+    { property: "og:site_name", content: "WordSkull" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: canonical },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:alt", content: "WordSkull links hub" },
+    { property: "og:locale", content: "en_US" },
+
+    // Twitter
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: ogImage },
+
+    // Robots
     {
-      title:
-        "💀 Links on Word Skull – Socials, News & Resources for Word Games 🎉✨",
-    },
-    {
-      name: "description",
+      name: "robots",
       content:
-        "✨ Welcome to your go-to hub for all things Word Skull! 🎉 Here, you can connect with us across social platforms, get updates, and dive deeper into the world of wordplay and learning fun! Whether you’re here to share your scores, stay in the loop, or just want a handy list of all our links, this page keeps you connected and in the game! 🧠💜",
+        "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1",
     },
   ];
 };

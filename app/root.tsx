@@ -309,7 +309,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <SettingsProvider>
               <StatsProvider>
                 <UseManualScrollRestoration />
-                {/* replaced ScrollToTopOnRouteChange with anchor-aware scroll */}
                 <AnchorAwareScroll />
                 <Body>{children}</Body>
               </StatsProvider>

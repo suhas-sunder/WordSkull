@@ -13,31 +13,48 @@ type RootMatch = { id: string; data?: { canonical?: string } };
 export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as RootMatch | undefined;
 
-  // Fallback canonical if root loader didn't provide one
+  // Canonical from root when available, with a safe fallback
   const canonical =
     root?.data?.canonical ??
     "https://www.wordskull.com/games/classic/specter-knights-medium-3-to-6-letter-words";
 
-  const title = "Word Skull Classic Medium (3–6 Letter Words) | Specter Mode";
+  const title = "Specter Medium Mode | Classic WordSkull (3-6 Letter Words)";
   const description =
-    "Sharpen your skills in Specter (Medium). Guess 3–6 letter words, build vocabulary, and climb difficulty—perfect for quick, satisfying word-puzzle sessions.";
+    "Play Classic WordSkull: Specter, the Medium mode. Guess 3-6 letter words, build vocabulary, and climb difficulty with quick, satisfying sessions.";
+
+  // Real image, 1200x630+, must return 200 OK
+  const ogImage = "https://www.wordskull.com/og/wordskull-specter.jpg";
 
   return [
+    // Title & Description
     { title },
     { name: "description", content: description },
-    // canonical
+
+    // Canonical
     { tagName: "link", rel: "canonical", href: canonical },
+
     // Open Graph
+    { property: "og:site_name", content: "WordSkull" },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
     { property: "og:url", content: canonical },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:alt", content: "WordSkull Specter medium mode" },
+    { property: "og:locale", content: "en_US" },
+
     // Twitter
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
-    // Crawl directives
-    { name: "robots", content: "index,follow,max-image-preview:large" },
+    { name: "twitter:image", content: ogImage },
+
+    // Robots
+    {
+      name: "robots",
+      content:
+        "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1",
+    },
   ];
 };
 

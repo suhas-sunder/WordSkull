@@ -11,14 +11,43 @@ import { WordsData } from "./games.classic.boneheads-easy-3-to-5-letter-words";
 import ClassicGameplayInstructions from "~/client/components/layout/ClassicGameplayInstructions";
 
 export const meta: MetaFunction = () => {
+  const canonical = "https://www.wordskull.com";
+
+  const title = "WordSkull | Free Fantasy Word Battle Game";
+  const description =
+    "Play WordSkull, a free fantasy word game. Sharpen your vocabulary, challenge your mind, and enjoy fun word puzzles with unique battle modes.";
+
+  const ogImage = "https://www.wordskull.com/og/wordskull-home.jpg";
+
   return [
+    // Title & Description
+    { title },
+    { name: "description", content: description },
+
+    // Canonical
+    { tagName: "link", rel: "canonical", href: canonical },
+
+    // Open Graph
+    { property: "og:site_name", content: "WordSkull" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: canonical },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:alt", content: "WordSkull fantasy word battle game" },
+    { property: "og:locale", content: "en_US" },
+
+    // Twitter
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: ogImage },
+
+    // Robots
     {
-      title: "💀 Word Skull - Sharpen Your Mind, One Word at a Time. 🎉✨",
-    },
-    {
-      name: "description",
+      name: "robots",
       content:
-        "WordSkull has fun word games for fun and learning! ❤️ Sharpen your vocabulary, challenge your mind 🧠, and enjoy relaxing gameplay and puzzles 💜.🎉",
+        "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1",
     },
   ];
 };

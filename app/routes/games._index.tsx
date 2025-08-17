@@ -10,23 +10,43 @@ export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as Match | undefined;
   const url = root?.data?.canonical ?? "https://www.wordskull.com/games";
 
-  const title =
-    "Play Word Games | Word Skull — Classic Modes & More Word Games!";
+  const title = "Play WordSkull Games | Free Word Battle Modes";
   const description =
-    "Explore Word Skull games. Start with Classic modes (Easy, Medium, Hard, Royal Lichen) and get ready for new word challenges!";
+    "Explore WordSkull game modes with new fantasy word challenges added regularly. Battle boneheads, spectres, reapers, and royal lichens & more.";
+
+  // Serve a real image that returns 200 OK
+  const ogImage = "https://www.wordskull.com/og/wordskull-games.jpg";
 
   return [
+    // Title & Description
     { title },
     { name: "description", content: description },
+
+    // Canonical
     { tagName: "link", rel: "canonical", href: url },
+
+    // Open Graph
+    { property: "og:site_name", content: "WordSkull" },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
     { property: "og:url", content: url },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:alt", content: "Play WordSkull Games" },
+    { property: "og:locale", content: "en_US" },
+
+    // Twitter
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
-    { name: "robots", content: "index,follow,max-image-preview:large" },
+    { name: "twitter:image", content: ogImage },
+
+    // Robots (single, consistent directive string)
+    {
+      name: "robots",
+      content:
+        "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1",
+    },
   ];
 };
 
@@ -44,7 +64,7 @@ export default function GamesIndex() {
     ? {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        name: "Word Skull — Games",
+        name: "Word Skull | Games",
         url: canonical,
         breadcrumb: {
           "@type": "BreadcrumbList",
@@ -140,7 +160,7 @@ export default function GamesIndex() {
                     Classic
                   </h3>
                   <p className="mt-1 font-lato text-sm text-skull-super-dark-brown/90">
-                    Core Word Skull experience — Easy, Medium, Hard, and Royal
+                    Core Word Skull experience | Easy, Medium, Hard, and Royal
                     Lichen (3–9 letters).
                   </p>
                   <span className="mt-3 inline-block rounded-full bg-pumpkin-orange px-4 py-1 text-sm text-white transition group-hover:bg-amber-600">

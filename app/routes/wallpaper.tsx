@@ -10,31 +10,53 @@ export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as Match | undefined;
   const url = root?.data?.canonical ?? "https://www.wordskull.com/wallpaper";
 
-  const title =
-    "Free 4K Fantasy Wallpapers | Dragons, Skulls, Anime & E-Girl | Word Skull";
+  const title = "Free 4K Fantasy Wallpapers | WordSkull";
   const description =
-    "Download free 4K HD wallpapers from Word Skull’s fantasy world—dragons, skulls, dungeon vibes, anime & e-girl aesthetics. Perfect sizes for desktop, mobile, and tablets.";
+    "Download free 4K wallpapers from WordSkull: dragons, skulls, dungeon and fantasy styles. Sizes for desktop, mobile, and tablets.";
+
+  // Real image, 1200x630+ and returns 200 OK
+  const ogImage = "https://www.wordskull.com/og/wordskull-wallpapers.jpg";
 
   return [
+    // Title & Description
     { title },
     { name: "description", content: description },
-    // canonical
+
+    // Canonical
     { tagName: "link", rel: "canonical", href: url },
-    // social
+
+    // Open Graph
+    { property: "og:site_name", content: "WordSkull" },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
     { property: "og:url", content: url },
+    { property: "og:image", content: ogImage },
+    {
+      property: "og:image:alt",
+      content: "WordSkull 4K fantasy wallpapers gallery",
+    },
+    { property: "og:locale", content: "en_US" },
+
+    // Twitter
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
-    // helpful keywords
+    { name: "twitter:image", content: ogImage },
+
+    // Helpful keywords (kept concise)
     {
       name: "keywords",
       content:
-        "4K wallpapers, fantasy wallpapers, dragon wallpaper, skull wallpaper, anime wallpaper, egirl wallpaper, desktop wallpaper, mobile wallpaper, tablet wallpaper, HD background",
+        "4K wallpapers, fantasy wallpapers, dragon wallpaper, skull wallpaper, anime wallpaper, e-girl wallpaper, desktop, mobile, tablet",
     },
-    { name: "robots", content: "index,follow,max-image-preview:large" },
+
+    // Robots
+    {
+      name: "robots",
+      content:
+        "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1",
+    },
   ];
 };
 
@@ -45,12 +67,12 @@ function Wallpaper() {
     {
       slug: "/desktop-landscape-wallpapers",
       h3: "16:9 Landscape (Desktop & Laptop)",
-      p: "Perfect for monitors and notebooks — crisp 4K/1080p fantasy scenes.",
+      p: "Perfect for monitors and notebooks | crisp 4K/1080p fantasy scenes.",
     },
     {
       slug: "/mobile-portrait-wallpapers",
       h3: "9:16 Portrait (Mobile)",
-      p: "Optimized for iPhone & Android lock/home screens — tall, vivid art.",
+      p: "Optimized for iPhone & Android lock/home screens | tall, vivid art.",
     },
     {
       slug: "/tablet-4-3-wallpapers",
@@ -112,7 +134,7 @@ function Wallpaper() {
           Free 4K HD Fantasy Wallpapers
         </h1>
         <p className="mt-3 max-w-2xl mx-auto font-lato text-skull-super-dark-brown/90">
-          Dragons, skulls, dungeons, anime & e-girl vibes—crafted to fit
+          Dragons, skulls, dungeons, anime & e-girl vibes|crafted to fit
           desktop, mobile, and tablet screens with minimal cropping and maximum
           impact.
         </p>
@@ -150,7 +172,7 @@ function Wallpaper() {
             Popular Themes
           </h2>
           <p className="text-center max-w-2xl mx-auto font-lato text-skull-super-dark-brown/90">
-            Explore signature Word Skull aesthetics—dark fantasy, neon-lit
+            Explore signature Word Skull aesthetics|dark fantasy, neon-lit
             e-girl, retro anime glow, and metallic skull iconography.
           </p>
           <nav

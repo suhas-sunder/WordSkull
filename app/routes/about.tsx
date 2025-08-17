@@ -19,28 +19,46 @@ export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as RootMatch | undefined;
 
   const canonical = root?.data?.canonical ?? "https://www.wordskull.com/about";
-  const title = "About Word Skull — A Fast, Fun Word & Puzzle Game Project";
+  const title = "About WordSkull | Free Fantasy Word Battle Game";
   const description =
-    "Learn about Word Skull: a quick, satisfying word game crafted by Suhas Sunder. Why it exists, how it’s built, and where it’s headed.";
+    "WordSkull is a fast, satisfying fantasy browser word game battling skulls. Learn why it exists, how it was built, and why you should play it.";
+
+  // Prefer a static, crawlable image URL that resolves with 200 OK
+  const ogImage = "https://www.wordskull.com/og/wordskull-about.jpg";
 
   return [
+    // Title & Description
     { title },
     { name: "description", content: description },
-    // canonical
+
+    // Canonical
     { tagName: "link", rel: "canonical", href: canonical },
-    // author (nice hint to crawlers)
+
+    // Author (kept as a hint, fine for crawlers)
     { tagName: "link", rel: "author", href: "https://www.suhassunder.com" },
+
     // Open Graph
+    { property: "og:site_name", content: "WordSkull" },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
     { property: "og:url", content: canonical },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:alt", content: "About WordSkull" },
+    { property: "og:locale", content: "en_US" },
+
     // Twitter
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
-    // Robots
-    { name: "robots", content: "index,follow,max-image-preview:large" },
+    { name: "twitter:image", content: ogImage },
+
+    // Robots (avoid conflicting directives that can trigger Bing rejections)
+    {
+      name: "robots",
+      content:
+        "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1",
+    },
   ];
 };
 

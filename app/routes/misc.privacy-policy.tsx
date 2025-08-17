@@ -3,15 +3,44 @@ import { Link, MetaFunction } from "@remix-run/react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
+  const canonical = "https://www.wordskull.com/privacy";
+
+  const title = "Privacy Policy | WordSkull";
+  const description =
+    "Read the WordSkull privacy policy. Learn how your data is handled and protected when playing the fantasy word games on the WordSkull website.";
+
+  const ogImage = "https://www.wordskull.com/og/wordskull-privacy.jpg";
+
   return [
-    { title: "Privacy Policy 🔏" },
-    { name: "description", content: "Emoji Kitchen Game Privacy Policy!" },
+    // Title & Description
+    { title },
+    { name: "description", content: description },
+
+    // Canonical
+    { tagName: "link", rel: "canonical", href: canonical },
+
+    // Open Graph
+    { property: "og:site_name", content: "WordSkull" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: canonical },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:alt", content: "WordSkull privacy policy" },
+    { property: "og:locale", content: "en_US" },
+
+    // Twitter
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: ogImage },
+
+    // Robots (policies usually don't need to appear in SERPs)
+    { name: "robots", content: "noindex,follow" },
   ];
 };
 
 export default function PrivacyPolicy() {
-
-
   return (
     <div className="my-20 flex flex-col items-center mx-10 justify-center gap-8 font-nunito text-skull-brown">
       <header className="max-w-[1200px]">
@@ -26,8 +55,8 @@ export default function PrivacyPolicy() {
           </span>
           <ul className="flex list-inside list-disc flex-col gap-5 py-2 pl-5 dark:text-gray-400">
             <li>
-              Visit our website at http://wordskull.com, or any website
-              of ours that links to this privacy notice
+              Visit our website at http://wordskull.com, or any website of ours
+              that links to this privacy notice
             </li>
             <li>
               Engage with us in other related ways, including any sales,
@@ -907,10 +936,10 @@ export default function PrivacyPolicy() {
           </p>
           <p>
             To exercise these rights, you can contact us by submitting a data
-            subject access request, by email at admin@wordskull.com, or
-            by referring to the contact details at the bottom of this document.
-            If you have a complaint about how we handle your data, we would like
-            to hear from you.
+            subject access request, by email at admin@wordskull.com, or by
+            referring to the contact details at the bottom of this document. If
+            you have a complaint about how we handle your data, we would like to
+            hear from you.
           </p>
           <h3>Colorado Residents</h3>
           <p>
@@ -1060,16 +1089,16 @@ export default function PrivacyPolicy() {
           <p>
             If we decline to take action regarding your request, we will inform
             you of our decision and reasoning behind it. If you wish to appeal
-            our decision, please email us at admin@wordskull.com. Within
-            sixty (60) days of receipt of an appeal, we will inform you in
-            writing of any action taken or not taken in response to the appeal,
-            including a written explanation of the reasons for the decisions. If
-            your appeal is denied, you may contact the{" "}
+            our decision, please email us at admin@wordskull.com. Within sixty
+            (60) days of receipt of an appeal, we will inform you in writing of
+            any action taken or not taken in response to the appeal, including a
+            written explanation of the reasons for the decisions. If your appeal
+            is denied, you may contact the{" "}
             <Link
               to={
                 "https://www.oag.state.va.us/consumer-protection/index.php/file-a-complaint"
               }
-             />{" "}
+            />{" "}
             Attorney General to submit a complaint.
           </p>
         </section>
