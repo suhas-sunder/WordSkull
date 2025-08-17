@@ -28,13 +28,13 @@ import {
   ThemeProvider,
   useTheme,
 } from "./client/components/context/ThemeContext";
-import localforage from "localforage";
+// REMOVED top-level localforage import
 import { SettingsProvider } from "./client/components/context/SettingsContext";
 import { StatsProvider } from "./client/components/context/StatsContext";
 import ErrorBoundary from "./client/components/utils/errors/ErrorBoundary";
-import GoogleAutoAds from "./client/components/utils/other/GoogleAutoAds";
+// REMOVED top-level GoogleAutoAds import
 import GetWordsForSkull from "./client/components/utils/requests/GetWordsForSkull";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 
 // --- Loader / action / clientLoader ---
 
@@ -71,6 +71,9 @@ export const action = async ({ request }: { request: Request }) => {
 export async function clientLoader({ serverLoader }: ClientLoaderFunctionArgs) {
   const cacheKey = "words";
   try {
+    // CLIENT-ONLY import to keep it out of the server bundle
+    const { default: localforage } = await import("localforage");
+
     const cachedWords = await localforage.getItem(cacheKey);
     if (cachedWords) {
       return { words: cachedWords };
@@ -162,6 +165,19 @@ function ScrollToTopOnRouteChange() {
   return null;
 }
 
+/** Client-only, lazy-loaded Google ads */
+const GoogleAutoAdsLazy = lazy(
+  () => import("./client/components/utils/other/GoogleAutoAds")
+);
+function AdsClientOnly() {
+  if (typeof document === "undefined") return null; // don't render on SSR
+  return (
+    <Suspense fallback={null}>
+      <GoogleAutoAdsLazy />
+    </Suspense>
+  );
+}
+
 // --- Document layout ---
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -228,7 +244,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Removed <ScrollRestoration /> to avoid conflicts */}
         <Scripts />
-        <GoogleAutoAds />
+        {/* Lazy, client-only ads */}
+        <AdsClientOnly />
       </body>
     </html>
   );
