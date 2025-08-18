@@ -30,18 +30,18 @@ const posts: Post[] = [
       "https://www.doodlegarden.com/img/wordskull-vs-nyt-wordle-game.jpg",
     imageAlt: "WordSkull vs Wordle comparison artwork",
   },
-  // {
-  //   slug: "wordskull-vs-nyt-spelling-bee",
-  //   title: "WordSkull vs NYT Spelling Bee: A Battle of Wits",
-  //   description:
-  //     "Comparing WordSkull's unique mechanics with the NYT Spelling Bee's challenge.",
-  //   date: "2025-08-18",
-  //   imageWebp:
-  //     "https://www.wordskull.com/og/blog/wordskull-vs-nyt-spelling-bee.webp",
-  //   imageJpg:
-  //     "https://www.wordskull.com/og/blog/wordskull-vs-nyt-spelling-bee.jpg",
-  //   imageAlt: "WordSkull vs NYT Spelling Bee cover",
-  // },
+  {
+    slug: "wordskull-vs-nyt-spelling-bee",
+    title: "WordSkull vs NYT Spelling Bee: A Battle of Wits",
+    description:
+      "Comparing WordSkull's unique mechanics with the NYT Spelling Bee's challenge.",
+    date: "2025-08-18",
+    imageWebp:
+      "https://www.doodlegarden.com/img/wordskull-vs-nyt-spelling-bee.webp",
+    imageJpg:
+      "https://www.doodlegarden.com/img/wordskull-vs-nyt-spelling-bee.jpg",
+    imageAlt: "WordSkull vs NYT Spelling Bee cover",
+  },
 ];
 
 /* ===================== META ===================== */
@@ -125,6 +125,7 @@ function buildJsonLdBlog(canonical: string, items: Post[]) {
   };
 }
 
+/* ===================== THUMB (no nested Link) ===================== */
 function PostThumb({
   post,
   priority = false,
@@ -132,7 +133,6 @@ function PostThumb({
   post: Post;
   priority?: boolean;
 }) {
-  // Fallback to whichever exists
   const hasSources = post.imageWebp || post.imageJpg;
   if (!hasSources) return null;
 
@@ -142,26 +142,23 @@ function PostThumb({
   const height = 400;
 
   return (
-    <Link to={`/blog/${post.slug}`} className="block mb-3">
-      <picture>
-        {post.imageWebp ? (
-          <source srcSet={post.imageWebp} type="image/webp" />
-        ) : null}
-        {post.imageJpg ? (
-          <source srcSet={post.imageJpg} type="image/jpeg" />
-        ) : null}
-        <img
-          src={post.imageJpg || post.imageWebp!}
-          alt={alt}
-          width={width}
-          height={height}
-          className="h-40 w-full rounded-xl object-cover"
-          loading={priority ? "eager" : "lazy"}
-          decoding={priority ? "sync" : "async"}
-          fetchPriority={priority ? "high" : "auto"}
-        />
-      </picture>
-    </Link>
+    <picture>
+      {post.imageWebp ? (
+        <source srcSet={post.imageWebp} type="image/webp" />
+      ) : null}
+      {post.imageJpg ? (
+        <source srcSet={post.imageJpg} type="image/jpeg" />
+      ) : null}
+      <img
+        src={post.imageJpg || post.imageWebp!}
+        alt={alt}
+        width={width}
+        height={height}
+        className="mb-3 h-40 w-full rounded-xl object-cover"
+        loading={priority ? "eager" : "lazy"}
+        decoding={priority ? "sync" : "async"}
+      />
+    </picture>
   );
 }
 
@@ -227,41 +224,35 @@ export default function BlogIndex() {
           ) : (
             <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {sorted.map((post, idx) => (
-                <li
-                  key={post.slug}
-                  className="group rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition hover:shadow-md"
-                >
-                  <article className="flex h-full flex-col">
+                <li key={post.slug}>
+                  <Link
+                    to={`/blog/${post.slug}`}
+                    className="group block rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pumpkin-orange/70"
+                    aria-label={`Read: ${post.title}`}
+                  >
+                    {/* Thumbnail */}
                     <PostThumb post={post} priority={idx < 3} />
 
+                    {/* Header */}
                     <header>
-                      <h3 className="font-lora text-lg leading-snug">
-                        <Link
-                          to={`/blog/${post.slug}`}
-                          className="text-pumpkin-orange transition group-hover:text-amber-600"
-                        >
-                          {post.title}
-                        </Link>
+                      <h3 className="font-lora text-lg leading-snug text-pumpkin-orange transition group-hover:text-amber-600">
+                        <span>{post.title}</span>
                       </h3>
                       <p className="mt-1 text-xs text-stone-500">
                         {formatDate(post.date)}
                       </p>
                     </header>
 
+                    {/* Excerpt */}
                     <p className="mt-3 line-clamp-3 text-sm text-stone-700">
                       {post.description}
                     </p>
 
-                    <div className="mt-4">
-                      <Link
-                        to={`/blog/${post.slug}`}
-                        className="inline-block rounded-full bg-pumpkin-orange px-4 py-1 text-sm text-white transition hover:bg-amber-600"
-                        aria-label={`Read ${post.title}`}
-                      >
-                        Read
-                      </Link>
-                    </div>
-                  </article>
+                    {/* Faux button (still part of the same link) */}
+                    <span className="mt-4 inline-block rounded-full bg-pumpkin-orange px-4 py-1 text-sm text-white transition group-hover:bg-amber-600">
+                      Read
+                    </span>
+                  </Link>
                 </li>
               ))}
             </ul>
