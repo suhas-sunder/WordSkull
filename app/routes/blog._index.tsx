@@ -30,18 +30,18 @@ const posts: Post[] = [
       "https://www.doodlegarden.com/img/wordskull-vs-nyt-wordle-game.jpg",
     imageAlt: "WordSkull vs Wordle comparison artwork",
   },
-  {
-    slug: "wordskull-vs-nyt-spelling-bee",
-    title: "WordSkull vs NYT Spelling Bee: A Battle of Wits",
-    description:
-      "Comparing WordSkull's unique mechanics with the NYT Spelling Bee's challenge.",
-    date: "2025-08-17",
-    imageWebp:
-      "https://www.wordskull.com/og/blog/wordskull-vs-nyt-spelling-bee.webp",
-    imageJpg:
-      "https://www.wordskull.com/og/blog/wordskull-vs-nyt-spelling-bee.jpg",
-    imageAlt: "WordSkull vs NYT Spelling Bee cover",
-  },
+  // {
+  //   slug: "wordskull-vs-nyt-spelling-bee",
+  //   title: "WordSkull vs NYT Spelling Bee: A Battle of Wits",
+  //   description:
+  //     "Comparing WordSkull's unique mechanics with the NYT Spelling Bee's challenge.",
+  //   date: "2025-08-18",
+  //   imageWebp:
+  //     "https://www.wordskull.com/og/blog/wordskull-vs-nyt-spelling-bee.webp",
+  //   imageJpg:
+  //     "https://www.wordskull.com/og/blog/wordskull-vs-nyt-spelling-bee.jpg",
+  //   imageAlt: "WordSkull vs NYT Spelling Bee cover",
+  // },
 ];
 
 /* ===================== META ===================== */
