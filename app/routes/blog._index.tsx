@@ -10,7 +10,9 @@ type Post = {
   title: string;
   description: string;
   date: string; // ISO, e.g. "2025-08-17"
-  image?: string; // optional social image per post
+  imageWebp?: string;
+  imageJpg?: string;
+  imageAlt?: string;
 };
 
 /* ===================== DATA ===================== */
@@ -22,7 +24,23 @@ const posts: Post[] = [
     description:
       "How WordSkull builds on Wordle’s addictive formula with a fantasy dungeon theme, unique skull battles, and fresh mechanics.",
     date: "2025-08-17",
-    image: "https://www.wordskull.com/og/blog/wordskull-vs-wordle.jpg",
+    imageWebp:
+      "https://www.doodlegarden.com/img/wordskull-vs-nyt-wordle-game.webp",
+    imageJpg:
+      "https://www.doodlegarden.com/img/wordskull-vs-nyt-wordle-game.jpg",
+    imageAlt: "WordSkull vs Wordle comparison artwork",
+  },
+  {
+    slug: "wordskull-vs-nyt-spelling-bee",
+    title: "WordSkull vs NYT Spelling Bee: A Battle of Wits",
+    description:
+      "Comparing WordSkull's unique mechanics with the NYT Spelling Bee's challenge.",
+    date: "2025-08-17",
+    imageWebp:
+      "https://www.wordskull.com/og/blog/wordskull-vs-nyt-spelling-bee.webp",
+    imageJpg:
+      "https://www.wordskull.com/og/blog/wordskull-vs-nyt-spelling-bee.jpg",
+    imageAlt: "WordSkull vs NYT Spelling Bee cover",
   },
 ];
 
@@ -37,14 +55,9 @@ export const meta: MetaFunction = ({ matches }) => {
   const ogImage = "https://www.wordskull.com/og/blog/wordskull-blog.jpg";
 
   return [
-    // Title & Description
     { title },
     { name: "description", content: description },
-
-    // Canonical
     { tagName: "link", rel: "canonical", href: url },
-
-    // Open Graph
     { property: "og:site_name", content: "WordSkull" },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
@@ -53,14 +66,10 @@ export const meta: MetaFunction = ({ matches }) => {
     { property: "og:image", content: ogImage },
     { property: "og:image:alt", content: "WordSkull Blog cover" },
     { property: "og:locale", content: "en_US" },
-
-    // Twitter
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
     { name: "twitter:image", content: ogImage },
-
-    // Robots
     {
       name: "robots",
       content:
@@ -114,6 +123,46 @@ function buildJsonLdBlog(canonical: string, items: Post[]) {
       ],
     },
   };
+}
+
+function PostThumb({
+  post,
+  priority = false,
+}: {
+  post: Post;
+  priority?: boolean;
+}) {
+  // Fallback to whichever exists
+  const hasSources = post.imageWebp || post.imageJpg;
+  if (!hasSources) return null;
+
+  const alt = post.imageAlt ?? post.title;
+  // Fixed intrinsic size to reduce CLS; adjust to your real aspect
+  const width = 900;
+  const height = 400;
+
+  return (
+    <Link to={`/blog/${post.slug}`} className="block mb-3">
+      <picture>
+        {post.imageWebp ? (
+          <source srcSet={post.imageWebp} type="image/webp" />
+        ) : null}
+        {post.imageJpg ? (
+          <source srcSet={post.imageJpg} type="image/jpeg" />
+        ) : null}
+        <img
+          src={post.imageJpg || post.imageWebp!}
+          alt={alt}
+          width={width}
+          height={height}
+          className="h-40 w-full rounded-xl object-cover"
+          loading={priority ? "eager" : "lazy"}
+          decoding={priority ? "sync" : "async"}
+          fetchPriority={priority ? "high" : "auto"}
+        />
+      </picture>
+    </Link>
+  );
 }
 
 /* ===================== PAGE ===================== */
@@ -177,24 +226,13 @@ export default function BlogIndex() {
             <p className="text-stone-600">No posts yet. Check back soon.</p>
           ) : (
             <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {sorted.map((post) => (
+              {sorted.map((post, idx) => (
                 <li
                   key={post.slug}
                   className="group rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition hover:shadow-md"
                 >
                   <article className="flex h-full flex-col">
-                    {/* Optional thumbnail */}
-                    {post.image ? (
-                      <Link to={`/blog/${post.slug}`} className="block mb-3">
-                        <img
-                          src={post.image}
-                          alt=""
-                          className="h-40 w-full rounded-xl object-cover"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </Link>
-                    ) : null}
+                    <PostThumb post={post} priority={idx < 3} />
 
                     <header>
                       <h3 className="font-lora text-lg leading-snug">
