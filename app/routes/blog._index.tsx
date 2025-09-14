@@ -42,6 +42,18 @@ const posts: Post[] = [
       "https://www.doodlegarden.com/img/wordskull-vs-nyt-spelling-bee.jpg",
     imageAlt: "WordSkull vs NYT Spelling Bee cover",
   },
+  {
+    slug: "wordskull-vs-nyt-connections",
+    title: "WordSkull vs NYT Connections: Linking Logic and Dungeon Battles",
+    description:
+      "Compare WordSkull and NYT Connections: word linking, logic challenges, and dungeon-inspired gameplay versus abstract categorization puzzles.",
+    date: "2025-09-14",
+    imageWebp:
+      "https://www.doodlegarden.com/img/wordskull-vs-nyt-connections.webp",
+    imageJpg:
+      "https://www.doodlegarden.com/img/wordskull-vs-nyt-connections.jpg",
+    imageAlt: "WordSkull vs NYT Connections artwork",
+  },
 ];
 
 /* ===================== META ===================== */

@@ -5,10 +5,10 @@ import { Link, useMatches } from "react-router-dom";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
 import GameLinks from "../client/components/layout/GameLinks";
-import ClassicGameLogic from "~/client/components/layout/ClassicGameLogic";
+import ClassicGameLogic from "../client/components/layout/ClassicGameLogic";
 import { useMemo } from "react";
 import { WordsData } from "./games.classic.boneheads-easy-3-to-5-letter-words";
-import ClassicGameplayInstructions from "~/client/components/layout/ClassicGameplayInstructions";
+import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
 
 export const meta: MetaFunction = () => {
   const canonical = "https://www.wordskull.com";

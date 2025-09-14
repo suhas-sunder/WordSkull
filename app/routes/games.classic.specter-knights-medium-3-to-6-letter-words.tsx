@@ -137,6 +137,7 @@ export default function WordSkullMedium() {
         wordsData={wordsData}
         difficulty="medium"
         gameMode="classic"
+        skullNumber={1}
       />
 
       {/* Cross-links to other modes */}

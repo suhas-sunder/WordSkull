@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useTheme } from "~/client/components/context/ThemeContext";
+import { useTheme } from "../../../client/components/context/ThemeContext";
 
 type Article = { slug: string; title: string; date?: string };
 
@@ -14,6 +14,11 @@ export default function BlogAside({ className = "" }: { className?: string }) {
       slug: "wordskull-vs-nyt-spelling-bee",
       title: "WordSkull vs NYT Spelling Bee: Speed Runs vs Letter Hives",
       date: "2025-08-17",
+    },
+    {
+      slug: "wordskull-vs-nyt-connections",
+      title: "WordSkull vs NYT Connections: Linking Logic and Dungeon Battles",
+      date: "2025-09-14",
     },
   ];
 

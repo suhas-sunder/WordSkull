@@ -30,6 +30,9 @@ function DisplaySkull({
 }: PropType) {
   const { darkThemeActive } = useTheme();
   const { isDelaying } = useDelay({ isEnterPressed, msecondsToDelay: 900 });
+  const [hydrated, setHydrated] = useState(false);
+  // Make absolutely sure we only render the grid after the client mounts
+  useEffect(() => setHydrated(true), []);
 
   // ========= SSR GUARD =========
   // Never render the grid on the server. Return a neutral placeholder.
@@ -47,9 +50,6 @@ function DisplaySkull({
   }
   // =============================
 
-  // Make absolutely sure we only render the grid after the client mounts
-  const [hydrated, setHydrated] = useState(false);
-  useEffect(() => setHydrated(true), []);
   if (!hydrated) {
     return (
       <div

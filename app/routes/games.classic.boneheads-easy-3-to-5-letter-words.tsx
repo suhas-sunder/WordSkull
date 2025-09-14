@@ -140,6 +140,7 @@ export default function WordSkullEasy() {
         wordsData={wordsData}
         difficulty="easy"
         gameMode="classic"
+        skullNumber={1}
       />
       <GameLinks />
       <section className="mt-20">

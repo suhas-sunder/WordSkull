@@ -1,8 +1,8 @@
 import { MetaFunction } from "@remix-run/node";
-import { Link, useMatches, useParams } from "@remix-run/react";
-import { useTheme } from "~/client/components/context/ThemeContext";
-import BlogSidebar from "~/client/components/navigation/BlogSidebar";
-import SocialLinks from "~/client/components/navigation/SocialLinks";
+import { Link } from "@remix-run/react";
+import { useTheme } from "../client/components/context/ThemeContext";
+import BlogSidebar from "../client/components/navigation/BlogSidebar";
+import SocialLinks from "../client/components/navigation/SocialLinks";
 
 /* ===================== META ===================== */
 export const meta: MetaFunction = () => {

@@ -1,8 +1,8 @@
 import { MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
-import { useTheme } from "~/client/components/context/ThemeContext";
-import LoreSidebar from "~/client/components/navigation/LoreSidebar";
-import SocialLinks from "~/client/components/navigation/SocialLinks";
+import { useTheme } from "../client/components/context/ThemeContext";
+import LoreSidebar from "../client/components/navigation/LoreSidebar";
+import SocialLinks from "../client/components/navigation/SocialLinks";
 
 /* ===================== CONSTANTS FOR THIS CHAPTER ===================== */
 const slug = "chapter-1-the-wizards-rise";

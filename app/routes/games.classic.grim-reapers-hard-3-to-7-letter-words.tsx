@@ -137,6 +137,7 @@ export default function WordSkullHard() {
         wordsData={wordsData}
         difficulty="hard"
         gameMode="classic"
+        skullNumber={1}
       />
 
       <GameLinks />

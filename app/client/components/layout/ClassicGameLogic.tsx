@@ -21,6 +21,7 @@ interface PropType {
   wordsData: WordsData;
   difficulty: string;
   gameMode: string;
+  skullNumber?: number; // NEW: variable for selecting skull
 }
 
 /** Client hydration flag (used only to fade the skeleton away) */
@@ -73,6 +74,7 @@ function ClassicGameLogic({
   wordsData,
   difficulty,
   gameMode,
+  skullNumber,
 }: PropType) {
   const [showGameOverMenu, setShowGameOverMenu] = useState<boolean>(true);
   const [startOffscreenTimer, setStartOffscreenTimer] =
@@ -93,35 +95,26 @@ function ClassicGameLogic({
     [endPosition, startPosition]
   );
 
-  // Deterministic pick index (no Math.random => no SSR/CSR mismatch)
+  // Pick skull by skullNumber (1-based), default to first skull
   const pickIndex = useMemo(() => {
     if (!skulls.length) return 0;
-    const key = `${startPosition}|${endPosition}|${lettersPerSkull}|${difficulty}|${gameMode}`;
-    let h = 2166136261 >>> 0;
-    for (let i = 0; i < key.length; i++) {
-      h ^= key.charCodeAt(i);
-      h = Math.imul(h, 16777619) >>> 0;
+    if (skullNumber && skullNumber > 0 && skullNumber <= skulls.length) {
+      return skullNumber - 1;
     }
-    return h % skulls.length;
-  }, [
-    skulls.length,
-    startPosition,
-    endPosition,
-    lettersPerSkull,
-    difficulty,
-    gameMode,
-  ]);
+    return 0;
+  }, [skulls.length, skullNumber]);
 
-  // First skull chosen deterministically on first render (SSR+CSR match)
+  // First skull chosen
   const initialSkullRef = useRef<string[][] | null>(null);
   if (initialSkullRef.current == null) {
     initialSkullRef.current = skulls[pickIndex] ?? [];
   }
+
   const [currentSkull, setCurrentSkull] = useState<string[][][]>([
     initialSkullRef.current,
   ]);
 
-  // If the inputs change (route/mode), update deterministically (no flash)
+  // Update skull if pickIndex or skull slice changes
   useEffect(() => {
     const next = skulls[pickIndex] ?? [];
     if (currentSkull[0] !== next) setCurrentSkull([next]);
@@ -157,22 +150,20 @@ function ClassicGameLogic({
     if (gameMode) setGameMode(gameMode);
   }, [difficulty, gameMode, setDifficulty, setGameMode]);
 
-  // --- Reserve exact space based on the initial (deterministic) skull
+  // Reserve space for initial skull
   const baseRows = initialSkullRef.current?.length ?? 0;
   const baseCols =
     baseRows > 0
       ? Math.max(...(initialSkullRef.current ?? []).map((r) => r.length))
       : 0;
 
-  // These cell/gap constants mirror the tile sizing used in DisplaySkull
-  const CELL_PX = 28; // ~1.75-1.8em @ 16px; tweak if you change sizing
+  const CELL_PX = 28;
   const GAP_PX = 2;
   const gridHeight =
     baseRows > 0 ? baseRows * CELL_PX + (baseRows - 1) * GAP_PX : 0;
   const gridWidth =
     baseCols > 0 ? baseCols * CELL_PX + (baseCols - 1) * GAP_PX : 0;
 
-  // Fade skeleton out one frame after hydration to avoid flicker
   const [showSkeleton, setShowSkeleton] = useState(true);
   useEffect(() => {
     if (!hydrated) return;
@@ -180,7 +171,6 @@ function ClassicGameLogic({
     return () => cancelAnimationFrame(id);
   }, [hydrated]);
 
-  // Always reserve keyboard area height
   const KEYBOARD_BLOCK_HEIGHT = 240;
 
   return (
@@ -225,7 +215,6 @@ function ClassicGameLogic({
             seconds={seconds}
           />
 
-          {/* Reserve skull footprint and overlay a skeleton until the first client paint */}
           <div
             className="relative"
             style={{ minHeight: gridHeight, minWidth: gridWidth }}
@@ -247,7 +236,6 @@ function ClassicGameLogic({
           </div>
         </label>
 
-        {/* Always reserve keyboard area height to avoid jumps */}
         <div
           className="flex max-w-[800px] w-full justify-center items-center"
           style={{ minHeight: KEYBOARD_BLOCK_HEIGHT }}
