@@ -88,9 +88,10 @@ export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as Match | undefined;
 
   const url = root?.data?.canonical ?? "https://www.wordskull.com/lore";
-  const title = "WordSkull Lore | Story, Factions, Rumors & Player Journals";
+  const title = "WordSkull Lore | Fantasy Story, Factions & Player Journals";
   const description =
-    "Explore the WordSkull lore: main story chapters, faction deep dives, misinformation rebuttals, and adventurer testimonials where fantasy meets word puzzle strategy.";
+    "Explore WordSkull lore: main story chapters, faction deep dives, rumors, and adventurer journals. Where fantasy storytelling meets word puzzle strategy.";
+
   const ogImage = "https://www.wordskull.com/og/lore/wordskull-lore.jpg";
 
   return [

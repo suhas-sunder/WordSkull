@@ -11,6 +11,7 @@ export const meta: MetaFunction = () => {
   const title = "WordSkull vs NYT Spelling Bee: Speed Runs vs Letter Hives";
   const description =
     "Compare WordSkull and NYT Spelling Bee: mechanics, strategy, difficulty, and when to train short 3–5 letter speed vs long-form vocabulary building.";
+
   const ogImage =
     "https://www.wordskull.com/og/blog/wordskull-vs-nyt-spelling-bee.jpg";
 

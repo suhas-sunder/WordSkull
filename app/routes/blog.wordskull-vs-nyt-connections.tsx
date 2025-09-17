@@ -10,9 +10,11 @@ const canonical = `https://www.wordskull.com/blog/${slug}`;
 const datePublished = "2025-09-14";
 const dateModified = datePublished;
 const title = "WordSkull vs NYT Connections: Linking Logic and Dungeon Battles";
-const headline = "WordSkull vs NYT Connections";
 const description =
   "Compare WordSkull and NYT Connections: word linking, logic challenges, and dungeon-inspired gameplay versus abstract categorization puzzles.";
+
+const headline = "WordSkull vs NYT Connections";
+
 const ogImageJpg =
   "https://www.doodlegarden.com/img/wordskull-vs-nyt-connections.jpg";
 const ogImageWebp =

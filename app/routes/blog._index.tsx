@@ -61,9 +61,11 @@ export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as Match | undefined;
 
   const url = root?.data?.canonical ?? "https://www.wordskull.com/blog";
-  const title = "WordSkull Blog | Word Game Strategy, Fantasy & Fun";
+  const title =
+    "WordSkull Blog | Wordle Tips, Spelling Bee Strategy & Fantasy Lore";
   const description =
-    "Dive into the WordSkull blog for word game tips, fantasy lore, strategy guides, and behind-the-scenes updates. Perfect for word puzzle fans and fantasy enthusiasts.";
+    "Dive into the WordSkull blog for Wordle strategy, NYT Spelling Bee insights, fantasy lore, and behind-the-scenes updates. Perfect for puzzle fans & fantasy gamers.";
+
   const ogImage = "https://www.wordskull.com/og/blog/wordskull-blog.jpg";
 
   return [

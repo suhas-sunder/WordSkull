@@ -10,10 +10,9 @@ export const meta: MetaFunction = ({ matches }) => {
 
   const url =
     root?.data?.canonical ?? "https://www.wordskull.com/games/classic";
-  const title =
-    "Classic WordSkull Games | Boneheads, Specter, Reapers, Royal Lichen";
+  const title = "Classic WordSkull Games | 3–9 Letter Word Battles";
   const description =
-    "Play Classic WordSkull: Boneheads (3-5 letters), Specter (3-6 letters), Reapers (3-7 letters), and Royal Lichen (3-9 letters).";
+    "Play Classic WordSkull: Boneheads (3–5 letters), Specter (3–6 letters), Reapers (3–7 letters), and Royal Lichen (3–9 letters). Free puzzles inspired by Wordle & Spelling Bee.";
 
   // Real OG asset, at least 1200x630, returns 200 OK
   const ogImage = "https://www.wordskull.com/og/wordskull-classic.jpg";

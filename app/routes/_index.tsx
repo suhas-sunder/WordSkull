@@ -13,9 +13,9 @@ import ClassicGameplayInstructions from "../client/components/layout/ClassicGame
 export const meta: MetaFunction = () => {
   const canonical = "https://www.wordskull.com";
 
-  const title = "WordSkull | Free Fantasy Word Battle Game";
+  const title = "WordSkull | Free Fantasy Word Game Like Wordle & Spelling Bee";
   const description =
-    "Play WordSkull, a free fantasy word game. Sharpen your vocabulary, challenge your mind, and enjoy fun word puzzles with unique battle modes.";
+    "Play WordSkull, a free fantasy word puzzle game. Inspired by Wordle & NYT Spelling Bee, challenge your vocabulary in unique battle modes with 3 to 9 letter words.";
 
   const ogImage = "https://www.wordskull.com/og/wordskull-home.jpg";
 

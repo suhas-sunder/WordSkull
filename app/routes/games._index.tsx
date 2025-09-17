@@ -1,6 +1,6 @@
 import { Outlet, useLocation, Link, useMatches } from "@remix-run/react";
 import type { MetaFunction } from "@remix-run/node";
-import SocialLinks from "~/client/components/navigation/SocialLinks";
+import SocialLinks from "../client/components/navigation/SocialLinks";
 
 type RootData = { canonical?: string };
 type Match = { id: string; data?: RootData };
@@ -10,9 +10,9 @@ export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as Match | undefined;
   const url = root?.data?.canonical ?? "https://www.wordskull.com/games";
 
-  const title = "Play WordSkull Games | Free Word Battle Modes";
+  const title = "Play WordSkull Games | Free Word Battle & Puzzle Modes";
   const description =
-    "Explore WordSkull game modes with new fantasy word challenges added regularly. Battle boneheads, spectres, reapers, and royal lichens & more.";
+    "Explore WordSkull game modes with new fantasy word challenges. Battle boneheads, spectres, reapers, and lichens using 3–9 letter words like in Wordle & Spelling Bee.";
 
   // Serve a real image that returns 200 OK
   const ogImage = "https://www.wordskull.com/og/wordskull-games.jpg";

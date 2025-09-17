@@ -11,6 +11,7 @@ export const meta: MetaFunction = () => {
   const title = "WordSkull vs Wordle: A Fantasy Twist on the Word Game Craze";
   const description =
     "A deep dive into WordSkull vs Wordle: gameplay mechanics, difficulty curves, strategy, and why fantasy dungeon battles keep word-game fans coming back.";
+
   const ogImage =
     "https://www.doodlegarden.com/img/wordskull-vs-nyt-wordle-game.webp";
 

@@ -19,9 +19,9 @@ export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as RootMatch | undefined;
 
   const canonical = root?.data?.canonical ?? "https://www.wordskull.com/about";
-  const title = "About WordSkull | Free Fantasy Word Battle Game";
+  const title = "About WordSkull | Fantasy Word Game Inspired by Wordle";
   const description =
-    "WordSkull is a fast, satisfying fantasy browser word game battling skulls. Learn why it exists, how it was built, and why you should play it.";
+    "WordSkull is a fast, satisfying fantasy browser word game battling skulls. Learn how it compares to Wordle & Spelling Bee, why it exists, and why you should play.";
 
   // Prefer a static, crawlable image URL that resolves with 200 OK
   const ogImage = "https://www.wordskull.com/og/wordskull-about.jpg";
