@@ -329,7 +329,7 @@ export default function Blog_WordSkullVsNYT() {
               puzzle mechanics. Dungeon battles, interactive boards, and
               strategic word linking set it apart from standard word
               categorization games like NYT Connections. Players not only solve
-              puzzles—they experience a narrative, test their wits, and enjoy
+              puzzles-they experience a narrative, test their wits, and enjoy
               RPG-style rewards.
             </p>
           </section>
@@ -352,7 +352,7 @@ export default function Blog_WordSkullVsNYT() {
               categorization puzzles, asking players to identify abstract
               patterns and subtle relationships between words. While simpler in
               presentation, these puzzles enhance logical reasoning, pattern
-              recognition, and critical thinking skills—making them a perfect
+              recognition, and critical thinking skills-making them a perfect
               complement to WordSkull for daily brain training.
             </p>
             <p className="mt-3">
