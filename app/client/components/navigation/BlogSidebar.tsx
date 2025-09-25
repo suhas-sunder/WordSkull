@@ -6,19 +6,24 @@ type Article = { slug: string; title: string; date?: string };
 export default function BlogAside({ className = "" }: { className?: string }) {
   const articles: Article[] = [
     {
-      slug: "wordskull-vs-wordle-fantasy-twist",
-      title: "WordSkull vs Wordle: A Fantasy Twist on the Word Game Craze",
-      date: "2025-08-17",
-    },
-    {
-      slug: "wordskull-vs-nyt-spelling-bee",
-      title: "WordSkull vs NYT Spelling Bee: Speed Runs vs Letter Hives",
-      date: "2025-08-17",
+      slug: "wordskull-vs-quordle-multi-grid-madness",
+      title: "WordSkull vs Quordle: Single Skulls vs Multi-Grid Madness",
+      date: "2025-09-24",
     },
     {
       slug: "wordskull-vs-nyt-connections",
       title: "WordSkull vs NYT Connections: Linking Logic and Dungeon Battles",
       date: "2025-09-14",
+    },
+    {
+      slug: "wordskull-vs-nyt-spelling-bee",
+      title: "WordSkull vs NYT Spelling Bee: A Battle of Wits",
+      date: "2025-08-18",
+    },
+    {
+      slug: "wordskull-vs-wordle-fantasy-twist",
+      title: "WordSkull vs Wordle: A Fantasy Twist on the Word Game Craze",
+      date: "2025-08-17",
     },
   ];
 
