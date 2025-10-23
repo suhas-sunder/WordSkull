@@ -64,6 +64,16 @@ const posts: Post[] = [
       "https://www.doodlegarden.com/img/wordskull-vs-nyt-wordle-game.jpg",
     imageAlt: "WordSkull vs Wordle comparison artwork",
   },
+  {
+    slug: "wordskull-vs-absurdle-outwitting-the-adversarial-puzzle",
+    title: "WordSkull vs Absurdle: Outwitting the Adversarial Puzzle",
+    description:
+      "Absurdle fights against you by changing the answer as you guess. WordSkull challenges you with fair battles, progression, and strategy that improves your skill.",
+    date: "2025-10-23",
+    imageWebp: "https://www.doodlegarden.com/img/wordskull-vs-absurdle.webp",
+    imageJpg: "https://www.doodlegarden.com/img/wordskull-vs-absurdle.jpg",
+    imageAlt: "WordSkull vs Absurdle cover art",
+  },
 ];
 
 /* ===================== META ===================== */

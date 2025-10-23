@@ -86,6 +86,7 @@ export default function Index() {
         } flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5 items-center`}
       >
         <GameLinks />
+        
         <section className="mt-10">
           <ClassicGameplayInstructions />
         </section>

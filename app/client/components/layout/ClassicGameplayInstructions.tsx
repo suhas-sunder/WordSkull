@@ -37,10 +37,264 @@ function ClassicGameplayInstructions() {
   }
 
   return (
-    <>
+    <div className="flex flex-col justify-center items-center -mt-14">
+      {/* === Related Sites Section === */}
+      <section className="mb-20 w-full justify-center items-center max-w-[1200px]">
+        <h2
+          className={`${
+            darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
+          } flex py-2 text-3xl sm:text-4xl font-lora text-center w-full justify-center items-center mb-6`}
+        >
+          <span aria-hidden="true">✦</span>{" "}
+          <span className="ml-2">More Fun Games & Projects</span>
+        </h2>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {/* 1 */}
+          <a
+            href="https://www.freetypingcamp.com"
+            className={`block rounded-2xl border ${
+              darkThemeActive
+                ? "border-stone-700 bg-stone-900/40 hover:bg-stone-800/60"
+                : "border-pumpkin-orange/60 bg-white/70 hover:bg-stone-50"
+            } p-6 transition`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="font-lora text-xl mb-2 text-pumpkin-orange">
+              Free Typing Camp
+            </h3>
+            <p className="font-lato text-base leading-relaxed tracking-wide">
+              Practice typing speed and accuracy through fun drills and
+              challenges. Perfect for improving words-per-minute skills.
+            </p>
+          </a>
+
+          {/* 2 */}
+          <a
+            href="https://www.morsewords.com"
+            className={`block rounded-2xl border ${
+              darkThemeActive
+                ? "border-stone-700 bg-stone-900/40 hover:bg-stone-800/60"
+                : "border-pumpkin-orange/60 bg-white/70 hover:bg-stone-50"
+            } p-6 transition`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="font-lora text-xl mb-2 text-pumpkin-orange">
+              Morse Words
+            </h3>
+            <p className="font-lato text-base leading-relaxed tracking-wide">
+              Learn Morse code interactively. Decode, translate, and test your
+              signal speed with words and sentences.
+            </p>
+          </a>
+
+          {/* 3 */}
+          <a
+            href="https://www.ilovecoloringpage.com"
+            className={`block rounded-2xl border ${
+              darkThemeActive
+                ? "border-stone-700 bg-stone-900/40 hover:bg-stone-800/60"
+                : "border-pumpkin-orange/60 bg-white/70 hover:bg-stone-50"
+            } p-6 transition`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="font-lora text-xl mb-2 text-pumpkin-orange">
+              I Love Coloring Page
+            </h3>
+            <p className="font-lato text-base leading-relaxed tracking-wide">
+              Thousands of printable and digital coloring pages for all ages.
+              Relax, create, and share your art.
+            </p>
+          </a>
+
+          {/* 4 */}
+          <a
+            href="https://www.wordmythology.com"
+            className={`block rounded-2xl border ${
+              darkThemeActive
+                ? "border-stone-700 bg-stone-900/40 hover:bg-stone-800/60"
+                : "border-pumpkin-orange/60 bg-white/70 hover:bg-stone-50"
+            } p-6 transition`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="font-lora text-xl mb-2 text-pumpkin-orange">
+              Word Mythology
+            </h3>
+            <p className="font-lato text-base leading-relaxed tracking-wide">
+              Explore the origins and myths behind everyday words. Learn
+              etymology through stories and symbolism.
+            </p>
+          </a>
+
+          {/* 5 */}
+          <a
+            href="https://www.funmoneygames.com"
+            className={`block rounded-2xl border ${
+              darkThemeActive
+                ? "border-stone-700 bg-stone-900/40 hover:bg-stone-800/60"
+                : "border-pumpkin-orange/60 bg-white/70 hover:bg-stone-50"
+            } p-6 transition`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="font-lora text-xl mb-2 text-pumpkin-orange">
+              Fun Money Games
+            </h3>
+            <p className="font-lato text-base leading-relaxed tracking-wide">
+              Play interactive finance and math games to learn saving,
+              budgeting, and spending in a fun way.
+            </p>
+          </a>
+
+          {/* 6 */}
+          <a
+            href="https://www.ilovemythology.com"
+            className={`block rounded-2xl border ${
+              darkThemeActive
+                ? "border-stone-700 bg-stone-900/40 hover:bg-stone-800/60"
+                : "border-pumpkin-orange/60 bg-white/70 hover:bg-stone-50"
+            } p-6 transition`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="font-lora text-xl mb-2 text-pumpkin-orange">
+              I Love Mythology
+            </h3>
+            <p className="font-lato text-base leading-relaxed tracking-wide">
+              Dive into gods, heroes, and folklore from around the world with
+              easy-to-read mythology summaries and art.
+            </p>
+          </a>
+
+          {/* 7 */}
+          <a
+            href="https://www.sushiclicker.com"
+            className={`block rounded-2xl border ${
+              darkThemeActive
+                ? "border-stone-700 bg-stone-900/40 hover:bg-stone-800/60"
+                : "border-pumpkin-orange/60 bg-white/70 hover:bg-stone-50"
+            } p-6 transition`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="font-lora text-xl mb-2 text-pumpkin-orange">
+              Sushi Clicker
+            </h3>
+            <p className="font-lato text-base leading-relaxed tracking-wide">
+              A fast-paced incremental clicker game where you build your sushi
+              empire. Tap, upgrade, and grow.
+            </p>
+          </a>
+
+          {/* 8 */}
+          <a
+            href="https://www.focusclimber.com"
+            className={`block rounded-2xl border ${
+              darkThemeActive
+                ? "border-stone-700 bg-stone-900/40 hover:bg-stone-800/60"
+                : "border-pumpkin-orange/60 bg-white/70 hover:bg-stone-50"
+            } p-6 transition`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="font-lora text-xl mb-2 text-pumpkin-orange">
+              Focus Climber
+            </h3>
+            <p className="font-lato text-base leading-relaxed tracking-wide">
+              Gamify your focus sessions. Set timers, climb digital peaks, and
+              track progress one task at a time.
+            </p>
+          </a>
+
+          {/* 9 */}
+          <a
+            href="https://www.pomotomato.com"
+            className={`block rounded-2xl border ${
+              darkThemeActive
+                ? "border-stone-700 bg-stone-900/40 hover:bg-stone-800/60"
+                : "border-pumpkin-orange/60 bg-white/70 hover:bg-stone-50"
+            } p-6 transition`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="font-lora text-xl mb-2 text-pumpkin-orange">
+              Pomo Tomato
+            </h3>
+            <p className="font-lato text-base leading-relaxed tracking-wide">
+              A cheerful Pomodoro timer with playful tomato animations. Stay
+              productive while keeping it lighthearted.
+            </p>
+          </a>
+
+          {/* 10 */}
+          <a
+            href="https://www.ilovepomodoro.com"
+            className={`block rounded-2xl border ${
+              darkThemeActive
+                ? "border-stone-700 bg-stone-900/40 hover:bg-stone-800/60"
+                : "border-pumpkin-orange/60 bg-white/70 hover:bg-stone-50"
+            } p-6 transition`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="font-lora text-xl mb-2 text-pumpkin-orange">
+              I Love Pomodoro
+            </h3>
+            <p className="font-lato text-base leading-relaxed tracking-wide">
+              Classic Pomodoro timer for serious focus. Minimal design, clean
+              stats, and simple productivity tracking.
+            </p>
+          </a>
+
+          {/* 11 */}
+          <a
+            href="https://www.dragontyping.com"
+            className={`block rounded-2xl border ${
+              darkThemeActive
+                ? "border-stone-700 bg-stone-900/40 hover:bg-stone-800/60"
+                : "border-pumpkin-orange/60 bg-white/70 hover:bg-stone-50"
+            } p-6 transition`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="font-lora text-xl mb-2 text-pumpkin-orange">
+              Dragon Typing
+            </h3>
+            <p className="font-lato text-base leading-relaxed tracking-wide">
+              Type to train your dragon. Improve typing speed while hatching
+              eggs, collecting treasures, and conquering speed trials.
+            </p>
+          </a>
+
+          {/* 12 */}
+          <a
+            href="https://www.ilovewordsearch.com"
+            className={`block rounded-2xl border ${
+              darkThemeActive
+                ? "border-stone-700 bg-stone-900/40 hover:bg-stone-800/60"
+                : "border-pumpkin-orange/60 bg-white/70 hover:bg-stone-50"
+            } p-6 transition`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="font-lora text-xl mb-2 text-pumpkin-orange">
+              I Love Word Search
+            </h3>
+            <p className="font-lato text-base leading-relaxed tracking-wide">
+              Find hidden words in themed puzzles. Relax, challenge your brain,
+              and improve pattern recognition with daily word searches.
+            </p>
+          </a>
+        </div>
+      </section>
+
       {showInstructions && (
         <>
-          <div className="flex relative flex-col w-full justify-center items-center -mt-12 mb-5">
+          <div className="flex relative flex-col w-full justify-center items-center  mb-5">
             <div id="gameplay-instructions" className="absolute -top-[5em]" />
             <h2
               className={`text-4xl font-nunito  uppercase mb-5 ${
@@ -308,7 +562,7 @@ function ClassicGameplayInstructions() {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }
 
