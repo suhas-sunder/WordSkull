@@ -25,6 +25,11 @@ export default function BlogAside({ className = "" }: { className?: string }) {
       title: "WordSkull vs Wordle: A Fantasy Twist on the Word Game Craze",
       date: "2025-08-17",
     },
+    {
+      slug: "wordskull-vs-absurdle-outwitting-the-adversarial-puzzle",
+      title: "Wordskull VS Absurdle: Outwitting the Adversarial Puzzle",
+      date: "2025-10-23",
+    },
   ];
 
   const { darkThemeActive } = useTheme();
