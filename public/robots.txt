@@ -3,3 +3,75 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.wordskull.com/sitemap.xml
+
+# --- disallowed paths (typical CMS / system dirs) ---
+Disallow: /wp-admin/
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+Disallow: /feed/
+Disallow: /search
+Disallow: /?s=
+Disallow: /*?replytocom
+Disallow: /*.php$
+
+# --- block known noisy crawlers ---
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: MauiBot
+Disallow: /
+
+User-agent: Barkrowler
+Disallow: /
+
+User-agent: ZoominfoBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: Sogou web spider
+Disallow: /
+
+User-agent: Exabot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+# --- explicitly allow ad & search crawlers ---
+User-agent: Googlebot
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+Sitemap: https://yourdomain.com/sitemap.xml
