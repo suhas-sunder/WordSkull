@@ -1,14 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useNavigate } from "@remix-run/react";
 import { useTheme } from "../client/components/context/ThemeContext";
 import { MetaFunction } from "@remix-run/node";
-import { Link, useMatches } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Skull_1 from "../client/assets/images/skull_1.png";
+import Skull_2 from "../client/assets/images/skull_2.png";
+import Skull_3 from "../client/assets/images/skull_3.png";
+import Skull_4 from "../client/assets/images/skull_4.png";
+import Skull_1_Webp from "../client/assets/images/skull_1.webp";
+import Skull_2_Webp from "../client/assets/images/skull_2.webp";
+import Skull_3_Webp from "../client/assets/images/skull_3.webp";
+import Skull_4_Webp from "../client/assets/images/skull_4.webp";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
-import GameLinks from "../client/components/layout/GameLinks";
-import ClassicGameLogic from "~/client/components/layout/ClassicGameLogic";
-import { useMemo } from "react";
-import { WordsData } from "./games.classic.boneheads-easy-3-to-5-letter-words";
-import ClassicGameplayInstructions from "~/client/components/layout/ClassicGameplayInstructions";
+import GameLinks from "~/client/components/layout/GameLinks";
 
 export const meta: MetaFunction = () => {
   return [
@@ -24,42 +29,61 @@ export const meta: MetaFunction = () => {
 };
 
 function Header() {
-  const matches = useMatches();
-  const wordsData = useMemo(() => {
-    // Find the first match with valid data
-    const match = matches?.find((match) => (match?.data as WordsData)?.words);
-    return match?.data as WordsData;
-  }, [matches]);
+  const { darkThemeActive } = useTheme();
 
   return (
     <header className="flex flex-col max-w-[1200px] text-center justify-center items-center mb-8">
-      <ClassicGameLogic
-        startPosition={0}
-        endPosition={4}
-        lettersPerSkull="Easy Difficulty: 3 - 5 letters"
-        wordsData={wordsData}
-        difficulty="easy"
-        gameMode="classic"
-      />
+      <h1
+        className={`${
+          darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
+        } w-full z-1 flex-row flex justify-center items-center text-4xl mb-[0.2em] sm:text-5xl text-center mt-9 leading-snug -translate-y-[0.3em] sm:translate-y-0 sm:mt-9  font-lora tracking-wide`}
+      >
+        <span className="whitespace-nowrap">
+          <span className="inline-flex">W</span>
+          <span className="inline-flex animate-scalePulse">💀</span>
+          <span className="inline-flex">rd</span>
+        </span>
+        <span className="inline-flex">Skull</span>
+      </h1>
+
+      <p
+        className={`${
+          darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
+        } sm:text-xl leading-relaxed sm:leading-loose font-lato sm:mb-3 mx-3 sm:mt-2 sm:mx-12`}
+      >
+        Welcome, fellow adventurer! It's time to embark on a quest to conquer
+        epic word and puzzle challenges to defeat the skulls. Sharpen your
+        vocabulary one word at a time by wielding the strongest weapon at your
+        disposal, your mind! The dungeon awaits...
+      </p>
+      <Link
+        to={"#word-skull-classic"}
+        className={`hover:bg-amber-600 bg-pumpkin-orange flex z-10 text-white px-8  text-lg font-nunito rounded-full mt-2 py-2 tracking-widest leading-relaxed border-stone-300 hover:border-stone-400`}
+      >
+        Start Playing!
+      </Link>
+      <div className="flex justify-center items-center w-full mt-10 sm:mt-3 scale-[.75]">
+        <SkullAnimation />
+      </div>
     </header>
   );
 }
 
 export default function Index() {
+  const navigate = useNavigate();
+
   const { darkThemeActive } = useTheme();
 
   return (
-    <div className="flex relative flex-col leading-relaxed tracking-wider mt-3 sm:mt-6 overflow-hidden justify-center items-center mx-7">
+    <div className="flex relative  animate-fadeIn flex-col leading-relaxed tracking-wider mt-3 sm:mt-5 overflow-hidden justify-center items-center">
       <Header />
       <main
         className={`${
-          darkThemeActive && "text-stone-400"
-        } flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5 items-center`}
+          darkThemeActive && "text-white"
+        } flex flex-col sm:gap-14 max-w-[1400px] -translate-y-5  items-center mx-10`}
       >
-        <GameLinks />
-        <section className="mt-10">
-          <ClassicGameplayInstructions />
-        </section>
+        
+      <GameLinks />
         <div>
           <h2
             className={`${
@@ -76,15 +100,17 @@ export default function Index() {
             <li className="flex flex-col gap-2">
               <h3
                 className={`${
-                  darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
+                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
                 } flex py-2 text-2xl font-nunito mt-2`}
               >
                 What is WordSkull?
               </h3>
               <p className="font-lato text-lg pl-5 tracking-wider leading-loose">
                 <Link
-                  className="text-pumpkin-orange hover:text-amber-600 font-lora"
-                  to="/game/classic/boneheads-easy-3-to-5-letter-words"
+                  className={`${
+                    darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
+                  } hover:text-amber-600 font-lora`}
+                  to="/boneheads-easy-3-to-5-letter-words"
                 >
                   WordSkull
                 </Link>{" "}
@@ -102,7 +128,7 @@ export default function Index() {
             <li className="flex flex-col gap-2">
               <h3
                 className={`${
-                  darkThemeActive ? "text-stone-400" : "text-skull-dark-brown"
+                  darkThemeActive ? "text-white" : "text-skull-super-dark-brown"
                 } flex py-2 text-2xl font-nunito mt-2`}
               >
                 What was the motivation behind WordSkull?
@@ -113,9 +139,9 @@ export default function Index() {
                 classic word and puzzle games. If you want the long story, you
                 can find it on the{" "}
                 <Link
-                  className={
-                    "text-pumpkin-orange hover:text-amber-600 font-lora"
-                  }
+                  className={`${
+                    darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
+                  } hover:text-amber-600 font-lora`}
                   to="/about"
                 >
                   {" "}
@@ -126,9 +152,6 @@ export default function Index() {
             </li>
           </ul>
         </div>
-        <div className="flex justify-center items-center w-full mt-10 sm:mt-3 scale-[.75]">
-          <SkullAnimation />
-        </div>
         <div
           className={`${
             darkThemeActive ? "text-stone-300" : "text-skull-dark-brown"
@@ -138,14 +161,18 @@ export default function Index() {
           feel free to reach out to{" "}
           <a
             href="mailto:admin@wordskull.com"
-            className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
+            className={`${
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
+            } hover:text-amber-600 font-lora`}
           >
             admin@wordskull.com{" "}
           </a>
           or you can find me on any of my socials and associated links listed on
           the{" "}
           <Link
-            className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
+            className={`${
+              darkThemeActive ? "text-amber-600" : "text-pumpkin-orange"
+            } hover:text-amber-600 font-lora`}
             to="/socials"
           >
             socials page
