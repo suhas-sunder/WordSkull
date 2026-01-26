@@ -1,19 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useNavigate } from "@remix-run/react";
 import { useTheme } from "../client/components/context/ThemeContext";
 import { MetaFunction } from "@remix-run/node";
 import { Link } from "react-router-dom";
-import Skull_1 from "../client/assets/images/skull_1.png";
-import Skull_2 from "../client/assets/images/skull_2.png";
-import Skull_3 from "../client/assets/images/skull_3.png";
-import Skull_4 from "../client/assets/images/skull_4.png";
-import Skull_1_Webp from "../client/assets/images/skull_1.webp";
-import Skull_2_Webp from "../client/assets/images/skull_2.webp";
-import Skull_3_Webp from "../client/assets/images/skull_3.webp";
-import Skull_4_Webp from "../client/assets/images/skull_4.webp";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
-import GameLinks from "~/client/components/layout/GameLinks";
+import GameLinks from "../client/components/layout/GameLinks";
 
 export const meta: MetaFunction = () => {
   return [
@@ -70,7 +61,6 @@ function Header() {
 }
 
 export default function Index() {
-  const navigate = useNavigate();
 
   const { darkThemeActive } = useTheme();
 
