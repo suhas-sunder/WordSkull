@@ -51,7 +51,7 @@ function GameDifficultyMenu({ title, emoji }: PropType) {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-12 lg:gap-16 justify-center items-center">
+      <div id="word-skull-game-modes"className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-12 lg:gap-16 justify-center items-center">
         <button
           onClick={() => navigate(ROUTES.easy)}
           className="group relative flex h-full col-span-2 flex-col gap-2 w-[15em] text-pumpkin-orange hover:text-amber-600 justify-center items-center text-center pt-8 pb-12 hover:scale-[1.05] transition-scale duration-300 shadow-md hover:shadow-lg hover:shadow-amber-600/30 rounded-t-[150em] rounded-b-full bg-white shadow-pumpkin-orange/20 bg-opacity-10"
