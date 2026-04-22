@@ -18,16 +18,6 @@ export default ({ mode }: { mode: string }) => {
         protocol: "ws",
         host: "localhost",
       },
-      proxy:
-        mode === "development"
-          ? {
-              "/v1/api": {
-                target: "http://localhost:3300", // Backend server running on port 3300 (adjust as needed)
-                changeOrigin: true,
-                secure: false,
-              },
-            }
-          : {},
     },
     css: { devSourcemap: false },
     optimizeDeps: {
@@ -37,7 +27,6 @@ export default ({ mode }: { mode: string }) => {
     },
     plugins: [
       mdx(),
-      // Include remix plugin only if not in test environment
       ...(process.env.NODE_ENV !== "test"
         ? [
             remix({
@@ -48,13 +37,13 @@ export default ({ mode }: { mode: string }) => {
                 v3_lazyRouteDiscovery: true,
                 v3_singleFetch: true,
               },
-              ignoredRouteFiles: ["**/*.css"], // Optionally ignore certain files
+              ignoredRouteFiles: ["**/*.css"],
             }),
           ]
         : []),
       tsconfigPaths(),
     ],
-    base: "/", // Ensure base path is set correctly
+    base: "/",
     test: {
       globals: true,
       environment: "jsdom",
@@ -62,7 +51,7 @@ export default ({ mode }: { mode: string }) => {
     define: {
       "import.meta.env.MODE": JSON.stringify(process.env.MODE || "development"),
       "import.meta.env.VITE_PORT": JSON.stringify(
-        process.env.VITE_PORT || "3200"
+        process.env.VITE_PORT || "3200",
       ),
     },
   });
