@@ -30,6 +30,7 @@ export default ({ mode }: { mode: string }) => {
       ...(process.env.NODE_ENV !== "test"
         ? [
             remix({
+              ssr: false,
               future: {
                 v3_fetcherPersist: true,
                 v3_relativeSplatPath: true,
