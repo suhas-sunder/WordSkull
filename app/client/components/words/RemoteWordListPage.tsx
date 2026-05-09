@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import SocialLinks from "../navigation/SocialLinks";
+import type { SortedWordsByLength } from "../../../shared/remoteWordLists";
 import {
-  REMOTE_WORD_LIST_FALLBACK_VERSION,
-  getRemoteWordListCacheKey,
-  getRemoteWordListUrl,
-  getRemoteWordManifestUrl,
-  normalizeRemoteWordList,
-  resolveManifestVersion,
+  SORTED_WORDS_CACHE_KEY,
+  getSortedWordsForLength,
+  getSortedWordsUrl,
+  normalizeSortedWordsPayload,
+  readSortedWordsResponse,
 } from "../../../shared/remoteWordLists";
 
 type WordListLink = {
@@ -25,28 +25,26 @@ type RemoteWordListPageProps = {
 type ListSource = "curated" | "cache" | "remote";
 type LoadState = "loading" | "loaded" | "failed";
 
-function readCachedWords(length: number, version: string) {
-  if (typeof window === "undefined") return [];
+function readCachedSortedWords() {
+  if (typeof window === "undefined") return {};
 
   try {
-    const cached = window.localStorage.getItem(
-      getRemoteWordListCacheKey(length, version)
-    );
-    if (!cached) return [];
+    const cached = window.localStorage.getItem(SORTED_WORDS_CACHE_KEY);
+    if (!cached) return {};
 
-    return normalizeRemoteWordList(JSON.parse(cached), length);
+    return normalizeSortedWordsPayload(JSON.parse(cached));
   } catch {
-    return [];
+    return {};
   }
 }
 
-function writeCachedWords(length: number, version: string, words: string[]) {
+function writeCachedSortedWords(sortedWords: SortedWordsByLength) {
   if (typeof window === "undefined") return;
 
   try {
     window.localStorage.setItem(
-      getRemoteWordListCacheKey(length, version),
-      JSON.stringify(words)
+      SORTED_WORDS_CACHE_KEY,
+      JSON.stringify(sortedWords)
     );
   } catch {
     // Storage is a convenience; the static fallback must remain usable.
@@ -79,60 +77,27 @@ export default function RemoteWordListPage({
     };
 
     const loadRemoteWords = async () => {
-      const fallbackCachedWords = readCachedWords(
-        length,
-        REMOTE_WORD_LIST_FALLBACK_VERSION
-      );
+      const cachedSortedWords = readCachedSortedWords();
+      const cachedWords = getSortedWordsForLength(cachedSortedWords, length);
 
-      if (fallbackCachedWords.length > initialWords.length) {
-        applyWords(fallbackCachedWords, "cache");
+      if (cachedWords.length > 0) {
+        applyWords(cachedWords, "cache");
       }
 
-      let cacheVersion = REMOTE_WORD_LIST_FALLBACK_VERSION;
-
       try {
-        const manifestResponse = await fetch(getRemoteWordManifestUrl(), {
+        const response = await fetch(getSortedWordsUrl(), {
           cache: "no-cache",
           signal: controller.signal,
         });
 
-        if (manifestResponse.ok) {
-          const manifest = await manifestResponse.json();
-          cacheVersion =
-            resolveManifestVersion(manifest) ?? REMOTE_WORD_LIST_FALLBACK_VERSION;
-
-          const versionedCachedWords = readCachedWords(length, cacheVersion);
-          if (versionedCachedWords.length > initialWords.length) {
-            applyWords(versionedCachedWords, "cache");
-          }
-        }
-      } catch {
-        cacheVersion = REMOTE_WORD_LIST_FALLBACK_VERSION;
-      }
-
-      try {
-        const listResponse = await fetch(getRemoteWordListUrl(length), {
-          cache: "no-cache",
-          signal: controller.signal,
-        });
-
-        if (!listResponse.ok) {
-          throw new Error(`Word list request failed: ${listResponse.status}`);
-        }
-
-        const payload = await listResponse.json();
-        const remoteWords = normalizeRemoteWordList(payload, length);
+        const sortedWords = await readSortedWordsResponse(response);
+        const remoteWords = getSortedWordsForLength(sortedWords, length);
 
         if (remoteWords.length === 0) {
           throw new Error("Word list response did not contain valid words.");
         }
 
-        writeCachedWords(length, cacheVersion, remoteWords);
-        writeCachedWords(
-          length,
-          REMOTE_WORD_LIST_FALLBACK_VERSION,
-          remoteWords
-        );
+        writeCachedSortedWords(sortedWords);
         applyWords(remoteWords, "remote");
 
         if (!cancelled) setLoadState("loaded");

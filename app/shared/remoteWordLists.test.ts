@@ -1,47 +1,68 @@
 import { describe, expect, it } from "vitest";
 import {
-  getRemoteWordListUrl,
-  normalizeRemoteWordList,
-  resolveManifestVersion,
+  DEFAULT_SORTED_WORDS_URL,
+  SORTED_WORDS_CACHE_KEY,
+  getSortedWordsForLength,
+  getSortedWordsUrl,
+  normalizeSortedWordsPayload,
 } from "./remoteWordLists";
 
-describe("remote word-list helpers", () => {
-  it("builds the length-specific public CDN URL", () => {
-    expect(getRemoteWordListUrl(5, "https://cdn.example.com")).toBe(
-      "https://cdn.example.com/words/v1/5-letter.json"
+describe("remote sorted word-list helpers", () => {
+  it("uses the existing gzipped sortedWords file by default", () => {
+    expect(DEFAULT_SORTED_WORDS_URL).toBe(
+      "https://www.doodlegarden.com/words-for-games/sortedWords.json.gz"
+    );
+    expect(getSortedWordsUrl()).toBe(DEFAULT_SORTED_WORDS_URL);
+    expect(getSortedWordsUrl()).not.toContain("/words/v1/");
+    expect(getSortedWordsUrl()).not.toContain("-letter.json");
+  });
+
+  it("can build the sortedWords URL from an optional public CDN base", () => {
+    expect(getSortedWordsUrl("https://cdn.example.com")).toBe(
+      "https://cdn.example.com/words-for-games/sortedWords.json.gz"
     );
   });
 
-  it("normalizes arrays of fetched words by length", () => {
-    expect(
-      normalizeRemoteWordList(["HOUSE", "house", "water", "bad-word", "tree"], 5)
-    ).toEqual(["house", "water"]);
+  it("reads the selected length from the keyed sortedWords object", () => {
+    const payload = {
+      "4": ["TREE", "wolf"],
+      "5": ["HOUSE", "house", "water", "bad-word", "tree"],
+      "6": ["planet"],
+    };
+
+    expect(getSortedWordsForLength(payload, 5)).toEqual(["house", "water"]);
   });
 
-  it("normalizes supported object response shapes", () => {
+  it("filters wrong-length words and removes duplicates", () => {
     expect(
-      normalizeRemoteWordList(
-        { words: { "4": ["Tree", "TREE", "house", "wolf"] } },
-        4
-      )
-    ).toEqual(["tree", "wolf"]);
-
-    expect(
-      normalizeRemoteWordList({ words: ["House", "World", "skull"] }, 5)
-    ).toEqual(["house", "skull", "world"]);
+      normalizeSortedWordsPayload({
+        "3": ["CAT", "cat", "cats", "c4t", "dog"],
+        "5": ["skull", "SKULL", "stone", "stones"],
+      })
+    ).toEqual({
+      "3": ["cat", "dog"],
+      "5": ["skull", "stone"],
+    });
   });
 
-  it("fails malformed responses safely", () => {
-    expect(normalizeRemoteWordList({ nope: ["house"] }, 5)).toEqual([]);
-    expect(normalizeRemoteWordList("house", 5)).toEqual([]);
-    expect(normalizeRemoteWordList(null, 5)).toEqual([]);
+  it("fails malformed data safely", () => {
+    expect(normalizeSortedWordsPayload(null)).toEqual({});
+    expect(normalizeSortedWordsPayload(["house"])).toEqual({});
+    expect(normalizeSortedWordsPayload({ "5": "house" })).toEqual({});
+    expect(getSortedWordsForLength({ nope: ["house"] }, 5)).toEqual([]);
   });
 
-  it("resolves manifest versions without trusting malformed data", () => {
-    expect(resolveManifestVersion({ version: "2026-05-09" })).toBe(
-      "2026-05-09"
-    );
-    expect(resolveManifestVersion({ version: 123 })).toBeNull();
-    expect(resolveManifestVersion(null)).toBeNull();
+  it("supports the shared sortedWords cache key", () => {
+    expect(SORTED_WORDS_CACHE_KEY).toBe("wordskull:sortedWords:v1");
+
+    const cachedPayload = normalizeSortedWordsPayload({
+      "5": ["HOUSE", "water", "house"],
+      "6": ["planet"],
+    });
+
+    expect(getSortedWordsForLength(cachedPayload, 5)).toEqual([
+      "house",
+      "water",
+    ]);
   });
 });

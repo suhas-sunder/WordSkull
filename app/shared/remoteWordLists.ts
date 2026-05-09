@@ -1,7 +1,7 @@
 export const DEFAULT_WORD_LIST_CDN_BASE_URL = "https://www.doodlegarden.com";
-export const REMOTE_WORD_LIST_VERSION_PATH = "/words/v1";
-export const REMOTE_WORD_LIST_FALLBACK_VERSION = "v1";
-export const REMOTE_WORD_LIST_CACHE_PREFIX = "wordskull:remote-word-list";
+export const SORTED_WORDS_PATH = "/words-for-games/sortedWords.json.gz";
+export const DEFAULT_SORTED_WORDS_URL = `${DEFAULT_WORD_LIST_CDN_BASE_URL}${SORTED_WORDS_PATH}`;
+export const SORTED_WORDS_CACHE_KEY = "wordskull:sortedWords:v1";
 
 const configuredBaseUrl = import.meta.env.VITE_WORD_LIST_CDN_BASE_URL?.trim();
 
@@ -9,12 +9,14 @@ export const WORD_LIST_CDN_BASE_URL = stripTrailingSlash(
   configuredBaseUrl || DEFAULT_WORD_LIST_CDN_BASE_URL
 );
 
-type RemoteWordListObject = {
-  words?: unknown;
-  data?: unknown;
-  items?: unknown;
-  list?: unknown;
-};
+const SUPPORTED_LENGTHS = [3, 4, 5, 6, 7, 8, 9] as const;
+
+type SupportedWordLength = (typeof SUPPORTED_LENGTHS)[number];
+type SupportedWordLengthKey = `${SupportedWordLength}`;
+
+export type SortedWordsByLength = Partial<
+  Record<SupportedWordLengthKey, string[]>
+>;
 
 function stripTrailingSlash(value: string) {
   return value.replace(/\/+$/, "");
@@ -28,70 +30,23 @@ function joinUrl(baseUrl: string, path: string) {
   return `${stripTrailingSlash(baseUrl)}/${stripLeadingSlash(path)}`;
 }
 
-export function getRemoteWordManifestUrl(baseUrl = WORD_LIST_CDN_BASE_URL) {
-  return joinUrl(baseUrl, `${REMOTE_WORD_LIST_VERSION_PATH}/manifest.json`);
+function isSupportedWordLength(length: number): length is SupportedWordLength {
+  return SUPPORTED_LENGTHS.includes(length as SupportedWordLength);
 }
 
-export function getRemoteWordListUrl(
-  length: number,
-  baseUrl = WORD_LIST_CDN_BASE_URL
-) {
-  return joinUrl(
-    baseUrl,
-    `${REMOTE_WORD_LIST_VERSION_PATH}/${length}-letter.json`
-  );
-}
+export function getSortedWordsUrl(baseUrl = WORD_LIST_CDN_BASE_URL) {
+  const normalizedBaseUrl = stripTrailingSlash(baseUrl);
 
-export function getRemoteWordListCacheKey(
-  length: number,
-  version = REMOTE_WORD_LIST_FALLBACK_VERSION
-) {
-  return `${REMOTE_WORD_LIST_CACHE_PREFIX}:${version}:${length}`;
-}
-
-export function resolveManifestVersion(manifest: unknown) {
-  if (!manifest || typeof manifest !== "object") return null;
-
-  const version = (manifest as { version?: unknown }).version;
-
-  return typeof version === "string" && version.trim()
-    ? version.trim()
-    : null;
-}
-
-function readWordsFromObject(payload: RemoteWordListObject, length: number) {
-  const sources = [payload.words, payload.data, payload.items, payload.list];
-
-  for (const source of sources) {
-    if (Array.isArray(source)) return source;
-
-    if (source && typeof source === "object") {
-      const wordsByLength = source as Record<string, unknown>;
-      const lengthWords =
-        wordsByLength[String(length)] ??
-        wordsByLength[`${length}-letter`] ??
-        wordsByLength[`${length}Letter`] ??
-        wordsByLength[`${length}Letters`];
-
-      if (Array.isArray(lengthWords)) return lengthWords;
-    }
+  if (normalizedBaseUrl.endsWith(".json.gz")) {
+    return normalizedBaseUrl;
   }
 
-  return [];
+  return joinUrl(normalizedBaseUrl, SORTED_WORDS_PATH);
 }
 
-function extractRemoteWords(payload: unknown, length: number) {
-  if (Array.isArray(payload)) return payload;
+function normalizeWordsForLength(words: unknown, length: SupportedWordLength) {
+  if (!Array.isArray(words)) return [];
 
-  if (payload && typeof payload === "object") {
-    return readWordsFromObject(payload as RemoteWordListObject, length);
-  }
-
-  return [];
-}
-
-export function normalizeRemoteWordList(payload: unknown, length: number) {
-  const words = extractRemoteWords(payload, length);
   const normalizedWords = words
     .filter((word): word is string => typeof word === "string")
     .map((word) => word.trim().toLowerCase())
@@ -101,4 +56,85 @@ export function normalizeRemoteWordList(payload: unknown, length: number) {
   return Array.from(new Set(normalizedWords)).sort((a, b) =>
     a.localeCompare(b)
   );
+}
+
+export function normalizeSortedWordsPayload(
+  payload: unknown
+): SortedWordsByLength {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return {};
+  }
+
+  const sortedWords = payload as Record<string, unknown>;
+  const normalizedSortedWords: SortedWordsByLength = {};
+
+  for (const length of SUPPORTED_LENGTHS) {
+    const lengthKey = String(length) as SupportedWordLengthKey;
+    const normalizedWords = normalizeWordsForLength(
+      sortedWords[lengthKey],
+      length
+    );
+
+    if (normalizedWords.length > 0) {
+      normalizedSortedWords[lengthKey] = normalizedWords;
+    }
+  }
+
+  return normalizedSortedWords;
+}
+
+export function getSortedWordsForLength(payload: unknown, length: number) {
+  if (!isSupportedWordLength(length)) return [];
+
+  const sortedWords = normalizeSortedWordsPayload(payload);
+  const lengthKey = String(length) as SupportedWordLengthKey;
+
+  return sortedWords[lengthKey] ?? [];
+}
+
+function looksGzipped(buffer: ArrayBuffer) {
+  const bytes = new Uint8Array(buffer);
+  return bytes.length >= 2 && bytes[0] === 0x1f && bytes[1] === 0x8b;
+}
+
+async function parseTextPayload(buffer: ArrayBuffer) {
+  const text = new TextDecoder().decode(buffer);
+  return JSON.parse(text);
+}
+
+async function parseGzipPayload(buffer: ArrayBuffer) {
+  if (typeof DecompressionStream !== "function") {
+    throw new Error(
+      "Unable to decompress sortedWords.json.gz in this browser. Configure R2 with Content-Type: application/json and Content-Encoding: gzip."
+    );
+  }
+
+  const stream = new Response(buffer).body;
+  if (!stream) {
+    throw new Error("Unable to read sortedWords.json.gz response body.");
+  }
+
+  const decompressedStream = stream.pipeThrough(new DecompressionStream("gzip"));
+  const text = await new Response(decompressedStream).text();
+
+  return JSON.parse(text);
+}
+
+export async function readSortedWordsResponse(
+  response: Response
+): Promise<SortedWordsByLength> {
+  if (!response.ok) {
+    throw new Error(`Sorted words request failed: ${response.status}`);
+  }
+
+  try {
+    return normalizeSortedWordsPayload(await response.clone().json());
+  } catch {
+    const buffer = await response.arrayBuffer();
+    const payload = looksGzipped(buffer)
+      ? await parseGzipPayload(buffer)
+      : await parseTextPayload(buffer);
+
+    return normalizeSortedWordsPayload(payload);
+  }
 }
