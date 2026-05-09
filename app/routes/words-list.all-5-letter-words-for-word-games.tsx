@@ -1,35 +1,29 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useState } from "react";
-import SocialLinks from "../client/components/navigation/SocialLinks";
+import RemoteWordListPage from "../client/components/words/RemoteWordListPage";
 import { getCanonicalUrl } from "../shared/routes";
 import { getWordsByLength } from "../shared/wordData";
 
 const LENGTH = 5;
-const canonical = getCanonicalUrl(
-  "/words-list/all-5-letter-words-for-word-games"
-);
-const list = getWordsByLength(LENGTH);
-const count = list.length;
+const canonical = getCanonicalUrl("/words-list/all-5-letter-words-for-word-games");
+const initialWords = getWordsByLength(LENGTH);
+const navLinks = [
+    { href: "/words-list/all-4-letter-words-for-word-games", label: "<- 4-letter words" },
+    { href: "/words-list/all-6-letter-words-for-word-games", label: "6-letter words ->" },
+];
 
 export const meta: MetaFunction = () => {
-  const title = "Curated 5-Letter Words for Word Games | WordSkull";
-  const desc = count
-    ? `Browse ${count.toLocaleString(
-        "en-US"
-      )} 5-letter words for Wordle, crosswords, anagrams, and puzzles. Perfect for daily Wordle training and vocab growth.`
-    : "Browse 5-letter words for Wordle, crosswords, anagrams, and puzzles. Perfect for daily Wordle training and vocab growth.";
-
-  const url = canonical;
+  const title = "All 5-Letter Words for Word Games | WordSkull";
+  const desc = "Browse 5-letter words for Wordle, crosswords, anagrams, and puzzles. Perfect for daily Wordle training and vocab growth.";
   const ogImage = "https://www.wordskull.com/og/wordskull-words-5.jpg";
 
   return [
     { title },
     { name: "description", content: desc },
-    { tagName: "link", rel: "canonical", href: url },
+    { tagName: "link", rel: "canonical", href: canonical },
     { property: "og:title", content: title },
     { property: "og:description", content: desc },
     { property: "og:type", content: "website" },
-    { property: "og:url", content: url },
+    { property: "og:url", content: canonical },
     { property: "og:image", content: ogImage },
     { property: "og:image:alt", content: "WordSkull 5-letter word list" },
     { name: "twitter:card", content: "summary_large_image" },
@@ -44,155 +38,13 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-/* ===================== PAGE ===================== */
 export default function FiveLetterWords() {
-  const [copied, setCopied] = useState<string | null>(null);
-
-  const handleCopy = async (word: string) => {
-    try {
-      if (navigator?.clipboard?.writeText) {
-        await navigator.clipboard.writeText(word);
-      } else {
-        const ta = document.createElement("textarea");
-        ta.value = word;
-        ta.setAttribute("readonly", "");
-        ta.style.position = "absolute";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-      }
-      setCopied(word);
-      window.setTimeout(() => setCopied(null), 1200);
-    } catch {
-      setCopied(null);
-    }
-  };
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    name: `Curated ${LENGTH}-Letter Words for Word Games`,
-    url: canonical,
-    isPartOf: {
-      "@type": "WebSite",
-      name: "Word Skull",
-      url: "https://www.wordskull.com",
-    },
-    breadcrumb: {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://www.wordskull.com",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Words List",
-          item: "https://www.wordskull.com/words-list",
-        },
-        { "@type": "ListItem", position: 3, name: `${LENGTH}-Letter Words` },
-      ],
-    },
-    about: [
-      { "@type": "Thing", name: "word games" },
-      { "@type": "Thing", name: `${LENGTH}-letter words` },
-      { "@type": "Thing", name: "Wordle" },
-      { "@type": "Thing", name: "crosswords" },
-      { "@type": "Thing", name: "anagrams" },
-      { "@type": "Thing", name: "cryptograms" },
-    ],
-    numberOfItems: count,
-  };
-
   return (
-    <div className="flex flex-col justify-center items-center mt-10">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
-      <header>
-        <h1 className="mt-[0.7em] text-5xl font-nunito text-skull-dark-brown mb-12">
-          Curated {LENGTH}-Letter Words for Word & Puzzle Games
-        </h1>
-      </header>
-
-      <main className="flex max-w-[1200px] flex-col w-full">
-        <div className="flex flex-col gap-5 justify-center items-center">
-          <h2 className="text-2xl">
-            There {count === 1 ? "is" : "are"} {count.toLocaleString("en-US")}{" "}
-            word
-            {count === 1 ? "" : "s"} in this list!
-          </h2>
-
-          {/* Copyable word buttons */}
-          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 w-full">
-            {list.map((word) => (
-              <li key={word}>
-                <button
-                  type="button"
-                  title="Click to copy"
-                  aria-label={`Copy ${word} to clipboard`}
-                  onClick={() => handleCopy(word)}
-                  className="group relative flex h-14 w-full items-center justify-center
-                   rounded-xl border border-pumpkin-orange/30 bg-white/90 px-3 shadow-sm transition hover:border-pumpkin-orange/60
-                   hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-pumpkin-orange
-                   active:scale-[0.98]"
-                >
-                  {/* The word stays centered */}
-                  <span className="font-semibold tracking-wide text-skull-dark-brown">
-                    {word}
-                  </span>
-
-                  {/* Hover/focus hint: centered at bottom, no layout shift, no overlap */}
-                  <span
-                    className="pointer-events-none absolute bottom-1 left-1/2 -translate-x-1/2
-                     text-[11px] leading-none text-pumpkin-orange/80 opacity-0
-                     transition-opacity duration-150
-                     group-hover:opacity-100 group-focus-visible:opacity-100"
-                  >
-                    Tap to copy
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-
-          <nav className="mt-6 text-pumpkin-orange">
-            <a
-              className="hover:text-amber-600 font-lora mr-4"
-              href="/words-list/all-4-letter-words-for-word-games"
-            >
-              ← 4-letter words
-            </a>
-            <a
-              className="hover:text-amber-600 font-lora"
-              href="/words-list/all-6-letter-words-for-word-games"
-            >
-              6-letter words →
-            </a>
-          </nav>
-        </div>
-
-        <SocialLinks />
-      </main>
-
-      {/* Tiny toast for copy feedback */}
-      <div
-        aria-live="polite"
-        className="pointer-events-none fixed bottom-4 right-4 z-50"
-      >
-        {copied && (
-          <div className="fixed bottom-4 right-4 z-50 rounded-lg bg-black/90 text-white text-sm px-3 py-2 shadow-lg">
-            Copied “{copied}”
-          </div>
-        )}
-      </div>
-    </div>
+    <RemoteWordListPage
+      length={LENGTH}
+      canonical={canonical}
+      initialWords={initialWords}
+      navLinks={navLinks}
+    />
   );
 }

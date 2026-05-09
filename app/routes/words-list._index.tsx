@@ -5,7 +5,7 @@ import { useMatches } from "@remix-run/react";
 import { useTheme } from "../client/components/context/ThemeContext";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import { getCanonicalUrl } from "../shared/routes";
-import { getTotalWordCount, getWordCountsByLength } from "../shared/wordData";
+import { getWordCountsByLength } from "../shared/wordData";
 
 type RootData = {
   canonical?: string;
@@ -17,12 +17,9 @@ const LENGTHS = [3, 4, 5, 6, 7, 8, 9] as const;
 /* ===================== META ===================== */
 export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as Match | undefined;
-  const total = getTotalWordCount();
-
-  const title = "Curated 3-9 Letter Words for Word Games | WordSkull";
-  const desc = total
-    ? `Browse ${total.toLocaleString()} words by length (3-9 letters) for Wordle, crosswords, anagrams, and more. Great for puzzles and practice.`
-    : "Browse words by length (3-9 letters) for Wordle, crosswords, anagrams, and more. Great for puzzles and practice.";
+  const title = "All 3-9 Letter Words for Word Games | WordSkull";
+  const desc =
+    "Browse word lists by length (3-9 letters) for Wordle, crosswords, anagrams, and more. Each length page loads the full public word list from the CDN.";
 
   const url = root?.data?.canonical ?? getCanonicalUrl("/words-list");
   const ogImage = "https://www.wordskull.com/og/wordskull-words-list.jpg";
@@ -91,7 +88,7 @@ export default function AllWordsForWordGame() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Curated 3-9 Letter Words for Word Games",
+    name: "All 3-9 Letter Words for Word Games",
     url: canonical,
     breadcrumb: {
       "@type": "BreadcrumbList",
@@ -126,9 +123,8 @@ export default function AllWordsForWordGame() {
           Words List - Word & Puzzle Games
         </h1>
         <p className="text-center font-lato text-skull-super-dark-brown/90 max-w-2xl">
-          Explore curated word lists by length. Perfect for training, solving
-          crosswords, leveling up at anagrams, and sharpening your Wordle
-          instincts.
+          Explore word lists by length. Each length page starts with a curated
+          preview and then loads the full public word list in your browser.
         </p>
       </header>
 
@@ -141,11 +137,11 @@ export default function AllWordsForWordGame() {
                 className={`${linkColor} hover:text-amber-600 font-lora`}
                 to={`/words-list/all-${n}-letter-words-for-word-games`}
               >
-                View curated list of {n}-letter words
+                View full {n}-letter word list
               </Link>
               <span className="text-sm text-stone-500">
                 {typeof countsByLen[n] === "number"
-                  ? `${countsByLen[n]?.toLocaleString()} words`
+                  ? `${countsByLen[n]?.toLocaleString()} starter words in the static preview`
                   : "Loading word count…"}
               </span>
             </div>
