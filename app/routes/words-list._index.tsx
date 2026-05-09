@@ -19,7 +19,7 @@ export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as Match | undefined;
   const total = getTotalWordCount();
 
-  const title = "All 3-9 Letter Words for Word Games | WordSkull";
+  const title = "Curated 3-9 Letter Words for Word Games | WordSkull";
   const desc = total
     ? `Browse ${total.toLocaleString()} words by length (3-9 letters) for Wordle, crosswords, anagrams, and more. Great for puzzles and practice.`
     : "Browse words by length (3-9 letters) for Wordle, crosswords, anagrams, and more. Great for puzzles and practice.";
@@ -91,7 +91,7 @@ export default function AllWordsForWordGame() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "All 3–9 Letter Words for Word Games",
+    name: "Curated 3-9 Letter Words for Word Games",
     url: canonical,
     breadcrumb: {
       "@type": "BreadcrumbList",
@@ -141,7 +141,7 @@ export default function AllWordsForWordGame() {
                 className={`${linkColor} hover:text-amber-600 font-lora`}
                 to={`/words-list/all-${n}-letter-words-for-word-games`}
               >
-                View list of all {n}-letter words
+                View curated list of {n}-letter words
               </Link>
               <span className="text-sm text-stone-500">
                 {typeof countsByLen[n] === "number"

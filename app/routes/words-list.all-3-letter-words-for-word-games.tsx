@@ -12,7 +12,7 @@ const list = getWordsByLength(LENGTH);
 const count = list.length;
 
 export const meta: MetaFunction = () => {
-  const title = "All 3-Letter Words for Word Games | WordSkull";
+  const title = "Curated 3-Letter Words for Word Games | WordSkull";
   const desc = count
     ? `Browse ${count.toLocaleString(
         "en-US"
@@ -85,7 +85,7 @@ export default function ThreeLetterWords() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: `All ${LENGTH}-Letter Words for Word Games`,
+    name: `Curated ${LENGTH}-Letter Words for Word Games`,
     url: canonical,
     isPartOf: {
       "@type": "WebSite",
@@ -131,7 +131,7 @@ export default function ThreeLetterWords() {
 
       <header>
         <h1 className="mt-[0.7em] text-5xl font-nunito text-skull-dark-brown mb-12">
-          All {LENGTH}-Letter Words for Word & Puzzle Games
+          Curated {LENGTH}-Letter Words for Word & Puzzle Games
         </h1>
       </header>
 

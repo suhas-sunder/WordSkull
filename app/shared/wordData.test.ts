@@ -28,9 +28,12 @@ describe("static word data helpers", () => {
     for (const length of WORD_LENGTHS) {
       const validationWords = new Set(getValidationWordsByLength(length));
       const targetWords = getTargetWordsByLength(length);
+      const publicWords = getWordsByLength(length);
 
       expect(targetWords.length).toBeGreaterThan(0);
       expect(targetWords.every((word) => validationWords.has(word))).toBe(true);
+      expect(publicWords).toEqual(targetWords);
+      expect(publicWords.length).toBeLessThan(validationWords.size);
     }
   });
 

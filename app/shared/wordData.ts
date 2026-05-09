@@ -13,7 +13,7 @@ export function normalizeWord(word: string) {
 }
 
 export function getWordsByLength(length: number) {
-  return getValidationWordsByLength(length);
+  return getPublicWordListWordsByLength(length);
 }
 
 export function getValidationWordsByLength(length: number) {
@@ -21,6 +21,10 @@ export function getValidationWordsByLength(length: number) {
 }
 
 export function getTargetWordsByLength(length: number) {
+  return targetWordsByLength[length] ?? [];
+}
+
+export function getPublicWordListWordsByLength(length: number) {
   return targetWordsByLength[length] ?? [];
 }
 
