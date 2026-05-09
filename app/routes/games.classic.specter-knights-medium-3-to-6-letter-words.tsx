@@ -1,11 +1,9 @@
 import type { MetaFunction } from "@remix-run/node";
 import ClassicGameLogic from "../client/components/layout/ClassicGameLogic";
 import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
-import { useMemo } from "react";
 import { useMatches } from "react-router-dom";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import GameLinks from "../client/components/layout/GameLinks";
-import { WordsData } from "./games.classic.boneheads-easy-3-to-5-letter-words";
 
 type RootMatch = { id: string; data?: { canonical?: string } };
 
@@ -61,10 +59,6 @@ export const meta: MetaFunction = ({ matches }) => {
 // ---------- PAGE ----------
 export default function WordSkullMedium() {
   const matches = useMatches();
-  const wordsData = useMemo(() => {
-    const match = matches?.find((m) => (m?.data as WordsData)?.words);
-    return match?.data as WordsData;
-  }, [matches]);
 
   // Canonical for JSON-LD
   const root = matches.find((m) => m.id === "root") as RootMatch | undefined;
@@ -134,7 +128,6 @@ export default function WordSkullMedium() {
         startPosition={4}
         endPosition={8}
         lettersPerSkull="Medium Difficulty: 3 - 6 letters"
-        wordsData={wordsData}
         difficulty="medium"
         gameMode="classic"
         skullNumber={1}

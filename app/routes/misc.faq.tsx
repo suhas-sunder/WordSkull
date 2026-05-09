@@ -3,7 +3,7 @@ import SocialLinks from "../client/components/navigation/SocialLinks";
 
 // ---------- META ----------
 export const meta: MetaFunction = () => {
-  const canonical = "https://www.wordskull.com/faq";
+  const canonical = "https://www.wordskull.com/misc/faq";
 
   const title = "WordSkull FAQ | Frequently Asked Questions";
   const description =

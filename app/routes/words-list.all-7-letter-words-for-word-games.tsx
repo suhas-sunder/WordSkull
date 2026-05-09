@@ -1,55 +1,17 @@
-import {
-  json,
-  type LoaderFunctionArgs,
-  type MetaFunction,
-} from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import type { MetaFunction } from "@remix-run/node";
 import { useState } from "react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
+import { getCanonicalUrl } from "../shared/routes";
+import { getWordsByLength } from "../shared/wordData";
 
-type WordsMap = Record<number, string[]>;
 const LENGTH = 7;
+const canonical = getCanonicalUrl(
+  "/words-list/all-7-letter-words-for-word-games"
+);
+const list = getWordsByLength(LENGTH);
+const count = list.length;
 
-/* ===================== LOADER ===================== */
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const url = new URL(request.url);
-  const canonical = `${url.origin}/words-list/all-${LENGTH}-letter-words-for-word-games`;
-
-  let words: WordsMap | undefined;
-
-  try {
-    const { default: GetWordsForSkull } = await import(
-      "../client/components/utils/requests/GetWordsForSkull"
-    );
-
-    const resOrObj = await GetWordsForSkull();
-
-    // Handle both: fetch Response or plain object (matches your working fix)
-    if (resOrObj && typeof (resOrObj as any).json === "function") {
-      const data = await (resOrObj as Response).json();
-      words = data?.words as WordsMap | undefined;
-    } else {
-      words = ((resOrObj as any)?.words ?? resOrObj) as WordsMap | undefined;
-    }
-  } catch (e) {
-    console.error("GetWordsForSkull failed in 7-letter route:", e);
-  }
-
-  const list: string[] =
-    (words?.[LENGTH] as string[] | undefined) ??
-    (words ? (Object.values(words)[LENGTH - 3] as string[]) : []) ??
-    [];
-
-  return json({
-    canonical,
-    list,
-    count: list.length,
-  });
-};
-
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  const count = data?.count as number | undefined;
-
+export const meta: MetaFunction = () => {
   const title = "All 7-Letter Words for Word Games | WordSkull";
   const desc = count
     ? `Study ${count.toLocaleString(
@@ -57,9 +19,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
       )} 7-letter words for crosswords, hangman, Scrabble, and anagrams. Great for longer puzzles and vocabulary training.`
     : "Study 7-letter words for crosswords, hangman, Scrabble, and anagrams. Great for longer puzzles and vocabulary training.";
 
-  const url =
-    data?.canonical ??
-    "https://www.wordskull.com/words-list/all-7-letter-words-for-word-games";
+  const url = canonical;
   const ogImage = "https://www.wordskull.com/og/wordskull-words-7.jpg";
 
   return [
@@ -86,7 +46,6 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 /* ===================== PAGE ===================== */
 export default function SevenLetterWords() {
-  const { list, count, canonical } = useLoaderData<typeof loader>();
   const [copied, setCopied] = useState<string | null>(null);
 
   const handleCopy = async (word: string) => {

@@ -1,57 +1,17 @@
-import {
-  json,
-  type LoaderFunctionArgs,
-  type MetaFunction,
-} from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import type { MetaFunction } from "@remix-run/node";
 import { useState } from "react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
+import { getCanonicalUrl } from "../shared/routes";
+import { getWordsByLength } from "../shared/wordData";
 
-type WordsMap = Record<number, string[]>;
 const LENGTH = 4;
+const canonical = getCanonicalUrl(
+  "/words-list/all-4-letter-words-for-word-games"
+);
+const list = getWordsByLength(LENGTH);
+const count = list.length;
 
-/* ===================== LOADER ===================== */
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const url = new URL(request.url);
-  const canonical = `${url.origin}/words-list/all-${LENGTH}-letter-words-for-word-games`;
-
-  let words: WordsMap | undefined;
-
-  try {
-    const { default: GetWordsForSkull } = await import(
-      "../client/components/utils/requests/GetWordsForSkull"
-    );
-
-    const resOrObj = await GetWordsForSkull();
-
-    // ✅ Handle both shapes:
-    // 1) fetch Response → parse JSON
-    // 2) direct object with { words }
-    if (resOrObj && typeof (resOrObj as any).json === "function") {
-      const data = await (resOrObj as Response).json();
-      words = data?.words as WordsMap | undefined;
-    } else {
-      words = ((resOrObj as any)?.words ?? resOrObj) as WordsMap | undefined;
-    }
-  } catch (e) {
-    console.error("GetWordsForSkull failed in 4-letter route:", e);
-  }
-
-  const list: string[] =
-    (words?.[LENGTH] as string[] | undefined) ??
-    (words ? (Object.values(words)[LENGTH - 3] as string[]) : []) ??
-    [];
-
-  return json({
-    canonical,
-    list,
-    count: list.length,
-  });
-};
-
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  const count = data?.count as number | undefined;
-
+export const meta: MetaFunction = () => {
   const title = "All 4-Letter Words for Word Games | WordSkull";
   const desc = count
     ? `Browse ${count.toLocaleString(
@@ -59,9 +19,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
       )} 4-letter words for Scrabble, Wordle, crosswords, and anagrams. Great for daily puzzles and short word play.`
     : "Browse 4-letter words for Scrabble, Wordle, crosswords, and anagrams. Great for daily puzzles and short word play.";
 
-  const url =
-    data?.canonical ??
-    "https://www.wordskull.com/words-list/all-4-letter-words-for-word-games";
+  const url = canonical;
   const ogImage = "https://www.wordskull.com/og/wordskull-words-4.jpg";
 
   return [
@@ -88,7 +46,6 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 /* ===================== PAGE ===================== */
 export default function FourLetterWords() {
-  const { list, count, canonical } = useLoaderData<typeof loader>();
   const [copied, setCopied] = useState<string | null>(null);
 
   const handleCopy = async (word: string) => {

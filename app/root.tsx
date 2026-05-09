@@ -15,13 +15,11 @@ import {
   Links,
   Meta,
   Scripts,
-  ClientLoaderFunctionArgs,
   useLocation,
   useNavigation,
 } from "@remix-run/react";
 
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node";
 
 import {
   ThemeProvider,
@@ -30,121 +28,20 @@ import {
 import { SettingsProvider } from "./client/components/context/SettingsContext";
 import { StatsProvider } from "./client/components/context/StatsContext";
 import ErrorBoundary from "./client/components/utils/errors/ErrorBoundary";
-import GetWordsForSkull from "./client/components/utils/requests/GetWordsForSkull";
 import { useEffect, lazy, Suspense, useState } from "react";
-
-/* ========= simple server memo cache for words ========= */
-type WordsPayload = { words: Record<number, string[]> };
-let WORDS_CACHE: WordsPayload | null = null;
-let WORDS_LOADED_AT = 0;
-const WORDS_TTL_MS = 60 * 60 * 1000; // 1 hour
-/* ===================================================== */
-
-// --- Loader / action / clientLoader ---
-
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const url = new URL(request.url);
-
-  // Normalize: strip trailing slashes on non-root
-  if (url.pathname !== "/" && url.pathname.endsWith("/")) {
-    url.pathname = url.pathname.replace(/\/+$/, "");
-    throw redirect(url.toString(), { status: 301 });
-  }
-
-  // Normalize: strip trailing periods or spaces
-  if (/[.\s]+$/.test(url.pathname)) {
-    url.pathname = url.pathname.replace(/[.\s]+$/, "");
-    throw redirect(url.toString(), { status: 301 });
-  }
-
-  // Build canonical (no trailing slash on path)
-  const canonical = url.origin + (url.pathname || "/") + url.search;
-
-  // Memoize/fetch words once per TTL, robust to Response|object shapes
-  const now = Date.now();
-  if (!WORDS_CACHE || now - WORDS_LOADED_AT > WORDS_TTL_MS) {
-    try {
-      const resOrObj = await GetWordsForSkull();
-      let words: Record<number, string[]> | undefined;
-
-      if (resOrObj && typeof (resOrObj as any).json === "function") {
-        const data = await (resOrObj as Response).json();
-        words = (data as any)?.words ?? (data as any);
-      } else {
-        words = (resOrObj as any)?.words ?? (resOrObj as any);
-      }
-
-      WORDS_CACHE = { words: words ?? {} };
-      WORDS_LOADED_AT = now;
-    } catch (e) {
-      console.error("GetWordsForSkull failed in root loader:", e);
-      WORDS_CACHE = { words: {} };
-      WORDS_LOADED_AT = now;
-    }
-  }
-
-  return json(
-    { ...WORDS_CACHE, canonical },
-    {
-      headers: {
-        "Cache-Control":
-          "public, s-maxage=86400, max-age=1800, stale-while-revalidate=604800",
-      },
-    }
-  );
-};
-
-export const action = async ({ request }: { request: Request }) => {
-  if (request.method !== "POST") {
-    return new Response("Method Not Allowed", { status: 405 });
-  }
-  return new Response("Not Found", { status: 404 });
-};
-
-export async function clientLoader({ serverLoader }: ClientLoaderFunctionArgs) {
-  const cacheKey = "words";
-  try {
-    const { default: localforage } = await import("localforage");
-
-    const cachedWords = await localforage.getItem(cacheKey);
-    if (cachedWords) {
-      return { words: cachedWords };
-    } else {
-      const { words }: { words: { [keys: number]: string[] } } =
-        await serverLoader();
-      await localforage.setItem(cacheKey, words);
-      return { words };
-    }
-  } catch (error) {
-    console.error("Error fetching or caching words data:", error);
-    return { words: [] };
-  }
-}
 
 // --- Meta ---
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  const canonical = data?.canonical ?? "";
-  return [
-    { title: "Word Skull" },
-    {
-      name: "description",
-      content:
-        "Play Word Skull: Classic, Royal Lichen, and more. Fast word challenges with 3 to 9 letter play.",
-    },
-    { tagName: "link", rel: "canonical", href: canonical },
-    { property: "og:url", content: canonical },
-    { property: "og:type", content: "website" },
-    { name: "twitter:card", content: "summary_large_image" },
-  ];
-};
-
-// NEW: document-level headers to avoid stale HTML pointing to deleted chunks
-export const headers = () => {
-  return {
-    "Cache-Control": "no-store",
-  };
-};
+export const meta: MetaFunction = () => [
+  { title: "Word Skull" },
+  {
+    name: "description",
+    content:
+      "Play Word Skull: Classic, Royal Lichen, and more. Fast word challenges with 3 to 9 letter play.",
+  },
+  { property: "og:type", content: "website" },
+  { name: "twitter:card", content: "summary_large_image" },
+];
 
 // --- UI shells ---
 

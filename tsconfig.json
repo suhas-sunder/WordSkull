@@ -12,14 +12,8 @@
     "app/routes/emoji-combos.tsx",
     "app/routes/emoji-combos.$emoji.tsx",
     "app/routes/games.tsx",
-    "server_routes/config/dbConfig.js",
-    "../typing-test-app/client/src/api/accountAPI.ts",
-    "scripts/generateSitemap.js",
-    "server_routes/accountRouter.js",
-    "server_routes/utils/validation.js",
-    "server_routes/utils/jwtGenerator.js",
-    "server_routes/middleware/authorization.js",
-    "app/routes/.word-skull-game-easy-mode.tsx"
+    "scripts/**/*.js",
+    "scripts/**/*.mjs"
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],

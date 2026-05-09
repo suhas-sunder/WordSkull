@@ -5,7 +5,7 @@ import LoreSidebar from "../client/components/navigation/LoreSidebar";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 
 /* ===================== CONSTANTS FOR THIS CHAPTER ===================== */
-const slug = "chapter-1-the-wizards-rise";
+const slug = "wordskull-chapter-1-the-wizards-rise-who-was-atriocsoul";
 const canonical = `https://www.wordskull.com/lore/${slug}`;
 const datePublished = "2025-08-20"; // set your actual publish date
 const dateModified = datePublished; // update when you edit

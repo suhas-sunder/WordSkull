@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
-  const canonical = "https://www.wordskull.com/links";
+  const canonical = "https://www.wordskull.com/misc/socials";
 
   const title = "Links Hub | WordSkull – Socials, News & Resources";
   const description =

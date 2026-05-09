@@ -2,747 +2,557 @@
 
 ## Project
 
-This repository is for **I Love Word Search**, a production-grade, SEO-first, ad-ready word search website for:
+WordSkull is a Remix/Vite word game and content site.
 
-`www.iLoveWordSearch.com`
+This repository is **Remix/Vite**, not Next.js.
 
-The product is not a thin one-page generator. It is a content-rich word search library plus a best-in-class builder, with the builder placed above the fold on every indexable page.
+The current working branch is:
 
-The site should feel:
-
-- professional
-- clean
-- fast
-- trustworthy
-- easy to use in under a minute
-- useful for teachers, parents, homeschoolers, ESL tutors, party planners, adult puzzle users, and seniors
-- scalable into specialty token-based word search modes later
-
-The final product should be a cleaner, more modern alternative to old worksheet generators and a stronger SEO architecture than cluttered UGC puzzle sites.
-
-## Core Build Principles
-
-Before making changes:
-
-- Inspect the relevant files before editing.
-- Follow the existing architecture, naming, routing, state, and styling patterns.
-- Do not guess when reference code exists. Read the reference code first.
-- Prefer shared components, shared utilities, and structured data over one-off route implementations.
-- Do not change unrelated files.
-- Do not rename existing functions, variables, routes, exports, or public APIs unless clearly required.
-- Do not add dependencies unless the task cannot be implemented safely without them.
-- If a dependency is needed, document why it is needed.
-- Keep the implementation production-ready, not demo-quality.
-- Preserve SEO, printability, accessibility, and puzzle correctness.
-- Do not claim success unless the feature or route was actually tested.
-
-## Tech Stack
-
-Use:
-
-- Next.js 15+ with App Router
-- TypeScript
-- Tailwind CSS
-- `next/font/google`
-- `zod` for schema validation
-- static generation for curated indexable pages
-- deterministic seeded puzzle generation
-- server-rendered HTML for SEO pages
-- selective hydration only where interactivity is required
-- structured content collections using JSON, TS objects, or MDX-backed data
-- print CSS as a first-class feature
-- SVG puzzle rendering as the source of truth
-- PDF/PNG exports derived from the same source-of-truth puzzle state
-
-Avoid:
-
-- giant component libraries
-- unnecessary client-side hydration
-- heavy visual effects
-- fragile route-local duplication
-- hardcoded content spread across components
-- ad hoc puzzle state that cannot reproduce the same puzzle later
-
-## Product Rules
-
-The builder must appear at the top of every indexable page.
-
-Every indexable page should provide real value. Do not create thin SEO pages, synonym pages, shuffled variants, or indexed filter combinations.
-
-Do not publish topic pages unless they have:
-
-- curated word lists
-- unique intro/context
-- actual utility
-- related links
-- a useful builder preset
-- enough distinct value to justify the page
-
-Do not promise features that are not implemented.
-
-Do not make medical or cognitive-health claims unless specifically sourced and intentionally approved later.
-
-Do not use patronizing copy for adults or seniors.
-
-Do not create a toy-like classroom clipart aesthetic.
-
-Do not let ads interfere with the builder, puzzle grid, print, or PDF output.
-
-## Design Direction
-
-The design must be professional, clean, calm, and highly legible.
-
-Use owner-provided styling images as taste references only. Do not copy any reference image 1:1. Identify the common design choices across the references, then build an original visual system that fits `www.iLoveWordSearch.com`.
-
-Use:
-
-- white page background
-- neutral grayscale palette
-- one restrained accent color
-- clear typography
-- calm spacing
-- 1px borders for structure
-- very light shadows only where useful
-- professional inputs
-- simple clear buttons
-- strong readable puzzle grids
-
-Avoid:
-
-- gradients
-- glassmorphism
-- loud classroom colors
-- generic SaaS dashboard visuals
-- giant rounded toy UI
-- unnecessary background color blocks
-- nested card-inside-card layouts
-- decorative clutter
-- heavy shadows
-- playful/sloppy form styling
-
-Use spacing, typography, borders, and restrained elevation to create hierarchy.
-
-## Fonts
-
-Use free fonts.
-
-Use:
-
-- Inter for UI, controls, forms, nav, and body copy
-- Source Serif 4 for page headings and editorial sections
-- Atkinson Hyperlegible Next for puzzle grids, answer keys, and accessibility-sensitive labels
-
-Do not use one font for everything.
-
-## Layout Rules
-
-- Desktop content width should be around 1120 to 1200px.
-- Builder should be a single unified surface with internal dividers, not a stack of nested cards.
-- On desktop, builder controls should be on the left and live preview on the right.
-- On mobile, preview should be immediately visible and controls should be grouped into clear sections.
-- Sticky primary actions are acceptable on mobile if they do not cover content.
-- Keep the above-the-fold experience clean.
-- Do not bury the builder under SEO copy.
-- Do not let the builder become a cluttered settings wall.
-- Keep the workflow clear enough that a new user can generate and print within one minute.
-
-## Button and Interaction Rules
-
-All interactive elements must have:
-
-- clear default state
-- clear hover state
-- clear active state
-- clear focus-visible state
-- clear disabled state
-- `cursor-pointer` where applicable
-- keyboard accessibility
-- sufficient contrast
-
-Do not create hover states that reduce readability.
-
-Do not rely on color alone to indicate state.
-
-Do not add animation that hurts usability. Respect reduced motion.
-
-## Puzzle Engine Rules
-
-The puzzle engine must be deterministic and token-based.
-
-Do not assume every grid cell is a single A-Z character.
-
-The engine should support alphabet packs that define:
-
-- normalization rules
-- valid input formats
-- display tokens
-- filler token generation
-- print renderer
-- interactive selection logic
-- accessibility labels
-
-This architecture must support future or specialty modes such as:
-
-- Morse tokens
-- Braille cells
-- ASL fingerspelling glyphs
-- binary strings
-- hexadecimal tokens
-- Greek letters
-- Kana
-- emoji-like symbols if enabled later
-
-The preview, PDF, printout, answer key, share link, and QR-code destination must reproduce the same puzzle from the same state and seed.
-
-## Puzzle Logic Requirements
-
-Handle:
-
-- deterministic seeded generation
-- reproducible output from the same state
-- manual rows and columns
-- auto-fit grid sizing
-- square and rectangular grids
-- difficulty presets
-- direction toggles
-- overlap/crossing rules
-- multi-word phrases
-- punctuation normalization
-- diacritics normalization where appropriate
-- duplicate words
-- empty lines
-- comma-separated paste
-- TSV/CSV/TXT upload
-- unsupported characters
-- words too long for the grid
-- too many words for the grid
-- hidden message constraints
-- specialty token modes
-- filler alphabet rules
-- large print constraints
-- answer key overlays
-- word bank ordering
-- online selection behavior
-- touch selection on mobile
-- keyboard accessibility
-- screen-reader labels
-
-If a puzzle cannot fit, do not silently fail.
-
-Show:
-
-- which words were placed
-- which words were excluded
-- practical fixes such as increasing grid size, reducing word count, allowing more directions, allowing overlap, or shortening phrases
-
-Never allow mismatches where:
-
-- preview differs from PDF
-- answer key differs from the puzzle
-- share link regenerates a different puzzle
-- QR code opens a state that produces a different puzzle
-- print output differs from the generated preview
-
-## Builder Requirements
-
-The builder should support:
-
-- one word per line
-- comma-separated paste
-- TSV/CSV/TXT upload
-- de-dupe
-- trim whitespace
-- preserve multi-word phrases
-- clue mode using `answer | clue`
-- batch paste cleanup
-- unsupported character warnings
-- max-length guidance
-- auto size
-- manual rows and columns
-- square or rectangle layouts
-- difficulty presets
-- individual direction toggles
-- allow/disallow overlap
-- rare-letter or harder filler options
-- uppercase/lowercase/title-preserving labels
-- puzzle title
-- optional subtitle/instructions
-- word bank on/off
-- word bank position
-- word bank sort options
-- font size controls
-- border weight
-- cell spacing
-- line weight
-- show/hide grid coordinates
-- name/date line
-- teacher copy vs student copy
-- answer key overlay
-- hidden message mode
-- themed alphabet packs
-- symbol packs for specialty generators
-- print
-- PDF
-- PNG
-- SVG
-- answer key export
-- direct share link
-- embed code
-- deterministic seed
-- shuffle/regenerate same word list
-- local save/recent puzzles
-
-Use debounced live preview.
-
-Persist latest builder state in local storage.
-
-If local storage is unavailable, fail gracefully.
-
-## QR Code and Branding Rules
-
-Every generated puzzle page and printout must include clean website branding and a QR code.
-
-Branding:
-
-- Use `www.iLoveWordSearch.com`
-- Keep branding professional and subtle.
-- Do not let branding dominate the puzzle.
-- Do not interfere with classroom or personal print use.
-
-QR code:
-
-- Must take the user to the exact builder page/state used to create the puzzle.
-- Must preserve the puzzle settings, topic, word list or state ID, seed, difficulty, grid size, alphabet pack, and output mode needed to reproduce the same puzzle.
-- If the URL becomes too long, use a deterministic short-link/state system or encoded server-side state.
-- Must be printable and scannable.
-- Must appear in a clean footer or utility area.
-- Must not appear inside the puzzle grid or word bank.
-- Must be included on student puzzle pages, answer key pages, and PDF/print surfaces where appropriate.
-
-Verify:
-
-- QR code renders
-- QR code points to a valid URL
-- linked state reproduces the same puzzle
-- QR code appears in print/PDF
-- QR code does not cause clipping or layout issues
-
-## Print and PDF Rules
-
-Print and PDF are first-class features.
-
-The output must match what teachers, parents, homeschool users, and casual puzzle users expect.
-
-Support:
-
-- Letter and A4
-- portrait and landscape
-- title
-- optional subtitle
-- instructions
-- puzzle grid
-- word bank
-- name/date line
-- teacher/student copy option
-- answer key page
-- large print mode
-- ink-saving mode
-- QR code and branding
-- clean margins
-- page numbering if multi-page
-- high contrast
-- readable grid and word bank
-- no ads
-- no sticky UI
-- no browser-only controls
-- no clipping
-
-PDF/print must preserve:
-
-- same seed
-- same grid
-- same word placements
-- same hidden message logic
-- same specialty tokens
-- same answer key
-- same title/instructions/word bank behavior
-- same QR link target
-
-Use SVG as the puzzle rendering source of truth, with PDF/PNG derived from it.
-
-Do not bolt print CSS on at the end.
-
-## SEO and Routing Rules
-
-Use static HTML for editorial/indexable pages.
-
-Every indexable page needs:
-
-- unique title
-- unique meta description
-- unique H1
-- concise value prop
-- builder above the fold
-- short unique intro
-- route-specific content modules
-- related links
-- breadcrumbs
-- canonical tag
-- schema where appropriate
-
-Avoid:
-
-- synonym page duplication
-- indexed query-parameter states
-- indexed shuffled variants
-- indexed user-generated pages by default
-- faceted navigation explosion
-- orphan pages
-- generic repeated paragraphs
-
-Use redirects for close synonyms.
-
-Use noindex for utility routes and query states.
-
-Sitemaps should be split by route family.
-
-Schema:
-
-- SoftwareApplication schema on generator hub
-- CollectionPage or ItemList schema on category and collection pages
-- breadcrumbs in HTML and schema
-- FAQ schema only when the FAQ is visible and genuinely useful
-- Open Graph image generation per route where practical
-
-## Canonical Route Structure
-
-Indexable core routes include:
-
-- `/`
-- `/word-search-generator`
-- `/free-printable-word-searches`
-- `/online-word-search`
-- `/word-search-pdf`
-- `/word-search-worksheets`
-- `/word-search-with-answer-key`
-- `/easy-word-searches`
-- `/hard-word-searches`
-- `/large-print-word-searches`
-- `/word-searches-for-kids`
-- `/word-searches-for-adults`
-- `/word-searches-for-seniors`
-- `/word-searches-for-teachers`
-- `/homeschool-word-searches`
-- `/esl-word-searches`
-- `/daily-word-search`
-- `/categories`
-- `/topics`
-- `/specialty-word-search-generators`
-- `/guides`
-
-Topic pages use:
-
-`/word-searches/[category]/[topic-slug]`
-
-Do not create separate canonical pages for every filter combination such as easy + printable + PDF + kids + topic.
-
-Use one canonical topic page and satisfy modifiers with in-page presets/tabs.
-
-## Noindex Utility Routes
-
-These can exist for UX, but must not become indexable clutter:
-
-- `/print/[id]`
-- `/pdf/[id]`
-- `/answer-key/[id]`
-- `/play/[id]` if separate from canonical topic page
-- `/embed/[id]`
-- `/custom/[slug]` for user-generated share links
-- query-parameter states like `?difficulty=`, `?largePrint=`, `?seed=`, `?print=`
-- daily archives unless later justified with real editorial value
-
-Utility routes should canonicalize to the main page where appropriate.
-
-## Content Quality Rules
-
-Editorial content must be:
-
-- clear
-- helpful
-- honest
-- calm
-- practical
-- human-sounding
-
-Avoid:
-
-- cheesy marketing language
-- generic AI-sounding filler
-- giant walls of text
-- toy-store tone
-- patronizing language for adults or seniors
-- exaggerated claims
-- medical or cognitive-health claims
-- unsupported feature promises
-
-Reusable modules are encouraged, but pages must not feel cloned.
-
-Use route-specific examples, word lists, notes, and related links.
-
-## Ad and Affiliate Rules
-
-This site is ad-first and affiliate-second, but UX comes first.
-
-Implement:
-
-- reserved ad slots with fixed heights to reduce CLS
-- no ads inside the builder controls
-- no ads inside the puzzle grid
-- no ads on print/PDF surfaces
-- no ads above the fold that crowd out the builder
-- affiliate modules only on guide/resource pages, not core puzzle pages
-
-Create hooks for future resource pages such as:
-
-- best printer for worksheets
-- best paper for home printables
-- classroom printable supplies
-
-Keep core product pages clean.
-
-## Accessibility Rules
-
-Use a WCAG AA mindset.
-
-Implement:
-
-- semantic headings
-- labeled controls
-- keyboard-usable builder
-- keyboard-usable solver
-- visible focus states
-- descriptive ARIA where useful
-- accessible validation messages
-- reduced motion support
-- high contrast mode
-- large print mode
-- touch-friendly mobile selection
-- no color-only answer indication
-- answer keys with clear contrast
-- screen-reader-friendly labels for controls and puzzle output where feasible
-
-## Performance Rules
-
-- Home and core hubs should feel instant.
-- Category and topic pages should use minimal JS.
-- Hydrate only where necessary.
-- Avoid expensive puzzle regeneration on every keystroke without debounce.
-- Avoid giant component libraries.
-- Avoid cumulative layout shift from ads or late UI.
-- Prefer SVG where practical.
-- Use responsive images sparingly.
-- Keep builder interactions fast on low-end devices.
-
-## Specialty Generator Rules
-
-Specialty modes must be real, not gimmicks.
-
-Morse:
-
-- accept plain text and encode to Morse
-- accept actual Morse input like `... --- ...`
-- normalize dots/dashes and separators
-- allow display as dot/dash tokens or styled Morse glyphs
-- include optional audio playback if implemented
-- include legend
-- preserve seed logic
-- preserve QR/share state
-
-Braille:
-
-- accept plain text and encode to braille
-- accept Unicode braille input
-- support 6-dot and optionally 8-dot mode
-- render proper braille cells
-- include legend/labels
-- preserve print spacing and accessibility
-- preserve QR/share state
-
-ASL fingerspelling:
-
-- render letters as ASL fingerspelling SVG glyphs
-- keep word bank readable in Latin text
-- include optional alphabet legend
-- support symbol-cell selection
-- preserve QR/share state
-
-Binary/hexadecimal:
-
-- encode text to binary or hex tokens
-- keep fixed-width token layout
-- support print and answer key cleanly
-
-Hidden message:
-
-- allow leftover cells to reveal a message
-- validate fit
-- preserve hidden message in export and answer key
-- preserve QR/share state
-
-If a specialty generator route exists but a mode is not fully implemented, do not pretend it is fully functional.
-
-## Documentation Requirements
-
-Maintain docs for:
-
-- adding a new category
-- adding a new topic
-- adding a new collection
-- adding a new guide
-- adding a new alphabet pack
-- adding a new specialty generator
-- editing redirect/noindex maps
-- editing print/PDF templates
-- content schema fields
-- route generation
-- testing puzzle logic
-- testing print/PDF output
-
-## Testing Requirements
-
-Add or update tests for:
-
-- puzzle generation determinism
-- seed reproducibility
-- word placement correctness
-- answer key correctness
-- fit/exclusion logic
-- direction toggle behavior
-- overlap behavior
-- phrase handling
-- specialty alphabet pack behavior
-- hidden message behavior
-- PDF/print output data consistency
-- QR/share link state preservation
-- builder validation
-- localStorage persistence
-- route generation
-- sitemap/robots/canonical behavior
-- noindex utility surfaces
-- accessibility basics
-- responsive builder layout
-- print CSS
-- content schema validation
-
-Try these commands if available:
-
-```bash
-npm run typecheck
-npm run lint
-npm test
-npm run build
-npm run test:e2e
-npm run test:unit
-npm run test:accessibility
-npm run test:seo
+```txt
+last-best-version
 ```
 
-If a command does not exist:
+This branch is the preferred base because it preserves the blog and lore route families that were missing from later branches.
 
-- say it does not exist
-- do not claim it passed
-- run the closest available validation command if appropriate
+Important preserved route/content areas:
 
-Browser QA should test at least:
+```txt
+app/routes/blog.*
+app/routes/lore.*
+BlogSidebar.tsx
+LoreSidebar.tsx
+```
 
-- `/`
-- `/word-search-generator`
-- `/free-printable-word-searches`
-- `/online-word-search`
-- `/word-search-pdf`
-- `/word-search-worksheets`
-- `/large-print-word-searches`
-- `/word-searches-for-kids`
-- `/word-searches-for-adults`
-- `/word-searches-for-teachers`
-- one category hub
-- one topic page
-- one collection page
-- one guide page
-- `/specialty/morse-code-word-search-generator`
-- `/specialty/braille-word-search-generator`
-- `/specialty/hidden-message-word-search-generator`
+Do **not** switch branches unless explicitly instructed.
 
-Viewport QA:
+---
 
-- 390px mobile
-- 768px tablet
-- 1024px laptop
-- 1280px desktop
-- 1440px desktop
-- 1920px wide
+## Primary Goal
 
-For each key route and viewport, verify:
+Prepare WordSkull for efficient Netlify deployment with:
 
-- builder appears above the fold
-- builder workflow is clear
-- preview remains readable
-- controls do not overflow
-- sticky actions do not cover content
-- print/PDF controls are accessible
-- no horizontal scroll
-- no excessive vertical bloat
-- typography remains readable
-- CTA buttons are clear
-- ads do not crowd the builder
-- QR code does not break print layout
-- page content does not feel cloned
+- no persistent Express backend
+- no production dependency on `server.js`
+- no Netlify Functions for normal gameplay/page rendering
+- no server-side Cloudflare R2 word fetches during page render
+- static-first deployment
+- build-time prerendered HTML for SEO-sensitive routes
+- preserved blog/lore/game/word-list content
+- preserved visual design and gameplay behavior
 
-## Final Response Format for Codex
+The desired production target is:
 
-When finishing a task, report:
+```txt
+Netlify static hosting
+Remix/Vite build output
+build/client as publish directory
+build-time prerendered HTML for public routes
+client-side/static word loading
+Cloudflare R2 used only as public read-only static asset storage
+```
 
+---
+
+## High-Level Architecture Rules
+
+### Use static-first Netlify hosting
+
+The preferred deployment model is:
+
+```txt
+npm run build
+-> Remix/Vite builds client/server artifacts
+-> prerender script generates static route HTML
+-> Netlify publishes build/client
+```
+
+Public route HTML should be generated at build time into paths like:
+
+```txt
+build/client/index.html
+build/client/blog/index.html
+build/client/lore/index.html
+build/client/words-list/all-5-letter-words-for-word-games/index.html
+```
+
+Do not rely on a persistent backend server for production.
+
+### Avoid plain SPA-only SEO loss
+
+A plain SPA-only deployment is not preferred because it can collapse route-specific HTML, metadata, canonical tags, JSON-LD, and content into a generic `index.html`.
+
+If a route is SEO-sensitive, prefer build-time prerendered HTML.
+
+SEO-sensitive route families include:
+
+```txt
+/
+blog routes
+lore routes
+game routes
+word-list routes
+legal/misc content routes
+```
+
+### Do not use Netlify Remix runtime adapter as the default solution
+
+Do not add `@netlify/remix-adapter/plugin` unless explicitly instructed.
+
+That approach implies Netlify runtime/serverless behavior. The current goal is static-first hosting with no normal runtime backend logic.
+
+---
+
+## Non-Negotiable Preservation Rules
+
+Do not delete or degrade:
+
+```txt
+app/routes/blog.*
+app/routes/lore.*
+BlogSidebar.tsx
+LoreSidebar.tsx
+game routes
+word-list routes
+sitemap/robots/canonical intent
+existing page copy
+existing visual design
+existing puzzle/game behavior
+```
+
+Do not change gameplay behavior unless required to remove backend dependency.
+
+Preserve:
+
+```txt
+play button behavior
+difficulty/mode behavior
+scoring
+lives
+timer
+keyboard behavior
+modals
+localStorage/localForage persistence
+copy/share behavior
+route URLs
+page styling
+SEO intent
+```
+
+---
+
+## Backend Removal Rules
+
+The production Netlify deployment must not depend on:
+
+```txt
+server.js
+server_routes/**
+netlify/functions/server.js
+Express runtime
+database runtime
+JWT auth runtime
+account/submission API runtime
+server-side R2 fetches
+server-side dictionary decompression
+```
+
+If these files/features are unused by public production routes, delete them instead of preserving dead backend baggage.
+
+Likely backend files to remove if unused:
+
+```txt
+server.js
+server_routes/accountRouter.js
+server_routes/submissionRouter.js
+server_routes/config/dbConfig.js
+server_routes/middleware/authorization.js
+server_routes/utils/jwtGenerator.js
+server_routes/utils/validation.js
+netlify/functions/server.js
+public/netlify.toml
+public/_redirects
+```
+
+Also remove obsolete client-side backend helpers if unused:
+
+```txt
+app/client/components/api/accountAPI.ts
+app/client/components/api/submissionAPI.ts
+app/client/components/api/cloudflareR2API.ts
+app/client/components/api/GetS3Client.ts
+app/client/components/utils/requests/PostIndieDevHeaderForm.ts
+app/client/components/utils/requests/PostIndieLogin.ts
+app/client/components/utils/requests/PostVerifyJWT.ts
+app/client/components/utils/requests/PostJSONFromR2.ts
+app/client/components/utils/requests/PostIndieDevImgToR2.ts
+app/client/components/utils/requests/GetIndieDevJson.ts
+app/client/components/utils/validation/VerifyJWTIndieLogin.ts
+app/client/components/utils/validation/ValidateIndieGameLinks.ts
+app/client/components/utils/validation/ValidateJson.ts
+app/client/components/utils/generators/GeneratexAmzDate.ts
+app/client/types/authTypes.tsx
+app/client/mocks/components/MockDefaultServerAPI.ts
+app/client/mocks/components/MockCloudflareR2API.ts
+```
+
+Only delete files after confirming no valid production import remains.
+
+---
+
+## Netlify Rules
+
+A valid Netlify setup should use a **root-level** `netlify.toml`.
+
+Do not keep Netlify config under:
+
+```txt
+public/netlify.toml
+```
+
+Netlify publish directory should be:
+
+```txt
+build/client
+```
+
+Do not publish:
+
+```txt
+public
+```
+
+Do not configure production traffic to use:
+
+```txt
+server.js
+netlify/functions/server.js
+```
+
+Root `netlify.toml` should support:
+
+- correct build command
+- correct publish directory
+- static fallback behavior only if compatible with prerendered route HTML
+- immutable cache headers for hashed build assets
+- correct 404 behavior
+
+---
+
+## Word Data Rules
+
+The word dictionary is large and may be stored in Cloudflare R2.
+
+Cloudflare R2 may remain the storage source, but it must not be used as a server-render-time backend dependency.
+
+Do not:
+
+```txt
+fetch the full word dictionary in app/root.tsx
+fetch the full word dictionary in Remix route loaders
+proxy the dictionary through Netlify Functions
+send the full dictionary through loader data
+put the full dictionary in initial HTML
+put the full dictionary in the main JS bundle
+block first gameplay on a remote dictionary fetch
+```
+
+Preferred direction:
+
+```txt
+bundled first-session target/validation word packs
+client-side static word source manager
+localForage/IndexedDB cache
+public read-only R2/CDN fetches
+length-specific word chunks
+background loading
+```
+
+Gameplay must start without waiting for the remote dictionary.
+
+Word-list pages may load full lists client-side because the user explicitly requested a list page.
+
+---
+
+## Remix Loader and Action Rules
+
+Remove runtime loaders/actions where they only exist for backend data, R2 word data, API proxying, or server-only behavior.
+
+Particular files to inspect carefully:
+
+```txt
+app/root.tsx
+app/routes/$.tsx
+app/routes/words-list.all-3-letter-words-for-word-games.tsx
+app/routes/words-list.all-4-letter-words-for-word-games.tsx
+app/routes/words-list.all-5-letter-words-for-word-games.tsx
+app/routes/words-list.all-6-letter-words-for-word-games.tsx
+app/routes/words-list.all-7-letter-words-for-word-games.tsx
+app/routes/words-list.all-8-letter-words-for-word-games.tsx
+app/routes/words-list.all-9-letter-words-for-word-games.tsx
+app/routes/words-list._index.tsx
+game routes
+```
+
+`app/root.tsx` should not contain:
+
+```txt
+runtime word loader
+server word cache
+GetWordsForSkull import
+no-store headers for normal static pages
+server-side R2 fetch
+server dictionary decompression
+```
+
+Keep root layout behavior, providers, nav/footer, styling, analytics/ads, and scroll behavior.
+
+---
+
+## Client/Server Boundary Rules
+
+Do not place server-only logic under `app/client`.
+
+Client code must not use:
+
+```txt
+private process.env values
+JWT_SECRET
+R2 secret keys
+S3 credentials
+@aws-sdk/client-s3
+Buffer for server upload logic
+Express request/response logic
+database access
+server cookies
+```
+
+Allowed client-side persistence:
+
+```txt
+localStorage
+sessionStorage
+localForage
+IndexedDB
+public read-only fetches
+static JSON assets
+bundled first-session data packs
+```
+
+---
+
+## SEO Rules
+
+Preserve route-specific SEO as much as possible.
+
+Maintain:
+
+```txt
+titles
+meta descriptions
+canonical URLs
+Open Graph URLs
+JSON-LD where already present
+sitemap
+robots.txt
+internal links
+blog/lore route content
+word-list route content
+```
+
+Use:
+
+```txt
+https://www.wordskull.com
+```
+
+as the canonical production origin.
+
+Remove placeholder sitemap references like:
+
+```txt
+https://yourdomain.com/sitemap.xml
+```
+
+Sitemap generation should use an explicit route registry rather than unreliable filesystem guessing where possible.
+
+Recommended shared config files:
+
+```txt
+app/shared/routes.ts
+app/shared/seo.ts
+app/client/config/site.ts
+```
+
+---
+
+## Prerendering Rules
+
+Add or maintain a build-time prerender script such as:
+
+```txt
+scripts/prerenderStaticRoutes.mjs
+```
+
+The script should:
+
+- run after the Remix/Vite build
+- render public canonical routes at build time
+- write static HTML into `build/client`
+- generate `404.html`
+- include blog routes
+- include lore routes
+- include game routes
+- include word-list routes
+- include legal/misc routes
+- not require a production Express server
+- not require Netlify Functions
+- not fetch R2 word data at page-render time
+
+---
+
+## Dependency Cleanup Rules
+
+After removing backend code, inspect `package.json`.
+
+Remove unused backend/runtime dependencies if no longer imported:
+
+```txt
+express
+cors
+body-parser
+cookie-parser
+jsonwebtoken
+bcrypt
+database drivers
+@aws-sdk/client-s3
+axios if only used for old backend/static fetches
+@remix-run/netlify if unused
+```
+
+Do not remove dependencies still required by the actual app.
+
+Do not add fake tests just to make a command pass.
+
+---
+
+## Testing and Validation
+
+After changes, run:
+
+```bash
+npm run build
+npm run typecheck
+npm run lint
+```
+
+Run `npm ci` if dependencies changed.
+
+If tests are missing, report that honestly. Do not invent fake passing tests.
+
+Manually verify:
+
+```txt
+/
+blog
+lore
+one individual blog route if present
+one individual lore route if present
+one game route
+one word-list route
+404
+play button
+first game start
+copy/share behavior
+localStorage/localForage behavior
+```
+
+Inspect generated files:
+
+```txt
+build/client/index.html
+build/client/blog/index.html
+build/client/lore/index.html
+build/client/404.html
+```
+
+Confirm:
+
+```txt
+root netlify.toml exists
+publish directory is build/client
+public/netlify.toml is gone
+netlify/functions/server.js is gone
+server.js is not used by production
+no normal page/game render depends on Express
+no normal page/game render depends on Netlify Functions
+no root/route loader fetches Cloudflare R2 word data
+blog/lore files still exist
+build passes
+typecheck passes or failures are listed with file/line/reason
+lint passes or failures are listed with file/line/reason
+```
+
+---
+
+## Response Format for Codex
+
+When completing a task, report:
+
+```txt
 1. Files changed
-   - exact files
-   - why each changed
+2. Files deleted
+3. Dependencies removed/added
+4. Architecture/design decisions
+5. UX changes
+6. SEO changes
+7. Puzzle/game logic changes
+8. Netlify changes
+9. Validation commands run and results
+10. Remaining risks
+```
 
-2. Architecture/design decisions
-   - shared components changed
-   - data/schema changes
-   - route generation changes
-   - puzzle engine changes
+Be explicit. Do not claim validation passed unless the command was actually run.
 
-3. UX/design changes
-   - builder layout
-   - page layout
-   - print/PDF layout
-   - accessibility changes
+---
 
-4. SEO changes
-   - metadata
-   - canonicals
-   - sitemap/robots
-   - redirects/noindex
-   - schema
+## Safety Rules
 
-5. Puzzle logic changes
-   - generation behavior
-   - seed behavior
-   - answer key behavior
-   - edge cases handled
+Do not make broad rewrites when targeted refactors are enough.
 
-6. QR/print/PDF changes
-   - QR state preservation
-   - branding placement
-   - print/PDF verification
+Do not delete blog/lore content.
 
-7. Validation
-   - exact command run
-   - pass/fail
-   - explanation for missing or failing commands
+Do not silently remove SEO routes.
 
-8. Remaining risks
-   - only real unresolved risks
-   - if none, say none
+Do not silently change gameplay.
 
-Do not say the task is complete if build, tests, print/PDF, QR/share-state reproduction, or key route QA was skipped without explanation.
+Do not introduce new backend runtime logic to solve static hosting issues.
+
+Do not use a fake success state for tests/typecheck/lint.
+
+Do not hardcode production API origins in client files.
+
+Do not expose private R2/S3/JWT credentials to the browser.
+
+Do not change branches unless explicitly instructed.
+
+---
+
+## Definition of Done
+
+A refactor is complete only when:
+
+```txt
+Netlify can publish build/client
+root netlify.toml is correct
+public/netlify.toml is removed
+production does not depend on Express
+production does not depend on broken Netlify server functions
+normal gameplay/page rendering does not use server-side R2/API logic
+blog/lore content remains present
+public routes have build-time static HTML where practical
+game starts and plays correctly
+SEO files use https://www.wordskull.com
+build result is validated
+typecheck/lint status is reported honestly
+remaining risks are listed
+```

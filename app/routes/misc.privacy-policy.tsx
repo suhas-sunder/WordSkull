@@ -3,7 +3,7 @@ import { Link, MetaFunction } from "@remix-run/react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
-  const canonical = "https://www.wordskull.com/privacy";
+  const canonical = "https://www.wordskull.com/misc/privacy-policy";
 
   const title = "Privacy Policy | WordSkull";
   const description =

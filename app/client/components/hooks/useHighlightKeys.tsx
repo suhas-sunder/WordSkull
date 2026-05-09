@@ -55,6 +55,8 @@ export default function useHighlightKeys({
   const timersRef = useRef<Map<string, number>>(new Map());
 
   useEffect(() => {
+    const timers = timersRef.current;
+
     // Only set bg + text for highlight; do not set border here
     const highlightClass = "bg-pumpkin-orange/60 text-white !brightness-[1.2]";
 
@@ -99,12 +101,12 @@ export default function useHighlightKeys({
       if (!ids.length) return;
 
       ids.forEach((id) => {
-        const t = timersRef.current.get(id);
-        if (t) {
-          window.clearTimeout(t);
-          timersRef.current.delete(id);
-        }
-      });
+          const t = timers.get(id);
+          if (t) {
+            window.clearTimeout(t);
+            timers.delete(id);
+          }
+        });
 
       highlightMany(ids);
     };
@@ -117,9 +119,9 @@ export default function useHighlightKeys({
       ids.forEach((id) => {
         const tid = window.setTimeout(() => {
           clearMany([id]);
-          timersRef.current.delete(id);
+          timers.delete(id);
         }, lingerMs);
-        timersRef.current.set(id, tid);
+        timers.set(id, tid);
       });
     };
 
@@ -129,8 +131,8 @@ export default function useHighlightKeys({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
-      timersRef.current.forEach((id) => window.clearTimeout(id));
-      timersRef.current.clear();
+      timers.forEach((timerId) => window.clearTimeout(timerId));
+      timers.clear();
     };
   }, [setKeyStyles, baseStyles, lingerMs]);
 }

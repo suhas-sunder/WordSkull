@@ -106,7 +106,7 @@ function About() {
           url: "https://www.suhassunder.com",
           sameAs: [
             "https://github.com/suhas-sunder",
-            "https://www.wordskull.com/socials",
+            "https://www.wordskull.com/misc/socials",
           ],
         },
       },

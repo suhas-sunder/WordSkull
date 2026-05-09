@@ -1,5 +1,5 @@
 import { MetaFunction } from "@remix-run/node";
-import { Link, useMatches } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 
 type RootData = { canonical?: string };

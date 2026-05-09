@@ -1,0 +1,113 @@
+[
+  { "path": "/", "changefreq": "weekly", "priority": 1 },
+  { "path": "/about", "changefreq": "monthly", "priority": 0.5 },
+  { "path": "/wallpaper", "changefreq": "monthly", "priority": 0.4 },
+  { "path": "/games", "changefreq": "weekly", "priority": 0.8 },
+  { "path": "/games/classic", "changefreq": "weekly", "priority": 0.8 },
+  {
+    "path": "/games/classic/boneheads-easy-3-to-5-letter-words",
+    "changefreq": "weekly",
+    "priority": 0.8
+  },
+  {
+    "path": "/games/classic/specter-knights-medium-3-to-6-letter-words",
+    "changefreq": "weekly",
+    "priority": 0.8
+  },
+  {
+    "path": "/games/classic/grim-reapers-hard-3-to-7-letter-words",
+    "changefreq": "weekly",
+    "priority": 0.8
+  },
+  {
+    "path": "/games/classic/royal-lichen-extreme-3-to-9-letter-words",
+    "changefreq": "weekly",
+    "priority": 0.8
+  },
+  { "path": "/blog", "changefreq": "monthly", "priority": 0.7 },
+  {
+    "path": "/blog/wordskull-vs-wordle-fantasy-twist",
+    "changefreq": "monthly",
+    "priority": 0.7
+  },
+  {
+    "path": "/blog/wordskull-vs-nyt-spelling-bee",
+    "changefreq": "monthly",
+    "priority": 0.7
+  },
+  {
+    "path": "/blog/wordskull-vs-nyt-connections",
+    "changefreq": "monthly",
+    "priority": 0.7
+  },
+  {
+    "path": "/blog/wordskull-vs-quordle-multi-grid-madness",
+    "changefreq": "monthly",
+    "priority": 0.7
+  },
+  {
+    "path": "/blog/wordskull-vs-absurdle-outwitting-the-adversarial-puzzle",
+    "changefreq": "monthly",
+    "priority": 0.7
+  },
+  { "path": "/lore", "changefreq": "monthly", "priority": 0.6 },
+  {
+    "path": "/lore/wordskull-chapter-1-the-wizards-rise-who-was-atriocsoul",
+    "changefreq": "monthly",
+    "priority": 0.6
+  },
+  { "path": "/words-list", "changefreq": "monthly", "priority": 0.7 },
+  {
+    "path": "/words-list/all-3-letter-words-for-word-games",
+    "changefreq": "monthly",
+    "priority": 0.6
+  },
+  {
+    "path": "/words-list/all-4-letter-words-for-word-games",
+    "changefreq": "monthly",
+    "priority": 0.6
+  },
+  {
+    "path": "/words-list/all-5-letter-words-for-word-games",
+    "changefreq": "monthly",
+    "priority": 0.6
+  },
+  {
+    "path": "/words-list/all-6-letter-words-for-word-games",
+    "changefreq": "monthly",
+    "priority": 0.6
+  },
+  {
+    "path": "/words-list/all-7-letter-words-for-word-games",
+    "changefreq": "monthly",
+    "priority": 0.6
+  },
+  {
+    "path": "/words-list/all-8-letter-words-for-word-games",
+    "changefreq": "monthly",
+    "priority": 0.6
+  },
+  {
+    "path": "/words-list/all-9-letter-words-for-word-games",
+    "changefreq": "monthly",
+    "priority": 0.6
+  },
+  { "path": "/misc/faq", "changefreq": "monthly", "priority": 0.4 },
+  { "path": "/misc/sitemap", "changefreq": "monthly", "priority": 0.4 },
+  { "path": "/misc/socials", "changefreq": "monthly", "priority": 0.3 },
+  {
+    "path": "/misc/privacy-policy",
+    "changefreq": "yearly",
+    "priority": 0.2
+  },
+  {
+    "path": "/misc/cookies-policy",
+    "changefreq": "yearly",
+    "priority": 0.2
+  },
+  {
+    "path": "/misc/terms-of-service",
+    "changefreq": "yearly",
+    "priority": 0.2
+  }
+]

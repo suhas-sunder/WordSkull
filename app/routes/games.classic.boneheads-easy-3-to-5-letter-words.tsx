@@ -1,14 +1,10 @@
 import type { MetaFunction } from "@remix-run/node";
 import ClassicGameLogic from "../client/components/layout/ClassicGameLogic";
 import { useMatches } from "react-router-dom";
-import { useMemo } from "react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import GameLinks from "../client/components/layout/GameLinks";
 import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
 
-export type WordsData = {
-  words?: { [key: number]: string[] };
-};
 
 type RootMatch = { id: string; data?: { canonical?: string } };
 
@@ -65,10 +61,6 @@ export const meta: MetaFunction = ({ matches }) => {
 export default function WordSkullEasy() {
   const matches = useMatches();
 
-  const wordsData = useMemo(() => {
-    const match = matches?.find((m) => (m?.data as WordsData)?.words);
-    return match?.data as WordsData;
-  }, [matches]);
 
   // JSON-LD (Breadcrumbs + WebApplication)
   const root = matches.find((m) => m.id === "root") as RootMatch | undefined;
@@ -137,7 +129,6 @@ export default function WordSkullEasy() {
         startPosition={0}
         endPosition={4}
         lettersPerSkull="Easy Difficulty: 3 - 5 letters"
-        wordsData={wordsData}
         difficulty="easy"
         gameMode="classic"
         skullNumber={1}

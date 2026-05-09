@@ -1,13 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useTheme } from "../client/components/context/ThemeContext";
 import { MetaFunction } from "@remix-run/node";
-import { Link, useMatches } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 import SkullAnimation from "../client/components/ui/visual/SkullAnimation";
 import GameLinks from "../client/components/layout/GameLinks";
 import ClassicGameLogic from "../client/components/layout/ClassicGameLogic";
-import { useMemo } from "react";
-import { WordsData } from "./games.classic.boneheads-easy-3-to-5-letter-words";
 import ClassicGameplayInstructions from "../client/components/layout/ClassicGameplayInstructions";
 
 export const meta: MetaFunction = () => {
@@ -53,20 +51,12 @@ export const meta: MetaFunction = () => {
 };
 
 function Header() {
-  const matches = useMatches();
-  const wordsData = useMemo(() => {
-    // Find the first match with valid data
-    const match = matches?.find((match) => (match?.data as WordsData)?.words);
-    return match?.data as WordsData;
-  }, [matches]);
-
   return (
     <header className="flex flex-col max-w-[1200px] text-center justify-center items-center mb-8">
       <ClassicGameLogic
         startPosition={0}
         endPosition={4}
         lettersPerSkull="Easy Difficulty: 3 - 5 letters"
-        wordsData={wordsData}
         difficulty="easy"
         gameMode="classic"
       />
@@ -114,7 +104,7 @@ export default function Index() {
               <p className="font-lato text-lg pl-5 tracking-wider leading-loose">
                 <Link
                   className="text-pumpkin-orange hover:text-amber-600 font-lora"
-                  to="/game/classic/boneheads-easy-3-to-5-letter-words"
+                  to="/games/classic/boneheads-easy-3-to-5-letter-words"
                 >
                   WordSkull
                 </Link>{" "}
@@ -176,7 +166,7 @@ export default function Index() {
           the{" "}
           <Link
             className={"text-pumpkin-orange hover:text-amber-600 font-lora"}
-            to="/socials"
+            to="/misc/socials"
           >
             socials page
           </Link>

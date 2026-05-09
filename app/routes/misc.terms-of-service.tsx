@@ -3,7 +3,7 @@ import { MetaFunction } from "@remix-run/react";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 
 export const meta: MetaFunction = () => {
-  const canonical = "https://www.wordskull.com/terms";
+  const canonical = "https://www.wordskull.com/misc/terms-of-service";
 
   const title = "Terms of Service | WordSkull";
   const description =

@@ -5,7 +5,7 @@ import BlogSidebar from "../client/components/navigation/BlogSidebar";
 import SocialLinks from "../client/components/navigation/SocialLinks";
 
 /* ===================== CONSTANTS FOR THIS ARTICLE ===================== */
-const slug = "wordskull-vs-quordle";
+const slug = "wordskull-vs-quordle-multi-grid-madness";
 const canonical = `https://www.wordskull.com/blog/${slug}`;
 const datePublished = "2025-09-24";
 const dateModified = datePublished;

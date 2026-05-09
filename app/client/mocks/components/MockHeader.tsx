@@ -13,6 +13,14 @@ interface MockHeaderProps {
   showKeyboard: boolean;
   setShowGameOverMenu: (value: boolean) => void;
   setShowKeyboard: (value: (prevState: boolean) => boolean) => void;
+  dispWordHistory?: boolean;
+  setDispWordHistory?: (
+    value: ((prevState: boolean) => boolean) | boolean
+  ) => void;
+  enteredWords?: string[][];
+  currentRow?: number;
+  wordsForSkull?: string[];
+  isEnterPressed?: boolean;
 }
 
 const MockHeader = ({
@@ -22,6 +30,12 @@ const MockHeader = ({
   lettersPerSkull = "Easy",
   dontFade = false,
   setShowGameOverMenu,
+  dispWordHistory = false,
+  setDispWordHistory = () => undefined,
+  enteredWords = [[]],
+  currentRow = 0,
+  wordsForSkull = [],
+  isEnterPressed = false,
 }: MockHeaderProps) => {
   // Render Header component inside MemoryRouter and MockThemeProvider
   return render(
@@ -33,6 +47,12 @@ const MockHeader = ({
           lettersPerSkull={lettersPerSkull}
           dontFade={dontFade}
           setShowGameOverMenu={setShowGameOverMenu}
+          dispWordHistory={dispWordHistory}
+          setDispWordHistory={setDispWordHistory}
+          enteredWords={enteredWords}
+          currentRow={currentRow}
+          wordsForSkull={wordsForSkull}
+          isEnterPressed={isEnterPressed}
         />
         <ToggleButton darkThemeActive={darkThemeActive} />
       </MockThemeProvider>

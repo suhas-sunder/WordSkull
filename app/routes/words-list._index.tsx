@@ -1,13 +1,14 @@
 import { MetaFunction } from "@remix-run/node";
 import { Link } from "react-router-dom";
 import { useMemo } from "react";
-import { useMatches } from "@remix-run/react"; // to read root loader data
+import { useMatches } from "@remix-run/react";
 import { useTheme } from "../client/components/context/ThemeContext";
 import SocialLinks from "../client/components/navigation/SocialLinks";
+import { getCanonicalUrl } from "../shared/routes";
+import { getTotalWordCount, getWordCountsByLength } from "../shared/wordData";
 
 type RootData = {
   canonical?: string;
-  words?: Record<number, string[]>;
 };
 type Match = { id: string; data?: RootData };
 
@@ -16,23 +17,14 @@ const LENGTHS = [3, 4, 5, 6, 7, 8, 9] as const;
 /* ===================== META ===================== */
 export const meta: MetaFunction = ({ matches }) => {
   const root = matches.find((m) => m.id === "root") as Match | undefined;
-  const words = root?.data?.words;
-
-  const counts = LENGTHS.map(
-    (n, i) =>
-      words?.[n]?.length ??
-      (words ? (Object.values(words) as any[])[i]?.length : undefined)
-  );
-  const total = counts.every((c) => typeof c === "number")
-    ? (counts as number[]).reduce((a, b) => a + b, 0)
-    : undefined;
+  const total = getTotalWordCount();
 
   const title = "All 3-9 Letter Words for Word Games | WordSkull";
   const desc = total
     ? `Browse ${total.toLocaleString()} words by length (3-9 letters) for Wordle, crosswords, anagrams, and more. Great for puzzles and practice.`
     : "Browse words by length (3-9 letters) for Wordle, crosswords, anagrams, and more. Great for puzzles and practice.";
 
-  const url = root?.data?.canonical ?? "https://www.wordskull.com/words-list";
+  const url = root?.data?.canonical ?? getCanonicalUrl("/words-list");
   const ogImage = "https://www.wordskull.com/og/wordskull-words-list.jpg";
 
   return [
@@ -82,21 +74,10 @@ export default function AllWordsForWordGame() {
 
   const { canonical, countsByLen } = useMemo(() => {
     const root = matches.find((m) => m.id === "root")?.data;
-    const words = root?.words;
-
-    const counts = LENGTHS.reduce<Record<number, number | undefined>>(
-      (acc, n, i) => {
-        acc[n] =
-          words?.[n]?.length ??
-          (words ? Object.values(words)[i]?.length : undefined);
-        return acc;
-      },
-      {}
-    );
 
     return {
-      canonical: root?.canonical ?? "https://www.wordskull.com/words-list",
-      countsByLen: counts,
+      canonical: root?.canonical ?? getCanonicalUrl("/words-list"),
+      countsByLen: getWordCountsByLength(),
     };
   }, [matches]);
 

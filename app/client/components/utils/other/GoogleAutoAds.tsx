@@ -1,11 +1,18 @@
 import { useEffect } from "react";
 
+type AdsWindow = Window & {
+  adsbygoogle?: {
+    push: (config: object) => unknown;
+  };
+  requestIdleCallback?: (callback: () => void) => number;
+};
+
 export default function GoogleAutoAds() {
   useEffect(() => {
     if (typeof window === "undefined" || typeof document === "undefined")
       return;
 
-    const w = window as any;
+    const w = window as AdsWindow;
 
     const injectScriptOnce = () => {
       const id = "adsbygoogleaftermount";
@@ -20,7 +27,15 @@ export default function GoogleAutoAds() {
       }
     };
 
-    const pushAd = () => (w.adsbygoogle || (w.adsbygoogle = [])).push({});
+    const pushAd = () => {
+      if (!w.adsbygoogle) {
+        const queue: object[] = [];
+        w.adsbygoogle = queue as unknown as NonNullable<
+          AdsWindow["adsbygoogle"]
+        >;
+      }
+      w.adsbygoogle.push({});
+    };
 
     const initSlots = () => {
       document.querySelectorAll<HTMLElement>(".adsbygoogle").forEach((el) => {

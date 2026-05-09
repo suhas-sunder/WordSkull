@@ -2,126 +2,157 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.wordskull.com</loc>
-    <lastmod>2026-01-11T06:23:31.452Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.wordskull.com/about</loc>
-    <lastmod>2025-09-17T16:37:04.889Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/blog</loc>
-    <lastmod>2025-09-14T17:27:13.369Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/blog/wordskull-vs-absurdle-outwitting-the-adversarial-puzzle</loc>
-    <lastmod>2025-10-23T17:23:26.294Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/blog/wordskull-vs-nyt-connections</loc>
-    <lastmod>2025-09-25T01:32:32.541Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/blog/wordskull-vs-nyt-spelling-bee</loc>
-    <lastmod>2025-09-17T16:40:21.044Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/blog/wordskull-vs-quordle-multi-grid-madness</loc>
-    <lastmod>2025-09-25T01:34:07.343Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/blog/wordskull-vs-wordle-fantasy-twist</loc>
-    <lastmod>2025-10-23T17:07:56.183Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/cookies-policy</loc>
-    <lastmod>2025-09-14T17:27:13.384Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/faq</loc>
-    <lastmod>2025-09-14T17:27:13.384Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/games</loc>
-    <lastmod>2025-09-14T17:27:13.369Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/games/classic</loc>
-    <lastmod>2025-09-14T17:27:13.369Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/games/classic/boneheads-easy-3-to-5-letter-words</loc>
-    <lastmod>2025-09-14T19:12:48.062Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/games/classic/grim-reapers-hard-3-to-7-letter-words</loc>
-    <lastmod>2025-09-14T19:09:56.389Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/games/classic/royal-lichen-extreme-3-to-9-letter-words</loc>
-    <lastmod>2025-09-14T19:10:08.605Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/games/classic/specter-knights-medium-3-to-6-letter-words</loc>
-    <lastmod>2025-09-14T19:10:43.079Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/lore</loc>
-    <lastmod>2025-09-14T17:27:13.369Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/lore/wordskull-chapter-1-the-wizards-rise-who-was-atriocsoul</loc>
-    <lastmod>2025-09-14T19:13:39.333Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/privacy-policy</loc>
-    <lastmod>2025-09-14T17:27:13.384Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/sitemap</loc>
-    <lastmod>2025-09-14T17:27:13.385Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/socials</loc>
-    <lastmod>2025-09-14T17:27:13.385Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.wordskull.com/terms-of-service</loc>
-    <lastmod>2025-09-14T17:27:13.385Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.wordskull.com/wallpaper</loc>
-    <lastmod>2025-09-14T17:27:13.386Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/games</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/games/classic</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/games/classic/boneheads-easy-3-to-5-letter-words</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/games/classic/specter-knights-medium-3-to-6-letter-words</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/games/classic/grim-reapers-hard-3-to-7-letter-words</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/games/classic/royal-lichen-extreme-3-to-9-letter-words</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/blog</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/blog/wordskull-vs-wordle-fantasy-twist</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/blog/wordskull-vs-nyt-spelling-bee</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/blog/wordskull-vs-nyt-connections</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/blog/wordskull-vs-quordle-multi-grid-madness</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/blog/wordskull-vs-absurdle-outwitting-the-adversarial-puzzle</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/lore</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/lore/wordskull-chapter-1-the-wizards-rise-who-was-atriocsoul</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.wordskull.com/words-list</loc>
-    <lastmod>2025-09-14T17:27:13.387Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.wordskull.com/words-list/all-3-letter-words-for-word-games</loc>
-    <lastmod>2025-09-14T17:27:13.386Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.wordskull.com/words-list/all-4-letter-words-for-word-games</loc>
-    <lastmod>2025-09-14T17:27:13.386Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.wordskull.com/words-list/all-5-letter-words-for-word-games</loc>
-    <lastmod>2025-09-14T17:27:13.386Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.wordskull.com/words-list/all-6-letter-words-for-word-games</loc>
-    <lastmod>2025-09-14T17:27:13.387Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.wordskull.com/words-list/all-7-letter-words-for-word-games</loc>
-    <lastmod>2025-09-14T17:27:13.387Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.wordskull.com/words-list/all-8-letter-words-for-word-games</loc>
-    <lastmod>2025-09-14T17:27:13.387Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.wordskull.com/words-list/all-9-letter-words-for-word-games</loc>
-    <lastmod>2025-09-14T17:27:13.387Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/misc/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/misc/sitemap</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/misc/socials</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/misc/privacy-policy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/misc/cookies-policy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://www.wordskull.com/misc/terms-of-service</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
 </urlset>

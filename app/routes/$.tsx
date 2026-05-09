@@ -1,9 +1,4 @@
-import type {
-  MetaFunction,
-  LoaderFunctionArgs,
-  ActionFunctionArgs,
-} from "@remix-run/node";
-import { json } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "@remix-run/react";
 import Error from "../client/components/ui/interactive/Error";
@@ -25,21 +20,6 @@ export const meta: MetaFunction = () => [
       "This page is missing or restricted. Head back to Word Skull games or try a different link.",
   },
 ];
-
-export async function loader({ request }: LoaderFunctionArgs) {
-  const url = new URL(request.url);
-  if (url.pathname === "/403") {
-    return json({ code: 403 }, { status: 403 });
-  }
-  return json({ code: 404 }, { status: 404 });
-}
-
-export async function action({ request }: ActionFunctionArgs) {
-  if (request.method !== "POST") {
-    return new Response("Method Not Allowed", { status: 405 });
-  }
-  return new Response("Not Found", { status: 404 });
-}
 
 export default function Wildcard() {
   const [status, setStatus] = useState<number>(404);
