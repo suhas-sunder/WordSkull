@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import words from "../data/Words";
+import { TargetWords, ValidationWords } from "../data/Words";
 import type { StaticWordsByLength } from "../../../shared/wordData";
 
 interface PropType {
@@ -9,31 +9,76 @@ interface PropType {
   };
 }
 
+const RECENT_TARGET_LIMIT = 120;
+const RECENT_TARGET_STORAGE_KEY = "wordskull:recent-targets";
+
+function normalizeWord(word: string) {
+  return word.trim().toLowerCase();
+}
+
+function readRecentTargets() {
+  if (typeof sessionStorage === "undefined") return [];
+
+  try {
+    const value = sessionStorage.getItem(RECENT_TARGET_STORAGE_KEY);
+    if (!value) return [];
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed.filter(Boolean).map(String) : [];
+  } catch {
+    return [];
+  }
+}
+
+function rememberRecentTarget(word: string) {
+  if (typeof sessionStorage === "undefined") return;
+
+  const normalizedWord = normalizeWord(word);
+  const recentTargets = readRecentTargets().filter(
+    (recentWord) => recentWord !== normalizedWord
+  );
+  recentTargets.unshift(normalizedWord);
+
+  try {
+    sessionStorage.setItem(
+      RECENT_TARGET_STORAGE_KEY,
+      JSON.stringify(recentTargets.slice(0, RECENT_TARGET_LIMIT))
+    );
+  } catch {
+    // Session storage is a nice-to-have only; gameplay must continue without it.
+  }
+}
+
 function useWordsForSkull({ currentSkull, wordsData }: PropType) {
   const [wordsForSkull, setWordsForSkull] = useState<string[]>([]);
   const [dispWordHistory, setDispWordHistory] = useState<boolean>(false);
 
-  // Memoize the backup words list
-  const backupWordsList = useMemo(() => words(), []);
+  // Memoize the backup word lists
+  const backupTargetWordsList = useMemo(() => TargetWords(), []);
+  const backupValidationWordsList = useMemo(() => ValidationWords(), []);
 
-  // Use the fetched words if available and valid, otherwise use the static backup words list
+  // Use the fetched words if available and valid, otherwise use the static validation list
   const wordsList: { [key: number]: string[] } = useMemo(() => {
-    // Check if wordsData exists and has valid words; otherwise, use backupWordsList
     if (wordsData?.words && Object.keys(wordsData?.words)?.length > 0) {
-      return wordsData?.words;
-    } else {
-      return backupWordsList;
+      return wordsData.words;
     }
-  }, [wordsData, backupWordsList]);
+
+    return backupValidationWordsList;
+  }, [wordsData, backupValidationWordsList]);
+
+  const targetWordsList: { [key: number]: string[] } = useMemo(
+    () => backupTargetWordsList,
+    [backupTargetWordsList]
+  );
 
   useEffect(() => {
     if (wordsForSkull[0] || currentSkull === undefined) return;
 
     // Get words of a specific length (Looking back I'm not sure why I excluded words with "@" or "~" here. I'm going to leave it in since it does no harm, but the code is probably unnecessary)
     const getWordsOfLength = (length: number) => {
-      if (!wordsList[length]) return [];
+      if (!targetWordsList[length]) return [];
 
-      return wordsList[length]
+      return targetWordsList[length]
+        ?.map(normalizeWord)
         ?.filter((word) => word?.length === length)
         ?.filter((word) => !word?.includes("@") && !word?.includes("~"));
     };
@@ -47,6 +92,7 @@ function useWordsForSkull({ currentSkull, wordsData }: PropType) {
 
     // Set to store used words and avoid duplicates
     const usedWords = new Set<string>();
+    const recentTargets = new Set(readRecentTargets());
 
     currentSkull[0]?.forEach((row, index) => {
       // Calculate effective length of the row ignoring "@" and "~"
@@ -66,14 +112,22 @@ function useWordsForSkull({ currentSkull, wordsData }: PropType) {
         return; //Handle edge case where no remaining unused words for length
       }
 
+      const freshWordsOfCorrectLength = wordsOfCorrectLength.filter(
+        (word) => !recentTargets.has(word)
+      );
+      const candidateWords =
+        freshWordsOfCorrectLength.length > 0
+          ? freshWordsOfCorrectLength
+          : wordsOfCorrectLength;
+
       // Select a random unused word
       const randomWord =
-        wordsOfCorrectLength[
-          Math.floor(Math.random() * wordsOfCorrectLength?.length)
-        ];
+        candidateWords[Math.floor(Math.random() * candidateWords.length)];
 
       // Add the chosen word to the usedWords set
       usedWords?.add(randomWord);
+      recentTargets.add(randomWord);
+      rememberRecentTarget(randomWord);
 
       setWordsForSkull((prevState) => {
         const newState = [...prevState];

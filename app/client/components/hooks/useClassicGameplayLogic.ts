@@ -49,6 +49,25 @@ function useClassicGameplayLogic({
     setIsGameOver,
   });
 
+  const normalizeEnteredWord = useCallback(
+    () =>
+      currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "").toLowerCase(),
+    [currentSkull, currentRow]
+  );
+
+  const isSupportedGuess = useCallback(
+    (word: string) => {
+      const normalizedWord = word.toLowerCase();
+      const targetWord = wordsForSkull[currentRow]?.toLowerCase();
+      const validationWords = wordsList[normalizedWord.length] ?? [];
+
+      return (
+        normalizedWord === targetWord || validationWords.includes(normalizedWord)
+      );
+    },
+    [currentRow, wordsForSkull, wordsList]
+  );
+
   //Handles index shift & updates to current row
   const handleNextRow = useCallback(() => {
     const shiftedIndex = HandleShiftIndexForward({
@@ -166,18 +185,14 @@ function useClassicGameplayLogic({
       }
 
       const handleEnteredWord = () => {
+        const enteredWord = normalizeEnteredWord();
+
         //Check if entered word is valid
         if (
           currentSkull[0][currentRow].join("") !== wordsForSkull[currentRow] &&
           !currentSkull[0][currentRow].includes("")
         ) {
-          if (
-            !wordsList[
-              currentSkull[0][currentRow].join("").replace(/[@~]/g, "").length
-            ].includes(
-              currentSkull[0][currentRow].join("").replace(/[@~]/g, "")
-            )
-          ) {
+          if (!isSupportedGuess(enteredWord)) {
             alert("Not in word list!");
             return;
           } else {
@@ -186,9 +201,7 @@ function useClassicGameplayLogic({
 
             //Only subtract a life if the entered word is in word list but not repeated
             if (
-              !enteredWords[currentRow]?.includes(
-                currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "")
-              )
+              !enteredWords[currentRow]?.includes(enteredWord)
             ) {
               setLives((prevState) =>
                 prevState !== null ? prevState - 1 : prevState
@@ -200,11 +213,7 @@ function useClassicGameplayLogic({
         }
 
         //If entered word is not repeated add it to enteredWords list
-        if (
-          !enteredWords[currentRow]?.includes(
-            currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "")
-          )
-        )
+        if (!enteredWords[currentRow]?.includes(enteredWord))
           setEnteredWords((prevState) => {
             const updatedWords = [...prevState];
 
@@ -213,13 +222,11 @@ function useClassicGameplayLogic({
               // Update the existing array with the current character
               updatedWords[currentRow] = [
                 ...updatedWords[currentRow],
-                currentSkull[0][currentRow].join("").replace(/[@~]/g, ""),
+                enteredWord,
               ];
             } else {
               // Initialize the array if it doesn't exist, then push the character
-              updatedWords[currentRow] = [
-                currentSkull[0][currentRow].join("").replace(/[@~]/g, ""),
-              ];
+              updatedWords[currentRow] = [enteredWord];
             }
 
             return updatedWords;
@@ -228,16 +235,16 @@ function useClassicGameplayLogic({
 
       //If enter is pressed and entered word isn't repeated for current row
       if (key === "enter") {
+        const enteredWord = normalizeEnteredWord();
+
         if (
-          currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "") !==
-            wordsForSkull[currentRow] &&
+          enteredWord !== wordsForSkull[currentRow] &&
           !currentSkull[0][currentRow]?.includes("")
         ) {
           //Incorrect word is entered
           handleEnteredWord();
         } else if (
-          currentSkull[0][currentRow]?.join("").replace(/[@~]/g, "").length ===
-          wordsForSkull[currentRow].length
+          enteredWord.length === wordsForSkull[currentRow].length
         ) {
           //Entered word matches answer
           setAnswerCorrect(true);
@@ -271,6 +278,8 @@ function useClassicGameplayLogic({
     enteredWords,
     handleNextRow,
     isGameOver,
+    isSupportedGuess,
+    normalizeEnteredWord,
     previouslyEnteredKey,
     setCurrentSkull,
     setDispWordHistory,

@@ -1,13 +1,27 @@
-import Words from "../client/components/data/Words";
+import Words, { TargetWords, ValidationWords } from "../client/components/data/Words";
 
 export type StaticWordsByLength = Record<number, string[]>;
 
-const wordsByLength = Words() as StaticWordsByLength;
+const validationWordsByLength = ValidationWords() as StaticWordsByLength;
+const targetWordsByLength = TargetWords() as StaticWordsByLength;
+const validationSetsByLength = new Map<number, Set<string>>();
 
 export const WORD_LENGTHS = [3, 4, 5, 6, 7, 8, 9] as const;
 
+export function normalizeWord(word: string) {
+  return word.trim().toLowerCase();
+}
+
 export function getWordsByLength(length: number) {
-  return wordsByLength[length] ?? [];
+  return getValidationWordsByLength(length);
+}
+
+export function getValidationWordsByLength(length: number) {
+  return validationWordsByLength[length] ?? [];
+}
+
+export function getTargetWordsByLength(length: number) {
+  return targetWordsByLength[length] ?? [];
 }
 
 export function getWordCountByLength(length: number) {
@@ -29,5 +43,25 @@ export function getTotalWordCount() {
 }
 
 export function getStaticWordsByLength() {
-  return wordsByLength;
+  return Words() as StaticWordsByLength;
+}
+
+function getValidationSet(length: number) {
+  const existingSet = validationSetsByLength.get(length);
+  if (existingSet) return existingSet;
+
+  const words = getValidationWordsByLength(length);
+  const nextSet = new Set(words);
+  validationSetsByLength.set(length, nextSet);
+  return nextSet;
+}
+
+export function isValidGuess(length: number, guess: string) {
+  const normalizedGuess = normalizeWord(guess);
+
+  return (
+    normalizedGuess.length === length &&
+    /^[a-z]+$/.test(normalizedGuess) &&
+    getValidationSet(length).has(normalizedGuess)
+  );
 }
